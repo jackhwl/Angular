@@ -45,6 +45,7 @@ module.exports = "<div class=\"col-lg-5\">\r\n  <div class=\"well bs-component\"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddBookComponent", function() { return AddBookComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var app_core_data_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! app/core/data.service */ "./src/app/core/data.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -55,14 +56,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var AddBookComponent = /** @class */ (function () {
-    function AddBookComponent() {
+    function AddBookComponent(dataService) {
+        this.dataService = dataService;
     }
     AddBookComponent.prototype.ngOnInit = function () { };
     AddBookComponent.prototype.saveBook = function (formValues) {
         var newBook = formValues;
         newBook.bookID = 0;
         console.log(newBook);
+        this.dataService.addBook(newBook)
+            .subscribe(function (data) { return console.log(data); }, function (err) { return console.log(err); });
         console.warn('Save new book not yet implemented.');
     };
     AddBookComponent = __decorate([
@@ -71,7 +76,7 @@ var AddBookComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./add-book.component.html */ "./src/app/add-book/add-book.component.html"),
             styles: []
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [app_core_data_service__WEBPACK_IMPORTED_MODULE_1__["DataService"]])
     ], AddBookComponent);
     return AddBookComponent;
 }());
@@ -435,7 +440,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var app_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/data */ "./src/app/data.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var app_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/data */ "./src/app/data.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -448,19 +454,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
-        this.mostPopularBook = app_data__WEBPACK_IMPORTED_MODULE_2__["allBooks"][0];
+        this.mostPopularBook = app_data__WEBPACK_IMPORTED_MODULE_3__["allBooks"][0];
     }
     DataService.prototype.setMostPopularBook = function (popularBook) {
         this.mostPopularBook = popularBook;
     };
     DataService.prototype.getAllReaders = function () {
-        return app_data__WEBPACK_IMPORTED_MODULE_2__["allReaders"];
+        return app_data__WEBPACK_IMPORTED_MODULE_3__["allReaders"];
     };
     DataService.prototype.getReaderById = function (id) {
-        return app_data__WEBPACK_IMPORTED_MODULE_2__["allReaders"].find(function (reader) { return reader.readerID === id; });
+        return app_data__WEBPACK_IMPORTED_MODULE_3__["allReaders"].find(function (reader) { return reader.readerID === id; });
     };
     DataService.prototype.getAllBooks = function () {
         console.log('Getting all books from the server');
@@ -475,13 +482,29 @@ var DataService = /** @class */ (function () {
         });
     };
     DataService.prototype.getOldBookById = function (id) {
-        return this.http.get("/api/books/" + id, {
+        console.log('getoldbook');
+        return this.http.get("/api/books/" + id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (b) { return ({
+            bookTitle: b.title,
+            year: b.publicationYear
+        }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (classicBook) { return console.log(classicBook); }));
+    };
+    DataService.prototype.addBook = function (newBook) {
+        return this.http.post('/api/books', newBook, {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-                'Accept': 'application/json',
-                'Authorization': 'my-token'
+                'Content-Type': 'application/json'
             })
-        })
-            .pipe();
+        });
+    };
+    DataService.prototype.updateBook = function (updatedBook) {
+        return this.http.put("/api/books/" + updatedBook.bookID, updatedBook, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        });
+    };
+    DataService.prototype.deleteBook = function (bookID) {
+        return this.http.delete("/api/books/" + bookID);
     };
     DataService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
@@ -601,7 +624,12 @@ var DashboardComponent = /** @class */ (function () {
         this.title.setTitle("Book Tracker");
     };
     DashboardComponent.prototype.deleteBook = function (bookID) {
-        console.warn("Delete book not yet implemented (bookID: " + bookID + ").");
+        var _this = this;
+        this.dataService.deleteBook(bookID)
+            .subscribe(function (data) {
+            var index = _this.allBooks.findIndex(function (book) { return book.bookID === bookID; });
+            _this.allBooks.splice(index, 1);
+        }, function (err) { return console.log(err); });
     };
     DashboardComponent.prototype.deleteReader = function (readerID) {
         console.warn("Delete reader not yet implemented (readerID: " + readerID + ").");
@@ -696,12 +724,16 @@ var EditBookComponent = /** @class */ (function () {
         var bookID = parseInt(this.route.snapshot.params['id']);
         this.dataService.getBookById(bookID)
             .subscribe(function (data) { return _this.selectedBook = data; }, function (err) { return console.log(err); });
+        this.dataService.getOldBookById(bookID)
+            .subscribe(function (data) { return console.log("Old book title: " + data.bookTitle); });
     };
     EditBookComponent.prototype.setMostPopular = function () {
         this.dataService.setMostPopularBook(this.selectedBook);
     };
     EditBookComponent.prototype.saveChanges = function () {
-        console.warn('Save changes to book not yet implemented.');
+        var _this = this;
+        this.dataService.updateBook(this.selectedBook)
+            .subscribe(function (data) { return console.log(_this.selectedBook.title + " updated successfully."); }, function (err) { return console.log(err); });
     };
     EditBookComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -908,7 +940,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/WilliamHuang/Developer/project/angular/Angular_HTTP_Communication/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Project\Angular\Angular_HTTP_Communication\src\main.ts */"./src/main.ts");
 
 
 /***/ })
