@@ -1,0 +1,30 @@
+{
+  "git.ignoreLimitWarning": true,
+  "git.decorations.enabled": false,
+
+  "files.autoSave": "afterDelay",
+
+  "vsicons.presets.angular": true,
+
+  "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/.DS_Store": true,
+      "**/.gitignore": true,
+      "npm-debug.log": true
+  },
+
+
+  "editor.quickSuggestions": true,
+  "editor.parameterHints.enabled": false,
+  "editor.wordBasedSuggestions": false,
+  "editor.selectionHighlight": false,
+  "editor.suggestOnTriggerCharacters": true,
+
+  "window.zoomLevel": 1,
+  
+  "terminal.integrated.fontSize": 11,
+
+  "editor.cursorBlinking": "solid"  
+}
