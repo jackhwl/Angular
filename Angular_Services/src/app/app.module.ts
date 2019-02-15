@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { EditReaderComponent } from './edit-reader/edit-reader.component';
-import { LoggerService } from './services/logger.service';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -23,9 +23,9 @@ import { LoggerService } from './services/logger.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CoreModule
   ],
-  providers: [LoggerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

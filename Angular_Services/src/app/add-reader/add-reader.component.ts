@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Reader } from "app/models/reader";
+import { BadgeService } from '../services/badge.service';
 
 @Component({
   selector: 'app-add-reader',
