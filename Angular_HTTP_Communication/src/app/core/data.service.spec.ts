@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@an
 
 import { DataService } from './data.service';
 import { Book } from 'app/models/book';
+import { BookTrackerError } from '../models/bookTrackerError';
 
 describe('DataService Tests', () => {
     let dataService: DataService;
@@ -24,7 +25,35 @@ describe('DataService Tests', () => {
         httpTestingController = TestBed.get(HttpTestingController);
     });
 
-    it('test 1', () => {
+    afterEach(() => {
+        httpTestingController.verify();
+    });
+
+    it('should GET all books', () => {
+        dataService.getAllBooks()
+            .subscribe((data: Book[]) => {
+                expect(data.length).toBe(3);
+            });
+        let booksRequest: TestRequest = httpTestingController.expectOne('/api/books');
+        expect(booksRequest.request.method).toEqual('GET');
+
+        booksRequest.flush(testBooks);
+    });
+
+    it('should return a BookTrackerError', () => {
+        dataService.getAllBooks()
+            .subscribe(
+                (data: Book[]) => fail('this should have been an error'),
+                (err: BookTrackerError) => {
+                    expect(err.errorNumber).toEqual(100);
+                    expect(err.friendlyMessage).toEqual('An error occurred retrieving data.');
+                }
+            );
+        let booksRequest: TestRequest = httpTestingController.expectOne('/api/books');
         
+        booksRequest.flush('error', {
+            status: 500,
+            statusText: 'Server Mock Error'
+        });
     });
 })
