@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { LoggerService } from './logger.service';
 import { allReaders, allBooks } from '../data';
 import { Reader } from 'app/models/reader';
