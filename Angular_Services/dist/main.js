@@ -421,6 +421,18 @@ var DataService = /** @class */ (function () {
         this.http = http;
         this.mostPopularBook = _data__WEBPACK_IMPORTED_MODULE_5__["allBooks"][0];
     }
+    DataService.prototype.getAuthorRecomendation = function (readerID) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                if (readerID > 0) {
+                    resolve('Dr. Seuss');
+                }
+                else {
+                    reject('Invalid reader ID');
+                }
+            }, 2000);
+        });
+    };
     DataService.prototype.getAllReaders = function () {
         return this.http.get('/api/readers')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleHttpError));
@@ -477,7 +489,7 @@ var LoggerService = /** @class */ (function () {
     function LoggerService() {
     }
     LoggerService.prototype.log = function (message) {
-        var timeString = new Date().toLocaleDateString();
+        var timeString = new Date().toLocaleTimeString();
         console.log(message + " (" + timeString + ")");
     };
     LoggerService.prototype.error = function (message) {
@@ -560,6 +572,9 @@ var DashboardComponent = /** @class */ (function () {
         this.dataService.getAllReaders()
             .subscribe(function (data) { return _this.allReaders = data; }, function (err) { return console.log('error ===>', err.friendlyMessage); }, function () { return _this.loggerService.log('All done getting readers!'); });
         this.mostPopularBook = this.dataService.mostPopularBook;
+        this.dataService.getAuthorRecomendation(-1)
+            .then(function (author) { return _this.loggerService.log(author); }, function (err) { return _this.loggerService.error("The promise was rejected: " + err); })
+            .catch(function (error) { return _this.loggerService.error(error.message); });
         this.loggerService.log('Done with dashboard initialization');
     };
     DashboardComponent.prototype.deleteBook = function (bookID) {
