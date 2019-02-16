@@ -32,14 +32,27 @@ export class DashboardComponent implements OnInit {
       );
     this.mostPopularBook = this.dataService.mostPopularBook;
 
-    this.dataService.getAuthorRecomendation(-1)
-        .then(
-          (author: string) => this.loggerService.log(author),
-          (err: string) => this.loggerService.error(`The promise was rejected: ${err}`)
-        )
-        .catch((error: Error) => this.loggerService.error(error.message));
+    // this.dataService.getAuthorRecommendation(-1)
+    //     .then(
+    //       (author: string) => this.loggerService.log(author),
+    //       (err: string) => this.loggerService.error(`The promise was rejected: ${err}`)
+    //     )
+    //     .catch((error: Error) => this.loggerService.error(error.message));
+
+    this.getAuthorRecommendationAsync(1)
+      .catch((error) => this.loggerService.error(error));
 
     this.loggerService.log('Done with dashboard initialization');
+  }
+
+  private async getAuthorRecommendationAsync(readerID: number): Promise<void> {
+    // try {
+      let author: string = await this.dataService.getAuthorRecommendation(readerID);
+      this.loggerService.log(author);
+    // }
+    // catch (error) {
+    //   this.loggerService.error(error);
+    // }
   }
 
   deleteBook(bookID: number): void {

@@ -12,7 +12,7 @@ export class DataService {
 
   mostPopularBook: Book = allBooks[0];
 
-  getAuthorRecomendation(readerID: number): Promise<string> {
+  getAuthorRecommendation(readerID: number): Promise<string> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (readerID > 0) {
