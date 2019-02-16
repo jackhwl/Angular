@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Project\Angular\Angular_Services\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
-module.exports = __webpack_require__(/*! D:\Project\Angular\Angular_Services\src\styles.css */"./src/styles.css");
+__webpack_require__(/*! /Users/WilliamHuang/Developer/project/angular/Angular_Services/node_modules/bootstrap/dist/css/bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+module.exports = __webpack_require__(/*! /Users/WilliamHuang/Developer/project/angular/Angular_Services/src/styles.css */"./src/styles.css");
 
 
 /***/ })

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Book } from "app/models/book";
 import { Reader } from "app/models/reader";
 import { LoggerService } from 'app/core/logger.service';
 import { DataService } from 'app/core/data.service';
+import { BookTrackerError } from 'app/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,8 +24,15 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.allBooks = this.dataService.getAllBooks();
-    this.allReaders = this.dataService.getAllReaders();
+    this.dataService.getAllReaders()
+      .subscribe(
+        (data: Reader[]) => this.allReaders = data,
+        (err: BookTrackerError) => console.log('error ===>', err.friendlyMessage),
+        () => this.loggerService.log('All done getting readers!')
+      );
     this.mostPopularBook = this.dataService.mostPopularBook;
+
+    this.loggerService.log('Done with dashboard initialization');
   }
 
   deleteBook(bookID: number): void {

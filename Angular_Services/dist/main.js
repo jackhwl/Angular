@@ -262,14 +262,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add-book/add-book.component */ "./src/app/add-book/add-book.component.ts");
-/* harmony import */ var _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-reader/add-reader.component */ "./src/app/add-reader/add-reader.component.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./edit-book/edit-book.component */ "./src/app/edit-book/edit-book.component.ts");
-/* harmony import */ var _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./edit-reader/edit-reader.component */ "./src/app/edit-reader/edit-reader.component.ts");
-/* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./core/core.module */ "./src/app/core/core.module.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-book/add-book.component */ "./src/app/add-book/add-book.component.ts");
+/* harmony import */ var _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./add-reader/add-reader.component */ "./src/app/add-reader/add-reader.component.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./edit-book/edit-book.component */ "./src/app/edit-book/edit-book.component.ts");
+/* harmony import */ var _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./edit-reader/edit-reader.component */ "./src/app/edit-reader/edit-reader.component.ts");
+/* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/core.module */ "./src/app/core/core.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -287,26 +288,28 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_7__["DashboardComponent"],
-                _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_3__["AddBookComponent"],
-                _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_9__["EditReaderComponent"],
-                _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_8__["EditBookComponent"],
-                _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_4__["AddReaderComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
+                _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_8__["DashboardComponent"],
+                _add_book_add_book_component__WEBPACK_IMPORTED_MODULE_4__["AddBookComponent"],
+                _edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_10__["EditReaderComponent"],
+                _edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_9__["EditBookComponent"],
+                _add_reader_add_reader_component__WEBPACK_IMPORTED_MODULE_5__["AddReaderComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-                _core_core_module__WEBPACK_IMPORTED_MODULE_10__["CoreModule"]
+                _core_core_module__WEBPACK_IMPORTED_MODULE_11__["CoreModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -390,8 +393,12 @@ var CoreModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _logger_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./logger.service */ "./src/app/core/logger.service.ts");
-/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data */ "./src/app/data.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _logger_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./logger.service */ "./src/app/core/logger.service.ts");
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data */ "./src/app/data.ts");
+/* harmony import */ var app_models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! app/models */ "./src/app/models/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -404,29 +411,42 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
+
 var DataService = /** @class */ (function () {
-    function DataService(loggerService) {
+    function DataService(loggerService, http) {
         this.loggerService = loggerService;
-        this.mostPopularBook = _data__WEBPACK_IMPORTED_MODULE_2__["allBooks"][0];
+        this.http = http;
+        this.mostPopularBook = _data__WEBPACK_IMPORTED_MODULE_5__["allBooks"][0];
     }
     DataService.prototype.getAllReaders = function () {
-        return _data__WEBPACK_IMPORTED_MODULE_2__["allReaders"];
+        return this.http.get('/api/readers')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleHttpError));
     };
     DataService.prototype.getReaderById = function (id) {
-        return _data__WEBPACK_IMPORTED_MODULE_2__["allReaders"].find(function (reader) { return reader.readerID === id; });
+        return _data__WEBPACK_IMPORTED_MODULE_5__["allReaders"].find(function (reader) { return reader.readerID === id; });
+    };
+    DataService.prototype.handleHttpError = function (error) {
+        var dataError = new app_models__WEBPACK_IMPORTED_MODULE_6__["BookTrackerError"]();
+        dataError.errorNumber = 100;
+        dataError.message = error.statusText;
+        dataError.friendlyMessage = 'An error occurred retrieving data.';
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(dataError);
     };
     DataService.prototype.getAllBooks = function () {
-        return _data__WEBPACK_IMPORTED_MODULE_2__["allBooks"];
+        return _data__WEBPACK_IMPORTED_MODULE_5__["allBooks"];
     };
     DataService.prototype.getBookById = function (id) {
-        return _data__WEBPACK_IMPORTED_MODULE_2__["allBooks"].find(function (book) { return book.bookID === id; });
+        return _data__WEBPACK_IMPORTED_MODULE_5__["allBooks"].find(function (book) { return book.bookID === id; });
     };
     DataService.prototype.setMostPopularBook = function (popularBook) {
         this.mostPopularBook = popularBook;
     };
     DataService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_logger_service__WEBPACK_IMPORTED_MODULE_1__["LoggerService"]])
+        __metadata("design:paramtypes", [_logger_service__WEBPACK_IMPORTED_MODULE_4__["LoggerService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], DataService);
     return DataService;
 }());
@@ -535,9 +555,12 @@ var DashboardComponent = /** @class */ (function () {
         this.loggerService.log('dashboard started');
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.allBooks = this.dataService.getAllBooks();
-        this.allReaders = this.dataService.getAllReaders();
+        this.dataService.getAllReaders()
+            .subscribe(function (data) { return _this.allReaders = data; }, function (err) { return console.log('error ===>', err.friendlyMessage); }, function () { return _this.loggerService.log('All done getting readers!'); });
         this.mostPopularBook = this.dataService.mostPopularBook;
+        this.loggerService.log('Done with dashboard initialization');
     };
     DashboardComponent.prototype.deleteBook = function (bookID) {
         console.warn("Delete book not yet implemented (bookID: " + bookID + ").");
@@ -726,6 +749,91 @@ var EditReaderComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/models/book.ts":
+/*!********************************!*\
+  !*** ./src/app/models/book.ts ***!
+  \********************************/
+/*! exports provided: Book */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Book", function() { return Book; });
+var Book = /** @class */ (function () {
+    function Book() {
+    }
+    return Book;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/bookTrackerError.ts":
+/*!********************************************!*\
+  !*** ./src/app/models/bookTrackerError.ts ***!
+  \********************************************/
+/*! exports provided: BookTrackerError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookTrackerError", function() { return BookTrackerError; });
+var BookTrackerError = /** @class */ (function () {
+    function BookTrackerError() {
+    }
+    return BookTrackerError;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/index.ts":
+/*!*********************************!*\
+  !*** ./src/app/models/index.ts ***!
+  \*********************************/
+/*! exports provided: Book, BookTrackerError, Reader */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _book__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./book */ "./src/app/models/book.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Book", function() { return _book__WEBPACK_IMPORTED_MODULE_0__["Book"]; });
+
+/* harmony import */ var _bookTrackerError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bookTrackerError */ "./src/app/models/bookTrackerError.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BookTrackerError", function() { return _bookTrackerError__WEBPACK_IMPORTED_MODULE_1__["BookTrackerError"]; });
+
+/* harmony import */ var _reader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reader */ "./src/app/models/reader.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Reader", function() { return _reader__WEBPACK_IMPORTED_MODULE_2__["Reader"]; });
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/reader.ts":
+/*!**********************************!*\
+  !*** ./src/app/models/reader.ts ***!
+  \**********************************/
+/*! exports provided: Reader */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Reader", function() { return Reader; });
+var Reader = /** @class */ (function () {
+    function Reader() {
+    }
+    return Reader;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/badge.service.ts":
 /*!*******************************************!*\
   !*** ./src/app/services/badge.service.ts ***!
@@ -825,7 +933,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Project\Angular\Angular_Services\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/WilliamHuang/Developer/project/angular/Angular_Services/src/main.ts */"./src/main.ts");
 
 
 /***/ })
