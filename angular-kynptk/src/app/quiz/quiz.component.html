@@ -1,0 +1,13 @@
+
+<ul *ngFor='let quiz of quizzes; let i = index'  
+    [ngClass]="{active: counter === i }" class ="hide">
+    <li>
+        {{i+1}}
+        <app-question [quiz]="quiz" (updateGuess)="updateGuess($event)"></app-question>
+        <button [disabled]="counter==0" (click)="counter=i-1">Prev</button>
+        <button [disabled]="counter==quizzes.length-1" (click)="counter=i+1">Next</button>
+        <button (click)="getScore()">Finish</button>
+    </li>
+</ul>
+{{score}}
+<button (click)="getScore()">Finish</button>
