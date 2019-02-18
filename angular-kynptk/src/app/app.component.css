@@ -24,6 +24,7 @@ span {
     margin: 0 auto;
     left: 0;
     right: 0;
+    width: 250px;
 }
 button {
     font-size: 1em;
