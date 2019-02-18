@@ -1,0 +1,23 @@
+
+.active {
+    display: block;
+}
+.bhide {
+    display: inline-block;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 5.5s linear;
+}
+.bactive {
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+}
+h2 {
+    margin-top: 5em;
+    color: #98b8ce;
+}
+h1 {
+    font-size: 5em;
+    color: #2f9ee9;
+}

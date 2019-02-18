@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -11,13 +11,11 @@ import { QuizService, LoggerService } from '../services';
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent implements OnInit, OnDestroy {
-  @Input() counter: number = 0;
-  score: number = 0;
-  submitted: boolean = false;
+  counter: number = 0;
+  viewedAll: boolean = false;
   quizzes: Quiz[];
   guesses: Guess[] = [];
   subscription: Subscription;
-  scoresub: Subscription;
   
   constructor(private quizService: QuizService, private loggerService: LoggerService, private router: Router) { }
   
@@ -35,23 +33,13 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.guesses.push(event);
   }
 
-  getScore() {
-    this.scoresub = this.quizService.getScore(this.guesses)
-        .subscribe(
-        (data: number) => this.score = data,
-        (error: QuizError) => this.loggerService.error(error.friendlyMessage),
-        () => this.loggerService.log('complete')
-      );
-  }
-
   submit() {
-    this.submitted = true;
-    this.getScore();
+    this.quizService.guesses = this.guesses;
+    this.router.navigate(['/score']);
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.scoresub.unsubscribe();
   }
 
 }

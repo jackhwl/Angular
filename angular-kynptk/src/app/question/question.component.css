@@ -23,13 +23,16 @@ label {
     cursor: pointer;
 }
 section {
-    margin: 0 auto;
     width: 100%;
-    text-align: center;
 }
 ul {
     display: inline-block;
 }
 span {
     padding: 10px 0 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+h1 {
+    color: #2f9ee9;
 }

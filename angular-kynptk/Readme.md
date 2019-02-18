@@ -21,3 +21,5 @@ Correct Answer: Atlanta
 Question 5: Who invented telephone?
 Options: Albert Einstein, Alexander Graham Bell, Isaac Newton, Marie Curie
 Correct Answer: Alexander Graham Bell
+
+https://stackblitz.com/edit/angular-jyasyy

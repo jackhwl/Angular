@@ -6,7 +6,7 @@ import { Quiz, Guess, QuizError } from '../models';
 
 @Injectable()
 export class QuizService {
-
+  guesses: Guess[] = [];
   constructor(private http: HttpClient) { }
 
   getAllQuizzes(): (Observable<Quiz[] | QuizError>) { 
@@ -16,12 +16,13 @@ export class QuizService {
       );
   }
 
-  getScore(guesses: Guess[]): Observable<any> {
-    return this.http.post('/api/scores', guesses)
+  getScore(): Observable<any> {
+    return this.http.post('/api/scores', this.guesses)
       .pipe(
         catchError(this.handleHttpError)
       );
   }
+
 
   private handleHttpError(error: HttpErrorResponse): Observable<QuizError> {
     let quizError = new QuizError();

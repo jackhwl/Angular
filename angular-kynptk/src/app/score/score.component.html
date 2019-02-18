@@ -1,0 +1,9 @@
+<section>
+    <h2>Your score is:</h2>
+    <h1 [ngClass]="{active: calculated }" class="hide">{{score}}</h1>
+    <h1 [ngClass]="{active: !calculated }" class="hide"><img
+            src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif"></h1>
+    <button [routerLink]="['/welcome']" title="Start over!" [ngClass]="{bactive: calculated }" class="bhide">
+        Start over
+    </button>
+</section>

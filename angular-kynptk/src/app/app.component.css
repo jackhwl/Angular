@@ -1,31 +1,14 @@
-section h1, section span {
-    font-family: Lato;
-    font-size: 2em;
-}
-section h1 {
-    display: inline;
-}
-section {
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-}
-article {
-    margin: 5em 0;
-}
-h1 {
-    padding: 3em 0 1em 0;
-    margin: 0 auto;
+body {
     color: #98b8ce;
 }
-span {
-    position: absolute;
-    top: 10em;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    width: 250px;
+
+section {
+    margin: 1em auto;
+    width: 30em;
+    text-align: center;
+    clear: both;
 }
+
 button {
     font-size: 1em;
     padding: 0.2em 0.6em;
@@ -39,25 +22,6 @@ button:hover {
     cursor: pointer;
 }
 
-span:hover ~ #millionaire {
-    font-family: Lato;
-    font-style: italic;
-    font-size: 2em;
-    color: #2f9ee9;
-}
-
-span:hover ~ #millionaireB {
-    font-family: Lato;
-    font-style: italic;
-    font-size: 2em;
-    text-transform: uppercase;
-    color: #2f9ee9;
-}
-
 .hide {
     display: none;
-}
-
-.active {
-    display: inline;
 }

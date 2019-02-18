@@ -1,0 +1,40 @@
+section h1, section span {
+    font-family: Lato;
+    font-size: 2em;
+}
+section h1 {
+    display: inline;
+}
+section {
+  width: 100%;
+}
+article {
+    margin: 5em 0;
+}
+h1 {
+    padding: 3em 0 1em 0;
+    margin: 0 auto;
+}
+span {
+    position: absolute;
+    top: 10em;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 250px;
+}
+
+span:hover ~ #millionaire {
+    font-family: Lato;
+    font-style: italic;
+    font-size: 2em;
+    color: #2f9ee9;
+}
+
+span:hover ~ #millionaireB {
+    font-family: Lato;
+    font-style: italic;
+    font-size: 2em;
+    text-transform: uppercase;
+    color: #2f9ee9;
+}

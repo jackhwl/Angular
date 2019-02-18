@@ -1,21 +1,15 @@
-
 <ul *ngFor='let quiz of quizzes; let i = index'  
-    [ngClass]="{active: !submitted && counter === i }" class ="hide">
+    [ngClass]="{active: counter === i }" class ="hide">
     <li>
         <div>
             <app-question [sequence]="i+1" [quiz]="quiz" (updateGuess)="updateGuess($event)"></app-question>
             <section>
-                <button [ngClass]="{active: counter !== 0 }" class ="hide" id="prev" (click)="counter=i-1">Prev</button>
-                <button [ngClass]="{active: counter !== quizzes.length-1 }" class ="hide" id="next" (click)="counter=i+1">Next</button>
+                <button [ngClass]="{active: counter !== 0 }" class ="hide" id="prev" (click)="counter=i-1" title="Previous" >Prev</button>
+                <button [ngClass]="{active: counter !== quizzes.length-1 }" class ="hide" id="next" (click)="counter=i+1;viewedAll=viewedAll || counter===quizzes.length-1" title="Next">Next</button>
             </section>
             <section>
-                <button (click)="submit()" id="done">Submit</button>
+                <button (click)="submit()" id="done" [ngClass]="{active: viewedAll || counter === quizzes.length-1 }" class ="hide" title="Submit">Submit</button>
             </section>
         </div>
     </li>
 </ul>
-<section [ngClass]="{active: submitted }" class ="hide">
-    <h2>Your score is:</h2>
-        <h1>{{score}}</h1>
-</section>
-<router-outlet></router-outlet>
