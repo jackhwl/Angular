@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Quiz, Guess } from "../models";
-
-import { QuizService } from '../services/quiz.service';
-
+import { Quiz, Guess, QuizError } from "../models";
+import { QuizService, LoggerService } from '../services';
 
 @Component({
   selector: 'app-quiz',
@@ -12,49 +11,23 @@ import { QuizService } from '../services/quiz.service';
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent implements OnInit, OnDestroy {
-
-  counter: number = 0;
+  @Input() counter: number = 0;
   score: number = 0;
+  submitted: boolean = false;
   quizzes: Quiz[];
   guesses: Guess[] = [];
   subscription: Subscription;
-
-
-  constructor(private quizService: QuizService) { }
+  scoresub: Subscription;
+  
+  constructor(private quizService: QuizService, private loggerService: LoggerService, private router: Router) { }
   
   ngOnInit() {
-    // this.dataService.getAllBooks()
-    //   .subscribe(
-    //     (data: Book[]) => this.allBooks = data,
-    //     (err: BookTrackerError) => console.log(err.friendlyMessage),
-    //     () => console.log('All done getting books.')
-    //   );
-    // let resolvedData: Quiz[] | BookTrackerError = this.route.snapshot.data['resolvedBooks'];
-    // if (resolvedData instanceof BookTrackerError) {
-    //   console.log(`Dashboard component error: ${resolvedData.friendlyMessage}`);
-    // } else {
-    //   this.allBooks = resolvedData;
-    // }
-
-    // this.subscription = this.quizService.getAllQuizzes()
-    //     .subscribe(
-    //     (data: Quiz[]) => this.quizzes = data,
-    //     (error) => console.error(error),
-    //     () => console.log('complete')
-    //     //(err: QuizError) => console.log('error ===>', err.friendlyMessage),
-    //     //() => this.loggerService.log('All done getting readers!')
-    //   );
-
-      this.subscription = this.quizService.getAllQuizzes1()
+      this.subscription = this.quizService.getAllQuizzes()
       .subscribe(
       (data: any) => this.quizzes = data,
-      (error) => console.error(error),
-      () => console.log('complete')
-      //(err: QuizError) => console.log('error ===>', err.friendlyMessage),
-      //() => this.loggerService.log('All done getting readers!')
+      (error: QuizError) => this.loggerService.error(error.friendlyMessage),
+      () => this.loggerService.log('complete')
     );
-    //this.mostPopularBook = this.dataService.mostPopularBook;
-
   }
 
   updateGuess (event: Guess) {
@@ -63,20 +36,22 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   getScore() {
-    console.log('aaa');
-    const subscription = this.quizService.getScore(this.guesses)
+    this.scoresub = this.quizService.getScore(this.guesses)
         .subscribe(
         (data: number) => this.score = data,
-        (error) => console.error(error),
-        () => console.log('complete')
-        //(err: QuizError) => console.log('error ===>', err.friendlyMessage),
-        //() => this.loggerService.log('All done getting readers!')
+        (error: QuizError) => this.loggerService.error(error.friendlyMessage),
+        () => this.loggerService.log('complete')
       );
-    this.subscription.add(subscription);
+  }
+
+  submit() {
+    this.submitted = true;
+    this.getScore();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.scoresub.unsubscribe();
   }
 
 }

@@ -1,0 +1,35 @@
+li.item:hover, .pickedItem {
+    background-color:#50ace9;
+    color: #fff;
+}
+
+li.item {
+    width:25em;
+    height:3em;
+    text-align:left;
+    line-height:2em;
+    font-size:1em;
+    padding-left:10px;
+    padding-right:10px;
+    border-bottom:1px solid;
+    border-color:#e2dede;
+    list-style-type: none;
+}
+label {
+    font-family: Lato;
+    font-size: 2em;
+    width: 100%;
+    display: inline-block;
+    cursor: pointer;
+}
+section {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+ul {
+    display: inline-block;
+}
+span {
+    padding: 10px 0 0 10px;
+}

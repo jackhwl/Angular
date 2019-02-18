@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+
 import { questions, options } from '../data';
 
 @Injectable()
@@ -10,9 +11,32 @@ export class FakeApiInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        function isGuessCorrect(guess: any): boolean {
+            const answers = options.filter(option => option.answer)
+                .map(o => ({
+                    questionId: o.questionId,
+                    answer: o.value
+                }));
 
+            return answers.filter(answer => answer.questionId === guess.questionId 
+                      && answer.answer === guess.answer).length > 0;
+        }
+
+        function getScore(guesses: any[]) {
+            let score: number = 0;
+            guesses.forEach(guess => {
+                score += isGuessCorrect(guess) ? 1 : 0;
+              });
+            
+            return score;
+        }
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
+
+            // throw error
+            if (request.url.endsWith('/error') && request.method === 'GET') {
+                return throwError({ error: { message: 'Error message throw from fake api' } });
+            }
 
             // get questions
             if (request.url.endsWith('/questions') && request.method === 'GET') {
@@ -36,7 +60,13 @@ export class FakeApiInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200, body: quizzes }));
             }
 
-            // get quizzes
+            // get scores
+            if (request.url.endsWith('/scores') && request.method === 'POST') {
+                const score: number = getScore(request.body);
+
+                return of(new HttpResponse({ status: 200, body: score }));
+            }
+
             // pass through any requests not handled above
             return next.handle(request);
             

@@ -1,5 +1,14 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
-<app-quiz></app-quiz>
+<section [ngClass]="{active: counter === -1 }" class="hide">
+  <article>
+    <span>
+      <button (click)="counter=0" title="Start the quiz and become a millionaire!">
+        Start the Quiz
+      </button>
+    </span>
+    <h1>Welcome to Who Wants to </h1>
+    <h1 id='millionaireB'>b</h1>
+    <h1 id='millionaire'>e a Millionaire</h1>
+  </article>
+</section>
+<app-quiz [counter]="counter" [ngClass]="{active: counter !== -1 }" class="hide"></app-quiz>
+<router-outlet></router-outlet>

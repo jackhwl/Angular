@@ -2,16 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 
 import { QuizService } from './quiz.service';
-import { Quiz } from '../models';
+import { Quiz, QuizError } from '../models';
 
 describe('QuizService Tests', () => {
-    let QuizService: QuizService;
+    let quizService: QuizService;
     let httpTestingController: HttpTestingController;
 
-    let testBooks: Book[] = [
-        { bookID: 1, title: 'Goodnight Moon', author: 'Margaret Wise Brown', publicationYear: 1953 },
-        { bookID: 2, title: 'Winnie-the-Pooh', author: 'A. A. Milne', publicationYear: 1926 },
-        { bookID: 3, title: 'The Hobbit', author: 'J. R. R. Tolkien', publicationYear: 1937 }
+    let testQuizzess: Quiz[] = [
+        { questionId: 1, question: 'question one', options:['aaa','bbb','ccc'] },
+        { questionId: 2, question: 'question two', options:['111','222','333'] },
+        { questionId: 3, question: 'question three', options:['ee','f','ggg'] },
     ];
 
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('QuizService Tests', () => {
             providers: [ QuizService ]
         });
 
-        QuizService = TestBed.get(QuizService);
+        quizService = TestBed.get(QuizService);
         httpTestingController = TestBed.get(HttpTestingController);
     });
 
@@ -28,29 +28,29 @@ describe('QuizService Tests', () => {
         httpTestingController.verify();
     });
 
-    it('should GET all books', () => {
-        QuizService.getAllBooks()
-            .subscribe((data: Book[]) => {
+    it('should GET all quizzes', () => {
+        quizService.getAllQuizzes()
+            .subscribe((data: Quiz[]) => {
                 expect(data.length).toBe(3);
             });
-        let booksRequest: TestRequest = httpTestingController.expectOne('/api/books');
-        expect(booksRequest.request.method).toEqual('GET');
+        let quizzesRequest: TestRequest = httpTestingController.expectOne('/api/quizzes');
+        expect(quizzesRequest.request.method).toEqual('GET');
 
-        booksRequest.flush(testBooks);
+        quizzesRequest.flush(testQuizzess);
     });
 
-    it('should return a BookTrackerError', () => {
-        QuizService.getAllBooks()
+    it('should return a QuizError', () => {
+        quizService.getAllQuizzes()
             .subscribe(
-                (data: Book[]) => fail('this should have been an error'),
-                (err: BookTrackerError) => {
-                    expect(err.errorNumber).toEqual(100);
-                    expect(err.friendlyMessage).toEqual('An error occurred retrieving data.');
+                (data: Quiz[]) => fail('this should have been an error'),
+                (err: QuizError) => {
+                    expect(err.errorNumber).toEqual(400);
+                    expect(err.friendlyMessage).toEqual('An error occurred when retrieving data.');
                 }
             );
-        let booksRequest: TestRequest = httpTestingController.expectOne('/api/books');
+        let quizzesRequest: TestRequest = httpTestingController.expectOne('/api/quizzes');
         
-        booksRequest.flush('error', {
+        quizzesRequest.flush('error', {
             status: 500,
             statusText: 'Server Mock Error'
         });

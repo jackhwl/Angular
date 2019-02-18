@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuizComponent } from "./quiz/quiz.component";
 
 const routes: Routes = [
-  { path: 'quiz', component: QuizComponent }, //, resolve: {resolvedBooks: BooksResolverService}
-  { path: '', redirectTo: 'quiz', pathMatch: 'full' }
+  //{ path: 'quiz', component: QuizComponent }, 
+  { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({

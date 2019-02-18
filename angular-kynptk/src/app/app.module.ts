@@ -1,22 +1,23 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app.routing.module';
 
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './question/question.component';
-import { FakeApiProvider } from './services/fake.api.service';
-import { QuizService } from './services/quiz.service';
+import { QuizService, LoggerService, QuizErrorHandlerService, FakeApiProvider } from './services';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpClientModule ],
-  declarations: [ AppComponent, HelloComponent, QuizComponent, QuestionComponent ],
+  imports:      [ BrowserModule, FormsModule, HttpClientModule, AppRoutingModule ],
+  declarations: [ AppComponent, QuizComponent, QuestionComponent ],
   providers: [
+    LoggerService,
     QuizService,
-    FakeApiProvider
+    FakeApiProvider,
+    { provide: ErrorHandler, useClass: QuizErrorHandlerService }
   ],
-  bootstrap:    [ AppComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

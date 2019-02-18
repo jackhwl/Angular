@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { QuizService } from './services/quiz.service';
 
 @Component({
   selector: 'my-app',
@@ -7,5 +6,5 @@ import { QuizService } from './services/quiz.service';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  name = 'Angular 6';
+  counter = -1;
 }

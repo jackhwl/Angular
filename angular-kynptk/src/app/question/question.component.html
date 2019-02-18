@@ -1,8 +1,13 @@
 
-<i>{{quiz.question}}</i>
-<ul>
-    <li *ngFor='let option of quiz.options'>
-        <input type="radio" name="{{quiz.questionId}}" value="{{option}}" 
-            (change)="optionChange($event)"> {{option}}
-    </li>
-</ul>
+<section>
+    <h1><i>{{sequence}}. {{quiz.question}}</i></h1>
+    <ul>
+        <li *ngFor='let option of quiz.options' class="item" 
+            [ngClass]="{pickedItem: option === checkedValue }" >
+            <label>
+                    <input type="radio" name="{{quiz.questionId}}" value="{{option}}" 
+                        (change)="optionChange($event)"> <span>{{option}}</span>
+            </label>
+        </li>
+    </ul>
+</section>
