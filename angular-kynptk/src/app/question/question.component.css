@@ -1,9 +1,9 @@
-li.item:hover, .pickedItem {
+li:hover, .pickedItem {
     background-color:#50ace9;
     color: #fff;
 }
 
-li.item {
+li {
     width:25em;
     height:3em;
     text-align:left;

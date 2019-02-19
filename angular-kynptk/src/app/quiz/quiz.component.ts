@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Quiz, Guess, QuizError } from "../models";
-import { QuizService, LoggerService } from '../services';
+import { LoggerService } from '../services';
+import { QuizService } from '../services';
 
 @Component({
-  selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
@@ -15,17 +14,16 @@ export class QuizComponent implements OnInit, OnDestroy {
   viewedAll: boolean = false;
   quizzes: Quiz[];
   guesses: Guess[] = [];
-  subscription: Subscription;
-  
-  constructor(private quizService: QuizService, private loggerService: LoggerService, private router: Router) { }
+
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private loggerService: LoggerService, private router: Router) { }
   
   ngOnInit() {
-      this.subscription = this.quizService.getAllQuizzes()
-      .subscribe(
-      (data: any) => this.quizzes = data,
-      (error: QuizError) => this.loggerService.error(error.friendlyMessage),
-      () => this.loggerService.log('complete')
-    );
+      const resolvedQuizzes = this.route.snapshot.data['resolvedQuizzes'];
+      if (resolvedQuizzes instanceof QuizError) {
+        this.loggerService.error(resolvedQuizzes.friendlyMessage)
+      } else {
+        this.quizzes = resolvedQuizzes;
+      }
   }
 
   updateGuess (event: Guess) {
@@ -39,7 +37,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+
   }
 
 }

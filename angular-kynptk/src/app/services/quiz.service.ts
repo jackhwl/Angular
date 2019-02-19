@@ -23,7 +23,6 @@ export class QuizService {
       );
   }
 
-
   private handleHttpError(error: HttpErrorResponse): Observable<QuizError> {
     let quizError = new QuizError();
     quizError.errorNumber = 400;

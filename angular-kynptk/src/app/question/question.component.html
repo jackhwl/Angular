@@ -2,7 +2,7 @@
 <section>
     <h1><i>{{sequence}}. {{quiz.question}}</i></h1>
     <ul>
-        <li *ngFor='let option of quiz.options' class="item" 
+        <li *ngFor='let option of quiz.options' 
             [ngClass]="{pickedItem: option === checkedValue }" >
             <label>
                     <input type="radio" name="{{quiz.questionId}}" value="{{option}}" 

@@ -5,7 +5,6 @@ import { QuizError } from "../models";
 import { QuizService, LoggerService } from '../services';
 
 @Component({
-  selector: 'app-score',
   templateUrl: './score.component.html',
   styleUrls: ['./score.component.css']
 })
@@ -20,8 +19,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     this.subscription = this.quizService.getScore()
         .subscribe(
         (data: number) => { this.calculated = true; this.score = data},
-        (error: QuizError) => this.loggerService.error(error.friendlyMessage),
-        () => this.loggerService.log('complete')
+        (error: QuizError) => this.loggerService.error(error.friendlyMessage)
       );
   }
 
