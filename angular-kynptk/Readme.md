@@ -23,3 +23,17 @@ Options: Albert Einstein, Alexander Graham Bell, Isaac Newton, Marie Curie
 Correct Answer: Alexander Graham Bell
 
 https://stackblitz.com/edit/angular-jyasyy
+
+data: two tables
+models:
+routing: use resolve in quiz route
+logging:
+error service: DI replace Error handler
+fake.api.service: 1. fake api call, 2. backend business logic
+
+app.component: footer use svg,
+welcome: Be a millionair, one word, make the button abosulte, in order to mouseover change follow wording
+quiz: show all questions, only display once a time, hide unnecessary button, once past last show submit, 
+    pass quiz and sequence to question component, emit onchange event from question,
+    use service share guesses.
+score: use cdn to load image

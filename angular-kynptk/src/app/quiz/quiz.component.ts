@@ -18,12 +18,13 @@ export class QuizComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private quizService: QuizService, private loggerService: LoggerService, private router: Router) { }
   
   ngOnInit() {
-      const resolvedQuizzes = this.route.snapshot.data['resolvedQuizzes'];
-      if (resolvedQuizzes instanceof QuizError) {
-        this.loggerService.error(resolvedQuizzes.friendlyMessage)
-      } else {
-        this.quizzes = resolvedQuizzes;
-      }
+     this.quizService.getAllQuizzesPromises().then(data=> this.quizzes = data);
+      // const resolvedQuizzes = this.route.snapshot.data['resolvedQuizzes'];
+      // if (resolvedQuizzes instanceof QuizError) {
+      //   this.loggerService.error(resolvedQuizzes.friendlyMessage)
+      // } else {
+      //   this.quizzes = resolvedQuizzes;
+      // }
   }
 
   updateGuess (event: Guess) {
