@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 
 import { DataService } from './data.service';
-import { Book } from 'app/models/book';
+import { Book } from 'app/models';
 import { BookTrackerError } from '../models/bookTrackerError';
 
 describe('DataService Tests', () => {
