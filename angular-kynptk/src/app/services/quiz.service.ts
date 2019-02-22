@@ -16,6 +16,14 @@ export class QuizService {
       );
   }
 
+  getAllQuizzesPromises(): Promise<Quiz[] | QuizError> { 
+    return this.http.get<Quiz[]>('/api/quizzes')
+    .pipe(
+      catchError(this.handleHttpError)
+    ).toPromise();
+  }
+  
+
   getScore(): Observable<any> {
     return this.http.post('/api/scores', this.guesses)
       .pipe(
