@@ -20,8 +20,13 @@
         *ngIf="isLoggedIn">
       <a class="nav-link">Welcome {{ userName }}</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">Show Messages</a>
+    <li class="nav-item" *ngIf="!isMessageDisplayed">
+      <a class="nav-link"
+        (click)="displayMessages()">Show Messages</a>
+    </li>
+    <li class="nav-item" *ngIf="isMessageDisplayed">
+      <a class="nav-link"
+        (click)="hideMessages()">Hide Messages</a>
     </li>
     <li class="nav-item"
         *ngIf="!isLoggedIn">
@@ -35,7 +40,14 @@
     </li>
   </ul>
 </nav>
-<div class="container"
-  [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
-  <router-outlet #o="outlet"></router-outlet>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10"
+    [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
+    <div class="col-md-2">
+      <router-outlet name="popup"></router-outlet>
+    </div>
+  </div>
 </div>
