@@ -17,7 +17,7 @@ import { AuthGuard } from '../user/auth.guard';
     SharedModule,
     RouterModule.forChild([
       { path: 'products', 
-        CanActivate: [AuthGuard],
+        //CanActivate: [AuthGuard],
         children: [
           { path: '', component: ProductListComponent },
           { path: ':id', component: ProductDetailComponent, resolve: { resolvedData: ProductResolver} },

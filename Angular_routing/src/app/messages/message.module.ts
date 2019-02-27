@@ -10,7 +10,7 @@ import { MessageComponent } from './message.component';
     SharedModule,
     RouterModule.forChild([
       {
-        path: 'message',
+        path: 'messages',
         component: MessageComponent,
         outlet: 'popup'
       }

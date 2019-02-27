@@ -42,8 +42,7 @@
 </nav>
 <div class="container">
   <div class="row">
-    <div class="col-md-10"
-    [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+    <div class="col-md-10" [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
       <router-outlet #o="outlet"></router-outlet>
     </div>
     <div class="col-md-2">
