@@ -14,8 +14,23 @@ export class ProductEditComponent implements OnInit  {
   pageTitle = 'Product Edit';
   errorMessage: string;
 
-  product: Product;
   private dataIsValid: { [key: string]: boolean } = {};
+  private currentProduct: Product;
+  private originalProduct: Product;
+
+  isDirty(): boolean {
+    return JSON.stringify(this.originalProduct) !== JSON.stringify(this.currentProduct);
+  }
+
+  get product(): Product {
+    return this.currentProduct;
+  }
+
+  set product(value: Product) {
+    this.currentProduct = value;
+    // Clone the object to retain a copy
+    this.originalProduct = { ...value };
+  }
 
   constructor(private productService: ProductService,
               private messageService: MessageService, private route: ActivatedRoute, private router: Router) { }
@@ -100,10 +115,17 @@ export class ProductEditComponent implements OnInit  {
     }
   }
 
+  reset(): void {
+    this.dataIsValid = null;
+    this.currentProduct = null;
+    this.originalProduct = null;
+  }
+
   onSaveComplete(message?: string): void {
     if (message) {
       this.messageService.addMessage(message);
     }
+    this.reset();
 
     // Navigate back to the product list
     this.router.navigate(['/products']);
