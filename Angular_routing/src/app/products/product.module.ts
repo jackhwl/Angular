@@ -9,7 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductResolver } from './product-resolver.service';
 import { ProductEditInfoComponent } from './product-edit/product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
-import { AuthGuard } from '../user/auth.guard';
+//import { AuthGuard } from '../user/auth.guard';
 import { ProductEditGuard } from './product-edit/product-edit.guard';
 
 
@@ -17,9 +17,9 @@ import { ProductEditGuard } from './product-edit/product-edit.guard';
   imports: [
     SharedModule,
     RouterModule.forChild([
-      { path: 'products', 
-        canActivate: [AuthGuard],
-        children: [
+      //{ path: 'products', 
+        //canActivate: [AuthGuard],
+        //children: [
           { path: '', component: ProductListComponent },
           { path: ':id', component: ProductDetailComponent, resolve: { resolvedData: ProductResolver} },
           { path: ':id/edit', 
@@ -32,8 +32,8 @@ import { ProductEditGuard } from './product-edit/product-edit.guard';
               { path: 'tags', component: ProductEditTagsComponent }
             ]
           }
-        ] 
-      }
+        //] 
+      //}
     ])
   ],
   declarations: [
