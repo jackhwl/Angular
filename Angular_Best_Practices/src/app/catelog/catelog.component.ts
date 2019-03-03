@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { DataRepositoryService } from "../services/data-repository.service"
 
 @Component({
-  styleUrls: ['../styles/catelog.component.css'],
-  templateUrl: '../templates/catelog.component.html'
+  styleUrls: ['./catelog.component.css'],
+  templateUrl: './catelog.component.html'
 })
 export class CatelogComponent {
   classes:any[];

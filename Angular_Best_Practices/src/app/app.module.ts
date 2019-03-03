@@ -5,14 +5,14 @@ import { HttpModule } from '@angular/http'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
 import { appRoutes } from './routes'
-import { AppComponent }  from './components/app.component';
-import { NavBarComponent }  from './components/nav-bar.component';
-import { CatelogComponent } from "./components/catelog.component";
-import { RegisterComponent } from "./components/sign-in.component";
-import { SignInComponent } from "./components/sign-in.component";
+import { AppComponent }  from './app.component';
+import { NavBarComponent }  from './nav-bar.component';
+import { CatelogComponent } from "./catelog/catelog.component";
+import { RegisterComponent } from "./users/sign-in.component";
+import { SignInComponent } from "./users/sign-in.component";
 import { LoadingSpinnerComponent } from "./components/loading-spinner.component";
 import { DataRepositoryService } from "./services/data-repository.service"
-import { AccountMenuComponent } from "./components/account-menu.component";
+import { AccountMenuComponent } from "./account-menu.component";
 
 @NgModule({
   imports:      [

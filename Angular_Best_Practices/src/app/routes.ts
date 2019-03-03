@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { CatelogComponent } from './components/catelog.component';
-import { RegisterComponent } from './components/sign-in';
-import { SignInComponent } from './components/sign-in';
+import { CatelogComponent } from './catelog/catelog.component';
+import { RegisterComponent } from './users/sign-in.component';
+import { SignInComponent } from './users/sign-in.component';
 
 export const appRoutes : Routes = [
   { path: 'catalog', component: CatelogComponent, },
