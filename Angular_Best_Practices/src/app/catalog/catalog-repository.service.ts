@@ -14,7 +14,7 @@ export class CatalogRepositoryService {
     const subject = new Subject<any>();
     const currentUser = this.userRepository.currentUser || {classes:[]};
     const catalogWithEnrollmentStatus =
-      COURSE_CATALOG.map(catalogClass => {
+      courseCatalog.map(catalogClass => {
         let enrolled = {enrolled: currentUser.classes.includes(catalogClass.classId)};
         return Object.assign(catalogClass, enrolled);
       });
@@ -24,7 +24,7 @@ export class CatalogRepositoryService {
   }
 }
 
-const COURSES = [{
+const courses = [{
   courseNumber: 'PO101',
   courseName: 'Intro to Potions',
   creditHours: 3,
@@ -56,86 +56,86 @@ const COURSES = [{
   description: '...'
 }];
 
-const COURSE_CATALOG = [{
+const courseCatalog = [{
   classId: '24ab7b14-f935-44c1-b91b-8598123ea54a',
-  course: COURSES[0],
+  course: courses[0],
   professor: 'Abramius Darksbayn',
   seatsAvailable: 23,
   days: 'MWF',
   time: 11
 }, {
   classId: 'cebbc5ba-f49a-4708-b3dc-51a346b3231e',
-  course: COURSES[0],
+  course: courses[0],
   professor: 'Philosifus Siebrand',
   seatsAvailable: 9,
   days: 'MWF',
   time: 12
 }, {
   classId: '6130cdd4-071a-4559-8072-35f0fbec5516',
-  course: COURSES[0],
+  course: courses[0],
   professor: 'Abramius Darksbayn',
   seatsAvailable: 14,
   days: 'THF',
   time: 2
 }, {
   classId: 'dd0343e9-50b2-4f1d-8b87-93c0b34f3d35',
-  course: COURSES[1],
+  course: courses[1],
   professor: 'Antonia Clavell',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[2],
+  course: courses[2],
   professor: 'Meriel Dufaux',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[3],
+  course: courses[3],
   professor: 'Adranus Klaus',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[4],
+  course: courses[4],
   professor: 'Ragnvald Graupnar',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[5],
+  course: courses[5],
   professor: 'Philosifus Siebrand',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[2],
+  course: courses[2],
   professor: 'Phoebe Chabon',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[3],
+  course: courses[3],
   professor: 'Sycily Soule',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 },{
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[4],
+  course: courses[4],
   professor: 'Heldebald Cincebeaux',
   seatsAvailable: 28,
   days: 'THF',
   time: 11
 }, {
   classId: '7277956e-795f-4c0f-9861-cf03635df5ea',
-  course: COURSES[5],
+  course: courses[5],
   professor: 'Gerlinda Weinschroot',
   seatsAvailable: 28,
   days: 'THF',
