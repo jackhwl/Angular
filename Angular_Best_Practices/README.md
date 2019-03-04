@@ -27,3 +27,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+Core Module vs Shared Module vs Feature Modules
+Core Module should contain any shared singleton services that are shared across multiple modules in your application. core module should also contain any app-level components. This does not mean components that are shared throughout the application, but rather, components that are only used by the top-level app component. like nav component.
+
+Shared Module, application-wide shared components, directives, and pipes. like loading spinner component.

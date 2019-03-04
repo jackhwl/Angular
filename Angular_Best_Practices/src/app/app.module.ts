@@ -6,14 +6,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
 import { appRoutes } from './routes'
 import { AppComponent }  from './app.component';
-import { NavBarComponent }  from './nav-bar.component';
-import { CatalogComponent } from "./catalog/catalog.component";
 import { RegisterComponent } from "./users/register.component";
 import { SignInComponent } from "./users/sign-in.component";
-import { LoadingSpinnerComponent } from "./components/loading-spinner.component";
-import { CatalogRepositoryService } from "./catalog/catalog-repository.service"
-import { UserRepositoryService } from "./services/user-repository.service"
-import { AccountMenuComponent } from "./account-menu.component";
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { CatalogModule } from './catalog/catalog.module';
 
 @NgModule({
   imports:      [
@@ -21,18 +18,17 @@ import { AccountMenuComponent } from "./account-menu.component";
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
+    SharedModule,
+    CatalogModule,
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     AppComponent,
-    NavBarComponent,
-    CatalogComponent,
     RegisterComponent,
     SignInComponent,
-    LoadingSpinnerComponent,
-    AccountMenuComponent
   ],
-  providers: [ CatalogRepositoryService, UserRepositoryService ],
+  providers: [  ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
