@@ -38,3 +38,11 @@ immutableCustomers = List<Customer>(this.customers);
 this.immutableCustomers.toArray();
 return fromJS(cust).toJS() as Customer;
 
+
+Rx.Observable.prototype.asObservable()
+Hides the identity of an observable sequence.
+
+Returns
+(Observable): An observable sequence that hides the identity of the source sequence.
+
+EventBus, loosely coupled communication can make maintenance more challenging, (who is triggering the event?)
