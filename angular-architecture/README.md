@@ -45,4 +45,4 @@ Hides the identity of an observable sequence.
 Returns
 (Observable): An observable sequence that hides the identity of the source sequence.
 
-EventBus, loosely coupled communication can make maintenance more challenging, (who is triggering the event?)
+EventBus, loosely coupled communication can make maintenance more challenging, (who is triggering the event?), and must remember to unsubscribe.
