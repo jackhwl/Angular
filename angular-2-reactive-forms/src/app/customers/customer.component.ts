@@ -19,6 +19,8 @@ export class CustomerComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]], //{value: 'n/a', disabled: true}
       email: ['', [Validators.required, Validators.email]],
+      phone: '',
+      notification: 'email',
       sendCatalog: true
     });
   }
@@ -35,5 +37,15 @@ export class CustomerComponent implements OnInit {
   save() {
     console.log(this.customerForm);
     console.log('Saved: ' + JSON.stringify(this.customerForm.value));
+  }
+
+  setNotification(notifVia: string): void {
+    const phoneControl = this.customerForm.get('phone');
+    if (notifVia==='text') {
+      phoneControl.setValidators(Validators.required);
+    } else {
+      phoneControl.clearValidators();
+    }
+    phoneControl.updateValueAndValidity();
   }
 }
