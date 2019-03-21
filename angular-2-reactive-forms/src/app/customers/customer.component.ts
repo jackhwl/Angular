@@ -23,7 +23,6 @@ export class CustomerComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  
   ngOnInit() {
     this.customerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
