@@ -1,38 +1,4 @@
-# npm i @angular/cli -g
-# ng new my-dream-app
-# ng serve
-Angular CLI support any Node 8.x or higher, npm 5.x or higher
-Always check angular.io for most up to date requirements
-https://angular.io/guide/quickstart
-
-ng version
-npm list -g @angular/cli --depth=0
-npm list -g --depth=0
-
-ng new ngtest --skip-install
-ng new ngtest --dry-run
-ng nwe --help
-ng new ngtest --style scss  
-              --prefix vi  
-              --skip-git  
-              --skip-tests 
-              --routing
-
-ng new my-app --routing
-              --prefix vi
-              --style scss
-              --dry-run
-
-ng config schematics.@schematics/angular:component.styleext scss
-
-ng lint my-app --help
-
-ng lint my-app --format stylish
-
-ng lint my-app --fix
-
-
-# MyDreamApp
+# Ngtest
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
 
