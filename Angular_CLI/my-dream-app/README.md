@@ -75,7 +75,30 @@ ng g m sales --routing
 ## generate routing after application created
 ng g m app --flat  --routing --force  -d
 
-# MyDreamApp
+ng g m admin --routing -m app.module 
+ng g c admin/users
+
+ng g guard auth
+
+# Building and Serving
+
+ng build
+runtime.js    WebPack runtime
+main.js       App code
+polyfills.js  Platform polyfills
+styles.js     Styles
+vendor.js     Angular and other vendor files
+
+npm i webpack-bundle-analyzer --save-dev
+ng build --stats-json
+npx webpack-bundle-analyzer dist/my-app/stats.json
+
+npm i source-map-explorer --save-dev
+ng build
+npx source-map-explorer dist/my-app/main.js
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
 
