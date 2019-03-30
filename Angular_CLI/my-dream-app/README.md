@@ -90,7 +90,7 @@ styles.js     Styles
 vendor.js     Angular and other vendor files
 
 npm i webpack-bundle-analyzer --save-dev
-ng build --stats-json
+ng build --stats-json  
 npx webpack-bundle-analyzer dist/my-app/stats.json
 
 npm i source-map-explorer --save-dev
@@ -100,6 +100,31 @@ npx source-map-explorer dist/my-app/main.js
 ||ng build|ng build --prod|
 |-|-|-|
 |Environment|environment.ts|environment.prod.ts|
+|Cache-busting|only images referenced in css|all build files|
+|Source maps|generated|not generated|
+|Extracted CSS|global CSS output to .js|yes, to css files|
+|Uglification|no|yes|
+|Tree-Shaking|no|yes|
+|AOT|no|yes| 
+|Bundling|yes|yes|
+
+ng build -help
+ng b --prod --stats-json
+
+npm run stats
+
+ng serve --help
+ng serve --port 8626 --live-reload false
+ng server --prod -o
+
+ng add @angular/pwa
+ng add @angular/material
+ng add @angular/elements
+ng add @ng-bootstrap/schematics
+
+
+
+
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
