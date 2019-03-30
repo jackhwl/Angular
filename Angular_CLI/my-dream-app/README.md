@@ -41,8 +41,30 @@ ng g c customer
 --change-detection   -c
 --dry-run            -d
 
-generate directive
+generate directive 
+ng g d search-box -d
+ng g d search-box --flat false -d
 
+ng g s sales-data -d
+@Injectable({
+  providedIn: 'root'
+})
+
+generate models
+ng g class models/customer -d
+ng g cl models/customer -d
+
+generate interface
+ng g i models/person
+
+generate enum
+ng g enum models/gender
+ng g e models/gender
+
+generate pipe
+ng g pipe init-caps -d
+ng g p shared/init-caps -d
+ng g p shared/init-caps -m app.module
 
 
 # MyDreamApp
