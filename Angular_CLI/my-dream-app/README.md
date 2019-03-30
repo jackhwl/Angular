@@ -97,7 +97,9 @@ npm i source-map-explorer --save-dev
 ng build
 npx source-map-explorer dist/my-app/main.js
 
-
+||ng build|ng build --prod|
+|-|-|-|
+|Environment|environment.ts|environment.prod.ts|
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
