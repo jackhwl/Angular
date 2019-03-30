@@ -66,6 +66,9 @@ ng g pipe init-caps -d
 ng g p shared/init-caps -d
 ng g p shared/init-caps -m app.module
 
+generate modules
+ng g m login --spec false -m app.module -d
+
 
 # MyDreamApp
 
