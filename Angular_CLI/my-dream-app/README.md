@@ -41,6 +41,8 @@ ng g c customer
 --change-detection   -c
 --dry-run            -d
 
+generate directive
+
 
 
 # MyDreamApp
