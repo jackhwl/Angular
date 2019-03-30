@@ -31,6 +31,16 @@ ng lint my-app --format stylish
 
 ng lint my-app --fix
 
+ng generate component customer
+ng g c customer
+--flat
+--inline-template   -t
+--inline-style      -s
+--spec
+--view-encapsulation -v
+--change-detection  -c
+--dry-run           -d
+
 
 # MyDreamApp
 
