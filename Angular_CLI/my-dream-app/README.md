@@ -1,6 +1,6 @@
-# npm i @angular/cli -g
-# ng new my-dream-app
-# ng serve
+npm i @angular/cli -g
+ng new my-dream-app
+ng serve
 Angular CLI support any Node 8.x or higher, npm 5.x or higher
 Always check angular.io for most up to date requirements
 https://angular.io/guide/quickstart
@@ -50,25 +50,30 @@ ng g s sales-data -d
   providedIn: 'root'
 })
 
-generate models
+## generate models
 ng g class models/customer -d
 ng g cl models/customer -d
 
-generate interface
+## generate interface
 ng g i models/person
 
-generate enum
+## generate enum
 ng g enum models/gender
 ng g e models/gender
 
-generate pipe
+## generate pipe
 ng g pipe init-caps -d
 ng g p shared/init-caps -d
 ng g p shared/init-caps -m app.module
 
-generate modules
+## generate modules
 ng g m login --spec false -m app.module -d
 
+## generate routing
+ng g m sales --routing
+
+## generate routing after application created
+ng g m app --flat  --routing --force  -d
 
 # MyDreamApp
 
