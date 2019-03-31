@@ -1,15 +1,23 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatIconModule,
   MatListModule,
   MatSidenavModule,
   MatToolbarModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
 } from '@angular/material';
 
 import { NavComponent } from './nav.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -19,13 +27,20 @@ describe('NavComponent', () => {
     TestBed.configureTestingModule({
       declarations: [NavComponent],
       imports: [
-        NoopAnimationsModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
         LayoutModule,
+        MatToolbarModule,
         MatButtonModule,
+        MatSidenavModule,
         MatIconModule,
         MatListModule,
-        MatSidenavModule,
-        MatToolbarModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule
       ]
     }).compileComponents();
   }));
