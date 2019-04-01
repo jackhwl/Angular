@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoggerService } from 'my-lib';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-dream-app';
+
+  constructor(logger: LoggerService){
+    logger.log('hello angular');
+  }
 }
