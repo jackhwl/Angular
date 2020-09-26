@@ -7,6 +7,12 @@
     <mat-card-content>
 
       <!-- LESSON LIST -->
-      
+      {{themeColor}}
+      <hr>
+      <span [style.color]="themeColor">Some Colored Text!</span>
+      <hr>
+      <input name="themeColor" [(ngModel)]="themeColor" type="text">
+      <hr>
+      <button mat-button (click)="updateColor()">Action</button>
     </mat-card-content>
   </mat-card>
