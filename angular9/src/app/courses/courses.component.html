@@ -9,7 +9,12 @@
         <mat-card-content>
 
             <!-- COURSES LIST -->
-
+            <mat-list>
+                <mat-list-item *ngFor="let course of courses" (click)="selectCourse(course)">
+                  <h3>{{course.title}}</h3>
+                </mat-list-item>
+              </mat-list>
+        
         </mat-card-content>
         </mat-card>
     </div>
@@ -24,6 +29,8 @@
             <mat-card-content>
             
             <!-- COURSE FORM -->
+            <span *ngIf="currentCourse; else elseBlock">{{currentCourse | json }}</span>
+            <ng-template #elseBlock>Select a course</ng-template>
 
             </mat-card-content>
             <mat-card-actions>
