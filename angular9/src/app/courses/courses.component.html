@@ -11,7 +11,12 @@
             <!-- COURSES LIST -->
             <mat-list>
                 <mat-list-item *ngFor="let course of courses" (click)="selectCourse(course)">
-                  <h3>{{course.title}}</h3>
+                  <h3 matLine>{{course.title}}</h3>
+                  <p matLine>{{course.description}}</p>
+                  <button mat-icon-button color="warn" 
+                  (click)="deleteCourse(course.id);$event.stopImmediatePropagation()" >
+                    <mat-icon>delete</mat-icon>
+                  </button>
                 </mat-list-item>
               </mat-list>
         

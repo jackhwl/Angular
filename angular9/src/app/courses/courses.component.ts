@@ -33,5 +33,8 @@ export class CoursesComponent implements OnInit {
     console.log(course);
     this.currentCourse = course;
   }
-
+  
+  deleteCourse(courseId) {
+    console.log('COURSE DELETED!', courseId);
+  }
 }
