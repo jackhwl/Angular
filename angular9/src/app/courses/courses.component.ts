@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  currentCourse = null;
+  selectedCourse = null;
   courses = [
     {
       id: 1,
@@ -27,14 +27,31 @@ export class CoursesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.resetSelectedcourse();
+  }
+
+  resetSelectedcourse() {
+    const emptyCourse =     
+    {
+      id: null,
+      title: '',
+      description: '',
+      percentComplete: 0,
+      favorite: false
+    };
+    this.selectedCourse = emptyCourse;
   }
 
   selectCourse(course) {
     console.log(course);
-    this.currentCourse = course;
+    this.selectedCourse = course;
   }
   
   deleteCourse(courseId) {
     console.log('COURSE DELETED!', courseId);
+  }
+
+  cancel() {
+    this.resetSelectedcourse();
   }
 }
