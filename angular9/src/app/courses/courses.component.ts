@@ -47,6 +47,10 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = course;
   }
   
+  saveCourse() {
+    console.log('SAVE COPURCE!');
+  }
+
   deleteCourse(courseId) {
     console.log('COURSE DELETED!', courseId);
   }
