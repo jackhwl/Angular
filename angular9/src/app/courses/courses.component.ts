@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../shared/services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -7,27 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
   selectedCourse = null;
-  courses = [
-    {
-      id: 1,
-      title: 'Angular 9 Fundamentals',
-      description: 'Learn the fundamentals of Angular 9',
-      percentComplete: 26,
-      favorite: true
-    },
-    {
-      id: 2,
-      title: 'Git commit message Best Practise',
-      description: 'Learn the fundamentals of Git commit message',
-      percentComplete: 62,
-      favorite: true
-    }
-  ];
+  courses = null;
 
-  constructor() { }
+  constructor(private courseService: CoursesService) { }
 
   ngOnInit(): void {
     this.resetSelectedcourse();
+    this.courses = this.courseService.courses;
   }
 
   resetSelectedcourse() {
