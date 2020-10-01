@@ -8,22 +8,6 @@ const BASE_URL = 'http://localhost:3000/';
 })
 export class CoursesService {
   private model = 'courses';
-  private courses = [
-    {
-      id: 1,
-      title: 'Angular 19 Fundamentals',
-      description: 'Learn the fundamentals of Angular 9',
-      percentComplete: 26,
-      favorite: true
-    },
-    {
-      id: 2,
-      title: 'Git commit message Best Practise',
-      description: 'Learn the fundamentals of Git commit message',
-      percentComplete: 62,
-      favorite: true
-    }
-  ];
 
   constructor(private http: HttpClient) { }
 
@@ -32,7 +16,7 @@ export class CoursesService {
   }
 
   find(courseId) {
-    
+    return this.http.get(this.getUrlById(courseId));
   }
 
   create(course) {
@@ -40,14 +24,18 @@ export class CoursesService {
   }
 
   update(course) {
-    console.log('update COURCE!', course);
+    return this.http.put(this.getUrlById(course.id), course);
   }
 
   delete(courseId) {
-    console.log('delete COURCE!', courseId);
+    return this.http.delete(this.getUrlById(courseId));
   }
 
   private getUrl() {
     return `${BASE_URL}${this.model}`;
+  }
+
+  private getUrlById(id) {
+    return `${this.getUrl()}/${id}`
   }
 }
