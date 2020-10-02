@@ -1,26 +1,26 @@
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
-                    <span *ngIf="course.id; else noSelection">{{course.title}}</span>
+                    <span *ngIf="selectedCourse.id; else noSelection">{{originalTitle}}</span>
                     <ng-template #noSelection>Select Course</ng-template>
                 </mat-card-title>
             </mat-card-header>
-            <form #form="ngForm" (submit)="saved.emit(course)">
+            <form #form="ngForm" (submit)="saved.emit(selectedCourse)">
                 <mat-card-content>
                 
                     <mat-form-field>
-                        <input matInput placeholder="Title" type="text" name="title" required [(ngModel)]="course.title"  >
+                        <input matInput placeholder="Title" type="text" name="title" required [(ngModel)]="selectedCourse.title"  >
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput placeholder="Description" type="text" name="description" [(ngModel)]="course.description"  >
+                        <input matInput placeholder="Description" type="text" name="description" [(ngModel)]="selectedCourse.description"  >
                     </mat-form-field>
                     <section>
-                        <h4>{{course.percentComplete}}% Complete</h4>
-                        <mat-slider class="full-width" min="0" max="100" name="percentComplete" thumbLable [(ngModel)]="course.percentComplete">
+                        <h4>{{selectedCourse.percentComplete}}% Complete</h4>
+                        <mat-slider class="full-width" min="0" max="100" name="percentComplete" thumbLable [(ngModel)]="selectedCourse.percentComplete">
                         </mat-slider>
                     </section>
                     <section>
-                        <mat-checkbox name="favorite" [(ngModel)]="course.favorite"></mat-checkbox>
+                        <mat-checkbox name="favorite" [(ngModel)]="selectedCourse.favorite"></mat-checkbox>
                     </section>
                 </mat-card-content>
                 <mat-card-actions>
