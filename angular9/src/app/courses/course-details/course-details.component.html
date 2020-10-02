@@ -1,1 +1,34 @@
-<p>course-details works!</p>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <span *ngIf="course.id; else noSelection">{{course.title}}</span>
+                    <ng-template #noSelection>Select Course</ng-template>
+                </mat-card-title>
+            </mat-card-header>
+            <form #form="ngForm" (submit)="saved.emit(course)">
+                <mat-card-content>
+                
+                    <mat-form-field>
+                        <input matInput placeholder="Title" type="text" name="title" required [(ngModel)]="course.title"  >
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Description" type="text" name="description" [(ngModel)]="course.description"  >
+                    </mat-form-field>
+                    <section>
+                        <h4>{{course.percentComplete}}% Complete</h4>
+                        <mat-slider class="full-width" min="0" max="100" name="percentComplete" thumbLable [(ngModel)]="course.percentComplete">
+                        </mat-slider>
+                    </section>
+                    <section>
+                        <mat-checkbox name="favorite" [(ngModel)]="course.favorite"></mat-checkbox>
+                    </section>
+                </mat-card-content>
+                <mat-card-actions>
+
+                    <button [disabled]="form.invalid" type="submit" mat-button color="primary">Submit</button>
+                    <button type="button" mat-button (click)="cancelled.emit()">Cancel</button>
+                </mat-card-actions>
+            </form>
+            <pre>{{form.value | json }}</pre>
+            <pre>{{form.valid | json }}</pre>
+        </mat-card>

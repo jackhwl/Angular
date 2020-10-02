@@ -2,10 +2,24 @@
   "courses": [
     {
       "id": 1,
-      "title": "Angular 9 Fundamentals",
+      "title": "Angular 9 Fundamentals 33",
       "description": "Learn the fundamentals of Angular 9",
       "percentComplete": 26,
       "favorite": true
+    },
+    {
+      "id": 2,
+      "title": "aaaa",
+      "description": "asdfs sf sdf ",
+      "percentComplete": 54,
+      "favorite": false
+    },
+    {
+      "id": 3,
+      "title": "sdf",
+      "description": "testting",
+      "percentComplete": 88,
+      "favorite": false
     }
   ]
 }

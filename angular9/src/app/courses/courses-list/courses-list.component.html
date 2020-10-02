@@ -7,11 +7,11 @@
     <mat-card-content>
 
         <mat-list>
-            <mat-list-item *ngFor="let course of courses" >
+            <mat-list-item *ngFor="let course of courses" (click)="selected.emit(course)">
                 <h3 matLine>{{course.title}}</h3>
                 <p matLine>{{course.description}}</p>
                 <button mat-icon-button color="warn" 
-                 >
+                (click)="deleted.emit(course.id);$event.stopImmediatePropagation()" >
                 <mat-icon>delete</mat-icon>
                 </button>
             </mat-list-item>

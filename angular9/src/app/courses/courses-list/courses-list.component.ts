@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss']
 })
-export class CoursesListComponent implements OnInit {
-  courses = []
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class CoursesListComponent {
+  @Input() courses;
+  @Output() selected = new EventEmitter();
+  @Output() deleted = new EventEmitter();
 }
