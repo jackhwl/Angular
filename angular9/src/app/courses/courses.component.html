@@ -1,31 +1,11 @@
 <div class="courses-containers">
     <div class="courses-list">
-        <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-            Course List
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-
-            <!-- COURSES LIST -->
-            <mat-list>
-                <mat-list-item *ngFor="let course of courses" (click)="selectCourse(course)">
-                  <h3 matLine>{{course.title}}</h3>
-                  <p matLine>{{course.description}}</p>
-                  <button mat-icon-button color="warn" 
-                  (click)="deleteCourse(course.id);$event.stopImmediatePropagation()" >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </mat-list-item>
-              </mat-list>
-        
-        </mat-card-content>
-        </mat-card>
+        <app-courses-list></app-courses-list>
     </div>
 
     <div class="course-details">
-        <mat-card>
+        <app-course-details></app-course-details>
+        <!-- <mat-card>
             <mat-card-header>
                 <mat-card-title>
                     <span *ngIf="selectedCourse.id; else noSelection">{{selectedCourse.title}}</span>
@@ -35,7 +15,6 @@
             <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
                 <mat-card-content>
                 
-                    <!-- COURSE FORM -->
                     <mat-form-field>
                         <input matInput placeholder="Title" type="text" name="title" required [(ngModel)]="selectedCourse.title"  >
                     </mat-form-field>
@@ -53,13 +32,12 @@
                 </mat-card-content>
                 <mat-card-actions>
 
-                    <!-- COURSE ACTIONS -->
                     <button [disabled]="form.invalid" type="submit" mat-button color="primary">Submit</button>
                     <button type="button" mat-button (click)="cancel()">Cancel</button>
                 </mat-card-actions>
             </form>
             <pre>{{form.value | json }}</pre>
             <pre>{{form.valid | json }}</pre>
-        </mat-card>
+        </mat-card> -->
     </div>
 </div>
