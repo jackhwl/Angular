@@ -3,5 +3,10 @@
   "projects": {},
   "cli": {
     "defaultCollection": "@nrwl/workspace"
+  },
+  "schematics": {
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
+    }
   }
 }
