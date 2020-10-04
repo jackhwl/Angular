@@ -3,6 +3,14 @@ import { FormsModule } from '@angular/forms';
 
 import { CourseDetailsComponent } from './course-details.component';
 
+const selectedCourseStub = {
+  "id": 1,
+  "title": "Angular 9 Fundamentals 33",
+  "description": "Learn the fundamentals of Angular 9",
+  "percent-complete": 26,
+  "favorite": true
+};
+
 describe('CourseDetailsComponent', () => {
   let component: CourseDetailsComponent;
   let fixture: ComponentFixture<CourseDetailsComponent>;
@@ -11,6 +19,7 @@ describe('CourseDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CourseDetailsComponent ],
       imports: [FormsModule]
+      
     })
     .compileComponents();
   }));
@@ -18,6 +27,7 @@ describe('CourseDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseDetailsComponent);
     component = fixture.componentInstance;
+    component.selectedCourse = selectedCourseStub;
     fixture.detectChanges();
   });
 
