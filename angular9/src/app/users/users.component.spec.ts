@@ -16,7 +16,11 @@ describe('UsersComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    //fixture.detectChanges();
+  });
+
+  it('should have the correct title', () => {
+    expect(component.title).toBe('Hello Users');
   });
 
   it('should create', () => {
