@@ -29,6 +29,9 @@
     "dashboard-e2e": {
       "tags": [],
       "implicitDependencies": ["dashboard"]
+    },
+    "material": {
+      "tags": []
     }
   }
 }
