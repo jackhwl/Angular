@@ -9,3 +9,5 @@
  * npm install --save-dev @nrwl/angular
  * ng g @nrwl/angular:app dashboard --routing -p=app --style=scss --d
  * ng add @angular/material
+
+* https://www.youtube.com/watch?v=W86LjdYjFTk&list=PLakNactNC1dH38AfqmwabvOszDmKriGco&index=6

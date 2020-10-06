@@ -168,6 +168,119 @@
           }
         }
       }
+    },
+    "review-ui-tile": {
+      "root": "libs/review/ui-tile",
+      "sourceRoot": "libs/review/ui-tile/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/review/ui-tile/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/review/ui-tile/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "review-util-formatters": {
+      "root": "libs/review/util-formatters",
+      "sourceRoot": "libs/review/util-formatters/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/review/util-formatters/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/review/util-formatters/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "review-data-access-games": {
+      "root": "libs/review/data-access-games",
+      "sourceRoot": "libs/review/data-access-games/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/review/data-access-games/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/review/data-access-games/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "review-feature-list": {
+      "root": "libs/review/feature-list",
+      "sourceRoot": "libs/review/feature-list/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/review/feature-list/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/review/feature-list/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "review-feature-details": {
+      "root": "libs/review/feature-details",
+      "sourceRoot": "libs/review/feature-details/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/review/feature-details/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/review/feature-details/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
