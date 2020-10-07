@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/review/data-access-games',
     '<rootDir>/libs/review/feature-list',
     '<rootDir>/libs/review/feature-details',
+    '<rootDir>/apps/store',
   ],
 };
