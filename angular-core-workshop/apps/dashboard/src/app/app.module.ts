@@ -5,6 +5,7 @@ import { MaterialModule } from '@workshop/material';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { ProjectsModule } from './projects/projects.module';
+import { AppRoutingModule } from './app-routing.module';
 import { CustomersModule } from './customers/customers.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,9 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
+    //NxModule.forRoot(),
+    //RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     BrowserAnimationsModule,
     MaterialModule,
+    AppRoutingModule,
     HomeModule,
     ProjectsModule,
     CustomersModule,
