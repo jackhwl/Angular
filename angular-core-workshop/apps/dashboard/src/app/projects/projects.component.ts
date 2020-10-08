@@ -29,8 +29,13 @@ export class ProjectsComponent implements OnInit {
       approved: true,
     },
   ];
-
+  selectedProject;
   constructor() {}
 
   ngOnInit(): void {}
+
+  selectProject(project) {
+    this.selectedProject = project;
+    console.log('selected', project);
+  }
 }
