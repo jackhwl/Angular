@@ -38,4 +38,8 @@ export class ProjectsComponent implements OnInit {
     this.selectedProject = project;
     console.log('selected', project);
   }
+
+  cancel() {
+    this.selectProject(null);
+  }
 }
