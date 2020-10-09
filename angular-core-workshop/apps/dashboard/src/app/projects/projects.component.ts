@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Project, ProjectsService } from "@workshop/core-data";
 
 @Component({
   selector: 'app-projects',
@@ -7,39 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
   primaryColor = 'red';
-  projects = [
-    {
-      id: '1',
-      title: 'Project One',
-      details: 'This is a sample project',
-      percentComplete: 20,
-      approved: false,
-    },
-    {
-      id: '2',
-      title: 'Project Two',
-      details: 'This is a sample project',
-      percentComplete: 40,
-      approved: false,
-    },
-    {
-      id: '3',
-      title: 'Project Three',
-      details: 'This is a sample project',
-      percentComplete: 100,
-      approved: true,
-    },
-  ];
-  selectedProject;
-  constructor() {}
+  projects: Project[];
+  selectedProject: Project;
+  
+  constructor(private projectsService: ProjectsService) {
 
-  ngOnInit(): void {}
+  }
+
+  ngOnInit(): void {
+    this.getProjects();
+  }
 
   selectProject(project) {
     this.selectedProject = project;
     console.log('selected', project);
   }
 
+  getProjects() {
+    this.projects = this.projectsService.all();
+  }
   cancel() {
     this.selectProject(null);
   }
