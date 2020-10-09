@@ -19,7 +19,7 @@
             <p mat-line>
               {{ project.details }}
             </p>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="deleteProject(project);$event.stopImmediatePropagation()">
               <mat-icon>close</mat-icon>
             </button>
           </mat-list-item>
