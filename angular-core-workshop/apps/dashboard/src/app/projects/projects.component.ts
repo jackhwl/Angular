@@ -10,7 +10,7 @@ export class ProjectsComponent implements OnInit {
   primaryColor = 'red';
   projects: Project[];
   selectedProject: Project;
-  
+
   constructor(private projectsService: ProjectsService) {
 
   }
@@ -25,7 +25,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.projects = this.projectsService.all();
+    this.projectsService.all()
+    .subscribe((result: any) => this.projects = result);
   }
   cancel() {
     this.selectProject(null);
