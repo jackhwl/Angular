@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@workshop/material';
-
+//import { NxModule } from '@nrwl/angular';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { ProjectsModule } from './projects/projects.module';
@@ -19,11 +19,11 @@ import { UiLoginModule } from '@workshop/ui-login';
     //RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     BrowserAnimationsModule,
     MaterialModule,
-    AppRoutingModule,
     HomeModule,
     ProjectsModule,
     CustomersModule,
-    UiLoginModule
+    UiLoginModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

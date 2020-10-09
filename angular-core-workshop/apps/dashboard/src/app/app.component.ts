@@ -9,6 +9,12 @@ export class AppComponent {
   @ViewChild('sidenav') localSideNav;
   title = 'Angular Core Workshop';
 
+  links = [
+    { path: '/', icon: 'home', title: 'Home'},
+    { path: '/customers', icon: 'face', title: 'Customers'},
+    { path: '/projects', icon: 'projects', title: 'Projects'}
+  ]
+
   toggle() {
     this.localSideNav.toggle();
   }
