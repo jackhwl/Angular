@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiLoginModule } from '@workshop/ui-login';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     NxModule.forRoot(),
     //RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     MaterialModule,
     UiLoginModule,
