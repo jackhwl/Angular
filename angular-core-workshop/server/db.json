@@ -120,13 +120,6 @@
       "details": "This is a sample project",
       "percentComplete": 33,
       "approved": true
-    },
-    {
-      "id": "JM-fypr",
-      "title": "Project Four",
-      "details": "This is a sample project",
-      "percentComplete": 44,
-      "approved": false
     }
   ]
 }

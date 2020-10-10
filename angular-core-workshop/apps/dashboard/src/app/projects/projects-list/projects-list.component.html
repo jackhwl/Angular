@@ -7,7 +7,7 @@
     <mat-card-content>
       <mat-list>
         <mat-list-item
-          (click)="selectProject(project)"
+          (click)="selected.emit(project)"
           *ngFor="let project of projects"
         >
           <h3 [style.color]="primaryColor" mat-line>
@@ -16,7 +16,7 @@
           <p mat-line>
             {{ project.details }}
           </p>
-          <button *ngIf="!readonly" mat-icon-button (click)="deleteProject(project);$event.stopImmediatePropagation()">
+          <button *ngIf="!readonly" mat-icon-button (click)="deleted.emit(project);$event.stopImmediatePropagation()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-list-item>
