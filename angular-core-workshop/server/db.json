@@ -113,6 +113,20 @@
       "targetDate": null,
       "completionDate": null,
       "customerId": "3"
+    },
+    {
+      "id": "mraaQUo",
+      "title": "Project Three",
+      "details": "This is a sample project",
+      "percentComplete": 33,
+      "approved": true
+    },
+    {
+      "id": "JM-fypr",
+      "title": "Project Four",
+      "details": "This is a sample project",
+      "percentComplete": 44,
+      "approved": false
     }
   ]
 }
