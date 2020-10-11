@@ -10,7 +10,7 @@
           (click)="selected.emit(project)"
           *ngFor="let project of projects"
         >
-          <h3 [style.color]="primaryColor" mat-line>
+          <h3 mat-line>
             {{ project.title }}
           </h3>
           <p mat-line>
