@@ -2,32 +2,30 @@
     <mat-card-header>
       <mat-card-title>
         <h1>
-          <span *ngIf="project.id; else elseBlock">{{
-            project.title
-          }}</span>
+          <span *ngIf="currentProject.id; else elseBlock">{{ originalTitle }}</span>
           <ng-template #elseBlock>Select a Project</ng-template>
         </h1>
       </mat-card-title>
     </mat-card-header>
-    <form (submit)="saved.emit($event)">
+    <form (submit)="saved.emit(currentProject)">
       <mat-card-content>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Title" [(ngModel)]="project.title" type="text" name="title">
+          <input matInput placeholder="Title" [(ngModel)]="currentProject.title" type="text" name="title">
         </mat-form-field>
         <mat-form-field class="full-width">
-          <textarea matInput placeholder="Details" [(ngModel)]="project.details" type="text" name="details"></textarea>
+          <textarea matInput placeholder="Details" [(ngModel)]="currentProject.details" type="text" name="details"></textarea>
         </mat-form-field>
         <section class="full-width">
-          <h4>{{project.percentComplete}}% Complete</h4>
-          <mat-slider class="full-width" min="0" max="100" thumbLabel [(ngModel)]="project.percentComplete" name="percentComplete"></mat-slider>
+          <h4>{{currentProject.percentComplete}}% Complete</h4>
+          <mat-slider class="full-width" min="0" max="100" thumbLabel [(ngModel)]="currentProject.percentComplete" name="percentComplete"></mat-slider>
         </section>
         <section>
-          <mat-checkbox [(ngModel)]="project.approved" name="approved">Approved By Customer</mat-checkbox>
+          <mat-checkbox [(ngModel)]="currentProject.approved" name="approved">Approved By Customer</mat-checkbox>
         </section>
       </mat-card-content>
       <mat-card-actions>
         <button type="submit" mat-button color="primary">Save</button>
-        <button type="button" mat-button (click)="cancelled.emit($event)">Cancel</button>
+        <button type="button" mat-button (click)="cancelled.emit(currentProject)">Cancel</button>
       </mat-card-actions>
     </form>
-  </mat-card>
+</mat-card>

@@ -116,18 +116,10 @@
     },
     {
       "id": "mraaQUo",
-      "title": "Project Three",
+      "title": "Project Three99",
       "details": "This is a sample project",
-      "percentComplete": 33,
+      "percentComplete": 66,
       "approved": true
-    },
-    {
-      "isTrusted": true,
-      "id": "IqkNqwt"
-    },
-    {
-      "isTrusted": true,
-      "id": "hmo2jBG"
     }
   ]
 }

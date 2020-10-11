@@ -7,8 +7,15 @@ import { Project } from "@workshop/core-data";
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent {
-  @Input() project: Project;
+  currentProject: Project;
+  originalTitle;
+
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
+
+  @Input() set project(value) {
+    if (value) this.originalTitle = value.title;
+    this.currentProject = Object.assign({}, value);
+  }
 
 }
