@@ -17,6 +17,11 @@ describe('ProjectsComponent', () => {
   let component: ProjectsComponent;
   let fixture: ComponentFixture<ProjectsComponent>;
   let de: DebugElement;
+  let projectsService: ProjectsService;
+
+  const mockProjectsService ={
+
+  }
 
   const emptyProject: Project = {
     id: null,
@@ -34,6 +39,7 @@ describe('ProjectsComponent', () => {
         ProjectsListComponent, 
         ProjectDetailsComponent
       ],
+      providers: [{provide: ProjectsService, useValue: mockProjectsService}], 
       imports: [
         MaterialModule,
         FormsModule,
@@ -44,7 +50,9 @@ describe('ProjectsComponent', () => {
 
     component = fixture.componentInstance;
     de = fixture.debugElement;
+    projectsService = de.injector.get(ProjectsService);
     fixture.detectChanges();
+
   });
 
   it('should have a primaryColor of `red`', () => {
