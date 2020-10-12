@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiLoginModule } from '@workshop/ui-login';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CoreDataModule } from '@workshop/core-data';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     UiLoginModule,
     AppRoutingModule,
+    CoreDataModule
   ],
   providers: [],
   bootstrap: [AppComponent],
