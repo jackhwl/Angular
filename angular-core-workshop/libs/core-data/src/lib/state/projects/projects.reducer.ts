@@ -27,6 +27,12 @@ const initialProjects: Project[] = [
     }
   ];
 
+const createProject = (projects, project) => [...projects, project];
+const updateProject = (projects, project) => projects.map(p => {
+  return p.id === project.id ? Object.assign({}, project) : p;
+});
+const deleteProject = (projects, project) => projects.filter(w => project.id !== w.id);
+
 // 01 Define the shape of my state
 export interface ProjectsState {
     projects: Project[];
@@ -42,7 +48,27 @@ export const initialState: ProjectsState = {
 // 03 Build the MOST simplest reducer
 export function projectsReducers(state = initialState, action): ProjectsState  {
     switch(action.type) {
+      case 'select':
+        return {
+          selectedProjectId: action.payload,
+          projects: state.projects
+        }
+      case 'create':
+        return {
+          selectedProjectId: state.selectedProjectId,
+          projects: createProject(state.projects, action.payload)
+        }
+      case 'update':
+        return {
+          selectedProjectId: state.selectedProjectId,
+          projects: updateProject(state.projects, action.payload)
+        }
+      case 'delete':
+        return {
+          selectedProjectId: state.selectedProjectId,
+          projects: deleteProject(state.projects, action.payload)
+        }
         default:
-            return state;
+          return state;
     }
 }
