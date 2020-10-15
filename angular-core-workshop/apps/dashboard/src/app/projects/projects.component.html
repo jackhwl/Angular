@@ -1,12 +1,11 @@
 <div class="container">
   <div class="col-50">
     <h1>{{primaryColor}}</h1>
-    {{projects$ | async | json}}
-    <!-- <app-projects-list 
+    <app-projects-list 
     [projects]="projects$ | async"
     (selected)="selectProject($event)"
     (deleted)="deleteProject($event)"
-    ></app-projects-list> -->
+    ></app-projects-list>
   </div>
   <div class="col-50">
     <app-project-details 

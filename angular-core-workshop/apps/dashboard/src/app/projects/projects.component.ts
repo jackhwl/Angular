@@ -19,8 +19,8 @@ export class ProjectsComponent implements OnInit {
     private projectsService: ProjectsService, 
     private store: Store<ProjectsState>) {
       this.projects$ = store.pipe(
-        select('projects')
-        //map(projectsState: ProjectsState => projectsState.projects)
+        select('projects'),
+        map((projectsState: ProjectsState) => projectsState.projects)
       )
   }
 
