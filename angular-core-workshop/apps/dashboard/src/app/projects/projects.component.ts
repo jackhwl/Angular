@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Project, ProjectsService, ProjectsState } from "@workshop/core-data";
+import { AddProject, UpdateProject, DeleteProject, Project, ProjectsService, ProjectsState } from "@workshop/core-data";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -58,7 +58,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.store.dispatch({type: 'create', payload: project});
+    this.store.dispatch(new AddProject(project));
 
     // These will go away
     //this.getProjects();
@@ -71,7 +71,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(project) {
-    this.store.dispatch({type: 'update', payload: project});
+    this.store.dispatch(new UpdateProject(project));
     //this.getProjects();
     this.resetProject();
 
@@ -83,7 +83,7 @@ export class ProjectsComponent implements OnInit {
   }
   
   deleteProject(project) {
-    this.store.dispatch({type: 'delete', payload: project});
+    this.store.dispatch(new DeleteProject(project));
     //this.getProjects()
     // this.projectsService.delete(project.id)
     // .subscribe(result => this.getProjects());
