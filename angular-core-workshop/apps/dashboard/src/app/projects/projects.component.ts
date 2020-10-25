@@ -15,7 +15,7 @@ export class ProjectsComponent implements OnInit {
   selectedProject: Project;
   currentProject: Project;
 
-  constructor(
+  constructor( 
     private projectsService: ProjectsService, 
     private store: Store<ProjectsState>) {
       this.projects$ = store.pipe(
@@ -61,7 +61,7 @@ export class ProjectsComponent implements OnInit {
     this.store.dispatch({type: 'create', payload: project});
 
     // These will go away
-    this.getProjects();
+    //this.getProjects();
     this.resetProject();
     // this.projectsService.create(project)
     // .subscribe(result => {
@@ -72,7 +72,7 @@ export class ProjectsComponent implements OnInit {
 
   updateProject(project) {
     this.store.dispatch({type: 'update', payload: project});
-    this.getProjects();
+    //this.getProjects();
     this.resetProject();
 
     // this.projectsService.update(project)
@@ -84,7 +84,7 @@ export class ProjectsComponent implements OnInit {
   
   deleteProject(project) {
     this.store.dispatch({type: 'delete', payload: project});
-    this.getProjects()
+    //this.getProjects()
     // this.projectsService.delete(project.id)
     // .subscribe(result => this.getProjects());
   }

@@ -68,7 +68,7 @@ export function projectsReducers(state = initialState, action): ProjectsState  {
           selectedProjectId: state.selectedProjectId,
           projects: deleteProject(state.projects, action.payload)
         }
-        default:
-          return state;
+      default:
+        return state;
     }
 }
