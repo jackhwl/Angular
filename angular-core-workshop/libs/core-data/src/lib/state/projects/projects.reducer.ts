@@ -2,7 +2,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Project } from "../../projects/project";
 import { ProjectsActionTypes } from './projects.actions';
 
-const initialProjects: Project[] = [
+export const initialProjects: Project[] = [
     {
       id: '1',
       title: 'Project One',
@@ -53,6 +53,8 @@ export function projectsReducers(state = initialState, action): ProjectsState  {
     switch(action.type) {
       case ProjectsActionTypes.ProjectSelected:
         return Object.assign({}, state, {selectedProjectId: action.payload})
+      case ProjectsActionTypes.LoadProjects:
+        return adapter.addMany(action.payload, state);
       case ProjectsActionTypes.AddProject:
         return adapter.addOne(action.payload, state);
       case ProjectsActionTypes.UpdateProject:

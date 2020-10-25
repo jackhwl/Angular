@@ -3,6 +3,7 @@ import { Project } from "../../projects/project";
 
 export enum ProjectsActionTypes {
     ProjectSelected = '[Projects] Seleted',
+    LoadProjects = '[Projects] Load Data',
     AddProject = '[Projects] Add Data',
     UpdateProject = '[Projects] Update Data',
     DeleteProject = '[Projects] Delete Data',
@@ -11,6 +12,11 @@ export enum ProjectsActionTypes {
 export class SelectProject implements Action {
     readonly type = ProjectsActionTypes.ProjectSelected;
     constructor(private payload: Project) {}
+}
+
+export class LoadProjects implements Action {
+    readonly type = ProjectsActionTypes.LoadProjects;
+    constructor(private payload: Project[]) {}c
 }
 
 export class AddProject implements Action { 
@@ -28,4 +34,4 @@ export class DeleteProject implements Action {
     constructor(private payload: Project) {}
 }
 
-export type ProjectActions = SelectProject | AddProject | UpdateProject | DeleteProject;
+export type ProjectActions = SelectProject | LoadProjects | AddProject | UpdateProject | DeleteProject;
