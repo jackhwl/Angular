@@ -53,9 +53,9 @@ export function projectsReducers(state = initialState, action): ProjectsState  {
     switch(action.type) {
       case ProjectsActionTypes.ProjectSelected:
         return Object.assign({}, state, {selectedProjectId: action.payload})
-      case ProjectsActionTypes.LoadProjects:
+      case ProjectsActionTypes.ProjectsLoaded:
         return adapter.addMany(action.payload, state);
-      case ProjectsActionTypes.AddProject:
+      case ProjectsActionTypes.ProjectsAdded:
         return adapter.addOne(action.payload, state);
       case ProjectsActionTypes.UpdateProject:
         return adapter.updateOne(action.payload, state);
