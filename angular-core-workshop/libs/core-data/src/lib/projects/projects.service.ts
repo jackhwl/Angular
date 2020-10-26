@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Project } from "./project";
 
 const BASE_URL = 'http://localhost:3000/';
 
@@ -19,18 +20,22 @@ export class ProjectsService {
   }
 
   all() {
-    return this.httpClient.get(this.getUrl());
+    return this.httpClient.get<Project[]>(this.getUrl());
   }
 
-  create(project) {
+  load(id) {
+    return this.httpClient.get<Project>(this.getUrlForId(id));
+  }
+
+  create(project: Project) {
     return this.httpClient.post(this.getUrl(), project);
   }
 
-  update(project) {
+  update(project: Project) {
     return this.httpClient.patch(this.getUrlForId(project.id), project);
   }
 
-  delete(projectId) {
-    return this.httpClient.delete(this.getUrlForId(projectId));
+  delete(project: Project) {
+    return this.httpClient.delete(this.getUrlForId(project.id));
   }
 }

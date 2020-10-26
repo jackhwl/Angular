@@ -15,7 +15,7 @@ export enum ProjectsActionTypes {
 
 export class SelectProject implements Action {
     readonly type = ProjectsActionTypes.ProjectSelected;
-    constructor(private payload: Project) {}
+    constructor(public payload: Project) {}
 }
 
 export class LoadProjects implements Action {
@@ -24,17 +24,17 @@ export class LoadProjects implements Action {
 
 export class ProjectsLoaded implements Action {
     readonly type = ProjectsActionTypes.ProjectsLoaded;
-    constructor(private payload: Project[]) {}
+    constructor(public payload: Project[]) {}
 }
 
 export class AddProject implements Action { 
     readonly type = ProjectsActionTypes.AddProject;
-    constructor(private payload: Project) {}
+    constructor(public payload: Project) {}
 }
 
 export class ProjectAdded implements Action { 
     readonly type = ProjectsActionTypes.ProjectsAdded;
-    constructor(private payload: Project) {}
+    constructor(public payload: Project) {}
 }
 
 export class UpdateProject implements Action { 
