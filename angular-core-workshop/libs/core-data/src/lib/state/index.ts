@@ -11,3 +11,9 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
     projects: fromProjects.projectsReducers
 }
+
+export const selectProjectState = createFeatureSelector<fromProjects.ProjectsState>('projects');
+
+export const  selectProjectIds = createSelector(selectProjectState, fromProjects.selectProjectIds);
+export const  selectProjectEntities = createSelector(selectProjectState, fromProjects.selectProjectEntities);
+export const  selectAllProjects = createSelector(selectProjectState, fromProjects.selectAllProjects);
