@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { LoadProjects, AddProject, UpdateProject, DeleteProject, Project, ProjectsState, selectAllProjects, selectCurrentProject, SelectProject} from "@workshop/core-data";
+import { LoadProjects, AddProject, UpdateProject, DeleteProject, Project, ProjectsState, selectAllProjects, selectCurrentProject, SelectProject, c, ProjectsFacade} from "@workshop/core-data";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -12,13 +12,12 @@ import { map } from 'rxjs/operators';
 export class ProjectsComponent implements OnInit {
   primaryColor = 'red';
   projects$: Observable<Project[]>;
-  selectedProject: Project;
+  //selectedProject: Project;
   currentProject$: Observable<Project>;
 
-  constructor( 
-    private store: Store<ProjectsState>) {
-      this.projects$ = store.pipe(select(selectAllProjects));
-      this.currentProject$ = store.pipe(select(selectCurrentProject));
+  constructor(private facade: ProjectsFacade, private store: Store<ProjectsState>) {
+      this.projects$ = facade.projects$;
+      this.currentProject$ = facade.currentProject$;
     }
 
   ngOnInit(): void {
