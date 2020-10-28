@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { LoadProjects, AddProject, UpdateProject, DeleteProject, Project, ProjectsService, ProjectsState, initialProjects, selectAllProjects} from "@workshop/core-data";
+import { LoadProjects, AddProject, UpdateProject, DeleteProject, Project, ProjectsState, selectAllProjects, selectCurrentProject, SelectProject} from "@workshop/core-data";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,12 +13,12 @@ export class ProjectsComponent implements OnInit {
   primaryColor = 'red';
   projects$: Observable<Project[]>;
   selectedProject: Project;
-  currentProject: Project;
+  currentProject$: Observable<Project>;
 
   constructor( 
-    private projectsService: ProjectsService, 
     private store: Store<ProjectsState>) {
-      this.projects$ = store.pipe(select(selectAllProjects))
+      this.projects$ = store.pipe(select(selectAllProjects));
+      this.currentProject$ = store.pipe(select(selectCurrentProject));
     }
 
   ngOnInit(): void {
@@ -27,19 +27,21 @@ export class ProjectsComponent implements OnInit {
   }
 
   selectProject(project) {
-    this.selectedProject = project;
-    console.log('selected', project);
+    this.store.dispatch(new SelectProject(project.id));
+    //this.selectedProject = project;
+    //console.log('selected', project);
   }
 
   resetProject() {
-    const emptyProject: Project = {
-      id: null,
-      title: '',
-      details: '',
-      percentComplete: 0,
-      approved: false
-    }
-    this.selectProject(emptyProject);
+    // const emptyProject: Project = {
+    //   id: null,
+    //   title: '',
+    //   details: '',
+    //   percentComplete: 0,
+    //   approved: false
+    // }
+    // this.selectProject(emptyProject);
+    this.store.dispatch(new SelectProject(null));
   }
 
   getProjects() {

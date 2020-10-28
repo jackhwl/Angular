@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-50">
-    <pre>{{projects$  | async | json}}</pre>
+    <!-- <pre>{{projects$  | async | json}}</pre> -->
     <app-projects-list 
     [projects]="projects$ | async"
     (selected)="selectProject($event)"
@@ -9,7 +9,7 @@
   </div>
   <div class="col-50">
     <app-project-details 
-    [project]="selectedProject"
+    [project]="currentProject$ | async"
     (saved)="saveProject($event)"
     (cancelled)="cancel()"
     ></app-project-details>
