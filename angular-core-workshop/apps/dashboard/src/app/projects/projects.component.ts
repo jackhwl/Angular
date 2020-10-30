@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { LoadProjects, AddProject, UpdateProject, DeleteProject, Project, ProjectsState, selectAllProjects, selectCurrentProject, SelectProject, c, ProjectsFacade} from "@workshop/core-data";
+import { Project, ProjectsFacade} from "@workshop/core-data";
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-projects',
@@ -10,15 +8,13 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  primaryColor = 'red';
   projects$: Observable<Project[]>;
-  //selectedProject: Project;
   currentProject$: Observable<Project>;
 
-  constructor(private facade: ProjectsFacade, private store: Store<ProjectsState>) {
-      this.projects$ = facade.projects$;
-      this.currentProject$ = facade.currentProject$;
-    }
+  constructor(private facade: ProjectsFacade) {
+    this.projects$ = facade.projects$;
+    this.currentProject$ = facade.currentProject$;
+  }
 
   ngOnInit(): void {
     this.getProjects();
@@ -26,7 +22,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   selectProject(project) {
-    this.store.dispatch(new SelectProject(project.id));
+    this.facade.selectProject(project.id);
     //this.selectedProject = project;
     //console.log('selected', project);
   }
@@ -40,13 +36,9 @@ export class ProjectsComponent implements OnInit {
     //   approved: false
     // }
     // this.selectProject(emptyProject);
-    this.store.dispatch(new SelectProject(null));
+    this.facade.selectProject(null);
   }
 
-  getProjects() {
-    this.store.dispatch(new LoadProjects());
-    //this.projects$ = this.projectsService.all();
-  }
 
   saveProject(project) {
     if (!project.id) {
@@ -56,36 +48,23 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
-  createProject(project) {
-    this.store.dispatch(new AddProject(project));
+  getProjects() {
+    this.facade.getProjects());
+    //this.projects$ = this.projectsService.all();
+  }
 
-    // These will go away
-    //this.getProjects();
+  createProject(project) {
+    this.facade.createProject(project);
     this.resetProject();
-    // this.projectsService.create(project)
-    // .subscribe(result => {
-    //   this.getProjects();
-    //   this.resetProject();
-    // });
   }
 
   updateProject(project) {
-    this.store.dispatch(new UpdateProject(project));
-    //this.getProjects();
+    this.facade.updateProject(project);
     this.resetProject();
-
-    // this.projectsService.update(project)
-    // .subscribe(result => {
-    //   this.getProjects();
-    //   this.resetProject();
-    // });
   }
   
   deleteProject(project) {
-    this.store.dispatch(new DeleteProject(project));
-    //this.getProjects()
-    // this.projectsService.delete(project.id)
-    // .subscribe(result => this.getProjects());
+    this.facade.deleteProject(project);
   }
 
   cancel() {

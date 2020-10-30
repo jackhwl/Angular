@@ -18,4 +18,48 @@ export class ProjectsFacade {
         this.currentProject$ = store.pipe(select(selectCurrentProject));            
     }
 
+    getProjects() {
+      this.store.dispatch(new LoadProjects());
+      //this.projects$ = this.projectsService.all();
+    }
+    
+    selectProject(project) {
+      this.store.dispatch(new SelectProject(project.id));
+      //this.selectedProject = project;
+      //console.log('selected', project);
+    }
+
+    createProject(project) {
+      this.store.dispatch(new AddProject(project));
+
+      // These will go away
+      //this.getProjects();
+      this.resetProject();
+      // this.projectsService.create(project)
+      // .subscribe(result => {
+      //   this.getProjects();
+      //   this.resetProject();
+      // });
+    }
+
+    updateProject(project) {
+      this.store.dispatch(new UpdateProject(project));
+      //this.getProjects();
+      this.resetProject();
+
+      // this.projectsService.update(project)
+      // .subscribe(result => {
+      //   this.getProjects();
+      //   this.resetProject();
+      // });
+    }
+    
+    deleteProject(project) {
+      this.store.dispatch(new DeleteProject(project));
+      //this.getProjects()
+      // this.projectsService.delete(project.id)
+      // .subscribe(result => this.getProjects());
+    }
+
+
 }
