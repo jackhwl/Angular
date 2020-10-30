@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { Project } from './../../projects/project';
 import { ProjectsService } from './../../projects/projects.service';
-import { AddProject, ProjectAdded, LoadProjects, ProjectsLoaded, ProjectsActionTypes } from './projects.actions';
+import { AddProject, ProjectAdded, DeleteProject, ProjectDeleted, LoadProjects, ProjectsLoaded, ProjectsActionTypes } from './projects.actions';
 import { ProjectsState } from './projects.reducer';
 
 @Injectable({providedIn: 'root'})
@@ -26,6 +26,16 @@ export class ProjectsEffects {
         return this.projectsService.create(action.payload)
             .pipe(
                 map((res: Project) => new ProjectAdded(res))
+            )
+    },
+    onError: () => {}
+  })
+
+  @Effect() deleteProjects$ = this.dataPersistence.pessimisticUpdate(ProjectsActionTypes.DeleteProject, {
+    run: (action: DeleteProject, state: ProjectsState) => {
+        return this.projectsService.delete(action.payload)
+            .pipe(
+                map((res: Project) => new ProjectDeleted(res))
             )
     },
     onError: () => {}

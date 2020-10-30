@@ -10,7 +10,9 @@ export enum ProjectsActionTypes {
     ProjectsAdded = '[Projects] Data Added',
 
     UpdateProject = '[Projects] Update Data',
+
     DeleteProject = '[Projects] Delete Data',
+    ProjectDeleted = '[Projects] Data Deleted',
 }
 
 export class SelectProject implements Action {
@@ -44,6 +46,11 @@ export class UpdateProject implements Action {
 
 export class DeleteProject implements Action { 
     readonly type = ProjectsActionTypes.DeleteProject;
+    constructor(public payload: Project) {}
+}
+
+export class ProjectDeleted implements Action { 
+    readonly type = ProjectsActionTypes.ProjectDeleted;
     constructor(private payload: Project) {}
 }
 
@@ -53,4 +60,5 @@ export type ProjectActions = SelectProject
     | AddProject 
     | ProjectAdded 
     | UpdateProject 
-    | DeleteProject;
+    | DeleteProject
+    | ProjectDeleted;
