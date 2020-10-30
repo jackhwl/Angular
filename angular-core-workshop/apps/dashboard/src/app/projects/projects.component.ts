@@ -23,19 +23,9 @@ export class ProjectsComponent implements OnInit {
 
   selectProject(project) {
     this.facade.selectProject(project.id);
-    //this.selectedProject = project;
-    //console.log('selected', project);
   }
 
   resetProject() {
-    // const emptyProject: Project = {
-    //   id: null,
-    //   title: '',
-    //   details: '',
-    //   percentComplete: 0,
-    //   approved: false
-    // }
-    // this.selectProject(emptyProject);
     this.facade.selectProject(null);
   }
 
@@ -49,8 +39,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.facade.getProjects());
-    //this.projects$ = this.projectsService.all();
+    this.facade.getProjects();
   }
 
   createProject(project) {
