@@ -51,7 +51,7 @@ export class DeleteProject implements Action {
 
 export class ProjectDeleted implements Action { 
     readonly type = ProjectsActionTypes.ProjectDeleted;
-    constructor(private payload: Project) {}
+    constructor(public payload: Project) {}
 }
 
 export type ProjectActions = SelectProject 

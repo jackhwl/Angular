@@ -35,7 +35,7 @@ export class ProjectsEffects {
     run: (action: DeleteProject, state: ProjectsState) => {
         return this.projectsService.delete(action.payload)
             .pipe(
-                map((res: Project) => new ProjectDeleted(res))
+                map(_ => new ProjectDeleted(action.payload))
             )
     },
     onError: () => {}
