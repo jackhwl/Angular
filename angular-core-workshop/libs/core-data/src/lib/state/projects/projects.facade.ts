@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { selectAllProjects, selectCurrentProject } from '..';
 import { Project } from '../../projects/project';
-import { AddProject, DeleteProject, LoadProjects, SelectProject, UpdateProject } from './projects.actions';
+import { AddProject, UpdateProject, DeleteProject, LoadProjects, SelectProject } from './projects.actions';
 import { ProjectsState } from './projects.reducer';
 
 @Injectable({
