@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@env/*": ["apps/dashboard/src/environments/*"],
+      "@env/*": ["libs/environments/*"],
       "@workshop/material": ["libs/material/src/index.ts"],
       "@workshop/core-data": ["libs/core-data/src/index.ts"],
       "@workshop/ui-login": ["libs/ui-login/src/index.ts"],
