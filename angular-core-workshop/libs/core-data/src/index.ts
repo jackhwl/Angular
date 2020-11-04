@@ -1,4 +1,4 @@
-export { Project } from "./lib/projects/project";
+export { Project } from "./lib/projects/project.model";
 export { ProjectsService } from './lib/projects/projects.service';
 export { CoreDataModule } from './lib/core-data.module';
 export { ProjectsFacade } from './lib/state/projects/projects.facade';

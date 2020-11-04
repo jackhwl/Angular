@@ -1,5 +1,5 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
-import { Project } from '../projects/project';
+import { Project } from '../projects/project.model';
 
 import * as fromProjects from './projects/projects.reducer';
 

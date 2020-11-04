@@ -94,7 +94,7 @@
   "projects": [
     {
       "id": "1",
-      "title": "Project One666",
+      "title": "Project One",
       "details": "This is a sample project",
       "percentComplete": 20,
       "approved": false,
@@ -120,13 +120,6 @@
       "details": "This is a sample project",
       "percentComplete": 66,
       "approved": true
-    },
-    {
-      "id": "qSTPNit",
-      "title": "mario 11m77",
-      "details": "",
-      "percentComplete": 0,
-      "approved": false
     }
   ]
 }

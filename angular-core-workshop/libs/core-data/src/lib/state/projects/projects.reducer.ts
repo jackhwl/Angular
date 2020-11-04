@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { ProjectsActionTypes } from './projects.actions';
-import { Project } from "../../projects/project";
+import { Project } from "../../projects/project.model";
 
 export const initialProjects: Project[] = [
     {
