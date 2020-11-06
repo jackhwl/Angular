@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project, ProjectsFacade} from "@workshop/core-data";
+import { Project, ProjectsFacade, Customer, CustomersFacade} from "@workshop/core-data";
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,25 +8,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
+  customers$: Observable<Customer[]> = this.customersFacade.allCustomers$;
   projects$: Observable<Project[]>;
   currentProject$: Observable<Project>;
 
-  constructor(private facade: ProjectsFacade) {
-    this.projects$ = facade.projects$;
-    this.currentProject$ = facade.currentProject$;
+  constructor(private projectsFacade: ProjectsFacade, private customersFacade: CustomersFacade) {
+    this.projects$ = projectsFacade.projects$;
+    this.currentProject$ = projectsFacade.currentProject$;
+    this.customers$ = customersFacade.allCustomers$;
   }
 
   ngOnInit(): void {
     this.getProjects();
     this.resetProject();
+    this.customersFacade.loadCustomers();
   }
 
   selectProject(project) {
-    this.facade.selectProject(project.id);
+    this.projectsFacade.selectProject(project.id);
   }
 
   resetProject() {
-    this.facade.selectProject(null);
+    this.projectsFacade.selectProject(null);
   }
 
 
@@ -39,21 +42,21 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.facade.getProjects();
+    this.projectsFacade.getProjects();
   }
 
   createProject(project) {
-    this.facade.createProject(project);
+    this.projectsFacade.createProject(project);
     this.resetProject();
   }
 
   updateProject(project) {
-    this.facade.updateProject(project);
+    this.projectsFacade.updateProject(project);
     this.resetProject();
   }
   
   deleteProject(project) {
-    this.facade.deleteProject(project);
+    this.projectsFacade.deleteProject(project);
   }
 
   cancel() {

@@ -15,6 +15,13 @@
         <mat-form-field class="full-width">
           <textarea matInput placeholder="Details" [(ngModel)]="currentProject.details" type="text" name="details"></textarea>
         </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Customer" [(ngModel)]="currentProject.customerId" name="customerId">
+            <mat-option *ngFor="let customer of customers" [value]="customer.id">
+              {{customer.firstName}} {{customer.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <section class="full-width">
           <h4>{{currentProject.percentComplete}}% Complete</h4>
           <mat-slider class="full-width" min="0" max="100" thumbLabel [(ngModel)]="currentProject.percentComplete" name="percentComplete"></mat-slider>

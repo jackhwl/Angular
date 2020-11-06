@@ -3,5 +3,6 @@ export interface Project {
     title: string,
     details: string,
     percentComplete: number,
-    approved: boolean
+    approved: boolean,
+    customerId: string
 }

@@ -24,7 +24,8 @@ const emptyProject: Project = {
     title: '',
     details: '',
     percentComplete: 0,
-    approved: false
+    approved: false,
+    customerId: null
 }
 
 export const selectProjectState = createFeatureSelector<fromProjects.ProjectsState>('projects');
@@ -50,13 +51,13 @@ export const selectAllCustomers = createSelector(
   fromCustomers.selectAllCustomers
 );
 
-// export const selectCustomersProjects = createSelector(
-//   selectAllCustomers,
-//   selectAllProjects,
-//   (customers, projects) => {
-//     return customers.map(customer => ({
-//       ...customer,
-//       projects: projects.filter(project => project.customerId === customer.id)
-//     }));
-//   }
-// );
+export const selectCustomersProjects = createSelector(
+  selectAllCustomers,
+  selectAllProjects,
+  (customers, projects) => {
+    return customers.map(customer => ({
+      ...customer,
+      projects: projects.filter(project => project.customerId === customer.id)
+    }));
+  }
+);

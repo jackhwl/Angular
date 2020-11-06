@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Project } from "@workshop/core-data";
+import { Project, Customer } from "@workshop/core-data";
 
 @Component({
   selector: 'app-project-details',
@@ -13,6 +13,7 @@ export class ProjectDetailsComponent {
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
 
+  @Input() customers: Customer[];
   @Input() set project(value) {
     if (value) this.originalTitle = value.title;
     this.currentProject = Object.assign({}, value);
