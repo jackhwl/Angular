@@ -2,16 +2,23 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import { Project } from '../projects/project.model';
 
 import * as fromProjects from './projects/projects.reducer';
+import * as fromCustomers from './customers/customers.reducer';
 
 // Updated the shapre of the entire application state
 export interface AppState {
-    projects: fromProjects.ProjectsState
+    projects: fromProjects.ProjectsState,
+    customers: fromCustomers.CustomersState
 }
 
 // Add in feature reducer into combined reducer
 export const reducers: ActionReducerMap<AppState> = {
-    projects: fromProjects.projectsReducers
+    projects: fromProjects.projectsReducer,
+    customers: fromCustomers.customersReducer
 }
+
+// -------------------------------------------------------------------
+// PROJECTS SELECTORS
+// -------------------------------------------------------------------
 const emptyProject: Project = {
     id: null,
     title: '',
@@ -31,3 +38,25 @@ export const  selectCurrentProject = createSelector(
     selectCurrentProjectId, 
     (projectEntities, projectId) => projectId ? projectEntities[projectId] : emptyProject
 )
+
+
+// -------------------------------------------------------------------
+// CUSTOMERS SELECTORS
+// -------------------------------------------------------------------
+export const selectCustomersState = createFeatureSelector<fromCustomers.CustomersState>('customers');
+
+export const selectAllCustomers = createSelector(
+  selectCustomersState,
+  fromCustomers.selectAllCustomers
+);
+
+// export const selectCustomersProjects = createSelector(
+//   selectAllCustomers,
+//   selectAllProjects,
+//   (customers, projects) => {
+//     return customers.map(customer => ({
+//       ...customer,
+//       projects: projects.filter(project => project.customerId === customer.id)
+//     }));
+//   }
+// );
