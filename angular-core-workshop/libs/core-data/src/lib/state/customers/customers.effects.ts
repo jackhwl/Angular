@@ -11,14 +11,15 @@ import { CustomersState } from './customers.reducer';
 @Injectable()
 export class CustomersEffects {
   @Effect()
-  loadCustomers$ = this.dataPersistence.fetch(CustomersActionTypes.LoadCustomers, {
-    run: (action: LoadCustomers, state: CustomersState) => {
-      return this.customersService.all().pipe(map((res: Customer[]) => new CustomersLoaded(res)))
-    },
+    loadCustomers$ = this.dataPersistence.fetch(CustomersActionTypes.LoadCustomers, {
+      run: (action: LoadCustomers, state: CustomersState) => {
+        return this.customersService.all()
+          .pipe(map((res: Customer[]) => new CustomersLoaded(res)))
+      },
 
-    onError: (action: LoadCustomers, error) => {
-      console.error('Error', error);
-    }
+      onError: (action: LoadCustomers, error) => {
+        console.error('Error', error);
+      }
   });
 
   constructor(

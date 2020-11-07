@@ -11,13 +11,13 @@ import { ProjectsState } from './projects.reducer';
   providedIn: 'root'
 })
 export class ProjectsFacade {
-    projects$: Observable<Project[]>;
+    projects$: Observable<Project[]> =this.store.pipe(select(selectAllProjects));
     currentProject$: Observable<Project>;
 
     constructor(private store: Store<ProjectsState>) {
-        this.projects$ = store.pipe(select(selectAllProjects));
+        //this.projects$ = store.pipe(select(selectAllProjects));
         this.currentProject$ = store.pipe(select(selectCurrentProject));            
-    }
+    } 
 
     getProjects() {
       this.store.dispatch(new LoadProjects());

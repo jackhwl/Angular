@@ -7,6 +7,7 @@ import { NxModule } from '@nrwl/nx';
 
 import { reducers } from '.';
 import { ProjectsEffects } from './projects/projects.effects';
+import { CustomersEffects } from './customers/customers.effects';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,7 @@ import { ProjectsEffects } from './projects/projects.effects';
     NxModule.forRoot(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
-    EffectsModule.forRoot([ProjectsEffects])
+    EffectsModule.forRoot([ProjectsEffects, CustomersEffects])
   ]
 })
 export class StateModule { }
