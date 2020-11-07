@@ -12,7 +12,7 @@ import { AboutMobileComponent } from '../cards/about-mobile/about-mobile.compone
 import { LocationData } from '../models/location-data/location-data';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import * as USCities from '../../assets/us_cities.json';
 import { City } from '../models/city/city';
 
