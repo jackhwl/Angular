@@ -8,21 +8,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  customers2$: Observable<Customer[]>;
   customers$: Observable<Customer[]> = this.customersFacade.allCustomers$;
   projects$: Observable<Project[]> = this.projectsFacade.projects$;
-  currentProject$: Observable<Project>;
+  currentProject$: Observable<Project> = this.projectsFacade.currentProject$;
 
-  constructor(private projectsFacade: ProjectsFacade, private customersFacade: CustomersFacade, private cusSvc: CustomersService) {
-    //this.projects$ = projectsFacade.projects$;
-    this.currentProject$ = projectsFacade.currentProject$;
-    //this.customers$ = customersFacade.allCustomers$;
-    this.customers2$ = cusSvc.all();
-
-  }
+  constructor(private projectsFacade: ProjectsFacade, private customersFacade: CustomersFacade) { }
 
   ngOnInit(): void {
-    this.getProjects();
+    this.projectsFacade.getProjects();
     this.resetProject();
     this.customersFacade.loadCustomers();
   }
@@ -42,10 +35,6 @@ export class ProjectsComponent implements OnInit {
     } else {
       this.updateProject(project);
     }
-  }
-
-  getProjects() {
-    this.projectsFacade.getProjects();
   }
 
   createProject(project) {

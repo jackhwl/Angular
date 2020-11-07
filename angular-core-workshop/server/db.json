@@ -119,7 +119,8 @@
       "title": "Project Three99555",
       "details": "This is a sample project",
       "percentComplete": 66,
-      "approved": true
+      "approved": true,
+      "customerId": "2"
     }
   ]
 }
