@@ -1,0 +1,33 @@
+table {
+  width: 100%;
+  color: blue;
+  background-color: lightgray;
+}
+
+.hourly-forecast {
+  height: 24em;
+  overflow: auto;
+}
+
+::ng-deep th.mat-header-cell {
+  height: 1em;
+  font-size: 1.5em;
+  color: blue;
+  background-color: lightgray;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  color: blue;
+  background-color: lightgray;
+}
+
+img {
+  padding: 1em;
+}
+
+.time {
+  font-weight: bold;
+  color: blue;
+}

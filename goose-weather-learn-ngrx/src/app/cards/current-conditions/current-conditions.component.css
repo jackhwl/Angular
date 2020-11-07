@@ -1,0 +1,32 @@
+p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 1em;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+::ng-deep mat-grid-list {
+  overflow: auto;
+}
+
+::ng-deep mat-grid-tile {
+  background: lightblue;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+

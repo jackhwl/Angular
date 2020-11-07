@@ -1,0 +1,6 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html {
+  background-color: lightgray;
+}
