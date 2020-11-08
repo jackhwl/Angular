@@ -1,3 +1,6 @@
+<div *ngIf="error$ | async as error">
+  <h1 class="error-message"><mat-icon>error</mat-icon> {{ error }}</h1>
+</div>
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span class="goose-image"><img src="./assets/goose_small.svg"></span>

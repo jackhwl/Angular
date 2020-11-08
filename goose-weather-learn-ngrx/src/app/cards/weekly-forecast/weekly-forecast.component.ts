@@ -1,5 +1,33 @@
-import { Component, OnInit, Input } from '@angular/core';
+// import { Component, OnInit, Input } from '@angular/core';
+// import { WeatherData } from 'src/app/models/weather-data/weather-data';
+
+// @Component({
+//   selector: 'app-weekly-forecast',
+//   templateUrl: './weekly-forecast.component.html',
+//   styleUrls: ['./weekly-forecast.component.css']
+// })
+// export class WeeklyForecastComponent implements OnInit {
+
+//   data: WeatherData;
+
+//   @Input()
+//   set weatherData(weatherData: WeatherData) {
+//     this.data = weatherData || null;
+//   }
+
+//   constructor() { }
+
+//   ngOnInit(): void {
+
+//   }
+
+// }
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WeatherData } from 'src/app/models/weather-data/weather-data';
+import { Store, select } from '@ngrx/store';
+import { AppState, selectWeather } from 'src/app/reducers';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-weekly-forecast',
@@ -8,17 +36,12 @@ import { WeatherData } from 'src/app/models/weather-data/weather-data';
 })
 export class WeeklyForecastComponent implements OnInit {
 
-  data: WeatherData;
+  data$: Observable<WeatherData>;
 
-  @Input()
-  set weatherData(weatherData: WeatherData) {
-    this.data = weatherData || null;
-  }
-
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-
+    this.data$ = this.store.pipe(select(selectWeather));
   }
 
 }

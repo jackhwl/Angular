@@ -16,6 +16,11 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import * as USCities from '../../assets/us_cities.json';
 import { City } from '../models/city/city';
 
+import { Store, select } from '@ngrx/store';
+import { AppState, selectError } from 'src/app/reducers';
+import { LoadLocations } from '../actions/location.actions';
+import { LoadWeather } from '../actions/weather.actions';
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -36,6 +41,7 @@ export class WeatherComponent implements OnInit {
   filteredCities: Observable<City[]>;
   cities = [];
   selectedLocation = '';
+  error$: Observable<any>;
 
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -47,73 +53,73 @@ export class WeatherComponent implements OnInit {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, public weatherService: WeatherService) {
+  constructor(private breakpointObserver: BreakpointObserver, public weatherService: WeatherService, private store: Store<AppState>) {
     // desktop view
     this.cardsDesktop = [
-      {
-        title: 'Current Conditions',
-        cols: 1,
-        rows: 1,
-        component: CurrentConditionsComponent
-      },
-      {
-        title: 'Hourly Forecast',
-        cols: 1,
-        rows: 1,
-        component: HourlyForecastComponent
-      },
-      {
-        title: 'Weather Discussion',
-        cols: 1,
-        rows: 2,
-        component: WeatherDiscussionComponent
-      },
+      // {
+      //   title: 'Current Conditions',
+      //   cols: 1,
+      //   rows: 1,
+      //   component: CurrentConditionsComponent
+      // },
+      // {
+      //   title: 'Hourly Forecast',
+      //   cols: 1,
+      //   rows: 1,
+      //   component: HourlyForecastComponent
+      // },
+      // {
+      //   title: 'Weather Discussion',
+      //   cols: 1,
+      //   rows: 2,
+      //   component: WeatherDiscussionComponent
+      // },
       {
         title: 'Weekly Forecast',
         cols: 2,
         rows: 1,
         component: WeeklyForecastComponent
       },
-      {
-        title: 'About',
-        cols: 3,
-        rows: 1,
-        component: AboutDesktopComponent
-      }
+      // {
+      //   title: 'About',
+      //   cols: 3,
+      //   rows: 1,
+      //   component: AboutDesktopComponent
+      // }
     ];
 
     // Mobile View
     this.cardsMobile = [
-      {
-        title: 'Current Conditions',
-        cols: 3,
-        rows: 1,
-        component: CurrentConditionsComponent
-      },
-      {
-        title: 'Hourly Forecast',
-        cols: 3,
-        rows: 1,
-        component: HourlyForecastComponent
-      },
-      {
-        title: 'Weather Discussion',
-        cols: 3,
-        rows: 2,
-        component: WeatherDiscussionComponent
-      },
+      // {
+      //   title: 'Current Conditions',
+      //   cols: 3,
+      //   rows: 1,
+      //   component: CurrentConditionsComponent
+      // },
+      // {
+      //   title: 'Hourly Forecast',
+      //   cols: 3,
+      //   rows: 1,
+      //   component: HourlyForecastComponent
+      // },
+      // {
+      //   title: 'Weather Discussion',
+      //   cols: 3,
+      //   rows: 2,
+      //   component: WeatherDiscussionComponent
+      // },
       {
         title: 'Weekly Forecast',
         cols: 3,
         rows: 1,
         component: WeeklyForecastComponent
       },
-      {
-        title: 'About',
-        cols: 3,
-        rows: 2,
-        component: AboutMobileComponent
-      }
+      // {
+      //   title: 'About',
+      //   cols: 3,
+      //   rows: 2,
+      //   component: AboutMobileComponent
+      // }
     ];
 
     // push a value to the list of locations so the user can go back to where they started
@@ -155,6 +161,8 @@ export class WeatherComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.error$ = this.store.pipe(select(selectError));
+
     try {
       navigator.geolocation.getCurrentPosition((position) => {
         this.savePosition(position);
@@ -174,23 +182,71 @@ export class WeatherComponent implements OnInit {
       }
     }
 
-    this.weatherService.getWeather(this.locationData)
-      .pipe(take(1))
-      .subscribe(weather => this.weatherData = weather);
+    this.store.dispatch(new LoadLocations({locationData: this.locationData}));
   }
 
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
+    console.log(event.option.value);
+    console.log(this.locationData);
     for (const city of this.cities) {
       if (city.combinedName === event.option.value) {
-        this.locationData.latitude = city.latitude;
-        this.locationData.longitude = city.longitude;
-        this.weatherData = null;
-        this.weatherService.getWeather(this.locationData)
-          .pipe(take(1))
-          .subscribe(weather => this.weatherData = weather);
+        console.log(city);
+        const latitude = parseFloat(city.latitude);
+        console.log(latitude);
+        const longitude = parseFloat(city.longitude);
+        this.locationData.latitude = latitude.toFixed(4).toString();
+        this.locationData.longitude = longitude.toFixed(4).toString();
+      //   this.weatherData = null;
+      //   this.weatherService.getWeather(this.locationData)
+      //     .pipe(take(1))
+      //     .subscribe(weather => this.weatherData = weather);
 
-        break;
-      }
+      //   break;
+      // }
+       this.store.dispatch(new LoadWeather({weatherData: null}));
+       this.store.dispatch(new LoadLocations({locationData: this.locationData}));
+       break;
+     }
     }
   }
+
+  // ngOnInit(): void {
+  //   try {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       this.savePosition(position);
+  //     });
+  //   } catch (error) {
+  //     alert('Browser does not support location services');
+  //   }
+  // }
+  
+  // savePosition(position) {
+  //   this.locationData.latitude = position.coords.latitude.toFixed(4).toString();
+  //   this.locationData.longitude = position.coords.longitude.toFixed(4).toString();
+  //   for (const city of this.cities) {
+  //     if (city.combinedName === '(your location)') {
+  //       city.latitude = this.locationData.latitude;
+  //       city.longitude = this.locationData.longitude;
+  //     }
+  //   }
+
+  //   this.weatherService.getWeather(this.locationData)
+  //     .pipe(take(1))
+  //     .subscribe(weather => this.weatherData = weather);
+  // }
+
+  // onSelectionChanged(event: MatAutocompleteSelectedEvent) {
+  //   for (const city of this.cities) {
+  //     if (city.combinedName === event.option.value) {
+  //       this.locationData.latitude = city.latitude;
+  //       this.locationData.longitude = city.longitude;
+  //       this.weatherData = null;
+  //       this.weatherService.getWeather(this.locationData)
+  //         .pipe(take(1))
+  //         .subscribe(weather => this.weatherData = weather);
+
+  //       break;
+  //     }
+  //   }
+  // }
 }

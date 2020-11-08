@@ -59,7 +59,7 @@ import { WeatherEffects } from './effects/weather.effects';
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forFeature([WeatherEffects])
+    EffectsModule.forRoot([WeatherEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
