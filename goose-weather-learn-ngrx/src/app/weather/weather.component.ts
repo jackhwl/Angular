@@ -9,6 +9,9 @@ import { WeeklyForecastComponent } from '../cards/weekly-forecast/weekly-forecas
 import { HourlyForecastComponent } from '../cards/hourly-forecast/hourly-forecast.component';
 import { AboutDesktopComponent } from '../cards/about-desktop/about-desktop.component';
 import { AboutMobileComponent } from '../cards/about-mobile/about-mobile.component';
+import { Store, select } from '@ngrx/store';
+import { AppState, selectError } from 'src/app/reducers';
+import { LoadLocations } from '../actions/location.actions';
 import { LocationData } from '../models/location-data/location-data';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -16,9 +19,6 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import * as USCities from '../../assets/us_cities.json';
 import { City } from '../models/city/city';
 
-import { Store, select } from '@ngrx/store';
-import { AppState, selectError } from 'src/app/reducers';
-import { LoadLocations } from '../actions/location.actions';
 import { LoadWeather } from '../actions/weather.actions';
 
 @Component({
@@ -186,23 +186,12 @@ export class WeatherComponent implements OnInit {
   }
 
   onSelectionChanged(event: MatAutocompleteSelectedEvent) {
-    console.log(event.option.value);
-    console.log(this.locationData);
     for (const city of this.cities) {
       if (city.combinedName === event.option.value) {
-        console.log(city);
         const latitude = parseFloat(city.latitude);
-        console.log(latitude);
         const longitude = parseFloat(city.longitude);
-        this.locationData.latitude = latitude.toFixed(4).toString();
-        this.locationData.longitude = longitude.toFixed(4).toString();
-      //   this.weatherData = null;
-      //   this.weatherService.getWeather(this.locationData)
-      //     .pipe(take(1))
-      //     .subscribe(weather => this.weatherData = weather);
-
-      //   break;
-      // }
+        this.locationData.latitude = latitude.toFixed(4);
+        this.locationData.longitude = longitude.toFixed(4);
        this.store.dispatch(new LoadWeather({weatherData: null}));
        this.store.dispatch(new LoadLocations({locationData: this.locationData}));
        break;

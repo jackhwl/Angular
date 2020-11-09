@@ -16,7 +16,7 @@ export class LoadWeather implements Action {
   readonly type = WeatherActionTypes.LoadWeather;
 
   constructor(readonly payload: {weatherData: WeatherData}) {
-
+    console.log('from LoadWeather')
   }
 }
 
