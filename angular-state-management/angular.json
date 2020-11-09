@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-state-management"
+    }
+  },
+  "defaultProject": "angular-state-management",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
