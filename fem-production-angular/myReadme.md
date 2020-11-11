@@ -17,7 +17,7 @@
 
 # add Data Model BaseEntity & Widget
 
-# generate core-data (talk to server), core-state and material
+# generate core-data (communicate with server), core-state (managing the state of application) and material
 
 - nx g lib core-data --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss -d
 - nx g lib core-state --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss -d
@@ -35,3 +35,5 @@
 - nx g c widgets/widgets-details -m app.module.ts --style=scss
 
 - nx g c home -m app.module.ts --style=scss
+
+# angular.json, nx.json tsconfig.base.json
