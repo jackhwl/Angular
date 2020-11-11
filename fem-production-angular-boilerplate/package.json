@@ -14,6 +14,7 @@
     "serve:json": "json-server server/db.json",
     "serve:api": "nx run api:serve",
     "serve:web": "ng serve --open",
+    "serve:client": "nx run client:serve --port=4400 --open",
     "serve:all": "concurrently \"npm run serve:api\" \"npm run serve:web\"",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
