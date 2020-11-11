@@ -14,6 +14,7 @@
 
 # 2 apps share same widgetService
 
-# generate shared component
+# generate shared lib
 
 - nx g lib ui-toolbar --style=scss -d
+- nx g c toolbar/tooolbar --project=ui-toolbar --style=scss -d
