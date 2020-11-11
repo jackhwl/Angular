@@ -27,3 +27,11 @@
 
 - nx g s services/widgets/widgets --project=core-data
 - nx g m routing --flat=true --m=app.module.ts
+
+# generate components
+
+- nx g c widgets -m app.module.ts --style=scss
+- nx g c widgets/widgets-list -m app.module.ts --style=scss
+- nx g c widgets/widgets-details -m app.module.ts --style=scss
+
+- nx g c home -m app.module.ts --style=scss
