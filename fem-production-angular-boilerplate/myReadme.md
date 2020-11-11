@@ -18,3 +18,9 @@
 
 - nx g lib ui-toolbar --style=scss -d
 - nx g c toolbar/tooolbar --project=ui-toolbar --style=scss -d
+
+# yarn add uuid
+
+# yarn add @nextjs/mapped-types
+
+- nx g @nestjs/schematics:resource widgets --type rest --crud true --source-root apps/api/src
