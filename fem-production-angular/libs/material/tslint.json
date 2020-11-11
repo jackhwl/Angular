@@ -1,0 +1,20 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "femProductionAngular",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "fem-production-angular",
+      "kebab-case"
+    ]
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
+  }
+}

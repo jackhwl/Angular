@@ -16,3 +16,14 @@
 - nx add @ngrx/store@10.0.1 --defaults=true --interactive=false
 
 # add Data Model BaseEntity & Widget
+
+# generate core-data (talk to server), core-state and material
+
+- nx g lib core-data --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss -d
+- nx g lib core-state --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss -d
+- nx g lib material --parent-module=apps/dashboard/src/app/app.module.ts --routing --style=scss -d
+
+# generate widgets services, routing
+
+- nx g s services/widgets/widgets --project=core-data
+- nx g m routing --flat=true --m=app.module.ts
