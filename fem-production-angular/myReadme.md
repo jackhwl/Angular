@@ -14,3 +14,5 @@
 
 - nx add @angular/material@10.2.7 --defaults=true --interactive=false
 - nx add @ngrx/store@10.0.1 --defaults=true --interactive=false
+
+# add Data Model BaseEntity & Widget
