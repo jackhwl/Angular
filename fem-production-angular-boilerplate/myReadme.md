@@ -24,3 +24,5 @@
 # yarn add @nextjs/mapped-types
 
 - nx g @nestjs/schematics:resource widgets --type rest --crud true --source-root apps/api/src
+
+# yarn add @nestjs/swagger swagger-ui-express
