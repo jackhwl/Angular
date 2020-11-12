@@ -26,3 +26,7 @@
 - nx g @nestjs/schematics:resource widgets --type rest --crud true --source-root apps/api/src
 
 # yarn add @nestjs/swagger swagger-ui-express
+
+# generate widgets state
+
+- nx g @nrwl/angular:ngrx widgets --module=libs/core-state/src/lib/core-state.module.ts --directory widgets --defaults --facade -d
