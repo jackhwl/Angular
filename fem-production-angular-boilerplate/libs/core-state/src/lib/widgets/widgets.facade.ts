@@ -21,6 +21,14 @@ export class WidgetsFacade {
 
   constructor(private widgetsService: WidgetsService) {}
 
+  reset() {
+    this.mutations.next();
+  }
+  
+  selectWidget(widget: Widget) {
+    this.selectedWidget.next(widget);
+  }
+
   loadWidgets() {
     this.widgetsService
       .all()

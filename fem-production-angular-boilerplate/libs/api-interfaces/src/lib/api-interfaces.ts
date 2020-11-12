@@ -12,6 +12,6 @@ export interface Item extends BaseEntity {
   description: string;
 }
 
-export interface Message extends BaseEntity {
+export interface Message {
   message: string;
 }

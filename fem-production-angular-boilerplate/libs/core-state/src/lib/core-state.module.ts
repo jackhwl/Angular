@@ -11,11 +11,11 @@ import { CoreDataModule } from "@fem/core-data";
   imports: [
     CommonModule,
     CoreDataModule,
-    StoreModule.forFeature(
-      fromWidgets.WIDGETS_FEATURE_KEY,
-      fromWidgets.reducer
-    ),
-    EffectsModule.forFeature([WidgetsEffects]),
+    // StoreModule.forFeature(
+    //   fromWidgets.WIDGETS_FEATURE_KEY,
+    //   fromWidgets.reducer
+    // ),
+    // EffectsModule.forFeature([WidgetsEffects]),
   ],
   providers: [WidgetsFacade],
 })
