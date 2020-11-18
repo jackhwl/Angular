@@ -1,0 +1,67 @@
+{
+  "npmScope": "fem",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "macro": {
+      "tags": []
+    },
+    "macro-e2e": {
+      "tags": [],
+      "implicitDependencies": ["macro"]
+    },
+    "api": {
+      "tags": []
+    },
+    "api-interfaces": {
+      "tags": []
+    },
+    "micro": {
+      "tags": []
+    },
+    "micro-e2e": {
+      "tags": [],
+      "implicitDependencies": ["micro"]
+    },
+    "meso": {
+      "tags": []
+    },
+    "meso-e2e": {
+      "tags": [],
+      "implicitDependencies": ["meso"]
+    },
+    "material": {
+      "tags": []
+    },
+    "ui-toolbar": {
+      "tags": []
+    },
+    "mega": {
+      "tags": []
+    },
+    "mega-e2e": {
+      "tags": [],
+      "implicitDependencies": ["mega"]
+    }
+  }
+}
