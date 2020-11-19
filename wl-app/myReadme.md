@@ -48,3 +48,7 @@ Part 2:
 - nx g c students/student-details -m app.module.ts --style=scss
 
 - nx g c home -m app.module.ts --style=scss
+
+# angular.json, nx.json tsconfig.base.json
+
+# copy material module content, remove storeModule and core-data routing

@@ -4,10 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
-import { CoreDataModule, coreDataRoutes } from '@wl/core-data';
-import { CoreStateModule, coreStateRoutes } from '@wl/core-state';
-import { MaterialModule, materialRoutes } from '@wl/material';
+import { CoreDataModule } from '@wl/core-data';
+import { CoreStateModule } from '@wl/core-state';
+import { MaterialModule } from '@wl/material';
 import { RoutingModule } from './routing.module';
 import { StudentsComponent } from './students/students.component';
 import { StudentsListComponent } from './students/students-list/students-list.component';
@@ -20,7 +19,6 @@ import { StudentDetailsComponent } from './students/student-details/student-deta
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
     CoreDataModule,
     CoreStateModule,
     MaterialModule,
