@@ -27,3 +27,24 @@ Part 2:
 
 - nx add @angular/material@10.2.7 --defaults=true --interactive=false
 - nx add @ngrx/store@10.0.1 --defaults=true --interactive=false
+
+## add Data Model BaseEntity & Student
+
+# generate core-data (communicate with server), core-state (managing the state of application) and material
+
+- nx g lib core-data --parent-module=apps/recruit/src/app/app.module.ts --routing --style=scss -d
+- nx g lib core-state --parent-module=apps/recruit/src/app/app.module.ts --routing --style=scss -d
+- nx g lib material --parent-module=apps/recruit/src/app/app.module.ts --routing --style=scss -d
+
+# generate students services, routing
+
+- nx g s services/students/students --project=core-data
+- nx g m routing --flat=true --m=app.module.ts
+
+# generate components
+
+- nx g c students -m app.module.ts --style=scss
+- nx g c students/students-list -m app.module.ts --style=scss
+- nx g c students/students-details -m app.module.ts --style=scss
+
+- nx g c home -m app.module.ts --style=scss
