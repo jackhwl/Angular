@@ -9,7 +9,7 @@ Part 2:
 
 ## yarn add concurrently --dev
 
-## package.json
+## add these lines to package.json
 
 ```
     "serve:api": "nx run api:serve",
@@ -22,3 +22,8 @@ Part 2:
 - npm run serve:all
 - http://localhost:3333/api/hello
 - http://localhost:4200
+
+## add angular material and ngrx store
+
+- nx add @angular/material@10.2.7 --defaults=true --interactive=false
+- nx add @ngrx/store@10.0.1 --defaults=true --interactive=false
