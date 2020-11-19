@@ -45,6 +45,6 @@ Part 2:
 
 - nx g c students -m app.module.ts --style=scss
 - nx g c students/students-list -m app.module.ts --style=scss
-- nx g c students/students-details -m app.module.ts --style=scss
+- nx g c students/student-details -m app.module.ts --style=scss
 
 - nx g c home -m app.module.ts --style=scss

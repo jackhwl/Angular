@@ -9,9 +9,13 @@ import { CoreDataModule, coreDataRoutes } from '@wl/core-data';
 import { CoreStateModule, coreStateRoutes } from '@wl/core-state';
 import { MaterialModule, materialRoutes } from '@wl/material';
 import { RoutingModule } from './routing.module';
+import { StudentsComponent } from './students/students.component';
+import { StudentsListComponent } from './students/students-list/students-list.component';
+import { HomeComponent } from './home/home.component';
+import { StudentDetailsComponent } from './students/student-details/student-details.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
