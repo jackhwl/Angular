@@ -1,5 +1,5 @@
 https://frontendmasters.com/workshops/production-angular/
-Part 2:
+Part 3: 8:40
 
 # Book Clean Code & Refactoring
 
@@ -52,3 +52,5 @@ Part 2:
 # angular.json, nx.json tsconfig.base.json
 
 # copy material module content, remove storeModule and core-data routing
+
+# add Routing, home page layout

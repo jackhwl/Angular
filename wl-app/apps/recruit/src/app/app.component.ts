@@ -8,6 +8,13 @@ import { Message } from '@wl/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  links = [
+    { path: '/', icon: 'home', title: 'home' },
+    { path: '/widgets', icon: 'view_list', title: 'widgets' },
+  ];
   hello$ = this.http.get<Message>('/api/hello');
   constructor(private http: HttpClient) {}
+
+  toggleSideNav(){}
+  logout(){}
 }
