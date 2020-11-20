@@ -1,1 +1,23 @@
-<p>students-list works!</p>
+<mat-card>
+    <mat-card-title>
+      Students
+    </mat-card-title>
+    <mat-card-content>
+      <mat-list data-cy="widgets-list">
+        <mat-list-item
+          *ngFor="let students of students"
+          attr.data-cy="widget-{{ students.id }}-item"
+          class="mat-list-option"
+          >
+          <span matLine attr.data-cy="widget-{{ students.id }}-item-title">{{ students.lastName }} {{ students.firstName }}</span>
+          <button
+            mat-icon-button
+            type="button"
+            color="warn"
+            >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
