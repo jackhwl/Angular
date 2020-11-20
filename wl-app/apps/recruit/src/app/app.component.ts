@@ -10,7 +10,7 @@ import { Message } from '@wl/api-interfaces';
 export class AppComponent {
   links = [
     { path: '/', icon: 'home', title: 'home' },
-    { path: '/widgets', icon: 'view_list', title: 'widgets' },
+    { path: '/students', icon: 'view_list', title: 'students' },
   ];
   hello$ = this.http.get<Message>('/api/hello');
   constructor(private http: HttpClient) {}
