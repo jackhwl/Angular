@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class StudentsComponent implements OnInit {
   students$: Observable<Student[]>;
+  student: Student;
   constructor(private studentsService: StudentsService) { }
 
   ngOnInit(): void {
@@ -20,7 +21,7 @@ export class StudentsComponent implements OnInit {
     this.students$ = this.studentsService.all();
   }
   selectedStudent(student) {
-    console.log(student);
+    this.student = student;
   }
   deleteStudent(student) {
     console.log('delete student', student);

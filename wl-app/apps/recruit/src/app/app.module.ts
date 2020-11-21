@@ -12,6 +12,7 @@ import { StudentsComponent } from './students/students.component';
 import { StudentsListComponent } from './students/students-list/students-list.component';
 import { HomeComponent } from './home/home.component';
 import { StudentDetailsComponent } from './students/student-details/student-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent],
@@ -23,6 +24,7 @@ import { StudentDetailsComponent } from './students/student-details/student-deta
     CoreStateModule,
     MaterialModule,
     RoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
