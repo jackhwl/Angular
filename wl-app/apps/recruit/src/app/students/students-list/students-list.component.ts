@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Student } from '@wl/api-interfaces';
 
 @Component({
@@ -8,10 +8,15 @@ import { Student } from '@wl/api-interfaces';
 })
 
 export class StudentsListComponent implements OnInit {
-  @Input() students: Student[]
+  @Input() students: Student[];
+  @Output() selected = new EventEmitter();
+  @Output() deleted = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
 
 }

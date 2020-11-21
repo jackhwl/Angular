@@ -5,12 +5,14 @@
     <mat-card-content>
       <mat-list data-cy="widgets-list">
         <mat-list-item
-          *ngFor="let students of students"
-          attr.data-cy="widget-{{ students.id }}-item"
+          (click)="selected.emit(student)"
+          *ngFor="let student of students"
+          attr.data-cy="widget-{{ student.id }}-item"
           class="mat-list-option"
           >
-          <span matLine attr.data-cy="widget-{{ students.id }}-item-title">{{ students.lastName }} {{ students.firstName }}</span>
+          <span matLine attr.data-cy="widget-{{ student.id }}-item-title">{{ student.lastName }} {{ student.firstName }}</span>
           <button
+          (click)="deleted.emit(student)"
             mat-icon-button
             type="button"
             color="warn"

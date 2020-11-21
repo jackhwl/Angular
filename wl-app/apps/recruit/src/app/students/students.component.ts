@@ -73,5 +73,10 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  selectedStudent(student) {
+    console.log(student);
+  }
+  deleteStudent(student) {
+    console.log('delete student', student);
+  }
 }
