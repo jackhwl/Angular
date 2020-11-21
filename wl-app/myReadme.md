@@ -58,3 +58,7 @@ Part 3: 8:40
 # export studentService in core-data index.ts
 
 # DI studentService to studentComponent
+
+- yarn add json-server --dev
+
+# create server/db.json
