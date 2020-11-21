@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit {
-  students: Student[];
+  students$: Observable<Student[]>;
   constructor(private studentsService: StudentsService) { }
 
   ngOnInit(): void {
@@ -17,8 +17,7 @@ export class StudentsComponent implements OnInit {
   }
 
   getStudents() {
-    this.studentsService.all()
-    .subscribe((result) => this.students = result);
+    this.students$ = this.studentsService.all();
   }
   selectedStudent(student) {
     console.log(student);

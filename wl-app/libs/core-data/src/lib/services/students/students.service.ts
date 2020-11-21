@@ -14,6 +14,7 @@ export class StudentsService {
   getUrl() {
     return `${environment.apiEndpoint}${this.model}`;
   }
+  
   all() {
     return this.httpClient.get<Student[]>(this.getUrl());
   }

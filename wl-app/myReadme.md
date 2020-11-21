@@ -62,3 +62,9 @@ Part 3: 8:40
 - yarn add json-server --dev
 
 # create server/db.json
+
+# move enviorment to lib
+
+# use httpClient in studentsService
+
+# use Observable in student component
