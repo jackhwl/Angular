@@ -12,7 +12,7 @@
           >
           <span matLine attr.data-cy="widget-{{ student.id }}-item-title">{{ student.lastName }} {{ student.firstName }}</span>
           <button
-          (click)="deleted.emit(student)"
+          (click)="deleted.emit(student);$event.stopImmediatePropagation();"
             mat-icon-button
             type="button"
             color="warn"

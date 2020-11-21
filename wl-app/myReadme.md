@@ -54,3 +54,7 @@ Part 3: 8:40
 # copy material module content, remove storeModule and core-data routing
 
 # add Routing, home page layout
+
+# export studentService in core-data index.ts
+
+# DI studentService to studentComponent

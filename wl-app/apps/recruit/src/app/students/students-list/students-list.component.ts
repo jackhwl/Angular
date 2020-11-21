@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Student } from '@wl/api-interfaces';
 
 @Component({
@@ -7,16 +7,8 @@ import { Student } from '@wl/api-interfaces';
   styleUrls: ['./students-list.component.scss']
 })
 
-export class StudentsListComponent implements OnInit {
+export class StudentsListComponent {
   @Input() students: Student[];
   @Output() selected = new EventEmitter();
   @Output() deleted = new EventEmitter();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-
 }
