@@ -21,6 +21,15 @@ wl-toolbar {
   z-index: 200;
 }
 
+.logo2 {
+  margin-left: 20px;
+  img {
+    vertical-align: middle;
+    width: 100px;
+    height: auto;
+  }
+}
+
 mat-sidenav {
   width: 300px;
   background-color: #eceff1 !important;

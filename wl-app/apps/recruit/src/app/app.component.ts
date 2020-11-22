@@ -15,11 +15,12 @@ export class AppComponent {
     { path: '/students', icon: 'view_list', title: 'students' },
   ];
   hello$ = this.http.get<Message>('/api/hello');
+  title = "Recruit";
   constructor(private http: HttpClient) {}
 
   toggleSideNav(){
     this.localSideNav.toggle();
   }
-  
+
   logout(){}
 }
