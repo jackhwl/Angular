@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-title>
-      <span >
+      <span *ngIf="currentStudent.id; else elseBlock">
         Editing 
       </span>
       <ng-template #elseBlock>
@@ -29,8 +29,8 @@
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button [disabled]="form.invalid" type="submit" mat-button color="primary">Save</button>
-        <button type="button" mat-button >
+        <button [disabled]="form.invalid" type="submit" mat-button (click)="saved.emit()" color="primary">Save</button>
+        <button type="button" mat-button (click)="cancelled.emit()" >
           Cancel
         </button>
       </mat-card-actions>

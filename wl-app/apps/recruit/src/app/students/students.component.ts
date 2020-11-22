@@ -20,8 +20,14 @@ export class StudentsComponent implements OnInit {
   getStudents() {
     this.students$ = this.studentsService.all();
   }
-  selectedStudent(student) {
+  selecteStudent(student) {
     this.student = student;
+  }
+  saveStudent(student) {
+    console.log('delete student', student);
+  }
+  resetForm() {
+    this.selecteStudent(null);
   }
   deleteStudent(student) {
     console.log('delete student', student);

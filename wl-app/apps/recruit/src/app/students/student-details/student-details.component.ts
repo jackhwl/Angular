@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Student } from '@wl/api-interfaces';
 
 @Component({
@@ -11,5 +11,6 @@ export class StudentDetailsComponent {
   @Input() set student(value: Student) {
     this.currentStudent = {...value}
   };
-
+  @Output() cancelled = new EventEmitter();
+  @Output() saved = new EventEmitter();
 }

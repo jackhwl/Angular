@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Message } from '@wl/api-interfaces';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'wl-root',
@@ -8,6 +9,7 @@ import { Message } from '@wl/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('sidenav') localSideNav;
   links = [
     { path: '/', icon: 'home', title: 'home' },
     { path: '/students', icon: 'view_list', title: 'students' },
@@ -15,6 +17,9 @@ export class AppComponent {
   hello$ = this.http.get<Message>('/api/hello');
   constructor(private http: HttpClient) {}
 
-  toggleSideNav(){}
+  toggleSideNav(){
+    this.localSideNav.toggle();
+  }
+  
   logout(){}
 }
