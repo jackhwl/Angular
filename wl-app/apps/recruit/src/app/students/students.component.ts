@@ -30,6 +30,7 @@ export class StudentsComponent implements OnInit {
     this.selecteStudent(null);
   }
   deleteStudent(student) {
-    console.log('delete student', student);
+    this.studentsService.delete(student.id)
+      .subscribe(result => this.getStudents());
   }
 }

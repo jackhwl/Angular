@@ -1,5 +1,5 @@
 {
-  "students":[
+  "students": [
     {
       "id": "1",
       "firstName": "Alexander",
@@ -26,16 +26,6 @@
       "middleName": "L ",
       "lastName": "Takeuchi",
       "email": "coryt@uga.edu",
-      "schoolName": "University of Georgia, School of Law",
-      "year": "2L",
-      "graduationDate": "2016-05-01"
-    },
-    {
-      "id": "4",
-      "firstName": "Alexander",
-      "middleName": "D",
-      "lastName": "Russo",
-      "email": "arusso1@uga.edu",
       "schoolName": "University of Georgia, School of Law",
       "year": "2L",
       "graduationDate": "2016-05-01"

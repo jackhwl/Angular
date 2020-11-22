@@ -15,7 +15,23 @@ export class StudentsService {
     return `${environment.apiEndpoint}${this.model}`;
   }
   
+  getUrlForId(id) {
+    return `${this.getUrl()}/${id}`;
+  }
+  
   all() {
     return this.httpClient.get<Student[]>(this.getUrl());
+  }
+
+  create(student) {
+    return this.httpClient.post(this.getUrl(), student);
+  }
+
+  update(student) {
+    return this.httpClient.patch(this.getUrlForId(student.id), student);
+  }
+
+  delete(studentId) {
+    return this.httpClient.delete(this.getUrlForId(studentId));
   }
 }
