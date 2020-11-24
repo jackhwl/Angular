@@ -68,3 +68,11 @@ Part 3: 8:40
 # use httpClient in studentsService
 
 # use Observable in student component
+
+# fix layout not 100% issue by rename tag name in style.scss (wl-root)
+
+# toggle sidebar, title
+
+# student CRUD service
+
+# student component crud

@@ -24,10 +24,29 @@ export class StudentsComponent implements OnInit {
     this.student = student;
   }
   saveStudent(student) {
-    console.log('delete student', student);
+    if (!student.id) {
+      this.createStudent(student);
+    } else {
+      this.updateStudent(student);
+    }
   }
-  resetForm() {
+  resetCurrentStudent() {
     this.selecteStudent(null);
+  }
+  createStudent(student) {
+    this.studentsService.create(student)
+      .subscribe(response => {
+        this.getStudents();
+        this.resetCurrentStudent();
+      });
+  }
+
+  updateStudent(student) {
+    this.studentsService.update(student)
+      .subscribe(response => {
+        this.getStudents();
+        this.resetCurrentStudent();
+      });
   }
   deleteStudent(student) {
     this.studentsService.delete(student.id)

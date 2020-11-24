@@ -4,7 +4,7 @@
       </wl-students-list>
     </div>
     <div class="details-component">
-      <wl-student-details [student]="student" (saved)="saveStudent($event)" (cancelled)="resetForm()">
+      <wl-student-details [student]="student" (saved)="saveStudent($event)" (cancelled)="resetCurrentStudent()">
       </wl-student-details>
     </div>
 </div>
