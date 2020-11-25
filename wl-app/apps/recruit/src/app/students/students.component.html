@@ -1,10 +1,16 @@
 <div class="component-container">
     <div class="list-component">
-      <wl-students-list [students]="students$ | async" (selected)="selecteStudent($event)" (deleted)="deleteStudent($event)">
+      <wl-students-list 
+        [students]="students$ | async" 
+        (selected)="selecteStudent($event)" 
+        (deleted)="deleteStudent($event)">
       </wl-students-list>
     </div>
     <div class="details-component">
-      <wl-student-details [student]="student" (saved)="saveStudent($event)" (cancelled)="resetCurrentStudent()">
+      <wl-student-details 
+        [student]="student" 
+        (saved)="saveStudent($event)" 
+        (cancelled)="resetCurrentStudent()">
       </wl-student-details>
     </div>
 </div>
