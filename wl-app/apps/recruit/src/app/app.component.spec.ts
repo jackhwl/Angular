@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MaterialModule } from '@wl/material';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [HttpClientModule, MaterialModule, RouterModule, FormsModule],
+      imports: [HttpClientModule, MaterialModule, RouterTestingModule, BrowserAnimationsModule]
+      
     }).compileComponents();
   }));
 

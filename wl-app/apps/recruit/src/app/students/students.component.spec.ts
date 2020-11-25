@@ -5,6 +5,8 @@ import { MaterialModule } from '@wl/material';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { StudentsListComponent } from './students-list/students-list.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('StudentsComponent', () => {
@@ -15,7 +17,7 @@ describe('StudentsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ StudentsComponent, StudentsListComponent, StudentDetailsComponent ],
       imports: [
-        MaterialModule, FormsModule
+        MaterialModule, FormsModule, HttpClientModule, BrowserAnimationsModule
       ]
     })
     .compileComponents();
