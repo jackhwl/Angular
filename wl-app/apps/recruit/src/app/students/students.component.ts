@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 export class StudentsComponent implements OnInit {
   students$: Observable<Student[]>;
   student: Student;
+  primaryColor = 'red';
+
   constructor(private studentsService: StudentsService) { }
 
   ngOnInit(): void {
@@ -20,9 +22,11 @@ export class StudentsComponent implements OnInit {
   getStudents() {
     this.students$ = this.studentsService.all();
   }
+
   selecteStudent(student) {
     this.student = student;
   }
+
   saveStudent(student) {
     if (!student.id) {
       this.createStudent(student);
@@ -30,9 +34,11 @@ export class StudentsComponent implements OnInit {
       this.updateStudent(student);
     }
   }
+
   resetCurrentStudent() {
     this.selecteStudent(null);
   }
+
   createStudent(student) {
     this.studentsService.create(student)
       .subscribe(response => {
@@ -48,6 +54,7 @@ export class StudentsComponent implements OnInit {
         this.resetCurrentStudent();
       });
   }
+
   deleteStudent(student) {
     this.studentsService.delete(student.id)
       .subscribe(result => this.getStudents());

@@ -7,12 +7,16 @@ import { StudentsListComponent } from './students-list/students-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DebugElement } from '@angular/core';
 
 
 describe('StudentsComponent', () => {
+  // Create my local test members
   let component: StudentsComponent;
   let fixture: ComponentFixture<StudentsComponent>;
+  let de: DebugElement;
 
+  // Instantiate test bed
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ StudentsComponent, StudentsListComponent, StudentDetailsComponent ],
@@ -26,10 +30,15 @@ describe('StudentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StudentsComponent);
     component = fixture.componentInstance;
+    de = fixture.debugElement;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a primaryColor of `red`', () => {
+    expect(component.primaryColor).toBe('red');
   });
 });
