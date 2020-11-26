@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { StudentsService } from '@wl/core-data';
 
 
 describe('StudentsComponent', () => {
@@ -16,11 +17,16 @@ describe('StudentsComponent', () => {
   let component: StudentsComponent;
   let fixture: ComponentFixture<StudentsComponent>;
   let de: DebugElement;
+  let studentsService: StudentsService;
+  
+  const mockStudentsService = {
 
+  }
   // Instantiate test bed
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ StudentsComponent, StudentsListComponent, StudentDetailsComponent ],
+      providers: [{provide: StudentsService, useValue: mockStudentsService}],
       imports: [
         MaterialModule, FormsModule, HttpClientModule, BrowserAnimationsModule
       ]
@@ -32,6 +38,7 @@ describe('StudentsComponent', () => {
     fixture = TestBed.createComponent(StudentsComponent);
     component = fixture.componentInstance;
     de = fixture.debugElement;
+    studentsService = de.injector.get(StudentsService);
     fixture.detectChanges();
   });
 

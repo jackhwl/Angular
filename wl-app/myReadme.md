@@ -76,3 +76,5 @@ Part 3: 8:40
 # student CRUD service
 
 # student component crud
+
+# debug avoid use innerText use textContent instead, mockService
