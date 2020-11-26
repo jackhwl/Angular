@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 
 describe('StudentsComponent', () => {
@@ -40,5 +41,17 @@ describe('StudentsComponent', () => {
 
   it('should have a primaryColor of `red`', () => {
     expect(component.primaryColor).toBe('red');
+  });
+
+  it('should display primaryColor', () => {
+    const h1 = de.query(By.css('h1'));
+    expect(h1.nativeElement.textContent).toBe('red'); // or use innerHTML, not innerText
+  });
+
+  it('should update h1 to new primaryColor', () => {
+    const h1 = de.query(By.css('h1'));
+    component.primaryColor = 'black';
+    fixture.detectChanges();
+    expect(h1.nativeElement.textContent).toBe('black');
   });
 });
