@@ -23,6 +23,10 @@ export class StudentsService {
     return this.httpClient.get<Student[]>(this.getUrl());
   }
 
+  find(studentId) {
+    return this.httpClient.get<Student>(this.getUrlForId(studentId));
+  }
+
   create(student) {
     return this.httpClient.post(this.getUrl(), student);
   }
