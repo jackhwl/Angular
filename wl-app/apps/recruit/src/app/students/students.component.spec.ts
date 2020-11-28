@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { StudentsService } from '@wl/core-data';
+import { Student } from '@wl/api-interfaces';
 
 
 describe('StudentsComponent', () => {
@@ -20,8 +21,18 @@ describe('StudentsComponent', () => {
   let studentsService: StudentsService;
   
   const mockStudentsService = {
-
+    all: () => {
+      return {
+        subscribe: () => {}
+      }
+    },
+    delete: () => {
+      return {
+        subscribe: () => {}
+      }
+    }
   }
+
   // Instantiate test bed
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -60,5 +71,22 @@ describe('StudentsComponent', () => {
     component.primaryColor = 'black';
     fixture.detectChanges();
     expect(h1.nativeElement.textContent).toBe('black');
+  });
+
+  it('should call studentsService.delete on deleteStudent', () => {
+    const student: Student = {
+      "id": "8",
+      "firstName": "Greg",
+      "middleName": null,
+      "lastName": "Djordjevic",
+      "email": "djordjevic.6@osu.edu",
+      "schoolName": "(Removed School)",
+      "year": "2L",
+      "graduationDate": "-0001-11-30"
+    };
+
+    spyOn(studentsService, 'delete').and.callThrough();
+    component.deleteStudent(student);
+    expect(studentsService.delete).toHaveBeenCalledWith('8');
   });
 });
