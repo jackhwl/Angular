@@ -80,3 +80,8 @@ Part 3: 8:40
 # debug avoid use innerText use textContent instead, mockService
 
 ## angular9 form.valid invalid, move save action to form tag
+
+# generate lazy load login module, login component
+
+- nx g m login --routing -d
+- nx g c login -d
