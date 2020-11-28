@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '@wl/api-interfaces';
-import { StudentsService } from '@wl/core-data';
+import { NotificationsService, StudentsService } from '@wl/core-data';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class StudentsComponent implements OnInit {
   student: Student;
   primaryColor = 'red';
 
-  constructor(private studentsService: StudentsService) { }
+  constructor(private studentsService: StudentsService, private ns: NotificationsService) { }
 
   ngOnInit(): void {
     this.getStudents();
@@ -42,6 +42,7 @@ export class StudentsComponent implements OnInit {
   createStudent(student) {
     this.studentsService.create(student)
       .subscribe(response => {
+        this.ns.emit('Student created!');
         this.getStudents();
         this.resetCurrentStudent();
       });
@@ -50,6 +51,7 @@ export class StudentsComponent implements OnInit {
   updateStudent(student) {
     this.studentsService.update(student)
       .subscribe(response => {
+        this.ns.emit('Student updated!');
         this.getStudents();
         this.resetCurrentStudent();
       });

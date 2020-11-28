@@ -85,3 +85,9 @@ Part 3: 8:40
 
 - nx g m login --routing -d
 - nx g c login -d
+
+# testing service
+
+# generate notifications service
+
+- nx g s notifications/notifications --project=core-data -d
