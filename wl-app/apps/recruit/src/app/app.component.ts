@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@wl/api-interfaces';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'wl-root',
@@ -14,13 +13,15 @@ export class AppComponent {
     { path: '/', icon: 'home', title: 'home' },
     { path: '/students', icon: 'view_list', title: 'students' },
   ];
-  hello$ = this.http.get<Message>('/api/hello');
+
   title = "Recruit";
-  constructor(private http: HttpClient) {}
+  constructor(private router: Router) {}
 
   toggleSideNav(){
     this.localSideNav.toggle();
   }
 
-  logout(){}
+  logout() {
+    this.router.navigateByUrl('/login')
+  }
 }
