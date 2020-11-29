@@ -13,6 +13,10 @@
                 "index": 0
             },
             "x-prompt": "Who do we want to greet?"
+        },
+        "project": {
+            "type": "string",
+            "description": "Generate in specific Angular CLI workspace project"
         }
     },
     "required": [
