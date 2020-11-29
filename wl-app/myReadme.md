@@ -1,5 +1,15 @@
 https://frontendmasters.com/workshops/production-angular/
 Part 3: 8:40
+https://medium.com/@tomastrajan/total-guide-to-custom-angular-schematics-5c50cf90cdb4
+
+# schematics
+
+npm install -g @angular-devkit/schematics-cli
+
+# windows only
+
+npm install -g json
+json -I -f package.json -e 'this.scripts.foo="bar"'
 
 # Book Clean Code & Refactoring
 
