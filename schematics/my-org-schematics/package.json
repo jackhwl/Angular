@@ -1,10 +1,9 @@
 {
-  "name": "hello",
+  "name": "my-org-schematics",
   "version": "0.0.0",
   "description": "A blank schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "build:watch": "tsc -p tsconfig.json --watch",
     "test": "npm run build && jasmine src/**/*_spec.js"
   },
   "keywords": [
@@ -16,13 +15,11 @@
   "dependencies": {
     "@angular-devkit/core": "^11.0.2",
     "@angular-devkit/schematics": "^11.0.2",
-    "@schematics/angular": "^11.0.2",
     "typescript": "~4.0.2"
   },
   "devDependencies": {
-    "@angular/cli": "^11.0.2",
-    "@types/jasmine": "~3.5.0",
     "@types/node": "^12.11.1",
+    "@types/jasmine": "~3.5.0",
     "jasmine": "^3.5.0"
   }
 }
