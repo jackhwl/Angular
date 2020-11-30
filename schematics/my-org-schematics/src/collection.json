@@ -4,6 +4,10 @@
     "my-org-schematics": {
       "description": "A blank schematic.",
       "factory": "./my-org-schematics/index#myOrgSchematics"
+    },
+    "hello": {
+      "description": "A blank schematic.",
+      "factory": "./hello/index#hello"
     }
   }
 }
