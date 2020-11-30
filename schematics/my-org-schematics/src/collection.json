@@ -9,6 +9,11 @@
       "description": "A blank schematic.",
       "factory": "./hello/index#hello",
       "schema": "./hello/schema.json"
+    },
+    "crud-resource": {
+      "description": "A blank schematic.",
+      "factory": "./crud-resource/index#crudResource",
+      "schema": "./crud-resource/schema.json"
     }
   }
 }

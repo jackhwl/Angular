@@ -1,6 +1,7 @@
 https://frontendmasters.com/workshops/production-angular/
 Part 3: 8:40
 https://medium.com/@tomastrajan/total-guide-to-custom-angular-schematics-5c50cf90cdb4
+https://frontendmasters.com/courses/angular-reactive/state-shape-initial-state-reducer/
 
 # schematics
 
