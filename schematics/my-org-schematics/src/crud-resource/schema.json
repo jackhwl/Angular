@@ -12,6 +12,10 @@
                 "$source": "argv",
                 "index": 0
             }        
+        },
+        "url": {
+            "type": "string",
+            "x-prompt": "What is the resource url (eg: /api/resource)?"
         }
     },
     "required": [
