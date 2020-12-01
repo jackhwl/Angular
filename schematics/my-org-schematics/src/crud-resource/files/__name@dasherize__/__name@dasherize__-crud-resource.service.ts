@@ -15,6 +15,11 @@ export class <%= classify(name)%>CrudResourceService {
     findAll(): Observable<<%= classify(name)%>[]> {
         return this.httpClient.get<<%= classify(name)%>[]>(RESOURCE_URL);
     }
+    <% if (findOne) { %>
+    findOne(id: string): Observable<<%= classify(name)%>> {
+        return this.httpClient.get<<%= classify(name)%>>(`${RESOURCE_URL}/${id}`);
+    }
+    <% } %>
 }
 
 export interface <%= classify(name)%> {

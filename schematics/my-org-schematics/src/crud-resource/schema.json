@@ -16,6 +16,10 @@
         "url": {
             "type": "string",
             "x-prompt": "What is the resource url (eg: /api/resource)?"
+        },
+        "findOne": {
+            "type": "boolean",
+            "default": false
         }
     },
     "required": [
