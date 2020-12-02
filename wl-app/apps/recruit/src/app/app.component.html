@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="mat-elevation-z4">
+<!-- <mat-toolbar color="primary" class="mat-elevation-z4">
   <span>
     <button data-cy="toggle-btn" mat-mini-fab (click)="toggleSideNav()">
       <mat-icon>menu</mat-icon>
@@ -14,7 +14,7 @@
   <button class="login" data-cy="login-btn" mat-mini-fab (click)="logout()">
     <mat-icon>person</mat-icon>
   </button>
-</mat-toolbar>
+</mat-toolbar> -->
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav [opened]="true" mode="side" class="app-sidenav">
@@ -38,8 +38,10 @@
       </mat-nav-list>
     </ng-container>
   </mat-sidenav>
-
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+  <mat-sidenav-content>
+    <wl-header (toggled)="toggleSideNav()"></wl-header>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

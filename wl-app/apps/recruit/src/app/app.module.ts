@@ -8,6 +8,7 @@ import { CoreDataModule } from '@wl/core-data';
 import { CoreStateModule } from '@wl/core-state';
 //import { MaterialModule } from '@wl/material';
 import { RoutingModule } from './routing.module';
+import { HeaderComponent } from './header/header.component';
 import { StudentsComponent } from './students/students.component';
 import { StudentsListComponent } from './students/students-list/students-list.component';
 import { HomeComponent } from './home/home.component';
@@ -24,9 +25,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 
-
 @NgModule({
-  declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent],
+  declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent, HeaderComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
