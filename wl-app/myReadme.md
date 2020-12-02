@@ -2,6 +2,8 @@ https://frontendmasters.com/workshops/production-angular/
 Part 3: 8:40
 https://medium.com/@tomastrajan/total-guide-to-custom-angular-schematics-5c50cf90cdb4
 https://frontendmasters.com/courses/angular-reactive/state-shape-initial-state-reducer/
+schematics ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-roles --url /api/user --project dashboard --debug=false --findOne --force
+ng g ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-role --url /api/user --project dashboard --findOne --force
 
 # schematics
 
@@ -106,3 +108,8 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 # generate notifications service
 
 - nx g s notifications/notifications --project=core-data -d
+
+# anaalyzing bundle size
+
+- nx build --prod --stats-json
+- yarn add webpack-bundle-analyzer --dev
