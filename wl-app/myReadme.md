@@ -113,4 +113,11 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 
 - nx build --prod --stats-json
 - yarn add webpack-bundle-analyzer --dev
-- nx g c header -m app.module.ts --style=scss
+
+# add header component
+
+- nx g c header -m app.module.ts --style=scss --skipTests
+
+# add sive nav list component
+
+- nx g c sidenav-list -m app.module.ts --style=scss --skipTests

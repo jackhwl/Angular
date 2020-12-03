@@ -26,7 +26,7 @@
               "apps/recruit/src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/recruit/src/styles.scss"
             ],        
             "stylePreprocessorOptions": {

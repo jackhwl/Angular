@@ -23,6 +23,9 @@ ul {
 mat-toolbar {
   div:last-of-type {
     margin-left: auto;
+    mat-icon {
+      transform: rotate(90deg);
+    }
   }
 }
 

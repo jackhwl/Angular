@@ -7,4 +7,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() toggled = new EventEmitter();
+  @Output() logout = new EventEmitter();
 }

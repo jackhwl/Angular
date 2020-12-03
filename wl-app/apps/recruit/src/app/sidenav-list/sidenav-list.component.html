@@ -1,0 +1,17 @@
+<span class="logo">
+    <a [routerLink]="'/'">
+        <img src="assets/logo.png" alt="Logo" />
+    </a>
+</span>
+<mat-divider></mat-divider>
+<mat-nav-list data-cy="nav-list">
+    <mat-list-item
+        *ngFor="let link of links"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        attr.data-cy="nav-item-{{ link.title }}"
+    >
+        <mat-icon matListIcon>{{ link.icon }}</mat-icon>
+        {{ link.title | uppercase }}
+    </mat-list-item>
+</mat-nav-list>

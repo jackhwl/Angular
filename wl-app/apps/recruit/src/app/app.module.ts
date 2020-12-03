@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { StudentDetailsComponent } from './students/student-details/student-details.component';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatTabsModule } from "@angular/material/tabs";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -24,9 +25,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 
 @NgModule({
-  declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent, HeaderComponent],
+  declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent, HeaderComponent, SidenavListComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -36,6 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
     //MaterialModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatTabsModule,
     MatIconModule,
     MatCardModule,
     MatListModule,
