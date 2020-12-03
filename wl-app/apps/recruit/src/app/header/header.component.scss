@@ -10,7 +10,7 @@ a:active {
   color: lightblue;
 }
 
-.navigation-items {
+ul {
   display: flex;
   list-style-type: none;
   padding: 0;
@@ -21,8 +21,9 @@ a:active {
 }
 
 mat-toolbar {
-  border-radius: 3px;
-  justify-content: space-between;
+  div:last-of-type {
+    margin-left: auto;
+  }
 }
 
 .toggle-btn {
@@ -32,11 +33,6 @@ mat-toolbar {
   display: inline;
 }
 
-@media (max-width: 959px) {
-  mat-toolbar {
-    border-radius: 0px;
-  }
-}
 @media (max-width: $screen-xs) {
   .toggle-btn {
     display: inline;
