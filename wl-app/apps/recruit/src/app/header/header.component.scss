@@ -1,3 +1,5 @@
+@import 'variables';
+
 a {
   text-decoration: none;
   color: black;
@@ -9,6 +11,7 @@ a:active {
 }
 
 .navigation-items {
+  display: flex;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -16,10 +19,26 @@ a:active {
 
 mat-toolbar {
   border-radius: 3px;
+  justify-content: space-between;
+}
+
+.toggle-btn {
+  display: none;
+}
+.top-nav {
+  display: inline;
 }
 
 @media (max-width: 959px) {
   mat-toolbar {
     border-radius: 0px;
+  }
+}
+@media (max-width: $screen-xs) {
+  .toggle-btn {
+    display: inline;
+  }
+  .top-nav {
+    display: none;
   }
 }
