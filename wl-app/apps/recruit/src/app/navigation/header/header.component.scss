@@ -2,12 +2,15 @@
 
 a {
   text-decoration: none;
-  color: black;
+  color: #222;
+  opacity: 0.8;
+  background-color: transparent;
+  padding: 5px 10px;
 }
 
 a:hover,
 a:active {
-  color: lightblue;
+  text-decoration: underline;
 }
 
 ul {
@@ -17,10 +20,14 @@ ul {
   margin: 0;
   li {
     margin-left: 15px;
+    font-size: 16px;
   }
 }
 
 mat-toolbar {
+  height: 60px;
+  background-color: #fff;
+
   div:last-of-type {
     margin-left: auto;
     mat-icon {
@@ -30,17 +37,23 @@ mat-toolbar {
 }
 
 .toggle-btn {
-  display: none;
-}
-.top-nav {
   display: inline;
 }
+.top-nav {
+  display: none;
+}
 
-@media (max-width: $screen-xs) {
+@media (min-width: $screen-xs) {
   .toggle-btn {
-    display: inline;
+    display: none;
   }
   .top-nav {
-    display: none;
+    display: inline;
+  }
+}
+
+@media (min-width: $screen-sm) {
+  mat-toolbar {
+    height: 115px;
   }
 }
