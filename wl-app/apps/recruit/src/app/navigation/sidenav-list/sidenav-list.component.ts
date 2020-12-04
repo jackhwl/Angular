@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -7,4 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SidenavListComponent {
   @Input() links;
+  @Output() logout = new EventEmitter();
 }

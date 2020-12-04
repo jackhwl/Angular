@@ -1,0 +1,20 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover,
+a:active {
+  color: lightgray;
+}
+.logo {
+  margin: 0 auto;
+
+  img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: auto;
+  }
+}

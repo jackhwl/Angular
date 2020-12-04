@@ -14,4 +14,9 @@
         <mat-icon matListIcon>{{ link.icon }}</mat-icon>
         {{ link.title | uppercase }}
     </mat-list-item>
+    <mat-list-item>  
+        <button class="login" data-cy="login-btn" mat-button (click)="logout.emit()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-list-item>
 </mat-nav-list>
