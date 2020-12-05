@@ -1,19 +1,57 @@
 import { Injectable } from '@angular/core';
-
-import { select, Store, Action } from '@ngrx/store';
-
-import * as fromStudents from './students.reducer';
-import * as StudentsSelectors from './students.selectors';
+import { Student } from '@wl/api-interfaces';
+import { NotificationsService, StudentsService } from '@wl/core-data';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class StudentsFacade {
-  loaded$ = this.store.pipe(select(StudentsSelectors.getStudentsLoaded));
-  allStudents$ = this.store.pipe(select(StudentsSelectors.getAllStudents));
-  selectedStudents$ = this.store.pipe(select(StudentsSelectors.getSelected));
+  private allStudents = new Subject<Student[]>();
+  private selectedStudent = new Subject<Student>();
+  private mutations = new Subject();
 
-  constructor(private store: Store<fromStudents.StudentsPartialState>) {}
+  allStudents$ = this.allStudents.asObservable();
+  selectedStudent$ = this.selectedStudent.asObservable();
+  mutations$ = this.mutations.asObservable();
 
-  dispatch(action: Action) {
-    this.store.dispatch(action);
+  constructor(private studentService: StudentsService, private ns: NotificationsService) {}
+
+  reset() {
+    this.mutations.next(true);
   }
+
+  selectStudent(student: Student) {
+    this.selectedStudent.next(student);
+  }
+
+  loadStudents() {
+    this.studentService.all()
+    .subscribe((students: Student[]) => this.allStudents.next(students));
+  }
+  
+  saveStudent(student: Student) {
+    if(student.id) {
+      this.updateStudent(student);
+    } else {
+      this.createStudent(student);
+    }
+  }
+
+  createStudent(student: Student) {
+    return this.studentService.create(student).subscribe((_) => {
+      this.ns.emit('Student created!');
+      this.reset()
+    });
+  }
+
+  updateStudent(student: Student) {
+    return this.studentService.update(student).subscribe((_) => {
+      this.ns.emit('Student updated!');
+      this.reset()
+    });
+  }
+
+  deleteStudent(student: Student) {
+    return this.studentService.delete(student.id).subscribe((_) => this.reset());
+  }
+
 }

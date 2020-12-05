@@ -9,9 +9,9 @@
     </div>
     <div class="details-component">
       <wl-student-details 
-        [student]="student" 
+        [student]="selectedStudent$ | async" 
         (saved)="saveStudent($event)" 
-        (cancelled)="resetCurrentStudent()">
+        (cancelled)="reset()">
       </wl-student-details>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '@wl/api-interfaces';
-import { NotificationsService, StudentsService } from '@wl/core-data';
+import { StudentsFacade } from '@wl/core-state';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,56 +9,79 @@ import { Observable } from 'rxjs';
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit {
-  students$: Observable<Student[]>;
-  student: Student;
+  students$: Observable<Student[]> = this.studentsFacade.allStudents$;
+  selectedStudent$: Observable<Student> = this.studentsFacade.selectedStudent$;
   primaryColor = 'red';
 
-  constructor(private studentsService: StudentsService, private ns: NotificationsService) { }
+  constructor(private studentsFacade: StudentsFacade) { }
 
   ngOnInit(): void {
-    this.getStudents();
+    this.reset();
+    this.studentsFacade.mutations$.subscribe(_ => this.reset());
   }
 
-  getStudents() {
-    this.students$ = this.studentsService.all();
-  }
-
-  selecteStudent(student) {
-    this.student = student;
-  }
-
-  saveStudent(student) {
-    if (!student.id) {
-      this.createStudent(student);
-    } else {
-      this.updateStudent(student);
-    }
-  }
-
-  resetCurrentStudent() {
+  reset() {
+    this.loadStudents();
     this.selecteStudent(null);
   }
 
-  createStudent(student) {
-    this.studentsService.create(student)
-      .subscribe(response => {
-        this.ns.emit('Student created!');
-        this.getStudents();
-        this.resetCurrentStudent();
-      });
+  selecteStudent(student) {
+    this.studentsFacade.selectStudent(student);
   }
 
-  updateStudent(student) {
-    this.studentsService.update(student)
-      .subscribe(response => {
-        this.ns.emit('Student updated!');
-        this.getStudents();
-        this.resetCurrentStudent();
-      });
+  loadStudents() {
+    this.studentsFacade.loadStudents();
+  }
+
+  saveStudent(student) {
+    if (student.id) {
+      this.studentsFacade.updateStudent(student);
+    } else {
+      this.studentsFacade.createStudent(student);
+    }
   }
 
   deleteStudent(student) {
-    this.studentsService.delete(student.id)
-      .subscribe(result => this.getStudents());
+    this.studentsFacade.deleteStudent(student)
   }
+
+  // getStudents() {
+  //   this.students$ = this.studentsService.all();
+  // }
+
+
+  // saveStudent2(student) {
+  //   if (!student.id) {
+  //     this.createStudent(student);
+  //   } else {
+  //     this.updateStudent(student);
+  //   }
+  // }
+
+  // resetCurrentStudent() {
+  //   this.selecteStudent(null);
+  // }
+
+  // createStudent(student) {
+  //   this.studentsService.create(student)
+  //     .subscribe(response => {
+  //       this.ns.emit('Student created!');
+  //       this.getStudents();
+  //       this.resetCurrentStudent();
+  //     });
+  // }
+
+  // updateStudent(student) {
+  //   this.studentsService.update(student)
+  //     .subscribe(response => {
+  //       this.ns.emit('Student updated!');
+  //       this.getStudents();
+  //       this.resetCurrentStudent();
+  //     });
+  // }
+
+  // deleteStudent(student) {
+  //   this.studentsService.delete(student.id)
+  //     .subscribe(result => this.getStudents());
+  // }
 }
