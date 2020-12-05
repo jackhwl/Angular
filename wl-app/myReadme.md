@@ -121,3 +121,7 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 # add sive nav list component
 
 - nx g c sidenav-list -m app.module.ts --style=scss --skipTests
+
+# add student state
+
+- nx g @nrwl/angular:ngrx students --module=libs/core-state/src/lib/core-state.module.ts --directory students --defaults --facade -d
