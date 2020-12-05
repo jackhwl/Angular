@@ -5,3 +5,14 @@ $screen-sm: 768px;
   font-family: 'Roboto';
   src: url('../assets/font/Roboto-Regular.ttf');
 }
+
+@font-face {
+  font-family: 'viglobal';
+  src: url('../assets/font/viglobal.eot');
+  src: url('../assets/font/viglobal.eot?#iefix') format('embedded-opentype'),
+    url('../assets/font/viglobal.woff') format('woff'),
+    url('../assets/font/viglobal.ttf') format('truetype'),
+    url('../assets/font/viglobal.svg#viglobal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
