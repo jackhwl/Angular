@@ -13,10 +13,12 @@ export const coreStateRoutes: Route[] = [];
   imports: [
     CommonModule,
     RouterModule,
+    StoreModule.forRoot({}),
     StoreModule.forFeature(
       fromStudents.STUDENTS_FEATURE_KEY,
       fromStudents.reducer
     ),
+    EffectsModule.forRoot(),
     EffectsModule.forFeature([StudentsEffects]),
   ],
   providers: [StudentsFacade],
