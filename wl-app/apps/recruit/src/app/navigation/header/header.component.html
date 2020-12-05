@@ -12,9 +12,14 @@
             <li><a routerLink="/home"><span class="nav-cell">Home</span></a></li>
             <li><a routerLink="/home"><span class="nav-cell">Header Link One</span></a></li>
             <li><a routerLink="/students"><span class="nav-cell">Students</span></a></li>
-            <li><button mat-stroked-button><span class="icon" data-icon="z"></span><span class="nav-cell">English</span></button></li>
+            <li class="dropdown-notifications">
+                <button mat-stroked-button>
+                    <span class="icon" data-icon="z"></span>
+                    <span class="language">English</span>
+                </button>
+            </li>
             <li>  
-                <button class="login" data-cy="login-btn" mat-button (click)="logout.emit()">
+                <button class="search" data-cy="login-btn" mat-button (click)="logout.emit()">
                     <mat-icon>search</mat-icon>
                 </button>
             </li>

@@ -14,8 +14,14 @@
         <mat-icon matListIcon>{{ link.icon }}</mat-icon>
         {{ link.title | uppercase }}
     </mat-list-item>
+    <mat-list-item class="dropdown-notifications">
+        <button mat-stroked-button>
+            <span class="icon" data-icon="z"></span>
+            <span class="language">English</span>
+        </button>
+    </mat-list-item>
     <mat-list-item>  
-        <button class="login" data-cy="login-btn" mat-button (click)="logout.emit()">
+        <button class="search" data-cy="login-btn" mat-button (click)="logout.emit()">
             <mat-icon>search</mat-icon>
         </button>
     </mat-list-item>
