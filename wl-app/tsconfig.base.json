@@ -20,7 +20,8 @@
       "@wl/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@wl/core-data": ["libs/core-data/src/index.ts"],
       "@wl/core-state": ["libs/core-state/src/index.ts"],
-      "@wl/material": ["libs/material/src/index.ts"]
+      "@wl/material": ["libs/material/src/index.ts"],
+      "@wl/testing": ["libs/testing/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -28,11 +28,9 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/recruit/src/styles.scss"
-            ],        
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/styles"
-              ]
+              "includePaths": ["libs/styles"]
             },
             "scripts": []
           },
@@ -291,6 +289,36 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/material/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "testing": {
+      "projectType": "library",
+      "root": "libs/testing",
+      "sourceRoot": "libs/testing/src",
+      "prefix": "wl",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/testing/tsconfig.lib.json",
+              "libs/testing/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/testing/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/testing/jest.config.js",
             "passWithNoTests": true
           }
         }

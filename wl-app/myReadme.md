@@ -129,3 +129,7 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 - nx g @nrwl/angular:ngrx students --module=libs/core-state/src/lib/core-state.module.ts --directory students --defaults --facade -d
 
 # fix tests
+
+# fenerate testing module
+
+- nx g lib core-state --parent-module=apps/recruit/src/app/app.module.ts --routing --style=scss -d
