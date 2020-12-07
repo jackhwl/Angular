@@ -30,7 +30,12 @@ describe('HomeComponent', () => {
 
     const mockMode = 'create';
     const mockWidgets = [];
-    const mockWidget = {};
+    const mockWidget: Widget = {  
+      id: null,
+      title: '',
+      description: '',
+      price: 0
+    };
 
     component.reCalculateTotal(mockMode, mockWidgets, mockWidget);
 
