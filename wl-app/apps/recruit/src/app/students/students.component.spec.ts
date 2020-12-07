@@ -9,42 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { StudentsService } from '@wl/core-data';
 import { StudentsFacade } from '@wl/core-state';
+import { mockEmptyStudent, mockStudent, mockStudentsFacade } from "@wl/testing";
 import { Student } from '@wl/api-interfaces';
-import { of } from 'rxjs';
-
 
 describe('StudentsComponent', () => {
   // Create my local test members
   let component: StudentsComponent;
   let fixture: ComponentFixture<StudentsComponent>;
   let de: DebugElement;
-  let studentsService: StudentsService;
   let studentsFacade: StudentsFacade;
-  
-  const mockStudentsService = {
-    all: () => {
-      return {
-        subscribe: () => {}
-      }
-    },
-    delete: () => {
-      return {
-        subscribe: () => {}
-      }
-    }
-  }
-
-  const mockStudentsFacade = {
-    loadStudents: () => {},
-    selectStudent: () => {},
-    deleteStudent: () => {},
-    saveStudent: () => {},
-    updateStudent: () => {},
-    createStudent: () => {},
-    mutations$: of(true)
-  }
 
   // Instantiate test bed
   beforeEach(async () => {
@@ -86,20 +60,41 @@ describe('StudentsComponent', () => {
     expect(h1.nativeElement.textContent).toBe('black');
   });
 
-  it('should call studentsService.delete on deleteStudent', () => {
-    const student: Student = {
-      "id": "8",
-      "firstName": "Greg",
-      "middleName": null,
-      "lastName": "Djordjevic",
-      "email": "djordjevic.6@osu.edu",
-      "schoolName": "(Removed School)",
-      "year": "2L",
-      "graduationDate": "-0001-11-30"
-    };
+  describe('should on save call studentsFacade', () => {
 
-    spyOn(studentsFacade, 'deleteStudent').and.callThrough();
-    component.deleteStudent(student);
-    expect(studentsFacade.deleteStudent).toHaveBeenCalledWith(student);
+    it('createStudent', () => {
+      const spy = jest.spyOn(studentsFacade, 'createStudent');
+      
+      component.saveStudent(mockEmptyStudent);
+      
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(mockEmptyStudent);
+    });
+
+    it('updateStudent', () => {
+      const spy = jest.spyOn(studentsFacade, 'updateStudent');
+      
+      component.saveStudent(mockStudent);
+      
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(mockStudent);
+    });
+
+    it('deleteStudent', () => {
+      const spy = jest.spyOn(studentsFacade, 'deleteStudent');
+      
+      component.deleteStudent(mockStudent);
+      
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(mockStudent);
+    });
+
+    it('should call studentsService.delete on deleteStudent', () => {
+      spyOn(studentsFacade, 'deleteStudent').and.callThrough();
+
+      component.deleteStudent(mockStudent);
+
+      expect(studentsFacade.deleteStudent).toHaveBeenCalledWith(mockStudent);
+    });
   });
 });
