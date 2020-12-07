@@ -86,20 +86,20 @@ describe('StudentsComponent', () => {
     expect(h1.nativeElement.textContent).toBe('black');
   });
 
-  // it('should call studentsService.delete on deleteStudent', () => {
-  //   const student: Student = {
-  //     "id": "8",
-  //     "firstName": "Greg",
-  //     "middleName": null,
-  //     "lastName": "Djordjevic",
-  //     "email": "djordjevic.6@osu.edu",
-  //     "schoolName": "(Removed School)",
-  //     "year": "2L",
-  //     "graduationDate": "-0001-11-30"
-  //   };
+  it('should call studentsService.delete on deleteStudent', () => {
+    const student: Student = {
+      "id": "8",
+      "firstName": "Greg",
+      "middleName": null,
+      "lastName": "Djordjevic",
+      "email": "djordjevic.6@osu.edu",
+      "schoolName": "(Removed School)",
+      "year": "2L",
+      "graduationDate": "-0001-11-30"
+    };
 
-  //   spyOn(studentsFacade, 'deleteStudent').and.callThrough();
-  //   component.deleteStudent(student);
-  //   expect(studentsFacade.deleteStudent).toHaveBeenCalledWith('8');
-  // });
+    spyOn(studentsFacade, 'deleteStudent').and.callThrough();
+    component.deleteStudent(student);
+    expect(studentsFacade.deleteStudent).toHaveBeenCalledWith(student);
+  });
 });
