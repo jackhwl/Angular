@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Project {
+interface BaseEntity {
   id: string | null;
+}
+
+interface Project extends BaseEntity {
   title: string;
   description: string;
+  completed: boolean;
 }
 
 interface ProjectsState {
@@ -11,25 +15,34 @@ interface ProjectsState {
   currentProject: Project;
 }
 
+const newProject: Project = {
+  id: null,
+  title: '',
+  description: '',
+  completed: false
+}
+
 const project1: Project = {
   id: '1',
   title: 'p title',
-  description: 'p description'
+  description: 'p description',
+  completed: true
 }
 
 const project2: Project = {
   id: '2',
   title: 'p title 2',
-  description: 'p description 2'
+  description: 'p description 2',
+  completed: false
 }
 
 const projects: Project[] = [
   project1, project2
 ]
 
-const initialState: ProjectsState = {
+const initialProjectsState: ProjectsState = {
   projects,
-  currentProject: project2
+  currentProject: newProject
 }
 
 interface ClientsState {
@@ -37,11 +50,17 @@ interface ClientsState {
   currentClient: Client;
 }
 
-interface Client {
-  id: string;
+interface Client extends BaseEntity {
   firstName: string;
   lastName: string;
   company: string;
+}
+
+const newClient: Client = {
+  id: null,
+  firstName: '',
+  lastName: '',
+  company: '',
 }
 
 const superClient: Client = {
@@ -51,7 +70,34 @@ const superClient: Client = {
   company: 'Bacon, Inc',
 }
 
-const tango = superClient
+const vipClient: Client = {
+  id: '222',
+  firstName: 'Peter2',
+  lastName: 'Porker2',
+  company: 'Bacon2, Inc',
+}
+
+const clients: Client[] = [
+  superClient, vipClient
+]
+
+const initialClientsState: ClientsState = {
+  clients,
+  currentClient: newClient
+}
+
+interface AppState {
+  clientsState: ClientsState,
+  projectsState: ProjectsState
+}
+
+const appState: AppState = {
+  clientsState: initialClientsState,
+  projectsState: initialProjectsState
+}
+
+const tango = appState
+
 
 @Component({
   selector: 'fem-home',
