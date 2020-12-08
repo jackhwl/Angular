@@ -1,5 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 
+interface Project {
+  id: string | null;
+  title: string;
+  description: string;
+}
+
+interface ProjectsState {
+  projects: Project[];
+  currentProject: Project;
+}
+
+const project1: Project = {
+  id: '1',
+  title: 'p title',
+  description: 'p description'
+}
+
+const project2: Project = {
+  id: '2',
+  title: 'p title 2',
+  description: 'p description 2'
+}
+
+const projects: Project[] = [
+  project1, project2
+]
+
+const initialState: ProjectsState = {
+  projects,
+  currentProject: project2
+}
+
+interface ClientsState {
+  clients: Client[];
+  currentClient: Client;
+}
+
 interface Client {
   id: string;
   firstName: string;
