@@ -96,7 +96,28 @@ const appState: AppState = {
   projectsState: initialProjectsState
 }
 
-const tango = appState
+
+
+class ProjectStore {
+  state: ProjectsState;
+
+  constructor(state: ProjectsState) {
+    this.state = state;
+  }
+
+  getState() {
+    return this.state;
+  }
+
+  select(key: string) {
+    return this.state[key];
+  }
+}
+
+const initialState = new ProjectStore(initialProjectsState);
+
+
+const tango = initialState
 
 
 @Component({
