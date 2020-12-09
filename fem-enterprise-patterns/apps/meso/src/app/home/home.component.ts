@@ -100,9 +100,11 @@ const appState: AppState = {
 
 class ProjectStore {
   state: ProjectsState;
+  reducer;
 
-  constructor(state: ProjectsState) {
+  constructor(state: ProjectsState, reducer) {
     this.state = state;
+    this.reducer = reducer;
   }
 
   getState() {
@@ -114,7 +116,27 @@ class ProjectStore {
   }
 }
 
-const initialState = new ProjectStore(initialProjectsState);
+class ClientStore {
+  state: ClientsState;
+  reducer;
+
+  constructor(state: ClientsState, reducer) {
+    this.state = state;
+    this.reducer = reducer;
+  }
+
+  getState() {
+    return this.state;
+  }
+
+  select(key: string) {
+    return this.state[key];
+  }
+
+  dispatch(action: Action) {
+    this.state = this.reducer(this.state, action);
+  }
+}
 
 interface Action {
   type: string;
@@ -122,7 +144,7 @@ interface Action {
 }
 
 const CLIENT_LOAD = 'load';
-const CLIENT_READ = 'read';
+const CLIENT_SELECT = 'select';
 const CLIENT_CLEAR = 'clear';
 const CLIENT_CREATE = 'create';
 const CLIENT_UPDATE = 'update';
@@ -172,7 +194,7 @@ const clientReducer = (state: ClientsState, action: Action): ClientsState => {
   switch(action.type) {
     case CLIENT_LOAD:
       return loadClient(state, action.payload);
-    case CLIENT_READ:
+    case CLIENT_SELECT:
       return selectClient(state, action.payload);
     case CLIENT_CLEAR:
       return clearClient(state);
@@ -184,11 +206,21 @@ const clientReducer = (state: ClientsState, action: Action): ClientsState => {
       return deleteClient(state, action.payload);
     default:
       return state;
-    }
+  }
 }
 
+const  jack: Client = {
+  id: '123',
+  firstName: 'Jack',
+  lastName: 'Huang',
+  company: 'viGlobal'
+}
+const clientStore = new ClientStore(initialClientsState, clientReducer);
+const aClient = clientStore.select('currentClient');
+clientStore.dispatch({type: CLIENT_CREATE, payload: jack});
+const allClients = clientStore.select('clients');
 
-const tango = initialState
+const tango = allClients
 
 
 @Component({
