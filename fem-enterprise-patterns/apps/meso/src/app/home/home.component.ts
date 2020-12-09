@@ -116,6 +116,77 @@ class ProjectStore {
 
 const initialState = new ProjectStore(initialProjectsState);
 
+interface Action {
+  type: string;
+  payload?: any;
+}
+
+const CLIENT_LOAD = 'load';
+const CLIENT_READ = 'read';
+const CLIENT_CLEAR = 'clear';
+const CLIENT_CREATE = 'create';
+const CLIENT_UPDATE = 'update';
+const CLIENT_DELETE = 'delete';
+
+const loadClient = (state, clients): ClientsState => {
+  return {
+    clients,
+    currentClient: state.currentClient
+  }
+}
+const selectClient = (state, client): ClientsState => {
+  return {
+    clients: state.clients,
+    currentClient: client
+  }
+}
+const clearClient = (state): ClientsState => {
+  return {
+    clients: state.clients,
+    currentClient: null
+  }
+}
+
+const createClient = (state, client): ClientsState => {
+  return {
+    clients: [...state.clients, client],
+    currentClient: state.currentClient
+  }
+}
+
+const updateClient = (state, client): ClientsState => {
+  return {
+    clients: state.clients.map(c => c.id === client.id ? Object.assign({}, client) : c),
+    currentClient: state.currentClient
+  }
+}
+
+const deleteClient = (state, client): ClientsState => {
+  return {
+    clients: state.clients.filter(c => c.id !== client.id),
+    currentClient: state.currentClient
+  }
+}
+
+const clientReducer = (state: ClientsState, action: Action): ClientsState => {
+  switch(action.type) {
+    case CLIENT_LOAD:
+      return loadClient(state, action.payload);
+    case CLIENT_READ:
+      return selectClient(state, action.payload);
+    case CLIENT_CLEAR:
+      return clearClient(state);
+    case CLIENT_CREATE:
+      return createClient(state, action.payload);
+    case CLIENT_UPDATE:
+      return updateClient(state, action.payload);
+    case CLIENT_DELETE:
+      return deleteClient(state, action.payload);
+    default:
+      return state;
+    }
+}
+
 
 const tango = initialState
 
