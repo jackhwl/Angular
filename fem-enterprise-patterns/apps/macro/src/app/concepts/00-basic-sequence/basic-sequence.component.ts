@@ -18,7 +18,7 @@ export class BasicSequenceComponent implements AfterViewInit {
   ngAfterViewInit() {
     fromEvent(this.getNativeElement(this.btn), 'click')
       .pipe(
-        // filter((event: KeyboardEvent) => event.shiftKey),
+        filter((event: KeyboardEvent) => event.shiftKey),
         map(event => 'Beast Mode Activated!')
       )
       .subscribe(result => this.message = result);
