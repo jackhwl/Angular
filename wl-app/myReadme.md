@@ -133,3 +133,7 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 # fenerate testing module
 
 - nx g lib core-state --parent-module=apps/recruit/src/app/app.module.ts --routing --style=scss -d
+
+# partial-application
+
+https://stackblitz.com/edit/partial-application

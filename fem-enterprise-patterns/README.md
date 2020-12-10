@@ -39,3 +39,5 @@ The `serve:all` command is a convenience methods that runs the `serve:api` and `
 ```
 
 > Note: the above terminal commands are for Mac. Remember to substitute the appropriate commands for your OS.
+
+https://stackblitz.com/edit/partial-application
