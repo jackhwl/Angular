@@ -17,7 +17,7 @@
                 {{ 'nav.' + link.title | translate }}
             </li>
             <li class="dropdown-notifications">
-                <button mat-stroked-button (click)="setLang.emit(currentLang === 'en' ? 'fr' : 'en')">
+                <button mat-stroked-button (click)="useLang.emit(currentLang === 'en' ? 'fr' : 'en')">
                     <span class="icon" data-icon="z"></span>
                     <span class="language">{{currentLang === 'en' ? 'Français' : 'English'}}</span>
                 </button>

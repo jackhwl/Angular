@@ -33,7 +33,7 @@ export class AppComponent {
     this.router.navigateByUrl('/login')
   }
 
-  setLang(lang) {
+  useLang(lang) {
     this.translate.use(lang);
   }
 }

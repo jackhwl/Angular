@@ -10,5 +10,5 @@ export class SidenavListComponent {
   @Input() links;
   @Input() currentLang;
   @Output() logout = new EventEmitter();
-  @Output() setLang = new EventEmitter();
+  @Output() useLang = new EventEmitter();
 }

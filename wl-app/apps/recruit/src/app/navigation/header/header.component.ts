@@ -10,5 +10,5 @@ export class HeaderComponent {
   @Input() currentLang;
   @Output() toggled = new EventEmitter();
   @Output() logout = new EventEmitter();
-  @Output() setLang = new EventEmitter();
+  @Output() useLang = new EventEmitter();
 }
