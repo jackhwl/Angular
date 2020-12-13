@@ -9,9 +9,13 @@
     </div>
     <div class="top-nav">
         <ul>
-            <li><a routerLink="/home"><span class="nav-cell">Home</span></a></li>
-            <li><a routerLink="/home"><span class="nav-cell">Header Link One</span></a></li>
-            <li><a routerLink="/students"><span class="nav-cell">Students</span></a></li>
+            <li
+                *ngFor="let link of links"
+                [routerLink]="link.path"
+                routerLinkActive="active"
+                attr.data-cy="nav-item-{{ link.title }}">
+                {{ 'nav.' + link.title | translate }}
+            </li>
             <li class="dropdown-notifications">
                 <button mat-stroked-button>
                     <span class="icon" data-icon="z"></span>

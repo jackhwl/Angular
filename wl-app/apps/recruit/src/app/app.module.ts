@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreDataModule } from '@wl/core-data';
 import { CoreStateModule } from '@wl/core-state';
@@ -16,6 +16,8 @@ import { StudentDetailsComponent } from './students/student-details/student-deta
 import { FormsModule } from '@angular/forms';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { SloganComponent } from './slogan/slogan.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent, HeaderComponent, SidenavListComponent, SloganComponent],
@@ -27,9 +29,21 @@ import { SloganComponent } from './slogan/slogan.component';
     CoreStateModule,
     MaterialModule,
     RoutingModule,
-    FormsModule
+    FormsModule,        
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

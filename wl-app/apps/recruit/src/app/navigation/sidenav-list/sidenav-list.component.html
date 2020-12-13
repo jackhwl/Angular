@@ -12,7 +12,7 @@
         attr.data-cy="nav-item-{{ link.title }}"
     >
         <mat-icon matListIcon>{{ link.icon }}</mat-icon>
-        {{ link.title | uppercase }}
+        {{ 'nav.' + link.title | translate | uppercase }}
     </mat-list-item>
     <mat-list-item class="dropdown-notifications">
         <button mat-stroked-button>

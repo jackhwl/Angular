@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'wl-header',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  @Input() links;
   @Output() toggled = new EventEmitter();
   @Output() logout = new EventEmitter();
 }
