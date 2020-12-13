@@ -18,10 +18,10 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav [opened]="false" mode="side" class="app-sidenav">
-    <wl-sidenav-list [links]="links"></wl-sidenav-list>
+    <wl-sidenav-list [links]="links" [currentLang]="translate.currentLang" (setLang)="setLang($event)"></wl-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <wl-header [links]="links" (toggled)="toggleSideNav()" (setLang)="setLang($event)"></wl-header>
+    <wl-header [links]="links" [currentLang]="translate.currentLang" (toggled)="toggleSideNav()" (setLang)="setLang($event)"></wl-header>
     <wl-slogan></wl-slogan>
     <main>
       <router-outlet></router-outlet>

@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() links;
+  @Input() currentLang;
   @Output() toggled = new EventEmitter();
   @Output() logout = new EventEmitter();
   @Output() setLang = new EventEmitter();
