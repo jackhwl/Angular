@@ -5,6 +5,8 @@ https://frontendmasters.com/courses/angular-reactive/state-shape-initial-state-r
 schematics ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-roles --url /api/user --project dashboard --debug=false --findOne --force
 ng g ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-role --url /api/user --project dashboard --findOne --force
 
+[Angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter)
+
 # schematics
 
 npm install -g @angular-devkit/schematics-cli
@@ -137,3 +139,7 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 # partial-application
 
 https://stackblitz.com/edit/partial-application
+
+# add ngx-translate
+
+- yarn add @ngx-translate/core @ngx-translate/http-loader --save
