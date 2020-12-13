@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private router: Router, public translate: TranslateService) {
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang('en');
-    
+
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
   }
@@ -31,5 +31,9 @@ export class AppComponent {
 
   logout() {
     this.router.navigateByUrl('/login')
+  }
+
+  setLang(lang) {
+    this.translate.use(lang);
   }
 }

@@ -17,9 +17,15 @@
                 {{ 'nav.' + link.title | translate }}
             </li>
             <li class="dropdown-notifications">
-                <button mat-stroked-button>
+                <button mat-stroked-button (click)="setLang.emit('en')">
                     <span class="icon" data-icon="z"></span>
                     <span class="language">English</span>
+                </button>
+            </li>
+            <li class="dropdown-notifications">
+                <button mat-stroked-button (click)="setLang.emit('fr')">
+                    <span class="icon" data-icon="z"></span>
+                    <span class="language">Français</span>
                 </button>
             </li>
             <li>  

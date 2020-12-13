@@ -9,4 +9,5 @@ export class HeaderComponent {
   @Input() links;
   @Output() toggled = new EventEmitter();
   @Output() logout = new EventEmitter();
+  @Output() setLang = new EventEmitter();
 }

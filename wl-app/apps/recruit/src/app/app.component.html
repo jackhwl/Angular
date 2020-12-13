@@ -21,7 +21,7 @@
     <wl-sidenav-list [links]="links"></wl-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <wl-header [links]="links" (toggled)="toggleSideNav()"></wl-header>
+    <wl-header [links]="links" (toggled)="toggleSideNav()" (setLang)="setLang($event)"></wl-header>
     <wl-slogan></wl-slogan>
     <main>
       <router-outlet></router-outlet>
