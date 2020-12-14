@@ -498,5 +498,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "recruit"
+  "defaultProject": "security"
 }

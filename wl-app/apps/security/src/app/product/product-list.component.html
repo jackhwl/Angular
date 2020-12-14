@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Product List</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary" (click)="addProduct()">Add New Product</button>
+  </div>
+</div>
+
+<div class="table-responsive" *ngIf="products && products.length">
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Product Name</th>
+        <th>Introduction Date</th>
+        <th class="text-right">Price</th>
+        <th>URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>
+          <a href="#" class="btn btn-primary" [routerLink]="['/productDetail', product.productId]">Edit
+          </a>
+        </td>
+        <td>{{product.productName}}</td>
+        <td>{{product.introductionDate | date:"MM/dd/yyyy"}}</td>
+        <td class="text-right">{{product.price | currency}}</td>
+        <td>{{product.url | lowercase}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
