@@ -7,5 +7,6 @@ module.exports = {
     '<rootDir>/libs/core-state',
     '<rootDir>/libs/material',
     '<rootDir>/libs/testing',
+    '<rootDir>/apps/security',
   ],
 };

@@ -47,6 +47,13 @@
     },
     "testing": {
       "tags": []
+    },
+    "security": {
+      "tags": []
+    },
+    "security-e2e": {
+      "tags": [],
+      "implicitDependencies": ["security"]
     }
   }
 }

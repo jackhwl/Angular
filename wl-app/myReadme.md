@@ -6,6 +6,7 @@ schematics ..\schematics\my-org-schematics\src\collection.json:crud-resource das
 ng g ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-role --url /api/user --project dashboard --findOne --force
 
 [Angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter)
+[Security](https://www.codemag.com/Article/1805021/Security-in-Angular-Part-1)
 
 # schematics
 
@@ -143,3 +144,7 @@ https://stackblitz.com/edit/partial-application
 # add ngx-translate
 
 - yarn add @ngx-translate/core @ngx-translate/http-loader --save
+
+# add security app
+
+- nx g app security --style=scss --routing -d
