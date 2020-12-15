@@ -148,3 +148,7 @@ https://stackblitz.com/edit/partial-application
 # add security app
 
 - nx g app security --style=scss --routing -d
+
+# add login component
+
+- nx g c security/login --flat --skipTests -d
