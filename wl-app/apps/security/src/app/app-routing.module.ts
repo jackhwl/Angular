@@ -6,6 +6,7 @@ import { CategoryListComponent } from './category/category-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductDetailComponent } from './product/product-detail.component';
 import { LoginComponent } from './security/login.component';
+import { AuthGuard } from './security/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,15 +15,21 @@ const routes: Routes = [
   },
   { 
     path: 'products', 
-    component: ProductListComponent
+    component: ProductListComponent,
+    canActivate: [AuthGuard],
+    data: {claimName: 'canAccessProducts'}
   },
   { 
     path: 'productDetail/:id',
-    component: ProductDetailComponent 
+    component: ProductDetailComponent,
+    canActivate: [AuthGuard],
+    data: {claimName: 'canAccessProducts'}
   },
   {
     path: 'categories',
-    component: CategoryListComponent
+    component: CategoryListComponent,
+    canActivate: [AuthGuard],
+    data: {claimName: 'canAccessCategories'}
   },
   {
     path: 'login',

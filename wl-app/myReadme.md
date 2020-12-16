@@ -152,3 +152,7 @@ https://stackblitz.com/edit/partial-application
 # add login component
 
 - nx g c security/login --flat --skipTests -d
+
+# add route Guard
+
+- nx g g security/auth --flat --skipTests -d
