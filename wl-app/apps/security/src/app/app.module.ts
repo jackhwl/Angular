@@ -7,6 +7,7 @@ import { ProductListComponent } from './product/product-list.component';
 import { ProductDetailComponent } from './product/product-detail.component';
 import { ProductService } from './product/product.service';
 import { CategoryService } from './category/category.service';
+import { SecurityService } from './security/security.service';
 import { CategoryListComponent } from './category/category-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -26,7 +27,7 @@ import { LoginComponent } from './security/login.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ProductService, CategoryService],
+  providers: [ProductService, CategoryService, SecurityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

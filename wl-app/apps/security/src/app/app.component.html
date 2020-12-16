@@ -7,11 +7,11 @@
       </a>
     </div>
     <ul class="nav navbar-nav">
-      <li>
-        <a routerLink="/products" *ngIf="securityObject.canAccessProducts">Products</a>
+      <li *ngIf="securityObject.canAccessProducts">
+        <a routerLink="/products" >Products</a>
       </li>
-      <li>
-        <a routerLink="/categories" *ngIf="securityObject.canAccessCategories">Categories</a>
+      <li *ngIf="securityObject.canAccessCategories">
+        <a routerLink="/categories">Categories</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

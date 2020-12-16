@@ -25,14 +25,14 @@ const routes: Routes = [
     component: CategoryListComponent
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: '', redirectTo: 'dashboard', pathMatch: 'full'
   },
   {
     path: '**', redirectTo: 'dashboard', pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
   }
 
 ];
