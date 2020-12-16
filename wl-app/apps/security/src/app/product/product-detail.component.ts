@@ -7,6 +7,8 @@ import { ProductService } from "./product.service";
 import { Product } from './product';
 import { Category } from '../category/category';
 import { CategoryService } from '../category/category.service';
+import { AppUserAuth } from '../security/app-user-auth';
+import { SecurityService } from '../security/security.service';
 
 @Component({
   templateUrl: './product-detail.component.html'
@@ -14,11 +16,16 @@ import { CategoryService } from '../category/category.service';
 export class ProductDetailComponent implements OnInit {
   product: Product;
   categories: Category[];
+  securityObject: AppUserAuth = null;
 
-  constructor(private categoryService: CategoryService,
-    private productService: ProductService,
-    private route: ActivatedRoute,
-    private location: Location) { }
+  constructor (private categoryService: CategoryService, 
+    private productService: ProductService, 
+    private route: ActivatedRoute, 
+    private location: Location, 
+    private securityService: SecurityService) {
+        this.securityObject = securityService.securityObject;
+  }
+
 
   ngOnInit() {
     this.getCategories();
