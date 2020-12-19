@@ -40,19 +40,19 @@ namespace webApi
 
 			app.UseRouting();
 
-			app.UseAuthorization();
+			//app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
 			});
 
-			//app.UseCors(
-			//	options => options.WithOrigins(
-			//	"http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
-			//);
+      app.UseCors(
+          options => options.WithOrigins(
+          "http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+      );
 
-			//app.UseMvc();
-		}
+      //app.UseMvc();
+    }
 	}
 }
