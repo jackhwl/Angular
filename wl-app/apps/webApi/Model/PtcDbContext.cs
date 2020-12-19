@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace PtcApi.Model
+namespace webApi.Model
 {
   public class PtcDbContext : DbContext
   {

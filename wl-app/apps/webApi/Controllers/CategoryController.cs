@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PtcApi.Model;
+using webApi.Model;
 
-namespace PtcApi.Controllers
+namespace webApi.Controllers
 {
   [Route("api/[controller]")]
   public class CategoryController : BaseApiController

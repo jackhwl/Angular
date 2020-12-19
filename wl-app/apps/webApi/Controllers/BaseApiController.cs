@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
-namespace PtcApi.Controllers
+namespace webApi.Controllers
 {
   public class BaseApiController : Controller
   {

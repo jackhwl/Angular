@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PtcApi.Model
+namespace webApi.Model
 {
   [Table("Product", Schema = "dbo")]
   public partial class Product

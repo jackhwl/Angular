@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PtcApi.Model;
+using webApi.Model;
 
-namespace PtcApi.Security
+namespace webApi.Security
 {
   public class SecurityManager
   {

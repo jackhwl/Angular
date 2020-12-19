@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PtcApi.Security;
-using PtcApi.Model;
+using webApi.Security;
+using webApi.Model;
 
-namespace PtcApi.Controllers
+namespace webApi.Controllers
 {
   [Route("api/[controller]")]
   public class SecurityController : BaseApiController
