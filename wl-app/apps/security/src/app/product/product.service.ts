@@ -10,10 +10,10 @@ const API_URL = "https://localhost:44381/api/product/";
 export class ProductService {
 
   constructor(private http: HttpClient) { }
-  
+
   getProducts(): Observable<Product[]> {
     //return of<Product[]>(PRODUCTS_MOCK);
-    return this.http.get<Product[]>(API_URL);    
+      return this.http.get<Product[]>(API_URL);
   }
   
   getProduct(id: number): Observable<Product> {
