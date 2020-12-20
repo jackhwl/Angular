@@ -4,7 +4,7 @@ import { Product } from './product';
 import { PRODUCTS_MOCK } from './products-mock';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-const API_URL = "https://localhost:44381/weatherforecast";
+const API_URL = "https://localhost:44381/api/product/";
 
 @Injectable()
 export class ProductService {

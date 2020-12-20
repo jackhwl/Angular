@@ -2,8 +2,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TodoApi.Model
 {
-  public class PtcDbContext : DbContext
+  public class TodoDbContext : DbContext
   {
+    //public TodoDbContext(DbContextOptions<TodoDbContext> options)
+    //       : base(options)
+    //{
+    //}
+
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<AppUser> Users { get; set; }

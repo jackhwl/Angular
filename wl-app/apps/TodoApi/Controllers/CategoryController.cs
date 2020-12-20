@@ -20,7 +20,7 @@ namespace TodoApi.Controllers
 
       try
       {
-        using (var db = new PtcDbContext())
+        using (var db = new TodoDbContext())
         {
           if (db.Categories.Count() > 0)
           {

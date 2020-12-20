@@ -19,7 +19,7 @@ namespace TodoApi.Controllers
 
       try
       {
-        using (var db = new PtcDbContext())
+        using (var db = new TodoDbContext())
         {
           if (db.Products.Count() > 0)
           {
@@ -48,7 +48,7 @@ namespace TodoApi.Controllers
 
       try
       {
-        using (var db = new PtcDbContext())
+        using (var db = new TodoDbContext())
         {
           entity = db.Products.Find(id);
           if (entity != null)

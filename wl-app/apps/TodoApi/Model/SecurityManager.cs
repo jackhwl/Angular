@@ -12,7 +12,7 @@ namespace TodoApi.Security
       AppUserAuth ret = new AppUserAuth();
       AppUser authUser = null;
 
-      using (var db = new PtcDbContext())
+      using (var db = new TodoDbContext())
       {
         // Attempt to validate user
         authUser = db.Users.Where(u => u.UserName.ToLower() == user.UserName.ToLower()
@@ -32,7 +32,7 @@ namespace TodoApi.Security
     {
       List<AppUserClaim> list = new List<AppUserClaim>();
 
-      using (var db = new PtcDbContext())
+      using (var db = new TodoDbContext())
       {
         list = db.Claims.Where(u => u.UserId == authUser.UserId).ToList();
       }
