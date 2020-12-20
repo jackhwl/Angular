@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
+using TodoApi.Model;
 
 namespace TodoApi
 {
@@ -18,8 +22,35 @@ namespace TodoApi
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+      // Get JWT Settings from JSON file
+      JwtSettings settings;
+      settings = GetJwtSettings();
+      services.AddSingleton<JwtSettings>(settings);
 
-			services.AddControllers();
+      // Register Jwt as the Authentication service
+      services.AddAuthentication(options =>
+      {
+        options.DefaultAuthenticateScheme = "JwtBearer";
+        options.DefaultChallengeScheme = "JwtBearer";
+      })
+      .AddJwtBearer("JwtBearer", jwtBearerOptions =>
+      {
+        jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
+            {
+              ValidateIssuerSigningKey = true,
+              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Key)),
+              ValidateIssuer = true,
+              ValidIssuer = settings.Issuer,
+
+              ValidateAudience = true,
+              ValidAudience = settings.Audience,
+
+              ValidateLifetime = true,
+              ClockSkew = TimeSpan.FromMinutes(settings.MinutesToExpiration)
+            };
+      });
+
+      services.AddControllers();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,5 +78,16 @@ namespace TodoApi
 			});
 
     }
-	}
+
+    public JwtSettings GetJwtSettings()
+    {
+      JwtSettings settings = new JwtSettings();
+      settings.Key = Configuration["JwtSettings:key"];
+      settings.Audience = Configuration["JwtSettings:audience"];
+      settings.Issuer = Configuration["JwtSettings:issuer"];
+      settings.MinutesToExpiration = Convert.ToInt32(Configuration["JwtSettings:minutesToExpiration"]);
+
+      return settings;
+    }
+  }
 }

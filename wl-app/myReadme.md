@@ -158,3 +158,5 @@ https://stackblitz.com/edit/partial-application
 - nx g g security/auth --flat --skipTests -d
 
 # add Todo WebApi backend for api/product
+
+# add System.IdentityModel.Tokens.Jwt and Microsoft.AspNetCore.Authentication.JwtBearer two packages
