@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using TodoApi.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TodoApi.Controllers
 {
@@ -12,6 +13,7 @@ namespace TodoApi.Controllers
   public class ProductController : BaseApiController
   {
     [HttpGet]
+    [Authorize]
     public IActionResult Get()
     {
       IActionResult ret = null;

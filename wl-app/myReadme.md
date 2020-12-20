@@ -156,3 +156,5 @@ https://stackblitz.com/edit/partial-application
 # add route Guard
 
 - nx g g security/auth --flat --skipTests -d
+
+# add Todo WebApi backend for api/product

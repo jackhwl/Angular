@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
-const API_URL = "https://localhost:44322/api/security/";
+const API_URL = "https://localhost:44381/api/security/";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -38,7 +38,6 @@ export class SecurityService {
     //     localStorage.setItem("bearerToken", this.securityObject.bearerToken);
     // }
     // return of<AppUserAuth>(this.securityObject);
-    console.log(entity);
     return this.http.post<AppUserAuth>(API_URL + "login", entity, httpOptions)
       .pipe(
         tap(resp => {
