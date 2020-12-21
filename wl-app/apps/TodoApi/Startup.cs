@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,12 +29,13 @@ namespace TodoApi
       services.AddSingleton<JwtSettings>(settings);
 
       // Register Jwt as the Authentication service
-      services.AddAuthentication(options =>
-      {
-        options.DefaultAuthenticateScheme = "JwtBearer";
-        options.DefaultChallengeScheme = "JwtBearer";
-      })
-      .AddJwtBearer("JwtBearer", jwtBearerOptions =>
+      //services.AddAuthentication(options =>
+      //{
+      //  options.DefaultAuthenticateScheme = "Bearer";
+      //  options.DefaultChallengeScheme = "Bearer";
+      //})
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      .AddJwtBearer(jwtBearerOptions =>
       {
         jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
             {
@@ -49,6 +51,13 @@ namespace TodoApi
               ClockSkew = TimeSpan.FromMinutes(settings.MinutesToExpiration)
             };
       });
+
+      services.AddCors();
+
+      services.AddMvc();
+//.AddJsonOptions(options =>
+//  options.SerializerSettings.ContractResolver =
+//new CamelCasePropertyNamesContractResolver());
 
       services.AddControllers();
 		}
@@ -71,8 +80,10 @@ namespace TodoApi
       );
 
       app.UseAuthorization();
+      //app.UseJwtBearerAuthentication();
 
-			app.UseEndpoints(endpoints =>
+
+      app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
 			});

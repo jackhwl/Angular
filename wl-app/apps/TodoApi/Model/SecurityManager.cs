@@ -1,12 +1,22 @@
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using TodoApi.Model;
 
 namespace TodoApi.Security
 {
   public class SecurityManager
   {
+    private JwtSettings _settings;
+    public SecurityManager(JwtSettings settings)
+    {
+      _settings = settings;
+    }
+
     public AppUserAuth AuthenticateUser(AppUser user)
     {
       AppUserAuth ret = new AppUserAuth();
@@ -48,7 +58,7 @@ namespace TodoApi.Security
       // Set User Properties
       ret.UserName = authUser.UserName;
       ret.IsAuthenticated = true;
-      ret.BearerToken = new Guid().ToString();
+      ret.BearerToken = BuildJwtToken(ret);
 
       // Get all claims for this user
       claims = GetUserClaims(authUser);
@@ -68,6 +78,37 @@ namespace TodoApi.Security
       }
 
       return ret;
+    }
+
+    protected string BuildJwtToken(AppUserAuth authUser)
+    {
+      SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
+      List<Claim> jwtClaims = new List<Claim>();
+
+      // Create standard JWT claims
+      jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, authUser.UserName));
+      jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+
+      // Add custom claims
+      jwtClaims.Add(new Claim("isAuthenticated", authUser.IsAuthenticated.ToString().ToLower()));
+      jwtClaims.Add(new Claim("canAccessProducts", authUser.CanAccessProducts.ToString().ToLower()));
+      jwtClaims.Add(new Claim("canAddProduct", authUser.CanAddProduct.ToString().ToLower()));
+      jwtClaims.Add(new Claim("canSaveProduct", authUser.CanSaveProduct.ToString().ToLower()));
+      jwtClaims.Add(new Claim("canAccessCategories", authUser.CanAccessCategories.ToString().ToLower()));
+      jwtClaims.Add(new Claim("canAddCategory", authUser.CanAddCategory.ToString().ToLower()));
+
+      // Create the JwtSecurityToken object
+      var token = new JwtSecurityToken(
+        issuer: _settings.Issuer,
+        audience: _settings.Audience,
+        claims: jwtClaims,
+        notBefore: DateTime.UtcNow,
+        expires: DateTime.UtcNow.AddMinutes(_settings.MinutesToExpiration),
+        signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+      );
+
+      // Create string representation of Jwt token
+      return new JwtSecurityTokenHandler().WriteToken(token);
     }
   }
 }

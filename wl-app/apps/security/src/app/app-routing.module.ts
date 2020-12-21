@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoryListComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     data: {claimName: 'canAccessCategories'}
   },
   {
