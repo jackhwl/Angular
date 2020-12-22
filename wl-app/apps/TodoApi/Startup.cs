@@ -79,9 +79,9 @@ namespace TodoApi
         "http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
       );
 
-      app.UseAuthorization();
-      //app.UseJwtBearerAuthentication();
+      app.UseAuthentication();
 
+      app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
 			{
