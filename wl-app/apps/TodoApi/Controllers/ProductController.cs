@@ -13,7 +13,7 @@ namespace TodoApi.Controllers
   public class ProductController : BaseApiController
   {
     [HttpGet]
-    [Authorize]
+    [Authorize(Policy = "CanAccessProducts")]
     public IActionResult Get()
     {
       IActionResult ret = null;

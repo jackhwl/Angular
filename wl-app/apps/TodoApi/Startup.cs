@@ -52,6 +52,12 @@ namespace TodoApi
             };
       });
 
+      services.AddAuthorization(cfg =>
+      {
+        // The claim key and value are case-sensitive
+        cfg.AddPolicy("CanAccessProducts", p => p.RequireClaim("CanAccessProducts", "true"));
+      });
+
       services.AddCors();
 
       services.AddMvc();
