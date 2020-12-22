@@ -2,11 +2,13 @@ https://frontendmasters.com/workshops/production-angular/
 Part 3: 8:40
 https://medium.com/@tomastrajan/total-guide-to-custom-angular-schematics-5c50cf90cdb4
 https://frontendmasters.com/courses/angular-reactive/state-shape-initial-state-reducer/
+
 schematics ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-roles --url /api/user --project dashboard --debug=false --findOne --force
 ng g ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-role --url /api/user --project dashboard --findOne --force
 
 [Angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter)
 [Security](https://www.codemag.com/Article/1805021/Security-in-Angular-Part-1)
+[JWT .net core 5.0](https://codeburst.io/jwt-auth-in-asp-net-core-148fb72bed03)
 
 # schematics
 
@@ -160,3 +162,7 @@ https://stackblitz.com/edit/partial-application
 # add Todo WebApi backend for api/product
 
 # add System.IdentityModel.Tokens.Jwt and Microsoft.AspNetCore.Authentication.JwtBearer two packages
+
+# add httpInterceptor module
+
+-nx g m security/httpInterceptor -m app.module --flat

@@ -22,7 +22,7 @@ export class ProductService {
       this.securityService
        .securityObject.bearerToken);
     //return of<Product[]>(PRODUCTS_MOCK);
-      return this.http.get<Product[]>(API_URL, { headers: httpOptions2 });
+      return this.http.get<Product[]>(API_URL, httpOptions);
   }
   
   getProduct(id: number): Observable<Product> {

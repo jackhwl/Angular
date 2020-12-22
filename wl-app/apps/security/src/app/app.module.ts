@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './security/login.component';
 import { AuthGuard } from './security/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpInterceptorModule } from './security/http-interceptor.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpInterceptorModule
   ],
   providers: [ProductService, CategoryService, SecurityService, AuthGuard],
   bootstrap: [AppComponent]
