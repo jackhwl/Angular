@@ -13,16 +13,16 @@ export class ProductService {
   constructor(private http: HttpClient, private securityService: SecurityService) { }
 
   getProducts(): Observable<Product[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.securityService.securityObject.bearerToken
-      })
-    };
-    let httpOptions2 = new HttpHeaders().set('Authorization', 'Bearer ' +
-      this.securityService
-       .securityObject.bearerToken);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Authorization': 'Bearer ' + this.securityService.securityObject.bearerToken
+    //   })
+    // };
+    // let httpOptions2 = new HttpHeaders().set('Authorization', 'Bearer ' +
+    //   this.securityService
+    //    .securityObject.bearerToken);
     //return of<Product[]>(PRODUCTS_MOCK);
-      return this.http.get<Product[]>(API_URL, httpOptions);
+      return this.http.get<Product[]>(API_URL);
   }
   
   getProduct(id: number): Observable<Product> {
