@@ -7,7 +7,8 @@ schematics ..\schematics\my-org-schematics\src\collection.json:crud-resource das
 ng g ..\schematics\my-org-schematics\src\collection.json:crud-resource dashboard/user-role --url /api/user --project dashboard --findOne --force
 
 [Angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter)
-[Security](https://www.codemag.com/Article/1805021/Security-in-Angular-Part-1)
+[Security 1](https://www.codemag.com/Article/1805021/Security-in-Angular-Part-1)
+[Security 3](https://www.codemag.com/Article/1811031/Security-in-Angular-Part-3)
 [JWT .net core 5.0](https://codeburst.io/jwt-auth-in-asp-net-core-148fb72bed03)
 
 # schematics
