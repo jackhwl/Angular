@@ -23,11 +23,12 @@ export class SecurityService {
     this.securityObject.userName = "";
     this.securityObject.bearerToken = "";
     this.securityObject.isAuthenticated = false;
-    this.securityObject.canAccessProducts = false;
-    this.securityObject.canAddProduct = false;
-    this.securityObject.canSaveProduct = false;
-    this.securityObject.canAccessCategories = false;
-    this.securityObject.canAddCategory = false;
+    this.securityObject.claims = [];
+    // this.securityObject.canAccessProducts = false;
+    // this.securityObject.canAddProduct = false;
+    // this.securityObject.canSaveProduct = false;
+    // this.securityObject.canAccessCategories = false;
+    // this.securityObject.canAddCategory = false;
     localStorage.removeItem("bearerToken");
   }
 
