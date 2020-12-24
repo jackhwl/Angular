@@ -56,4 +56,35 @@ export class SecurityService {
     this.resetSecurityObject();
   }
 
+  hasClaim(claimType: any) : boolean {
+    return this.isClaimValid(claimType);
+  }
+
+  private isClaimValid(claimType: string):boolean {
+    let ret: boolean = false;
+    let auth: AppUserAuth = null;
+    let claimValue: string = '';
+    
+    // Retrieve security object
+    auth = this.securityObject;
+    if (auth) {
+      // See if the claim type has a value
+      // *hasClaim="'claimType:value'"
+      if (claimType.indexOf(":") >= 0) {
+        let words: string[] = claimType.split(":");
+        claimType = words[0].toLowerCase();
+        claimValue = words[1];
+      }
+      else {
+        claimType = claimType.toLowerCase();
+        // Get the claim value, or assume 'true'
+        claimValue = claimValue ? claimValue : "true";
+      }
+      // Attempt to find the claim
+      ret = auth.claims.find(c => c.claimType.toLowerCase() == claimType && c.claimValue == claimValue) != null;
+    }
+    
+    return ret;
+  }
+    
 }
