@@ -167,3 +167,7 @@ https://stackblitz.com/edit/partial-application
 # add httpInterceptor module
 
 -nx g m security/httpInterceptor -m app.module --flat
+
+# Create Structural Directive to Check Claim
+
+-nx g d security/hasClaim --flat -d

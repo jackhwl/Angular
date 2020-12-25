@@ -2,6 +2,7 @@ import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+//import { HasClaimDirective } from './has-claim.directive';
       
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -24,6 +25,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 @NgModule({
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
-  ]
+  ],
+  //declarations: [HasClaimDirective]
 })
 export class HttpInterceptorModule { }

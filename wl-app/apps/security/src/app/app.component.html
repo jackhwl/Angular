@@ -7,12 +7,26 @@
       </a>
     </div>
     <ul class="nav navbar-nav">
-      <li *ngIf="securityObject.canAccessProducts">
-        <a routerLink="/products" >Products</a>
-      </li>
-      <li *ngIf="securityObject.canAccessCategories">
-        <a routerLink="/categories">Categories</a>
-      </li>
+      <li>
+        <ng-container
+        *ngIf="securityObject.isAuthenticated">
+        <a routerLink="/products"
+        *hasClaim="'canAccessProducts'">
+        Products
+        </a>
+        </ng-container>
+        </li>
+        
+        <li>
+          <ng-container
+          *ngIf="securityObject.isAuthenticated">
+          <a routerLink="/categories"
+          *hasClaim="'canAccessCategories'">
+          Categories
+          </a>
+          </ng-container>
+          </li>
+          
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
