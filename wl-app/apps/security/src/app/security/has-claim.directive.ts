@@ -13,8 +13,7 @@ export class HasClaimDirective {
   @Input() set hasClaim(claimType: any) {
       if (this.securityService.hasClaim(claimType)) {
         // Add template to DOM
-        this.viewContainer.
-        createEmbeddedView(this.templateRef);
+        this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         // Remove template from DOM
         this.viewContainer.clear();

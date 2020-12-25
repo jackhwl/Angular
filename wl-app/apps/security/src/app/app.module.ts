@@ -15,6 +15,7 @@ import { LoginComponent } from './security/login.component';
 import { AuthGuard } from './security/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorModule } from './security/http-interceptor.module';
+import { HasClaimDirective } from './security/has-claim.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpInterceptorModule } from './security/http-interceptor.module';
     ProductDetailComponent,
     CategoryListComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    HasClaimDirective
   ],
   imports: [
     BrowserModule,
