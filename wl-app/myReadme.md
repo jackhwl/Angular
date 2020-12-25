@@ -171,3 +171,4 @@ https://stackblitz.com/edit/partial-application
 # Create Structural Directive to Check Claim
 
 -nx g d security/hasClaim --flat -d
+# ngrx/data
