@@ -175,3 +175,9 @@ https://stackblitz.com/edit/partial-application
 # ngrx/data
 
 https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
+
+# move ngrx-data to wl-app
+
+# add ngrxData app
+
+- nx g app ngrxData --style=scss --routing -d

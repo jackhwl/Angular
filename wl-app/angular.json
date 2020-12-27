@@ -450,6 +450,128 @@
           }
         }
       }
+    },
+    "ngrx-data": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/ngrx-data",
+      "sourceRoot": "apps/ngrx-data/src",
+      "prefix": "wl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ngrx-data",
+            "index": "apps/ngrx-data/src/index.html",
+            "main": "apps/ngrx-data/src/main.ts",
+            "polyfills": "apps/ngrx-data/src/polyfills.ts",
+            "tsConfig": "apps/ngrx-data/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/ngrx-data/src/favicon.ico",
+              "apps/ngrx-data/src/assets"
+            ],
+            "styles": ["apps/ngrx-data/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ngrx-data/src/environments/environment.ts",
+                  "with": "apps/ngrx-data/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngrx-data:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngrx-data:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngrx-data:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ngrx-data/tsconfig.app.json",
+              "apps/ngrx-data/tsconfig.spec.json",
+              "apps/ngrx-data/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/ngrx-data/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/ngrx-data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ngrx-data-e2e": {
+      "root": "apps/ngrx-data-e2e",
+      "sourceRoot": "apps/ngrx-data-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ngrx-data-e2e/cypress.json",
+            "tsConfig": "apps/ngrx-data-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ngrx-data:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngrx-data:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/ngrx-data-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/ngrx-data-e2e/**/*"]
+          }
+        }
+      }
     }
   },
   "cli": {

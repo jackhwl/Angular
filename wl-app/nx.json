@@ -54,6 +54,13 @@
     "security-e2e": {
       "tags": [],
       "implicitDependencies": ["security"]
+    },
+    "ngrx-data": {
+      "tags": []
+    },
+    "ngrx-data-e2e": {
+      "tags": [],
+      "implicitDependencies": ["ngrx-data"]
     }
   }
 }
