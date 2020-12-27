@@ -185,3 +185,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 # add toolbar component
 
 -nx g c toolbar -m app.module.ts --style=scss --skipTests -d
+
+# add angular-in-memory-web-api
+
+- yarn add angular-in-memory-web-api
