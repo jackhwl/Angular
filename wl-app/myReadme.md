@@ -181,3 +181,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 # add ngrxData app
 
 - nx g app ngrxData --style=scss --routing -d
+
+# add toolbar component
+
+-nx g c toolbar -m app.module.ts --style=scss --skipTests -d

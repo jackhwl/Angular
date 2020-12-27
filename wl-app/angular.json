@@ -620,5 +620,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "security"
+  "defaultProject": "ngrx-data"
 }
