@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Villain } from '@wl/api-interfaces';
-import { VillainService } from '@wl/core-data';
+import { VillainService, VillainFacade } from '@wl/core-data';
 
 @Component({
   selector: 'app-villains',
@@ -11,12 +11,15 @@ import { VillainService } from '@wl/core-data';
 })
 export class VillainsComponent implements OnInit {
   selected: Villain;
-  villains: Villain[];
+  //villains: Villain[];
   loading: boolean;
-  // villains$: Observable<Villain[]>;
+  villains$: Observable<Villain[]> = this.villainFacade.allVillain$;
   // loading$: Observable<boolean>;
 
-  constructor(private villainService: VillainService) {
+  constructor(
+    private villainService: VillainService,
+    private villainFacade: VillainFacade
+  ) {
     // this.villains$ = villainService.entities$;
     // this.loading$ = villainService.loading$;
   }
@@ -58,14 +61,16 @@ export class VillainsComponent implements OnInit {
   }
 
   getVillains() {
-    // this.villainService.getAll();
-    // this.close();
-    this.loading = true;
-    this.villainService
-      .getAll()
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(villains => (this.villains = villains));
+    this.villainFacade.loadVillain();
     this.close();
+    // // this.villainService.getAll();
+    // // this.close();
+    // this.loading = true;
+    // this.villainService
+    //   .getAll()
+    //   .pipe(finalize(() => (this.loading = false)))
+    //   .subscribe(villains => (this.villains = villains));
+    // this.close();
   }
 
   select(villain: Villain) {
