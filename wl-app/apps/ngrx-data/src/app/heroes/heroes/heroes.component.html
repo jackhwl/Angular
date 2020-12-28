@@ -25,7 +25,7 @@
   <div class="list-container">
     <div *ngIf="heroes">
       <mat-spinner
-        *ngIf="loading"
+        *ngIf="loading; else heroList"
         mode="indeterminate"
         color="accent"
       ></mat-spinner>

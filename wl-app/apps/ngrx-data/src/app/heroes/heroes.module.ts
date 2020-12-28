@@ -10,7 +10,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HeroesComponent, HeroListComponent],
-  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)]
+  imports: [CommonModule, MaterialModule, RouterModule.forChild(routes)],
+  declarations: [HeroesComponent, HeroListComponent]
 })
 export class HeroesModule {}
