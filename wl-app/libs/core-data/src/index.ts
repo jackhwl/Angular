@@ -6,3 +6,4 @@ export {
 export { InMemoryDataService } from './lib/services/in-memory-data.service';
 export { ToastService } from './lib/notifications/toast.service';
 export { HeroService } from './lib/services/heroes/hero.service';
+export { VillainService } from './lib/services/villains/villain.service';
