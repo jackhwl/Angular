@@ -39,14 +39,14 @@
       </ng-template>
     </div>
   </div>
-  <!-- <div class="detail-container">
-      <app-hero-detail
-        *ngIf="selected"
-        [hero]="selected"
-        (unselect)="close()"
-        (add)="add($event)"
-        (update)="update($event)"
-      >
-      </app-hero-detail> 
-    </div> -->
+  <div class="detail-container">
+    <app-hero-detail
+      *ngIf="selected"
+      [hero]="selected"
+      (unselect)="close()"
+      (add)="add($event)"
+      (update)="update($event)"
+    >
+    </app-hero-detail>
+  </div>
 </div>
