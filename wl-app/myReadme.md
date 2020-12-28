@@ -189,3 +189,8 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 # add angular-in-memory-web-api
 
 - yarn add angular-in-memory-web-api
+
+# add heroes, villains module
+
+- nx g m heroes -d
+- nx g m villains -d
