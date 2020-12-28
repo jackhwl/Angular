@@ -12,9 +12,9 @@ import { VillainService, VillainFacade } from '@wl/core-data';
 export class VillainsComponent implements OnInit {
   selected: Villain;
   //villains: Villain[];
-  loading: boolean;
-  villains$: Observable<Villain[]> = this.villainFacade.allVillain$;
-  // loading$: Observable<boolean>;
+  //loading: boolean;
+  villains$: Observable<Villain[]> = this.villainFacade.villains$;
+  loading$: Observable<boolean> = this.villainFacade.loading$;
 
   constructor(
     private villainService: VillainService,
@@ -61,7 +61,7 @@ export class VillainsComponent implements OnInit {
   }
 
   getVillains() {
-    this.villainFacade.loadVillain();
+    this.villainFacade.getAll();
     this.close();
     // // this.villainService.getAll();
     // // this.close();

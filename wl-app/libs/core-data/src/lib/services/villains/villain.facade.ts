@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { Villain } from '@wl/api-interfaces';
 import { NotificationsService, VillainService } from '@wl/core-data';
 import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class VillainFacade {
-  private allVillain = new Subject<Villain[]>();
+  private villains = new Subject<Villain[]>();
   private selectedVillain = new Subject<Villain>();
+  private loading = new Subject<boolean>();
   private mutations = new Subject();
 
-  allVillain$ = this.allVillain.asObservable();
+  villains$ = this.villains.asObservable();
   selectedVillain$ = this.selectedVillain.asObservable();
+  loading$ = this.loading.asObservable();
   mutations$ = this.mutations.asObservable();
 
   constructor(
@@ -26,10 +29,12 @@ export class VillainFacade {
     this.selectedVillain.next(villain);
   }
 
-  loadVillain() {
+  getAll() {
+    this.loading.next(true);
     this.villainService
       .getAll()
-      .subscribe((villains: Villain[]) => this.allVillain.next(villains));
+      .pipe(finalize(() => this.loading.next(false)))
+      .subscribe((villains: Villain[]) => this.villains.next(villains));
   }
 
   saveVillain(villain: Villain) {
