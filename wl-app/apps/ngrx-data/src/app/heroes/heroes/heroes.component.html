@@ -23,9 +23,9 @@
 </div>
 <div class="content-container">
   <div class="list-container">
-    <div *ngIf="heroes$ | async as heroes">
+    <div *ngIf="heroes">
       <mat-spinner
-        *ngIf="loading$ | async; else heroList"
+        *ngIf="loading"
         mode="indeterminate"
         color="accent"
       ></mat-spinner>

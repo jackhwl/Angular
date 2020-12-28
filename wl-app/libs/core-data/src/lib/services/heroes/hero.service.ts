@@ -45,7 +45,7 @@ export class HeroService {
   }
 
   private handleError(res: HttpErrorResponse) {
-    console.error(res.error);
+    console.error(res);
     return observableThrowError(res.error || 'Server error');
   }
 

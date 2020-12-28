@@ -11,8 +11,8 @@ import { HeroService } from '@wl/core-data';
 })
 export class HeroesComponent implements OnInit {
   selected: Hero;
-  heroes$: Hero[];
-  loading$: boolean;
+  heroes: Hero[];
+  loading: boolean;
   // heroes$: Observable<Hero[]>;
   // loading$: Observable<boolean>;
 
@@ -56,14 +56,14 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes() {
-    this.heroService.getAll();
+    //    this.heroService.getAll();
+    //    this.close();
+    this.loading = true;
+    this.heroService
+      .getAll()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(heroes => (this.heroes = heroes));
     this.close();
-    // this.loading = true;
-    // this.heroService
-    //   .getAll()
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe(heroes => (this.heroes = heroes));
-    // this.close();
   }
 
   select(hero: Hero) {
