@@ -29,14 +29,15 @@ export class VillainsComponent implements OnInit {
   }
 
   add(villain: Villain) {
-    //this.villainService.add(villain);
-    this.loading = true;
-    this.villainService
-      .add(villain)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(
-        addedvillain => (this.villains = this.villains.concat(addedvillain))
-      );
+    this.villainFacade.add(villain);
+    // //this.villainService.add(villain);
+    // this.loading = true;
+    // this.villainService
+    //   .add(villain)
+    //   .pipe(finalize(() => (this.loading = false)))
+    //   .subscribe(
+    //     addedvillain => (this.villains = this.villains.concat(addedvillain))
+    //   );
   }
 
   close() {

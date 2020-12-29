@@ -41,25 +41,37 @@ export class VillainFacade {
     if (villain.id) {
       this.updateVillain(villain);
     } else {
-      this.createVillain(villain);
+      this.add(villain);
     }
   }
 
-  createVillain(villain: Villain) {
-    return this.villainService.add(villain).subscribe(_ => {
-      this.ns.emit('Villain created!');
-      this.reset();
-    });
+  add(villain: Villain) {
+    this.loading.next(true);
+    this.villainService
+      .add(villain)
+      .pipe(finalize(() => this.loading.next(false)))
+      .subscribe(_ => {
+        this.ns.emit('Villain created!');
+        this.reset();
+      });
   }
 
   updateVillain(villain: Villain) {
-    return this.villainService.update(villain).subscribe(_ => {
-      this.ns.emit('Villain updated!');
-      this.reset();
-    });
+    this.loading.next(true);
+    this.villainService
+      .update(villain)
+      .pipe(finalize(() => this.loading.next(false)))
+      .subscribe(_ => {
+        this.ns.emit('Villain updated!');
+        this.reset();
+      });
   }
 
   deleteVillain(villain: Villain) {
-    return this.villainService.delete(villain).subscribe(_ => this.reset());
+    this.loading.next(true);
+    this.villainService
+      .delete(villain)
+      .pipe(finalize(() => this.loading.next(false)))
+      .subscribe(_ => this.reset());
   }
 }
