@@ -6,15 +6,15 @@ import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class VillainFacade {
+  private mutations = new Subject();
+  private loading = new Subject<boolean>();
   private villains = new Subject<Villain[]>();
   private selectedVillain = new Subject<Villain>();
-  private loading = new Subject<boolean>();
-  private mutations = new Subject();
 
+  mutations$ = this.mutations.asObservable();
+  loading$ = this.loading.asObservable();
   villains$ = this.villains.asObservable();
   selectedVillain$ = this.selectedVillain.asObservable();
-  loading$ = this.loading.asObservable();
-  mutations$ = this.mutations.asObservable();
 
   constructor(
     private villainService: VillainService,
@@ -39,7 +39,7 @@ export class VillainFacade {
 
   saveVillain(villain: Villain) {
     if (villain.id) {
-      this.updateVillain(villain);
+      this.update(villain);
     } else {
       this.add(villain);
     }
@@ -56,7 +56,7 @@ export class VillainFacade {
       });
   }
 
-  updateVillain(villain: Villain) {
+  update(villain: Villain) {
     this.loading.next(true);
     this.villainService
       .update(villain)
@@ -67,7 +67,7 @@ export class VillainFacade {
       });
   }
 
-  deleteVillain(villain: Villain) {
+  delete(villain: Villain) {
     this.loading.next(true);
     this.villainService
       .delete(villain)

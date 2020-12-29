@@ -14,7 +14,7 @@
       color="primary"
       type="button"
       (click)="enableAddMode()"
-      *ngIf="!selected"
+      *ngIf="!(selectedVillain$ | async)"
       matTooltip="Add a new villain"
     >
       Add
@@ -32,18 +32,18 @@
       <ng-template #villainList>
         <app-villain-list
           [villains]="villains"
-          [selectedVillain]="selected"
+          [selectedVillain]="selectedVillain$ | async"
           (deleted)="delete($event)"
-          (selected)="select($event)"
+          (selected)="selectVillain($event)"
         ></app-villain-list>
       </ng-template>
     </div>
   </div>
   <div class="detail-container">
     <app-villain-detail
-      *ngIf="selected"
-      [villain]="selected"
-      (unselect)="close()"
+      *ngIf="selectedVillain$ | async as selectedVillain"
+      [villain]="selectedVillain"
+      (unselect)="selectVillain(null)"
       (add)="add($event)"
       (update)="update($event)"
     >
