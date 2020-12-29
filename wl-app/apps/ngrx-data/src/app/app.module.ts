@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RoutingModule } from './routing.module';
 import { ModalComponent } from './modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppStoreModule } from '@wl/core-state';
 
 @NgModule({
   declarations: [AppComponent, ToolbarComponent, ModalComponent],
@@ -15,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     RoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
