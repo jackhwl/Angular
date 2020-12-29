@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Villain } from '@wl/api-interfaces';
-import { NotificationsService, VillainService } from '@wl/core-data';
+import {
+  NotificationsService,
+  VillainService,
+  VillainNgrxDataService
+} from '@wl/core-data';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -18,6 +22,7 @@ export class VillainFacade {
 
   constructor(
     private villainService: VillainService,
+    //VillainNgrxDataService,
     private ns: NotificationsService
   ) {}
 
