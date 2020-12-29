@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VillainDetailComponent } from './villain-detail/villain-detail.component';
 import { VillainListComponent } from './villain-list/villain-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VillainFacade, VillainService } from '@wl/core-data';
+import { VillainFacade } from '@wl/core-state';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: VillainsComponent }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Villain } from '@wl/api-interfaces';
-import { VillainFacade } from '@wl/core-data';
+import { VillainFacade } from '@wl/core-state';
 
 @Component({
   selector: 'app-villains',

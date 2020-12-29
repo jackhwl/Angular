@@ -56,6 +56,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@nrwl/angular": "10.3.2",
     "angular-in-memory-web-api": "^0.11.0",
+    "ngrx-data": "^6.1.0-beta.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.5",
     "zone.js": "^0.10.2"
