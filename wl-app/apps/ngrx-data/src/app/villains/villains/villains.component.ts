@@ -31,63 +31,21 @@ export class VillainsComponent implements OnInit {
 
   add(villain: Villain) {
     this.villainFacade.add(villain);
-    // //this.villainService.add(villain);
-    // this.loading = true;
-    // this.villainService
-    //   .add(villain)
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe(
-    //     addedvillain => (this.villains = this.villains.concat(addedvillain))
-    //   );
   }
-
-  // close() {
-  //   this.selected = null;
-  // }
 
   delete(villain: Villain) {
     this.villainFacade.delete(villain);
-    // //this.villainService.delete(villain);
-    // //this.close();
-    // this.loading = true;
-    // this.close();
-    // this.villainService
-    //   .delete(villain)
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe(
-    //     () => (this.villains = this.villains.filter(h => h.id !== villain.id))
-    //   );
   }
 
   enableAddMode() {
-    this.selectedVillain$ = <any>{};
+    this.selectVillain(<Villain>{});
   }
 
   getVillains() {
     this.villainFacade.getAll();
-    //this.close();
-    // // this.villainService.getAll();
-    // // this.close();
-    // this.loading = true;
-    // this.villainService
-    //   .getAll()
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe(villains => (this.villains = villains));
-    // this.close();
   }
 
   update(villain: Villain) {
     this.villainFacade.update(villain);
-    // //this.villainService.update(villain);
-    // this.loading = true;
-    // this.villainService
-    //   .update(villain)
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe(
-    //     () =>
-    //       (this.villains = this.villains.map(h =>
-    //         h.id === villain.id ? villain : h
-    //       ))
-    //   );
   }
 }
