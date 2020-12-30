@@ -20,7 +20,7 @@ import { Villain } from '@wl/api-interfaces';
 })
 export class VillainDetailComponent implements OnChanges {
   @Input() villain: Villain;
-  @Output() unselect = new EventEmitter<string>();
+  @Output() cancel = new EventEmitter<string>();
   @Output() add = new EventEmitter<Villain>();
   @Output() update = new EventEmitter<Villain>();
 
@@ -56,7 +56,7 @@ export class VillainDetailComponent implements OnChanges {
   }
 
   close() {
-    this.unselect.emit();
+    this.cancel.emit();
   }
 
   saveVillain(form: FormGroup) {

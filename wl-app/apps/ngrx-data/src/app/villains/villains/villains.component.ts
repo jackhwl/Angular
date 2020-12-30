@@ -29,14 +29,6 @@ export class VillainsComponent implements OnInit {
     this.villainFacade.selectVillain(villain);
   }
 
-  saveVillain(villain: Villain) {
-    if (villain.id) {
-      this.villainFacade.add(villain);
-    } else {
-      this.villainFacade.update(villain);
-    }
-  }
-
   add(villain: Villain) {
     this.villainFacade.add(villain);
   }

@@ -43,8 +43,7 @@
     <app-villain-detail
       *ngIf="selectedVillain$ | async as selectedVillain"
       [villain]="selectedVillain"
-      (unselect)="selectVillain(null)"
-      (saved)="saveVillain($event)"
+      (cancel)="selectVillain(null)"
       (add)="add($event)"
       (update)="update($event)"
     >
