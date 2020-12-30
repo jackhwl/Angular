@@ -22,8 +22,4 @@ export class VillainListComponent {
   byId(villain: Villain) {
     return villain.id;
   }
-
-  select(villain: Villain) {
-    this.selected.emit(villain);
-  }
 }

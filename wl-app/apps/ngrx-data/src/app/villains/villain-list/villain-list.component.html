@@ -23,7 +23,7 @@
         <div
           class="selectable-item"
           [class.selected]="villain === selectedVillain"
-          (click)="select(villain)"
+          (click)="selected.emit(villain)"
         >
           <div class="badge">{{ villain.id }}</div>
           <div class="item-text">
