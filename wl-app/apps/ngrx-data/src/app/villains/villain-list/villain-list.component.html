@@ -15,7 +15,7 @@
           color="accent"
           class="delete-button"
           aria-label="Delete"
-          (click)="deleteVillain(villain)"
+          (click)="deleted.emit(villain)"
           matTooltip="Delete the villain"
         >
           <mat-icon>delete</mat-icon>

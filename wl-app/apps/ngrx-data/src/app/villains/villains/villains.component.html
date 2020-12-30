@@ -33,7 +33,7 @@
         <app-villain-list
           [villains]="villains"
           [selectedVillain]="selectedVillain$ | async"
-          (deleted)="delete($event)"
+          (deleted)="deleteVillain($event)"
           (selected)="selectVillain($event)"
         ></app-villain-list>
       </ng-template>
