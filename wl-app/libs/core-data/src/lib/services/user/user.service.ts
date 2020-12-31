@@ -3,8 +3,8 @@ import { User } from '@wl/api-interfaces';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const ANONYMOUS_USER: User = {
-  firstName: '',
-  lastName: ''
+  firstName: 'Peter',
+  lastName: 'Chen'
 };
 
 @Injectable()

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '@wl/api-interfaces';
 import { ToastService, UserService } from '@wl/core-data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'wl-home',
@@ -12,6 +13,7 @@ export class HomeComponent {
     firstName: 'Alice',
     lastName: 'Smith'
   };
+  user$: Observable<User> = this.userService.user$;
 
   constructor(
     private newsletterService: ToastService,
@@ -23,10 +25,11 @@ export class HomeComponent {
   }
 
   changeUserName() {
-    this.user.firstName = 'Bob';
+    //this.user.firstName = 'Bob';
     // this.user = {
     //   firstName: 'Bob',
     //   lastName: 'Smith'
     // };
+    this.userService.loadUser({ firstName: 'Bob', lastName: 'Smith' });
   }
 }
