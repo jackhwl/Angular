@@ -21,3 +21,8 @@ export interface Person {
   name: string;
   saying: string;
 }
+
+export interface User {
+  firstName: string;
+  lastName: string;
+}

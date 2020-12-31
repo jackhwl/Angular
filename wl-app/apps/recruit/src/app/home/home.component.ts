@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { User } from '@wl/api-interfaces';
+import { StudentsService } from '@wl/core-data';
 
 @Component({
   selector: 'wl-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  user: User = {
+    firstName: 'Alice',
+    lastName: 'Smith'
+  };
 
-  constructor() { }
+  constructor(private newsletterService: StudentsService) {}
 
-  ngOnInit(): void {
+  subscribe(email: string) {
+    this.newsletterService.all().subscribe(_ => console.log(email));
   }
 
+  changeUserName() {
+    this.user.firstName = 'Bob';
+  }
 }

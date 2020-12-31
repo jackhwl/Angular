@@ -16,11 +16,23 @@ import { StudentDetailsComponent } from './students/student-details/student-deta
 import { FormsModule } from '@angular/forms';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { SloganComponent } from './slogan/slogan.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NewsletterComponent } from './newsletter/newsletter.component';
 
 @NgModule({
-  declarations: [AppComponent, StudentsComponent, StudentsListComponent, HomeComponent, StudentDetailsComponent, HeaderComponent, SidenavListComponent, SloganComponent],
+  declarations: [
+    AppComponent,
+    StudentsComponent,
+    StudentsListComponent,
+    HomeComponent,
+    NewsletterComponent,
+    StudentDetailsComponent,
+    HeaderComponent,
+    SidenavListComponent,
+    SloganComponent,
+    NewsletterComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -29,17 +41,17 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     CoreStateModule,
     MaterialModule,
     RoutingModule,
-    FormsModule,        
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
-  })
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 

@@ -1,6 +1,10 @@
 <div class="component-container">
-    <div class="list-component">
-        <p>home works!</p>
-    </div>
+  <div class="list-component">
+    <wl-newsletter
+      [user]="user"
+      (subscribe)="subscribe($event)"
+    ></wl-newsletter>
+    <button (click)="changeUserName()">Change User Name</button>
+    <p>home works!</p>
   </div>
-  
+</div>
