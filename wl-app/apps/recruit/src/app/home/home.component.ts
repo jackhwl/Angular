@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '@wl/api-interfaces';
-import { StudentsService } from '@wl/core-data';
+import { ToastService } from '@wl/core-data';
 
 @Component({
   selector: 'wl-home',
@@ -13,17 +13,17 @@ export class HomeComponent {
     lastName: 'Smith'
   };
 
-  constructor(private newsletterService: StudentsService) {}
+  constructor(private newsletterService: ToastService) {}
 
   subscribe(email: string) {
-    this.newsletterService.all().subscribe(_ => console.log(email));
+    this.newsletterService.openSnackBar(email, 'GET');
   }
 
   changeUserName() {
-    //this.user.firstName = 'Bob';
-    this.user = {
-      firstName: 'Bob',
-      lastName: 'Smith'
-    };
+    this.user.firstName = 'Bob';
+    // this.user = {
+    //   firstName: 'Bob',
+    //   lastName: 'Smith'
+    // };
   }
 }
