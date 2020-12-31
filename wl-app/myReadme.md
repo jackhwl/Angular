@@ -194,3 +194,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 - nx g m heroes -d
 - nx g m villains -d
+
+# add newsletter component for this onPush article
+
+[OnPush](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
