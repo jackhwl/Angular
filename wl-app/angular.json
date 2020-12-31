@@ -475,7 +475,11 @@
               "apps/ngrx-data/src/favicon.ico",
               "apps/ngrx-data/src/assets"
             ],
-            "styles": ["apps/ngrx-data/src/styles.scss"],
+            "styles": [
+              "apps/ngrx-data/src/styles/theme.scss",
+              "apps/ngrx-data/src/styles/mixin.scss",
+              "apps/ngrx-data/src/styles/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
