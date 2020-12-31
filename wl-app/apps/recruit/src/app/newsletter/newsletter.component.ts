@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { User } from '@wl/api-interfaces';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'wl-newsletter',
@@ -14,7 +15,7 @@ import { User } from '@wl/api-interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsletterComponent {
-  @Input() user: User;
+  @Input() user$: Observable<User>;
   @Output() subscribe = new EventEmitter();
 
   subscribeToNewsletter(email: string) {

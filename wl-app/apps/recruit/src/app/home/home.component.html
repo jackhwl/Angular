@@ -1,7 +1,7 @@
 <div class="component-container">
   <div class="list-component">
     <wl-newsletter
-      [user]="user$ | async"
+      [user$]="user$"
       (subscribe)="subscribe($event)"
     ></wl-newsletter>
     <button (click)="changeUserName()">Change User Name</button>

@@ -1,7 +1,9 @@
 <fieldset class="newsletter">
   <legend>Newsletter</legend>
-  {{ user | json }}
-  <h5>Hello {{ user?.firstName }}, enter your email below to subscribe:</h5>
+  {{ user$ | async | json }}
+  <h5>
+    Hello {{ (user$ | async)?.firstName }}, enter your email below to subscribe:
+  </h5>
   <form>
     <input #email type="email" name="email" placeholder="Enter your Email" />
 
