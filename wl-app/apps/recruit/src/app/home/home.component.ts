@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '@wl/api-interfaces';
-import { ToastService } from '@wl/core-data';
+import { ToastService, UserService } from '@wl/core-data';
 
 @Component({
   selector: 'wl-home',
@@ -13,7 +13,10 @@ export class HomeComponent {
     lastName: 'Smith'
   };
 
-  constructor(private newsletterService: ToastService) {}
+  constructor(
+    private newsletterService: ToastService,
+    private userService: UserService
+  ) {}
 
   subscribe(email: string) {
     this.newsletterService.openSnackBar(email, 'GET');
