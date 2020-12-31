@@ -20,6 +20,10 @@ export class HomeComponent {
   }
 
   changeUserName() {
-    this.user.firstName = 'Bob';
+    //this.user.firstName = 'Bob';
+    this.user = {
+      firstName: 'Bob',
+      lastName: 'Smith'
+    };
   }
 }
