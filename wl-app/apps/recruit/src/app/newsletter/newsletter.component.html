@@ -1,7 +1,7 @@
-<fieldset class="newsletter">
+<fieldset class="newsletter" *ngIf="user$ | async as user; else loading">
   <legend>Newsletter</legend>
 
-  <h5>Hello {{ firstName }}, enter your email below to subscribe:</h5>
+  <h5>Hello {{ user.firstName }}, enter your email below to subscribe:</h5>
   <form>
     <input #email type="email" name="email" placeholder="Enter your Email" />
 
@@ -13,3 +13,7 @@
     />
   </form>
 </fieldset>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

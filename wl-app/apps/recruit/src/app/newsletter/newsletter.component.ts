@@ -18,7 +18,8 @@ import { Observable } from 'rxjs';
 export class NewsletterComponent {
   //@Input() user$: Observable<User>;
   //@Output() subscribe = new EventEmitter();
-  firstName: string;
+  user$: Observable<User> = this.userService.user$;
+  //firstName: string;
 
   constructor(
     private newsletterService: ToastService,
@@ -26,7 +27,7 @@ export class NewsletterComponent {
   ) {}
 
   ngOnInit() {
-    this.userService.user$.subscribe(user => (this.firstName = user.firstName));
+    //this.userService.user$.subscribe(user => (this.firstName = user.firstName));
   }
 
   subscribeToNewsletter(email: string) {
