@@ -19,6 +19,7 @@ import { SloganComponent } from './slogan/slogan.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { NewsletterparentComponent } from './newsletterparent/newsletterparent.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
     HeaderComponent,
     SidenavListComponent,
     SloganComponent,
-    NewsletterComponent
+    NewsletterComponent,
+    NewsletterparentComponent
   ],
   imports: [
     BrowserModule,

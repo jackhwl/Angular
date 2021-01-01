@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { User } from '@wl/api-interfaces';
+import { ToastService, UserService } from '@wl/core-data';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,10 +16,20 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsletterComponent {
-  @Input() user$: Observable<User>;
-  @Output() subscribe = new EventEmitter();
+  //@Input() user$: Observable<User>;
+  //@Output() subscribe = new EventEmitter();
+  firstName: string;
+
+  constructor(
+    private newsletterService: ToastService,
+    private userService: UserService
+  ) {}
+
+  ngOnInit() {
+    this.userService.user$.subscribe(user => (this.firstName = user.firstName));
+  }
 
   subscribeToNewsletter(email: string) {
-    this.subscribe.emit(email);
+    this.newsletterService.openSnackBar(email, 'GET');
   }
 }
