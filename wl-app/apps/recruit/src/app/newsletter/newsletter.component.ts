@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import {
   Component,
   Input,
@@ -23,8 +24,14 @@ export class NewsletterComponent {
 
   constructor(
     private newsletterService: ToastService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private ref: ChangeDetectorRef
+  ) {
+    ref.detach();
+    setInterval(() => {
+      this.ref.detectChanges();
+    }, 3000);
+  }
 
   ngOnInit() {
     //this.userService.user$.subscribe(user => (this.firstName = user.firstName));
