@@ -199,3 +199,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 [OnPush](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
 [OnPush 2](https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/)
+[Angular Architecture - Smart Components vs Presentational Components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/)
