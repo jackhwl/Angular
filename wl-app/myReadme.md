@@ -198,3 +198,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 # add newsletter component for this onPush article
 
 [OnPush](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
+[OnPush 2](https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/)
