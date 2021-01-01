@@ -201,3 +201,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 [OnPush 2](https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/)
 [Angular Architecture - Smart Components vs Presentational Components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/)
 [Angular Architecture - Container vs Presentational Components Common Design Pitfalls](https://blog.angular-university.io/angular-component-design-how-to-avoid-custom-event-bubbling-and-extraneous-properties-in-the-local-component-tree/)
+[How to build Angular apps using Observable Data Services - Pitfalls to avoid](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/)
