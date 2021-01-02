@@ -203,3 +203,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 [Angular Architecture - Container vs Presentational Components Common Design Pitfalls](https://blog.angular-university.io/angular-component-design-how-to-avoid-custom-event-bubbling-and-extraneous-properties-in-the-local-component-tree/)
 [How to build Angular apps using Observable Data Services - Pitfalls to avoid](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/)
 [How To Debug RxJs - A Simple Way For Debugging Rxjs Observables](https://blog.angular-university.io/debug-rxjs/)
+[Angular Service Layers: Redux, RxJs and Ngrx Store - When to Use a Store And Why?](https://blog.angular-university.io/angular-2-redux-ngrx-rxjs/)
