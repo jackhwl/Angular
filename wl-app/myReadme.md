@@ -197,11 +197,49 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 # add newsletter component for this onPush article
 
-[OnPush](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
-[OnPush 2](https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/)
-[Angular Architecture - Smart Components vs Presentational Components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/)
-[Angular Architecture - Container vs Presentational Components Common Design Pitfalls](https://blog.angular-university.io/angular-component-design-how-to-avoid-custom-event-bubbling-and-extraneous-properties-in-the-local-component-tree/)
-[How to build Angular apps using Observable Data Services - Pitfalls to avoid](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/)
-[How To Debug RxJs - A Simple Way For Debugging Rxjs Observables](https://blog.angular-university.io/debug-rxjs/)
-[Angular Service Layers: Redux, RxJs and Ngrx Store - When to Use a Store And Why?](https://blog.angular-university.io/angular-2-redux-ngrx-rxjs/)
-[Ngrx Store - An Architecture Guide](https://blog.angular-university.io//angular-ngrx-store-and-effects-crash-course/)
+- [OnPush](https://blog.angular-university.io/onpush-change-detection-how-it-works/)
+- [OnPush 2](https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/)
+- [Angular Architecture - Smart Components vs Presentational Components](https://blog.angular-university.io/angular-2-smart-components-vs-presentation-components-whats-the-difference-when-to-use-each-and-why/)
+- [Angular Architecture - Container vs Presentational Components Common Design Pitfalls](https://blog.angular-university.io/angular-component-design-how-to-avoid-custom-event-bubbling-and-extraneous-properties-in-the-local-component-tree/)
+- [How to build Angular apps using Observable Data Services - Pitfalls to avoid](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/)
+- [How To Debug RxJs - A Simple Way For Debugging Rxjs Observables](https://blog.angular-university.io/debug-rxjs/)
+- [Angular Service Layers: Redux, RxJs and Ngrx Store - When to Use a Store And Why?](https://blog.angular-university.io/angular-2-redux-ngrx-rxjs/)
+- [Ngrx Store - An Architecture Guide](https://blog.angular-university.io//angular-ngrx-store-and-effects-crash-course/)
+
+## [RxJS in Angular: Reactive Development](https://app.pluralsight.com/library/courses/rxjs-angular-reactive-development/table-of-contents)
+
+- [Code](https://github.com/deborahk/angular-rxjs)
+- of('Apple1', 'Apple2')
+- from(['Apple1', 'Apple2'])
+
+### Observable
+
+- Any stream of data
+
+### Observer
+
+- Observes the stream
+- Methods to process notifications from the stream: next(), error(), complete()
+
+### Subscriber
+
+- An Observer that can unsubscribe
+
+### Subscription
+
+- Represents the execution of an Observable
+- subscribe() returns a Subscription
+
+## Stopping an Observable
+
+- Call complete() on the Observer
+- Use a creation function that completes: of, from, ...
+- Use an operator that completes: take, ...
+- Throw an error
+- Call unsubscribe() on the Subscription
+
+## RxJS Operators
+
+- tap
+- map
+- take
