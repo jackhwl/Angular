@@ -243,3 +243,5 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - tap
 - map
 - take
+
+## Going Reactive
