@@ -245,3 +245,19 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - take
 
 ## Going Reactive
+
+### catchError
+
+- RxJS Operator
+- Catches any errors that occur on an Obseraable
+- catchError(this.handleError)
+- Used for catching errors and
+  - Rethrowing an erroor
+  - Or replacing the errored Obserable to continue after an error occurs
+
+### throwError
+
+- RxJS Creation Function
+- Creates an Observable that emits no items And immediately emits an error notification **throwError(err)**, Used for
+  Propagating an error
+- Creates an Observable that emits no items **Obserable\<never\>** Immediately emits an error notification
