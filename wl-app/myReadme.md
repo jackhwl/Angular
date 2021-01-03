@@ -261,3 +261,6 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - Creates an Observable that emits no items And immediately emits an error notification **throwError(err)**, Used for
   Propagating an error
 - Creates an Observable that emits no items **Obserable\<never\>** Immediately emits an error notification
+
+![alt text](../Angular-RxJS/src/assets/images/commonPattern.PNG 'commonPattern')
+![alt text](../Angular-RxJS/src/assets/images/DeclaraativePattern.PNG 'commonPattern')
