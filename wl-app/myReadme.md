@@ -264,3 +264,32 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 ![alt text](../Angular-RxJS/src/assets/images/commonPattern.PNG 'commonPattern')
 ![alt text](../Angular-RxJS/src/assets/images/DeclaraativePattern.PNG 'commonPattern')
+
+## Combining Streams
+
+### combineLatest
+
+- Static creation function, not a pipeable operator
+- Creates an Observable whose values are defined:
+  - Using the latest values from each input Obsservable
+  - combineLatest([a$, b$, c$])
+
+### forkJoin
+
+- Static creation function, not a pipeable operator
+- Creates an Observable whose value is defined
+  - Using the **last** value from each input Observable
+  - forkJoin([a$, b$, c$])
+- When all input streams complete
+  - Emits a value to the output stream
+  - And completes
+
+### withLatestFrom
+
+- Pipeable operator
+- Creates an Observable whose values are defined
+  - Using the latest values from each input Observable
+  - But only when the source stream emits
+  - a$.pipe(withLatestFrom(b$, c\$))
+- to react to changes in only one stream
+- to regulate the output of the other streams
