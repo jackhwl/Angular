@@ -294,9 +294,11 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - to react to changes in only one stream
 - to regulate the output of the other streams
 
-### merge
+### merge and scan
 
 - Static creation function, not a pipeable operator
 - Combines multiple streams byy merging their emissions
 - merge(a$, b$, c\$)
 - Combining sequences of similar types to blend their emitted values
+
+### shareReplay
