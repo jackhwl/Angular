@@ -302,3 +302,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - Combining sequences of similar types to blend their emitted values
 
 ### shareReplay
+
+## Higer-order Mapping Operators
+
+### concatMap, mergeMap
