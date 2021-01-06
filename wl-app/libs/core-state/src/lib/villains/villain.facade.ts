@@ -10,9 +10,9 @@ import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class VillainFacade {
-  private mutations = new Subject();
-  private loading = new Subject<boolean>();
-  private villains = new Subject<Villain[]>();
+  private mutations = new BehaviorSubject(null);
+  private loading = new BehaviorSubject<boolean>(true);
+  private villains = new BehaviorSubject<Villain[]>(null);
   private selectedVillain = new BehaviorSubject<Villain>(null);
 
   mutations$ = this.mutations.asObservable();
