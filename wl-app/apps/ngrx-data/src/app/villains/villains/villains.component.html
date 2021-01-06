@@ -1,4 +1,4 @@
-<div *ngIf="vm$ | async as vm">
+<ng-container *ngIf="vm$ | async as vm">
   <div class="control-panel">
     <div class="button-panel">
       <button
@@ -52,4 +52,4 @@
       </app-villain-detail>
     </div>
   </div>
-</div>
+</ng-container>

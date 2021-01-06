@@ -10,15 +10,10 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./villains.component.scss']
 })
 export class VillainsComponent implements OnInit {
-  private selectedVillain$: Observable<Villain> = this.villainFacade
-    .selectedVillain$;
-  private villains$: Observable<Villain[]> = this.villainFacade.villains$;
-  private loading$: Observable<boolean> = this.villainFacade.loading$;
-
   vm$ = combineLatest([
-    this.villains$,
-    this.loading$,
-    this.selectedVillain$
+    this.villainFacade.villains$,
+    this.villainFacade.loading$,
+    this.villainFacade.selectedVillain$
   ]).pipe(
     filter(Boolean),
     map(([villains, loading, selectedVillain]) => ({
