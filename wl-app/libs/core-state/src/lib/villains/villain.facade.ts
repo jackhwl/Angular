@@ -5,7 +5,7 @@ import {
   VillainService,
   VillainNgrxDataService
 } from '@wl/core-data';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class VillainFacade {
   private mutations = new Subject();
   private loading = new Subject<boolean>();
   private villains = new Subject<Villain[]>();
-  private selectedVillain = new Subject<Villain>();
+  private selectedVillain = new BehaviorSubject<Villain>(null);
 
   mutations$ = this.mutations.asObservable();
   loading$ = this.loading.asObservable();

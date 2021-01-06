@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { Villain } from '@wl/api-interfaces';
 import { VillainFacade } from '@wl/core-state';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-villains',
@@ -9,9 +10,23 @@ import { VillainFacade } from '@wl/core-state';
   styleUrls: ['./villains.component.scss']
 })
 export class VillainsComponent implements OnInit {
-  selectedVillain$: Observable<Villain> = this.villainFacade.selectedVillain$;
-  villains$: Observable<Villain[]> = this.villainFacade.villains$;
-  loading$: Observable<boolean> = this.villainFacade.loading$;
+  private selectedVillain$: Observable<Villain> = this.villainFacade
+    .selectedVillain$;
+  private villains$: Observable<Villain[]> = this.villainFacade.villains$;
+  private loading$: Observable<boolean> = this.villainFacade.loading$;
+
+  vm$ = combineLatest([
+    this.villains$,
+    this.loading$,
+    this.selectedVillain$
+  ]).pipe(
+    filter(Boolean),
+    map(([villains, loading, selectedVillain]) => ({
+      villains,
+      loading,
+      selectedVillain
+    }))
+  );
 
   constructor(private villainFacade: VillainFacade) {}
 
