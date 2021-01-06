@@ -36,7 +36,7 @@ export class ProductDetailComponent {
     this.productSuppliers$,
     this.pageTitle$
   ]).pipe(
-    filter(([product]) => Boolean(product)),
+    filter(Boolean),
     map(([product, productSuppliers, pageTitle]) => ({
       product,
       productSuppliers,
