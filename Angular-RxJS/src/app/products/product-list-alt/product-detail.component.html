@@ -30,7 +30,10 @@
     </div>
 
     <div class="table-responsive">
-      <table class="table mb-0" *ngIf="productSuppliers">
+      <table
+        class="table mb-0"
+        *ngIf="productSuppliers$ | async as productSuppliers"
+      >
         <thead>
           <tr>
             <th>Supplier</th>
