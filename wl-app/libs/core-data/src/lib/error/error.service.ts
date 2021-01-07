@@ -1,15 +1,44 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { iif, Observable, of, throwError, timer } from 'rxjs';
+import {
+  catchError,
+  concatMap,
+  delay,
+  delayWhen,
+  retryWhen,
+  take,
+  tap
+} from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ErrorService {
-  catchError() {
+  catchReThrowError() {
     return catchError(this.handleError);
   }
 
-  handleError(err: any): Observable<never> {
+  retryAfter0(delayN: number, stop: number) {
+    return retryWhen(errors => {
+      return errors.pipe(
+        concatMap((e, i) =>
+          iif(() => i > stop, throwError(e), of(e).pipe(delay(delayN)))
+        )
+      );
+    });
+  }
+
+  retryAfter(delay: number, stop: number) {
+    return retryWhen(errors => {
+      return errors.pipe(
+        delayWhen(() => timer(delay)),
+        tap(() => console.log('retrying...')),
+        take(stop)
+        //concat(Observable.throw)
+      );
+    });
+  }
+
+  private handleError(err: any): Observable<never> {
     console.error(err);
     // 99in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console

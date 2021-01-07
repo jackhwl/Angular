@@ -29,12 +29,12 @@ export class VillainService {
       tap(() =>
         this.toastService.openSnackBar('Villain retrieved successfully!', 'GET')
       ),
-      this.errorService.catchError()
+      this.errorService.catchReThrowError()
     );
   }
 
   getAll() {
-    return this.http.get<Array<Villain>>(`${api}/villains`).pipe(
+    return this.http.get<Array<Villain>>(`${api}/villainsd`).pipe(
       map(villains => villains),
       tap(() =>
         this.toastService.openSnackBar(
@@ -42,7 +42,7 @@ export class VillainService {
           'GET'
         )
       ),
-      this.errorService.catchError()
+      this.errorService.retryAfter(2000, 3)
     );
   }
 
