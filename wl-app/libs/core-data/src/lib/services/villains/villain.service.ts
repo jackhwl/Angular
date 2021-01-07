@@ -1,15 +1,19 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError as observableThrowError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Villain } from '@wl/api-interfaces';
 import { ToastService } from '../../notifications/toast.service';
+import { ErrorService } from '../../error/error.service';
 const api = '/api';
 
 @Injectable({ providedIn: 'root' })
 export class VillainService {
-  constructor(private http: HttpClient, private toastService: ToastService) {}
+  constructor(
+    private http: HttpClient,
+    private toastService: ToastService,
+    private errorService: ErrorService
+  ) {}
 
   logout() {
     return this.http.get(`${api}/logout`);
@@ -25,7 +29,7 @@ export class VillainService {
       tap(() =>
         this.toastService.openSnackBar('Villain retrieved successfully!', 'GET')
       ),
-      catchError(this.handleError)
+      this.errorService.catchError()
     );
   }
 
@@ -38,13 +42,8 @@ export class VillainService {
           'GET'
         )
       ),
-      catchError(this.handleError)
+      this.errorService.catchError()
     );
-  }
-
-  private handleError(res: HttpErrorResponse) {
-    console.error(res.error);
-    return observableThrowError(res.error || 'Server error');
   }
 
   delete(villain: Villain) {

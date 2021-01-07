@@ -11,3 +11,4 @@ export {
   VillainNgrxDataService
 } from './lib/services/villains/villain.ngrx.data.service';
 export { UserService } from './lib/services/user/user.service';
+export { ErrorService } from './lib/error/error.service';
