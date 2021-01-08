@@ -34,7 +34,7 @@ export class VillainService {
   }
 
   getAll() {
-    return this.http.get<Array<Villain>>(`${api}/villainsd`).pipe(
+    return this.http.get<Array<Villain>>(`${api}/villainsf`).pipe(
       map(villains => villains),
       tap(() =>
         this.toastService.openSnackBar(
@@ -42,7 +42,7 @@ export class VillainService {
           'GET'
         )
       ),
-      this.errorService.retryAfter(2000, 3)
+      this.errorService.retryAfter(2000)
     );
   }
 

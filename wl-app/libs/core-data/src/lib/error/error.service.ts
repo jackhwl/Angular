@@ -17,17 +17,24 @@ export class ErrorService {
     return catchError(this.handleError);
   }
 
-  retryAfter0(delayN: number, stop: number) {
+  retryAfter(delayN: number, stop: number = 3) {
     return retryWhen(errors => {
       return errors.pipe(
         concatMap((e, i) =>
-          iif(() => i > stop, throwError(e), of(e).pipe(delay(delayN)))
+          iif(
+            () => i >= stop,
+            throwError(e),
+            of(e).pipe(
+              delay(delayN),
+              tap(() => console.log('retrying...', i + 1))
+            )
+          )
         )
       );
     });
   }
 
-  retryAfter(delay: number, stop: number) {
+  retryAfter0(delay: number, stop: number) {
     return retryWhen(errors => {
       return errors.pipe(
         delayWhen(() => timer(delay)),
