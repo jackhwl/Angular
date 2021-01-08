@@ -1,7 +1,8 @@
 {
-    "nav": {
-        "home": "Accueil",
-        "header_link_one": "Lien d'en-tête un",
-        "students": "Élèves"
-    }
+  "nav": {
+    "home": "Accueil",
+    "header_link_one": "Lien d'en-tête un",
+    "villains": "Méchants",
+    "students": "Élèves"
+  }
 }

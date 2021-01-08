@@ -1,7 +1,8 @@
 {
-    "nav": {
-        "home": "Home",
-        "header_link_one": "Header Link One",
-        "students": "Students"
-    }
+  "nav": {
+    "home": "Home",
+    "header_link_one": "Header Link One",
+    "villains": "Villains",
+    "students": "Students"
+  }
 }
