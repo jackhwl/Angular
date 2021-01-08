@@ -1,0 +1,55 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="control-panel">
+    <div class="button-panel">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="getVillains()"
+        matTooltip="Refresh the villains"
+      >
+        Refresh
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="enableAddMode()"
+        *ngIf="!vm.selectedVillain"
+        matTooltip="Add a new villain"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div class="list-container">
+      <div>
+        <mat-spinner
+          *ngIf="vm.loading; else villainList"
+          mode="indeterminate"
+          color="accent"
+        ></mat-spinner>
+        <ng-template #villainList>
+          <app-villain-list
+            [villains]="vm.villains"
+            [selectedVillain]="vm.selectedVillain"
+            (deleted)="deleteVillain($event)"
+            (selected)="selectVillain($event)"
+          ></app-villain-list>
+        </ng-template>
+      </div>
+    </div>
+    <div class="detail-container">
+      <app-villain-detail
+        *ngIf="vm.selectedVillain"
+        [villain]="vm.selectedVillain"
+        (cancel)="selectVillain(null)"
+        (add)="add($event)"
+        (update)="update($event)"
+      >
+      </app-villain-detail>
+    </div>
+  </div>
+</ng-container>
