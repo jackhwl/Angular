@@ -17,7 +17,7 @@ export class ErrorService {
     return catchError(this.handleError);
   }
 
-  retryAfter(delayN: number, stop: number = 3) {
+  retryAfter(delayTime: number = 1000, stop: number = 3) {
     return retryWhen(errors => {
       return errors.pipe(
         concatMap((e, i) =>
@@ -25,7 +25,7 @@ export class ErrorService {
             () => i >= stop,
             throwError(e),
             of(e).pipe(
-              delay(delayN),
+              delay(delayTime),
               tap(() => console.log('retrying...', i + 1))
             )
           )
