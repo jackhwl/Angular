@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 
 import { Villain } from '@wl/api-interfaces';
+import { environment } from '@env/environment';
 import { ToastService } from '../../notifications/toast.service';
 import { ErrorService } from '../../error/error.service';
-const api = '/api';
+
+const api = `${environment.apiEndpoint}`;
 
 @Injectable({ providedIn: 'root' })
 export class VillainService {
@@ -14,6 +16,10 @@ export class VillainService {
     private toastService: ToastService,
     private errorService: ErrorService
   ) {}
+
+  getUrl() {
+    return `${environment.apiEndpoint}`;
+  }
 
   logout() {
     return this.http.get(`${api}/logout`);

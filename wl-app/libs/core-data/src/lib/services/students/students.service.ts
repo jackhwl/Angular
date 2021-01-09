@@ -9,16 +9,16 @@ import { Student } from '@wl/api-interfaces';
 export class StudentsService {
   model = 'students';
   private students;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getUrl() {
-    return `${environment.apiEndpoint}${this.model}`;
+    return `${environment.apiEndpoint}/${this.model}`;
   }
-  
+
   getUrlForId(id) {
     return `${this.getUrl()}/${id}`;
   }
-  
+
   all() {
     return this.httpClient.get<Student[]>(this.getUrl());
   }
