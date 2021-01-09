@@ -94,6 +94,11 @@ function mapCollectionName(name: string): string {
 function getDbData() {
   const heroes: Hero[] = [
     {
+      id: 10,
+      name: 'Mr. Memo',
+      saying: 'From Memory!'
+    },
+    {
       id: 11,
       name: 'Maxwell Smart',
       saying: 'Missed it by that much.'
@@ -116,6 +121,11 @@ function getDbData() {
   ];
 
   const villains: Villain[] = [
+    {
+      id: 20,
+      name: 'Mr. Memo',
+      saying: 'From Memory!'
+    },
     {
       id: 21,
       name: 'Dr. Evil',
