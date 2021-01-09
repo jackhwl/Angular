@@ -8,6 +8,7 @@ import { VillainListComponent } from './villain-list/villain-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VillainFacade } from '@wl/core-state';
 import { ModalComponent } from '../modal/modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: VillainsComponent }
@@ -25,8 +26,20 @@ const routes: Routes = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forChild(),
     RouterModule.forChild(routes)
   ],
   providers: [VillainFacade]
 })
 export class VillainsModule {}
+
+// // required for AOT compilation
+// export function httpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http);
+// }
+
+// class CustomLoader implements TranslateLoader {
+//     getTranslation(lang: string): Observable<any> {
+//         return Observable.of({KEY: 'value'});
+//     }
+// }

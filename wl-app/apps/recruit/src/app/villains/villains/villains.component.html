@@ -8,7 +8,7 @@
         (click)="getVillains()"
         matTooltip="Refresh the villains"
       >
-        Refresh
+        {{ 'i18_villains.refresh' | translate }}
       </button>
       <button
         mat-raised-button
@@ -18,7 +18,7 @@
         *ngIf="!vm.selectedVillain"
         matTooltip="Add a new villain"
       >
-        Add
+        {{ 'i18_villains.add' | translate }}
       </button>
     </div>
   </div>
