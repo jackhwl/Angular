@@ -1,24 +1,26 @@
 <mat-card>
-    <mat-card-title>
-      Students
-    </mat-card-title>
-    <mat-card-content>
-      <mat-list data-cy="widgets-list">
-        <mat-list-item
-          (click)="selected.emit(student)"
-          *ngFor="let student of students"
-          attr.data-cy="widget-{{ student.id }}-item"
-          class="mat-list-option"
-          >
-          <span matLine attr.data-cy="widget-{{ student.id }}-item-title">{{ student.lastName }} {{ student.firstName }}</span>
-          <button
-          (click)="deleted.emit(student);$event.stopImmediatePropagation();"
-            mat-icon-button
-            type="button"
-            >
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <mat-card-title>
+    {{ 'i18_students.students' | translate }}
+  </mat-card-title>
+  <mat-card-content>
+    <mat-list data-cy="widgets-list">
+      <mat-list-item
+        (click)="selected.emit(student)"
+        *ngFor="let student of students"
+        attr.data-cy="widget-{{ student.id }}-item"
+        class="mat-list-option"
+      >
+        <span matLine attr.data-cy="widget-{{ student.id }}-item-title"
+          >{{ student.lastName }} {{ student.firstName }}</span
+        >
+        <button
+          (click)="deleted.emit(student); $event.stopImmediatePropagation()"
+          mat-icon-button
+          type="button"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
