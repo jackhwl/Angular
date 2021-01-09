@@ -8,6 +8,7 @@ module.exports = {
     '<rootDir>/libs/material',
     '<rootDir>/libs/testing',
     '<rootDir>/apps/security',
-    '<rootDir>/apps/ngrx-data'
+    '<rootDir>/apps/ngrx-data',
+    '<rootDir>/libs/shared'
   ]
 };
