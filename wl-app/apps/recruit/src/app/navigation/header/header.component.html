@@ -1,32 +1,43 @@
 <mat-toolbar>
-    <div class="toggle-btn">
-        <button mat-icon-button (click)="toggled.emit()">
-            <mat-icon>menu</mat-icon>
+  <div class="toggle-btn">
+    <button mat-icon-button (click)="toggled.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/home">Owner-Account</a>
+  </div>
+  <div class="top-nav">
+    <ul>
+      <li
+        *ngFor="let link of links"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        attr.data-cy="nav-item-{{ link.title }}"
+      >
+        {{ 'i18_nav.' + link.title | translate }}
+      </li>
+      <li class="dropdown-notifications">
+        <button
+          mat-stroked-button
+          (click)="useLang.emit(currentLang === 'en' ? 'fr' : 'en')"
+        >
+          <span class="icon" data-icon="z"></span>
+          <span class="language">{{
+            currentLang === 'en' ? 'Français' : 'English'
+          }}</span>
         </button>
-    </div>
-    <div>
-        <a routerLink="/home">Owner-Account</a>
-    </div>
-    <div class="top-nav">
-        <ul>
-            <li
-                *ngFor="let link of links"
-                [routerLink]="link.path"
-                routerLinkActive="active"
-                attr.data-cy="nav-item-{{ link.title }}">
-                {{ 'nav.' + link.title | translate }}
-            </li>
-            <li class="dropdown-notifications">
-                <button mat-stroked-button (click)="useLang.emit(currentLang === 'en' ? 'fr' : 'en')">
-                    <span class="icon" data-icon="z"></span>
-                    <span class="language">{{currentLang === 'en' ? 'Français' : 'English'}}</span>
-                </button>
-            </li>
-            <li>  
-                <button class="search" data-cy="login-btn" mat-button (click)="logout.emit()">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </li>
-        </ul>
-    </div>
+      </li>
+      <li>
+        <button
+          class="search"
+          data-cy="login-btn"
+          mat-button
+          (click)="logout.emit()"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
 </mat-toolbar>

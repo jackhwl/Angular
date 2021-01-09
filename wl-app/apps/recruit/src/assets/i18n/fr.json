@@ -1,8 +1,24 @@
 {
-  "nav": {
+  "i18_nav": {
     "home": "Accueil",
     "header_link_one": "Lien d'en-tête un",
     "villains": "Méchants",
     "students": "Élèves"
+  },
+  "i18_students": {
+    "students": "Élèves",
+    "firstname": "Prénom",
+    "middlename": "Deuxième nom"
+  },
+  "i18_villains": {
+    "villains": "Méchants",
+    "villain_details": "Détails du méchant",
+    "refresh": "Rafraîchir",
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "save": "sauver",
+    "id": "id",
+    "name": "Nom",
+    "saying": "en disant"
   }
 }

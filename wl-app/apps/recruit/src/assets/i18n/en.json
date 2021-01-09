@@ -1,8 +1,24 @@
 {
-  "nav": {
+  "i18_nav": {
     "home": "Home",
     "header_link_one": "Header Link One",
     "villains": "Villains",
     "students": "Students"
+  },
+  "i18_students": {
+    "students": "Students",
+    "firstname": "FirstName",
+    "middlename": "MiddleName"
+  },
+  "i18_villains": {
+    "villains": "Villains",
+    "villain_details": "Villain Details",
+    "refresh": "Refresh",
+    "add": "Add",
+    "cancel": "Cancel",
+    "save": "Save",
+    "id": "id",
+    "name": "name",
+    "saying": "saying"
   }
 }

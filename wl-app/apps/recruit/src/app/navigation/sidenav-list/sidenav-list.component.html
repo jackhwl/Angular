@@ -1,28 +1,38 @@
 <span class="logo">
-    <a [routerLink]="'/'">
-        <img src="assets/logo.png" alt="Logo" />
-    </a>
+  <a [routerLink]="'/'">
+    <img src="assets/logo.png" alt="Logo" />
+  </a>
 </span>
 <mat-divider></mat-divider>
 <mat-nav-list data-cy="nav-list">
-    <mat-list-item
-        *ngFor="let link of links"
-        [routerLink]="link.path"
-        routerLinkActive="active"
-        attr.data-cy="nav-item-{{ link.title }}"
+  <mat-list-item
+    *ngFor="let link of links"
+    [routerLink]="link.path"
+    routerLinkActive="active"
+    attr.data-cy="nav-item-{{ link.title }}"
+  >
+    <mat-icon matListIcon>{{ link.icon }}</mat-icon>
+    {{ 'i18_nav.' + link.title | translate | uppercase }}
+  </mat-list-item>
+  <mat-list-item class="dropdown-notifications">
+    <button
+      mat-stroked-button
+      (click)="useLang.emit(currentLang === 'en' ? 'fr' : 'en')"
     >
-        <mat-icon matListIcon>{{ link.icon }}</mat-icon>
-        {{ 'nav.' + link.title | translate | uppercase }}
-    </mat-list-item>
-    <mat-list-item class="dropdown-notifications">
-        <button mat-stroked-button (click)="useLang.emit(currentLang === 'en' ? 'fr' : 'en')">
-            <span class="icon" data-icon="z"></span>
-            <span class="language">{{currentLang === 'en' ? 'Français' : 'English'}}</span>
-        </button>
-    </mat-list-item>
-    <mat-list-item>  
-        <button class="search" data-cy="login-btn" mat-button (click)="logout.emit()">
-            <mat-icon>search</mat-icon>
-        </button>
-    </mat-list-item>
+      <span class="icon" data-icon="z"></span>
+      <span class="language">{{
+        currentLang === 'en' ? 'Français' : 'English'
+      }}</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button
+      class="search"
+      data-cy="login-btn"
+      mat-button
+      (click)="logout.emit()"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-list-item>
 </mat-nav-list>
