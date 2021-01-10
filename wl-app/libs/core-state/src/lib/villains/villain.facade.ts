@@ -67,7 +67,7 @@ export class VillainFacade {
       .update(villain)
       .pipe(finalize(() => this.loading.next(false)))
       .subscribe(_ => {
-        this.ns.emit('Villain updated!');
+        //this.ns.emit('Villain updated!');
         this.reset();
       });
   }

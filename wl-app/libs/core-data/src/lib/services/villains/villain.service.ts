@@ -7,6 +7,7 @@ import { Villain } from '@wl/api-interfaces';
 import { environment } from '@env/environment';
 import { ToastService } from '../../notifications/toast.service';
 import { ErrorService } from '../../error/error.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' })
 export class VillainService {
@@ -14,7 +15,8 @@ export class VillainService {
     private http: HttpClient,
     private location: Location,
     private toastService: ToastService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private translateService: TranslateService
   ) {}
 
   getUrl() {
@@ -47,12 +49,7 @@ export class VillainService {
   getAll() {
     return this.http.get<Array<Villain>>(this.getUrl()).pipe(
       map(villains => villains),
-      tap(() =>
-        this.toastService.openSnackBar(
-          'Villains retrieved successfully!',
-          'GET'
-        )
-      ),
+      //tap(() => this.toastService.open('i18.villains.villains_retrieved_successfully', 'GET')),
       this.errorService.retryAfter()
     );
   }
@@ -84,15 +81,13 @@ export class VillainService {
   }
 
   update(villain: Villain) {
-    return this.http
-      .put<Villain>(this.getUrlForId(villain.id), villain)
-      .pipe(
-        tap(() =>
-          this.toastService.openSnackBar(
-            `Villain ${villain.name} updated`,
-            'PUT'
-          )
-        )
-      );
+    return this.http.put<Villain>(this.getUrlForId(villain.id), villain).pipe(
+      tap(() =>
+        this.toastService.open('i18.villains.villain_updated', 'PUT', {
+          name: villain.name
+        })
+      ),
+      this.errorService.retryAfter()
+    );
   }
 }
