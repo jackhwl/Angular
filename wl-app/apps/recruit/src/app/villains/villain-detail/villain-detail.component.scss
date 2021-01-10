@@ -1,6 +1,6 @@
-//@import '../../../styles/mixin';
+@import '../../../styles/mixin';
 
-// .mat-card {
-//   @include mat-card-layout;
-//   @include editarea-margins;
-// }
+.mat-card {
+  @include mat-card-layout;
+  @include editarea-margins;
+}

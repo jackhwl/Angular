@@ -1,11 +1,11 @@
-//@import '../../../styles/mixin';
+@import '../../../styles/mixin';
 
-// .control-panel {
-//   @include control-panel-layout;
-// }
-// .content-container {
-//   @include content-container-layout;
-// }
+.control-panel {
+  @include control-panel-layout;
+}
+.content-container {
+  @include content-container-layout;
+}
 
 .button-panel > button {
   margin-right: 12px;
