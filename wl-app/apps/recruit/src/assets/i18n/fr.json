@@ -1,24 +1,22 @@
 {
-  "i18_nav": {
-    "home": "Accueil",
-    "header_link_one": "Lien d'en-tête un",
-    "villains": "Méchants",
-    "students": "Élèves"
-  },
-  "i18_students": {
-    "students": "Élèves",
-    "firstname": "Prénom",
-    "middlename": "Deuxième nom"
-  },
-  "i18_villains": {
-    "villains": "Méchants",
-    "villain_details": "Détails du méchant",
-    "refresh": "Rafraîchir",
-    "add": "Ajouter",
-    "cancel": "Annuler",
-    "save": "sauver",
-    "id": "id",
-    "name": "Nom",
-    "saying": "en disant"
-  }
+  "i18.nav.home": "Accueil",
+  "i18.nav.header_link_one": "Lien d'en-tête un",
+  "i18.nav.villains": "Méchants",
+  "i18.nav.students": "Élèves",
+
+  "i18.students.students": "Élèves",
+  "i18.students.firstname": "Prénom",
+  "i18.students.middlename": "Deuxième nom",
+
+  "i18.villains.villains": "Méchants",
+  "i18.villains.villain_details": "Détails du méchant",
+  "i18.villains.refresh": "Rafraîchir",
+  "i18.villains.add": "Ajouter",
+  "i18.villains.cancel": "Annuler",
+  "i18.villains.save": "sauver",
+  "i18.villains.id": "id",
+  "i18.villains.name": "Nom",
+  "i18.villains.saying": "en disant",
+  "i18.villains.villains_retrieved_successfully": "Villains récupéré avec succès!",
+  "i18.villains.villain_updated": "Villain {{name}} mis à jour!"
 }

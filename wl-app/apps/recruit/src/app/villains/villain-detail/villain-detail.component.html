@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Villain Details</mat-card-title>
+    <mat-card-title>{{
+      'i18.villains.villain_details' | translate
+    }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="saveVillain(form)">
@@ -10,7 +12,7 @@
             <input
               matInput
               formControlName="id"
-              placeholder="id"
+              placeholder="{{ 'i18.villains.id' | translate }}"
               #id
               readonly
             />
@@ -21,7 +23,7 @@
             <input
               matInput
               formControlName="name"
-              placeholder="name"
+              placeholder="{{ 'i18.villains.name' | translate }}"
               #name
               (keyup.esc)="close()"
               (keyup.enter)="saveVillain(form)"
@@ -33,7 +35,7 @@
             <textarea
               matInput
               formControlName="saying"
-              placeholder="saying"
+              placeholder="{{ 'i18.villains.saying' | translate }}"
               #saying
               (keyup.esc)="close()"
               (keyup.enter)="saveVillain(form)"
@@ -48,7 +50,7 @@
         (click)="close()"
         matTooltip="Cancel all changes"
       >
-        Cancel
+        {{ 'i18.villains.cancel' | translate }}
       </button>
       <button
         mat-raised-button
@@ -57,7 +59,7 @@
         [disabled]="form.pristine || form.invalid"
         matTooltip="Save all changes"
       >
-        Save
+        {{ 'i18.villains.save' | translate }}
       </button>
     </form>
   </mat-card-content>
