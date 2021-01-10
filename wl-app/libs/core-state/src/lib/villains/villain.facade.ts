@@ -5,8 +5,8 @@ import {
   VillainNgrxDataService,
   ToastService
 } from '@wl/core-data';
-import { BehaviorSubject } from 'rxjs';
-import { delay, finalize, tap } from 'rxjs/operators';
+import { BehaviorSubject, pipe } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class VillainFacade {
@@ -19,6 +19,24 @@ export class VillainFacade {
   loading$ = this.loading.asObservable();
   villains$ = this.villains.asObservable();
   selectedVillain$ = this.selectedVillain.asObservable();
+  nfs = {
+    getAll: {
+      i18n_key: 'i18.villains.villains_retrieved_successfully',
+      action: 'GET'
+    },
+    add: {
+      i18n_key: 'i18.villains.villain_created',
+      action: 'POST'
+    },
+    update: {
+      i18n_key: 'i18.villains.villain_updated',
+      action: 'PUT'
+    },
+    delete: {
+      i18n_key: 'i18.villains.villain_deleted',
+      action: 'DELETE'
+    }
+  };
 
   constructor(
     private villainService: VillainService,
@@ -26,6 +44,22 @@ export class VillainFacade {
     //private ns: NotificationsService,
     private toastService: ToastService
   ) {}
+
+  notification(type: string, name: string, cb?: any) {
+    if (cb) {
+      cb();
+    } else {
+      this.toastService.open(this.nfs[type].i18n_key, this.nfs[type].action, {
+        name
+      });
+    }
+  }
+
+  villainFinalize = (type: string, name: string, cb?: any) =>
+    pipe(
+      finalize(() => this.loading.next(false)),
+      tap(() => this.notification(type, name, cb))
+    );
 
   reset() {
     this.mutations.next(true);
@@ -35,14 +69,11 @@ export class VillainFacade {
     this.selectedVillain.next(villain);
   }
 
-  getAll() {
+  getAll(cb?: any) {
     this.loading.next(true);
     this.villainService
       .getAll()
-      .pipe(
-        finalize(() => this.loading.next(false))
-        //tap(() => this.toastService.open('i18.villains.villains_retrieved_successfully', 'GET')),
-      )
+      .pipe(this.villainFinalize('getAll', '', cb))
       .subscribe((villains: Villain[]) => this.villains.next(villains));
   }
 
@@ -58,55 +89,23 @@ export class VillainFacade {
     this.loading.next(true);
     this.villainService
       .add(villain)
-      .pipe(
-        finalize(() => this.loading.next(false)),
-        tap(() =>
-          cb
-            ? cb()
-            : this.toastService.open('i18.villains.villain_created', 'POST', {
-                name: villain.name
-              })
-        )
-      )
-      .subscribe(_ => {
-        //this.ns.emit('Villain created!');
-        this.reset();
-      });
+      .pipe(this.villainFinalize('add', villain.name, cb))
+      .subscribe(_ => this.reset());
   }
 
   update(villain: Villain, cb?: any) {
     this.loading.next(true);
     this.villainService
       .update(villain)
-      .pipe(
-        finalize(() => this.loading.next(false)),
-        tap(() =>
-          cb
-            ? cb()
-            : this.toastService.open('i18.villains.villain_updated', 'PUT', {
-                name: villain.name
-              })
-        )
-      )
-      .subscribe(_ => {
-        this.reset();
-      });
+      .pipe(this.villainFinalize('update', villain.name, cb))
+      .subscribe(_ => this.reset());
   }
 
   delete(villain: Villain, cb?: any) {
     this.loading.next(true);
     this.villainService
       .delete(villain)
-      .pipe(
-        finalize(() => this.loading.next(false)),
-        tap(() =>
-          cb
-            ? cb()
-            : this.toastService.open('i18.villains.villain_deleted', 'DELETE', {
-                name: villain.name
-              })
-        )
-      )
+      .pipe(this.villainFinalize('delete', villain.name, cb))
       .subscribe(_ => this.reset());
   }
 }
