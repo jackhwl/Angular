@@ -6,7 +6,7 @@ import {
   ToastService
 } from '@wl/core-data';
 import { BehaviorSubject } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { delay, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class VillainFacade {
@@ -54,16 +54,18 @@ export class VillainFacade {
     }
   }
 
-  add(villain: Villain) {
+  add(villain: Villain, cb?: any) {
     this.loading.next(true);
     this.villainService
       .add(villain)
       .pipe(
         finalize(() => this.loading.next(false)),
         tap(() =>
-          this.toastService.open('i18.villains.villain_created', 'POST', {
-            name: villain.name
-          })
+          cb
+            ? cb()
+            : this.toastService.open('i18.villains.villain_created', 'POST', {
+                name: villain.name
+              })
         )
       )
       .subscribe(_ => {
@@ -72,34 +74,37 @@ export class VillainFacade {
       });
   }
 
-  update(villain: Villain) {
+  update(villain: Villain, cb?: any) {
     this.loading.next(true);
     this.villainService
       .update(villain)
       .pipe(
         finalize(() => this.loading.next(false)),
         tap(() =>
-          this.toastService.open('i18.villains.villain_updated', 'PUT', {
-            name: villain.name
-          })
+          cb
+            ? cb()
+            : this.toastService.open('i18.villains.villain_updated', 'PUT', {
+                name: villain.name
+              })
         )
       )
       .subscribe(_ => {
-        //this.ns.emit('Villain updated!');
         this.reset();
       });
   }
 
-  delete(villain: Villain) {
+  delete(villain: Villain, cb?: any) {
     this.loading.next(true);
     this.villainService
       .delete(villain)
       .pipe(
         finalize(() => this.loading.next(false)),
         tap(() =>
-          this.toastService.open('i18.villains.villain_deleted', 'DELETE', {
-            name: villain.name
-          })
+          cb
+            ? cb()
+            : this.toastService.open('i18.villains.villain_deleted', 'DELETE', {
+                name: villain.name
+              })
         )
       )
       .subscribe(_ => this.reset());

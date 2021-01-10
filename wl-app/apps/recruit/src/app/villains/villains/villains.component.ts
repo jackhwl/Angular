@@ -3,6 +3,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { Villain } from '@wl/api-interfaces';
 import { VillainFacade } from '@wl/core-state';
 import { filter, map } from 'rxjs/operators';
+import { ToastService } from '@wl/core-data';
 
 @Component({
   selector: 'app-villains',
@@ -23,7 +24,10 @@ export class VillainsComponent implements OnInit {
     }))
   );
 
-  constructor(private villainFacade: VillainFacade) {}
+  constructor(
+    private villainFacade: VillainFacade,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.reset();
@@ -55,7 +59,11 @@ export class VillainsComponent implements OnInit {
     this.villainFacade.getAll();
   }
 
+  update_cb(name) {
+    this.toastService.open('i18.villains.villain_updated', 'PUT', { name });
+  }
+
   update(villain: Villain) {
-    this.villainFacade.update(villain);
+    this.villainFacade.update(villain, () => this.update_cb(villain.name));
   }
 }
