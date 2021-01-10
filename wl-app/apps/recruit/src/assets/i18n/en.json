@@ -18,5 +18,7 @@
   "i18.villains.name": "name",
   "i18.villains.saying": "saying",
   "i18.villains.villains_retrieved_successfully": "Villains retrieved successfully!",
-  "i18.villains.villain_updated": "Villain {{name}} updated!"
+  "i18.villains.villain_created": "Villain {{name}} created!",
+  "i18.villains.villain_updated": "Villain {{name}} updated!",
+  "i18.villains.villain_deleted": "Villain {{name}} deleted!"
 }

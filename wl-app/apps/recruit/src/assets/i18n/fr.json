@@ -18,5 +18,7 @@
   "i18.villains.name": "Nom",
   "i18.villains.saying": "en disant",
   "i18.villains.villains_retrieved_successfully": "Villains récupéré avec succès!",
-  "i18.villains.villain_updated": "Villain {{name}} mis à jour!"
+  "i18.villains.villain_created": "Le méchant {{name}} a créé!",
+  "i18.villains.villain_updated": "Villain {{name}} mis à jour!",
+  "i18.villains.villain_deleted": "Le méchant {{name}} supprimé!"
 }
