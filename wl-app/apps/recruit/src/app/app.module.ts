@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreDataModule } from '@wl/core-data';
+import { CoreDataModule, PluralHttpUrlGenerator } from '@wl/core-data';
 import { AppStoreModule, CoreStateModule } from '@wl/core-state';
 import { MaterialModule } from '@wl/material';
 import { RoutingModule } from './routing.module';
@@ -21,7 +21,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterparentComponent } from './newsletterparent/newsletterparent.component';
 
-import { DefaultDataServiceConfig } from 'ngrx-data';
+import { DefaultDataServiceConfig, HttpUrlGenerator } from 'ngrx-data';
 import { environment } from '@env/environment';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
@@ -62,7 +62,8 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     })
   ],
   providers: [
-    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+    //{ provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+    //{ provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
   ],
   bootstrap: [AppComponent]
 })

@@ -12,3 +12,6 @@ export {
 } from './lib/services/villains/villain.ngrx.data.service';
 export { UserService } from './lib/services/user/user.service';
 export { ErrorService } from './lib/error/error.service';
+export {
+  PluralHttpUrlGenerator
+} from './lib/services/plural-http-url-generator';
