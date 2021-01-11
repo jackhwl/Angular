@@ -21,6 +21,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterparentComponent } from './newsletterparent/newsletterparent.component';
 
+import { DefaultDataServiceConfig } from 'ngrx-data';
+import { environment } from '@env/environment';
+
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: environment.apiEndpoint
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +61,9 @@ import { NewsletterparentComponent } from './newsletterparent/newsletterparent.c
       }
     })
   ],
-  providers: [],
+  providers: [
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

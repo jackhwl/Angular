@@ -10,6 +10,10 @@ if (environment.production) {
 }
 
 platformBrowserDynamic()
-  //.bootstrapModule(AppModule)
-  .bootstrapModule(AppDevModule)
+  .bootstrapModule(
+    environment.production ||
+      (!environment.production && !environment.inMemorryData)
+      ? AppModule
+      : AppDevModule
+  )
   .catch(err => console.error(err));
