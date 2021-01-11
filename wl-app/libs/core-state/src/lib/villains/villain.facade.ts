@@ -39,8 +39,8 @@ export class VillainFacade {
   };
 
   constructor(
-    private villainService: VillainService,
-    //VillainNgrxDataService,
+    private villainService: //VillainService,
+    VillainNgrxDataService,
     private toastService: ToastService
   ) {}
 
