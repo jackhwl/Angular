@@ -41,18 +41,15 @@ export class VillainFacade {
   constructor(
     private villainService: VillainService,
     //VillainNgrxDataService,
-    //private ns: NotificationsService,
     private toastService: ToastService
   ) {}
 
   notification(type: string, name: string, cb?: any) {
-    if (cb) {
-      cb();
-    } else {
-      this.toastService.open(this.nfs[type].i18n_key, this.nfs[type].action, {
-        name
-      });
-    }
+    cb
+      ? cb()
+      : this.toastService.open(this.nfs[type].i18n_key, this.nfs[type].action, {
+          name
+        });
   }
 
   villainFinalize = (type: string, name: string, cb?: any) =>
