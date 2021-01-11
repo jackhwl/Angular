@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreDataModule } from '@wl/core-data';
-import { CoreStateModule } from '@wl/core-state';
+import { AppStoreModule, CoreStateModule } from '@wl/core-state';
 import { MaterialModule } from '@wl/material';
 import { RoutingModule } from './routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
@@ -39,6 +39,8 @@ import { NewsletterparentComponent } from './newsletterparent/newsletterparent.c
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AppStoreModule,
+
     CoreDataModule,
     CoreStateModule,
     MaterialModule,
