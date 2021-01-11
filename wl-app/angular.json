@@ -654,5 +654,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "recruit"
+  "defaultProject": "ngrx-data"
 }

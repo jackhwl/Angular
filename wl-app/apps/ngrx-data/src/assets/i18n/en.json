@@ -1,0 +1,24 @@
+{
+  "i18.nav.home": "Home",
+  "i18.nav.header_link_one": "Header Link One",
+  "i18.nav.villains": "Villains",
+  "i18.nav.students": "Students",
+
+  "i18.students.students": "Students",
+  "i18.students.firstname": "FirstName",
+  "i18.students.middlename": "MiddleName",
+
+  "i18.villains.villains": "Villains",
+  "i18.villains.villain_details": "Villain Details",
+  "i18.villains.refresh": "Refresh",
+  "i18.villains.add": "Add",
+  "i18.villains.cancel": "Cancel",
+  "i18.villains.save": "Save",
+  "i18.villains.id": "id",
+  "i18.villains.name": "name",
+  "i18.villains.saying": "saying",
+  "i18.villains.villains_retrieved_successfully": "Villains retrieved successfully!",
+  "i18.villains.villain_created": "Villain {{name}} created!",
+  "i18.villains.villain_updated": "Villain {{name}} updated!",
+  "i18.villains.villain_deleted": "Villain {{name}} deleted!"
+}
