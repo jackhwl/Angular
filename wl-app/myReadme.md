@@ -314,3 +314,5 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - nx g lib shared --parent-module=apps/recruit/src/app/app.module.ts --style=scss -d
 
 ## shared module contain translate, material
+
+## [token in memorry](https://freddycorly.medium.com/mocking-backend-with-angular-in-memory-api-c238b73ddb98)

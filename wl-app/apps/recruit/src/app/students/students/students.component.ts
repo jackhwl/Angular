@@ -13,7 +13,7 @@ export class StudentsComponent implements OnInit {
   selectedStudent$: Observable<Student> = this.studentsFacade.selectedStudent$;
   primaryColor = 'red';
 
-  constructor(private studentsFacade: StudentsFacade) { }
+  constructor(private studentsFacade: StudentsFacade) {}
 
   ngOnInit(): void {
     this.reset();
@@ -42,13 +42,12 @@ export class StudentsComponent implements OnInit {
   }
 
   deleteStudent(student) {
-    this.studentsFacade.deleteStudent(student)
+    this.studentsFacade.deleteStudent(student);
   }
 
   // getStudents() {
   //   this.students$ = this.studentsService.all();
   // }
-
 
   // saveStudent2(student) {
   //   if (!student.id) {

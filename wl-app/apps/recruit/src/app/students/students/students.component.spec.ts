@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StudentsComponent } from './students.component';
 import { MaterialModule } from '@wl/material';
-import { StudentDetailsComponent } from './student-details/student-details.component';
-import { StudentsListComponent } from './students-list/students-list.component';
+import { StudentDetailsComponent } from '../student-details/student-details.component';
+import { StudentsListComponent } from '../students-list/students-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { StudentsFacade } from '@wl/core-state';
-import { mockEmptyStudent, mockStudent, mockStudentsFacade } from "@wl/testing";
+import { mockEmptyStudent, mockStudent, mockStudentsFacade } from '@wl/testing';
 import { Student } from '@wl/api-interfaces';
 
 describe('StudentsComponent', () => {
@@ -23,13 +23,19 @@ describe('StudentsComponent', () => {
   // Instantiate test bed
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StudentsComponent, StudentsListComponent, StudentDetailsComponent ],
-      providers: [{provide: StudentsFacade, useValue: mockStudentsFacade}],
+      declarations: [
+        StudentsComponent,
+        StudentsListComponent,
+        StudentDetailsComponent
+      ],
+      providers: [{ provide: StudentsFacade, useValue: mockStudentsFacade }],
       imports: [
-        MaterialModule, FormsModule, HttpClientModule, BrowserAnimationsModule
+        MaterialModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -61,30 +67,29 @@ describe('StudentsComponent', () => {
   });
 
   describe('should on save call studentsFacade', () => {
-
     it('createStudent', () => {
       const spy = jest.spyOn(studentsFacade, 'createStudent');
-      
+
       component.saveStudent(mockEmptyStudent);
-      
+
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(mockEmptyStudent);
     });
 
     it('updateStudent', () => {
       const spy = jest.spyOn(studentsFacade, 'updateStudent');
-      
+
       component.saveStudent(mockStudent);
-      
+
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(mockStudent);
     });
 
     it('deleteStudent', () => {
       const spy = jest.spyOn(studentsFacade, 'deleteStudent');
-      
+
       component.deleteStudent(mockStudent);
-      
+
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(mockStudent);
     });
