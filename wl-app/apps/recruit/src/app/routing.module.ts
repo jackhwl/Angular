@@ -6,6 +6,11 @@ import { StudentsComponent } from './students/students.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
+    path: 'heroes',
+    loadChildren: () =>
+      import('./heroes/heroes.module').then(m => m.HeroesModule)
+  },
+  {
     path: 'villains',
     loadChildren: () =>
       import('./villains/villains.module').then(m => m.VillainsModule)

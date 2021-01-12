@@ -12,7 +12,7 @@ export class AppComponent {
   @ViewChild('sidenav') localSideNav;
   links = [
     { path: '/', icon: 'home', title: 'home' },
-    { path: '/home', icon: 'view_list', title: 'header_link_one' },
+    { path: '/heroes', icon: 'view_list', title: 'heroes' },
     { path: '/villains', icon: 'view_list', title: 'villains' },
     { path: '/students', icon: 'view_list', title: 'students' }
   ];
