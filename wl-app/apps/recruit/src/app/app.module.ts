@@ -2,24 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreDataModule, PluralHttpUrlGenerator } from '@wl/core-data';
 import { AppStoreModule, CoreStateModule } from '@wl/core-state';
-import { MaterialModule } from '@wl/material';
 import { RoutingModule } from './routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { SloganComponent } from './slogan/slogan.component';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterparentComponent } from './newsletterparent/newsletterparent.component';
 
 import { DefaultDataServiceConfig, HttpUrlGenerator } from 'ngrx-data';
 import { environment } from '@env/environment';
+import { CoreModule } from './core/core.module';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: environment.apiEndpoint
@@ -29,7 +25,6 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
   declarations: [
     AppComponent,
     HomeComponent,
-    NewsletterComponent,
     HeaderComponent,
     SidenavListComponent,
     SloganComponent,
@@ -38,22 +33,13 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     AppStoreModule,
 
     CoreDataModule,
     CoreStateModule,
-    MaterialModule,
-    RoutingModule,
-    FormsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    CoreModule,
+    RoutingModule
   ],
   providers: environment.inMemorryData
     ? []
@@ -67,8 +53,3 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
