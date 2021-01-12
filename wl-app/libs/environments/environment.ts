@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
   apiEndpoint: 'http://localhost:3000',
-  ngrxData: true,
+  ngrxData: false,
   inMemorryData: true
 };

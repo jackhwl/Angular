@@ -61,10 +61,15 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
       }
     })
   ],
-  providers: [
-    //{ provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
-    //{ provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
-  ],
+  providers: environment.inMemorryData
+    ? []
+    : [
+        {
+          provide: DefaultDataServiceConfig,
+          useValue: defaultDataServiceConfig
+        },
+        { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
