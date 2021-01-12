@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { environment } from '@env/environment';
 import { Villain } from '@wl/api-interfaces';
 import {
   VillainService,
@@ -37,12 +38,12 @@ export class VillainFacade {
       action: 'DELETE'
     }
   };
-
-  constructor(
-    private villainService: //VillainService,
-    VillainNgrxDataService,
-    private toastService: ToastService
-  ) {}
+  villainService: VillainNgrxDataService | VillainService;
+  constructor(private injector: Injector, private toastService: ToastService) {
+    this.villainService = environment.ngrxData
+      ? <VillainNgrxDataService>this.injector.get(VillainNgrxDataService)
+      : <VillainService>this.injector.get(VillainService);
+  }
 
   notification(type: string, name: string, cb?: any) {
     cb
