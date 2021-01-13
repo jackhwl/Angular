@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreDataModule, PluralHttpUrlGenerator } from '@wl/core-data';
-import { AppStoreModule, CoreStateModule } from '@wl/core-state';
+import { CoreStateModule } from '@wl/core-state';
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     BrowserModule,
 
     // core
-    AppStoreModule,
+    //AppStoreModule,
 
     CoreDataModule,
     CoreStateModule,
@@ -35,15 +35,15 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     // app
     RoutingModule
   ],
-  providers: environment.inMemorryData
-    ? []
-    : [
+  providers: environment.ngrxData
+    ? [
         {
           provide: DefaultDataServiceConfig,
           useValue: defaultDataServiceConfig
         },
         { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
-      ],
+      ]
+    : [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

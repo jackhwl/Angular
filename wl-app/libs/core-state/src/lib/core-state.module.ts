@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '@env/environment';
+import { DefaultDataServiceConfig, NgrxDataModule } from 'ngrx-data';
+import { entityConfig } from './entity-metadata';
+
 import * as fromStudents from './students/students.reducer';
 import { StudentsEffects } from './students/students.effects';
 import { StudentsFacade } from './students/students.facade';
 
-export const coreStateRoutes: Route[] = [];
-
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature(
       fromStudents.STUDENTS_FEATURE_KEY,
@@ -20,7 +20,10 @@ export const coreStateRoutes: Route[] = [];
     ),
     EffectsModule.forRoot(),
     EffectsModule.forFeature([StudentsEffects]),
+
+    NgrxDataModule.forRoot(entityConfig),
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
-  providers: [StudentsFacade],
+  providers: [StudentsFacade]
 })
 export class CoreStateModule {}
