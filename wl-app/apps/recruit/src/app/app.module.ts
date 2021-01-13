@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CoreDataModule } from '@wl/core-data';
 import { CoreStateModule } from '@wl/core-state';
 import { RoutingModule } from './routing.module';
 
@@ -20,7 +19,6 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
 
     // core
-    CoreDataModule,
     CoreStateModule,
     CoreModule,
 

@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { SloganComponent } from './slogan/slogan.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterparentComponent } from './newsletterparent/newsletterparent.component';
+import { UserService } from '@wl/core-data';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent }
@@ -18,6 +19,7 @@ const routes: Routes = [
     NewsletterComponent,
     NewsletterparentComponent
   ],
-  imports: [SharedModule, RouterModule.forChild(routes)]
+  imports: [SharedModule, RouterModule.forChild(routes)],
+  providers: [UserService]
 })
 export class HomeModule {}
