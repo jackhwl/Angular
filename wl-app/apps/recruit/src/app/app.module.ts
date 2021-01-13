@@ -9,7 +9,6 @@ import { RoutingModule } from './routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { SloganComponent } from './slogan/slogan.component';
 
 import { DefaultDataServiceConfig, HttpUrlGenerator } from 'ngrx-data';
 import { environment } from '@env/environment';
@@ -20,20 +19,20 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidenavListComponent,
-    SloganComponent
-  ],
+  declarations: [AppComponent, HeaderComponent, SidenavListComponent],
   imports: [
-    BrowserModule,
+    // angular
     BrowserAnimationsModule,
+    BrowserModule,
+
+    // core
     AppStoreModule,
 
     CoreDataModule,
     CoreStateModule,
     CoreModule,
+
+    // app
     RoutingModule
   ],
   providers: environment.inMemorryData
