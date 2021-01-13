@@ -4,12 +4,21 @@ import { StoreModule } from '@ngrx/store';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env/environment';
-import { DefaultDataServiceConfig, NgrxDataModule } from 'ngrx-data';
+import {
+  DefaultDataServiceConfig,
+  HttpUrlGenerator,
+  NgrxDataModule
+} from 'ngrx-data';
 import { entityConfig } from './entity-metadata';
+import { PluralHttpUrlGenerator } from '@wl/core-data';
 
 import * as fromStudents from './students/students.reducer';
 import { StudentsEffects } from './students/students.effects';
 import { StudentsFacade } from './students/students.facade';
+
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: environment.apiEndpoint
+};
 
 @NgModule({
   imports: [
@@ -24,6 +33,15 @@ import { StudentsFacade } from './students/students.facade';
     NgrxDataModule.forRoot(entityConfig),
     environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
-  providers: [StudentsFacade]
+  providers: environment.ngrxData
+    ? [
+        StudentsFacade,
+        {
+          provide: DefaultDataServiceConfig,
+          useValue: defaultDataServiceConfig
+        },
+        { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+      ]
+    : [StudentsFacade]
 })
 export class CoreStateModule {}

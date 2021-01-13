@@ -18,7 +18,6 @@ const routes: Routes = [
     NewsletterComponent,
     NewsletterparentComponent
   ],
-  imports: [SharedModule, RouterModule.forChild(routes)],
-  providers: []
+  imports: [SharedModule, RouterModule.forChild(routes)]
 })
 export class HomeModule {}
