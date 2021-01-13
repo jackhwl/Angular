@@ -14,7 +14,6 @@ import { PluralHttpUrlGenerator } from '@wl/core-data';
 
 import * as fromStudents from './students/students.reducer';
 import { StudentsEffects } from './students/students.effects';
-import { StudentsFacade } from './students/students.facade';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: environment.apiEndpoint
@@ -35,13 +34,12 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
   ],
   providers: environment.ngrxData
     ? [
-        StudentsFacade,
         {
           provide: DefaultDataServiceConfig,
           useValue: defaultDataServiceConfig
         },
         { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
       ]
-    : [StudentsFacade]
+    : []
 })
 export class CoreStateModule {}
