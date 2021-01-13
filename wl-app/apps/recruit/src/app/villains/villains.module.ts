@@ -7,11 +7,13 @@ import { VillainDetailComponent } from './villain-detail/villain-detail.componen
 import { VillainListComponent } from './villain-list/villain-list.component';
 import { VillainFacade } from '@wl/core-state';
 import { ModalComponent } from '../modal/modal.component';
+// import { environment } from '@env/environment';
+// import { DefaultDataServiceConfig, HttpUrlGenerator } from 'ngrx-data';
+// import { PluralHttpUrlGenerator } from '@wl/core-data';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: VillainsComponent }
 ];
-
 @NgModule({
   declarations: [
     VillainsComponent,
@@ -21,5 +23,17 @@ const routes: Routes = [
   ],
   imports: [SharedModule, RouterModule.forChild(routes)],
   providers: [VillainFacade]
+  // environment.ngrxData ?
+  // ( environment.inMemorryData ?
+  //   [ VillainFacade,
+  //   //{ provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+  // ]
+  // :
+  //   [ VillainFacade,
+  //     //{ provide: DefaultDataServiceConfig, useValue: { root: environment.apiEndpoint } },
+  //     //{ provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+  //   ] )
+  //   :
+  //   [VillainFacade]
 })
 export class VillainsModule {}
