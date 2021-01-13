@@ -7,6 +7,9 @@ import { VillainDetailComponent } from './villain-detail/villain-detail.componen
 import { VillainListComponent } from './villain-list/villain-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VillainFacade } from '@wl/core-state';
+import { environment } from '@env/environment';
+import { DefaultDataServiceConfig, HttpUrlGenerator } from 'ngrx-data';
+import { PluralHttpUrlGenerator } from '@wl/core-data';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: VillainsComponent }
@@ -25,6 +28,15 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  providers: [VillainFacade]
+  providers: environment.ngrxData
+    ? [
+        VillainFacade,
+        {
+          provide: DefaultDataServiceConfig,
+          useValue: { root: environment.apiEndpoint }
+        },
+        { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+      ]
+    : [VillainFacade]
 })
 export class VillainsModule {}
