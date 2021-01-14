@@ -10,7 +10,7 @@ import {
   ParsedRequestUrl
 } from 'angular-in-memory-web-api';
 
-import { Hero, Villain } from '@wl/api-interfaces';
+//import { Hero, Villain } from '@wl/api-interfaces';
 
 /** In-memory database data */
 interface Db {
@@ -94,9 +94,15 @@ function mapCollectionName(name: string): string {
  * Development data
  */
 function getDbData() {
-  return {
-    heroes: data.heroes,
-    students: data.students,
-    villains: data.villains
-  } as Db;
+  const heroes = data.heroes.map(item =>
+    Object.assign(item, (item.name = '_m_' + item.name))
+  );
+  const villains = data.villains.map(item =>
+    Object.assign(item, (item.name = '_m_' + item.name))
+  );
+  const students = data.students.map(item =>
+    Object.assign(item, (item.firstName = '_m_' + item.firstName))
+  );
+
+  return { heroes, villains, students } as Db;
 }
