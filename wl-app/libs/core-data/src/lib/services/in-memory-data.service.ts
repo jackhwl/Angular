@@ -10,8 +10,6 @@ import {
   ParsedRequestUrl
 } from 'angular-in-memory-web-api';
 
-//import { Hero, Villain } from '@wl/api-interfaces';
-
 /** In-memory database data */
 interface Db {
   [collectionName: string]: any[];
