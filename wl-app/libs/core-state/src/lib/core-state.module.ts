@@ -28,14 +28,15 @@ import { PluralHttpUrlGenerator } from '@wl/core-data';
     NgrxDataModule.forRoot(entityConfig),
     environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
-  providers: environment.ngrxData
-    ? [
-        {
-          provide: DefaultDataServiceConfig,
-          useValue: { root: environment.apiEndpoint }
-        },
-        { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
-      ]
-    : []
+  providers:
+    environment.ngrxData && !environment.inMemorryData
+      ? [
+          {
+            provide: DefaultDataServiceConfig,
+            useValue: { root: environment.apiEndpoint }
+          },
+          { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+        ]
+      : []
 })
 export class CoreStateModule {}
