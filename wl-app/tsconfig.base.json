@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
+      "@wl/db": ["server/db.json"],
       "@env/*": ["libs/environments/*"],
       "@wl/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@wl/core-data": ["libs/core-data/src/index.ts"],

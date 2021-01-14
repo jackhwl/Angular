@@ -2,6 +2,7 @@
  * Hero-oriented InMemoryDbService with method overrides.
  */
 import { Injectable } from '@angular/core';
+import * as data from '@wl/db';
 
 import {
   RequestInfo,
@@ -83,7 +84,8 @@ function mapCollectionName(name: string): string {
   return (
     ({
       hero: 'heroes',
-      villain: 'villains'
+      villain: 'villains',
+      student: 'students'
     } as any)[name] || name
   );
 }
@@ -92,71 +94,9 @@ function mapCollectionName(name: string): string {
  * Development data
  */
 function getDbData() {
-  const heroes: Hero[] = [
-    {
-      id: 10,
-      name: 'Mr. Memo',
-      saying: 'From Memory!'
-    },
-    {
-      id: 11,
-      name: 'Maxwell Smart',
-      saying: 'Missed it by that much.'
-    },
-    {
-      id: 12,
-      name: 'Bullwinkle J. Moose',
-      saying: 'Watch me pull a rabbit out of a hat.'
-    },
-    {
-      id: 13,
-      name: 'Muhammad Ali',
-      saying: 'Float like a butterfly, sting like a bee.'
-    },
-    {
-      id: 14,
-      name: 'Eleanor Roosevelt',
-      saying: 'No one can make you feel inferior without your consent.'
-    }
-  ];
-
-  const villains: Villain[] = [
-    {
-      id: 20,
-      name: 'Mr. Memo',
-      saying: 'From Memory!'
-    },
-    {
-      id: 21,
-      name: 'Dr. Evil',
-      saying: 'One million dollars!'
-    },
-    {
-      id: 22,
-      name: 'Agent Smith',
-      saying: 'Human beings are a disease.'
-    },
-    {
-      id: 23,
-      name: 'Natasha Fatale',
-      saying: 'You can say that again, dahling.'
-    },
-    {
-      id: 24,
-      name: 'Goldfinger',
-      saying: 'No, I expect you to die!'
-    },
-    {
-      id: 25,
-      name: 'West Witch',
-      saying: "I'll get you, my pretty, and your little dog too!"
-    },
-    {
-      id: 26,
-      name: 'Tony Montana',
-      saying: 'Say hello to my little friend.'
-    }
-  ];
-
-  return { heroes, villains } as Db;
+  return {
+    heroes: data.heroes,
+    students: data.students,
+    villains: data.villains
+  } as Db;
 }
