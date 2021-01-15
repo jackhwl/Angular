@@ -15,7 +15,10 @@ export class VillainService {
   ) {}
 
   getUrl() {
-    var api = this.location.normalize(environment.apiEndpoint);
+    const endpoint = environment.inMemorryData
+      ? 'api'
+      : environment.apiEndpoint;
+    var api = this.location.normalize(endpoint);
     return `${api}/villains`;
   }
 
