@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
+
 import { environment } from '@env/environment';
 import { Student } from '@wl/api-interfaces';
 
@@ -8,11 +10,14 @@ import { Student } from '@wl/api-interfaces';
 })
 export class StudentsService {
   model = 'students';
-  private students;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private location: Location) {}
 
   getUrl() {
-    return `${environment.apiEndpoint}/${this.model}`;
+    const endpoint = environment.inMemorryData
+      ? 'api'
+      : environment.apiEndpoint;
+    const api = this.location.normalize(endpoint);
+    return `${api}/${this.model}`;
   }
 
   getUrlForId(id) {

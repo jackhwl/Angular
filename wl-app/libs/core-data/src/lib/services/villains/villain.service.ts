@@ -8,6 +8,7 @@ import { ErrorService } from '../../error/error.service';
 
 @Injectable({ providedIn: 'root' })
 export class VillainService {
+  model = 'villains';
   constructor(
     private http: HttpClient,
     private location: Location,
@@ -18,8 +19,8 @@ export class VillainService {
     const endpoint = environment.inMemorryData
       ? 'api'
       : environment.apiEndpoint;
-    var api = this.location.normalize(endpoint);
-    return `${api}/villains`;
+    const api = this.location.normalize(endpoint);
+    return `${api}/${this.model}`;
   }
 
   getUrlForId(id) {
