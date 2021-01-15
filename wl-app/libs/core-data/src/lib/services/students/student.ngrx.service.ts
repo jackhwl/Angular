@@ -8,7 +8,7 @@ import { Student } from '@wl/api-interfaces';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentsService {
+export class StudentNgrxService {
   model = 'students';
   constructor(private httpClient: HttpClient, private location: Location) {}
 

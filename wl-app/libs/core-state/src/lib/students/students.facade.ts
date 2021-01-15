@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { Student } from '@wl/api-interfaces';
-import { NotificationsService, StudentsService } from '@wl/core-data';
+
+import { NotificationsService, StudentNgrxService } from '@wl/core-data';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -13,7 +15,10 @@ export class StudentsFacade {
   selectedStudent$ = this.selectedStudent.asObservable();
   mutations$ = this.mutations.asObservable();
 
-  constructor(private studentService: StudentsService, private ns: NotificationsService) {}
+  constructor(
+    private studentService: StudentNgrxService,
+    private ns: NotificationsService
+  ) {}
 
   reset() {
     this.mutations.next(true);
@@ -24,12 +29,13 @@ export class StudentsFacade {
   }
 
   loadStudents() {
-    this.studentService.all()
-    .subscribe((students: Student[]) => this.allStudents.next(students));
+    this.studentService
+      .all()
+      .subscribe((students: Student[]) => this.allStudents.next(students));
   }
-  
+
   saveStudent(student: Student) {
-    if(student.id) {
+    if (student.id) {
       this.updateStudent(student);
     } else {
       this.createStudent(student);
@@ -37,21 +43,20 @@ export class StudentsFacade {
   }
 
   createStudent(student: Student) {
-    return this.studentService.create(student).subscribe((_) => {
+    return this.studentService.create(student).subscribe(_ => {
       this.ns.emit('Student created!');
-      this.reset()
+      this.reset();
     });
   }
 
   updateStudent(student: Student) {
-    return this.studentService.update(student).subscribe((_) => {
+    return this.studentService.update(student).subscribe(_ => {
       this.ns.emit('Student updated!');
-      this.reset()
+      this.reset();
     });
   }
 
   deleteStudent(student: Student) {
-    return this.studentService.delete(student.id).subscribe((_) => this.reset());
+    return this.studentService.delete(student.id).subscribe(_ => this.reset());
   }
-
 }

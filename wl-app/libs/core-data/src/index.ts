@@ -1,4 +1,6 @@
-export { StudentsService } from './lib/services/students/students.service';
+export {
+  StudentNgrxService
+} from './lib/services/students/student.ngrx.service';
 export {
   NotificationsService
 } from './lib/notifications/notifications.service';
