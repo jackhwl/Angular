@@ -18,3 +18,4 @@ export {
   PluralHttpUrlGenerator
 } from './lib/services/plural-http-url-generator';
 export { LocalStorageService } from './lib/local-storage/local-storage.service';
+export { SecurityService } from './lib/services/security/security.service';

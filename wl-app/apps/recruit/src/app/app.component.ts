@@ -14,7 +14,8 @@ export class AppComponent {
     { path: '/', icon: 'home', title: 'home' },
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
     { path: '/villains', icon: 'view_list', title: 'villains' },
-    { path: '/students', icon: 'view_list', title: 'students' }
+    { path: '/students', icon: 'view_list', title: 'students' },
+    { path: '/login', icon: 'view_list', title: 'login' }
   ];
 
   title = 'Recruit';
