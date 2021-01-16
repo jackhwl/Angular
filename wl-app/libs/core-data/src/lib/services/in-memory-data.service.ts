@@ -71,6 +71,59 @@ export class InMemoryDataService {
         : undefined;
     return parsed;
   }
+
+  // HTTP POST interceptor
+  post(reqInfo: RequestInfo) {
+    // if client pinged api/authentication
+    //  then call authenticate (defined below)
+    if (reqInfo.collectionName === 'login') return this.authenticate(reqInfo);
+
+    //  otherwise default response of In-memory DB
+    return undefined;
+  }
+
+  // mocking authentication happens here
+  // HTTP POST interceptor handler
+  authenticate(reqInfo: RequestInfo) {
+    // return an Observable response
+    return reqInfo.utils.createResponse$(() => {
+      console.log('HTTP POST api/authentication override');
+
+      const { headers, url, req } = reqInfo;
+      const { userName, password } = req['body'];
+      if (
+        this.db.users.filter(
+          u => u.userName === userName && u.password === password
+        ).length > 0
+      ) {
+        return {
+          status: 200,
+          headers,
+          url,
+          body: {
+            userName,
+            bearerToken:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+            isAuthenticated: true,
+            claims: []
+          }
+        };
+      }
+
+      //  otherwise return response with status code 401 (unauthorized)
+      return {
+        status: 401,
+        headers,
+        url,
+        body: {
+          userName,
+          bearerToken: null,
+          isAuthenticated: false,
+          claims: []
+        }
+      };
+    });
+  }
 }
 
 /**
@@ -102,5 +155,5 @@ function getDbData() {
     Object.assign(item, (item.firstName = '_m_' + item.firstName))
   );
 
-  return { heroes, villains, students } as Db;
+  return { heroes, villains, students, users: data.users } as Db;
 }

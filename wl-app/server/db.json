@@ -120,5 +120,11 @@
       "name": "Tony Montana",
       "saying": "Say hello to my little friend."
     }
+  ],
+  "users": [
+    {
+      "userName": "jack",
+      "password": "password"
+    }
   ]
 }
