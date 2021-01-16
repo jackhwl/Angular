@@ -3,7 +3,10 @@ import { AppUser, AppUserAuth } from '@wl/api-interfaces';
 //import { LOGIN_MOCKS } from './login-mocks';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Location } from '@angular/common';
 import { tap } from 'rxjs/operators';
+import { LocalStorageService } from '../../local-storage/local-storage.service';
+import { environment } from '@env/environment';
 
 const API_URL = 'https://localhost:44381/api/security/';
 
@@ -16,8 +19,20 @@ const httpOptions = {
 @Injectable()
 export class SecurityService {
   securityObject: AppUserAuth = new AppUserAuth();
+  model = 'login';
+  constructor(
+    private http: HttpClient,
+    private location: Location,
+    private localStorageService: LocalStorageService
+  ) {}
 
-  constructor(private http: HttpClient) {}
+  getUrl() {
+    const endpoint = environment.inMemorryData
+      ? 'api'
+      : environment.apiEndpoint;
+    const api = this.location.normalize(endpoint);
+    return `${api}/${this.model}`;
+  }
 
   resetSecurityObject(): void {
     this.securityObject.userName = '';
@@ -29,28 +44,29 @@ export class SecurityService {
     // this.securityObject.canSaveProduct = false;
     // this.securityObject.canAccessCategories = false;
     // this.securityObject.canAddCategory = false;
-    localStorage.removeItem('bearerToken');
+    this.localStorageService.removeItem('bearerToken');
   }
 
   login(entity: AppUser): Observable<AppUserAuth> {
     this.resetSecurityObject();
     // Object.assign(this.securityObject, LOGIN_MOCKS.find(user => user.userName.toLowerCase() === entity.userName.toLowerCase()));
     // if (this.securityObject.userName !== "") {
-    //     localStorage.setItem("bearerToken", this.securityObject.bearerToken);
+    //     this.localStorageService.setItem("bearerToken", this.securityObject.bearerToken);
     // }
     // return of<AppUserAuth>(this.securityObject);
-    return this.http
-      .post<AppUserAuth>(API_URL + 'login', entity, httpOptions)
-      .pipe(
-        tap(resp => {
-          // Use object assign to update the
-          // current object
-          Object.assign(this.securityObject, resp);
+    return this.http.post<AppUserAuth>(this.getUrl(), entity, httpOptions).pipe(
+      tap(resp => {
+        // Use object assign to update the
+        // current object
+        Object.assign(this.securityObject, resp);
 
-          // Store into local storage
-          localStorage.setItem('bearerToken', this.securityObject.bearerToken);
-        })
-      );
+        // Store into local storage
+        this.localStorageService.setItem(
+          'bearerToken',
+          this.securityObject.bearerToken
+        );
+      })
+    );
   }
 
   logout(): void {
