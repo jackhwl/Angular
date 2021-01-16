@@ -17,3 +17,4 @@ export { ErrorService } from './lib/error/error.service';
 export {
   PluralHttpUrlGenerator
 } from './lib/services/plural-http-url-generator';
+export { LocalStorageService } from './lib/local-storage/local-storage.service';
