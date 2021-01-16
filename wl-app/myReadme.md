@@ -316,3 +316,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## shared module contain translate, material
 
 ## [token in memorry](https://freddycorly.medium.com/mocking-backend-with-angular-in-memory-api-c238b73ddb98)
+
+## login based on security module,
+
+## add local-storage service with localStorageChanges\$
