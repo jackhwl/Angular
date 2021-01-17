@@ -16,6 +16,8 @@ const routes: Routes = [
     path: 'villains',
     loadChildren: () =>
       import('./villains/villains.module').then(m => m.VillainsModule)
+    //canActivate: [AuthGuard],
+    //data: {claimName: 'canAccessVillains'}
   },
   {
     path: 'students',

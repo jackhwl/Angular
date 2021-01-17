@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '@wl/shared';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SecurityService } from '@wl/core-data';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     }),
     SharedModule
   ],
+  providers: [SecurityService],
   exports: [SharedModule, TranslateModule]
 })
 export class CoreModule {}
