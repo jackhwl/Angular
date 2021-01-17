@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AppUser, AppUserAuth } from '@wl/api-interfaces';
 //import { LOGIN_MOCKS } from './login-mocks';
 import { Injectable } from '@angular/core';
@@ -19,6 +19,10 @@ const httpOptions = {
 @Injectable()
 export class SecurityService {
   securityObject: AppUserAuth = new AppUserAuth();
+  private securityObject0 = new BehaviorSubject<AppUserAuth>(new AppUserAuth());
+
+  securityObject$ = this.securityObject0.asObservable();
+
   model = 'login';
   constructor(
     private http: HttpClient,
@@ -35,10 +39,12 @@ export class SecurityService {
   }
 
   resetSecurityObject(): void {
+    this.securityObject0.next(new AppUserAuth());
     this.securityObject.userName = '';
     this.securityObject.bearerToken = '';
     this.securityObject.isAuthenticated = false;
     this.securityObject.claims = [];
+
     // this.securityObject.canAccessProducts = false;
     // this.securityObject.canAddProduct = false;
     // this.securityObject.canSaveProduct = false;
@@ -58,6 +64,7 @@ export class SecurityService {
       tap(resp => {
         // Use object assign to update the
         // current object
+        this.securityObject0.next(resp);
         Object.assign(this.securityObject, resp);
 
         // Store into local storage

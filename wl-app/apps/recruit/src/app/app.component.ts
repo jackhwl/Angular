@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppUserAuth } from '@wl/api-interfaces';
 import { SecurityService } from '@wl/core-data';
+import { from, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'wl-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('sidenav') localSideNav;
   private linksAll = [
     { path: '/', icon: 'home', title: 'home' },
@@ -19,9 +21,7 @@ export class AppComponent {
     { path: '/students', icon: 'view_list', title: 'students', isAdmin: true },
     { path: '/login', icon: 'view_list', title: 'login' }
   ];
-  links = [];
-
-  securityObject: AppUserAuth = null;
+  links$ = of(this.linksAll);
 
   title = 'Recruit';
   constructor(
@@ -34,12 +34,20 @@ export class AppComponent {
 
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+  }
 
-    this.securityObject = this.securityService.securityObject;
-
-    this.links = this.securityObject.isAuthenticated
-      ? this.linksAll
-      : this.linksAll.filter(l => !l.isAdmin);
+  ngOnInit(): void {
+    this.securityService.securityObject$
+      .pipe(
+        tap(o => {
+          this.links$ = of(
+            o.isAuthenticated
+              ? this.linksAll
+              : this.linksAll.filter(l => !l.isAdmin)
+          );
+        })
+      )
+      .subscribe();
   }
 
   toggleSideNav() {

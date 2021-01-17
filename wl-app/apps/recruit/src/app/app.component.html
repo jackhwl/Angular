@@ -16,7 +16,7 @@
   </button>
 </mat-toolbar> -->
 
-<mat-sidenav-container>
+<mat-sidenav-container *ngIf="links$ | async as links">
   <mat-sidenav #sidenav [opened]="false" mode="side" class="app-sidenav">
     <wl-sidenav-list
       [links]="links"
