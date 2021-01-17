@@ -10,7 +10,7 @@ import { SecurityService } from '@wl/core-data';
 })
 export class LoginComponent implements OnInit {
   user: AppUser = new AppUser();
-  securityObject: AppUserAuth = null;
+  securityObject$ = this.securityService.securityObject$;
   returnUrl: string;
 
   constructor(
@@ -20,20 +20,20 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.user.userName = 'jack';
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
 
   login() {
     this.securityService.login(this.user).subscribe(
       resp => {
-        this.securityObject = resp;
         console.log('resp=', resp);
         if (this.returnUrl) {
           this.router.navigateByUrl(this.returnUrl);
         }
       },
       () => {
-        this.securityObject = new AppUserAuth();
+        //this.securityObject$ = new AppUserAuth();
       }
     );
   }
