@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppUserAuth } from '@wl/api-interfaces';
 import { SecurityService } from '@wl/core-data';
-import { from, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
     { path: '/login', icon: 'view_list', title: 'login' }
   ];
   links$ = of(this.linksAll);
+  isAuthenticated$: Observable<boolean>;
 
   title = 'Recruit';
   constructor(

@@ -320,3 +320,5 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## login based on security module,
 
 ## add local-storage service with localStorageChanges\$
+
+## back to store basic (espicially selector) angular reactive workshop
