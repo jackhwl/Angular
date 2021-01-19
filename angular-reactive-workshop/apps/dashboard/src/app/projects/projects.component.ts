@@ -7,9 +7,11 @@ import {
   NotificationsService,
   CustomersService,
   ProjectsState,
+  LoadProjects,
   AddProject,
   UpdateProject,
-  DeleteProject
+  DeleteProject,
+  initialProjects
 } from '@workshop/core-data';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
@@ -41,12 +43,14 @@ export class ProjectsComponent implements OnInit {
   ) {
     this.projects$ = this.store.pipe(
       select('projects'),
-      map((projectsState: ProjectsState) => projectsState.projects)
+      map(data => data.entities),
+      map(data => Object.keys(data).map(k => data[k]))
+      //map((projectsState: ProjectsState) => projectsState.entities)
     );
   }
 
   ngOnInit() {
-    //this.getProjects();
+    this.getProjects();
     this.getCustomers();
     this.resetCurrentProject();
   }
@@ -67,9 +71,10 @@ export class ProjectsComponent implements OnInit {
     this.customers$ = this.customerService.all();
   }
 
-  // getProjects() {
-  //   //this.projects$ = this.projectsService.all();
-  // }
+  getProjects() {
+    this.store.dispatch(new LoadProjects(initialProjects));
+    //this.projects$ = this.projectsService.all();
+  }
 
   saveProject(project) {
     if (!project.id) {
