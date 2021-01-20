@@ -13,7 +13,7 @@ export { CustomersFacade } from './lib/state/customers/customers.facade';
 export {
   ProjectsState,
   initialProjects,
-  selectAllProjects
+  selectAllProjects2
 } from './lib/state/projects/projects.reducer';
 export {
   SelectProject,

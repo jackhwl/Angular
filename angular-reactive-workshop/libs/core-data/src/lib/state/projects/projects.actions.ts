@@ -1,4 +1,3 @@
-import { SelectControlValueAccessor } from '@angular/forms';
 import { Action } from '@ngrx/store';
 import { Project } from '../../projects/project.model';
 

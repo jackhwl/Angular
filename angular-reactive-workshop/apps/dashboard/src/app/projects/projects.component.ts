@@ -11,11 +11,11 @@ import {
   AddProject,
   UpdateProject,
   DeleteProject,
-  initialProjects,
-  selectAllProjects
+  initialProjects
 } from '@workshop/core-data';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
+import { selectAllProjects } from 'libs/core-data/src/lib/state';
 
 const emptyProject: Project = {
   id: null,
@@ -43,6 +43,12 @@ export class ProjectsComponent implements OnInit {
     private ns: NotificationsService
   ) {
     this.projects$ = this.store.pipe(select(selectAllProjects));
+    // this.projects$ = this.store.pipe(
+    //   select('projects'),
+    //   map(data => data.entities),
+    //   map(data => Object.keys(data).map(k => data[k]))
+    //   //map((projectsState: ProjectsState) => projectsState.entities)
+    // );
   }
 
   ngOnInit() {

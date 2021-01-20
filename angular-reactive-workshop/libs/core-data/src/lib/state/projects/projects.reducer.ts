@@ -71,4 +71,4 @@ const { selectIds, selectEntities, selectAll } = adapter.getSelectors();
 
 export const selectProjectIds = selectIds;
 export const selectProjectEntities = selectEntities;
-export const selectAllProjects = selectAll;
+export const selectAllProjects2 = selectAll;
