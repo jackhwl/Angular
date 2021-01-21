@@ -36,15 +36,15 @@ export const selectProjectState = createFeatureSelector<
 
 export const selectProjectIds = createSelector(
   selectProjectState,
-  fromProjects.selectProjectIds
+  fromProjects.selectIds
 );
 
 export const selectProjectEntities = createSelector(
   selectProjectState,
-  fromProjects.selectProjectEntities
+  fromProjects.selectEntities
 );
 
 export const selectAllProjects = createSelector(
   selectProjectState,
-  fromProjects.selectAllProjects
+  fromProjects.selectAll
 );
