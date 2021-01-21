@@ -4,9 +4,13 @@ import { Project } from '../../projects/project.model';
 export enum ProjectsActionTypes {
   ProjectSelected = '[Projects] Selected',
   LoadProjects = '[Projects] Load Data',
+  ProjectsLoaded = '[Projects] Data Loaded',
   AddProject = '[Projects] Add Data',
+  ProjectAdded = '[Projects] Data Added',
   UpdateProject = '[Projects] Update Data',
-  DeleteProject = '[Projects] Delete Data'
+  ProjectsUpdated = '[Projects] Data Updated',
+  DeleteProject = '[Projects] Delete Data',
+  ProjectsDeleted = '[Projects] Data Deleted'
 }
 
 export class SelectProject implements Action {
@@ -16,11 +20,19 @@ export class SelectProject implements Action {
 
 export class LoadProjects implements Action {
   readonly type = ProjectsActionTypes.LoadProjects;
+}
+
+export class ProjectsLoaded implements Action {
+  readonly type = ProjectsActionTypes.ProjectsLoaded;
   constructor(private payload: Project[]) {}
 }
 
 export class AddProject implements Action {
   readonly type = ProjectsActionTypes.AddProject;
+}
+
+export class ProjectAdded implements Action {
+  readonly type = ProjectsActionTypes.ProjectAdded;
   constructor(private payload: Project) {}
 }
 
@@ -36,6 +48,9 @@ export class DeleteProject implements Action {
 
 export type ProjectsActions =
   | SelectProject
+  | LoadProjects
+  | ProjectsLoaded
   | AddProject
+  | ProjectAdded
   | UpdateProject
   | DeleteProject;
