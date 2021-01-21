@@ -29,6 +29,7 @@ export class ProjectsLoaded implements Action {
 
 export class AddProject implements Action {
   readonly type = ProjectsActionTypes.AddProject;
+  constructor(public payload: Project) {}
 }
 
 export class ProjectAdded implements Action {

@@ -5,7 +5,13 @@ import { map } from 'rxjs/operators';
 
 import { Project } from './../../projects/project.model';
 import { ProjectsService } from './../../projects/projects.service';
-import { ProjectsActionTypes } from './projects.actions';
+import {
+  AddProject,
+  ProjectAdded,
+  LoadProjects,
+  ProjectsActionTypes,
+  ProjectsLoaded
+} from './projects.actions';
 import { ProjectsState } from './projects.reducer';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +19,11 @@ export class ProjectsEffects {
   @Effect() loadProjects$ = this.dataPersistence.fetch(
     ProjectsActionTypes.LoadProjects,
     {
-      run: () => {},
+      run: (action: LoadProjects, state: ProjectsState) => {
+        return this.projectsService
+          .all()
+          .pipe(map((res: Project[]) => new ProjectsLoaded(res)));
+      },
       onError: () => {}
     }
   );
@@ -21,7 +31,11 @@ export class ProjectsEffects {
   @Effect() addProjects$ = this.dataPersistence.pessimisticUpdate(
     ProjectsActionTypes.AddProject,
     {
-      run: () => {},
+      run: (action: AddProject, state: ProjectsState) => {
+        return this.projectsService
+          .create(action.payload)
+          .pipe(map((res: Project) => new ProjectAdded(res)));
+      },
       onError: () => {}
     }
   );

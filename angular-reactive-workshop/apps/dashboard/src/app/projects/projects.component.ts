@@ -8,10 +8,11 @@ import {
   CustomersService,
   ProjectsState,
   LoadProjects,
-  AddProject,
+  //AddProject,
   UpdateProject,
   DeleteProject,
-  initialProjects
+  initialProjects,
+  AddProject
 } from '@workshop/core-data';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
@@ -74,7 +75,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.store.dispatch(new LoadProjects(initialProjects));
+    this.store.dispatch(new LoadProjects());
     //this.projects$ = this.projectsService.all();
   }
 
