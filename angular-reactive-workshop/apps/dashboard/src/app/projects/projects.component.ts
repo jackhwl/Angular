@@ -8,15 +8,14 @@ import {
   CustomersService,
   ProjectsState,
   LoadProjects,
-  //AddProject,
+  AddProject,
   UpdateProject,
   DeleteProject,
   initialProjects,
-  AddProject
+  selectAllProjects
 } from '@workshop/core-data';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-import { selectAllProjects } from 'libs/core-data/src/lib/state';
 
 const emptyProject: Project = {
   id: null,
