@@ -328,5 +328,6 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - ![ngrx flow](tools/ngrx.png 'flow')
 - Reducers use actions to change state. Effects are used to listen for actions and return new actions
 - All actions hit all reducers first, then the action is passed to the effects
+- reducer and store for state management, effects for flow control
 
-## Using DataPersistence
+## [Using DataPersistence](https://blog.nrwl.io/using-ngrx-4-to-manage-state-in-angular-applications-64e7a1f84b7b)

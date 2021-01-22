@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, createEffect, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 import { map } from 'rxjs/operators';
+import { fetch } from '@nrwl/angular';
 
 import { Project } from './../../projects/project.model';
 import { ProjectsService } from './../../projects/projects.service';
@@ -16,6 +17,17 @@ import { ProjectsState } from './projects.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsEffects {
+  // loadProjects$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType('ProjectsActionTypes.LoadProjects'),
+  //     fetch({
+  //       run: (action: LoadProjects) => {
+  //         return nullSafeIsEquivalent;
+  //       }
+  //     })
+  //   )
+  // );
+
   @Effect() loadProjects$ = this.dataPersistence.fetch(
     ProjectsActionTypes.LoadProjects,
     {
