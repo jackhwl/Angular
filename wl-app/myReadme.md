@@ -326,3 +326,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - createFeatureSelector & createSelector
 
 - ![ngrx flow](tools/ngrx.png 'flow')
+- Reducers use actions to change state. Effects are used to listen for actions and return new actions
+- All actions hit all reducers first, then the action is passed to the effects
+
+## Using DataPersistence
