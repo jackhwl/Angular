@@ -324,3 +324,5 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## back to store basic (espicially selector) angular reactive workshop
 
 - createFeatureSelector & createSelector
+
+- ![ngrx flow](tools/ngrx.png 'flow')
