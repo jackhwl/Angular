@@ -70,3 +70,21 @@ export const selectCurrentProject = createSelector(
   (projectEntities, projectId) =>
     projectId ? projectEntities[projectId] : emptyProject
 );
+
+export const selectCustomersProjects = createSelector(
+  selectAllCustomers,
+  selectAllProjects,
+  (customers, projects) => {
+    return customers.map(customer => {
+      return Object.assign(
+        {},
+        {
+          ...customer,
+          projects: projects.filter(
+            project => project.customerId == customer.id
+          )
+        }
+      );
+    });
+  }
+);
