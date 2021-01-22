@@ -48,3 +48,14 @@ export const selectAllProjects = createSelector(
   selectProjectState,
   fromProjects.selectAll
 );
+
+export const selectCurrentProjectId = createSelector(
+  selectProjectState,
+  fromProjects.getSelectedProjectId
+);
+
+export const selectCurrentProject = createSelector(
+  selectProjectEntities,
+  selectCurrentProjectId,
+  (projectEntities, projectId) => projectEntities[projectId]
+);
