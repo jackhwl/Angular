@@ -15,7 +15,7 @@ export enum ProjectsActionTypes {
 
 export class SelectProject implements Action {
   readonly type = ProjectsActionTypes.ProjectSelected;
-  constructor(public payload: Project) {}
+  constructor(public payload) {}
 }
 
 export class LoadProjects implements Action {

@@ -3,6 +3,7 @@ import {
   createFeatureSelector,
   createSelector
 } from '@ngrx/store';
+import { Project } from '../projects/project.model';
 
 import * as fromCustomers from './customers/customers.reducer';
 import * as fromProjects from './projects/projects.reducer';
@@ -54,8 +55,18 @@ export const selectCurrentProjectId = createSelector(
   fromProjects.getSelectedProjectId
 );
 
+const emptyProject: Project = {
+  id: null,
+  title: '',
+  details: '',
+  percentComplete: 0,
+  approved: false,
+  customerId: null
+};
+
 export const selectCurrentProject = createSelector(
   selectProjectEntities,
   selectCurrentProjectId,
-  (projectEntities, projectId) => projectEntities[projectId]
+  (projectEntities, projectId) =>
+    projectId ? projectEntities[projectId] : emptyProject
 );
