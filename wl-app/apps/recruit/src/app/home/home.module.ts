@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '@wl/shared';
 import { HomeComponent } from './home.component';
-import { SloganComponent } from './slogan/slogan.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { NewsletterparentComponent } from './newsletterparent/newsletterparent.component';
 import { UserService } from '@wl/core-data';
@@ -13,12 +12,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    SloganComponent,
-    NewsletterComponent,
-    NewsletterparentComponent
-  ],
+  declarations: [HomeComponent, NewsletterComponent, NewsletterparentComponent],
   imports: [SharedModule, RouterModule.forChild(routes)],
   providers: [UserService]
 })

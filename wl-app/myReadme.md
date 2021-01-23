@@ -331,3 +331,8 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - reducer and store for state management, effects for flow control
 
 ## [Using DataPersistence](https://blog.nrwl.io/using-ngrx-4-to-manage-state-in-angular-applications-64e7a1f84b7b)
+
+## add jobs module, jobs-list component
+
+- nx g m jobs -d
+- nx g c jobs/jobs-list -m jobs -d
