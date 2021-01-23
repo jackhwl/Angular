@@ -1,23 +1,12 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {
   Customer,
-  Project,
-  ProjectsService,
-  NotificationsService,
   CustomersService,
-  ProjectsState,
-  LoadProjects,
-  AddProject,
-  UpdateProject,
-  DeleteProject,
-  initialProjects,
-  selectAllProjects,
-  selectCurrentProject,
-  SelectProject
+  NotificationsService,
+  Project,
+  ProjectsFacade
 } from '@workshop/core-data';
-import { select, Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -31,11 +20,11 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private customerService: CustomersService,
-    private store: Store<ProjectsState>,
+    private facade: ProjectsFacade,
     private ns: NotificationsService
   ) {
-    this.projects$ = this.store.pipe(select(selectAllProjects));
-    this.currentProject$ = this.store.pipe(select(selectCurrentProject));
+    this.projects$ = this.facade.projects$;
+    this.currentProject$ = this.facade.currentProject$;
     // this.projects$ = this.store.pipe(
     //   select('projects'),
     //   map(data => data.entities),
@@ -52,12 +41,14 @@ export class ProjectsComponent implements OnInit {
 
   resetCurrentProject() {
     //this.currentProject = emptyProject;
-    this.store.dispatch(new SelectProject(null));
+    //this.store.dispatch(new SelectProject(null));
+    this.facade.selectProject(null);
   }
 
   selectProject(project) {
+    this.facade.selectProject(project.id);
     //this.currentProject = project;
-    this.store.dispatch(new SelectProject(project.id));
+    //this.store.dispatch(new SelectProject(project.id));
   }
 
   cancel(project) {
@@ -69,7 +60,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.store.dispatch(new LoadProjects());
+    this.facade.getProjects();
+    //this.store.dispatch(new LoadProjects());
     //this.projects$ = this.projectsService.all();
   }
 
@@ -82,7 +74,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.store.dispatch(new AddProject(project));
+    this.facade.createProject(project);
+    //this.store.dispatch(new AddProject(project));
     // this.projectsService.create(project).subscribe(response => {
     this.ns.emit('Project created!');
     //this.getProjects();
@@ -91,7 +84,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(project) {
-    this.store.dispatch(new UpdateProject(project));
+    this.facade.updateProject(project);
+    //this.store.dispatch(new UpdateProject(project));
     // this.projectsService.update(project).subscribe(response => {
     this.ns.emit('Project saved!');
     //this.getProjects();
@@ -100,7 +94,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project) {
-    this.store.dispatch(new DeleteProject(project));
+    this.facade.deleteProject(project);
+    //this.store.dispatch(new DeleteProject(project));
     // this.projectsService.delete(project).subscribe(response => {
     this.ns.emit('Project deleted!');
     //this.getProjects();
