@@ -18,7 +18,55 @@
       </div>
     </div>
   </div>
-
+  <article class="search-bar">
+    <a name="search"></a>
+    <div class="search-container with-search-button">
+      <div data-icon="7" class="icon"></div>
+      <input
+        name="textKeyWord"
+        type="text"
+        id="textKeyWord"
+        placeholder="Search all available positions"
+      />
+      <div class="searchTag  hidden">
+        <div class="keyword">
+          <span title="Labor &amp; Employee"></span>
+          <a
+            id="contentPlaceHolder_LinkButtonSearchLocation"
+            href="javascript:__doPostBack('ctl00$contentPlaceHolder$LinkButtonSearchLocation','')"
+          >
+            <div class="icon vi-close"></div>
+          </a>
+        </div>
+      </div>
+      <div class="searchTag  hidden">
+        <div class="keyword">
+          <span title="Boston">_Legal</span>
+          <a
+            id="contentPlaceHolder_LinkButtonSearchCategory"
+            href="javascript:__doPostBack('ctl00$contentPlaceHolder$LinkButtonSearchCategory','')"
+          >
+            <div class="icon vi-close"></div>
+          </a>
+        </div>
+      </div>
+      <a
+        id="contentPlaceHolder_linkBtnSearch"
+        href="javascript:__doPostBack('ctl00$contentPlaceHolder$linkBtnSearch','')"
+        ><div data-icon="U" class="icon"></div
+      ></a>
+      <div
+        class="search-filter-group collapsed"
+        data-toggle="collapse"
+        data-target="#filterBar"
+      >
+        <div class="icon vi-refine"></div>
+        <div class="search-filter">FILTER</div>
+        <div class="icon vi-close"></div>
+        <div class="search-filter-close">CLOSE</div>
+      </div>
+    </div>
+  </article>
   <div class="list-component">
     <p>jobs-list works!</p>
   </div>
