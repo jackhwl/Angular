@@ -50,3 +50,15 @@ export class AppUserAuth {
   // canAccessCategories: boolean = false;
   // canAddCategory: boolean = false;
 }
+
+export interface Job {
+  JobId: number;
+  JobName: string;
+  OfficeName: string;
+  DepartmentName: string;
+  ApplicationYear: string;
+  JobSummarySA: string;
+  JobDescriptionSA: string;
+  OfficeID: number;
+  JobCategoryID: number;
+}
