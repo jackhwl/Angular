@@ -53,13 +53,22 @@
 
     &.with-search-button {
       > input {
-        background-color: #333;
-        color: #ccc;
+        background-color: #f2f2f2;
+        color: #888;
         border: 0;
         font-size: 20px;
         font-style: italic;
         font-weight: lighter;
         padding-left: 64px;
+        border-radius: 25px 0 0 25px;
+        flex: 1 1 100%;
+
+        &:focus {
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+          outline: none;
+          transition: all 0.3s;
+          border-color: #007dc6;
+        }
       }
 
       > input::placeholder {
@@ -76,6 +85,7 @@
       > .searchTag {
         background-color: #f2f2f2;
         padding: 2px 5px 0 0;
+        display: none;
 
         > .keyword {
           color: #ffffff;
@@ -111,19 +121,21 @@
 
     .icon {
       font-size: 38px;
-      color: #ffffff;
+      color: #222222;
       transform: rotate(90deg);
       margin: 0 -50px 0 6px;
     }
 
     > a {
-      background-color: #333;
+      background-color: #f2f2f2;
+      border-radius: 0 25px 25px 0;
       flex: 0 0 50px;
+      text-decoration: none;
 
       .icon {
         color: #58b957;
         transform: rotate(0deg);
-        margin: 11px 0 0 0;
+        margin: 6px 0 0 0;
       }
     }
 
