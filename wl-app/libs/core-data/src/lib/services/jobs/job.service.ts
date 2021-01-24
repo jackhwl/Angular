@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Job } from '@fem/api-interfaces';
+import { Job } from '@wl/api-interfaces';
 
 const API_ENDPOINT = 'http://localhost:3000/';
 
@@ -25,11 +25,11 @@ export class JobService {
   }
 
   update(job: Job) {
-    return this.http.put(this.getUrlWithId(job.id), job);
+    return this.http.put(this.getUrlWithId(job.JobId), job);
   }
 
   delete(job: Job) {
-    return this.http.delete(this.getUrlWithId(job.id));
+    return this.http.delete(this.getUrlWithId(job.JobId));
   }
 
   private getUrl() {
