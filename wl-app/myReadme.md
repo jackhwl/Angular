@@ -334,5 +334,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 ## add jobs module, jobs-list component
 
-- nx g m jobs -d
-- nx g c jobs/jobs-list -m jobs -d
+- nx g m jobs -d; nx g c jobs/jobs-list -m jobs -d
