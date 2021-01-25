@@ -126,5 +126,40 @@
       "userName": "jack",
       "password": "password"
     }
+  ],
+  "jobs": [
+    {
+      "JobId": 10,
+      "JobName": "actual client assignments",
+      "OfficeName": "Toronto",
+      "DepartmentName": "Litigation",
+      "ApplicationYear": 2013,
+      "JobSummarySA": "Summer associate program for qualified second year law students interested in obtaining experience in the practice areas of the Firm. The program",
+      "JobDescriptionSA": "commences in late May and continues for approximately 11 weeks. All of the Firm's Upstate offices participate in the program and are committed to affording qualified law students the opportunity to enhance their knowledge and experience of the technical and professional aspects of becoming a lawyer and practicing law. Summer associates work closely with the Firm's partners and associates in all of the Firm's practice areas on actual client assignments. Summer associates devote a significant amount of time to researching various legal issues and drafting legal memoranda, but also have many opportunities to obtain first hand experience in litigation and transactional work including observing depositions, trials and administrative meetings and hearings, attending closings for a variety of commercial transactions and drafting agreements.",
+      "OfficeID": 23,
+      "JobCategoryID": 34
+    },
+    {
+      "JobId": 11,
+      "JobName": "Rédacteur de blogue adjoint, Québec",
+      "OfficeName": "Montreal",
+      "DepartmentName": "Estate",
+      "ApplicationYear": 2015,
+      "JobSummarySA": "Huffington Post Canada cherche à accueillir un nouveau membre dans son équipe à l'occasion de son lancement en français au Québec.",
+      "JobDescriptionSA": "Huffington Post Canada cherche à accueillir un nouveau membre dans son équipe à l'occasion de son lancement en français au Québec. Il nous faut le meilleur candidat pour gérer les responsabilités quotidiennes inhérentes à l'une de nos marques médias en ligne les plus enthousiasmantes qui soient. Plus de 1,5 million de Canadiens lisent déjà HuffPost et nous visons maintenant à atteindre les lecteurs de langue française et les Québécois grâce à nos nouvelles et les tout derniers points de vue de l'actualité.",
+      "OfficeID": 25,
+      "JobCategoryID": 36
+    },
+    {
+      "JobId": 13,
+      "JobName": "Summer for New York",
+      "OfficeName": "New York",
+      "DepartmentName": "Litigation",
+      "ApplicationYear": 2012,
+      "JobSummarySA": "Our CALGARY OFFICE IS NOW ACCEPTING APPLICATIONS FOR SUMMER STUDENTS FOR THE YEAR 2013",
+      "JobDescriptionSA": "Spending the summer with us as a student exposes you to the high level, challenging work of a national law firm while working in a co-operative learning environment committed to student training at all levels. Over 115 lawyers, dedicated Directors of Research & Professional Development and a firmly entrenched training program ensures top-notch legal work, training and feedback throughout your summer. Our Firm Summer Program enjoys a tremendous reputation and most of our Summer Students wind up articling and practicing with us.",
+      "OfficeID": 27,
+      "JobCategoryID": 37
+    }
   ]
 }
