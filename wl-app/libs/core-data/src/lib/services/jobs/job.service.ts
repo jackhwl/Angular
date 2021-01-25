@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { environment } from '@env/environment';
 import { Job } from '@wl/api-interfaces';
-import { ErrorService } from '@wl/core-data';
+import { ErrorService } from '../../error/error.service';
 
 @Injectable({
   providedIn: 'root'
