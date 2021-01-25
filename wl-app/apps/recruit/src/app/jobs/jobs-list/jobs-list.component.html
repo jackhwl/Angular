@@ -67,7 +67,40 @@
       </div>
     </div>
   </article>
-  <div class="list-component">
-    <p>jobs-list works!</p>
+  <div class="panel">
+    <div class="panel-body">
+      <div class="panel-options-container">
+        <div class="panel-option">
+          <span class="search-results-no">Available Positions</span>
+          <span class="badge-circle badge-success" id="spanPositionsCounter"
+            >8</span
+          >
+        </div>
+        <div class="panel-option">
+          <span class="btn-group btn-group-round" id="rbListEventDetails">
+            <span class="btn btn-success"
+              ><input
+                name="inputEventDetails"
+                id="inputEventDetails_1"
+                type="radio"
+                value="1"
+                onclick="setRecruitDetail(false);"/><label
+                for="inputEventDetails_1"
+                ><div class="icon vi-view-list-simple"></div></label
+            ></span>
+            <span class="btn btn-success"
+              ><input
+                name="inputEventDetails"
+                id="inputEventDetails_2"
+                type="radio"
+                value="2"
+                onclick="setRecruitDetail(true);"/><label
+                for="inputEventDetails_2"
+                ><div class="icon vi-view-list-detailed"></div></label
+            ></span>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
