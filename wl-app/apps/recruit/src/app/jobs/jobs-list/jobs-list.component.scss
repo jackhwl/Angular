@@ -338,10 +338,28 @@
               padding: 0 1px;
             }
           }
-
+          .btn {
+            > input[type='checkbox'],
+            > input[type='radio'] {
+              position: absolute;
+              display: none;
+            }
+          }
           .icon {
             font-size: 28px;
           }
+        }
+        .vi-view-list-simple:before {
+          content: '\e071';
+        }
+        .vi-view-list-detailed:before {
+          content: '\31';
+        }
+        label {
+          display: inline-block;
+          max-width: 100%;
+          margin-bottom: 5px;
+          font-weight: bold;
         }
       }
     }
