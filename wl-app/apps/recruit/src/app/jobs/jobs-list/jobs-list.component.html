@@ -72,9 +72,9 @@
       <div class="panel-options-container">
         <div class="panel-option">
           <span class="search-results-no">Available Positions</span>
-          <span class="badge-circle badge-success" id="spanPositionsCounter"
-            >8</span
-          >
+          <span class="badge-circle badge-success" id="spanPositionsCounter">{{
+            jobs.length
+          }}</span>
         </div>
         <div class="panel-option">
           <span class="btn-group btn-group-round" id="rbListEventDetails">
@@ -104,3 +104,4 @@
     </div>
   </div>
 </div>
+{{ jobs | json }}
