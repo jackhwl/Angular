@@ -335,3 +335,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## add jobs module, jobs-list component
 
 - nx g m jobs -d; nx g c jobs/jobs-list -m jobs -d
+
+# generate job state and facade
+
+- nx g @nrwl/angular:ngrx jobs --module=libs/core-state/src/lib/core-state.module.ts --directory jobs --defaults --facade -d

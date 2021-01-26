@@ -14,6 +14,9 @@ import { entityConfig } from './entity-metadata';
 import * as fromStudents from './students/students.reducer';
 import { StudentsEffects } from './students/students.effects';
 import { PluralHttpUrlGenerator } from '@wl/core-data';
+import * as fromJobs from './jobs/jobs.reducer';
+import { JobsEffects } from './jobs/jobs.effects';
+import { JobsFacade } from './jobs/jobs.facade';
 
 @NgModule({
   imports: [
@@ -26,7 +29,9 @@ import { PluralHttpUrlGenerator } from '@wl/core-data';
     EffectsModule.forFeature([StudentsEffects]),
 
     NgrxDataModule.forRoot(entityConfig),
-    environment.production ? [] : StoreDevtoolsModule.instrument()
+    environment.production ? [] : StoreDevtoolsModule.instrument(),
+    StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.reducer),
+    EffectsModule.forFeature([JobsEffects])
   ],
   providers:
     environment.ngrxData && !environment.inMemorryData
