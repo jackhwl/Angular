@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { JobsFacade } from '@wl/core-state';
+import { combineLatest } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'wl-jobs',
@@ -6,7 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-  constructor() {}
+  vm$ = combineLatest([this.facade.jobs$, this.facade.loading$]).pipe(
+    filter(Boolean),
+    map(([jobs, loading]) => ({
+      jobs,
+      loading
+    }))
+  );
 
-  ngOnInit(): void {}
+  constructor(private facade: JobsFacade) {}
+
+  ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll() {
+    this.facade.getAll();
+  }
 }

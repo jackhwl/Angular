@@ -30,7 +30,7 @@ import { JobsFacade } from './jobs/jobs.facade';
 
     NgrxDataModule.forRoot(entityConfig),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
-    StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.reducer),
+    StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.jobReducer),
     EffectsModule.forFeature([JobsEffects])
   ],
   providers:

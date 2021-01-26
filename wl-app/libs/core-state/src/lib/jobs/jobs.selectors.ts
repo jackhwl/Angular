@@ -1,13 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   JOBS_FEATURE_KEY,
-  State,
+  JobState,
   JobsPartialState,
   jobsAdapter
 } from './jobs.reducer';
 
 // Lookup the 'Jobs' feature state managed by NgRx
-export const getJobsState = createFeatureSelector<JobsPartialState, State>(
+export const getJobsState = createFeatureSelector<JobsPartialState, JobState>(
   JOBS_FEATURE_KEY
 );
 
@@ -15,31 +15,31 @@ const { selectAll, selectEntities } = jobsAdapter.getSelectors();
 
 export const getJobsLoaded = createSelector(
   getJobsState,
-  (state: State) => state.loaded
+  (state: JobState) => state.loaded
 );
 
 export const getJobsError = createSelector(
   getJobsState,
-  (state: State) => state.error
+  (state: JobState) => state.error
 );
 
 export const getAllJobs = createSelector(
   getJobsState,
-  (state: State) => selectAll(state)
+  (state: JobState) => selectAll(state)
 );
 
 export const getJobsEntities = createSelector(
   getJobsState,
-  (state: State) => selectEntities(state)
+  (state: JobState) => selectEntities(state)
 );
 
-export const getSelectedId = createSelector(
+export const getJobSelectedId = createSelector(
   getJobsState,
-  (state: State) => state.selectedId
+  (state: JobState) => state.selectedId
 );
 
-export const getSelected = createSelector(
+export const getSelectedJob = createSelector(
   getJobsEntities,
-  getSelectedId,
+  getJobSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );

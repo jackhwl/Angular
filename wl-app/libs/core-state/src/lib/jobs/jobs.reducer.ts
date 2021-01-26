@@ -6,27 +6,27 @@ import { JobsEntity } from './jobs.models';
 
 export const JOBS_FEATURE_KEY = 'jobs';
 
-export interface State extends EntityState<JobsEntity> {
+export interface JobState extends EntityState<JobsEntity> {
   selectedId?: string | number; // which Jobs record has been selected
   loaded: boolean; // has the Jobs list been loaded
   error?: string | null; // last known error (if any)
 }
 
 export interface JobsPartialState {
-  readonly [JOBS_FEATURE_KEY]: State;
+  readonly [JOBS_FEATURE_KEY]: JobState;
 }
 
 export const jobsAdapter: EntityAdapter<JobsEntity> = createEntityAdapter<
   JobsEntity
 >();
 
-export const initialState: State = jobsAdapter.getInitialState({
+export const initialJobState: JobState = jobsAdapter.getInitialState({
   // set initial required properties
   loaded: false
 });
 
 const jobsReducer = createReducer(
-  initialState,
+  initialJobState,
   on(JobsActions.loadJobs, state => ({
     ...state,
     loaded: false,
@@ -38,6 +38,6 @@ const jobsReducer = createReducer(
   on(JobsActions.loadJobsFailure, (state, { error }) => ({ ...state, error }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function jobReducer(state: JobState | undefined, action: Action) {
   return jobsReducer(state, action);
 }

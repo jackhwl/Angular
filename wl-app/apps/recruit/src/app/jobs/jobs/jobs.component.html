@@ -1,1 +1,4 @@
-<p>jobs works!</p>
+<ng-container *ngIf="vm$ | async as vm">
+  <wl-jobs-list></wl-jobs-list>
+  {{ vm.jobs | json }}
+</ng-container>
