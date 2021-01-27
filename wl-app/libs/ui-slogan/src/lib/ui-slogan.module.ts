@@ -4,6 +4,7 @@ import { SloganComponent } from './slogan/slogan/slogan.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [SloganComponent]
+  declarations: [SloganComponent],
+  exports: [SloganComponent]
 })
 export class UiSloganModule {}
