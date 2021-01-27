@@ -47,13 +47,7 @@ export class VillainService {
 
   getAll() {
     return this.http
-      .get<Array<Villain>>(this.getUrl())
-      .pipe(this.errorService.retryAfter());
-  }
-
-  delete(villain: Villain) {
-    return this.http
-      .delete(this.getUrlForId(villain.id))
+      .get<Villain[]>(this.getUrl())
       .pipe(this.errorService.retryAfter());
   }
 
@@ -66,6 +60,12 @@ export class VillainService {
   update(villain: Villain) {
     return this.http
       .put<Villain>(this.getUrlForId(villain.id), villain)
+      .pipe(this.errorService.retryAfter());
+  }
+
+  delete(villain: Villain) {
+    return this.http
+      .delete(this.getUrlForId(villain.id))
       .pipe(this.errorService.retryAfter());
   }
 }

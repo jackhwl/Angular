@@ -57,7 +57,7 @@ export class JobsFacade {
   getAll(cb?: any) {
     this.loading.next(true);
     this.jobService
-      .all()
+      .getAll()
       .pipe(this.sideFinalize('getAll', '', cb))
       .subscribe((jobs: Job[]) => this.jobs.next(jobs));
   }

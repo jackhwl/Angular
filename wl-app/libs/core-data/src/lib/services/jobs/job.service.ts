@@ -27,7 +27,7 @@ export class JobService {
     return `${this.getUrl()}/${id}`;
   }
 
-  all() {
+  getAll() {
     return this.http
       .get<Job[]>(this.getUrl())
       .pipe(this.errorService.retryAfter());
@@ -39,7 +39,7 @@ export class JobService {
       .pipe(this.errorService.retryAfter());
   }
 
-  create(job: Job) {
+  add(job: Job) {
     return this.http
       .post(this.getUrl(), job)
       .pipe(this.errorService.retryAfter());
