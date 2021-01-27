@@ -9,6 +9,7 @@ module.exports = {
     '<rootDir>/libs/testing',
     '<rootDir>/apps/security',
     '<rootDir>/apps/ngrx-data',
-    '<rootDir>/libs/shared'
+    '<rootDir>/libs/shared',
+    '<rootDir>/libs/ui-slogan'
   ]
 };

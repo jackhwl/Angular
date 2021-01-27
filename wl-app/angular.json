@@ -606,6 +606,36 @@
           "style": "scss"
         }
       }
+    },
+    "ui-slogan": {
+      "projectType": "library",
+      "root": "libs/ui-slogan",
+      "sourceRoot": "libs/ui-slogan/src",
+      "prefix": "wl",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-slogan/tsconfig.lib.json",
+              "libs/ui-slogan/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui-slogan/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-slogan/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -339,3 +339,8 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 # generate job state and facade
 
 - nx g @nrwl/angular:ngrx jobs --module=libs/core-state/src/lib/core-state.module.ts --directory jobs --defaults --facade -d
+
+## generate lib ui-slogan and slogan component under it
+
+- nx g lib ui-slogan --style=scss -d
+- nx g c slogan/slogan --project=ui-slogan -d

@@ -64,6 +64,9 @@
     },
     "shared": {
       "tags": []
+    },
+    "ui-slogan": {
+      "tags": []
     }
   }
 }
