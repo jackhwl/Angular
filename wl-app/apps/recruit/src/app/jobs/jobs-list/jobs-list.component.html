@@ -101,7 +101,35 @@
           </span>
         </div>
       </div>
+      <table>
+        <tr *ngFor="let job of jobs; trackBy: byId">
+          <td>
+            <h4>{{ job.JobName }}</h4>
+            <section class="sub-title">
+              <h5>
+                {{ 'i18.job.office' | translate }}
+                <span>{{ job.OfficeName }}</span>
+              </h5>
+              <h5>
+                {{ 'i18.job.department' | translate }}
+                <span>{{ job.DepartmentName }}</span>
+              </h5>
+              <h5>
+                {{ 'i18.job.date_posted' | translate }}
+                <span>{{ job.JobName }}</span>
+              </h5>
+              <h5>
+                {{ 'i18.job.application_deadline' | translate }}
+                <span>{{ job.ApplicationYear }}</span>
+              </h5>
+            </section>
+            <div class="summary" data-vi-filter="detail">
+              {{ true ? job.JobSummarySA : job.JobDescriptionSA }}
+            </div>
+          </td>
+          <td><i class="vi vi-long-arrow-right"></i></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
-{{ jobs | json }}

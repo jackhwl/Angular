@@ -16,5 +16,9 @@ export class JobsListComponent implements OnInit {
   @Input() jobs: Job[];
   constructor() {}
 
+  byId(job: Job) {
+    return job.JobId;
+  }
+
   ngOnInit(): void {}
 }

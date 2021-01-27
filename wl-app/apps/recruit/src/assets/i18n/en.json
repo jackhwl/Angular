@@ -7,6 +7,11 @@
   "i18.nav.students": "Students",
   "i18.nav.login": "Login",
 
+  "i18.job.office": "Office",
+  "i18.job.department": "Department",
+  "i18.job.date_posted": "Date_Posted",
+  "i18.job.application_deadline": "Application_Deadline",
+
   "i18.students.students": "Students",
   "i18.students.firstname": "FirstName",
   "i18.students.middlename": "MiddleName",
