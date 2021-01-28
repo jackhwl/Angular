@@ -9,12 +9,15 @@ import { finalize, tap } from 'rxjs/operators';
 import * as fromJobs from './jobs.reducer';
 import * as JobsSelectors from './jobs.selectors';
 
+import * as JobsActions from './jobs.actions';
+import { JobState } from './jobs.reducer';
+
 @Injectable()
 export class JobsFacade {
   private loading = new BehaviorSubject<boolean>(true);
   private jobs = new BehaviorSubject<Job[]>(null);
 
-  jobs$ = this.jobs.asObservable();
+  jobs$ = this.store.pipe(select(() => JobsSelectors.getAllJobs)); //this.jobs.asObservable();
   loading$ = this.loading.asObservable();
 
   nfs = {
@@ -36,6 +39,7 @@ export class JobsFacade {
     }
   };
   constructor(
+    private store: Store<JobState>,
     private jobService: JobService,
     private toastService: ToastService
   ) {}
@@ -54,11 +58,15 @@ export class JobsFacade {
       tap(() => this.notification(type, name, cb))
     );
 
-  getAll(cb?: any) {
+  getAll2(cb?: any) {
     this.loading.next(true);
     this.jobService
       .getAll()
       .pipe(this.sideFinalize('getAll', '', cb))
       .subscribe((jobs: Job[]) => this.jobs.next(jobs));
+  }
+
+  getAll() {
+    this.store.dispatch(JobsActions.loadJobs());
   }
 }

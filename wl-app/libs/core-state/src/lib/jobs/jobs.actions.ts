@@ -1,11 +1,12 @@
 import { createAction, props } from '@ngrx/store';
+import { Job } from '@wl/api-interfaces';
 import { JobsEntity } from './jobs.models';
 
 export const loadJobs = createAction('[Jobs] Load Jobs');
 
 export const loadJobsSuccess = createAction(
   '[Jobs] Load Jobs Success',
-  props<{ jobs: JobsEntity[] }>()
+  props<{ jobs: Job[] }>()
 );
 
 export const loadJobsFailure = createAction(

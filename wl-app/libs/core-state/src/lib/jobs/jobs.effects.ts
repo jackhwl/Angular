@@ -4,6 +4,9 @@ import { fetch } from '@nrwl/angular';
 
 import * as fromJobs from './jobs.reducer';
 import * as JobsActions from './jobs.actions';
+import { JobService } from '@wl/core-data';
+import { Job } from '@wl/api-interfaces';
+import { finalize, map } from 'rxjs/operators';
 
 @Injectable()
 export class JobsEffects {
@@ -12,8 +15,9 @@ export class JobsEffects {
       ofType(JobsActions.loadJobs),
       fetch({
         run: action => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return JobsActions.loadJobsSuccess({ jobs: [] });
+          this.jobService
+            .getAll()
+            .pipe(map((jobs: Job[]) => JobsActions.loadJobsSuccess({ jobs })));
         },
 
         onError: (action, error) => {
@@ -24,5 +28,5 @@ export class JobsEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private jobService: JobService) {}
 }
