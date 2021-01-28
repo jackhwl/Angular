@@ -1,41 +1,42 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   STUDENTS_FEATURE_KEY,
-  State,
+  StudentState,
   StudentsPartialState,
-  studentsAdapter,
+  studentsAdapter
 } from './students.reducer';
 
 // Lookup the 'Students' feature state managed by NgRx
 export const getStudentsState = createFeatureSelector<
   StudentsPartialState,
-  State
+  StudentState
 >(STUDENTS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = studentsAdapter.getSelectors();
 
 export const getStudentsLoaded = createSelector(
   getStudentsState,
-  (state: State) => state.loaded
+  (state: StudentState) => state.loaded
 );
 
 export const getStudentsError = createSelector(
   getStudentsState,
-  (state: State) => state.error
+  (state: StudentState) => state.error
 );
 
-export const getAllStudents = createSelector(getStudentsState, (state: State) =>
-  selectAll(state)
+export const getAllStudents = createSelector(
+  getStudentsState,
+  (state: StudentState) => selectAll(state)
 );
 
 export const getStudentsEntities = createSelector(
   getStudentsState,
-  (state: State) => selectEntities(state)
+  (state: StudentState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getStudentsState,
-  (state: State) => state.selectedId
+  (state: StudentState) => state.selectedId
 );
 
 export const getSelected = createSelector(

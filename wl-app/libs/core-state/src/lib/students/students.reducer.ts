@@ -6,41 +6,43 @@ import { StudentsEntity } from './students.models';
 
 export const STUDENTS_FEATURE_KEY = 'students';
 
-export interface State extends EntityState<StudentsEntity> {
+export interface StudentState extends EntityState<StudentsEntity> {
   selectedId?: string | number; // which Students record has been selected
   loaded: boolean; // has the Students list been loaded
   error?: string | null; // last known error (if any)
 }
 
 export interface StudentsPartialState {
-  readonly [STUDENTS_FEATURE_KEY]: State;
+  readonly [STUDENTS_FEATURE_KEY]: StudentState;
 }
 
-export const studentsAdapter: EntityAdapter<StudentsEntity> = createEntityAdapter<
+export const studentsAdapter: EntityAdapter<
   StudentsEntity
->();
+> = createEntityAdapter<StudentsEntity>();
 
-export const initialState: State = studentsAdapter.getInitialState({
-  // set initial required properties
-  loaded: false,
-});
+export const initialStudentsState: StudentState = studentsAdapter.getInitialState(
+  {
+    // set initial required properties
+    loaded: false
+  }
+);
 
 const studentsReducer = createReducer(
-  initialState,
-  on(StudentsActions.loadStudents, (state) => ({
+  initialStudentsState,
+  on(StudentsActions.loadStudents, state => ({
     ...state,
     loaded: false,
-    error: null,
+    error: null
   })),
   on(StudentsActions.loadStudentsSuccess, (state, { students }) =>
     studentsAdapter.setAll(students, { ...state, loaded: true })
   ),
   on(StudentsActions.loadStudentsFailure, (state, { error }) => ({
     ...state,
-    error,
+    error
   }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: StudentState | undefined, action: Action) {
   return studentsReducer(state, action);
 }
