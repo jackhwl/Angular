@@ -129,6 +129,7 @@
   ],
   "jobs": [
     {
+      "id": 10,
       "JobId": 10,
       "JobName": "actual client assignments",
       "OfficeName": "Toronto",
@@ -140,6 +141,7 @@
       "JobCategoryID": 34
     },
     {
+      "id": 11,
       "JobId": 11,
       "JobName": "Rédacteur de blogue adjoint, Québec",
       "OfficeName": "Montreal",
@@ -151,6 +153,7 @@
       "JobCategoryID": 36
     },
     {
+      "id": 13,
       "JobId": 13,
       "JobName": "Summer for New York",
       "OfficeName": "New York",

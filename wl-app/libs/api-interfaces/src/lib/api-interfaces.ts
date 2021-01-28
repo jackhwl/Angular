@@ -52,6 +52,7 @@ export class AppUserAuth {
 }
 
 export interface Job {
+  id: string | number;
   JobId: number;
   JobName: string;
   OfficeName: string;
