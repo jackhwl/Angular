@@ -27,7 +27,7 @@ export const initialStudentsState: StudentState = studentsAdapter.getInitialStat
   }
 );
 
-const studentsReducer = createReducer(
+const _studentsReducer = createReducer(
   initialStudentsState,
   on(StudentsActions.loadStudents, state => ({
     ...state,
@@ -43,9 +43,9 @@ const studentsReducer = createReducer(
   }))
 );
 
-export function studentReducer(
+export function studentsReducer(
   state: StudentState | undefined,
   action: Action
 ) {
-  return studentsReducer(state, action);
+  return _studentsReducer(state, action);
 }

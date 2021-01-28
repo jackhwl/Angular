@@ -25,7 +25,7 @@ export const initialJobState: JobState = jobsAdapter.getInitialState({
   loaded: false
 });
 
-const jobsReducer = createReducer(
+const _jobsReducer = createReducer(
   initialJobState,
   on(JobsActions.loadJobs, state => ({
     ...state,
@@ -38,6 +38,6 @@ const jobsReducer = createReducer(
   on(JobsActions.loadJobsFailure, (state, { error }) => ({ ...state, error }))
 );
 
-export function jobReducer(state: JobState | undefined, action: Action) {
-  return jobsReducer(state, action);
+export function jobsReducer(state: JobState | undefined, action: Action) {
+  return _jobsReducer(state, action);
 }
