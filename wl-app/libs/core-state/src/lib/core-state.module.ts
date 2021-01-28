@@ -16,7 +16,6 @@ import { StudentsEffects } from './students/students.effects';
 import { PluralHttpUrlGenerator } from '@wl/core-data';
 import * as fromJobs from './jobs/jobs.reducer';
 import { JobsEffects } from './jobs/jobs.effects';
-import { JobsFacade } from './jobs/jobs.facade';
 
 @NgModule({
   imports: [
