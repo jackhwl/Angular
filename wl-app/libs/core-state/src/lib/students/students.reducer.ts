@@ -43,6 +43,9 @@ const studentsReducer = createReducer(
   }))
 );
 
-export function reducer(state: StudentState | undefined, action: Action) {
+export function studentReducer(
+  state: StudentState | undefined,
+  action: Action
+) {
   return studentsReducer(state, action);
 }

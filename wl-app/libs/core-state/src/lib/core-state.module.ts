@@ -22,7 +22,7 @@ import { JobsEffects } from './jobs/jobs.effects';
     StoreModule.forRoot({}),
     StoreModule.forFeature(
       fromStudents.STUDENTS_FEATURE_KEY,
-      fromStudents.reducer
+      fromStudents.studentReducer
     ),
     EffectsModule.forRoot(),
     EffectsModule.forFeature([StudentsEffects]),
