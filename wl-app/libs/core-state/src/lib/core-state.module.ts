@@ -24,13 +24,14 @@ import { JobsEffects } from './jobs/jobs.effects';
       fromStudents.STUDENTS_FEATURE_KEY,
       fromStudents.studentsReducer
     ),
+    StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.jobsReducer),
+
     EffectsModule.forRoot(),
     EffectsModule.forFeature([StudentsEffects]),
+    EffectsModule.forFeature([JobsEffects]),
 
     NgrxDataModule.forRoot(entityConfig),
-    environment.production ? [] : StoreDevtoolsModule.instrument(),
-    StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.jobsReducer),
-    EffectsModule.forFeature([JobsEffects])
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
   providers:
     environment.ngrxData && !environment.inMemorryData
