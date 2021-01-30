@@ -344,3 +344,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 - nx g lib ui-slogan --style=scss -d
 - nx g c slogan/slogan --project=ui-slogan -d
+
+## review ngrx doc
+
+- ![ngrx flow 2](tools/state-management-lifecycle.png 'flow')
