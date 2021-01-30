@@ -15,9 +15,12 @@ export class JobsEffects {
       ofType(JobsActions.loadJobs),
       fetch({
         run: action => {
-          this.jobService
-            .getAll()
-            .pipe(map((jobs: Job[]) => JobsActions.loadJobsSuccess({ jobs })));
+          this.jobService.getAll().pipe(
+            map((jobs: Job[]) => {
+              console.log('sss');
+              return JobsActions.loadJobsSuccess({ jobs });
+            })
+          );
         },
 
         onError: (action, error) => {

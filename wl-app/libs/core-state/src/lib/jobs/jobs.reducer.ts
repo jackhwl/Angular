@@ -21,7 +21,9 @@ export const jobsAdapter: EntityAdapter<Job> = createEntityAdapter<Job>();
 
 export const initialJobState: JobState = jobsAdapter.getInitialState({
   // set initial required properties
-  loaded: false
+  selectedId: 3,
+  loaded: false,
+  entities: {}
 });
 
 const _jobsReducer = createReducer(
@@ -32,7 +34,6 @@ const _jobsReducer = createReducer(
     error: null
   })),
   on(JobsActions.loadJobsSuccess, (state, { jobs }) => {
-    console.log('JobsActions.loadJobsSuccess');
     return jobsAdapter.setAll(jobs, { ...state, loaded: true });
   }),
   on(JobsActions.loadJobsFailure, (state, { error }) => ({ ...state, error }))
