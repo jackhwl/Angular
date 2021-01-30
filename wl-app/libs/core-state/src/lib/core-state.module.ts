@@ -11,8 +11,6 @@ import {
 } from 'ngrx-data';
 import { entityConfig } from './entity-metadata';
 
-import * as fromStudents from './students/students.reducer';
-import { StudentsEffects } from './students/students.effects';
 import { PluralHttpUrlGenerator } from '@wl/core-data';
 import * as fromJobs from './jobs/jobs.reducer';
 import { JobsEffects } from './jobs/jobs.effects';
@@ -20,14 +18,10 @@ import { JobsEffects } from './jobs/jobs.effects';
 @NgModule({
   imports: [
     StoreModule.forRoot({}),
-    StoreModule.forFeature(
-      fromStudents.STUDENTS_FEATURE_KEY,
-      fromStudents.studentsReducer
-    ),
+
     StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.jobsReducer),
 
     EffectsModule.forRoot(),
-    EffectsModule.forFeature([StudentsEffects]),
     EffectsModule.forFeature([JobsEffects]),
 
     NgrxDataModule.forRoot(entityConfig),

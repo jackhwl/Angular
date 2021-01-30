@@ -5,6 +5,10 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 import { StudentsListComponent } from './students-list/students-list.component';
 import { StudentsFacade } from '@wl/core-state';
 import { SharedModule } from '@wl/shared';
+import { StoreModule } from '@ngrx/store';
+import * as fromStudents from 'libs/core-state/src/lib/students/students.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentsEffects } from 'libs/core-state/src/lib/students/students.effects';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: StudentsComponent }
@@ -16,7 +20,15 @@ const routes: Routes = [
     StudentDetailsComponent,
     StudentsListComponent
   ],
-  imports: [SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    SharedModule,
+    StoreModule.forFeature(
+      fromStudents.STUDENTS_FEATURE_KEY,
+      fromStudents.studentsReducer
+    ),
+    EffectsModule.forFeature([StudentsEffects]),
+    RouterModule.forChild(routes)
+  ],
   providers: [StudentsFacade]
 })
 export class StudentsModule {}
