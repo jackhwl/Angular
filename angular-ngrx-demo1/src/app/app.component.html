@@ -1,6 +1,14 @@
-<h1>NgRx Tutorial</h1>
+<h2>Books</h2>
+<app-book-list
+  class="book-list"
+  [books]="books$ | async"
+  (add)="onAdd($event)"
+></app-book-list>
 
-<!-- 
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://github.com/ngrx/platform
--->
+<h2>My Collection</h2>
+<app-book-collection
+  class="book-collection"
+  [books]="bookCollection$ | async"
+  (remove)="onRemove($event)"
+>
+</app-book-collection>
