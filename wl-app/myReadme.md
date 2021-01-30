@@ -348,3 +348,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## review ngrx doc
 
 - ![ngrx flow 2](tools/state-management-lifecycle.png 'flow')
+  [Tutorial 1](https://stackblitz.com/edit/angular-mhj1du?file=src%2Fapp%2Fmy-counter%2Fmy-counter.component.ts)
