@@ -17,7 +17,7 @@ export class JobsFacade {
   private loading = new BehaviorSubject<boolean>(true);
   private jobs = new BehaviorSubject<Job[]>(null);
 
-  jobs$ = this.store.pipe(select(() => JobsSelectors.getAllJobs)); //this.jobs.asObservable();
+  jobs$ = this.store.pipe(select(JobsSelectors.getAllJobs)); //this.jobs.asObservable();
   loading$ = this.loading.asObservable();
 
   nfs = {

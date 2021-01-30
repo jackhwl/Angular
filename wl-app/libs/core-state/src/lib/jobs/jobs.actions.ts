@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Job } from '@wl/api-interfaces';
-import { JobsEntity } from './jobs.models';
+//import { JobsEntity } from './jobs.models';
 
 export const loadJobs = createAction('[Jobs] Load Jobs');
 
