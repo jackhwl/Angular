@@ -9,11 +9,14 @@ import { StoreModule } from "@ngrx/store";
 import { HttpClientModule } from "@angular/common/http";
 import { BookListComponent } from "./book-list/book-list.component";
 import { BookCollectionComponent } from "./book-collection/book-collection.component";
+import { EffectsModule } from "@ngrx/effects";
+import { BooksEffects } from "./state/books.effects";
 
 @NgModule({
   imports: [
     BrowserModule,
     StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }),
+    EffectsModule.forRoot([BooksEffects]),
     HttpClientModule
   ],
   declarations: [AppComponent, BookListComponent, BookCollectionComponent],
