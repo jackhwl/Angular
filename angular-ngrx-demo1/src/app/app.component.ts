@@ -2,7 +2,12 @@ import { Component } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 
 import { selectBookCollection, selectBooks } from "./state/books.selectors";
-import { retrievedBookList, addBook, removeBook, getBookList } from "./state/books.actions";
+import {
+  retrievedBookList,
+  addBook,
+  removeBook,
+  getBookList
+} from "./state/books.actions";
 //import { GoogleBooksService } from "./book-list/books.service";
 
 @Component({
@@ -25,8 +30,8 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(getBookList());
-  //   this.booksService
-  //     .getBooks()
-  //     .subscribe(books => this.store.dispatch(retrievedBookList({ books })));
-  // }
+    //   this.booksService
+    //     .getBooks()
+    //     .subscribe(books => this.store.dispatch(retrievedBookList({ books })));
+  }
 }
