@@ -349,3 +349,15 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 - ![ngrx flow 2](tools/state-management-lifecycle.png 'flow')
   [Tutorial 1](https://stackblitz.com/edit/angular-mhj1du?file=src%2Fapp%2Fmy-counter%2Fmy-counter.component.ts)
+- action props item just a label, can be anything
+
+```
+  export const retrievedBookList = createAction(
+    "[Book List/API] Retrieve Books Success",
+    props<{ asdf_books }>()
+  );
+```
+
+[Selector](https://ultimatecourses.com/blog/ngrx-store-understanding-state-selectors)
+
+- job service facade vs job store facade
