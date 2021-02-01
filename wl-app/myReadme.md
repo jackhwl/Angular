@@ -361,3 +361,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 [Selector](https://ultimatecourses.com/blog/ngrx-store-understanding-state-selectors)
 
 - job service facade vs job store facade
+- [common error](https://medium.com/angular-in-depth/common-and-easy-to-make-mistakes-when-youre-new-to-ngrx-49404ac973ea)

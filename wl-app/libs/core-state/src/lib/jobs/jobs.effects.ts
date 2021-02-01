@@ -5,7 +5,7 @@ import { fetch } from '@nrwl/angular';
 import * as JobsActions from './jobs.actions';
 import { JobService } from '@wl/core-data';
 import { Job } from '@wl/api-interfaces';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class JobsEffects {
@@ -17,9 +17,10 @@ export class JobsEffects {
       // ))
       fetch({
         run: action =>
-          this.jobService
-            .getAll()
-            .pipe(map((jobs: Job[]) => JobsActions.loadJobsSuccess({ jobs }))),
+          this.jobService.getAll().pipe(
+            tap(jobs => console.log('bb=', jobs)),
+            map((jobs: Job[]) => JobsActions.loadJobsSuccess({ jobs }))
+          ),
         onError: (action, error) => JobsActions.loadJobsFailure({ error })
       })
     )
