@@ -11,3 +11,7 @@
 
 - ng generate @ngrx/schematics:reducer fizzbuzz --group=true --skipTests  
   -ng generate @ngrx/schematics:reducer fizzbuzz --reducers=reducers/index.ts --group=true --spec=false
+
+## generate action
+
+- ng generate @ngrx/schematics:action fizzbuzz --group=true --skipTests
