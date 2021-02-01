@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { State } from './reducers';
+import { getMessage, State } from './reducers';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +8,8 @@ import { State } from './reducers';
     {{ fizzbuzzMessage | async }}
   `
 })
-export class AppComponent implements OnInit {
-  fizzbuzzMessage: Observable<string> = this.store.pipe(
-    select(state => state.fizzbuzz.message)
-  );
+export class AppComponent {
+  fizzbuzzMessage = this.store.pipe(select(getMessage));
 
-  constructor(private store: Store<State>) {}
-
-  ngOnInit() {
-    setInterval(() => this.store.dispatch({ type: 'NEXT' }), 1000);
-  }
+  constructor(private store: Store<{}>) {}
 }
