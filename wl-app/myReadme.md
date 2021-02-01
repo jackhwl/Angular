@@ -362,3 +362,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 - job service facade vs job store facade
 - [common error](https://medium.com/angular-in-depth/common-and-easy-to-make-mistakes-when-youre-new-to-ngrx-49404ac973ea)
+- [Enterprise Angular applications with ngrx](https://duncanhunter.gitbooks.io/enterprise-angular-applications-with-ngrx-and-nx/content/chapter1.html)

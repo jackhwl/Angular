@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
 
+  // need replace with auth.effects.ts in https://ngrx.io/guide/effects
   login() {
     this.securityService.login(this.user).subscribe(
       resp => {
