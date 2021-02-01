@@ -31,6 +31,7 @@ export class JobsFacade {
   jobs$ = this.store.pipe(
     select(JobsSelectors.getAllJobs),
     filter(jobs => jobs.length > 0),
+    tap(aa => console.log('aa=', aa)),
     this.sideFinalize('getAll', '')
   );
 

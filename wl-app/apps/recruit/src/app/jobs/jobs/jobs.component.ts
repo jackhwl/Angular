@@ -9,7 +9,6 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
-  jobs2$ = this.facade.jobs$;
   vm$ = combineLatest([this.facade.jobs$, this.facade.loading$]).pipe(
     filter(Boolean),
     map(([jobs, loading]) => ({
