@@ -29,20 +29,20 @@ export class JobsEffects {
       ofType(JobsActions.loadJobs),
       // mergeMap(() => this.jobService.getAll().pipe(
       // switchMap((jobs: Job[]) => [
-      //   JobsActions.displayLoadJobsSuccess({title: 'GET', description: 'i18.job.job_retrieved_successfully'}),
       //   JobsActions.loadJobsSuccess({ jobs }),
+      //   JobsActions.displayLoadJobsSuccess({title: 'GET', description: 'i18.job.job_retrieved_successfully'}),
       // ])
       // ))
       fetch({
         run: action =>
           this.jobService.getAll().pipe(
             switchMap((jobs: Job[]) => [
+              JobsActions.loadJobsSuccess({ jobs }),
               JobsActions.notifyLoadJobsSuccess({
                 description: 'i18.job.job_retrieved_successfully',
                 title: 'GET',
                 interpolateParams: { counter: jobs.length }
-              }),
-              JobsActions.loadJobsSuccess({ jobs })
+              })
             ])
           ),
         onError: (action, error) => JobsActions.loadJobsFailure({ error })
