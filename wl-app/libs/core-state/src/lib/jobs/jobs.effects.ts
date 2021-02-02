@@ -9,10 +9,10 @@ import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class JobsEffects {
-  displayLoadJobsSuccess$ = createEffect(
+  notifyLoadJobsSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(JobsActions.displayLoadJobsSuccess),
+        ofType(JobsActions.notifyLoadJobsSuccess),
         tap(action => {
           this.toastService.open(
             action.description,
@@ -37,7 +37,7 @@ export class JobsEffects {
         run: action =>
           this.jobService.getAll().pipe(
             switchMap((jobs: Job[]) => [
-              JobsActions.displayLoadJobsSuccess({
+              JobsActions.notifyLoadJobsSuccess({
                 description: 'i18.job.job_retrieved_successfully',
                 title: 'GET',
                 interpolateParams: { counter: jobs.length }
