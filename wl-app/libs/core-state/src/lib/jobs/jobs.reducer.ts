@@ -36,7 +36,8 @@ const _jobsReducer = createReducer(
   on(JobsActions.loadJobsSuccess, (state, { jobs }) => {
     return jobsAdapter.setAll(jobs, { ...state, loaded: true });
   }),
-  on(JobsActions.loadJobsFailure, (state, { error }) => ({ ...state, error }))
+  on(JobsActions.loadJobsFailure, (state, { error }) => ({ ...state, error })),
+  on(JobsActions.displayLoadJobsSuccess, state => state)
 );
 
 export function jobsReducer(state: JobState | undefined, action: Action) {

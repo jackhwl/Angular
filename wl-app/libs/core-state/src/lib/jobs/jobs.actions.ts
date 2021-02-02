@@ -13,3 +13,8 @@ export const loadJobsFailure = createAction(
   '[Jobs] Load Jobs Failure',
   props<{ error: any }>()
 );
+
+export const displayLoadJobsSuccess = createAction(
+  '[Toastr Notification] Display Load Jobs Success',
+  props<{ item: string; title: string; description: string }>()
+);
