@@ -36,11 +36,11 @@ export class JobsEffects {
       fetch({
         run: action =>
           this.jobService.getAll().pipe(
-            tap(jobs => console.log('bb=', jobs)),
             switchMap((jobs: Job[]) => [
               JobsActions.displayLoadJobsSuccess({
                 description: 'i18.job.job_retrieved_successfully',
-                title: 'GET'
+                title: 'GET',
+                interpolateParams: { counter: jobs.length }
               }),
               JobsActions.loadJobsSuccess({ jobs })
             ])
