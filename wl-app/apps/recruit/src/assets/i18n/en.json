@@ -11,6 +11,7 @@
   "i18.job.department": "Department",
   "i18.job.date_posted": "Date_Posted",
   "i18.job.application_deadline": "Application_Deadline",
+  "i18.job.job_retrieved_successfully": "Jobs retrieved successfully!",
 
   "i18.students.students": "Students",
   "i18.students.firstname": "FirstName",

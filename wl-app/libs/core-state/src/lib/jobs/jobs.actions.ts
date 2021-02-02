@@ -16,5 +16,5 @@ export const loadJobsFailure = createAction(
 
 export const displayLoadJobsSuccess = createAction(
   '[Toastr Notification] Display Load Jobs Success',
-  props<{ item: string; title: string; description: string }>()
+  props<{ title: string; description: string; interpolateParams?: Object }>()
 );

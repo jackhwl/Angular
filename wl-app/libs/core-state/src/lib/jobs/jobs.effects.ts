@@ -9,39 +9,16 @@ import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class JobsEffects {
-  nfs = {
-    getAll: {
-      i18n_key: 'i18.villains.villains_retrieved_successfully',
-      verb: 'GET'
-    },
-    add: {
-      i18n_key: 'i18.villains.villain_created',
-      verb: 'POST'
-    },
-    update: {
-      i18n_key: 'i18.villains.villain_updated',
-      verb: 'PUT'
-    },
-    delete: {
-      i18n_key: 'i18.villains.villain_deleted',
-      verb: 'DELETE'
-    }
-  };
-
-  notification(item: string, name: string, cb?: any) {
-    cb
-      ? cb()
-      : this.toastService.open(this.nfs[item].i18n_key, this.nfs[item].verb, {
-          name
-        });
-  }
-
   displayLoadJobsSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(JobsActions.displayLoadJobsSuccess),
         tap(action => {
-          this.notification(action.item, action.title);
+          this.toastService.open(
+            action.description,
+            action.title,
+            action.interpolateParams
+          );
         })
       ),
     { dispatch: false }
@@ -52,7 +29,7 @@ export class JobsEffects {
       ofType(JobsActions.loadJobs),
       // mergeMap(() => this.jobService.getAll().pipe(
       // switchMap((jobs: Job[]) => [
-      //   JobsActions.displayLoadJobsSuccess({item: 'getAll', title: '', description: ''}),
+      //   JobsActions.displayLoadJobsSuccess({title: 'GET', description: 'i18.job.job_retrieved_successfully'}),
       //   JobsActions.loadJobsSuccess({ jobs }),
       // ])
       // ))
@@ -62,9 +39,8 @@ export class JobsEffects {
             tap(jobs => console.log('bb=', jobs)),
             switchMap((jobs: Job[]) => [
               JobsActions.displayLoadJobsSuccess({
-                item: 'getAll',
-                title: '',
-                description: ''
+                description: 'i18.job.job_retrieved_successfully',
+                title: 'GET'
               }),
               JobsActions.loadJobsSuccess({ jobs })
             ])
