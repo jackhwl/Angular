@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '@wl/shared';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SecurityService } from '@wl/core-data';
 
+import { AppComponent } from '../app.component';
+import { HeaderComponent } from '../navigation/header/header.component';
+import { SidenavListComponent } from '../navigation/sidenav-list/sidenav-list.component';
+
+export const COMPONENTS = [AppComponent, HeaderComponent, SidenavListComponent];
+
 @NgModule({
   imports: [
+    RouterModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -17,8 +25,9 @@ import { SecurityService } from '@wl/core-data';
     }),
     SharedModule
   ],
+  declarations: COMPONENTS,
   providers: [SecurityService],
-  exports: [SharedModule, TranslateModule]
+  exports: [SharedModule, TranslateModule, ...COMPONENTS]
 })
 export class CoreModule {}
 

@@ -6,17 +6,13 @@ import { CoreStateModule } from '@wl/core-state';
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './navigation/header/header.component';
-import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-
 import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, SidenavListComponent],
   imports: [
     // angular
-    BrowserAnimationsModule,
     BrowserModule,
+    BrowserAnimationsModule,
 
     // core
     CoreStateModule,
