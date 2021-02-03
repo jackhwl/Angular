@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreStateModule } from '@wl/core-state';
-import { RoutingModule } from './routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './core/containers/app.component';
 import { CoreModule } from './core/core.module';
@@ -19,7 +19,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
 
     // app
-    RoutingModule
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
