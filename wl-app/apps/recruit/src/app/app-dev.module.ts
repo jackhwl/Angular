@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { AppModule } from './app.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './core/containers/app.component';
 
 import {
   HttpClientInMemoryWebApiModule,

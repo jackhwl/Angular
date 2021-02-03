@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreStateModule } from '@wl/core-state';
 import { RoutingModule } from './routing.module';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './core/containers/app.component';
 import { CoreModule } from './core/core.module';
 
 @NgModule({

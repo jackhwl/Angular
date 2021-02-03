@@ -361,11 +361,11 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 [Selector](https://ultimatecourses.com/blog/ngrx-store-understanding-state-selectors)
 
 - job service facade vs job store facade
-- [common error](https://medium.com/angular-in-depth/common-and-easy-to-make-mistakes-when-youre-new-to-ngrx-49404ac973ea)
 - [Enterprise Angular applications with ngrx](https://duncanhunter.gitbooks.io/enterprise-angular-applications-with-ngrx-and-nx/content/chapter1.html)
   https://github.com/ngrx/platform/tree/master/projects/example-app
   https://timdeschryver.dev/blog/clean-ngrx-reducers-using-immer
   https://medium.com/angular-in-depth/simple-state-mutations-in-ngxs-with-immer-48b908874a5e
-  https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5
 
 # notification in effect
+
+## move app.component to core/container folder
