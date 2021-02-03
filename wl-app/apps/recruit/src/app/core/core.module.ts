@@ -7,8 +7,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SecurityService } from '@wl/core-data';
 
 import { AppComponent } from './containers/app.component';
-import { HeaderComponent } from '../navigation/header/header.component';
-import { SidenavListComponent } from '../navigation/sidenav-list/sidenav-list.component';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 
 export const COMPONENTS = [AppComponent, HeaderComponent, SidenavListComponent];
 

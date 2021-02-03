@@ -368,4 +368,4 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 
 # notification in effect
 
-## move app.component to core/container folder
+## move app.component to core/container folder, navigation folder to core folder
