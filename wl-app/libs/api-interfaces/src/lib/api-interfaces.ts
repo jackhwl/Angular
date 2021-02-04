@@ -25,6 +25,12 @@ export interface Person {
 export interface User {
   firstName: string;
   lastName: string;
+  name: string;
+}
+
+export interface Credentials {
+  username: string;
+  password: string;
 }
 
 export class AppUser {
