@@ -3,7 +3,7 @@ import { CanActivate } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-// import { AuthApiActions } from '../../auth/actions';
+import { AuthApiActions } from '@wl/core-state';
 // import * as fromAuth from '../../auth/reducers';
 
 @Injectable({
