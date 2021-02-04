@@ -86,6 +86,7 @@
     "jest": "26.2.2",
     "jest-preset-angular": "8.3.1",
     "json-server": "^0.16.3",
+    "ngrx-store-freeze": "^0.2.4",
     "prettier": "2.0.4",
     "ts-jest": "26.4.0",
     "ts-node": "~7.0.0",
