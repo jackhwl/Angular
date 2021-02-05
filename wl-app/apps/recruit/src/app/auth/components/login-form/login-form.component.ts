@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Credentials } from '@wl/api-interfaces';
 
 @Component({
-  selector: 'bc-login-form',
+  selector: 'wl-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
