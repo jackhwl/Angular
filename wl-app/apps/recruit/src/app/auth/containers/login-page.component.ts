@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import * as fromAuth from '../../auth/reducers';
+import { fromAuth } from '@wl/core-state';
 import { LoginPageActions } from '@wl/core-state';
 import { Credentials } from '@wl/api-interfaces';
 
