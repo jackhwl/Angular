@@ -1,4 +1,4 @@
-export * from './lib/jobs/jobs.actions';
+export * from './lib/jobs/actions';
 export * from './lib/jobs/jobs.selectors';
 export * from './lib/jobs/jobs.models';
 export * from './lib/jobs/jobs.facade';

@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as JobsActions from './jobs.actions';
+import { JobsActions, JobsApiActions } from './actions';
 //import { JobsEntity } from './jobs.models';
 import { Job } from '@wl/api-interfaces';
 
@@ -33,11 +33,14 @@ const _jobsReducer = createReducer(
     loaded: false,
     error: null
   })),
-  on(JobsActions.loadJobsSuccess, (state, { jobs }) => {
+  on(JobsApiActions.loadJobsSuccess, (state, { jobs }) => {
     return jobsAdapter.setAll(jobs, { ...state, loaded: true });
   }),
-  on(JobsActions.loadJobsFailure, (state, { error }) => ({ ...state, error })),
-  on(JobsActions.notifyLoadJobsSuccess, state => state)
+  on(JobsApiActions.loadJobsFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
+  on(JobsApiActions.notifyLoadJobsSuccess, state => state)
 );
 
 export function jobsReducer(state: JobState | undefined, action: Action) {

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import * as JobsSelectors from './jobs.selectors';
 
-import * as JobsActions from './jobs.actions';
+import { JobsActions } from './actions';
 
 @Injectable()
 export class JobsFacade {
