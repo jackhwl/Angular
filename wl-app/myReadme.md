@@ -365,6 +365,7 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
   https://github.com/ngrx/platform/tree/master/projects/example-app
   https://timdeschryver.dev/blog/clean-ngrx-reducers-using-immer
   https://medium.com/angular-in-depth/simple-state-mutations-in-ngxs-with-immer-48b908874a5e
+  https://www.codemag.com/Article/1811061/Angular-and-the-Store#:~:text=The%20structure%20is%20self%2Dexplanatory,state%20together%20with%20the%20reducers.
 
 # notification in effect
 
@@ -373,3 +374,5 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## add ngrx-store-freeze
 
 - yarn add ngrx-store-freeze --dev
+
+## add job routing, default load job module
