@@ -15,7 +15,7 @@ import { tap } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   @ViewChild('sidenav') localSideNav;
   private linksAll = [
-    { path: '/', icon: 'home', title: 'home' },
+    { path: '/home', icon: 'home', title: 'home' },
     { path: '/jobs', icon: 'view_list', title: 'jobs' },
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
     { path: '/villains', icon: 'view_list', title: 'villains', isAdmin: true },

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@wl/shared';
-import { JobsListComponent } from './jobs-list/jobs-list.component';
-import { JobsComponent } from './jobs/jobs.component';
+import { JobsListComponent } from './components/jobs-list/jobs-list.component';
+import { JobsComponent } from './containers/jobs.component';
 import { JobsFacade } from '@wl/core-state';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
