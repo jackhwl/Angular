@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@wl/core-state';
 import { NotFoundPageComponent } from './core/containers/not-found-page.component';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'jobs',
-    loadChildren: () => import('./jobs/jobs.module').then(m => m.JobsModule)
+    loadChildren: () => import('./jobs/jobs.module').then(m => m.JobsModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'heroes',
