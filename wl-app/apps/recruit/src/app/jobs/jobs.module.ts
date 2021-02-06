@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-
-import { SharedModule } from '@wl/shared';
-import { JobsListComponent } from './components/jobs-list/jobs-list.component';
-import { JobsComponent } from './containers/jobs.component';
-import { JobsFacade } from '@wl/core-state';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromJobs from 'libs/core-state/src/lib/jobs/jobs.reducer';
-import { JobsEffects } from 'libs/core-state/src/lib/jobs/jobs.effects';
+
+import { SharedModule } from '@wl/shared';
+import { JobsFacade, JobsEffects, fromJobs } from '@wl/core-state';
 import { JobsRoutingModule } from './jobs-routing.module';
+
+import { JobsListComponent } from './components/jobs-list/jobs-list.component';
+import { JobsComponent } from './containers/jobs.component';
 
 @NgModule({
   declarations: [JobsListComponent, JobsComponent],
