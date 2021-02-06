@@ -7,6 +7,9 @@ import * as fromRoot from '../../reducers';
 import * as fromAuth from './auth.reducer';
 import * as fromLoginPage from './login-page.reducer';
 import { AuthApiActions } from '../actions';
+//import { AUTH_FEATURE_KEY } from './auth.reducer';
+
+export const AUTH_FEATURE_KEY = 'auth';
 
 export interface AuthState {
   status: fromAuth.State;
@@ -25,7 +28,9 @@ export const reducers: ActionReducerMap<
   loginPage: fromLoginPage.reducer
 };
 
-export const selectAuthState = createFeatureSelector<State, AuthState>('auth');
+export const selectAuthState = createFeatureSelector<State, AuthState>(
+  AUTH_FEATURE_KEY
+);
 
 export const selectAuthStatusState = createSelector(
   selectAuthState,

@@ -13,9 +13,9 @@ import { JobsComponent } from './containers/jobs.component';
   declarations: [JobsListComponent, JobsComponent],
   imports: [
     SharedModule,
-    JobsRoutingModule,
     StoreModule.forFeature(fromJobs.JOBS_FEATURE_KEY, fromJobs.jobsReducer),
-    EffectsModule.forFeature([JobsEffects])
+    EffectsModule.forFeature([JobsEffects]),
+    JobsRoutingModule
   ],
   providers: [JobsFacade]
 })
