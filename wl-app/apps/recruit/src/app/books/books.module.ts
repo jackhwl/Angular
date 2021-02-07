@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { SharedModule } from '@wl/shared';
+
 import { reducers } from '../books/reducers';
-import { MaterialModule } from '../material';
 import { ComponentsModule } from './components';
 import { BooksRoutingModule } from './books-routing.module';
 import { BookEffects } from './effects/book.effects';
@@ -16,8 +16,7 @@ import { CollectionPageComponent } from './containers/collection-page.component'
 
 @NgModule({
   imports: [
-    CommonModule,
-    MaterialModule,
+    SharedModule,
     ComponentsModule,
     BooksRoutingModule,
 
