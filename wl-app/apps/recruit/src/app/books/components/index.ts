@@ -4,10 +4,10 @@ import { SharedModule } from '@wl/shared';
 import { RouterModule } from '@angular/router';
 
 import { BookAuthorsComponent } from './book-authors.component';
-import { BookDetailComponent } from './book-detail.component';
-import { BookPreviewComponent } from './book-preview.component';
+import { BookDetailComponent } from './book-detail/book-detail.component';
+import { BookPreviewComponent } from './book-preview/book-preview.component';
 import { BookPreviewListComponent } from './book-preview-list.component';
-import { BookSearchComponent } from './book-search.component';
+import { BookSearchComponent } from './book-search/book-search.component';
 import { PipesModule } from '@wl/core-data';
 
 export const COMPONENTS = [
