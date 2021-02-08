@@ -3,7 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { reducers } from '../books/reducers';
-import { ComponentsModule } from './components';
+import { BooksComponentsModule } from './components';
 import { BooksRoutingModule } from './books-routing.module';
 import { BookEffects } from './effects/book.effects';
 import { CollectionEffects } from './effects/collection.effects';
@@ -14,7 +14,7 @@ import { CollectionPageComponent } from './containers/collection-page.component'
 
 @NgModule({
   imports: [
-    ComponentsModule,
+    BooksComponentsModule,
     BooksRoutingModule,
 
     /**
