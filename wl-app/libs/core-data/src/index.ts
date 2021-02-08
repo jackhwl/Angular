@@ -21,3 +21,4 @@ export { LocalStorageService } from './lib/local-storage/local-storage.service';
 export { SecurityService } from './lib/services/security/security.service';
 export { JobService } from './lib/services/jobs/job.service';
 //export { AuthGuard } from './lib/auth/auth-guard.service'
+export { PipesModule } from './lib/pipes';

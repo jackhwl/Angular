@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { SharedModule } from '@wl/shared';
 import { RouterModule } from '@angular/router';
 
 import { BookAuthorsComponent } from './book-authors.component';
@@ -8,8 +8,7 @@ import { BookDetailComponent } from './book-detail.component';
 import { BookPreviewComponent } from './book-preview.component';
 import { BookPreviewListComponent } from './book-preview-list.component';
 import { BookSearchComponent } from './book-search.component';
-import { MaterialModule } from '../../material';
-import { PipesModule } from '../../shared/pipes';
+import { PipesModule } from '@wl/core-data';
 
 export const COMPONENTS = [
   BookAuthorsComponent,
@@ -20,13 +19,7 @@ export const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    RouterModule,
-    PipesModule
-  ],
+  imports: [SharedModule, RouterModule, PipesModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })

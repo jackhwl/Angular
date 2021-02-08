@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { SharedModule } from '@wl/shared';
-
 import { reducers } from '../books/reducers';
 import { ComponentsModule } from './components';
 import { BooksRoutingModule } from './books-routing.module';
@@ -16,7 +14,6 @@ import { CollectionPageComponent } from './containers/collection-page.component'
 
 @NgModule({
   imports: [
-    SharedModule,
     ComponentsModule,
     BooksRoutingModule,
 
