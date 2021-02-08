@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Book } from '../models/book';
+import { Book } from '@wl/api-interfaces';
 
 @Component({
   selector: 'bc-book-authors',

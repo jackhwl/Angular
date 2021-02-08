@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 
 import * as fromBooks from '../../books/reducers';
 import { FindBookPageActions } from '../actions';
-import { Book } from '../models/book';
+import { Book } from '@wl/api-interfaces';
 
 @Component({
   selector: 'bc-find-book-page',

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import * as fromBooks from '../../books/reducers';
 import { SelectedBookPageActions } from '../actions';
-import { Book } from '../models/book';
+import { Book } from '@wl/api-interfaces';
 
 @Component({
   selector: 'bc-selected-book-page',
