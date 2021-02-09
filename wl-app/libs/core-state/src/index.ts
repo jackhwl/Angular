@@ -20,3 +20,4 @@ import * as fromBooks from './lib/books/reducers';
 export { fromAuth, fromJobs, fromBooks };
 //export * from './lib/auth/auth.facade';
 export * from './lib/auth/auth-guard.service';
+export * from './lib/books/guards/book-exists.guard';
