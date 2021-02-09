@@ -3,8 +3,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import * as fromBooks from '../../books/reducers';
-import { FindBookPageActions } from '../actions';
+import { fromBooks } from '@wl/core-state';
+import { FindBookPageActions } from '@wl/core-state';
 import { Book } from '@wl/api-interfaces';
 
 @Component({

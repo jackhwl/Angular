@@ -4,7 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@wl/shared';
 
-import { reducers } from '../books/reducers';
+import { fromBooks } from '@wl/core-state';
 import { BooksComponentsModule } from './components';
 import { BooksRoutingModule } from './books-routing.module';
 import { BookEffects } from './effects/book.effects';
@@ -26,7 +26,7 @@ import { CollectionPageComponent } from './containers/collection-page.component'
      * eagerly or lazily and will be dynamically added to
      * the existing state.
      */
-    StoreModule.forFeature('books', reducers),
+    StoreModule.forFeature('books', fromBooks.reducers),
 
     /**
      * Effects.forFeature is used to register effects

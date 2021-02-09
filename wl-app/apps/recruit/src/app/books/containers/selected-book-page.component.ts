@@ -2,8 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as fromBooks from '../../books/reducers';
-import { SelectedBookPageActions } from '../actions';
+import { fromBooks } from '@wl/core-state';
+import { SelectedBookPageActions } from '@wl/core-state';
 import { Book } from '@wl/api-interfaces';
 
 @Component({
