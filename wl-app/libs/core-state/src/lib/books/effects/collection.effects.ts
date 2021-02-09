@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Database } from '@ngrx/db';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { defer, Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
@@ -29,7 +29,7 @@ export class CollectionEffects {
   });
 
   @Effect()
-  loadCollection$: Observable<Action> = this.actions$.pipe(
+  loadCollection$ = this.actions$.pipe(
     ofType(CollectionPageActions.loadCollection.type),
     switchMap(() =>
       this.db.query('books').pipe(
@@ -45,7 +45,17 @@ export class CollectionEffects {
   );
 
   @Effect()
-  addBookToCollection$: Observable<Action> = this.actions$.pipe(
+  // addBookToCollection$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //   ofType(SelectedBookPageActions.addBook.type),
+  //   mergeMap(({ book }) =>
+  //     this.db.insert('books', [book]).pipe(
+  //       map(() => CollectionApiActions.addBookSuccess({ book })),
+  //       catchError(() => of(CollectionApiActions.addBookFailure({ book })))
+  //     )
+  //   )
+  // ));
+  addBookToCollection$ = this.actions$.pipe(
     ofType(SelectedBookPageActions.addBook.type),
     mergeMap(({ book }) =>
       this.db.insert('books', [book]).pipe(
@@ -56,7 +66,7 @@ export class CollectionEffects {
   );
 
   @Effect()
-  removeBookFromCollection$: Observable<Action> = this.actions$.pipe(
+  removeBookFromCollection$ = this.actions$.pipe(
     ofType(SelectedBookPageActions.removeBook.type),
     mergeMap(({ book }) =>
       this.db.executeWrite('books', 'delete', [book.id]).pipe(
