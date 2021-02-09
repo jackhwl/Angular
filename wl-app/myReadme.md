@@ -376,3 +376,5 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 - yarn add ngrx-store-freeze --dev
 
 ## add job routing, default load job module
+
+https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow
