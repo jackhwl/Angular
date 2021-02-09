@@ -1566,6 +1566,11 @@
     optional "0.1.4"
     tslib "2.0.3"
 
+"@ngrx/db@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/db/-/db-2.1.0.tgz#dad736c86ea8f849a8fa0df3e506d7e7b9e2e930"
+  integrity sha1-2tc2yG6o+Emo+g3z5QbX57ni6TA=
+
 "@ngrx/effects@10.0.0":
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-10.0.0.tgz#d58151b1d7f5731ea42de7ed239bbab3d5866542"
