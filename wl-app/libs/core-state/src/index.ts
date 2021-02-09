@@ -21,3 +21,5 @@ export { fromAuth, fromJobs, fromBooks };
 //export * from './lib/auth/auth.facade';
 export * from './lib/auth/auth-guard.service';
 export * from './lib/books/guards/book-exists.guard';
+export * from './lib/books/effects/book.effects';
+export * from './lib/books/effects/collection.effects';
