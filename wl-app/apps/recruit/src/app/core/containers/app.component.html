@@ -31,6 +31,32 @@
       (toggled)="toggleSideNav()"
       (useLang)="useLang($event)"
     ></wl-header>
+    <bc-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
+      <bc-nav-item
+        (navigate)="closeSidenav()"
+        *ngIf="loggedIn$ | async"
+        routerLink="/"
+        icon="book"
+        hint="View your book collection"
+      >
+        My Collection
+      </bc-nav-item>
+      <bc-nav-item
+        (navigate)="closeSidenav()"
+        *ngIf="loggedIn$ | async"
+        routerLink="/books/find"
+        icon="search"
+        hint="Find your next book!"
+      >
+        Browse Books
+      </bc-nav-item>
+      <bc-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
+        Sign In
+      </bc-nav-item>
+      <bc-nav-item (navigate)="logout()" *ngIf="loggedIn$ | async">
+        Sign Out
+      </bc-nav-item>
+    </bc-sidenav>
     <main>
       <router-outlet></router-outlet>
     </main>

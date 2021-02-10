@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +8,9 @@ import { AppUserAuth } from '@wl/api-interfaces';
 import { SecurityService } from '@wl/core-data';
 import { from, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { fromAuth, fromRoot } from '@wl/core-state';
+import { LayoutActions, AuthActions } from '@wl/core-state';
 
 @Component({
   selector: 'wl-root',
@@ -25,13 +30,23 @@ export class AppComponent implements OnInit {
   ];
   links$ = of(this.linksAll);
   isAuthenticated$: Observable<boolean>;
+  showSidenav$: Observable<boolean>;
+  loggedIn$: Observable<boolean>;
 
   title = 'Recruit';
   constructor(
     private securityService: SecurityService,
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private store: Store<fromRoot.State & fromAuth.State>
   ) {
+    /**
+     * Selectors can be applied with the `select` operator which passes the state
+     * tree to the provided selector
+     */
+    this.showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
+    this.loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang('en');
 
@@ -57,11 +72,31 @@ export class AppComponent implements OnInit {
     this.localSideNav.toggle();
   }
 
-  logout() {
+  logoutJob() {
     this.router.navigateByUrl('/login');
   }
 
   useLang(lang) {
     this.translate.use(lang);
+  }
+
+  closeSidenav() {
+    /**
+     * All state updates are handled through dispatched actions in 'container'
+     * components. This provides a clear, reproducible history of state
+     * updates and user interaction through the life of our
+     * application.
+     */
+    this.store.dispatch(LayoutActions.closeSidenav());
+  }
+
+  openSidenav() {
+    this.store.dispatch(LayoutActions.openSidenav());
+  }
+
+  logout() {
+    this.closeSidenav();
+
+    this.store.dispatch(AuthActions.logoutConfirmation());
   }
 }

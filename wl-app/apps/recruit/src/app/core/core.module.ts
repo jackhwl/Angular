@@ -10,11 +10,19 @@ import { AppComponent } from './containers/app.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { NotFoundPageComponent } from './containers/not-found-page.component';
+import { NavItemComponent } from './components/nav-item.component';
+import { SidenavComponent } from './components/sidenav.component';
+import { ToolbarComponent } from './components/toolbar.component';
 
 export const COMPONENTS = [
   AppComponent,
   HeaderComponent,
   SidenavListComponent,
+
+  NavItemComponent,
+  SidenavComponent,
+  ToolbarComponent,
+
   NotFoundPageComponent
 ];
 
