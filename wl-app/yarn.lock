@@ -1566,10 +1566,10 @@
     optional "0.1.4"
     tslib "2.0.3"
 
-"@ngrx/db@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/db/-/db-2.1.0.tgz#dad736c86ea8f849a8fa0df3e506d7e7b9e2e930"
-  integrity sha1-2tc2yG6o+Emo+g3z5QbX57ni6TA=
+"@ngrx/db@2.2.0-beta.0":
+  version "2.2.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/db/-/db-2.2.0-beta.0.tgz#962bbc29be9a457e02e90397f420b703ab331484"
+  integrity sha512-doC0v9sR0Jc8O7MOU/GVl8McVYmkEcoEyLhtGPNSTt570f7pKh+QDJDSnp+Z2hTcrevP7c3sOZ8dfRBTnyNiBw==
 
 "@ngrx/effects@10.0.0":
   version "10.0.0"
