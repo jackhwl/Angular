@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   @ViewChild('sidenav') localSideNav;
   private linksAll = [
     { path: '/home', icon: 'home', title: 'home' },
+    { path: '/books', icon: 'view_list', title: 'books' },
     { path: '/jobs', icon: 'view_list', title: 'jobs' },
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
     { path: '/villains', icon: 'view_list', title: 'villains', isAdmin: true },
