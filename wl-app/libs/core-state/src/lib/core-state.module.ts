@@ -12,10 +12,11 @@ import {
 import { entityConfig } from './entity-metadata';
 
 import { PluralHttpUrlGenerator } from '@wl/core-data';
+import { metaReducers, reducers } from './reducers';
 
 @NgModule({
   imports: [
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(),
     NgrxDataModule.forRoot(entityConfig),
     environment.production ? [] : StoreDevtoolsModule.instrument()
