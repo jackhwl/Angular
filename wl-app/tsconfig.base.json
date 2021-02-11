@@ -25,7 +25,8 @@
       "@wl/material": ["libs/material/src/index.ts"],
       "@wl/testing": ["libs/testing/src/index.ts"],
       "@wl/shared": ["libs/shared/src/index.ts"],
-      "@wl/ui-slogan": ["libs/ui-slogan/src/index.ts"]
+      "@wl/ui-slogan": ["libs/ui-slogan/src/index.ts"],
+      "@wl/logout-dialog": ["libs/logout-dialog/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -67,6 +67,9 @@
     },
     "ui-slogan": {
       "tags": []
+    },
+    "logout-dialog": {
+      "tags": []
     }
   }
 }

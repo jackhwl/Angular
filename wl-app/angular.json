@@ -636,6 +636,36 @@
           "style": "scss"
         }
       }
+    },
+    "logout-dialog": {
+      "projectType": "library",
+      "root": "libs/logout-dialog",
+      "sourceRoot": "libs/logout-dialog/src",
+      "prefix": "wl",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/logout-dialog/tsconfig.lib.json",
+              "libs/logout-dialog/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/logout-dialog/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logout-dialog/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

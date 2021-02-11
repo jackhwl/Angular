@@ -10,6 +10,7 @@ module.exports = {
     '<rootDir>/apps/security',
     '<rootDir>/apps/ngrx-data',
     '<rootDir>/libs/shared',
-    '<rootDir>/libs/ui-slogan'
+    '<rootDir>/libs/ui-slogan',
+    '<rootDir>/libs/logout-dialog'
   ]
 };
