@@ -23,6 +23,7 @@ import * as AuthActions from './lib/auth/actions/auth.actions';
 export { fromAuth, fromJobs, fromBooks, fromRoot, AuthActions };
 //export * from './lib/auth/auth.facade';
 export * from './lib/auth/auth-guard.service';
+export * from './lib/auth/effects/auth.effects';
 export * from './lib/books/guards/book-exists.guard';
 export * from './lib/books/effects/book.effects';
 export * from './lib/books/effects/collection.effects';

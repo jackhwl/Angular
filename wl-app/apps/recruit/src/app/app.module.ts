@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreStateModule } from '@wl/core-state';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './core/containers/app.component';
 import { CoreModule } from './core/core.module';
@@ -14,12 +15,14 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     BrowserAnimationsModule,
 
+    //MaterialModule,
+    AuthModule,
+    // app
+    AppRoutingModule,
+
     // core
     CoreStateModule,
-    CoreModule,
-
-    // app
-    AppRoutingModule
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { LoginPageActions, AuthApiActions, AuthActions } from '../actions';
 import { Credentials } from '@wl/api-interfaces';
-import { LogoutConfirmationDialogComponent } from '../components/logout-confirmation-dialog.component';
+import { LogoutConfirmationDialogComponent } from '../logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { AuthService } from '@wl/core-data';
 
 @Injectable()
