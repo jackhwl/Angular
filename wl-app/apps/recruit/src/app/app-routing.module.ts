@@ -6,7 +6,7 @@ import { NotFoundPageComponent } from './core/containers/not-found-page.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/jobs',
+    redirectTo: '/books',
     pathMatch: 'full'
   },
   {
@@ -15,8 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'books',
-    loadChildren: () => import('./books/books.module').then(m => m.BooksModule)
-    //canActivate: [AuthGuard]
+    loadChildren: () => import('./books/books.module').then(m => m.BooksModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'jobs',
