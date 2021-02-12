@@ -12,11 +12,7 @@ import {
   LogoutDialogModule
 } from '@wl/logout-dialog';
 
-export const COMPONENTS = [
-  LoginPageComponent,
-  LoginFormComponent
-  //LogoutConfirmationDialogComponent
-];
+export const COMPONENTS = [LoginPageComponent, LoginFormComponent];
 
 @NgModule({
   imports: [

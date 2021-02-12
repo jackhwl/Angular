@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthApiActions } from './actions';
 import * as fromAuth from './reducers';
-import { LogoutDialogModule } from '@wl/logout-dialog';
 
 // import { AuthApiActions } from '@wl/core-state';
 // import { AuthFacade } from '@wl/core-state';
