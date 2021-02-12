@@ -7,22 +7,26 @@ import { AuthEffects, fromAuth } from '@wl/core-state';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginPageComponent } from './containers/login-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { LogoutConfirmationDialogComponent } from './components/logout-confirmation-dialog/logout-confirmation-dialog.component';
+import {
+  LogoutConfirmationDialogComponent,
+  LogoutDialogModule
+} from '@wl/logout-dialog';
 
 export const COMPONENTS = [
   LoginPageComponent,
-  LoginFormComponent,
-  LogoutConfirmationDialogComponent
+  LoginFormComponent
+  //LogoutConfirmationDialogComponent
 ];
 
 @NgModule({
-  declarations: COMPONENTS,
   imports: [
     SharedModule,
+    LogoutDialogModule,
     AuthRoutingModule,
     StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.reducers),
     EffectsModule.forFeature([AuthEffects])
   ],
+  declarations: COMPONENTS,
   entryComponents: [LogoutConfirmationDialogComponent]
 })
 export class AuthModule {}

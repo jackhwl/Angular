@@ -7,8 +7,8 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { LoginPageActions, AuthApiActions, AuthActions } from '../actions';
 import { Credentials } from '@wl/api-interfaces';
-import { LogoutConfirmationDialogComponent } from '../logout-confirmation-dialog/logout-confirmation-dialog.component';
 import { AuthService } from '@wl/core-data';
+import { LogoutConfirmationDialogComponent } from '@wl/logout-dialog';
 
 @Injectable()
 export class AuthEffects {
