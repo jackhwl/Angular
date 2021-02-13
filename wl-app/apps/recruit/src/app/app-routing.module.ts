@@ -41,10 +41,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./students/students.module').then(m => m.StudentsModule)
   },
-  {
-    path: 'signin',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
-  },
+  // {
+  //   path: 'signin',
+  //   loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  // },
   { path: '**', component: NotFoundPageComponent }
 ];
 
