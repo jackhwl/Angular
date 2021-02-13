@@ -31,6 +31,9 @@
       (toggled)="toggleSideNav()"
       (useLang)="useLang($event)"
     ></wl-header>
+    <bc-toolbar (openMenu)="openSidenav()">
+      Book Collection
+    </bc-toolbar>
     <bc-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
       <bc-nav-item
         (navigate)="closeSidenav()"
@@ -57,9 +60,6 @@
         Sign Out
       </bc-nav-item>
     </bc-sidenav>
-    <bc-toolbar (openMenu)="openSidenav()">
-      Book Collection
-    </bc-toolbar>
     <main>
       <router-outlet></router-outlet>
     </main>

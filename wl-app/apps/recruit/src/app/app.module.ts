@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './core/containers/app.component';
 import { CoreModule } from './core/core.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   imports: [
@@ -15,8 +16,8 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     BrowserAnimationsModule,
 
+    LoginModule,
     AuthModule,
-
     // app
     AppRoutingModule,
 
