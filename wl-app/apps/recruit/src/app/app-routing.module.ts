@@ -42,7 +42,7 @@ const routes: Routes = [
       import('./students/students.module').then(m => m.StudentsModule)
   },
   {
-    path: 'login',
+    path: 'signin',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   { path: '**', component: NotFoundPageComponent }
