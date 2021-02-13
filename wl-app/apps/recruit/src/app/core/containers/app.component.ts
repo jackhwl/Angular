@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
     { path: '/villains', icon: 'view_list', title: 'villains', isAdmin: true },
     { path: '/students', icon: 'view_list', title: 'students', isAdmin: true },
-    { path: '/login', icon: 'view_list', title: 'login' }
+    { path: '/login', icon: 'view_list', title: 'login' },
+    { path: '/signin', icon: 'view_list', title: 'signin' }
   ];
   links$ = of(this.linksAll);
   isAuthenticated$: Observable<boolean>;

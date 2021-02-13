@@ -6,7 +6,8 @@
   "i18.nav.heroes": "Héros",
   "i18.nav.villains": "Méchants",
   "i18.nav.students": "Élèves",
-  "i18.nav.login": "S'identifier",
+  "i18.nav.login": "Connexion",
+  "i18.nav.signin": "S'identifier",
 
   "i18.job.office": "Office",
   "i18.job.department": "Department",
