@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@wl/shared';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SecurityService } from '@wl/core-data';
+import { SecurityAuthGuard, SecurityService } from '@wl/core-data';
 
 import { AppComponent } from './containers/app.component';
 import { HeaderComponent } from './navigation/header/header.component';
@@ -40,7 +40,7 @@ export const COMPONENTS = [
     SharedModule
   ],
   declarations: COMPONENTS,
-  providers: [SecurityService],
+  providers: [SecurityService, SecurityAuthGuard],
   exports: [SharedModule, TranslateModule, ...COMPONENTS]
 })
 export class CoreModule {}

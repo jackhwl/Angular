@@ -18,8 +18,8 @@ export {
   PluralHttpUrlGenerator
 } from './lib/services/plural-http-url-generator';
 export { LocalStorageService } from './lib/local-storage/local-storage.service';
-export { SecurityService } from './lib/services/security/security.service';
 export { JobService } from './lib/services/jobs/job.service';
+export { SecurityService } from './lib/services/security/security.service';
 export { SecurityAuthGuard } from './lib/services/security/security.auth.guard';
 export { GoogleBooksService } from './lib/services/google-books.service';
 export { PipesModule } from './lib/pipes';
