@@ -9,6 +9,7 @@ import * as fromRoot from '../reducers';
 
 import { AuthActions } from './actions';
 import { LayoutActions } from '../core/actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthFacade {
@@ -26,7 +27,8 @@ export class AuthFacade {
 
   constructor(
     private store: Store<fromRoot.State & fromAuth.State>,
-    private securityService: SecurityService
+    private securityService: SecurityService,
+    private router: Router
   ) {
     this.links$ = combineLatest([
       this.securityService.securityObject$,
@@ -72,5 +74,12 @@ export class AuthFacade {
     this.closeSidenav();
 
     this.store.dispatch(AuthActions.logoutConfirmation());
+  }
+
+  isBookModule() {
+    if (this.router.url.startsWith('/book')) return true;
+    if (this.router.url === '/login') return true;
+
+    return false;
   }
 }

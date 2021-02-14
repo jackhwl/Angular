@@ -32,7 +32,7 @@
       (useLang)="useLang($event)"
       (logout)="logout()"
     ></wl-header>
-    <bc-toolbar (openMenu)="openSidenav()">
+    <bc-toolbar (openMenu)="openSidenav()" *ngIf="isBookModule()">
       Book Collection
     </bc-toolbar>
     <bc-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
