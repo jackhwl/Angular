@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 
 import { ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { from, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { AuthFacade, fromAuth, fromRoot } from '@wl/core-state';
-import { LayoutActions, AuthActions } from '@wl/core-state';
+import { AuthFacade } from '@wl/core-state';
 
 @Component({
   selector: 'wl-root',
@@ -16,7 +13,7 @@ import { LayoutActions, AuthActions } from '@wl/core-state';
 })
 export class AppComponent implements OnInit {
   @ViewChild('sidenav') localSideNav;
-  links$ = of([]);
+  links$: Observable<any>;
   isAuthenticated$: Observable<boolean>;
   showSidenav$: Observable<boolean>;
   loggedIn$: Observable<boolean>;
@@ -24,9 +21,7 @@ export class AppComponent implements OnInit {
   title = 'Recruit';
   constructor(
     private authFacade: AuthFacade,
-    private router: Router,
-    public translate: TranslateService,
-    private store: Store<fromRoot.State & fromAuth.State>
+    public translate: TranslateService
   ) {
     /**
      * Selectors can be applied with the `select` operator which passes the state
@@ -49,31 +44,19 @@ export class AppComponent implements OnInit {
     this.localSideNav.toggle();
   }
 
-  logoutJob() {
-    this.router.navigateByUrl('/login');
-  }
-
   useLang(lang) {
     this.translate.use(lang);
   }
 
   closeSidenav() {
-    /**
-     * All state updates are handled through dispatched actions in 'container'
-     * components. This provides a clear, reproducible history of state
-     * updates and user interaction through the life of our
-     * application.
-     */
-    this.store.dispatch(LayoutActions.closeSidenav());
+    this.authFacade.closeSidenav();
   }
 
   openSidenav() {
-    this.store.dispatch(LayoutActions.openSidenav());
+    this.authFacade.openSidenav();
   }
 
   logout() {
-    this.closeSidenav();
-
-    this.store.dispatch(AuthActions.logoutConfirmation());
+    this.authFacade.logout();
   }
 }
