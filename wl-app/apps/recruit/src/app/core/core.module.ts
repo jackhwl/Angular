@@ -13,6 +13,7 @@ import { NotFoundPageComponent } from './containers/not-found-page.component';
 import { NavItemComponent } from './components/nav-item.component';
 import { SidenavComponent } from './components/sidenav.component';
 import { ToolbarComponent } from './components/toolbar.component';
+import { AuthFacade } from '@wl/core-state';
 
 export const COMPONENTS = [
   AppComponent,
@@ -40,7 +41,7 @@ export const COMPONENTS = [
     SharedModule
   ],
   declarations: COMPONENTS,
-  providers: [SecurityService, SecurityAuthGuard],
+  providers: [SecurityService, SecurityAuthGuard, AuthFacade],
   exports: [SharedModule, TranslateModule, ...COMPONENTS]
 })
 export class CoreModule {}

@@ -21,7 +21,7 @@ import * as fromRoot from './lib/reducers';
 export * from './lib/core/actions';
 import * as AuthActions from './lib/auth/actions/auth.actions';
 export { fromAuth, fromJobs, fromBooks, fromRoot, AuthActions };
-//export * from './lib/auth/auth.facade';
+export * from './lib/auth/auth.facade';
 export * from './lib/auth/auth-guard.service';
 export * from './lib/auth/effects/auth.effects';
 export * from './lib/books/guards/book-exists.guard';
