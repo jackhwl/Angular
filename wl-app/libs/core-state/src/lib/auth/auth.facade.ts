@@ -43,14 +43,16 @@ export class AuthFacade {
                 { path: '/students', icon: 'view_list', title: 'students' }
               ]
             : this.linksAll),
-          data[1].valueOf()
-            ? {
-                path: '/logout',
-                icon: 'view_list',
-                title: 'logout',
-                click: 'logout'
-              }
-            : { path: '/login', icon: 'view_list', title: 'login' }
+          ...(data[1].valueOf()
+            ? [
+                {
+                  path: '/logout',
+                  icon: 'view_list',
+                  title: 'logout',
+                  click: 'logout'
+                }
+              ]
+            : [])
         ])
       )
     );
