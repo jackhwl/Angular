@@ -11,6 +11,7 @@ import { tap } from 'rxjs/operators';
 
 import { fromAuth, fromRoot } from '@wl/core-state';
 import { LayoutActions, AuthActions } from '@wl/core-state';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'wl-root',
@@ -26,19 +27,9 @@ export class AppComponent implements OnInit {
     { path: '/villains', icon: 'view_list', title: 'villains', isAdmin: true },
     { path: '/students', icon: 'view_list', title: 'students', isAdmin: true },
     { path: '/signin', icon: 'view_list', title: 'signin' },
-    { path: '/books', icon: 'view_list', title: 'books' },
-    {
-      path: '/login',
-      icon: 'view_list',
-      title: 'login',
-      isAuthenticated: false
-    },
-    {
-      path: '/logout',
-      icon: 'view_list',
-      title: 'logout',
-      isAuthenticated: true
-    }
+    { path: '/books', icon: 'view_list', title: 'books' }
+    // { path: '/login', icon: 'view_list', title: 'login' },
+    // { path: '/logout', icon: 'view_list', title: 'logout' }
   ];
   links$ = of(this.linksAll);
   isAuthenticated$: Observable<boolean>;
@@ -67,29 +58,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.securityService.securityObject$
-      .pipe(
-        tap(o => {
-          this.links$ = of(
-            o.isAuthenticated
-              ? this.linksAll
-              : this.linksAll.filter(l => !l.isAdmin)
-          );
-        })
-      )
-      .subscribe();
-
-    // this.loggedIn$
-    //   .pipe(
-    //     tap(loggedIn => {
-    //       this.links$ = of(
-    //         loggedIn
-    //           ? this.linksAll.filter(l => l.isAuthenticated)
-    //           : this.linksAll.filter(l => !l.isAuthenticated)
-    //       );
-    //     })
-    //   )
-    //   .subscribe();
+    combineLatest(
+      this.securityService.securityObject$,
+      this.loggedIn$,
+      (o, loggedIn) =>
+        (this.links$ = of([
+          ...(o.isAuthenticated
+            ? this.linksAll
+            : this.linksAll.filter(l => !l.isAdmin)),
+          loggedIn
+            ? { path: '/logout', icon: 'view_list', title: 'logout' }
+            : { path: '/login', icon: 'view_list', title: 'login' }
+        ]))
+    ).subscribe();
   }
 
   toggleSideNav() {
