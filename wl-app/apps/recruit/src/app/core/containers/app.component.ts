@@ -21,13 +21,24 @@ export class AppComponent implements OnInit {
   @ViewChild('sidenav') localSideNav;
   private linksAll = [
     { path: '/home', icon: 'home', title: 'home' },
-    { path: '/books', icon: 'view_list', title: 'books' },
     { path: '/jobs', icon: 'view_list', title: 'jobs' },
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
     { path: '/villains', icon: 'view_list', title: 'villains', isAdmin: true },
     { path: '/students', icon: 'view_list', title: 'students', isAdmin: true },
-    { path: '/login', icon: 'view_list', title: 'login' },
-    { path: '/signin', icon: 'view_list', title: 'signin' }
+    { path: '/signin', icon: 'view_list', title: 'signin' },
+    { path: '/books', icon: 'view_list', title: 'books' },
+    {
+      path: '/login',
+      icon: 'view_list',
+      title: 'login',
+      isAuthenticated: false
+    },
+    {
+      path: '/logout',
+      icon: 'view_list',
+      title: 'logout',
+      isAuthenticated: true
+    }
   ];
   links$ = of(this.linksAll);
   isAuthenticated$: Observable<boolean>;
@@ -67,6 +78,18 @@ export class AppComponent implements OnInit {
         })
       )
       .subscribe();
+
+    // this.loggedIn$
+    //   .pipe(
+    //     tap(loggedIn => {
+    //       this.links$ = of(
+    //         loggedIn
+    //           ? this.linksAll.filter(l => l.isAuthenticated)
+    //           : this.linksAll.filter(l => !l.isAuthenticated)
+    //       );
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   toggleSideNav() {

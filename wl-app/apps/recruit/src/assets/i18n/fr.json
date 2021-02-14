@@ -7,7 +7,9 @@
   "i18.nav.villains": "Méchants",
   "i18.nav.students": "Élèves",
   "i18.nav.login": "Connexion",
+  "i18.nav.logout": "Se déconnecter",
   "i18.nav.signin": "S'identifier",
+  "i18.nav.signout": "Déconnexion",
 
   "i18.job.office": "Office",
   "i18.job.department": "Department",

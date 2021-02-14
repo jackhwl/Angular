@@ -7,7 +7,9 @@
   "i18.nav.villains": "Villains",
   "i18.nav.students": "Students",
   "i18.nav.login": "Login",
+  "i18.nav.logout": "Logout",
   "i18.nav.signin": "Signin",
+  "i18.nav.signout": "Signout",
 
   "i18.job.office": "Office",
   "i18.job.department": "Department",
