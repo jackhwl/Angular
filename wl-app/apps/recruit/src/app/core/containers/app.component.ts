@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,12 +11,12 @@ import { AuthFacade } from '@wl/core-state';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   @ViewChild('sidenav') localSideNav;
-  links$: Observable<any>;
   isAuthenticated$: Observable<boolean>;
   showSidenav$: Observable<boolean>;
   loggedIn$: Observable<boolean>;
+  links$: Observable<any>;
 
   title = 'Recruit';
   constructor(
@@ -37,8 +37,6 @@ export class AppComponent implements OnInit {
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
   }
-
-  ngOnInit(): void {}
 
   toggleSideNav() {
     this.localSideNav.toggle();

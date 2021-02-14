@@ -9,14 +9,19 @@
   </div>
   <div class="top-nav">
     <ul>
-      <li
-        *ngFor="let link of links"
-        [routerLink]="link.path"
-        routerLinkActive="active"
-        attr.data-cy="nav-item-{{ link.title }}"
-      >
-        {{ 'i18.nav.' + link.title | translate }}
-      </li>
+      <ng-template ngFor let-link [ngForOf]="links">
+        <li
+          *ngIf="!link.click"
+          [routerLink]="link.path"
+          routerLinkActive="active"
+          attr.data-cy="nav-item-{{ link.title }}"
+        >
+          {{ 'i18.nav.' + link.title | translate }}
+        </li>
+        <li *ngIf="link.click" (click)="data(link.click)">
+          {{ 'i18.nav.' + link.title | translate }}
+        </li>
+      </ng-template>
       <li class="dropdown-notifications">
         <button
           mat-stroked-button

@@ -11,4 +11,8 @@ export class HeaderComponent {
   @Output() toggled = new EventEmitter();
   @Output() logout = new EventEmitter();
   @Output() useLang = new EventEmitter();
+
+  data(data: string) {
+    if (data == 'logout') this.logout.emit();
+  }
 }
