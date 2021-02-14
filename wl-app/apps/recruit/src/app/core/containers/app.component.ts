@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppUserAuth } from '@wl/api-interfaces';
 import { SecurityService } from '@wl/core-data';
 import { from, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { fromAuth, fromRoot } from '@wl/core-state';
 import { LayoutActions, AuthActions } from '@wl/core-state';
@@ -24,12 +24,8 @@ export class AppComponent implements OnInit {
     { path: '/home', icon: 'home', title: 'home' },
     { path: '/jobs', icon: 'view_list', title: 'jobs' },
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
-    { path: '/villains', icon: 'view_list', title: 'villains', isAdmin: true },
-    { path: '/students', icon: 'view_list', title: 'students', isAdmin: true },
     { path: '/signin', icon: 'view_list', title: 'signin' },
     { path: '/books', icon: 'view_list', title: 'books' }
-    // { path: '/login', icon: 'view_list', title: 'login' },
-    // { path: '/logout', icon: 'view_list', title: 'logout' }
   ];
   links$ = of(this.linksAll);
   isAuthenticated$: Observable<boolean>;
@@ -58,19 +54,25 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    combineLatest(
+    this.links$ = combineLatest([
       this.securityService.securityObject$,
-      this.loggedIn$,
-      (o, loggedIn) =>
-        (this.links$ = of([
-          ...(o.isAuthenticated
-            ? this.linksAll
-            : this.linksAll.filter(l => !l.isAdmin)),
-          loggedIn
+      this.loggedIn$
+    ]).pipe(
+      switchMap(data =>
+        of([
+          ...(data[0].isAuthenticated
+            ? [
+                ...this.linksAll,
+                { path: '/villains', icon: 'view_list', title: 'villains' },
+                { path: '/students', icon: 'view_list', title: 'students' }
+              ]
+            : this.linksAll),
+          data[1].valueOf()
             ? { path: '/logout', icon: 'view_list', title: 'logout' }
             : { path: '/login', icon: 'view_list', title: 'login' }
-        ]))
-    ).subscribe();
+        ])
+      )
+    );
   }
 
   toggleSideNav() {
