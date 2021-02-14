@@ -21,8 +21,8 @@ export class SecurityAuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     let claimName: string = next.data['claimName'];
     if (
-      this.securityService.securityObject.isAuthenticated &&
-      this.securityService.hasClaim(claimName)
+      this.securityService.securityObject.isAuthenticated
+      // && this.securityService.hasClaim(claimName)
     ) {
       return true;
     } else {
