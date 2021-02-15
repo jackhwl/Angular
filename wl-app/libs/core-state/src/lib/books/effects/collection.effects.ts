@@ -29,21 +29,24 @@ export class CollectionEffects {
   openDB$ = createEffect(() => this.db.open('books_app'), { dispatch: false });
 
   //@Effect()
-  loadCollection$: Observable<Action> = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CollectionPageActions.loadCollection.type),
-      switchMap(() =>
-        this.db.query('books').pipe(
-          toArray(),
-          map((books: Book[]) =>
-            CollectionApiActions.loadBooksSuccess({ books })
-          ),
-          catchError(error =>
-            of(CollectionApiActions.loadBooksFailure({ error }))
+  loadCollection$: Observable<Action> = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(CollectionPageActions.loadCollection.type),
+        switchMap(() =>
+          this.db.query('books').pipe(
+            toArray(),
+            map((books: Book[]) =>
+              CollectionApiActions.loadBooksSuccess({ books })
+            ),
+            catchError(error =>
+              of(CollectionApiActions.loadBooksFailure({ error }))
+            )
           )
         )
-      )
-    )
+        // Errors are handled and it is safe to disable resubscription
+      ),
+    { useEffectsErrorHandler: false }
   );
 
   @Effect()
