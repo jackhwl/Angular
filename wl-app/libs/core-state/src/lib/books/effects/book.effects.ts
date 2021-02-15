@@ -1,5 +1,5 @@
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { asyncScheduler, EMPTY as empty, Observable, of } from 'rxjs';
 import {
@@ -27,32 +27,31 @@ import { GoogleBooksService } from '@wl/core-data';
 
 @Injectable()
 export class BookEffects {
-  @Effect()
-  search$ = ({ debounce = 300, scheduler = asyncScheduler } = {}): Observable<
-    Action
-  > =>
-    this.actions$.pipe(
-      ofType(FindBookPageActions.searchBooks.type),
-      debounceTime(debounce, scheduler),
-      switchMap(({ query }) => {
-        if (query === '') {
-          return empty;
-        }
+  search$ = createEffect(
+    ({ debounce = 300, scheduler = asyncScheduler } = {}): Observable<Action> =>
+      this.actions$.pipe(
+        ofType(FindBookPageActions.searchBooks.type),
+        debounceTime(debounce, scheduler),
+        switchMap(({ query }) => {
+          if (query === '') {
+            return empty;
+          }
 
-        const nextSearch$ = this.actions$.pipe(
-          ofType(FindBookPageActions.searchBooks.type),
-          skip(1)
-        );
+          const nextSearch$ = this.actions$.pipe(
+            ofType(FindBookPageActions.searchBooks.type),
+            skip(1)
+          );
 
-        return this.googleBooks.searchBooks(query).pipe(
-          takeUntil(nextSearch$),
-          map((books: Book[]) => BooksApiActions.searchSuccess({ books })),
-          catchError(err =>
-            of(BooksApiActions.searchFailure({ errorMsg: err }))
-          )
-        );
-      })
-    );
+          return this.googleBooks.searchBooks(query).pipe(
+            takeUntil(nextSearch$),
+            map((books: Book[]) => BooksApiActions.searchSuccess({ books })),
+            catchError(err =>
+              of(BooksApiActions.searchFailure({ errorMsg: err }))
+            )
+          );
+        })
+      )
+  );
 
   constructor(
     private actions$: Actions<FindBookPageActions.FindBookPageActionsUnion>,
