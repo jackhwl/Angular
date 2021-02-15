@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Database } from '@ngrx/db';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { defer, Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
@@ -23,22 +23,24 @@ export class CollectionEffects {
    * Wrapping the database open call in `defer` makes
    * effect easier to test.
    */
-  @Effect({ dispatch: false })
-  openDB$: Observable<any> = defer(() => {
-    return this.db.open('books_app');
-  });
+  //@Effect({ dispatch: false })
+  //  openDB$: Observable<any> = defer(() => {
 
-  @Effect()
-  loadCollection$: Observable<Action> = this.actions$.pipe(
-    ofType(CollectionPageActions.loadCollection.type),
-    switchMap(() =>
-      this.db.query('books').pipe(
-        toArray(),
-        map((books: Book[]) =>
-          CollectionApiActions.loadBooksSuccess({ books })
-        ),
-        catchError(error =>
-          of(CollectionApiActions.loadBooksFailure({ error }))
+  openDB$ = createEffect(() => this.db.open('books_app'), { dispatch: false });
+
+  //@Effect()
+  loadCollection$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CollectionPageActions.loadCollection.type),
+      switchMap(() =>
+        this.db.query('books').pipe(
+          toArray(),
+          map((books: Book[]) =>
+            CollectionApiActions.loadBooksSuccess({ books })
+          ),
+          catchError(error =>
+            of(CollectionApiActions.loadBooksFailure({ error }))
+          )
         )
       )
     )
