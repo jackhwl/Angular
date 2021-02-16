@@ -378,3 +378,8 @@ https://github.com/johnpapa/ngrx-data-lab/blob/master/README.md
 ## add job routing, default load job module
 
 https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow
+
+# nx dep-graph
+
+https://www.youtube.com/watch?v=gt44dtkgzPQ&t=847s
+https://indepth.dev/posts/1185/tiny-angular-application-projects-in-nx-workspaces
