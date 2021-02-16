@@ -155,6 +155,10 @@
       }
     },
     "shared-assets": {
+      "projectType": "library",
+      "root": "libs/shared/assets",
+      "sourceRoot": "libs/shared/assets/src",
+      "prefix": "workspace",
       "architect": {}
     }
   }
