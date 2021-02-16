@@ -29,3 +29,29 @@ npx rimraf ./apps/tiny-app/src/assets ./libs/shared/assets/_.js ./libs/shared/as
 - "" > ./libs/shared/assets/src/assets/images/.gitkeep
 
 - mv ./apps/tiny-app/src/favicon.ico ./libs/shared/assets/src
+
+## replace the assets options
+
+```
+            "assets": [
+              "apps/tiny-app/src/favicon.ico",
+              "apps/tiny-app/src/assets"
+            ],
+```
+
+to
+
+```
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "libs/shared/assets/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/shared/assets/src/assets",
+                "output": "assets"
+              }
+            ]
+```
