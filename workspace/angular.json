@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "tiny-app",
+  "projects": {
+    "tiny-app": {
+      "projectType": "application",
+      "root": "apps/tiny-app",
+      "sourceRoot": "apps/tiny-app/src",
+      "prefix": "workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/tiny-app",
+            "index": "apps/tiny-app/src/index.html",
+            "main": "apps/tiny-app/src/main.ts",
+            "polyfills": "apps/tiny-app/src/polyfills.ts",
+            "tsConfig": "apps/tiny-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/tiny-app/src/favicon.ico",
+              "apps/tiny-app/src/assets"
+            ],
+            "styles": ["apps/tiny-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/tiny-app/src/environments/environment.ts",
+                  "with": "apps/tiny-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "tiny-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "tiny-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "tiny-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/tiny-app/src/**/*.ts",
+              "apps/tiny-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/tiny-app"],
+          "options": {
+            "jestConfig": "apps/tiny-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tiny-app-e2e": {
+      "root": "apps/tiny-app-e2e",
+      "sourceRoot": "apps/tiny-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/tiny-app-e2e/cypress.json",
+            "tsConfig": "apps/tiny-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "tiny-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "tiny-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/tiny-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}

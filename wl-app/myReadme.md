@@ -383,3 +383,4 @@ https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client
 
 https://www.youtube.com/watch?v=gt44dtkgzPQ&t=847s
 https://indepth.dev/posts/1185/tiny-angular-application-projects-in-nx-workspaces
+https://indepth.dev/posts/1117/the-shell-library-patterns-with-nx-and-monorepo-architectures
