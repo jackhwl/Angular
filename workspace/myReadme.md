@@ -72,3 +72,9 @@ to
 - nx generate library environments --directory=shared --tags="scope:shared,type:environments" --style=scss
 
 - npx rimraf ./libs/shared/environments/src/lib/_._
+
+## Add and configure NgRx Store
+
+- nx add @ngrx/store --minimal false
+
+- nx add @ngrx/store-devtools
