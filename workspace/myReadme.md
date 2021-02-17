@@ -66,3 +66,9 @@ to
 - mv ./apps/tiny-app/src/styles.scss ./libs/shared/styles/src/lib/\_global.scss
 
 - "@import './lib/global';" > ./libs/shared/styles/src/index.scss
+
+# Extract an environments workspace library
+
+- nx generate library environments --directory=shared --tags="scope:shared,type:environments" --style=scss
+
+- npx rimraf ./libs/shared/environments/src/lib/_._
