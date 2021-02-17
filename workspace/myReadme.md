@@ -63,3 +63,6 @@ to
 - npx rimraf ./libs/shared/styles/_.js ./libs/shared/styles/_.json ./libs/shared/styles/src/_._ ./libs/shared/styles/src/lib/_._
 
 - "# shared-styles" > ./libs/shared/styles/README.md
+- mv ./apps/tiny-app/src/styles.scss ./libs/shared/styles/src/lib/\_global.scss
+
+- "@import './lib/global';" > ./libs/shared/styles/src/index.scss
