@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@workspace/shared/assets": ["libs/shared/assets/src/index.ts"]
+      "@workspace/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@workspace/shared/styles": ["libs/shared/styles/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -55,3 +55,11 @@ to
               }
             ]
 ```
+
+## Generate a clean workspace sass library
+
+- nx generate library styles --directory=shared --tags="scope:shared,type:styles" --style=scss
+
+- npx rimraf ./libs/shared/styles/_.js ./libs/shared/styles/_.json ./libs/shared/styles/src/_._ ./libs/shared/styles/src/lib/_._
+
+- "# shared-styles" > ./libs/shared/styles/README.md
