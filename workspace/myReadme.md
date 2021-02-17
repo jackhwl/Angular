@@ -78,3 +78,9 @@ to
 - nx add @ngrx/store --minimal false
 
 - nx add @ngrx/store-devtools
+
+## Extract a shared data access library
+
+- nx generate library data-access --directory=shared --tags="scope:shared,type:data-access" --style=scss
+
+- mv ./apps/tiny-app/src/app/reducers ./libs/shared/data-access/src/lib
