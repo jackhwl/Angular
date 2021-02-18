@@ -12,6 +12,7 @@
         "project": ["libs/shared/data-access/tsconfig.*?.json"]
       },
       "rules": {
+        "@typescript-eslint/no-empty-interface": "off",
         "@angular-eslint/directive-selector": [
           "error",
           { "type": "attribute", "prefix": "workspace", "style": "camelCase" }
