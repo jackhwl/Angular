@@ -16,7 +16,10 @@
     }
   },
   "projects": {
-    "tiny-app": { "tags": [] },
+    "tiny-app": {
+      "tags": [],
+      "implicitDependencies": ["shared-assets", "shared-styles"]
+    },
     "tiny-app-e2e": { "tags": [], "implicitDependencies": ["tiny-app"] },
     "shared-assets": { "tags": ["scope:shared", "type:assets"] },
     "shared-styles": { "tags": ["scope:shared", "type:styles"] },
