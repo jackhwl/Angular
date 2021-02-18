@@ -84,3 +84,5 @@ to
 - nx generate library data-access --directory=shared --tags="scope:shared,type:data-access" --style=scss
 
 - mv ./apps/tiny-app/src/app/reducers ./libs/shared/data-access/src/lib
+
+## Add a development mode only meta reducer
