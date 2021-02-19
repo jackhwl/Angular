@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "recruit",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "recruit": {
+      "projectType": "application",
+      "root": "apps/recruit",
+      "sourceRoot": "apps/recruit/src",
+      "prefix": "vi-app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/recruit",
+            "index": "apps/recruit/src/index.html",
+            "main": "apps/recruit/src/main.ts",
+            "polyfills": "apps/recruit/src/polyfills.ts",
+            "tsConfig": "apps/recruit/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/recruit/src/favicon.ico",
+              "apps/recruit/src/assets"
+            ],
+            "styles": ["apps/recruit/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/recruit/src/environments/environment.ts",
+                  "with": "apps/recruit/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "recruit:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "recruit:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "recruit:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/recruit/src/**/*.ts",
+              "apps/recruit/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/recruit"],
+          "options": {
+            "jestConfig": "apps/recruit/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "recruit-e2e": {
+      "root": "apps/recruit-e2e",
+      "sourceRoot": "apps/recruit-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/recruit-e2e/cypress.json",
+            "tsConfig": "apps/recruit-e2e/tsconfig.e2e.json",
+            "devServerTarget": "recruit:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "recruit:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/recruit-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+- npx create-nx-workspace vi-app --cli=angular --preset=angular --appName=tiny-app --style=scss
