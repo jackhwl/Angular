@@ -1,1 +1,3 @@
 - npx create-nx-workspace vi-app --cli=angular --preset=angular --appName=tiny-app --style=scss
+- nx generate library environments --directory=shared --tags="scope:shared,type:environments" --style=scss
+- npx rimraf ./libs/shared/environments/src/lib/_._
