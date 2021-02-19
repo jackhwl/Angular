@@ -1,4 +1,6 @@
 [Tiny Angular application projects in Nx workspaces](https://indepth.dev/posts/1185/tiny-angular-application-projects-in-nx-workspaces#extract-an-assets-workspace-library)
+[Shell Library patterns with Nx and Monorepo Architectures](https://indepth.dev/posts/1117/the-shell-library-patterns-with-nx-and-monorepo-architectures)
+[Sustainable Angular Architectures](https://www.angulararchitects.io/aktuelles/sustainable-angular-architectures-1/)
 
 # Create an Nx workspace with an Angular application
 
