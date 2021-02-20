@@ -19,6 +19,6 @@
     "recruit": { "tags": [] },
     "recruit-e2e": { "tags": [], "implicitDependencies": ["recruit"] },
     "shared-environments": { "tags": ["scope:shared", "type:environments"] },
-    "common-ui-custom-material": { "tags": [] }
+    "shared-ui-custom-material": { "tags": [] }
   }
 }

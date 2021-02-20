@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@vi-app/shared/environments": ["libs/shared/environments/src/index.ts"],
-      "@vi-app/common/ui/custom-material": [
-        "libs/common/ui/custom-material/src/index.ts"
+      "@vi-app/shared/ui/custom-material": [
+        "libs/shared/ui/custom-material/src/index.ts"
       ]
     }
   },

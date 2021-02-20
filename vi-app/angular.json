@@ -171,26 +171,26 @@
         }
       }
     },
-    "common-ui-custom-material": {
+    "shared-ui-custom-material": {
       "projectType": "library",
-      "root": "libs/common/ui/custom-material",
-      "sourceRoot": "libs/common/ui/custom-material/src",
+      "root": "libs/shared/ui/custom-material",
+      "sourceRoot": "libs/shared/ui/custom-material/src",
       "prefix": "vi-app",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/common/ui/custom-material/src/**/*.ts",
-              "libs/common/ui/custom-material/src/**/*.html"
+              "libs/shared/ui/custom-material/src/**/*.ts",
+              "libs/shared/ui/custom-material/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/common/ui/custom-material"],
+          "outputs": ["coverage/libs/shared/ui/custom-material"],
           "options": {
-            "jestConfig": "libs/common/ui/custom-material/jest.config.js",
+            "jestConfig": "libs/shared/ui/custom-material/jest.config.js",
             "passWithNoTests": true
           }
         }
