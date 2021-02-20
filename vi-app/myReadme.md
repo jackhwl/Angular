@@ -6,3 +6,8 @@
 "export \* from './lib/environment';" > ./libs/shared/environments/src/index.ts
 
 npx rimraf ./apps/tiny-app/src/environments
+
+## Custom Material Modules
+
+npm i @angular/material
+nx generate library custom-material --directory=common/ui --style=scss
