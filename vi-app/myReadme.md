@@ -11,3 +11,7 @@ npx rimraf ./apps/tiny-app/src/environments
 
 npm i @angular/material
 nx generate library custom-material --directory=common/ui --style=scss
+
+## assets
+
+nx generate library assets --directory=shared --tags="scope:shared,type:assets" --style=scss
