@@ -48,8 +48,16 @@
             "tsConfig": "apps/recruit/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/recruit/src/favicon.ico",
-              "apps/recruit/src/assets"
+              {
+                "glob": "favicon.ico",
+                "input": "libs/shared/assets/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/shared/assets/src/assets",
+                "output": "assets"
+              }
             ],
             "styles": ["apps/recruit/src/styles.scss"],
             "scripts": []
