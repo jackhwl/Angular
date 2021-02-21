@@ -3,6 +3,7 @@ module.exports = {
     '<rootDir>/apps/recruit',
     '<rootDir>/libs/shared/environments',
     '<rootDir>/libs/common/ui/custom-material',
-    '<rootDir>/libs/shared/assets'
+    '<rootDir>/libs/shared/assets',
+    '<rootDir>/libs/shared/styles'
   ]
 };

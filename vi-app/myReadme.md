@@ -15,3 +15,15 @@ nx generate library custom-material --directory=common/ui --style=scss
 ## assets
 
 nx generate library assets --directory=shared --tags="scope:shared,type:assets" --style=scss
+
+## styles
+
+nx generate library styles --directory=shared --tags="scope:shared,type:styles" --style=scss
+
+npx rimraf ./libs/shared/styles/_.js ./libs/shared/styles/_.json ./libs/shared/styles/src/_._ ./libs/shared/styles/src/lib/_._
+
+"# shared-styles" > ./libs/shared/styles/README.md
+
+mv ./apps/tiny-app/src/styles.scss ./libs/shared/styles/src/lib/\_global.scss
+
+"@import './lib/global';" > ./libs/shared/styles/src/index.scss
