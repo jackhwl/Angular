@@ -27,3 +27,5 @@ npx rimraf ./libs/shared/styles/_.js ./libs/shared/styles/_.json ./libs/shared/s
 mv ./apps/tiny-app/src/styles.scss ./libs/shared/styles/src/lib/\_global.scss
 
 "@import './lib/global';" > ./libs/shared/styles/src/index.scss
+
+## index.scss content has invisible charactors need remove
