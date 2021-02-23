@@ -36,7 +36,7 @@
       "projectType": "application",
       "root": "apps/recruit",
       "sourceRoot": "apps/recruit/src",
-      "prefix": "vi-app",
+      "prefix": "vi",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -158,7 +158,7 @@
       "projectType": "library",
       "root": "libs/shared/environments",
       "sourceRoot": "libs/shared/environments/src",
-      "prefix": "vi-app",
+      "prefix": "vi",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -183,7 +183,7 @@
       "projectType": "library",
       "root": "libs/shared/ui/custom-material",
       "sourceRoot": "libs/shared/ui/custom-material/src",
-      "prefix": "vi-app",
+      "prefix": "vi",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -208,21 +208,21 @@
       "projectType": "library",
       "root": "libs/shared/assets",
       "sourceRoot": "libs/shared/assets/src",
-      "prefix": "vi-app",
+      "prefix": "vi",
       "architect": {}
     },
     "shared-styles": {
       "projectType": "library",
       "root": "libs/shared/styles",
       "sourceRoot": "libs/shared/styles/src",
-      "prefix": "vi-app",
+      "prefix": "vi",
       "architect": {}
     },
     "shared-ui-slogan": {
       "projectType": "library",
       "root": "libs/shared/ui/slogan",
       "sourceRoot": "libs/shared/ui/slogan/src",
-      "prefix": "vi-app",
+      "prefix": "vi",
       "architect": {
         "lint": {
           "builder": "@nrwl/linter:eslint",
