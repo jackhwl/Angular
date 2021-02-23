@@ -55,8 +55,8 @@
               },
               {
                 "glob": "**/*",
-                "input": "libs/shared/assets/src/assets",
-                "output": "assets"
+                "input": "libs/shared/assets/",
+                "output": "/assets/"
               }
             ],
             "styles": ["libs/shared/styles/src/index.scss"],

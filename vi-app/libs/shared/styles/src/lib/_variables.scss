@@ -1,0 +1,22 @@
+$screen-xs: 599px;
+$screen-sm: 768px;
+$screen-note: 576px;
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/assets/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'viglobal';
+  src: url('/assets/fonts/viglobal.eot');
+  src: url('/assets/fonts/viglobal.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/viglobal.woff') format('woff'),
+    url('/assets/fonts/viglobal.ttf') format('truetype'),
+    url('/assets/fonts/viglobal.svg#viglobal') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$rec-width: 90%;
+$rec-max-width: 880px;
