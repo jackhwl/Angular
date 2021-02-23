@@ -22,6 +22,7 @@
     "shared-ui-custom-material": { "tags": [] },
     "shared-assets": { "tags": ["scope:shared", "type:assets"] },
     "shared-styles": { "tags": ["scope:shared", "type:styles"] },
-    "shared-ui-slogan": { "tags": [] }
+    "shared-ui-slogan": { "tags": [] },
+    "shared-auth": { "tags": [] }
   }
 }
