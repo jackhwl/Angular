@@ -29,3 +29,9 @@ mv ./apps/tiny-app/src/styles.scss ./libs/shared/styles/src/lib/\_global.scss
 "@import './lib/global';" > ./libs/shared/styles/src/index.scss
 
 ## index.scss content has invisible charactors need remove
+
+## add slogan lib
+
+nx g lib slogan --directory=shared/ui --style=scss  
+https://www.youtube.com/watch?v=_QU0mpyF7bQ&t=545s
+https://indepth.dev/posts/1117/the-shell-library-patterns-with-nx-and-monorepo-architectures

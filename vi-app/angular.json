@@ -217,6 +217,31 @@
       "sourceRoot": "libs/shared/styles/src",
       "prefix": "vi-app",
       "architect": {}
+    },
+    "shared-ui-slogan": {
+      "projectType": "library",
+      "root": "libs/shared/ui/slogan",
+      "sourceRoot": "libs/shared/ui/slogan/src",
+      "prefix": "vi-app",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/ui/slogan/src/**/*.ts",
+              "libs/shared/ui/slogan/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/ui/slogan"],
+          "options": {
+            "jestConfig": "libs/shared/ui/slogan/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
