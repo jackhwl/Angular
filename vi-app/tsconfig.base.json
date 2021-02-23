@@ -15,13 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@vi-app/shared/environments": ["libs/shared/environments/src/index.ts"],
-      "@vi-app/shared/ui/custom-material": [
+      "@vi/shared/environments": ["libs/shared/environments/src/index.ts"],
+      "@vi/shared/ui/custom-material": [
         "libs/shared/ui/custom-material/src/index.ts"
       ],
-      "@vi-app/shared/assets": ["libs/shared/assets/src/index.ts"],
-      "@vi-app/shared/styles": ["libs/shared/styles/src/index.ts"],
-      "@vi-app/shared/ui/slogan": ["libs/shared/ui/slogan/src/index.ts"]
+      "@vi/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@vi/shared/styles": ["libs/shared/styles/src/index.ts"],
+      "@vi/shared/ui/slogan": ["libs/shared/ui/slogan/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
