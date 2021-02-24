@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { fromAuth } from '@wl/core-state';
 import { LoginPageActions } from '@wl/core-state';
@@ -9,13 +9,11 @@ import { Credentials } from '@wl/api-interfaces';
   templateUrl: './login-page.component.html',
   styleUrls: []
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   pending$ = this.store.pipe(select(fromAuth.getLoginPagePending));
   error$ = this.store.pipe(select(fromAuth.getLoginPageError));
 
   constructor(private store: Store<fromAuth.State>) {}
-
-  ngOnInit() {}
 
   onSubmit(credentials: Credentials) {
     this.store.dispatch(LoginPageActions.login({ credentials }));
