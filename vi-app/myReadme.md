@@ -38,3 +38,7 @@ https://www.youtube.com/watch?v=_QU0mpyF7bQ&t=545s
 https://indepth.dev/posts/1117/the-shell-library-patterns-with-nx-and-monorepo-architectures
 https://creately.com/ Your Visual Workspace
 https://duncanhunter.gitbook.io/enterprise-angular-applications-with-ngrx-and-nx/introduction/3-generating-components-and-nx-lib
+
+## add api-interfaces lib
+
+nx g lib api-interfaces --style=scss --skipTests
