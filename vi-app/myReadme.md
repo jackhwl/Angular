@@ -42,3 +42,7 @@ https://duncanhunter.gitbook.io/enterprise-angular-applications-with-ngrx-and-nx
 ## add api-interfaces lib
 
 nx g lib api-interfaces --style=scss --skipTests
+
+## add shared-common module
+
+nx g lib common --style=scss --skipTests --directory=shared

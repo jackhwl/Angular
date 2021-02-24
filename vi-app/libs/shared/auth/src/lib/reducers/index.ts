@@ -3,7 +3,7 @@ import {
   createFeatureSelector,
   ActionReducerMap
 } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
+//import * as fromRoot from '../../reducers';
 import * as fromAuth from './auth.reducer';
 import * as fromLoginPage from './login-page.reducer';
 import { AuthApiActions } from '../actions';
@@ -16,7 +16,8 @@ export interface AuthState {
   loginPage: fromLoginPage.State;
 }
 
-export interface State extends fromRoot.State {
+export interface State {
+  //extends fromRoot.State
   auth: AuthState;
 }
 

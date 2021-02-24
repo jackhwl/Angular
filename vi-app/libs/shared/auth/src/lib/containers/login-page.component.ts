@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { fromAuth } from '@wl/core-state';
-import { LoginPageActions } from '@wl/core-state';
-import { Credentials } from '@wl/api-interfaces';
+import { Credentials } from '@vi/api-interfaces';
+import * as fromAuth from '../reducers';
+import { LoginPageActions } from '../actions';
 
 @Component({
   selector: 'vi-login-page',

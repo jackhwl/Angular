@@ -7,6 +7,7 @@ module.exports = {
     '<rootDir>/libs/shared/styles',
     '<rootDir>/libs/shared/ui/slogan',
     '<rootDir>/libs/shared/auth',
-    '<rootDir>/libs/api-interfaces'
+    '<rootDir>/libs/api-interfaces',
+    '<rootDir>/libs/shared/common'
   ]
 };

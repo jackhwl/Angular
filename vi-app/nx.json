@@ -24,6 +24,7 @@
     "shared-styles": { "tags": ["scope:shared", "type:styles"] },
     "shared-ui-slogan": { "tags": [] },
     "shared-auth": { "tags": [] },
-    "api-interfaces": { "tags": [] }
+    "api-interfaces": { "tags": [] },
+    "shared-common": { "tags": [] }
   }
 }
