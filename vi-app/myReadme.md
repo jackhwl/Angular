@@ -33,6 +33,8 @@ mv ./apps/tiny-app/src/styles.scss ./libs/shared/styles/src/lib/\_global.scss
 ## add slogan lib
 
 nx g lib slogan --directory=shared/ui --style=scss  
+https://www.youtube.com/watch?v=esDbHZ2tbhg
 https://www.youtube.com/watch?v=_QU0mpyF7bQ&t=545s
 https://indepth.dev/posts/1117/the-shell-library-patterns-with-nx-and-monorepo-architectures
 https://creately.com/ Your Visual Workspace
+https://duncanhunter.gitbook.io/enterprise-angular-applications-with-ngrx-and-nx/introduction/3-generating-components-and-nx-lib
