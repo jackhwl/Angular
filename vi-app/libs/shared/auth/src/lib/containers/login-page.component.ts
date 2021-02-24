@@ -5,7 +5,7 @@ import { LoginPageActions } from '@wl/core-state';
 import { Credentials } from '@wl/api-interfaces';
 
 @Component({
-  selector: 'wl-login-page',
+  selector: 'vi-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: []
 })
