@@ -1,0 +1,17 @@
+<a [routerLink]="['/books', id]">
+  <mat-card>
+    <mat-card-title-group>
+      <img mat-card-sm-image *ngIf="thumbnail" [src]="thumbnail" />
+      <mat-card-title>{{ title | viEllipsis: 35 }}</mat-card-title>
+      <mat-card-subtitle *ngIf="subtitle">{{
+        subtitle | viEllipsis: 40
+      }}</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content>
+      <p *ngIf="description">{{ description | viEllipsis }}</p>
+    </mat-card-content>
+    <mat-card-footer>
+      <vi-book-authors [book]="book"></vi-book-authors>
+    </mat-card-footer>
+  </mat-card>
+</a>
