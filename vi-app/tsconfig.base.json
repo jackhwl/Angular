@@ -24,7 +24,8 @@
       "@vi/shared/ui/slogan": ["libs/shared/ui/slogan/src/index.ts"],
       "@vi/shared/auth": ["libs/shared/auth/src/index.ts"],
       "@vi/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@vi/shared/common": ["libs/shared/common/src/index.ts"]
+      "@vi/shared/common": ["libs/shared/common/src/index.ts"],
+      "@vi/books": ["libs/books/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

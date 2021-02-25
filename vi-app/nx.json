@@ -25,6 +25,7 @@
     "shared-ui-slogan": { "tags": [] },
     "shared-auth": { "tags": [] },
     "api-interfaces": { "tags": [] },
-    "shared-common": { "tags": [] }
+    "shared-common": { "tags": [] },
+    "books": { "tags": [] }
   }
 }
