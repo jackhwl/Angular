@@ -14,6 +14,8 @@ import { FindBookPageComponent } from './containers/find-book-page.component';
 import { ViewBookPageComponent } from './containers/view-book-page.component';
 import { SelectedBookPageComponent } from './containers/selected-book-page.component';
 import { CollectionPageComponent } from './containers/collection-page.component';
+import { DBModule } from '@ngrx/db';
+import { schema } from './db';
 
 @NgModule({
   imports: [
@@ -37,7 +39,9 @@ import { CollectionPageComponent } from './containers/collection-page.component'
      * All Effects will only be instantiated once regardless of
      * whether they are registered once or multiple times.
      */
-    EffectsModule.forFeature([BookEffects, CollectionEffects])
+    EffectsModule.forFeature([BookEffects, CollectionEffects]),
+
+    DBModule.provideDB(schema)
   ],
   declarations: [
     FindBookPageComponent,
