@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//import { CoreStateModule } from '@wl/core-state';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from '@vi/shared/auth';
 
@@ -22,7 +21,6 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
 
     // core
-    //CoreStateModule,
     CoreModule
   ],
   bootstrap: [AppComponent]
