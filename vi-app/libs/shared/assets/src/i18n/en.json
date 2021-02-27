@@ -1,0 +1,37 @@
+{
+  "i18.nav.home": "Home",
+  "i18.nav.header_link_one": "Header Link One",
+  "i18.nav.jobs": "Jobs",
+  "i18.nav.books": "Books",
+  "i18.nav.heroes": "Heroes",
+  "i18.nav.villains": "Villains",
+  "i18.nav.students": "Students",
+  "i18.nav.login": "Login",
+  "i18.nav.logout": "Logout",
+  "i18.nav.signin": "Signin",
+  "i18.nav.signout": "Signout",
+
+  "i18.job.office": "Office",
+  "i18.job.department": "Department",
+  "i18.job.date_posted": "Date_Posted",
+  "i18.job.application_deadline": "Application_Deadline",
+  "i18.job.job_retrieved_successfully": "{{counter}} Jobs retrieved successfully!",
+
+  "i18.students.students": "Students",
+  "i18.students.firstname": "FirstName",
+  "i18.students.middlename": "MiddleName",
+
+  "i18.villains.villains": "Villains",
+  "i18.villains.villain_details": "Villain Details",
+  "i18.villains.refresh": "Refresh",
+  "i18.villains.add": "Add",
+  "i18.villains.cancel": "Cancel",
+  "i18.villains.save": "Save",
+  "i18.villains.id": "id",
+  "i18.villains.name": "name",
+  "i18.villains.saying": "saying",
+  "i18.villains.villains_retrieved_successfully": "Villains retrieved successfully!",
+  "i18.villains.villain_created": "Villain {{name}} created!",
+  "i18.villains.villain_updated": "Villain {{name}} updated!",
+  "i18.villains.villain_deleted": "Villain {{name}} deleted!"
+}

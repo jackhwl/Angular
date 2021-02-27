@@ -54,6 +54,11 @@
                 "output": "./"
               },
               {
+                "glob": "*.json",
+                "input": "libs/shared/assets/src/i18n",
+                "output": "/assets/i18n/"
+              },
+              {
                 "glob": "**/*",
                 "input": "libs/shared/assets/",
                 "output": "/assets/"

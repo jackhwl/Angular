@@ -1,0 +1,37 @@
+{
+  "i18.nav.home": "Accueil",
+  "i18.nav.header_link_one": "Lien d'en-tête un",
+  "i18.nav.jobs": "Travaux",
+  "i18.nav.books": "Livres",
+  "i18.nav.heroes": "Héros",
+  "i18.nav.villains": "Méchants",
+  "i18.nav.students": "Élèves",
+  "i18.nav.login": "Connexion",
+  "i18.nav.logout": "Se déconnecter",
+  "i18.nav.signin": "S'identifier",
+  "i18.nav.signout": "Déconnexion",
+
+  "i18.job.office": "Office",
+  "i18.job.department": "Department",
+  "i18.job.date_posted": "Date_Posted",
+  "i18.job.application_deadline": "Application_Deadline",
+  "i18.job.job_retrieved_successfully": "{{counter}} travaux récupérés avec succès!",
+
+  "i18.students.students": "Élèves",
+  "i18.students.firstname": "Prénom",
+  "i18.students.middlename": "Deuxième nom",
+
+  "i18.villains.villains": "Méchants",
+  "i18.villains.villain_details": "Détails du méchant",
+  "i18.villains.refresh": "Rafraîchir",
+  "i18.villains.add": "Ajouter",
+  "i18.villains.cancel": "Annuler",
+  "i18.villains.save": "sauver",
+  "i18.villains.id": "id",
+  "i18.villains.name": "Nom",
+  "i18.villains.saying": "en disant",
+  "i18.villains.villains_retrieved_successfully": "Villains récupéré avec succès!",
+  "i18.villains.villain_created": "Le méchant {{name}} a créé!",
+  "i18.villains.villain_updated": "Villain {{name}} mis à jour!",
+  "i18.villains.villain_deleted": "Le méchant {{name}} supprimé!"
+}
