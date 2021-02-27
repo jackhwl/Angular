@@ -64,7 +64,9 @@
                 "output": "/assets/"
               }
             ],
-            "styles": [],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": ["libs/shared/styles/src/lib"]
             },
