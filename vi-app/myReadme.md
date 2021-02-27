@@ -46,3 +46,8 @@ nx g lib api-interfaces --style=scss --skipTests
 ## add shared-common module
 
 nx g lib common --style=scss --skipTests --directory=shared
+
+## add webpack-bundle-analyzer
+
+- nx build --prod --stats-json
+- yarn add webpack-bundle-analyzer --dev
