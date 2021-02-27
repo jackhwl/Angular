@@ -60,7 +60,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "libs/shared/assets/",
+                "input": "libs/shared/assets/src/",
                 "output": "/assets/"
               }
             ],
