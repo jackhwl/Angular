@@ -59,7 +59,10 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["libs/shared/styles/src/index.scss"],
+            "styles": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/shared/styles/src/lib"]
+            },
             "scripts": []
           },
           "configurations": {
@@ -230,7 +233,11 @@
             "lintFilePatterns": [
               "libs/shared/ui/slogan/src/**/*.ts",
               "libs/shared/ui/slogan/src/**/*.html"
-            ]
+            ],
+            "styles": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/shared/styles/src/lib"]
+            }
           }
         },
         "test": {
