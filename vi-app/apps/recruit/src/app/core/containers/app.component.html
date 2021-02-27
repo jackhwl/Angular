@@ -1,0 +1,68 @@
+<!-- <mat-toolbar color="primary" class="mat-elevation-z4">
+  <span>
+    <button data-cy="toggle-btn" mat-mini-fab (click)="toggleSideNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="logo2">
+      <img src="assets/logo2.png" alt="Logo">
+    </span>
+    <span class="title">
+      {{title}}
+    </span>
+  </span>
+  <span class="spacer"></span>
+  <button class="login" data-cy="login-btn" mat-mini-fab (click)="logout()">
+    <mat-icon>person</mat-icon>
+  </button>
+</mat-toolbar> -->
+
+<mat-sidenav-container *ngIf="links$ | async as links">
+  <mat-sidenav #sidenav [opened]="false" mode="side" class="app-sidenav">
+    <vi-sidenav-list
+      [links]="links"
+      [currentLang]="translate.currentLang"
+      (useLang)="useLang($event)"
+    ></vi-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <vi-header
+      [links]="links"
+      [currentLang]="translate.currentLang"
+      (toggled)="toggleSideNav()"
+      (useLang)="useLang($event)"
+      (logout)="logout()"
+    ></vi-header>
+    <vi-toolbar (openMenu)="openSidenav()" *ngIf="isBookModule()">
+      Book Collection
+    </vi-toolbar>
+    <vi-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
+      <vi-nav-item
+        (navigate)="closeSidenav()"
+        *ngIf="loggedIn$ | async"
+        routerLink="/"
+        icon="book"
+        hint="View your book collection"
+      >
+        My Collection
+      </vi-nav-item>
+      <vi-nav-item
+        (navigate)="closeSidenav()"
+        *ngIf="loggedIn$ | async"
+        routerLink="/books/find"
+        icon="search"
+        hint="Find your next book!"
+      >
+        Browse Books
+      </vi-nav-item>
+      <vi-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
+        Sign In
+      </vi-nav-item>
+      <vi-nav-item (navigate)="logout()" *ngIf="loggedIn$ | async">
+        Sign Out
+      </vi-nav-item>
+    </vi-sidenav>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,12 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
+//import { CoreStateModule } from '@wl/core-state';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from '@vi/shared/auth';
+
+import { AppComponent } from './core/containers/app.component';
+import { CoreModule } from './core/core.module';
+//import { LoginModule } from './login/login.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule],
-  providers: [],
+  imports: [
+    // angular
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    //LoginModule,
+    AuthModule,
+    // app
+    AppRoutingModule,
+
+    // core
+    //CoreStateModule,
+    CoreModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
