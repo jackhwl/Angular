@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import * as fromAuth from '../reducers';
 import * as fromRoot from '../reducers';
 
-//import { AuthActions } from '../actions';
+import { AuthActions } from '../actions';
 //import { LayoutActions } from '../core/actions';
 import { Router } from '@angular/router';
 
@@ -45,6 +45,7 @@ export class AuthFacade {
           //   : this.linksAll),
           ...(data[0].valueOf()
             ? [
+                ...this.linksAll,
                 {
                   path: '/logout',
                   icon: 'view_list',
@@ -52,7 +53,7 @@ export class AuthFacade {
                   click: 'logout'
                 }
               ]
-            : [])
+            : this.linksAll)
         ])
       )
     );
@@ -72,11 +73,11 @@ export class AuthFacade {
   //   this.store.dispatch(LayoutActions.openSidenav());
   // }
 
-  // logout() {
-  //   this.closeSidenav();
+  logout() {
+    //this.closeSidenav();
 
-  //   this.store.dispatch(AuthActions.logoutConfirmation());
-  // }
+    this.store.dispatch(AuthActions.logoutConfirmation());
+  }
 
   isBookModule() {
     if (this.router.url.startsWith('/book')) return true;

@@ -55,7 +55,7 @@ export class AppComponent {
   }
 
   logout() {
-    //this.authFacade.logout();
+    this.authFacade.logout();
   }
 
   isBookModule() {
