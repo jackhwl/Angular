@@ -61,6 +61,24 @@ namespace SSRNetCore22
 
 				spa.Options.SourcePath = "ClientApp";
 
+				spa.UseSpaPrerendering(options =>
+				{
+					// This is the path where angular generates the server build result
+					// This path would be different when using React or Vue
+					options.BootModulePath = $"{spa.Options.SourcePath}/dist/server/main.js";
+
+					// During development, let angular run the build:ssr command on each build.
+					// Check the package.json to see what this command does.
+					// When deploying your application on a production server, the ng build:ssr command will be executed to generate the server build.
+					// Check the csproj file to see what commands are being run on publish.
+					// The PublishRunWebpack target runs `npm install` `npm run build -- --prod` and `npm run build:ssr`
+					options.BootModuleBuilder = env.IsDevelopment()
+						? new AngularCliBuilder(npmScript: "build:ssr")
+						: null;
+
+					options.ExcludeUrls = new[] { "/sockjs-node" };
+				});
+
 				if (env.IsDevelopment())
 				{
 					spa.UseAngularCliServer(npmScript: "start");
