@@ -15,6 +15,7 @@ import { NavItemComponent } from './components/nav-item.component';
 import { SidenavComponent } from './components/sidenav.component';
 import { ToolbarComponent } from './components/toolbar.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { CoreFacade } from './services/core.facade';
 
@@ -48,7 +49,7 @@ export const COMPONENTS = [
     /**
      * @ngrx/router-store keeps router state up-to-date in the store.
      */
-    //StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot(),
 
     /**
      * Store devtools instrument the store retaining past versions of state
