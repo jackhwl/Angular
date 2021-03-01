@@ -51,3 +51,11 @@ nx g lib common --style=scss --skipTests --directory=shared
 
 - nx build --prod --stats-json
 - yarn add webpack-bundle-analyzer --dev
+
+https://ngrx.io/guide/router-store/configuration
+https://subscription.packtpub.com/book/application_development/9781787288904/2/ch02lvl1sec12/url-format
+https://indepth.dev/posts/1206/understanding-the-magic-behind-ngrx-effects
+https://indepth.dev/posts/1199/understanding-the-magic-behind-ngrx-store
+
+add store-devtools
+npm i @ngrx/store-devtools --save-dev

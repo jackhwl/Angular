@@ -15,9 +15,11 @@ import { NavItemComponent } from './components/nav-item.component';
 import { SidenavComponent } from './components/sidenav.component';
 import { ToolbarComponent } from './components/toolbar.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { CoreFacade } from './services/core.facade';
+import { environment } from '@vi/shared/environments';
 
 export const COMPONENTS = [
   AppComponent,
@@ -61,9 +63,11 @@ export const COMPONENTS = [
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-    // StoreDevtoolsModule.instrument({
-    //   name: 'NgRx Book Store App',
-    // }),
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({
+          name: 'NgRx Book Store App'
+        }),
 
     /**
      * EffectsModule.forRoot() is imported once in the root module and
