@@ -8,7 +8,6 @@ import * as fromAuth from '../reducers';
 import * as fromRoot from '../reducers';
 
 import { AuthActions } from '../actions';
-//import { LayoutActions } from '../core/actions';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -59,23 +58,7 @@ export class AuthFacade {
     );
   }
 
-  // closeSidenav() {
-  //   /**
-  //    * All state updates are handled through dispatched actions in 'container'
-  //    * components. This provides a clear, reproducible history of state
-  //    * updates and user interaction through the life of our
-  //    * application.
-  //    */
-  //   this.store.dispatch(LayoutActions.closeSidenav());
-  // }
-
-  // openSidenav() {
-  //   this.store.dispatch(LayoutActions.openSidenav());
-  // }
-
   logout() {
-    //this.closeSidenav();
-
     this.store.dispatch(AuthActions.logoutConfirmation());
   }
 

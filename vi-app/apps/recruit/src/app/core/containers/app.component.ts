@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 import { AuthFacade } from '@vi/shared/auth';
+import { CoreFacade } from '../services/core.facade';
 
 @Component({
   selector: 'vi-root',
@@ -21,6 +22,7 @@ export class AppComponent {
   title = 'Recruit';
   constructor(
     private authFacade: AuthFacade,
+    private coreFacade: CoreFacade,
     public translate: TranslateService
   ) {
     /**
@@ -47,14 +49,15 @@ export class AppComponent {
   }
 
   closeSidenav() {
-    //this.authFacade.closeSidenav();
+    this.coreFacade.closeSidenav();
   }
 
   openSidenav() {
-    //this.authFacade.openSidenav();
+    this.coreFacade.openSidenav();
   }
 
   logout() {
+    this.closeSidenav();
     this.authFacade.logout();
   }
 

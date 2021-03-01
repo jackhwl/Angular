@@ -16,6 +16,7 @@ import { SidenavComponent } from './components/sidenav.component';
 import { ToolbarComponent } from './components/toolbar.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { CoreFacade } from './services/core.facade';
 
 export const COMPONENTS = [
   AppComponent,
@@ -79,7 +80,7 @@ export const COMPONENTS = [
     //DBModule.provideDB(schema),
   ],
   declarations: COMPONENTS,
-  providers: [AuthFacade], //SecurityService, SecurityAuthGuard,
+  providers: [AuthFacade, CoreFacade], //SecurityService, SecurityAuthGuard,
   exports: [SharedCommonModule, TranslateModule, ...COMPONENTS]
 })
 export class CoreModule {}
