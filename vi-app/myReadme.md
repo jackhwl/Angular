@@ -60,3 +60,7 @@ https://indepth.dev/posts/1199/understanding-the-magic-behind-ngrx-store
 add store-devtools
 npm i @ngrx/store-devtools --save-dev
 https://subscription.packtpub.com/book/application_development/9781787288904/2/ch02lvl1sec17/activating-components
+
+## add students lib
+
+nx g lib students --style=scss

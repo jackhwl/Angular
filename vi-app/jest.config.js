@@ -9,6 +9,7 @@ module.exports = {
     '<rootDir>/libs/shared/auth',
     '<rootDir>/libs/api-interfaces',
     '<rootDir>/libs/shared/common',
-    '<rootDir>/libs/books'
+    '<rootDir>/libs/books',
+    '<rootDir>/libs/students'
   ]
 };

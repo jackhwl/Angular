@@ -357,6 +357,31 @@
           }
         }
       }
+    },
+    "students": {
+      "projectType": "library",
+      "root": "libs/students",
+      "sourceRoot": "libs/students/src",
+      "prefix": "vi",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/students/src/**/*.ts",
+              "libs/students/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/students"],
+          "options": {
+            "jestConfig": "libs/students/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

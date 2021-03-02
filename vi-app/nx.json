@@ -26,6 +26,7 @@
     "shared-auth": { "tags": [] },
     "api-interfaces": { "tags": [] },
     "shared-common": { "tags": [] },
-    "books": { "tags": [] }
+    "books": { "tags": [] },
+    "students": { "tags": [] }
   }
 }
