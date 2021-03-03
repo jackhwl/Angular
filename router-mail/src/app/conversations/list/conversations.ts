@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Conversation } from '../../shared/model';
-import { pluck } from 'rxjs/operators';
+import { mergeAll, pluck } from 'rxjs/operators';
 
 @Component({
   templateUrl: './conversations.html',
@@ -15,8 +15,9 @@ export class ConversationsCmp {
 
   constructor(route: ActivatedRoute) {
     this.folder = route.params.pipe(pluck('folder'));
-    this.conversations = (<any>(
-      route.data.pipe(pluck('conversations'))
-    )).mergeAll();
+    this.conversations = <any>route.data.pipe(
+      pluck('conversations'),
+      mergeAll()
+    );
   }
 }

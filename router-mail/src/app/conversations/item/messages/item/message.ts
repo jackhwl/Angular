@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Message } from '../../../../shared/model';
-import { pluck } from 'rxjs/operators';
+import { mergeAll, pluck } from 'rxjs/operators';
 
 @Component({
   templateUrl: './message.html',
@@ -14,7 +14,10 @@ export class MessageCmp {
   messages: Observable<Message[]>;
 
   constructor(route: ActivatedRoute) {
-    this.messages = (<any>route.data.pipe(pluck('messages'))).mergeAll();
+    this.messages = <any>route.data.pipe(
+      pluck('messages'),
+      mergeAll()
+    );
     this.message = route.data.pipe(pluck('message'));
   }
 }
