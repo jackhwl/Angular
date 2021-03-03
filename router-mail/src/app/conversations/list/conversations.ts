@@ -1,6 +1,3 @@
-import 'rxjs/add/operator/pluck';
-import 'rxjs/add/operator/mergeAll';
-
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';

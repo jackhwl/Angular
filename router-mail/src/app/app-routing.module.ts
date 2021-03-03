@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import {
   ComposeCmp,
   ConversationCmp,
@@ -7,6 +7,7 @@ import {
   MessageCmp,
   MessagesCmp
 } from './conversations';
+import { Actions, Repo } from './shared/model';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/inbox' },
@@ -47,9 +48,28 @@ const routes: Routes = [
   }
 ];
 
+export function conversationsResolver(repo: Repo) {
+  return (route: ActivatedRouteSnapshot) =>
+    repo.conversations(route.params['folder']);
+}
+
+export function conversationResolver(repo: Repo) {
+  return (route: ActivatedRouteSnapshot) =>
+    repo.conversation(+route.params['id']);
+}
+
+export function messagesResolver(repo: Repo) {
+  return (route: ActivatedRouteSnapshot) =>
+    repo.messageTitles(+route.parent.params['id']);
+}
+
+export function messageResolver(repo: Repo) {
+  return (route: ActivatedRouteSnapshot) => repo.message(+route.params['id']);
+}
+
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
