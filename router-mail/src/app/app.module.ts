@@ -20,6 +20,7 @@ import {
 import { MailAppCmp } from './mail';
 import { Actions, Repo } from './shared/model';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
-    //MaterialModule.forRoot()
+    ReactiveFormsModule,
+    MaterialModule
   ],
   bootstrap: [MailAppCmp]
 })

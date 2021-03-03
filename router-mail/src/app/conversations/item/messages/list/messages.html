@@ -1,4 +1,4 @@
-<md-card
+<mat-card
   *ngFor="let m of messages | async"
   [routerLink]="['../messages', m.id]"
 >
@@ -6,4 +6,4 @@
   <p>
     <span class="light">by {{m.user.name}} [{{m.user.email}}]</span>
   </p>
-</md-card>
+</mat-card>
