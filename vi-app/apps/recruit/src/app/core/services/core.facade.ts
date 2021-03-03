@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { LayoutActions } from '../actions';
+import * as fromRoot from '../../reducers';
 
 @Injectable()
 export class CoreFacade {
-  //showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
+  showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
   //loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
 
   constructor(private store: Store<{}>) {}

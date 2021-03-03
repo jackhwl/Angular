@@ -6,7 +6,7 @@ import {
   ConversationsCmp,
   MessageCmp,
   MessagesCmp
-} from './conversations/index';
+} from './conversations';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/inbox' },
