@@ -2,10 +2,10 @@
   color: grey;
 }
 
-md-card {
+mat-card {
   margin-bottom: 10px;
 }
 
-md-card.selected {
+mat-card.selected {
   background-color: aliceblue;
 }
