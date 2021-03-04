@@ -1,0 +1,19 @@
+<div class="component-container">
+  <div class="list-component">
+    <h1>{{ primaryColor }}</h1>
+    <vi-students-list
+      [students]="students$ | async"
+      (selected)="selecteStudent($event)"
+      (deleted)="deleteStudent($event)"
+    >
+    </vi-students-list>
+  </div>
+  <div class="details-component">
+    <vi-student-details
+      [student]="selectedStudent$ | async"
+      (saved)="saveStudent($event)"
+      (cancelled)="reset()"
+    >
+    </vi-student-details>
+  </div>
+</div>

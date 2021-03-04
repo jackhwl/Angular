@@ -1,0 +1,95 @@
+<mat-card>
+  <mat-card-title>
+    <span *ngIf="currentStudent.id; else elseBlock">
+      Editing
+    </span>
+    <ng-template #elseBlock>
+      Select Student
+    </ng-template>
+  </mat-card-title>
+  <form #form="ngForm" (submit)="saved.emit(currentStudent)">
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="{{ 'i18.students.firstname' | translate }}"
+          [(ngModel)]="currentStudent.firstName"
+          type="text"
+          name="FirstName"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="{{ 'i18.students.middlename' | translate }}"
+          [(ngModel)]="currentStudent.middleName"
+          type="text"
+          name="MiddleName"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="LastName"
+          [(ngModel)]="currentStudent.lastName"
+          type="text"
+          name="LastName"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Email"
+          [(ngModel)]="currentStudent.email"
+          type="text"
+          name="Email"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="SchoolName"
+          [(ngModel)]="currentStudent.schoolName"
+          type="text"
+          name="SchoolName"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Year"
+          [(ngModel)]="currentStudent.year"
+          type="text"
+          name="Year"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="GraduationDate"
+          [(ngModel)]="currentStudent.graduationDate"
+          type="text"
+          name="GraduationDate"
+        />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        [disabled]="form.invalid"
+        type="submit"
+        mat-button
+        color="primary"
+      >
+        Save
+      </button>
+      <button type="button" mat-button (click)="cancelled.emit()">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+  <pre>{{ form.value | json }}</pre>
+  {{ form.valid }}
+</mat-card>
