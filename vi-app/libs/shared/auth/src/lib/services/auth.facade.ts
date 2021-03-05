@@ -16,6 +16,7 @@ export class AuthFacade {
     { path: '/home', icon: 'home', title: 'home' },
     { path: '/jobs', icon: 'view_list', title: 'jobs' },
     { path: '/heroes', icon: 'view_list', title: 'heroes' },
+    { path: '/students', icon: 'view_list', title: 'students' },
     { path: '/signin', icon: 'view_list', title: 'signin' },
     { path: '/books', icon: 'view_list', title: 'books' }
   ];

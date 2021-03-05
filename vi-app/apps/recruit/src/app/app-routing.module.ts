@@ -37,11 +37,10 @@ const routes: Routes = [
   //   //canActivate: [AuthGuard],
   //   //data: {claimName: 'canAccessVillains'}
   // },
-  // {
-  //   path: 'students',
-  //   loadChildren: () =>
-  //     import('./students/students.module').then(m => m.StudentsModule)
-  // },
+  {
+    path: 'students',
+    loadChildren: () => import('@vi/students').then(m => m.StudentsModule)
+  },
   // {
   //   path: 'signin',
   //   loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
