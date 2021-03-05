@@ -11,3 +11,7 @@ export interface Student extends BaseEntity {
   year: string;
   graduationDate: string;
 }
+
+export interface StudentsEntity {
+  id: string | number; // Primary ID
+}
