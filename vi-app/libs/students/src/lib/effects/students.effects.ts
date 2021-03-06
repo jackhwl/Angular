@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
 import * as fromStudents from '../reducers/students.reducer';
-import * as StudentsActions from '../actions/students.actions';
+import { StudentsActions, StudentsApiActions } from '../actions';
 
 @Injectable()
 export class StudentsEffects {
@@ -13,12 +13,12 @@ export class StudentsEffects {
       fetch({
         run: action => {
           // Your custom service 'load' logic goes here. For now just return a success action...
-          return StudentsActions.loadStudentsSuccess({ students: [] });
+          return StudentsApiActions.loadStudentsSuccess({ students: [] });
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return StudentsActions.loadStudentsFailure({ error });
+          return StudentsApiActions.loadStudentsFailure({ error });
         }
       })
     )

@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as StudentsActions from '../actions/students.actions';
+import { StudentsActions, StudentsApiActions } from '../actions';
 import { StudentsEntity } from '../models/student';
 
 export const STUDENTS_FEATURE_KEY = 'students';
@@ -34,10 +34,10 @@ const _studentsReducer = createReducer(
     loaded: false,
     error: null
   })),
-  on(StudentsActions.loadStudentsSuccess, (state, { students }) =>
+  on(StudentsApiActions.loadStudentsSuccess, (state, { students }) =>
     studentsAdapter.setAll(students, { ...state, loaded: true })
   ),
-  on(StudentsActions.loadStudentsFailure, (state, { error }) => ({
+  on(StudentsApiActions.loadStudentsFailure, (state, { error }) => ({
     ...state,
     error
   }))
