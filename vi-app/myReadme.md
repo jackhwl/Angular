@@ -65,3 +65,7 @@ https://subscription.packtpub.com/book/application_development/9781787288904/2/c
 
 nx g lib students --style=scss
 students config use service no state in Redux tool
+
+## add villains lib
+
+nx g lib villains --style=scss

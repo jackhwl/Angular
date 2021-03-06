@@ -17,7 +17,8 @@
         "@angular-eslint/component-selector": [
           "error",
           { "type": "element", "prefix": "vi", "style": "kebab-case" }
-        ]
+        ],
+        "@typescript-eslint/no-unused-vars": "off"
       }
     },
     {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { Villain } from '../models/villain';
-import { VillainFacade } from '../villain.facade';
+import { VillainFacade } from '../services/villain.facade';
 import { filter, map } from 'rxjs/operators';
 import { ToastService } from '../services/toast.service';
 
