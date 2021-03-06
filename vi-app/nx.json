@@ -27,6 +27,7 @@
     "api-interfaces": { "tags": [] },
     "shared-common": { "tags": [] },
     "books": { "tags": [] },
-    "students": { "tags": [] }
+    "students": { "tags": [] },
+    "villains": { "tags": [] }
   }
 }

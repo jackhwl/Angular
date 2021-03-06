@@ -10,6 +10,7 @@ module.exports = {
     '<rootDir>/libs/api-interfaces',
     '<rootDir>/libs/shared/common',
     '<rootDir>/libs/books',
-    '<rootDir>/libs/students'
+    '<rootDir>/libs/students',
+    '<rootDir>/libs/villains'
   ]
 };

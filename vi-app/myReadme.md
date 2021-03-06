@@ -64,3 +64,4 @@ https://subscription.packtpub.com/book/application_development/9781787288904/2/c
 ## add students lib
 
 nx g lib students --style=scss
+students config use service no state in Redux tool

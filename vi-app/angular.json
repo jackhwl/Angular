@@ -382,6 +382,31 @@
           }
         }
       }
+    },
+    "villains": {
+      "projectType": "library",
+      "root": "libs/villains",
+      "sourceRoot": "libs/villains/src",
+      "prefix": "vi",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/villains/src/**/*.ts",
+              "libs/villains/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/villains"],
+          "options": {
+            "jestConfig": "libs/villains/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
