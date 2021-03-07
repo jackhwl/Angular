@@ -11,6 +11,7 @@ module.exports = {
     '<rootDir>/libs/shared/common',
     '<rootDir>/libs/books',
     '<rootDir>/libs/students',
-    '<rootDir>/libs/villains'
+    '<rootDir>/libs/villains',
+    '<rootDir>/apps/api'
   ]
 };

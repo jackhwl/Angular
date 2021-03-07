@@ -46,6 +46,10 @@ json -I -f package.json -e 'this.scripts.foo="bar"'
 - http://localhost:3333/api/hello
 - http://localhost:4200
 
+angular.json -> recruit -> architect -> serve -> options -> "proxyConfig": "apps/recruit/proxy.conf.json"
+doesn't work with json-server, work with @nrwl/nest
+https://nx.dev/latest/angular/tutorial/05-add-node-app
+
 ## add angular material and ngrx store
 
 - nx add @angular/material@10.2.7 --defaults=true --interactive=false

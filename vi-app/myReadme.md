@@ -69,3 +69,13 @@ students config use service no state in Redux tool
 ## add villains lib
 
 nx g lib villains --style=scss
+
+## localhost:4200/api
+
+npm install --save-dev @nrwl/nest
+
+angular.json -> recruit -> architect -> serve -> options -> "proxyConfig": "apps/recruit/proxy.conf.json"
+doesn't work with json-server, work with @nrwl/nest
+https://nx.dev/latest/angular/tutorial/05-add-node-app
+
+npx nx g @nrwl/nest:app api -d

@@ -28,6 +28,7 @@
     "shared-common": { "tags": [] },
     "books": { "tags": [] },
     "students": { "tags": [] },
-    "villains": { "tags": [] }
+    "villains": { "tags": [] },
+    "api": { "tags": [] }
   }
 }
