@@ -18,8 +18,10 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
+import { EntityDataModule } from '@ngrx/data';
 import { CoreFacade } from './services/core.facade';
 import { environment } from '@vi/shared/environments';
+import { entityConfig } from './entity-metadata';
 
 export const COMPONENTS = [
   AppComponent,
@@ -76,8 +78,9 @@ export const COMPONENTS = [
      *
      * See: https://ngrx.io/guide/effects#registering-root-effects
      */
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
 
+    environment.ngrxData ? EntityDataModule.forRoot(entityConfig) : []
     /**
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
      * service available.
