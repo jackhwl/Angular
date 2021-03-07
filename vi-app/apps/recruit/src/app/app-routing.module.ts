@@ -30,13 +30,12 @@ const routes: Routes = [
   //   loadChildren: () =>
   //     import('./heroes/heroes.module').then(m => m.HeroesModule)
   // },
-  // {
-  //   path: 'villains',
-  //   loadChildren: () =>
-  //     import('./villains/villains.module').then(m => m.VillainsModule)
-  //   //canActivate: [AuthGuard],
-  //   //data: {claimName: 'canAccessVillains'}
-  // },
+  {
+    path: 'villains',
+    loadChildren: () => import('@vi/villains').then(m => m.VillainsModule)
+    //canActivate: [AuthGuard],
+    //data: {claimName: 'canAccessVillains'}
+  },
   {
     path: 'students',
     loadChildren: () => import('@vi/students').then(m => m.StudentsModule)
