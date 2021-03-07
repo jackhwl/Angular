@@ -79,3 +79,7 @@ doesn't work with json-server, work with @nrwl/nest
 https://nx.dev/latest/angular/tutorial/05-add-node-app
 
 npx nx g @nrwl/nest:app api -d
+
+## ngrx/data EntityDataModule
+
+npm i angular-in-memory-web-api -D
