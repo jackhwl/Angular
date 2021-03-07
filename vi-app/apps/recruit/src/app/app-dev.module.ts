@@ -7,7 +7,7 @@ import {
   HttpClientInMemoryWebApiModule,
   InMemoryDbService
 } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from '@wl/core-data';
+import { InMemoryDataService } from './core/services/in-memory-data.service';
 import { environment } from '@vi/shared/environments';
 
 @NgModule({
