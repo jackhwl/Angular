@@ -19,6 +19,7 @@
       "@vi/shared/ui/custom-material": [
         "libs/shared/ui/custom-material/src/index.ts"
       ],
+      "@vi/db": ["server/db.json"],
       "@vi/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@vi/shared/styles": ["libs/shared/styles/src/index.ts"],
       "@vi/shared/ui/slogan": ["libs/shared/ui/slogan/src/index.ts"],
