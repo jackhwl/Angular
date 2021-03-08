@@ -11,6 +11,16 @@ export const loadStudentsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadStudentSuccess = createAction(
+  '[Students/API] Load Student Success',
+  props<{ student: Student }>()
+);
+
+export const loadStudentFailure = createAction(
+  '[Students/API] Load Student Failure',
+  props<{ error: any }>()
+);
+
 export const notifyLoadStudentsSuccess = createAction(
   '[Toastr Notification/API] Display Load Students Success',
   props<{ title: string; description: string; interpolateParams?: Object }>()

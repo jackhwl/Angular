@@ -2,11 +2,11 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { StudentsActions, StudentsApiActions } from '../actions';
-import { Student as StudentsEntity } from '../models/student';
+import { Student } from '../models/student';
 
 export const STUDENTS_FEATURE_KEY = 'students';
 
-export interface StudentState extends EntityState<StudentsEntity> {
+export interface StudentState extends EntityState<Student> {
   selectedId?: string | number; // which Students record has been selected
   loaded: boolean; // has the Students list been loaded
   error?: string | null; // last known error (if any)
@@ -16,9 +16,9 @@ export interface StudentsPartialState {
   readonly [STUDENTS_FEATURE_KEY]: StudentState;
 }
 
-export const studentsAdapter: EntityAdapter<
-  StudentsEntity
-> = createEntityAdapter<StudentsEntity>();
+export const studentsAdapter: EntityAdapter<Student> = createEntityAdapter<
+  Student
+>();
 
 export const initialStudentsState: StudentState = studentsAdapter.getInitialState(
   {
@@ -27,8 +27,19 @@ export const initialStudentsState: StudentState = studentsAdapter.getInitialStat
   }
 );
 
+const onFailure = (state, { error }) => ({ ...state, error });
+
 const _studentsReducer = createReducer(
   initialStudentsState,
+  on(StudentsActions.selectStudent, (state, { selectedId }) =>
+    Object.assign({}, state, { selectedId })
+  ),
+  // on(StudentsActions.resetSelectedStudent, (state) =>
+  //   Object.assign({}, state, { selectedId: null })
+  // ),
+  // on(StudentsActions.resetStudents, (state) => widgetsAdapter.removeAll(state)),
+
+  // Load widgets
   on(StudentsActions.loadStudents, state => ({
     ...state,
     loaded: false,

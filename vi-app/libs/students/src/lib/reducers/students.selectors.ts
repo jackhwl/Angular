@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Student } from '../models/student';
 import {
   STUDENTS_FEATURE_KEY,
   StudentState,
@@ -39,10 +40,21 @@ export const getSelectedId = createSelector(
   (state: StudentState) => state.selectedId
 );
 
+const emptyStudent: Student = {
+  id: null,
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  email: '',
+  schoolName: '',
+  year: '',
+  graduationDate: ''
+};
+
 export const getSelected = createSelector(
   getStudentsEntities,
   getSelectedId,
-  (entities, selectedId) => selectedId && entities[selectedId]
+  (entities, selectedId) => (selectedId ? entities[selectedId] : emptyStudent)
 );
 
 export const getLoaded = createSelector(

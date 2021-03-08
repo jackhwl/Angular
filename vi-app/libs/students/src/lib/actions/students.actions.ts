@@ -8,10 +8,10 @@ export const selectStudent = createAction(
 
 export const loadStudents = createAction('[Students] Load Students');
 
-// export const loadStudent = createAction(
-//   '[Students] Load Student',
-//   props<{ student: Student }>()
-// );
+export const loadStudent = createAction(
+  '[Students] Load Student',
+  props<{ studentId: Student }>()
+);
 
 // Create Student
 export const createStudent = createAction(

@@ -6,7 +6,7 @@ import { Student } from '../models/student';
 import * as fromStudents from '../reducers/students.reducer';
 import { StudentsActions, StudentsApiActions } from '../actions';
 import { StudentService } from '../services';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from '@vi/shared/common';
 
 @Injectable()
@@ -46,6 +46,24 @@ export class StudentsEffects {
           console.error('Error', error);
           return StudentsApiActions.loadStudentsFailure({ error });
         }
+      })
+    )
+  );
+
+  loadStudent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StudentsActions.loadStudent),
+      fetch({
+        run: action =>
+          this.studentService
+            .find(action.studentId)
+            .pipe(
+              switchMap((student: Student) => [
+                StudentsApiActions.loadStudentSuccess({ student })
+              ])
+            ),
+        onError: (action, error) =>
+          StudentsApiActions.loadStudentFailure({ error })
       })
     )
   );
