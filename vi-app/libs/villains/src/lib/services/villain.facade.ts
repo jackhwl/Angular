@@ -6,7 +6,7 @@ import { BehaviorSubject, pipe } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { VillainNgrxDataService } from './villain.ngrx.data.service';
 import { VillainService } from './villain.service';
-import { ToastService } from './toast.service';
+import { ToastService } from '@vi/shared/common';
 
 @Injectable()
 export class VillainFacade {

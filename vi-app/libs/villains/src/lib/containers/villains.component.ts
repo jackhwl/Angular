@@ -3,7 +3,7 @@ import { combineLatest } from 'rxjs';
 import { Villain } from '../models/villain';
 import { VillainFacade } from '../services/villain.facade';
 import { filter, map } from 'rxjs/operators';
-import { ToastService } from '../services/toast.service';
+import { ToastService } from '@vi/shared/common';
 
 @Component({
   selector: 'vi-villains',
