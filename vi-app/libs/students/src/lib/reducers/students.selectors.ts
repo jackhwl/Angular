@@ -44,3 +44,8 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+export const getLoaded = createSelector(
+  getStudentsState,
+  (state: StudentState) => state.loaded
+);
