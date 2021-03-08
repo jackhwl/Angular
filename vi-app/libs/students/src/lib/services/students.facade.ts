@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Student } from './models/student';
+import { Student } from '../models/student';
 
-import { StudentNgrxService } from './services';
+import { StudentService } from './';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -15,9 +15,8 @@ export class StudentsFacade {
   mutations$ = this.mutations.asObservable();
 
   constructor(
-    private studentService: StudentNgrxService
-  ) //private ns: NotificationsService
-  {}
+    private studentService: StudentService //private ns: NotificationsService
+  ) {}
 
   reset() {
     this.mutations.next(true);

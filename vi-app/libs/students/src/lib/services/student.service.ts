@@ -8,7 +8,7 @@ import { Student } from '../models/student';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentNgrxService {
+export class StudentService {
   model = 'students';
   constructor(private httpClient: HttpClient, private location: Location) {}
 

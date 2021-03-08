@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student';
-import { StudentsStoreFacade } from '../students.store.facade';
+import { StudentsStoreFacade } from '../services';
 import { Observable } from 'rxjs';
 
 @Component({

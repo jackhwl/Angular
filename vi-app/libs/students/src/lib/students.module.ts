@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StudentsComponent } from './containers/students.component';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentsFacade } from './students.facade';
-import { StudentsStoreFacade } from './students.store.facade';
+import { StudentsFacade, StudentsStoreFacade } from './services';
 import { SharedCommonModule } from '@vi/shared/common';
 import { StoreModule } from '@ngrx/store';
 import * as fromStudents from './reducers/students.reducer';

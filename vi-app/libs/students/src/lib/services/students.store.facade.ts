@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Student } from './models/student';
+import { Student } from '../models/student';
 
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Subject } from 'rxjs';
 
-import * as StudentsSelectors from './reducers/students.selectors';
+import * as StudentsSelectors from '../reducers/students.selectors';
 
-import { StudentsActions, StudentsApiActions } from './actions';
+import { StudentsActions, StudentsApiActions } from '../actions';
 
 @Injectable()
 export class StudentsStoreFacade {

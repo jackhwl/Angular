@@ -5,7 +5,7 @@ import { Student } from '../models/student';
 
 import * as fromStudents from '../reducers/students.reducer';
 import { StudentsActions, StudentsApiActions } from '../actions';
-import { StudentNgrxService } from '../services';
+import { StudentService } from '../services';
 import { switchMap, tap } from 'rxjs/operators';
 import { ToastService } from '@vi/shared/common';
 
@@ -35,7 +35,7 @@ export class StudentsEffects {
             switchMap((students: Student[]) => [
               StudentsApiActions.loadStudentsSuccess({ students }),
               StudentsApiActions.notifyLoadStudentsSuccess({
-                description: 'i18.job.job_retrieved_successfully',
+                description: 'i18.students.students_retrieved_successfully',
                 title: 'GET',
                 interpolateParams: { counter: students.length }
               })
@@ -52,7 +52,7 @@ export class StudentsEffects {
 
   constructor(
     private actions$: Actions,
-    private studentService: StudentNgrxService,
+    private studentService: StudentService,
     private toastService: ToastService
   ) {}
 }
