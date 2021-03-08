@@ -10,3 +10,8 @@ export const loadStudentsFailure = createAction(
   '[Students/API] Load Students Failure',
   props<{ error: any }>()
 );
+
+export const notifyLoadStudentsSuccess = createAction(
+  '[Toastr Notification/API] Display Load Students Success',
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
