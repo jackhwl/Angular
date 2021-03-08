@@ -83,3 +83,8 @@ npx nx g @nrwl/nest:app api -d
 ## ngrx/data EntityDataModule
 
 npm i angular-in-memory-web-api -D
+
+environment.ngrxData indicate villainsFacade use VillainNgrxDataService or VillainService
+environment.inMemorryData indicate use inMemorryData or not
+
+students.store.facade.ts

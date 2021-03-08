@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { StudentsEntity } from '../models/student';
+import { Student as StudentsEntity } from '../models/student';
 
 export const loadStudentsSuccess = createAction(
   '[Students/API] Load Students Success',

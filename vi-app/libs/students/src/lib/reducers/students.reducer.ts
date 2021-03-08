@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { StudentsActions, StudentsApiActions } from '../actions';
-import { StudentsEntity } from '../models/student';
+import { Student as StudentsEntity } from '../models/student';
 
 export const STUDENTS_FEATURE_KEY = 'students';
 

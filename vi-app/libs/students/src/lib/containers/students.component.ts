@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student';
-import { StudentsFacade } from '../students.facade';
+import { StudentsStoreFacade } from '../students.store.facade';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class StudentsComponent implements OnInit {
   selectedStudent$: Observable<Student> = this.studentsFacade.selectedStudent$;
   primaryColor = 'red';
 
-  constructor(private studentsFacade: StudentsFacade) {}
+  constructor(private studentsFacade: StudentsStoreFacade) {}
 
   ngOnInit(): void {
     this.reset();
