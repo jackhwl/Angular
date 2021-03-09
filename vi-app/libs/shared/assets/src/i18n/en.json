@@ -21,6 +21,7 @@
   "i18.students.firstname": "FirstName",
   "i18.students.middlename": "MiddleName",
   "i18.students.students_retrieved_successfully": "{{counter}} Students retrieved successfully!",
+  "i18.students.student_updated_successfully": "Student: {{name}} updated successfully!",
 
   "i18.villains.villains": "Villains",
   "i18.villains.villain_details": "Villain Details",

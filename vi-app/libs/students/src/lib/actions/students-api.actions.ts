@@ -41,9 +41,19 @@ export const updateStudentSuccess = createAction(
   props<{ student: Student }>()
 );
 
+export const notifyUpdateStudentSuccess = createAction(
+  '[Toastr Notification/API] Update Student Success',
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
 export const updateStudentFailure = createAction(
   '[Students/API] Update Student Failure',
   props<{ error: any }>()
+);
+
+export const notifyUpdateStudentFailure = createAction(
+  '[Toastr Notification/API] Update Student Failure',
+  props<{ title: string; description: string; interpolateParams?: Object }>()
 );
 
 export const deleteStudentSuccess = createAction(

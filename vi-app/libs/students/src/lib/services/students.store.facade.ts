@@ -47,7 +47,7 @@ export class StudentsStoreFacade {
   }
 
   updateStudent(student: Student) {
-    //this.store.dispatch(new UpdateProject(project));
+    this.store.dispatch(StudentsActions.updateStudent({ student }));
   }
 
   deleteStudent(student: Student) {

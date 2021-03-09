@@ -11,10 +11,13 @@ import { ToastService } from '@vi/shared/common';
 
 @Injectable()
 export class StudentsEffects {
-  notifyLoadJobsSuccess$ = createEffect(
+  notify$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(StudentsApiActions.notifyLoadStudentsSuccess),
+        ofType(
+          StudentsApiActions.notifyLoadStudentsSuccess,
+          StudentsApiActions.notifyUpdateStudentSuccess
+        ),
         tap(action => {
           this.toastService.open(
             action.description,
@@ -68,6 +71,28 @@ export class StudentsEffects {
     )
   );
 
+  updateStudent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StudentsActions.updateStudent),
+      fetch({
+        run: action =>
+          this.studentService.update(action.student).pipe(
+            switchMap((student: Student) => [
+              StudentsApiActions.updateStudentSuccess({ student }),
+              StudentsApiActions.notifyUpdateStudentSuccess({
+                description: 'i18.students.student_updated_successfully',
+                title: 'PUT',
+                interpolateParams: {
+                  name: action.student.firstName + ' ' + action.student.lastName
+                }
+              })
+            ])
+          ),
+        onError: (action, error) =>
+          StudentsApiActions.updateStudentFailure({ error })
+      })
+    )
+  );
   constructor(
     private actions$: Actions,
     private studentService: StudentService,

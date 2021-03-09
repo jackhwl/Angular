@@ -93,3 +93,4 @@ how to get selectedStudent:
 - in students.reducer on(StudentsActions.selectStudent) set selectedId to state
 - page get selectedStudent through student.facade selectedStudent\$ --> call student selector StudentsSelectors.getSelected
 - same thing for allStudents
+  https://blog.nrwl.io/essential-angular-2-compilation-cfbebf9bb6e4#.y9s7pc41m
