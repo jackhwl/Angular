@@ -88,3 +88,8 @@ environment.ngrxData indicate villainsFacade use VillainNgrxDataService or Villa
 environment.inMemorryData indicate use inMemorryData or not
 
 students.store.facade.ts
+how to get selectedStudent:
+
+- in students.reducer on(StudentsActions.selectStudent) set selectedId to state
+- page get selectedStudent through student.facade selectedStudent\$ --> call student selector StudentsSelectors.getSelected
+- same thing for allStudents
