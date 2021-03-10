@@ -31,4 +31,4 @@ export function reducer(
   }
 }
 
-export const getUser = (state: State) => state.user;
+export const getUser = (state: State) => state?.user;

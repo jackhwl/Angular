@@ -7,7 +7,7 @@ import { NotFoundPageComponent } from './core/components/not-found-page.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/books',
+    redirectTo: '/students',
     pathMatch: 'full'
   },
   // {

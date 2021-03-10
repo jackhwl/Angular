@@ -35,16 +35,10 @@ export const selectAuthState = createFeatureSelector<State, AuthState>(
 
 export const selectAuthStatusState = createSelector(
   selectAuthState,
-  (state: AuthState) => state.status
+  (state: AuthState) => state?.status
 );
-export const getUser = createSelector(
-  selectAuthStatusState,
-  fromAuth.getUser
-);
-export const getLoggedIn = createSelector(
-  getUser,
-  user => !!user
-);
+export const getUser = createSelector(selectAuthStatusState, fromAuth.getUser);
+export const getLoggedIn = createSelector(getUser, user => !!user);
 
 export const selectLoginPageState = createSelector(
   selectAuthState,
