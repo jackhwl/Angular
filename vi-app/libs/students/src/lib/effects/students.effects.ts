@@ -16,6 +16,7 @@ export class StudentsEffects {
       this.actions$.pipe(
         ofType(
           StudentsApiActions.notifyLoadStudentsSuccess,
+          StudentsApiActions.notifyCreateStudentSuccess,
           StudentsApiActions.notifyUpdateStudentSuccess
         ),
         tap(action => {
@@ -71,14 +72,39 @@ export class StudentsEffects {
     )
   );
 
+  createStudent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StudentsActions.createStudent),
+      fetch({
+        run: action =>
+          this.studentService.create(action.student).pipe(
+            switchMap((student: Student) => [
+              StudentsApiActions.createStudentSuccess({ student }),
+              StudentsApiActions.notifyCreateStudentSuccess({
+                description: 'i18.students.student_created_successfully',
+                title: 'POST',
+                interpolateParams: {
+                  name: student.firstName + ' ' + student.lastName
+                }
+              })
+            ])
+          ),
+        onError: (action, error) =>
+          StudentsApiActions.updateStudentFailure({ error })
+      })
+    )
+  );
+
   updateStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StudentsActions.updateStudent),
       fetch({
         run: action =>
           this.studentService.update(action.student).pipe(
-            switchMap((student: Student) => [
-              StudentsApiActions.updateStudentSuccess({ student }),
+            switchMap(_ => [
+              StudentsApiActions.updateStudentSuccess({
+                student: action.student
+              }),
               StudentsApiActions.notifyUpdateStudentSuccess({
                 description: 'i18.students.student_updated_successfully',
                 title: 'PUT',
@@ -93,6 +119,7 @@ export class StudentsEffects {
       })
     )
   );
+
   constructor(
     private actions$: Actions,
     private studentService: StudentService,

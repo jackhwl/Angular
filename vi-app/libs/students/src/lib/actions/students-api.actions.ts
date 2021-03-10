@@ -31,6 +31,11 @@ export const createStudentSuccess = createAction(
   props<{ student: Student }>()
 );
 
+export const notifyCreateStudentSuccess = createAction(
+  '[Toastr Notification/API] Create Student Success',
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
 export const createStudentFailure = createAction(
   '[Students/API] Create Student Failure',
   props<{ error: any }>()

@@ -18,8 +18,10 @@ export class StudentsStoreFacade {
   mutations$ = this.actions$.pipe(
     filter(
       (action: Action) =>
-        action.type === StudentsActions.createStudent({} as any).type ||
-        action.type === StudentsActions.updateStudent({} as any).type ||
+        action.type ===
+          StudentsApiActions.notifyCreateStudentSuccess({} as any).type ||
+        action.type ===
+          StudentsApiActions.notifyUpdateStudentSuccess({} as any).type ||
         action.type === StudentsActions.deleteStudent({} as any).type
     )
   );
@@ -43,7 +45,7 @@ export class StudentsStoreFacade {
   // }
 
   createStudent(student: Student) {
-    //this.store.dispatch(new AddProject(project));
+    this.store.dispatch(StudentsActions.createStudent({ student }));
   }
 
   updateStudent(student: Student) {

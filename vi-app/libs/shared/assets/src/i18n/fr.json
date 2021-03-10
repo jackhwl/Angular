@@ -22,6 +22,8 @@
   "i18.students.middlename": "Deuxième nom",
   "i18.students.students_retrieved_successfully": "{{counter}} étudiants récupérés avec succès!",
   "i18.students.student_updated_successfully": "Étudiant: {{name}} mis à jour avec succès!",
+  "i18.students.student_created_successfully": "Élève: {{name}} a été créé avec succès!",
+  "i18.students.student_deleted_successfully": "Élève: {{name}} a bien été supprimé!",
 
   "i18.villains.villains": "Méchants",
   "i18.villains.villain_details": "Détails du méchant",
