@@ -22,7 +22,8 @@ export class StudentsStoreFacade {
           StudentsApiActions.notifyCreateStudentSuccess({} as any).type ||
         action.type ===
           StudentsApiActions.notifyUpdateStudentSuccess({} as any).type ||
-        action.type === StudentsActions.deleteStudent({} as any).type
+        action.type ===
+          StudentsApiActions.notifyDeleteStudentSuccess({} as any).type
     )
   );
 
@@ -53,7 +54,7 @@ export class StudentsStoreFacade {
   }
 
   deleteStudent(student: Student) {
-    //this.store.dispatch(new DeleteProject(project));
+    this.store.dispatch(StudentsActions.deleteStudent({ student }));
   }
 
   dispatch(action: Action) {

@@ -66,6 +66,11 @@ export const deleteStudentSuccess = createAction(
   props<{ student: Student }>()
 );
 
+export const notifyDeleteStudentSuccess = createAction(
+  '[Toastr Notification/API] Delete Student Success',
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
 export const deleteStudentFailure = createAction(
   '[Students/API] Delete Student Failure',
   props<{ error: any }>()

@@ -17,7 +17,8 @@ export class StudentsEffects {
         ofType(
           StudentsApiActions.notifyLoadStudentsSuccess,
           StudentsApiActions.notifyCreateStudentSuccess,
-          StudentsApiActions.notifyUpdateStudentSuccess
+          StudentsApiActions.notifyUpdateStudentSuccess,
+          StudentsApiActions.notifyDeleteStudentSuccess
         ),
         tap(action => {
           this.toastService.open(
@@ -108,6 +109,31 @@ export class StudentsEffects {
               StudentsApiActions.notifyUpdateStudentSuccess({
                 description: 'i18.students.student_updated_successfully',
                 title: 'PUT',
+                interpolateParams: {
+                  name: action.student.firstName + ' ' + action.student.lastName
+                }
+              })
+            ])
+          ),
+        onError: (action, error) =>
+          StudentsApiActions.updateStudentFailure({ error })
+      })
+    )
+  );
+
+  deleteStudent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StudentsActions.deleteStudent),
+      fetch({
+        run: action =>
+          this.studentService.delete(action.student.id).pipe(
+            switchMap(_ => [
+              StudentsApiActions.deleteStudentSuccess({
+                student: action.student
+              }),
+              StudentsApiActions.notifyDeleteStudentSuccess({
+                description: 'i18.students.student_deleted_successfully',
+                title: 'DELETE',
                 interpolateParams: {
                   name: action.student.firstName + ' ' + action.student.lastName
                 }
