@@ -26,7 +26,7 @@ export class StudentsComponent implements OnInit {
   }
 
   selecteStudent(student: Student) {
-    this.studentsFacade.selectStudent(student.id);
+    this.studentsFacade.selectStudent(student?.id);
   }
 
   loadStudents() {
