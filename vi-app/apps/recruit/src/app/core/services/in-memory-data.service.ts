@@ -51,7 +51,7 @@ export class InMemoryDataService {
     this.maxId =
       1 +
       collection.reduce((prev, cur) => Math.max(prev, cur.id || 0), this.maxId);
-    return this.maxId;
+    return this.maxId.toString();
   }
 
   /**
@@ -146,15 +146,18 @@ function mapCollectionName(name: string): string {
  * Development data
  */
 function getDbData() {
-  const heroes = data.heroes.map(item =>
-    Object.assign(item, (item.name = '_m_' + item.name))
-  );
-  const villains = data.villains.map(item =>
-    Object.assign(item, (item.name = '_m_' + item.name))
-  );
-  const students = data.students.map(item =>
-    Object.assign(item, (item.firstName = '_m_' + item.firstName))
-  );
+  // const heroes = data.heroes.map(item =>
+  //   Object.assign(item, (item.name = '_m_' + item.name))
+  // );
+  // const villains = data.villains.map(item =>
+  //   Object.assign(item, (item.name = '_m_' + item.name))
+  // );
+  // const students = data.students.map(item =>
+  //   Object.assign(item, (item.firstName = '_m_' + item.firstName))
+  // );
+  const heroes = data.heroes;
+  const villains = data.villains;
+  const students = data.students;
 
   return { heroes, villains, students, users: data.users } as Db;
 }

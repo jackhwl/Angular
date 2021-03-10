@@ -85,7 +85,12 @@ export class StudentsEffects {
                 description: 'i18.students.student_created_successfully',
                 title: 'POST',
                 interpolateParams: {
-                  name: student.firstName + ' ' + student.lastName
+                  name:
+                    student.id +
+                    ' ' +
+                    student.firstName +
+                    ' ' +
+                    student.lastName
                 }
               })
             ])
