@@ -51,7 +51,7 @@ export class InMemoryDataService {
     this.maxId =
       1 +
       collection.reduce((prev, cur) => Math.max(prev, cur.id || 0), this.maxId);
-    return this.maxId.toString();
+    return this.maxId;
   }
 
   /**

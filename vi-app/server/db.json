@@ -1,7 +1,7 @@
 {
   "students": [
     {
-      "id": "1",
+      "id": 1,
       "firstName": "Alexander",
       "middleName": "D",
       "lastName": "Russo",
@@ -11,7 +11,7 @@
       "graduationDate": "2016-05-01"
     },
     {
-      "id": "2",
+      "id": 2,
       "firstName": "Greg",
       "middleName": null,
       "lastName": "Djordjevic",
@@ -21,7 +21,7 @@
       "graduationDate": "-0001-11-30"
     },
     {
-      "id": "3",
+      "id": 3,
       "firstName": "Cory",
       "middleName": "L ",
       "lastName": "Takeuchi",
@@ -31,7 +31,7 @@
       "graduationDate": "2016-05-01"
     },
     {
-      "id": "5",
+      "id": 5,
       "firstName": "Tabitha",
       "middleName": "Ashley ",
       "lastName": "Ferrer",
@@ -41,7 +41,7 @@
       "graduationDate": "2014-05-01"
     },
     {
-      "id": "6",
+      "id": 6,
       "firstName": "Cindy",
       "middleName": "C.",
       "lastName": "Unegbu",
