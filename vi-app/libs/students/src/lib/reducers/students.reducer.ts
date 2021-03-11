@@ -51,6 +51,10 @@ const _studentsReducer = createReducer(
   on(StudentsApiActions.loadStudentsFailure, (state, { error }) => ({
     ...state,
     error
+  })),
+  on(StudentsApiActions.updateStudentFailure, (state, { error }) => ({
+    ...state,
+    error
   }))
 );
 

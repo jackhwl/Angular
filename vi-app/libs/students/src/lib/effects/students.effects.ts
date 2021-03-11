@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { fetch, pessimisticUpdate } from '@nrwl/angular';
 import { Student } from '../models/student';
 
 import * as fromStudents from '../reducers/students.reducer';
 import { StudentsActions, StudentsApiActions } from '../actions';
 import { StudentService } from '../services';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { ToastService } from '@vi/shared/common';
 
 @Injectable()
@@ -18,7 +18,8 @@ export class StudentsEffects {
           StudentsApiActions.notifyLoadStudentsSuccess,
           StudentsApiActions.notifyCreateStudentSuccess,
           StudentsApiActions.notifyUpdateStudentSuccess,
-          StudentsApiActions.notifyDeleteStudentSuccess
+          StudentsApiActions.notifyDeleteStudentSuccess,
+          StudentsApiActions.notifyUpdateStudentFailure
         ),
         tap(action => {
           this.toastService.open(
@@ -76,7 +77,7 @@ export class StudentsEffects {
   createStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StudentsActions.createStudent),
-      fetch({
+      pessimisticUpdate({
         run: action =>
           this.studentService.create(action.student).pipe(
             switchMap((student: Student) => [
@@ -104,7 +105,7 @@ export class StudentsEffects {
   updateStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StudentsActions.updateStudent),
-      fetch({
+      pessimisticUpdate({
         run: action =>
           this.studentService.update(action.student).pipe(
             switchMap(_ => [
@@ -121,7 +122,21 @@ export class StudentsEffects {
             ])
           ),
         onError: (action, error) =>
-          StudentsApiActions.updateStudentFailure({ error })
+          StudentsApiActions.notifyUpdateStudentFailure({
+            description: 'i18.students.student_updated_failure',
+            title: 'PATCH',
+            interpolateParams: {
+              name:
+                action.student.id +
+                ' ' +
+                action.student.firstName +
+                ' ' +
+                action.student.lastName,
+              error: error.status + ' ' + error.statusText
+            }
+          })
+        //StudentsApiActions.updateStudentFailure({ error })
+        //return null;
       })
     )
   );
@@ -129,7 +144,7 @@ export class StudentsEffects {
   deleteStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StudentsActions.deleteStudent),
-      fetch({
+      pessimisticUpdate({
         run: action =>
           this.studentService.delete(action.student.id).pipe(
             switchMap(_ => [

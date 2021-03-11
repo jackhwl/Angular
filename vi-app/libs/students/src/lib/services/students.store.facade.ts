@@ -42,19 +42,19 @@ export class StudentsStoreFacade {
   }
 
   // selectProject(projectId) {
-  //   this.store.dispatch(new SelectProject(projectId));
+  //   this.dispatch(new SelectProject(projectId));
   // }
 
   createStudent(student: Student) {
-    this.store.dispatch(StudentsActions.createStudent({ student }));
+    this.dispatch(StudentsActions.createStudent({ student }));
   }
 
   updateStudent(student: Student) {
-    this.store.dispatch(StudentsActions.updateStudent({ student }));
+    this.dispatch(StudentsActions.updateStudent({ student }));
   }
 
   deleteStudent(student: Student) {
-    this.store.dispatch(StudentsActions.deleteStudent({ student }));
+    this.dispatch(StudentsActions.deleteStudent({ student }));
   }
 
   dispatch(action: Action) {
