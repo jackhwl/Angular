@@ -20,11 +20,10 @@ export class StudentsStoreFacade {
     filter(
       (action: Action) =>
         action.type ===
-          StudentsApiActions.notifyCreateStudentSuccess({} as any).type ||
+          StudentsApiActions.createStudentSuccess({} as any).type ||
         action.type ===
-          StudentsApiActions.notifyUpdateStudentSuccess({} as any).type ||
-        action.type ===
-          StudentsApiActions.notifyDeleteStudentSuccess({} as any).type
+          StudentsApiActions.updateStudentSuccess({} as any).type ||
+        action.type === StudentsApiActions.deleteStudentSuccess({} as any).type
     )
   );
 

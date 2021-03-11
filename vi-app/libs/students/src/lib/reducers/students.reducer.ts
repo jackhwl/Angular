@@ -52,6 +52,14 @@ const _studentsReducer = createReducer(
     ...state,
     error
   })),
+  // on(StudentsApiActions.createStudentSuccess, (state, { student }) =>
+  //   Object.assign({}, state, { selectedId: student.id })
+  // ),
+  // ({
+  //   ...state,
+  //   error: null,
+  //   selectedId: student.id
+  // })),
   on(StudentsApiActions.updateStudentSuccess, (state, { student }) => ({
     ...state,
     error: null
