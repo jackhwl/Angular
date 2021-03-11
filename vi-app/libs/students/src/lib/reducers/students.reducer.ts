@@ -34,9 +34,9 @@ const _studentsReducer = createReducer(
   on(StudentsActions.selectStudent, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
   ),
-  // on(StudentsActions.resetSelectedStudent, (state) =>
-  //   Object.assign({}, state, { selectedId: null })
-  // ),
+  on(StudentsApiActions.resetSelectedStudent, state =>
+    Object.assign({}, state, { selectedId: -1 })
+  ),
   // on(StudentsActions.resetStudents, (state) => widgetsAdapter.removeAll(state)),
 
   // Load widgets

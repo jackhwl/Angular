@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { Student } from '../models/student';
 
+export const resetSelectedStudent = createAction(
+  '[Students/API] Reset Selected Students'
+);
+
 export const loadStudentsSuccess = createAction(
   '[Students/API] Load Students Success',
   props<{ students: Student[] }>()
