@@ -37,7 +37,7 @@ export class StudentService {
   }
 
   update(student) {
-    return this.httpClient.put(this.getUrlForId(student.id), student);
+    return this.httpClient.patch(this.getUrlForId(student.id), student);
   }
 
   delete(studentId) {

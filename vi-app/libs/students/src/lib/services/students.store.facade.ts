@@ -14,6 +14,7 @@ export class StudentsStoreFacade {
   loaded$ = this.store.pipe(select(StudentsSelectors.getLoaded));
   allStudents$ = this.store.pipe(select(StudentsSelectors.getAllStudents));
   selectedStudent$ = this.store.pipe(select(StudentsSelectors.getSelected));
+  error$ = this.store.pipe(select(StudentsSelectors.getError));
 
   mutations$ = this.actions$.pipe(
     filter(

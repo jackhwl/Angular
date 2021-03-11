@@ -61,3 +61,8 @@ export const getLoaded = createSelector(
   getStudentsState,
   (state: StudentState) => state.loaded
 );
+
+export const getError = createSelector(
+  getStudentsState,
+  (state: StudentState) => state.error
+);

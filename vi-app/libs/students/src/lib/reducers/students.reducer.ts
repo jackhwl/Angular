@@ -46,11 +46,15 @@ const _studentsReducer = createReducer(
     error: null
   })),
   on(StudentsApiActions.loadStudentsSuccess, (state, { students }) =>
-    studentsAdapter.setAll(students, { ...state, loaded: true })
+    studentsAdapter.setAll(students, { ...state, loaded: true, error: null })
   ),
   on(StudentsApiActions.loadStudentsFailure, (state, { error }) => ({
     ...state,
     error
+  })),
+  on(StudentsApiActions.updateStudentSuccess, (state, { student }) => ({
+    ...state,
+    error: null
   })),
   on(StudentsApiActions.updateStudentFailure, (state, { error }) => ({
     ...state,

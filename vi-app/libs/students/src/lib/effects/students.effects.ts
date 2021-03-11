@@ -8,6 +8,7 @@ import { StudentsActions, StudentsApiActions } from '../actions';
 import { StudentService } from '../services';
 import { switchMap, tap } from 'rxjs/operators';
 import { ToastService } from '@vi/shared/common';
+import { of } from 'rxjs';
 
 @Injectable()
 export class StudentsEffects {
@@ -122,7 +123,8 @@ export class StudentsEffects {
               })
             ])
           ),
-        onError: (action, error) =>
+        onError: (action, error) => {
+          console.log('error student=', action.student);
           StudentsApiActions.notifyUpdateStudentFailure({
             description: 'i18.students.student_updated_failure',
             title: 'PATCH',
@@ -135,9 +137,10 @@ export class StudentsEffects {
                 action.student.lastName,
               error: error.status + ' ' + error.statusText
             }
-          })
-        //StudentsApiActions.updateStudentFailure({ error })
-        //return null;
+          });
+          return StudentsApiActions.updateStudentFailure({ error });
+          //return null;
+        }
       })
     )
   );
