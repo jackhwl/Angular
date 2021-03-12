@@ -82,6 +82,18 @@ export class InMemoryDataService {
     return undefined;
   }
 
+  patch(requestInfo: RequestInfo) {
+    const body = requestInfo;
+    const responseOptions = {
+      headers: requestInfo.headers,
+      url: requestInfo.url,
+      body,
+      status: 201,
+      statusText: 'getStatusText(STATUS.OK)'
+    };
+    return requestInfo.utils.createResponse$(() => responseOptions);
+  }
+
   // mocking authentication happens here
   // HTTP POST interceptor handler
   authenticate(reqInfo: RequestInfo) {
