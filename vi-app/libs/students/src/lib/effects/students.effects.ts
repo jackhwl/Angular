@@ -8,7 +8,6 @@ import { StudentsActions, StudentsApiActions } from '../actions';
 import { StudentService } from '../services';
 import { switchMap, tap } from 'rxjs/operators';
 import { ToastService } from '@vi/shared/common';
-import { of } from 'rxjs';
 
 @Injectable()
 export class StudentsEffects {
@@ -41,7 +40,7 @@ export class StudentsEffects {
           this.studentService.all().pipe(
             switchMap((students: Student[]) => [
               StudentsApiActions.loadStudentsSuccess({ students }),
-              //StudentsApiActions.resetSelectedStudent(),
+              StudentsApiActions.resetSelectedStudent(),
               StudentsApiActions.notifyLoadStudentsSuccess({
                 description: 'i18.students.students_retrieved_successfully',
                 title: 'GET',
@@ -98,8 +97,10 @@ export class StudentsEffects {
               })
             ])
           ),
-        onError: (action, error) =>
-          StudentsApiActions.updateStudentFailure({ error })
+        onError: (action, error) => {
+          console.error('Error', error);
+          StudentsApiActions.updateStudentFailure({ error });
+        }
       })
     )
   );
@@ -124,22 +125,8 @@ export class StudentsEffects {
             ])
           ),
         onError: (action, error) => {
-          console.log('error student=', action.student);
-          StudentsApiActions.notifyUpdateStudentFailure({
-            description: 'i18.students.student_updated_failure',
-            title: 'PATCH',
-            interpolateParams: {
-              name:
-                action.student.id +
-                ' ' +
-                action.student.firstName +
-                ' ' +
-                action.student.lastName,
-              error: error.status + ' ' + error.statusText
-            }
-          });
+          console.error('Error', error);
           return StudentsApiActions.updateStudentFailure({ error });
-          //return null;
         }
       })
     )
@@ -164,8 +151,10 @@ export class StudentsEffects {
               })
             ])
           ),
-        onError: (action, error) =>
-          StudentsApiActions.updateStudentFailure({ error })
+        onError: (action, error) => {
+          console.error('Error', error);
+          StudentsApiActions.updateStudentFailure({ error });
+        }
       })
     )
   );

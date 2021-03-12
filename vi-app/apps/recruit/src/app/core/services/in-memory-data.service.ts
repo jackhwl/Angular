@@ -83,15 +83,16 @@ export class InMemoryDataService {
   }
 
   patch(requestInfo: RequestInfo) {
-    const body = requestInfo;
-    const responseOptions = {
-      headers: requestInfo.headers,
-      url: requestInfo.url,
-      body,
-      status: 201,
-      statusText: 'getStatusText(STATUS.OK)'
-    };
-    return requestInfo.utils.createResponse$(() => responseOptions);
+    return null;
+    // const body = requestInfo;
+    // const responseOptions = {
+    //   headers: requestInfo.headers,
+    //   url: requestInfo.url,
+    //   body,
+    //   status: 201,
+    //   statusText: 'getStatusText(STATUS.OK)'
+    // };
+    // return requestInfo.utils.createResponse$(() => responseOptions);
   }
 
   // mocking authentication happens here
