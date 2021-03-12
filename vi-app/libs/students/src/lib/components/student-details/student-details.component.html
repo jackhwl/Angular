@@ -88,6 +88,9 @@
       <button type="button" mat-button (click)="cancelled.emit()">
         Cancel
       </button>
+      <button type="button" mat-button (click)="resetForm(this.form)">
+        Reset
+      </button>
     </mat-card-actions>
   </form>
   <pre>{{ form.value | json }}</pre>

@@ -13,4 +13,12 @@ export class StudentDetailsComponent {
   }
   @Output() cancelled = new EventEmitter();
   @Output() saved = new EventEmitter();
+
+  resetForm(form) {
+    form.reset();
+    // form.controls.forEach((name, control) => {
+    //   control.updateValue('');
+    //   control.setErrors(null);
+    // });
+  }
 }

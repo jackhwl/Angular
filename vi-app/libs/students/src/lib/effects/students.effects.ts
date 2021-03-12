@@ -41,7 +41,7 @@ export class StudentsEffects {
           this.studentService.all().pipe(
             switchMap((students: Student[]) => [
               StudentsApiActions.loadStudentsSuccess({ students }),
-              StudentsApiActions.resetSelectedStudent(),
+              //StudentsApiActions.resetSelectedStudent(),
               StudentsApiActions.notifyLoadStudentsSuccess({
                 description: 'i18.students.students_retrieved_successfully',
                 title: 'GET',
