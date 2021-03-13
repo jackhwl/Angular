@@ -31,8 +31,11 @@ const onFailure = (state, { error }) => ({ ...state, error });
 
 const _studentsReducer = createReducer(
   initialStudentsState,
-  on(StudentsActions.selectStudent, (state, { selectedId }) =>
+  on(StudentsActions.selectStudentById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
+  ),
+  on(StudentsActions.selectStudent, (state, { student }) =>
+    Object.assign({}, state, { selectedId: student.id })
   ),
   on(StudentsApiActions.resetSelectedStudent, state =>
     Object.assign({}, state, { selectedId: -1 })

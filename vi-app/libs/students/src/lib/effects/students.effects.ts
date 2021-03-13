@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch, pessimisticUpdate } from '@nrwl/angular';
+import { fetch, optimisticUpdate, pessimisticUpdate } from '@nrwl/angular';
 import { Student } from '../models/student';
 
 import * as fromStudents from '../reducers/students.reducer';
@@ -153,7 +153,7 @@ export class StudentsEffects {
           ),
         onError: (action, error) => {
           console.error('Error', error);
-          StudentsApiActions.updateStudentFailure({ error });
+          return StudentsApiActions.updateStudentFailure({ error });
         }
       })
     )

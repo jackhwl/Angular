@@ -9,10 +9,12 @@ export class StudentsFacade {
   private allStudents = new Subject<Student[]>();
   private selectedStudent = new Subject<Student>();
   private mutations = new Subject();
+  private error = new Subject();
 
   allStudents$ = this.allStudents.asObservable();
   selectedStudent$ = this.selectedStudent.asObservable();
   mutations$ = this.mutations.asObservable();
+  error$ = this.error.asObservable();
 
   constructor(
     private studentService: StudentService //private ns: NotificationsService

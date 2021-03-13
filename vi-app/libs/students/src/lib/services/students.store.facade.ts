@@ -33,8 +33,12 @@ export class StudentsStoreFacade {
     this.dispatch(StudentsActions.loadStudents());
   }
 
-  selectStudent(selectedId: string) {
-    this.dispatch(StudentsActions.selectStudent({ selectedId }));
+  selectStudentById(selectedId: string) {
+    this.dispatch(StudentsActions.selectStudentById({ selectedId }));
+  }
+
+  selectStudent(student: Student) {
+    this.dispatch(StudentsActions.selectStudent({ student }));
   }
 
   loadStudents() {
