@@ -35,7 +35,7 @@ const _studentsReducer = createReducer(
     Object.assign({}, state, { selectedId })
   ),
   on(StudentsActions.selectStudent, (state, { student }) =>
-    Object.assign({}, state, { selectedId: student.id })
+    Object.assign({}, state, { selectedId: student?.id })
   ),
   on(StudentsApiActions.resetSelectedStudent, state =>
     Object.assign({}, state, { selectedId: -1 })
