@@ -12,6 +12,7 @@ export class StudentsComponent implements OnInit {
   students$: Observable<Student[]> = this.studentsFacade.allStudents$;
   selectedStudent$: Observable<Student> = this.studentsFacade.selectedStudent$;
   error$: Observable<any> = this.studentsFacade.error$;
+
   primaryColor = 'red';
 
   constructor(private studentsFacade: StudentsFacade) {}

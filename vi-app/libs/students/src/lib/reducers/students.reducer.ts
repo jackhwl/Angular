@@ -55,18 +55,19 @@ const _studentsReducer = createReducer(
     ...state,
     error
   })),
-  // on(StudentsApiActions.createStudentSuccess, (state, { student }) =>
-  //   Object.assign({}, state, { selectedId: student.id })
-  // ),
-  // ({
-  //   ...state,
-  //   error: null,
-  //   selectedId: student.id
-  // })),
-  on(StudentsApiActions.updateStudentSuccess, (state, { student }) => ({
-    ...state,
-    error: null
-  })),
+  on(StudentsApiActions.createStudentSuccess, (state, { student }) =>
+    studentsAdapter.addOne(student, {
+      ...state,
+      error: null,
+      selectedId: student.id
+    })
+  ),
+  on(StudentsApiActions.updateStudentSuccess, (state, { student }) =>
+    studentsAdapter.upsertOne(student, {
+      ...state,
+      error: null
+    })
+  ),
   on(StudentsApiActions.updateStudentFailure, (state, { error }) => ({
     ...state,
     error
