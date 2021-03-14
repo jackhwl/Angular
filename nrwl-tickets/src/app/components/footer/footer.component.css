@@ -1,0 +1,23 @@
+footer {
+  color: #98b8ce;
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+a {
+  margin: 0px 0 0 0;
+  padding: 0px 0 0 0;
+  color: #98b8ce;
+  text-decoration: none;
+}
+footer svg path {
+  fill: #98b8ce;
+}
+footer h3 {
+  font-family: Lato;
+  font-size: 0.7em;
+  font-weight: 400;
+  margin: 0px 0 0 0;
+  padding: 0px 0 0 0;
+  display: inline;
+}

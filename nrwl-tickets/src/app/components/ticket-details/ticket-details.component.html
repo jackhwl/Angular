@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-title>
+    <span *ngIf="currentTicket.id !== null; else elseBlock">
+      Editing
+    </span>
+    <ng-template #elseBlock>
+      Select Ticket
+    </ng-template>
+  </mat-card-title>
+  <form #form="ngForm" (submit)="saved.emit(currentTicket)">
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          [(ngModel)]="currentTicket.assigneeId"
+          type="text"
+          name="AssigneeId"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          [(ngModel)]="currentTicket.completed"
+          type="text"
+          name="Completed"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          [(ngModel)]="currentTicket.description"
+          type="text"
+          name="Description"
+        />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        [disabled]="form.invalid"
+        type="submit"
+        mat-button
+        color="primary"
+      >
+        Save
+      </button>
+      <button type="button" mat-button (click)="cancelled.emit()">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+  <pre>{{ form.value | json }}</pre>
+  {{ form.valid }}
+</mat-card>
