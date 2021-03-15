@@ -5,7 +5,7 @@
       <button type="submit">Query</button>
       <a [routerLink]="['/tickets/new']">Add New</a>
     </form>
-    errors: {{ error$ | async | json }}
+    <div *ngIf="error$ | async">error:{{ error$ | async | json }}</div>
     <vi-tickets-list
       *ngIf="!(selectedTicket$ | async)"
       [tickets]="tickets$ | async"

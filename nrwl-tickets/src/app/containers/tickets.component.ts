@@ -12,6 +12,7 @@ import { Ticket, User } from "../services/backend.service";
   styleUrls: ["./tickets.component.css"]
 })
 export class TicketsComponent {
+  title = "ticket managing";
   tickets$: Observable<Ticket[]> = this.ticketsFacade.allTickets$;
   //users$: Observable<User[]> = this.ticketsFacade.allUsers$;
   selectedTicket$: Observable<Ticket> = this.ticketsFacade.selectedTicket$;

@@ -61,5 +61,5 @@ export const getLoaded = createSelector(
 
 export const getError = createSelector(
   getTicketsState,
-  (state: TicketState) => state.error
+  (state: TicketState) => state?.error
 );
