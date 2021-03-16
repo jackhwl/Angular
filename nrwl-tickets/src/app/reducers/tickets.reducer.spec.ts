@@ -1,9 +1,13 @@
 import { initialTicketsState, ticketsReducer } from "./tickets.reducer";
 import { TicketsActions, TicketsApiActions } from "../actions";
+import { createAction } from "@ngrx/store";
 
 describe("default", () => {
-  it("should return init state", () => {
-    const newState = ticketsReducer(undefined, TicketsActions.loadTicket);
+  it("should return init state when action not found", () => {
+    const newState = ticketsReducer(
+      undefined,
+      createAction("[Tickets] Not Match Action")
+    );
     expect(newState).toEqual(initialTicketsState);
   });
 });
