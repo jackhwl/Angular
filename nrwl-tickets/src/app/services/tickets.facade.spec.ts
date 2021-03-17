@@ -10,10 +10,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { TicketsEffects } from "../effects/tickets.effects";
-import { of } from "rxjs";
 import { TicketsActions } from "../actions";
 
-describe("TicketsFacade", () => {
+describe("Tickets Facade", () => {
   const ticket = {
     id: 0,
     description: "Install a monitor arm",

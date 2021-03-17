@@ -7,6 +7,11 @@ import { switchMap, tap } from "rxjs/operators";
 
 @Injectable()
 export class TicketsEffects {
+  constructor(
+    private actions$: Actions,
+    private ticketService: BackendService
+  ) {}
+
   loadTickets$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TicketsActions.loadTickets),
@@ -105,9 +110,4 @@ export class TicketsEffects {
       })
     )
   );
-
-  constructor(
-    private actions$: Actions,
-    private ticketService: BackendService
-  ) {}
 }

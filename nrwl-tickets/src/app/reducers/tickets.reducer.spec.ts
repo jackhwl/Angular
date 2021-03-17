@@ -2,7 +2,7 @@ import { initialTicketsState, ticketsReducer } from "./tickets.reducer";
 import { TicketsActions, TicketsApiActions } from "../actions";
 import { createAction } from "@ngrx/store";
 
-describe("default", () => {
+describe("Tickets Reducer default", () => {
   it("should return init state when action not found", () => {
     const newState = ticketsReducer(
       undefined,
@@ -12,7 +12,7 @@ describe("default", () => {
   });
 });
 
-describe("loadTickets", () => {
+describe("Tickets Reducer loadTickets", () => {
   const tickets = [
     {
       id: 0,
