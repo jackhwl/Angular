@@ -22,7 +22,6 @@ describe("TicketsEffects", () => {
       completed: false
     }
   ];
-
   let actions$: Observable<Action>;
   let effects: TicketsEffects;
   let ticketService: jasmine.SpyObj<BackendService>;
@@ -42,15 +41,30 @@ describe("TicketsEffects", () => {
     >;
   });
 
-  it("should return a stream with todo list loaded action", () => {
-    const action = TicketsActions.loadTickets;
-    const outcome = TicketsApiActions.loadTicketsSuccess({ tickets });
+  describe("loadTickets$", () => {
+    it("should return a stream with success action", () => {
+      const action = TicketsActions.loadTickets();
+      const outcome = TicketsApiActions.loadTicketsSuccess({ tickets });
 
-    actions$ = hot("-a", { a: action });
-    const response = cold("-a|", { a: tickets });
-    ticketService.tickets.and.returnValue(response);
+      actions$ = hot("-a", { a: action });
+      const response = cold("-a|", { a: tickets });
+      ticketService.tickets.and.returnValue(response);
 
-    const expected = cold("--b", { b: outcome });
-    expect(effects.loadTickets$).toBeObservable(expected);
+      const expected = cold("--b", { b: outcome });
+      expect(effects.loadTickets$).toBeObservable(expected);
+    });
+
+    it("should fail and return a failure action with the error", () => {
+      const action = TicketsActions.loadTickets();
+      const error = new Error("some error") as any;
+      const outcome = TicketsApiActions.loadTicketsFailure({ error });
+
+      actions$ = hot("-a", { a: action });
+      const response = cold("-#|", {}, error);
+      ticketService.tickets.and.returnValue(response);
+
+      const expected = cold("--b", { b: outcome });
+      expect(effects.loadTickets$).toBeObservable(expected);
+    });
   });
 });
