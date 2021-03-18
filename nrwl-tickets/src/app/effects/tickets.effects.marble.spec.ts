@@ -7,7 +7,7 @@ import { BackendService } from "../services";
 import { TicketsEffects } from "./tickets.effects";
 import { TicketsActions, TicketsApiActions } from "../actions";
 
-describe("Tickets Effects", () => {
+describe("Tickets Effects (Marble)", () => {
   const tickets = [
     {
       id: 0,
@@ -45,25 +45,27 @@ describe("Tickets Effects", () => {
     it("should return a stream with success action", () => {
       const action = TicketsActions.loadTickets();
       const outcome = TicketsApiActions.loadTicketsSuccess({ tickets });
+      const values = { a: action, b: tickets, c: outcome };
 
-      actions$ = hot("-a", { a: action });
-      const response = cold("-a|", { a: tickets });
+      actions$ = hot("-a", values);
+      const response = cold("-b|", values);
       ticketService.tickets.and.returnValue(response);
 
-      const expected = cold("--b", { b: outcome });
+      const expected = cold("--c", values);
       expect(effects.loadTickets$).toBeObservable(expected);
     });
 
-    it("should fail and return a failure action with the error", () => {
+    it("should fail and return an action with the error", () => {
       const action = TicketsActions.loadTickets();
       const error = new Error("some error") as any;
       const outcome = TicketsApiActions.loadTicketsFailure({ error });
+      const values = { a: action, b: tickets, c: outcome };
 
-      actions$ = hot("-a", { a: action });
-      const response = cold("-#|", {}, error);
+      actions$ = hot("-a", values);
+      const response = cold("-#|", values, error);
       ticketService.tickets.and.returnValue(response);
 
-      const expected = cold("--b", { b: outcome });
+      const expected = cold("--c", values);
       expect(effects.loadTickets$).toBeObservable(expected);
     });
   });
