@@ -7,7 +7,7 @@ import { BackendService } from "../services";
 import { TicketsEffects } from "./tickets.effects";
 import { TicketsActions, TicketsApiActions } from "../actions";
 
-describe("TicketsEffects", () => {
+describe("Tickets Effects", () => {
   const tickets = [
     {
       id: 0,

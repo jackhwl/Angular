@@ -11,7 +11,7 @@ import { TicketsListComponent } from "../components/tickets-list/tickets-list.co
 import { TicketDetailsComponent } from "../components/ticket-details/ticket-details.component";
 import { TicketsFacade } from "../services";
 
-xdescribe("TicketsComponent", () => {
+xdescribe("Tickets Component", () => {
   const tickets = [
     {
       id: 0,
