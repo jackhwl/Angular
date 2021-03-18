@@ -1,12 +1,9 @@
 import { TestBed } from "@angular/core/testing";
 import { Observable, of } from "rxjs";
-import { Action } from "@ngrx/store";
-import { cold, hot } from "jasmine-marbles";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { BackendService } from "../services";
 import { TicketsEffects } from "./tickets.effects";
 import { TicketsActions, TicketsApiActions } from "../actions";
-import { MockStore, provideMockStore } from "@ngrx/store/testing";
 
 describe("Tickets Effects (Observables)", () => {
   const tickets = [
@@ -23,31 +20,8 @@ describe("Tickets Effects (Observables)", () => {
       completed: false
     }
   ];
-  const initialState = {
-    tickets: {
-      ids: [0, 1],
-      entities: {
-        0: {
-          id: 0,
-          description: "Install a monitor arm",
-          assigneeId: 111,
-          completed: false
-        },
-        1: {
-          id: 1,
-          description: "Move the desk to the new location",
-          assigneeId: 111,
-          completed: false
-        }
-      },
-      error: null,
-      loaded: false,
-      selectedId: null
-    }
-  };
   let actions$: Observable<any>;
   let effects: TicketsEffects;
-  let store: MockStore;
   let ticketService: BackendService;
   const mockBackendService = {
     tickets() {
@@ -60,13 +34,11 @@ describe("Tickets Effects (Observables)", () => {
       providers: [
         TicketsEffects,
         provideMockActions(() => actions$),
-        provideMockStore({ initialState }),
         { provide: BackendService, useValue: mockBackendService }
       ]
     });
 
     effects = TestBed.inject(TicketsEffects);
-    store = TestBed.inject(MockStore);
     ticketService = TestBed.inject(BackendService);
   });
 
