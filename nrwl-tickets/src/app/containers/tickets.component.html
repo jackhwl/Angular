@@ -1,26 +1,24 @@
 <div class="component-container">
-  <div class="list-component">
-    <form #queryForm="ngForm" (submit)="query()">
-      <input type="text" name="querytodo" [(ngModel)]="query_str" />
-      <button type="submit">Query</button>
-      <a [routerLink]="['/tickets/new']">Add New</a>
-    </form>
-    <div *ngIf="error$ | async">error:{{ error$ | async | json }}</div>
-    <vi-tickets-list
+  <form #queryForm="ngForm" (submit)="query()">
+    <a routerLink="/tickets">List</a>
+    <input type="text" name="querytodo" [(ngModel)]="query_str" />
+    <button type="submit">Query</button>
+    <a routerLink="/tickets/new">Add New</a>
+  </form>
+  <div *ngIf="error$ | async">error:{{ error$ | async | json }}</div>
+  <router-outlet></router-outlet>
+  <!-- <vi-tickets-list
       *ngIf="!(selectedTicket$ | async)"
       [tickets]="tickets$ | async"
       (selected)="selecteTicket($event)"
       (deleted)="deleteTicket($event)"
     >
     </vi-tickets-list>
-  </div>
-  <div class="details-component">
     <vi-ticket-details
       *ngIf="selectedTicket$ | async"
       [ticket]="selectedTicket$ | async"
       (saved)="saveTicket($event)"
       (cancelled)="reset()"
     >
-    </vi-ticket-details>
-  </div>
+    </vi-ticket-details> -->
 </div>

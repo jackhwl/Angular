@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component } from "@angular/core";
+import { Observable } from "rxjs";
+import { TicketsFacade } from "src/app/services";
 import { Ticket } from "../../services/backend.service";
 
 @Component({
@@ -7,7 +9,6 @@ import { Ticket } from "../../services/backend.service";
   styleUrls: ["./tickets-list.component.scss"]
 })
 export class TicketsListComponent {
-  @Input() tickets: Ticket[];
-  @Output() selected = new EventEmitter();
-  @Output() deleted = new EventEmitter();
+  tickets$: Observable<Ticket[]> = this.ticketsFacade.allTickets$;
+  constructor(private ticketsFacade: TicketsFacade) {}
 }

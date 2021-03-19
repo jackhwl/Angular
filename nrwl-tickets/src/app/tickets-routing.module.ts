@@ -1,10 +1,18 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { TicketDetailsComponent } from "./components/ticket-details/ticket-details.component";
+import { TicketsListComponent } from "./components/tickets-list/tickets-list.component";
 import { TicketsComponent } from "./containers/tickets.component";
 
 export const routes: Routes = [
-  { path: ":id", component: TicketsComponent },
-  { path: "", redirectTo: "tickets", pathMatch: "full" }
+  {
+    path: "",
+    component: TicketsComponent,
+    children: [
+      { path: ":id", component: TicketDetailsComponent },
+      { path: "", component: TicketsListComponent }
+    ]
+  }
 ];
 
 @NgModule({

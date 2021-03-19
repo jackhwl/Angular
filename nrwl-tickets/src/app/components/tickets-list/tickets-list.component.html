@@ -1,24 +1,15 @@
 <mat-card>
-  <mat-card-title> </mat-card-title>
   <mat-card-content>
     <mat-list data-cy="widgets-list">
       <mat-list-item
-        (click)="selected.emit(ticket)"
-        *ngFor="let ticket of tickets"
+        *ngFor="let ticket of tickets$ | async"
         attr.data-cy="widget-{{ ticket.id }}-item"
         class="mat-list-option"
       >
         <span matLine attr.data-cy="widget-{{ ticket.id }}-item-title"
           >{{ ticket.id }} {{ ticket.description }}</span
         >
-        <a [routerLink]="['/tickets', [ticket.id]]">Edit</a>
-        <button
-          (click)="deleted.emit(ticket); $event.stopImmediatePropagation()"
-          mat-icon-button
-          type="button"
-        >
-          <mat-icon>clear</mat-icon>
-        </button>
+        <a routerLink="/tickets/{{ ticket.id }}">Edit</a>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
