@@ -16,7 +16,16 @@ export class TicketDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    route.params.subscribe(_ => (this.id = _.id));
+    this.route.params.subscribe(_ => (this.id = _.id));
+  }
+
+  ngOnInit(): void {
+    this.ticketsFacade.selectedTicket$.subscribe(
+      tickets => (this.currentTicket = { ...tickets })
+    );
+    if (this.id !== null) {
+      this.selectTicketById(this.id === "new" ? null : this.id);
+    }
   }
 
   saved(ticket) {
@@ -27,15 +36,8 @@ export class TicketDetailsComponent implements OnInit {
     }
     this.router.navigate(["tickets"]);
   }
-  cancelled() {}
-
-  ngOnInit(): void {
-    this.ticketsFacade.selectedTicket$.subscribe(
-      tickets => (this.currentTicket = { ...tickets })
-    );
-    if (this.id !== null) {
-      this.selectTicketById(this.id === "new" ? null : this.id);
-    }
+  cancelled() {
+    this.router.navigate(["tickets"]);
   }
 
   selectTicketById(id: string) {

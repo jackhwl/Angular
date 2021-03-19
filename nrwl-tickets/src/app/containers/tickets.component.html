@@ -1,6 +1,5 @@
 <div class="component-container">
   <form #queryForm="ngForm" (submit)="query()">
-    <a routerLink="/tickets">List</a>
     <input type="text" name="querytodo" [(ngModel)]="query_str" />
     <button type="submit">Query</button>
     <a routerLink="/tickets/new">Add New</a>
