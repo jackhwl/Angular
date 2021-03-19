@@ -25,60 +25,63 @@ export class TicketsComponent {
     route: ActivatedRoute,
     private router: Router
   ) {
-    route.params.subscribe(_ => (this.id = _.id));
+    route.queryParams.subscribe(_ => (this.query_str = _.q));
     router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(_ => this.reset());
-  }
-
-  ngOnInit(): void {
-    this.ticketsFacade.mutations$.subscribe(_ => this.reset());
-
-    if (this.id !== null) {
-      this.selectTicketById(this.id === "new" ? null : this.id);
-    }
-  }
-
-  reset() {
-    this.loadFilterTickets();
-    //this.selecteTicket(null);
-  }
-
-  selecteTicket(ticket: Ticket) {
-    if (ticket !== null) this.router.navigate(["tickets", ticket.id]);
-    //this.ticketsFacade.selectTicket(ticket);
-  }
-
-  selectTicketById(id: string) {
-    this.ticketsFacade.selectTicketById(id);
-  }
-
-  loadTickets() {
-    this.ticketsFacade.loadTickets();
-  }
-
-  loadFilterTickets() {
-    this.ticketsFacade.loadFilterTickets(this.query_str);
-  }
-
-  creaateticket() {
-    this.router.navigate(["tickets", "new"]);
-  }
-
-  saveTicket(ticket) {
-    if (ticket.id !== null) {
-      this.ticketsFacade.updateTicket(ticket);
-    } else {
-      this.ticketsFacade.createTicket(ticket);
-    }
-    this.router.navigate(["tickets"]);
-  }
-
-  deleteTicket(ticket) {
-    this.ticketsFacade.deleteTicket(ticket);
+      .subscribe(_ => this.ticketsFacade.loadFilterTickets(this.query_str));
   }
 
   query() {
-    this.router.navigateByUrl("tickets?q=" + this.query_str);
+    this.router.navigate(["tickets"], {
+      queryParams: { q: this.query_str },
+      queryParamsHandling: "merge"
+    });
   }
+
+  // ngOnInit(): void {
+  //   // this.ticketsFacade.mutations$.subscribe(_ => this.reset());
+
+  //   // if (this.id !== null) {
+  //   //   this.selectTicketById(this.id === "new" ? null : this.id);
+  //   // }
+  // }
+
+  // reset() {
+  //   this.loadFilterTickets();
+  //   //this.selecteTicket(null);
+  // }
+
+  // loadFilterTickets() {
+  //   this.ticketsFacade.loadFilterTickets(this.query_str);
+  // }
+
+  // selecteTicket(ticket: Ticket) {
+  //   if (ticket !== null) this.router.navigate(["tickets", ticket.id]);
+  //   //this.ticketsFacade.selectTicket(ticket);
+  // }
+
+  // selectTicketById(id: string) {
+  //   this.ticketsFacade.selectTicketById(id);
+  // }
+
+  // loadTickets() {
+  //   this.ticketsFacade.loadTickets();
+  // }
+
+  // creaateticket() {
+  //   this.router.navigate(["tickets", "new"]);
+  // }
+
+  // saveTicket(ticket) {
+  //   if (ticket.id !== null) {
+  //     this.ticketsFacade.updateTicket(ticket);
+  //   } else {
+  //     this.ticketsFacade.createTicket(ticket);
+  //   }
+  //   this.router.navigate(["tickets"]);
+  // }
+
+  // deleteTicket(ticket) {
+  //   this.ticketsFacade.deleteTicket(ticket);
+  // }
 }

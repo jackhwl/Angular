@@ -34,10 +34,11 @@ export class TicketDetailsComponent implements OnInit {
     } else {
       this.ticketsFacade.createTicket(ticket);
     }
-    this.router.navigate(["tickets"]);
+    this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
   }
+
   cancelled() {
-    this.router.navigate(["tickets"]);
+    this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
   }
 
   selectTicketById(id: string) {

@@ -9,7 +9,9 @@
         <span matLine attr.data-cy="widget-{{ ticket.id }}-item-title"
           >{{ ticket.id }} {{ ticket.description }}</span
         >
-        <a routerLink="/tickets/{{ ticket.id }}">Edit</a>
+        <a [routerLink]="['/tickets', ticket.id]" queryParamsHandling="merge"
+          >Edit</a
+        >
       </mat-list-item>
     </mat-list>
   </mat-card-content>
