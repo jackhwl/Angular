@@ -8,7 +8,7 @@ import { EffectsModule } from "@ngrx/effects";
 import * as fromTickets from "./reducers/tickets.reducer";
 import { TicketsFacade } from "./services";
 import { TicketsEffects } from "./effects/tickets.effects";
-import { TicketsComponent } from "./containers/tickets.component";
+import { TicketsComponent } from "./containers/tickets/tickets.component";
 import { TicketsRoutingModule } from "./tickets-routing.module";
 
 @NgModule({

@@ -5,11 +5,11 @@ import { By } from "@angular/platform-browser";
 import { RouterLinkWithHref } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { of } from "rxjs";
-import { MaterialModule } from "../material.module";
+import { MaterialModule } from "../../material.module";
 import { TicketsComponent } from "./tickets.component";
-import { TicketsListComponent } from "../components/tickets-list/tickets-list.component";
-import { TicketDetailsComponent } from "../components/ticket-details/ticket-details.component";
-import { TicketsFacade } from "../services";
+import { TicketsListComponent } from "../../components/tickets-list/tickets-list.component";
+import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
+import { TicketsFacade } from "../../services";
 
 xdescribe("Tickets Component", () => {
   const tickets = [
