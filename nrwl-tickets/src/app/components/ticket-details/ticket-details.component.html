@@ -7,7 +7,7 @@
       Select Ticket
     </ng-template>
   </mat-card-title>
-  <form #form="ngForm" (submit)="saved.emit(currentTicket)">
+  <form #form="ngForm" (submit)="saved(currentTicket)">
     <mat-card-content>
       <mat-form-field class="full-width">
         <input
@@ -43,7 +43,7 @@
       >
         Save
       </button>
-      <button type="button" mat-button (click)="cancelled.emit()">
+      <button type="button" mat-button (click)="cancelled()">
         Cancel
       </button>
     </mat-card-actions>
