@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
+import { TicketVm } from "src/app/models/ticketvm";
 import { TicketsFacade } from "src/app/services";
-import { Ticket } from "../../services/backend.service";
 
 @Component({
   selector: "vi-tickets-list",
@@ -9,6 +9,6 @@ import { Ticket } from "../../services/backend.service";
   styleUrls: ["./tickets-list.component.scss"]
 })
 export class TicketsListComponent {
-  tickets$: Observable<Ticket[]> = this.ticketsFacade.allTickets$;
+  tickets$: Observable<TicketVm[]> = this.ticketsFacade.allTicketVms$;
   constructor(private ticketsFacade: TicketsFacade) {}
 }

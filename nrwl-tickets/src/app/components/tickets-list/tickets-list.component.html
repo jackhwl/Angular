@@ -6,9 +6,11 @@
         attr.data-cy="widget-{{ ticket.id }}-item"
         class="mat-list-option"
       >
-        <span matLine attr.data-cy="widget-{{ ticket.id }}-item-title"
-          >{{ ticket.id }} {{ ticket.description }}</span
-        >
+        <span matLine attr.data-cy="widget-{{ ticket.id }}-item-title">
+          {{ ticket.id }}
+          <span *ngFor="let user of ticket.assignees">{{ user.name }} </span>
+          {{ ticket.description }}
+        </span>
         <a [routerLink]="['/tickets', ticket.id]" queryParamsHandling="merge"
           >Edit</a
         >
