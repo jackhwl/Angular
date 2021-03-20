@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Observable } from "rxjs";
 import { TicketsFacade } from "src/app/services";
-import { Ticket } from "../../services/backend.service";
+import { Ticket, User } from "../../services/backend.service";
 
 @Component({
   selector: "vi-ticket-details",
@@ -9,6 +10,7 @@ import { Ticket } from "../../services/backend.service";
   styleUrls: ["./ticket-details.component.scss"]
 })
 export class TicketDetailsComponent implements OnInit {
+  users$: Observable<User[]> = this.ticketsFacade.allUsers$;
   currentTicket: Ticket;
   id: string;
   constructor(

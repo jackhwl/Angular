@@ -10,12 +10,11 @@
   <form #form="ngForm" (submit)="saved(currentTicket)">
     <mat-card-content>
       <mat-form-field class="full-width">
-        <input
-          matInput
-          [(ngModel)]="currentTicket.assigneeId"
-          type="text"
-          name="AssigneeId"
-        />
+        <mat-select name="AssigneeId" [(ngModel)]="currentTicket.assigneeId">
+          <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{
+            user.name
+          }}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field class="full-width">
         <input

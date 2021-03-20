@@ -12,6 +12,7 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatButtonModule } from "@angular/material/button";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatSelectModule } from "@angular/material/select";
 
 // import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -37,6 +38,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatFormFieldModule,
     MatSnackBarModule,
     MatInputModule,
+    MatSelectModule,
     MatButtonToggleModule,
     MatButtonModule,
     MatProgressSpinnerModule,
