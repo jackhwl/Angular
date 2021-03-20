@@ -65,12 +65,16 @@ export class BackendService {
 
   filteredTickets(queryStr) {
     if (!queryStr) return this.tickets();
+    const ids = this.storedUsers
+      .filter(user => user.name.toLowerCase().includes(queryStr.toLowerCase()))
+      .map(user => user.id);
 
     return of(
-      this.storedTickets.filter(ticket => {
-        let a = 3 / 0;
-        return ticket.description.includes(queryStr);
-      })
+      this.storedTickets.filter(
+        ticket =>
+          ticket.description.toLowerCase().includes(queryStr.toLowerCase()) ||
+          ids.includes(ticket.assigneeId)
+      )
     ).pipe(delay(randomDelay()), this.errorService.retryAfter());
   }
 
