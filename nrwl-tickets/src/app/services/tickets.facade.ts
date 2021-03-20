@@ -27,14 +27,14 @@ export class TicketsFacade {
     )
   );
 
-  mutations$ = this.actions$.pipe(
-    filter(
-      (action: Action) =>
-        action.type === TicketsApiActions.createTicketSuccess({} as any).type ||
-        action.type === TicketsApiActions.updateTicketSuccess({} as any).type ||
-        action.type === TicketsApiActions.deleteTicketSuccess({} as any).type
-    )
-  );
+  // mutations$ = this.actions$.pipe(
+  //   filter(
+  //     (action: Action) =>
+  //       action.type === TicketsApiActions.createTicketSuccess({} as any).type ||
+  //       action.type === TicketsApiActions.updateTicketSuccess({} as any).type ||
+  //       action.type === TicketsApiActions.deleteTicketSuccess({} as any).type
+  //   )
+  // );
 
   constructor(private store: Store<{}>, private actions$: ActionsSubject) {}
 
