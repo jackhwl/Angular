@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { getTicketModuleState, TicketModuleState } from ".";
 import { User } from "../services/backend.service";
 import {
   USERS_FEATURE_KEY,
@@ -8,10 +9,15 @@ import {
 } from "./users.reducer";
 
 // Lookup the 'Users' feature state managed by NgRx
-export const getUsersState = createFeatureSelector<
-  UsersPartialState,
-  UserState
->(USERS_FEATURE_KEY);
+// export const getUsersState = createFeatureSelector<
+//   UsersPartialState,
+//   UserState
+// >(USERS_FEATURE_KEY);
+
+export const getUsersState = createSelector(
+  getTicketModuleState,
+  (state: TicketModuleState) => state.users
+);
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
 

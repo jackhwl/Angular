@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { getTicketModuleState, TicketModuleState } from ".";
 import { Ticket } from "../services/backend.service";
 import {
   TICKETS_FEATURE_KEY,
@@ -8,10 +9,14 @@ import {
 } from "./tickets.reducer";
 
 // Lookup the 'Tickets' feature state managed by NgRx
-export const getTicketsState = createFeatureSelector<
-  TicketsPartialState,
-  TicketState
->(TICKETS_FEATURE_KEY);
+// export const getTicketsState = createFeatureSelector<
+//   TicketsPartialState,
+//   TicketState
+// >(TICKETS_FEATURE_KEY);
+export const getTicketsState = createSelector(
+  getTicketModuleState,
+  (state: TicketModuleState) => state.tickets
+);
 
 const { selectAll, selectEntities } = ticketsAdapter.getSelectors();
 

@@ -5,11 +5,12 @@ import { BackendService } from "./services/backend.service";
 import { TicketsComponentsModule } from "./components";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import * as fromTickets from "./reducers/tickets.reducer";
+import * as fromTicketModule from "./reducers";
 import { TicketsFacade } from "./services";
 import { TicketsEffects } from "./effects/tickets.effects";
 import { TicketsComponent } from "./containers/tickets/tickets.component";
 import { TicketsRoutingModule } from "./tickets-routing.module";
+import { UsersEffects } from "./effects/users.effects";
 
 @NgModule({
   declarations: [TicketsComponent],
@@ -19,10 +20,10 @@ import { TicketsRoutingModule } from "./tickets-routing.module";
     TicketsComponentsModule,
     TicketsRoutingModule,
     StoreModule.forFeature(
-      fromTickets.TICKETS_FEATURE_KEY,
-      fromTickets.ticketsReducer
+      fromTicketModule.TICKETMODULE_FEATURE_KEY,
+      fromTicketModule.reducers
     ),
-    EffectsModule.forFeature([TicketsEffects])
+    EffectsModule.forFeature([TicketsEffects, UsersEffects])
   ],
   providers: [BackendService, TicketsFacade]
 })

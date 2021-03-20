@@ -2,20 +2,30 @@ import { Injectable } from "@angular/core";
 import { Ticket } from "./backend.service";
 
 import { Action, ActionsSubject, select, Store } from "@ngrx/store";
-import { BehaviorSubject, Subject } from "rxjs";
+import { combineLatest } from "rxjs";
 
 import * as TicketsSelectors from "../reducers/tickets.selectors";
+import * as UsersSelectors from "../reducers/users.selectors";
 
-import { TicketsActions, TicketsApiActions } from "../actions";
-import { filter } from "rxjs/operators";
+import { TicketsActions, TicketsApiActions, UsersActions } from "../actions";
+import { filter, map } from "rxjs/operators";
 
 @Injectable()
 export class TicketsFacade {
   loaded$ = this.store.pipe(select(TicketsSelectors.getLoaded));
   allTickets$ = this.store.pipe(select(TicketsSelectors.getAllTickets));
-  //allUsers$ = this.store.pipe(select(TicketsSelectors.getAllTickets));
+  allUsers$ = this.store.pipe(select(UsersSelectors.getAllUsers));
   selectedTicket$ = this.store.pipe(select(TicketsSelectors.getSelected));
   error$ = this.store.pipe(select(TicketsSelectors.getError));
+
+  allTicketVms$ = combineLatest([this.allTickets$, this.allUsers$]).pipe(
+    map(([tickets, users]) =>
+      tickets.map(ticket => ({
+        ...ticket,
+        assignees: users.filter(user => user.id === ticket.assigneeId)
+      }))
+    )
+  );
 
   mutations$ = this.actions$.pipe(
     filter(
@@ -46,6 +56,10 @@ export class TicketsFacade {
 
   loadFilterTickets(queryStr) {
     this.dispatch(TicketsActions.loadFilterTickets({ queryStr }));
+  }
+
+  loadUsers() {
+    this.dispatch(UsersActions.loadUsers());
   }
 
   createTicket(ticket: Ticket) {
