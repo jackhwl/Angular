@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { TicketsFacade } from "src/app/services";
 import { Ticket, User } from "../../services/backend.service";
@@ -11,27 +11,20 @@ import { Ticket, User } from "../../services/backend.service";
 })
 export class TicketDetailsComponent implements OnInit {
   users$: Observable<User[]> = this.ticketsFacade.allUsers$;
+  tickets$ = this.ticketsFacade.selectedTicketByRoute$;
+
   currentTicket: Ticket;
-  id: string;
-  constructor(
-    private ticketsFacade: TicketsFacade,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.route.params.subscribe(_ => (this.id = _.id));
-  }
+  constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
   ngOnInit(): void {
-    this.ticketsFacade.selectedTicket$.subscribe(
+    this.ticketsFacade.selectTicketByRoute();
+    this.ticketsFacade.selectedTicketByRoute$.subscribe(
       tickets => (this.currentTicket = { ...tickets })
     );
-    if (this.id !== null) {
-      this.selectTicketById(this.id === "new" ? null : this.id);
-    }
   }
 
   saved(ticket) {
-    if (ticket.id !== null) {
+    if (ticket.id !== null && ticket.id !== undefined) {
       this.ticketsFacade.updateTicket(ticket);
     } else {
       this.ticketsFacade.createTicket(ticket);
@@ -41,9 +34,5 @@ export class TicketDetailsComponent implements OnInit {
 
   cancelled() {
     this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
-  }
-
-  selectTicketById(id: string) {
-    this.ticketsFacade.selectTicketById(id);
   }
 }

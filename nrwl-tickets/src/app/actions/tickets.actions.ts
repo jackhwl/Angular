@@ -11,6 +11,10 @@ export const selectTicket = createAction(
   props<{ ticket: Ticket }>()
 );
 
+export const selectTicketByRoute = createAction(
+  "[Tickets] Select Ticket By Route"
+);
+
 export const loadTickets = createAction("[Tickets] Load Tickets");
 
 export const loadTicket = createAction(

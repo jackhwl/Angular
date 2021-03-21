@@ -16,6 +16,9 @@ export class TicketsFacade {
   allTickets$ = this.store.pipe(select(TicketsSelectors.getAllTickets));
   allUsers$ = this.store.pipe(select(UsersSelectors.getAllUsers));
   selectedTicket$ = this.store.pipe(select(TicketsSelectors.getSelected));
+  selectedTicketByRoute$ = this.store.pipe(
+    select(TicketsSelectors.getSelectedByRoute)
+  );
   error$ = this.store.pipe(select(TicketsSelectors.getError));
 
   allTicketVms$ = combineLatest([this.allTickets$, this.allUsers$]).pipe(
@@ -48,6 +51,10 @@ export class TicketsFacade {
 
   selectTicket(ticket: Ticket) {
     this.dispatch(TicketsActions.selectTicket({ ticket }));
+  }
+
+  selectTicketByRoute() {
+    this.dispatch(TicketsActions.selectTicketByRoute());
   }
 
   loadTickets() {

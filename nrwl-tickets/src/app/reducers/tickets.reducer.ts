@@ -35,6 +35,7 @@ const _ticketsReducer = createReducer(
   on(TicketsActions.selectTicket, (state, { ticket }) =>
     Object.assign({}, state, { selectedId: ticket?.id })
   ),
+  on(TicketsActions.selectTicketByRoute, state => Object.assign({}, state)),
   on(TicketsApiActions.resetSelectedTicket, state =>
     Object.assign({}, state, { selectedId: -1 })
   ),

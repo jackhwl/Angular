@@ -7,6 +7,7 @@ import {
   TicketsPartialState,
   ticketsAdapter
 } from "./tickets.reducer";
+import { selectRouteParams } from "./router.selectors";
 
 // Lookup the 'Tickets' feature state managed by NgRx
 // export const getTicketsState = createFeatureSelector<
@@ -57,6 +58,12 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) =>
     selectedId !== null ? entities[selectedId] : emptyTicket
+);
+
+export const getSelectedByRoute = createSelector(
+  getTicketsEntities,
+  selectRouteParams,
+  (entities, { id }) => (id !== null ? entities[id] : emptyTicket)
 );
 
 export const getLoaded = createSelector(
