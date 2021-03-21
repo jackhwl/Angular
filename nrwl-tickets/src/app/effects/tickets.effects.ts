@@ -6,6 +6,7 @@ import { TicketsActions, TicketsApiActions } from "../actions";
 import { switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { selectQueryParam } from "../reducers/router.selectors";
+import { throwError } from "rxjs";
 
 @Injectable()
 export class TicketsEffects {
@@ -62,14 +63,16 @@ export class TicketsEffects {
       ofType(TicketsActions.loadFilterTicketsByRoute),
       withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
       fetch({
-        run: (action, q) =>
-          this.ticketService
+        run: (action, q) => {
+          if (q === "error") return throwError("something wrong @ backend");
+          return this.ticketService
             .filteredTickets(q)
             .pipe(
               switchMap((tickets: Ticket[]) => [
                 TicketsApiActions.loadFilterTicketsSuccess({ tickets })
               ])
-            ),
+            );
+        },
 
         onError: (action, error) => {
           console.error("Error", error);

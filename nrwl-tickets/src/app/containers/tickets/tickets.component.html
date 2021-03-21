@@ -1,12 +1,14 @@
 <div class="component-container">
   <form #queryForm="ngForm" (submit)="query()">
     <input type="text" name="querytodo" [(ngModel)]="query_str" />
-    <button type="submit">Query</button>
+    <button type="submit">Query</button>(Enter 'error' to trigger an exception)
     <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
       >Add New</a
     >
   </form>
-  <div *ngIf="error$ | async">error:{{ error$ | async | json }}</div>
+  <div style="color: red;" *ngIf="error$ | async">
+    error:{{ error$ | async | json }}
+  </div>
   <router-outlet></router-outlet>
   <!-- <vi-tickets-list
       *ngIf="!(selectedTicket$ | async)"
