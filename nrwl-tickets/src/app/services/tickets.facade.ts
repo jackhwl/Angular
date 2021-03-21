@@ -7,8 +7,8 @@ import { combineLatest } from "rxjs";
 import * as TicketsSelectors from "../reducers/tickets.selectors";
 import * as UsersSelectors from "../reducers/users.selectors";
 
-import { TicketsActions, TicketsApiActions, UsersActions } from "../actions";
-import { filter, map } from "rxjs/operators";
+import { TicketsActions, UsersActions } from "../actions";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class TicketsFacade {
@@ -63,6 +63,10 @@ export class TicketsFacade {
 
   loadFilterTickets(queryStr) {
     this.dispatch(TicketsActions.loadFilterTickets({ queryStr }));
+  }
+
+  loadFilterTicketsByRoute() {
+    this.dispatch(TicketsActions.loadFilterTicketsByRoute());
   }
 
   loadUsers() {

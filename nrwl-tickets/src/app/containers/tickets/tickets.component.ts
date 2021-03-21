@@ -24,7 +24,7 @@ export class TicketsComponent {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(_ => {
         this.ticketsFacade.loadUsers();
-        this.ticketsFacade.loadFilterTickets(this.query_str);
+        this.ticketsFacade.loadFilterTicketsByRoute();
       });
   }
 

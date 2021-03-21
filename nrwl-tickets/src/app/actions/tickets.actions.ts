@@ -26,6 +26,10 @@ export const loadFilterTickets = createAction(
   props<{ queryStr: string }>()
 );
 
+export const loadFilterTicketsByRoute = createAction(
+  "[Tickets] Load Filtered Ticket By Route"
+);
+
 export const loadFilterTicketsSuccess = createAction(
   "[Tickets/API] Load Filter Tickets Success",
   props<{ tickets: Ticket[] }>()

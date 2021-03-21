@@ -11,7 +11,6 @@ import { Ticket, User } from "../../services/backend.service";
 })
 export class TicketDetailsComponent implements OnInit {
   users$: Observable<User[]> = this.ticketsFacade.allUsers$;
-  tickets$ = this.ticketsFacade.selectedTicketByRoute$;
 
   currentTicket: Ticket;
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}

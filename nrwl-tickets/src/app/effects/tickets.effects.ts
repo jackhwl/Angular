@@ -3,11 +3,14 @@ import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { BackendService, Ticket } from "../services/backend.service";
 import { TicketsActions, TicketsApiActions } from "../actions";
-import { switchMap, tap } from "rxjs/operators";
+import { switchMap, tap, withLatestFrom } from "rxjs/operators";
+import { select, Store } from "@ngrx/store";
+import { selectQueryParam } from "../reducers/router.selectors";
 
 @Injectable()
 export class TicketsEffects {
   constructor(
+    private store: Store<{}>,
     private actions$: Actions,
     private ticketService: BackendService
   ) {}
@@ -40,6 +43,28 @@ export class TicketsEffects {
         run: action =>
           this.ticketService
             .filteredTickets(action.queryStr)
+            .pipe(
+              switchMap((tickets: Ticket[]) => [
+                TicketsApiActions.loadFilterTicketsSuccess({ tickets })
+              ])
+            ),
+
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketsApiActions.loadFilterTicketsFailure({ error });
+        }
+      })
+    )
+  );
+
+  loadFilterTicketsByRoute$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketsActions.loadFilterTicketsByRoute),
+      withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
+      fetch({
+        run: (action, q) =>
+          this.ticketService
+            .filteredTickets(q)
             .pipe(
               switchMap((tickets: Ticket[]) => [
                 TicketsApiActions.loadFilterTicketsSuccess({ tickets })

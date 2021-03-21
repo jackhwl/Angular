@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>
-    <span *ngIf="currentTicket.id !== null; else elseBlock">
+    <span *ngIf="currentTicket.id !== undefined; else elseBlock">
       Editing
     </span>
     <ng-template #elseBlock>
