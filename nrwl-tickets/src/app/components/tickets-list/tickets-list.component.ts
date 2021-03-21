@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { TicketVm } from "src/app/models/ticketvm";
-import { TicketsFacade } from "src/app/services";
+import { TicketVm } from "../../models/ticketvm";
+import { TicketsFacade } from "../../services";
 
 @Component({
   selector: "vi-tickets-list",

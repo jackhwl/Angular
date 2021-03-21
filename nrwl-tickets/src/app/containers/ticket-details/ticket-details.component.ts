@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { TicketsFacade } from "src/app/services";
+import { TicketsFacade } from "../../services";
 import { Ticket, User } from "../../services/backend.service";
 
 @Component({
