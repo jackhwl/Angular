@@ -4,6 +4,9 @@ import { provideMockActions } from "@ngrx/effects/testing";
 import { BackendService } from "../services";
 import { TicketsEffects } from "./tickets.effects";
 import { TicketsActions, TicketsApiActions } from "../actions";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { routerReducer } from "@ngrx/router-store";
 
 describe("Tickets Effects (Observables)", () => {
   const tickets = [
@@ -31,6 +34,10 @@ describe("Tickets Effects (Observables)", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot({ router: routerReducer }),
+        EffectsModule.forRoot([])
+      ],
       providers: [
         TicketsEffects,
         provideMockActions(() => actions$),

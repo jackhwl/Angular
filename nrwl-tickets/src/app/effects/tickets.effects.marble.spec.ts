@@ -1,11 +1,13 @@
 import { TestBed } from "@angular/core/testing";
 import { Observable } from "rxjs";
-import { Action } from "@ngrx/store";
+import { Action, StoreModule } from "@ngrx/store";
 import { cold, hot } from "jasmine-marbles";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { BackendService } from "../services";
 import { TicketsEffects } from "./tickets.effects";
 import { TicketsActions, TicketsApiActions } from "../actions";
+import { EffectsModule } from "@ngrx/effects";
+import { routerReducer } from "@ngrx/router-store";
 
 describe("Tickets Effects (Marble)", () => {
   const tickets = [
@@ -28,6 +30,10 @@ describe("Tickets Effects (Marble)", () => {
   const ticketServiceSpy = jasmine.createSpyObj("BackendService", ["tickets"]);
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot({ router: routerReducer }),
+        EffectsModule.forRoot([])
+      ],
       providers: [
         TicketsEffects,
         provideMockActions(() => actions$),
