@@ -11,7 +11,7 @@ import { TicketsListComponent } from "../../components/tickets-list/tickets-list
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
 import { TicketsFacade } from "../../services";
 
-xdescribe("Tickets Component", () => {
+describe("Tickets Component", () => {
   const tickets = [
     {
       id: 0,
@@ -28,10 +28,10 @@ xdescribe("Tickets Component", () => {
   ];
 
   const ticketsFacadeStub = {
-    allTickets$: of(tickets),
+    allTicketVms$: of(tickets),
     mutations$: of(false),
     selectTicketById() {},
-    loadFilterTickets() {},
+    loadFilterTicketsByRoute() {},
     loadTickets() {}
   };
   let ticketsFacade: TicketsFacade;
@@ -92,7 +92,7 @@ xdescribe("Tickets Component", () => {
     expect(component).toBeDefined();
   });
 
-  it("should have TicketsListComponent render", () => {
+  xit("should have TicketsListComponent render", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     fixture.detectChanges();
     const debugElements = fixture.debugElement.queryAll(
@@ -102,10 +102,9 @@ xdescribe("Tickets Component", () => {
   });
 
   it(`should have ${tickets.length} tickets render`, () => {
-    const fixture = TestBed.createComponent(TicketsComponent);
+    const fixture = TestBed.createComponent(TicketsListComponent);
     //fixture.whenStable().then(() => {
     fixture.detectChanges();
-    //fixture.componentInstance.loadTickets();
     const debugElements = fixture.debugElement.queryAll(
       By.css(".mat-list-text")
     );
