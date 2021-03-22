@@ -9,6 +9,7 @@
         <span matLine attr.data-cy="widget-{{ ticket.id }}-item-title">
           {{ ticket.id }}
           <span *ngFor="let user of ticket.assignees">{{ user.name }} </span>
+          {{ ticket.completed }}
           {{ ticket.description }}
         </span>
         <a [routerLink]="['/tickets', ticket.id]" queryParamsHandling="merge"
@@ -18,3 +19,6 @@
     </mat-list>
   </mat-card-content>
 </mat-card>
+<!-- <table mat-table [dataSource]="tickets$ | async">
+
+</table> -->

@@ -24,11 +24,12 @@ import { MatSelectModule } from "@angular/material/select";
 // import { MatSelectModule } from '@angular/material/select';
 // import { MatSliderModule } from '@angular/material/slider';
 // import { MatStepperModule } from '@angular/material/stepper';
-// import { MatTableModule } from '@angular/material/table';
+import { MatTableModule } from "@angular/material/table";
 // import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   exports: [
+    MatTableModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTabsModule,
