@@ -1,11 +1,12 @@
 <div class="component-container">
-  <form #queryForm="ngForm" (submit)="query()">
-    <input type="text" name="querytodo" [(ngModel)]="query_str" />
-    <button type="submit">Query</button>(Enter 'error' to trigger an exception)
-    <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
-      >Add New</a
-    >
-  </form>
+  <input
+    type="text"
+    name="querytodo"
+    [ngModel]="q$ | async"
+    (ngModelChange)="query($event)"
+  />
+  (Enter 'error' to trigger an exception)
+  <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge">Add New</a>
   <div style="color: red;" *ngIf="error$ | async">
     error:{{ error$ | async | json }}
   </div>
