@@ -11,11 +11,10 @@ import {
   tick
 } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsFacade } from "../../services";
-import { FormsModule } from "@angular/forms";
 
 @Directive({
   selector: "[routerLink]"
@@ -70,14 +69,11 @@ describe("TicketsComponent (route)", () => {
 
   beforeEach(async () => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
-    routeSpy = { queryParams: of({ id: "test" }) };
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
-      imports: [FormsModule],
       providers: [
         { provide: TicketsFacade, useValue: ticketsFacadeStub },
-        { provide: Router, useValue: routerSpy },
-        { provide: ActivatedRoute, useValue: routeSpy }
+        { provide: Router, useValue: routerSpy }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
@@ -96,7 +92,6 @@ describe("TicketsComponent (route)", () => {
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
-  let routeSpy: any;
 
   it("navigates to tickets/new when addNew link is clicked", () => {
     clickAddNew();

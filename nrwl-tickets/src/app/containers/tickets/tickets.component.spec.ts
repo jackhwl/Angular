@@ -112,7 +112,7 @@ describe("Tickets Component", () => {
     //});
   });
 
-  it(`should query method been called when query button clicked`, () => {
+  xit(`should query method been called when query button clicked`, () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
     spyOn(component, "query");
