@@ -1,4 +1,4 @@
-import { TestBed, waitForAsync } from "@angular/core/testing";
+import { inject, TestBed, waitForAsync } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
@@ -109,6 +109,21 @@ describe("Tickets Component", () => {
       By.css(".mat-list-text")
     );
     expect(debugElements.length).toEqual(tickets.length);
+    //});
+  });
+
+  it(`should query method been called when query button clicked`, () => {
+    const fixture = TestBed.createComponent(TicketsComponent);
+    const component = fixture.componentInstance;
+    spyOn(component, "query");
+
+    let button = fixture.debugElement.nativeElement.querySelector("button");
+    button.click();
+
+    //fixture.whenStable().then(() => {
+    fixture.detectChanges();
+    expect(component.query).toHaveBeenCalled();
+
     //});
   });
 });
