@@ -32,13 +32,13 @@ class FakeRouterLink {
   }
 }
 const leftMouseButton = 0;
-describe("TicketsComponent (shallow)", () => {
+describe("TicketsComponent (route)", () => {
   function advance() {
-    tick();
+    //tick();
     fixture.detectChanges();
   }
 
-  function clickTopHero() {
+  function clickAddNew() {
     const firstLink = fixture.debugElement.query(By.css("a"));
 
     firstLink.triggerEventHandler("click", { button: leftMouseButton });
@@ -86,20 +86,20 @@ describe("TicketsComponent (shallow)", () => {
     ticketsFacade = TestBed.inject(TicketsFacade);
   });
 
-  beforeEach(fakeAsync(() => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(TicketsComponent);
     component = fixture.componentInstance;
     advance();
     advance();
-  }));
+  });
 
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
   let routeSpy: any;
 
-  it("navigates to tickets/new when addNew link is clicked", fakeAsync(() => {
-    clickTopHero();
+  it("navigates to tickets/new when addNew link is clicked", () => {
+    clickAddNew();
     advance();
 
     const expectedPath = "/tickets/new";
@@ -107,5 +107,5 @@ describe("TicketsComponent (shallow)", () => {
       .mostRecent()
       .args[0][0].join("/");
     expect(actualPath).toBe(expectedPath);
-  }));
+  });
 });
