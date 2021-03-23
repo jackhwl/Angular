@@ -10,7 +10,6 @@ import { TicketsFacade } from "../../services";
   styleUrls: ["./tickets.component.css"]
 })
 export class TicketsComponent {
-  title = "ticket managing";
   error$: Observable<any> = this.ticketsFacade.error$;
   q$: Observable<any> = this.ticketsFacade.q$;
 
@@ -23,9 +22,9 @@ export class TicketsComponent {
       });
   }
 
-  query(query_str) {
+  query(q) {
     this.router.navigate(["tickets"], {
-      queryParams: { q: query_str },
+      queryParams: { q },
       queryParamsHandling: "merge"
     });
   }

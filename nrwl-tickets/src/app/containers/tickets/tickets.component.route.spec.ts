@@ -84,7 +84,7 @@ describe("TicketsComponent (route)", () => {
     ticketsFacade = TestBed.inject(TicketsFacade);
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(TicketsComponent);
     component = fixture.componentInstance;
     advance();
@@ -94,6 +94,22 @@ describe("TicketsComponent (route)", () => {
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
+
+  function setInputValue(selector: string, value: string) {
+    fixture.detectChanges();
+    tick();
+
+    let input = fixture.debugElement.query(By.css(selector)).nativeElement;
+    input.value = value;
+    input.dispatchEvent(new Event("input"));
+    tick();
+  }
+  function sendInput(inputElement: any, text: string) {
+    inputElement.value = text;
+    dispatchEvent(new Event("change"));
+    fixture.detectChanges();
+    return fixture.whenStable();
+  }
 
   it("navigates to tickets/new when addNew link is clicked", () => {
     clickAddNew();
@@ -105,4 +121,20 @@ describe("TicketsComponent (route)", () => {
       .args[0][0].join("/");
     expect(actualPath).toBe(expectedPath);
   });
+
+  it("should call query method with value of q$", fakeAsync(() => {
+    const fixture = TestBed.createComponent(TicketsComponent);
+    const component = fixture.componentInstance;
+    spyOn(component, "query");
+    component.q$ = of("move");
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      const queryBox = fixture.debugElement.query(
+        By.css('input[name="querytodo"]')
+      ).nativeElement;
+      queryBox.dispatchEvent(new Event("input"));
+      expect(component.query).toHaveBeenCalled();
+      expect(component.query).toHaveBeenCalledWith("move");
+    });
+  }));
 });
