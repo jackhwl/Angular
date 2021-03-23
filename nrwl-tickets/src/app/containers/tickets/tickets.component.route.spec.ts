@@ -15,6 +15,7 @@ import { Router } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsFacade } from "../../services";
+import { FormsModule } from "@angular/forms";
 
 @Directive({
   selector: "[routerLink]"
@@ -71,6 +72,7 @@ describe("TicketsComponent (route)", () => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
+      imports: [FormsModule],
       providers: [
         { provide: TicketsFacade, useValue: ticketsFacadeStub },
         { provide: Router, useValue: routerSpy }
