@@ -21,7 +21,7 @@ export class TicketsComponent {
   ) {
     this.route.queryParams.subscribe(_ => (this.query_str = _.q));
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      ?.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(_ => {
         this.ticketsFacade.loadUsers();
         this.ticketsFacade.loadFilterTicketsByRoute();
