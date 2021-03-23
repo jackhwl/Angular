@@ -9,6 +9,7 @@ import * as UsersSelectors from "../reducers/users.selectors";
 
 import { TicketsActions, UsersActions } from "../actions";
 import { map } from "rxjs/operators";
+import { selectQueryParam } from "../reducers/router.selectors";
 
 @Injectable()
 export class TicketsFacade {
@@ -20,6 +21,7 @@ export class TicketsFacade {
     select(TicketsSelectors.getSelectedByRoute)
   );
   error$ = this.store.pipe(select(TicketsSelectors.getError));
+  q$ = this.store.pipe(select(selectQueryParam("q")));
 
   allTicketVms$ = combineLatest([this.allTickets$, this.allUsers$]).pipe(
     map(([tickets, users]) =>

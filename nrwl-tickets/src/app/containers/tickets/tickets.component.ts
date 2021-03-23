@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
 import { TicketsFacade } from "../../services";
@@ -12,14 +12,9 @@ import { TicketsFacade } from "../../services";
 export class TicketsComponent {
   title = "ticket managing";
   error$: Observable<any> = this.ticketsFacade.error$;
-  query_str: string = "";
+  q$: Observable<any> = this.ticketsFacade.q$;
 
-  constructor(
-    private ticketsFacade: TicketsFacade,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.route.queryParams.subscribe(_ => (this.query_str = _.q));
+  constructor(private ticketsFacade: TicketsFacade, private router: Router) {
     this.router.events
       ?.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(_ => {
@@ -28,9 +23,9 @@ export class TicketsComponent {
       });
   }
 
-  query() {
+  query(query_str) {
     this.router.navigate(["tickets"], {
-      queryParams: { q: this.query_str },
+      queryParams: { q: query_str },
       queryParamsHandling: "merge"
     });
   }
