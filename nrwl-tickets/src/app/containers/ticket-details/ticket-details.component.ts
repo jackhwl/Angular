@@ -18,7 +18,7 @@ export class TicketDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.ticketsFacade.selectTicketByRoute();
     this.ticketsFacade.selectedTicketByRoute$.subscribe(
-      tickets => (this.currentTicket = { ...tickets })
+      ticket => (this.currentTicket = { ...ticket })
     );
   }
 
