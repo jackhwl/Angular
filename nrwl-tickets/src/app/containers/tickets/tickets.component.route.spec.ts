@@ -11,11 +11,12 @@ import {
   tick
 } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
-import { Router } from "@angular/router";
+import { Router, RouterModule, UrlTree } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsFacade } from "../../services";
 import { FormsModule } from "@angular/forms";
+import { Router as Router2 } from "@angular/router";
 
 @Directive({
   selector: "[routerLink]"
@@ -67,21 +68,31 @@ describe("TicketsComponent (route)", () => {
   };
   let ticketsFacade: TicketsFacade;
   let router: Router;
+  let router3: Router;
+  //let router2: Router2;
 
   beforeEach(async () => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
+    //router2Spy = jasmine.createSpyObj("Router2", ["createUrlTree"]);
+    //rSpy = SpyOn(Router2, "createUrlTree");
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
-      imports: [FormsModule],
+      imports: [
+        FormsModule
+        //RouterModule.forChild([{path: "", component: TicketsComponent}])
+      ],
       providers: [
         { provide: TicketsFacade, useValue: ticketsFacadeStub },
         { provide: Router, useValue: routerSpy }
+        //  Router2
+        //{ provide: Router2, useValue: router2Spy },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
 
     await TestBed.compileComponents();
     ticketsFacade = TestBed.inject(TicketsFacade);
+    router3 = TestBed.inject(Router);
   });
 
   beforeEach(async () => {
@@ -94,6 +105,7 @@ describe("TicketsComponent (route)", () => {
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
+  //let router2Spy: jasmine.SpyObj<Router2>;
 
   function setInputValue(selector: string, value: string) {
     fixture.detectChanges();
@@ -120,12 +132,15 @@ describe("TicketsComponent (route)", () => {
       .mostRecent()
       .args[0][0].join("/");
     expect(actualPath).toBe(expectedPath);
+    expect(routerSpy.navigate.calls.allArgs()[0][0][0]).toEqual(
+      jasmine.objectContaining(["/tickets", "new"])
+    );
   });
 
   it("should call query method with value of q$", fakeAsync(() => {
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
-    spyOn(component, "query");
+    spyOn(component, "query").and.callThrough();
     component.q$ = of("move");
     fixture.detectChanges();
     fixture.whenStable().then(() => {
