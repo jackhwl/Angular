@@ -52,6 +52,7 @@ describe("TicketsComponent (route)", () => {
     mutations$: of(false),
     selectTicketById() {},
     loadFilterTicketsByRoute() {},
+    loadUsers() {},
     loadTickets() {}
   };
   let ticketsFacade: TicketsFacade;
