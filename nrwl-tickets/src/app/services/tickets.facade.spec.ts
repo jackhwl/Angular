@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { TicketsEffects } from "../effects/tickets.effects";
-import { TicketsActions } from "../actions";
+import { TicketsActions, UsersActions } from "../actions";
 
 describe("Tickets Facade", () => {
   const ticket = {
@@ -92,15 +92,74 @@ describe("Tickets Facade", () => {
     })
   );
 
+  it("should dispatch selectTicketById action when call selectTicketById method", () => {
+    ticketsFacade.selectTicketById("1");
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.selectTicketById({ selectedId: "1" })
+    );
+  });
+
+  it("should dispatch selectTicket action when call selectTicket method", () => {
+    ticketsFacade.selectTicket(ticket);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.selectTicket({ ticket })
+    );
+  });
+
+  it("should dispatch selectTicketByRoute action when call selectTicketByRoute method", () => {
+    ticketsFacade.selectTicketByRoute();
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.selectTicketByRoute()
+    );
+  });
+
   it("should dispatch load Tickets action when call getAll method", () => {
     ticketsFacade.getAll();
     expect(store.dispatch).toHaveBeenCalledWith(TicketsActions.loadTickets());
+  });
+
+  it("should dispatch load Tickets action when call loadTickets method", () => {
+    ticketsFacade.loadTickets();
+    expect(store.dispatch).toHaveBeenCalledWith(TicketsActions.loadTickets());
+  });
+
+  it("should dispatch loadFilterTickets action when call loadFilterTickets method", () => {
+    ticketsFacade.loadFilterTickets("q");
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.loadFilterTickets({ queryStr: "q" })
+    );
+  });
+
+  it("should dispatch loadFilterTicketsByRoute action when call loadFilterTicketsByRoute method", () => {
+    ticketsFacade.loadFilterTicketsByRoute();
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.loadFilterTicketsByRoute()
+    );
+  });
+
+  it("should dispatch load Users action when call loadUsers method", () => {
+    ticketsFacade.loadUsers();
+    expect(store.dispatch).toHaveBeenCalledWith(UsersActions.loadUsers());
   });
 
   it("should dispatch create Ticket action when call createTicket method", () => {
     ticketsFacade.createTicket(ticket);
     expect(store.dispatch).toHaveBeenCalledWith(
       TicketsActions.createTicket({ ticket })
+    );
+  });
+
+  it("should dispatch update Ticket action when call updateTicket method", () => {
+    ticketsFacade.updateTicket(ticket);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.updateTicket({ ticket })
+    );
+  });
+
+  it("should dispatch delete Ticket action when call deleteTicket method", () => {
+    ticketsFacade.deleteTicket(ticket);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      TicketsActions.deleteTicket({ ticket })
     );
   });
 });
