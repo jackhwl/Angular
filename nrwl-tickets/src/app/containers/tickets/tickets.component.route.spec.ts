@@ -11,12 +11,11 @@ import {
   tick
 } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
-import { Router, RouterModule, UrlTree } from "@angular/router";
+import { Router } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsFacade } from "../../services";
 import { FormsModule } from "@angular/forms";
-import { Router as Router2 } from "@angular/router";
 
 @Directive({
   selector: "[routerLink]"
@@ -32,19 +31,8 @@ class FakeRouterLink {
     this.router.navigate([this.routerLink]);
   }
 }
-const leftMouseButton = 0;
 describe("TicketsComponent (route)", () => {
-  function advance() {
-    //tick();
-    fixture.detectChanges();
-  }
-
-  function clickAddNew() {
-    const firstLink = fixture.debugElement.query(By.css("a"));
-
-    firstLink.triggerEventHandler("click", { button: leftMouseButton });
-  }
-
+  const leftMouseButton = 0;
   const tickets = [
     {
       id: 0,
@@ -68,44 +56,35 @@ describe("TicketsComponent (route)", () => {
   };
   let ticketsFacade: TicketsFacade;
   let router: Router;
-  let router3: Router;
-  //let router2: Router2;
 
   beforeEach(async () => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
-    //router2Spy = jasmine.createSpyObj("Router2", ["createUrlTree"]);
-    //rSpy = SpyOn(Router2, "createUrlTree");
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
-      imports: [
-        FormsModule
-        //RouterModule.forChild([{path: "", component: TicketsComponent}])
-      ],
+      imports: [FormsModule],
       providers: [
         { provide: TicketsFacade, useValue: ticketsFacadeStub },
         { provide: Router, useValue: routerSpy }
-        //  Router2
-        //{ provide: Router2, useValue: router2Spy },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
 
     await TestBed.compileComponents();
     ticketsFacade = TestBed.inject(TicketsFacade);
-    router3 = TestBed.inject(Router);
   });
 
   beforeEach(async () => {
     fixture = TestBed.createComponent(TicketsComponent);
     component = fixture.componentInstance;
-    advance();
-    advance();
+    //tick();
+    fixture.detectChanges();
+    //tick();
+    fixture.detectChanges();
   });
 
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
-  //let router2Spy: jasmine.SpyObj<Router2>;
 
   function setInputValue(selector: string, value: string) {
     fixture.detectChanges();
@@ -124,8 +103,11 @@ describe("TicketsComponent (route)", () => {
   }
 
   it("navigates to tickets/new when addNew link is clicked", () => {
-    clickAddNew();
-    advance();
+    const firstLink = fixture.debugElement.query(By.css("a"));
+
+    firstLink.triggerEventHandler("click", { button: leftMouseButton });
+    //tick();
+    fixture.detectChanges();
 
     const expectedPath = "/tickets/new";
     const actualPath = routerSpy.navigate.calls

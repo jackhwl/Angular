@@ -33,6 +33,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button
+        id="save"
         [disabled]="form.invalid"
         type="submit"
         mat-button
@@ -40,7 +41,7 @@
       >
         Save
       </button>
-      <button type="button" mat-button (click)="cancelled()">
+      <button id="cancel" type="button" mat-button (click)="cancelled()">
         Cancel
       </button>
     </mat-card-actions>
