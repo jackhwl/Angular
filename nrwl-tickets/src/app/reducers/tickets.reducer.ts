@@ -25,7 +25,7 @@ export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
   loaded: false
 });
 
-const onFailure = (state, { error }) => ({ ...state, error });
+//const onFailure = (state, { error }) => ({ ...state, error });
 
 const _ticketsReducer = createReducer(
   initialTicketsState,

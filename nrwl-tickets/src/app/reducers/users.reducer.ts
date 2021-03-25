@@ -23,7 +23,7 @@ export const initialUsersState: UserState = usersAdapter.getInitialState({
   loaded: false
 });
 
-const onFailure = (state, { error }) => ({ ...state, error });
+// const onFailure = (state, { error }) => ({ ...state, error });
 
 const _usersReducer = createReducer(
   initialUsersState,

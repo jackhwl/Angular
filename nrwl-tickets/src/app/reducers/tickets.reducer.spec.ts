@@ -1,18 +1,70 @@
-import { initialTicketsState, ticketsReducer } from "./tickets.reducer";
+import * as fromTickets from "./tickets.reducer";
 import { TicketsActions, TicketsApiActions } from "../actions";
 import { createAction } from "@ngrx/store";
+import { Action } from "@ngrx/store";
+
+const tickets = [
+  {
+    id: 0,
+    description: "Install a monitor arm",
+    assigneeId: 111,
+    completed: false
+  },
+  {
+    id: 1,
+    description: "Move the desk to the new location",
+    assigneeId: 222,
+    completed: false
+  },
+  {
+    id: 2,
+    description: "Regiter online",
+    assigneeId: 333,
+    completed: false
+  }
+];
 
 describe("Tickets Reducer default", () => {
   it("should return init state when action not found", () => {
-    const newState = ticketsReducer(
+    const newState = fromTickets.ticketsReducer(
       undefined,
       createAction("[Tickets] Not Match Action")
     );
-    expect(newState).toEqual(initialTicketsState);
+    expect(newState).toEqual(fromTickets.initialTicketsState);
   });
 });
 
 describe("Tickets Reducer loadTickets", () => {
+  it("should return loaded is false", () => {
+    const newState = fromTickets.ticketsReducer(
+      fromTickets.initialTicketsState,
+      TicketsActions.loadTickets
+    );
+    expect(newState.loaded).toBe(false);
+  });
+
+  it("should return loaded is true and error is null if load tickets success", () => {
+    const newState = fromTickets.ticketsReducer(
+      fromTickets.initialTicketsState,
+      TicketsApiActions.loadTicketsSuccess({ tickets })
+    );
+    expect(newState.loaded).toBe(true);
+    expect(newState.error).toBeNull();
+    expect(newState.ids.length).toBe(tickets.length);
+  });
+
+  it("should return loaded is false and error if load tickets fail", () => {
+    const error = new Error("http error");
+    const newState = fromTickets.ticketsReducer(
+      fromTickets.initialTicketsState,
+      TicketsApiActions.loadTicketsFailure({ error })
+    );
+    expect(newState.loaded).toBe(false);
+    expect(newState.error.toString()).toContain(error.message);
+  });
+});
+
+describe("Tickets Reducer loadFilterTickets", () => {
   const tickets = [
     {
       id: 0,
@@ -35,17 +87,17 @@ describe("Tickets Reducer loadTickets", () => {
   ];
 
   it("should return loaded is false", () => {
-    const newState = ticketsReducer(
-      initialTicketsState,
-      TicketsActions.loadTickets
+    const newState = fromTickets.ticketsReducer(
+      fromTickets.initialTicketsState,
+      TicketsActions.loadFilterTickets
     );
     expect(newState.loaded).toBe(false);
   });
 
-  it("should return loaded is true and error is null if load tickets success", () => {
-    const newState = ticketsReducer(
-      initialTicketsState,
-      TicketsApiActions.loadTicketsSuccess({ tickets })
+  it("should return loaded is true and error is null if loadFilterTickets success", () => {
+    const newState = fromTickets.ticketsReducer(
+      fromTickets.initialTicketsState,
+      TicketsApiActions.loadFilterTicketsSuccess({ tickets })
     );
     expect(newState.loaded).toBe(true);
     expect(newState.error).toBeNull();
@@ -54,11 +106,108 @@ describe("Tickets Reducer loadTickets", () => {
 
   it("should return loaded is false and error if load tickets fail", () => {
     const error = new Error("http error");
-    const newState = ticketsReducer(
-      initialTicketsState,
-      TicketsApiActions.loadTicketsFailure({ error })
+    const newState = fromTickets.ticketsReducer(
+      fromTickets.initialTicketsState,
+      TicketsApiActions.loadFilterTicketsFailure({ error })
     );
     expect(newState.loaded).toBe(false);
     expect(newState.error.toString()).toContain(error.message);
+  });
+});
+
+describe("Tickets Reducer", () => {
+  describe("undefined action", () => {
+    it("should return the default state", () => {
+      const { initialTicketsState } = fromTickets;
+      const action = {} as Action;
+      const state = fromTickets.ticketsReducer(undefined, action);
+
+      expect(state).toBe(initialTicketsState);
+    });
+  });
+
+  describe("selectTicketById action", () => {
+    it("should set the selectedId of ticket state", () => {
+      const initialState = fromTickets.ticketsReducer(
+        fromTickets.initialTicketsState,
+        TicketsApiActions.loadTicketsSuccess({ tickets })
+      );
+      const selectedId = "1";
+      const action = TicketsActions.selectTicketById({ selectedId });
+      const state = fromTickets.ticketsReducer(initialState, action);
+
+      expect(state.selectedId).toBe(selectedId);
+      expect(state.entities).toBe(initialState.entities);
+    });
+  });
+
+  describe("selectTicket action", () => {
+    it("should set the selected ticket state", () => {
+      const initialState = fromTickets.ticketsReducer(
+        fromTickets.initialTicketsState,
+        TicketsApiActions.loadTicketsSuccess({ tickets })
+      );
+      const ticket = tickets[1];
+      const action = TicketsActions.selectTicket({ ticket });
+      const state = fromTickets.ticketsReducer(initialState, action);
+
+      expect(state.selectedId).toBe(ticket.id);
+      expect(state.entities).toBe(initialState.entities);
+    });
+  });
+
+  describe("selectTicketByRoute action without Route param", () => {
+    it("should set the selectedId to undefined", () => {
+      const initialState = fromTickets.ticketsReducer(
+        fromTickets.initialTicketsState,
+        TicketsApiActions.loadTicketsSuccess({ tickets })
+      );
+      const action = TicketsActions.selectTicketByRoute();
+      const state = fromTickets.ticketsReducer(initialState, action);
+
+      expect(state.selectedId).toBe(undefined);
+      expect(state.entities).toBe(initialState.entities);
+    });
+  });
+
+  describe("API/resetSelectedTicket action", () => {
+    it("should set the selectedId to -1", () => {
+      const initialState = fromTickets.ticketsReducer(
+        fromTickets.initialTicketsState,
+        TicketsApiActions.loadTicketsSuccess({ tickets })
+      );
+      const action = TicketsApiActions.resetSelectedTicket();
+      const state = fromTickets.ticketsReducer(initialState, action);
+
+      expect(state.selectedId).toBe(-1);
+      expect(state.entities).toBe(initialState.entities);
+    });
+  });
+
+  describe("API/loadFilterTicketsSuccess action", () => {
+    it("should return filtered tickets", () => {
+      const { initialTicketsState } = fromTickets;
+      const action = TicketsApiActions.loadFilterTicketsSuccess({ tickets });
+      const state = fromTickets.ticketsReducer(initialTicketsState, action);
+
+      expect(state.loaded).toBe(true);
+      expect(state.error).toBe(null);
+      expect(state.ids).toEqual(tickets.map(t => t.id));
+    });
+  });
+
+  describe("API/updateTicketFailure action", () => {
+    it("should return error object", () => {
+      const initialState = fromTickets.ticketsReducer(
+        fromTickets.initialTicketsState,
+        TicketsApiActions.loadTicketsSuccess({ tickets })
+      );
+      const error = new Error("http error");
+      const action = TicketsApiActions.updateTicketFailure({ error });
+      const state = fromTickets.ticketsReducer(initialState, action);
+
+      expect(state.error).not.toBe(null);
+      expect(state.error.toString()).toContain(error.message);
+    });
   });
 });
