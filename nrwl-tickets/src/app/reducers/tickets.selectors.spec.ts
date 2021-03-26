@@ -1,4 +1,13 @@
-import { getAllTickets } from "./tickets.selectors";
+import {
+  getTicketsEntities,
+  getTicketsState,
+  getLoaded,
+  getError,
+  getSelectedId,
+  getSelected,
+  getAllTickets,
+  getSelectedByRoute
+} from "./tickets.selectors";
 
 describe("Tickets Selectors", () => {
   const initialState = {
@@ -23,10 +32,51 @@ describe("Tickets Selectors", () => {
       selectedId: null
     }
   };
+  const initialTicketModuleState = {
+    users: {},
+    tickets: initialState.tickets
+  };
+
+  it("should return ticket state", () => {
+    const result = getTicketsState.projector(initialTicketModuleState);
+    expect(result).toEqual(initialState.tickets);
+  });
+
+  it("should return ticket entities", () => {
+    const result = getTicketsEntities.projector(initialState.tickets);
+    expect(result).toBe(initialState.tickets.entities);
+  });
 
   it("should select all tickets", () => {
     const result = getAllTickets.projector(initialState.tickets);
     expect(result.length).toBe(initialState.tickets.ids.length);
     expect(result[0].id).toBe(0);
+  });
+
+  it("should return selectedId", () => {
+    const result = getSelectedId.projector(initialState);
+    expect(result ?? null).toBe(initialState.tickets.selectedId);
+  });
+
+  it("should select ticket by id", () => {
+    const result = getSelected.projector(initialState.tickets.entities, 1);
+    expect(result).toBe(initialState.tickets.entities[1]);
+  });
+
+  it("should select ticket by route", () => {
+    const result = getSelectedByRoute.projector(initialState.tickets.entities, {
+      id: 1
+    });
+    expect(result).toBe(initialState.tickets.entities[1]);
+  });
+
+  it("should return load", () => {
+    const result = getLoaded.projector(initialState);
+    expect(result ?? false).toBe(initialState.tickets.loaded);
+  });
+
+  it("should return error", () => {
+    const result = getError.projector(initialState);
+    expect(result ?? null).toBe(initialState.tickets.error);
   });
 });

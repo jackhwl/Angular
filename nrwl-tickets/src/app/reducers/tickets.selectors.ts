@@ -21,16 +21,6 @@ export const getTicketsState = createSelector(
 
 const { selectAll, selectEntities } = ticketsAdapter.getSelectors();
 
-export const getTicketsLoaded = createSelector(
-  getTicketsState,
-  (state: TicketState) => state.loaded
-);
-
-export const getTicketsError = createSelector(
-  getTicketsState,
-  (state: TicketState) => state.error
-);
-
 export const getAllTickets = createSelector(
   getTicketsState,
   (state: TicketState) => selectAll(state)
