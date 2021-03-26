@@ -21,16 +21,6 @@ export const getUsersState = createSelector(
 
 const { selectAll, selectEntities } = usersAdapter.getSelectors();
 
-export const getUsersLoaded = createSelector(
-  getUsersState,
-  (state: UserState) => state.loaded
-);
-
-export const getUsersError = createSelector(
-  getUsersState,
-  (state: UserState) => state.error
-);
-
 export const getAllUsers = createSelector(getUsersState, (state: UserState) =>
   selectAll(state)
 );
