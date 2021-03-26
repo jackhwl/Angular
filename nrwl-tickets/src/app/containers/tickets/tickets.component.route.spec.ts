@@ -131,6 +131,7 @@ describe("TicketsComponent (route)", () => {
         By.css('input[name="querytodo"]')
       ).nativeElement;
       queryBox.dispatchEvent(new Event("input"));
+      tick(200);
       expect(component.query).toHaveBeenCalled();
       expect(component.query).toHaveBeenCalledWith("move");
     });
