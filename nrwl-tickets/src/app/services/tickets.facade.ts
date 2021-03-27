@@ -7,9 +7,10 @@ import { combineLatest } from "rxjs";
 import * as TicketsSelectors from "../reducers/tickets.selectors";
 import * as UsersSelectors from "../reducers/users.selectors";
 
-import { TicketsActions, UsersActions } from "../actions";
-import { map } from "rxjs/operators";
+import { TicketsActions, TicketsApiActions, UsersActions } from "../actions";
+import { filter, map } from "rxjs/operators";
 import { selectQueryParam } from "../reducers/router.selectors";
+import { routerNavigatedAction } from "@ngrx/router-store";
 
 @Injectable()
 export class TicketsFacade {
@@ -32,16 +33,21 @@ export class TicketsFacade {
     )
   );
 
-  // mutations$ = this.actions$.pipe(
-  //   filter(
-  //     (action: Action) =>
-  //       action.type === TicketsApiActions.createTicketSuccess({} as any).type ||
-  //       action.type === TicketsApiActions.updateTicketSuccess({} as any).type ||
-  //       action.type === TicketsApiActions.deleteTicketSuccess({} as any).type
-  //   )
-  // );
+  mutations$ = this.actions$.pipe(
+    filter(
+      (action: Action) =>
+        action.type === routerNavigatedAction.type ||
+        action.type === TicketsApiActions.createTicketSuccess({} as any).type ||
+        action.type === TicketsApiActions.updateTicketSuccess({} as any).type
+    )
+  );
 
   constructor(private store: Store<{}>, private actions$: ActionsSubject) {}
+
+  complete(ticket) {
+    ticket.completed = true;
+    this.updateTicket(ticket);
+  }
 
   getAll() {
     this.dispatch(TicketsActions.loadTickets());

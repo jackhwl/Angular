@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { interval, Observable, Subject, Subscription } from "rxjs";
-import { debounce, filter, map } from "rxjs/operators";
+import { debounce, map } from "rxjs/operators";
 import { TicketsFacade } from "../../services";
 
 @Component({
@@ -13,19 +13,17 @@ export class TicketsComponent implements OnInit, OnDestroy {
   error$: Observable<any> = this.ticketsFacade.error$;
   q$: Observable<any> = this.ticketsFacade.q$;
   subject = new Subject();
-  sub: Subscription;
+  querySub: Subscription;
+  mutationSub: Subscription;
 
-  constructor(private ticketsFacade: TicketsFacade, private router: Router) {
-    this.router.events
-      ?.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(_ => {
-        this.ticketsFacade.loadUsers();
-        this.ticketsFacade.loadFilterTicketsByRoute();
-      });
-  }
+  constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
   ngOnInit() {
-    this.sub = this.subject
+    this.mutationSub = this.ticketsFacade.mutations$.subscribe(_ => {
+      this.ticketsFacade.loadUsers();
+      this.ticketsFacade.loadFilterTicketsByRoute();
+    });
+    this.querySub = this.subject
       .pipe(
         debounce(() => interval(200)),
         map(q =>
@@ -43,6 +41,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.querySub.unsubscribe();
+    this.mutationSub.unsubscribe();
   }
 }
