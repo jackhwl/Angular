@@ -5,7 +5,8 @@ import {
   getError,
   getSelectedId,
   getSelected,
-  getAllUsers
+  getAllUsers,
+  emptyUser
 } from "./users.selectors";
 
 describe("Users Selectors", () => {
@@ -56,6 +57,11 @@ describe("Users Selectors", () => {
   it("should select user by id", () => {
     const result = getSelected.projector(initialState.users.entities, 1);
     expect(result).toBe(initialState.users.entities[1]);
+  });
+
+  it("should return empty user if id is null", () => {
+    const result = getSelected.projector(initialState.users.entities, null);
+    expect(result).toBe(emptyUser);
   });
 
   it("should return load", () => {

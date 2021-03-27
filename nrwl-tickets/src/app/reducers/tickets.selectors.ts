@@ -36,7 +36,7 @@ export const getSelectedId = createSelector(
   (state: TicketState) => state.selectedId
 );
 
-const emptyTicket: Ticket = {
+export const emptyTicket: Ticket = {
   id: null,
   description: "",
   assigneeId: null,
@@ -63,5 +63,5 @@ export const getLoaded = createSelector(
 
 export const getError = createSelector(
   getTicketsState,
-  (state: TicketState) => state?.error
+  (state: TicketState) => state.error
 );

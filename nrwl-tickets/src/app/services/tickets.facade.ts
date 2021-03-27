@@ -44,11 +44,6 @@ export class TicketsFacade {
 
   constructor(private store: Store<{}>, private actions$: ActionsSubject) {}
 
-  complete(ticket) {
-    ticket.completed = true;
-    this.updateTicket(ticket);
-  }
-
   getAll() {
     this.dispatch(TicketsActions.loadTickets());
   }

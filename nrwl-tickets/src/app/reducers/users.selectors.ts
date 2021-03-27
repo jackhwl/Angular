@@ -35,7 +35,7 @@ export const getSelectedId = createSelector(
   (state: UserState) => state.selectedId
 );
 
-const emptyUser: User = {
+export const emptyUser: User = {
   id: null,
   name: ""
 };
@@ -54,5 +54,5 @@ export const getLoaded = createSelector(
 
 export const getError = createSelector(
   getUsersState,
-  (state: UserState) => state?.error
+  (state: UserState) => state.error
 );

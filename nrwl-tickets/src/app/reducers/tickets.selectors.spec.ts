@@ -6,7 +6,8 @@ import {
   getSelectedId,
   getSelected,
   getAllTickets,
-  getSelectedByRoute
+  getSelectedByRoute,
+  emptyTicket
 } from "./tickets.selectors";
 
 describe("Tickets Selectors", () => {
@@ -63,11 +64,23 @@ describe("Tickets Selectors", () => {
     expect(result).toBe(initialState.tickets.entities[1]);
   });
 
+  it("should return empty ticket if id is null", () => {
+    const result = getSelected.projector(initialState.tickets.entities, null);
+    expect(result).toBe(emptyTicket);
+  });
+
   it("should select ticket by route", () => {
     const result = getSelectedByRoute.projector(initialState.tickets.entities, {
       id: 1
     });
     expect(result).toBe(initialState.tickets.entities[1]);
+  });
+
+  it("should return empty ticket if route param is null", () => {
+    const result = getSelectedByRoute.projector(initialState.tickets.entities, {
+      id: null
+    });
+    expect(result).toBe(emptyTicket);
   });
 
   it("should return load", () => {
