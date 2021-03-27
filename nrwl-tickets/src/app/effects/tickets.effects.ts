@@ -64,7 +64,6 @@ export class TicketsEffects {
       withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
       fetch({
         run: (action, q) => {
-          if (q === "error") return throwError("something wrong @ backend");
           return this.ticketService
             .filteredTickets(q)
             .pipe(

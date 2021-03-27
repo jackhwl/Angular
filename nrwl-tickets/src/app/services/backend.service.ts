@@ -64,6 +64,7 @@ export class BackendService {
   }
 
   filteredTickets(queryStr) {
+    if (queryStr === "error") return throwError("something wrong @ backend");
     if (!queryStr) return this.tickets();
     const ids = this.storedUsers
       .filter(user => user.name.toLowerCase().includes(queryStr.toLowerCase()))
