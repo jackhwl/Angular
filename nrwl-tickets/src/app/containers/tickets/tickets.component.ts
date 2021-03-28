@@ -13,8 +13,8 @@ export class TicketsComponent implements OnInit, OnDestroy {
   error$: Observable<any> = this.ticketsFacade.error$;
   q$: Observable<any> = this.ticketsFacade.q$;
   subject = new Subject();
-  querySub: Subscription;
-  mutationSub: Subscription;
+  querySub: Subscription | undefined;
+  mutationSub: Subscription | undefined;
 
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
@@ -41,7 +41,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.querySub.unsubscribe();
-    this.mutationSub.unsubscribe();
+    if (this.querySub) this.querySub.unsubscribe();
+    if (this.mutationSub) this.mutationSub.unsubscribe();
   }
 }
