@@ -24,25 +24,32 @@ export class TicketsFacade {
   error$ = this.store.pipe(select(TicketsSelectors.getError));
   q$ = this.store.pipe(select(selectQueryParam("q")));
 
-  allTicketVms$ = combineLatest([this.allTickets$, this.allUsers$]).pipe(
-    map(([tickets, users]) =>
-      tickets.map(ticket => ({
-        ...ticket,
-        assignees: users.filter(user => user.id === ticket.assigneeId)
-      }))
-    )
-  );
-
-  mutations$ = this.actions$.pipe(
-    filter(
-      (action: Action) =>
-        action.type === routerNavigatedAction.type ||
-        action.type === TicketsApiActions.createTicketSuccess({} as any).type ||
-        action.type === TicketsApiActions.updateTicketSuccess({} as any).type
-    )
-  );
+  allTicketVms$ = this.getAllTicketVms();
+  mutations$ = this.getMutations();
 
   constructor(private store: Store<{}>, private actions$: ActionsSubject) {}
+
+  getMutations() {
+    return this.actions$.pipe(
+      filter(
+        (action: Action) =>
+          action.type === routerNavigatedAction.type ||
+          action.type === TicketsApiActions.createTicketSuccess.type ||
+          action.type === TicketsApiActions.updateTicketSuccess.type
+      )
+    );
+  }
+
+  getAllTicketVms() {
+    return combineLatest([this.allTickets$, this.allUsers$]).pipe(
+      map(([tickets, users]) =>
+        tickets.map(ticket => ({
+          ...ticket,
+          assignees: users.filter(user => user.id === ticket.assigneeId)
+        }))
+      )
+    );
+  }
 
   getAll() {
     this.dispatch(TicketsActions.loadTickets());

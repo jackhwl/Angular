@@ -7,10 +7,13 @@ import { FormsModule } from "@angular/forms";
 import * as fromTickets from "../reducers/tickets.reducer";
 import { MaterialModule } from "../material.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { StoreModule } from "@ngrx/store";
+import { ActionsSubject, StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { TicketsEffects } from "../effects/tickets.effects";
-import { TicketsActions, UsersActions } from "../actions";
+import { TicketsActions, TicketsApiActions, UsersActions } from "../actions";
+import { cold, hot } from "jasmine-marbles";
+import { routerNavigatedAction } from "@ngrx/router-store";
+import { map } from "rxjs/operators";
 
 describe("Tickets Facade", () => {
   const ticket = {
@@ -36,6 +39,34 @@ describe("Tickets Facade", () => {
       id: 2,
       description: "Regiter online",
       assigneeId: 333,
+      completed: false
+    }
+  ];
+  const users = [
+    { id: 111, name: "Victor" },
+    { id: 222, name: "Jack" },
+    { id: 333, name: "Wenlin" }
+  ];
+  const ticketVms = [
+    {
+      id: 0,
+      description: "Install a monitor arm",
+      assigneeId: 111,
+      assignees: [{ id: 111, name: "Victor" }],
+      completed: false
+    },
+    {
+      id: 1,
+      description: "Move the desk to the new location",
+      assigneeId: 222,
+      assignees: [{ id: 222, name: "Jack" }],
+      completed: false
+    },
+    {
+      id: 2,
+      description: "Regiter online",
+      assigneeId: 333,
+      assignees: [{ id: 333, name: "Wenlin" }],
       completed: false
     }
   ];
@@ -65,8 +96,10 @@ describe("Tickets Facade", () => {
   let store: MockStore;
   let ticketsFacade: TicketsFacade;
   let compl: TicketsListComponent;
+  let actions$: ActionsSubject;
   beforeEach(
     waitForAsync(() => {
+      const actionSub: ActionsSubject = new ActionsSubject();
       TestBed.configureTestingModule({
         declarations: [],
         imports: [
@@ -82,13 +115,16 @@ describe("Tickets Facade", () => {
         providers: [
           TicketsFacade,
           BackendService,
-          provideMockStore({ initialState })
+          provideMockStore({ initialState }),
+          { provide: ActionsSubject, useValue: actionSub }
         ]
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
       ticketsFacade = TestBed.inject(TicketsFacade);
       spyOn(store, "dispatch").and.callThrough();
+      actions$ = TestBed.inject(ActionsSubject);
+      spyOn(ticketsFacade, "getMutations").and.callThrough();
     })
   );
 
@@ -161,5 +197,49 @@ describe("Tickets Facade", () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       TicketsActions.deleteTicket({ ticket })
     );
+  });
+
+  it("allTicketVms$ should return ticketVm", () => {
+    ticketsFacade.allUsers$ = cold("-a", { a: users });
+    ticketsFacade.allTickets$ = cold("-b", { b: tickets });
+    const expected$ = hot("-c", { c: ticketVms });
+
+    expect(ticketsFacade.getAllTicketVms()).toBeObservable(expected$);
+  });
+
+  it("mutations$ should return true when TicketsApiActions.createTicketSuccess emit", () => {
+    actions$.next(TicketsApiActions.createTicketSuccess({ ticket }));
+    const expected$ = cold("c", { c: true });
+
+    expect(ticketsFacade.getMutations().pipe(map(_ => true))).toBeObservable(
+      expected$
+    );
+  });
+
+  it("mutations$ should return true when TicketsApiActions.updateTicketSuccess emit", () => {
+    actions$.next(TicketsApiActions.updateTicketSuccess({ ticket }));
+    const expected$ = cold("c", { c: true });
+
+    expect(ticketsFacade.getMutations().pipe(map(_ => true))).toBeObservable(
+      expected$
+    );
+  });
+
+  it("mutations$ should return true when routerNavigatedAction emit", () => {
+    actions$.next(routerNavigatedAction({ payload: null }));
+    const expected$ = cold("c", { c: true });
+
+    expect(ticketsFacade.getMutations().pipe(map(_ => true))).toBeObservable(
+      expected$
+    );
+  });
+
+  it("mutations$ should not return anything when TicketsApiActions.updateTicketFailure emit", () => {
+    actions$.next(TicketsApiActions.updateTicketFailure({ error: "eee" }));
+    const expected$ = cold("c", { c: true });
+
+    expect(
+      ticketsFacade.getMutations().pipe(map(_ => true))
+    ).not.toBeObservable(expected$);
   });
 });
