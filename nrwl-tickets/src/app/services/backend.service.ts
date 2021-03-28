@@ -64,18 +64,19 @@ export class BackendService {
   }
 
   filteredTickets(queryStr) {
-    if (queryStr === "error") return throwError("something wrong @ backend");
     if (!queryStr) return this.tickets();
     const ids = this.storedUsers
       .filter(user => user.name.toLowerCase().includes(queryStr.toLowerCase()))
       .map(user => user.id);
 
     return of(
-      this.storedTickets.filter(
-        ticket =>
+      this.storedTickets.filter(ticket => {
+        if (queryStr === "error") throw "something wrong @ backend";
+        return (
           ticket.description.toLowerCase().includes(queryStr.toLowerCase()) ||
           ids.includes(ticket.assigneeId)
-      )
+        );
+      })
     ).pipe(delay(randomDelay()), this.errorService.retryAfter());
   }
 
