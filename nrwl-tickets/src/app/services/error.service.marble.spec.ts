@@ -58,6 +58,21 @@ describe("error Service (marble tests)", () => {
     scheduler.run(({ expectObservable }) => {
       const values = { a: { status: 200 } };
       const source$ = createRetryableStream(
+        cold("-a", values),
+        cold("-#"),
+        cold("-a", values)
+      );
+      const fn = service.retryAfter(100, 2);
+
+      const expectedMarle = "-a";
+      expectObservable(source$.pipe(fn)).toBe(expectedMarle, values);
+    });
+  });
+
+  it("retryAfter should retry 2 times every 100ms", () => {
+    scheduler.run(({ expectObservable }) => {
+      const values = { a: { status: 200 } };
+      const source$ = createRetryableStream(
         cold("-#"),
         cold("-#"),
         cold("-a", values)
@@ -100,7 +115,7 @@ describe("error Service (marble tests)", () => {
     });
   });
 
-  it("retryAfter0 should retry 3 times every 100ms", () => {
+  it("retryAfter0 should retry 3 times every 100ms then finish", () => {
     scheduler.run(({ expectObservable }) => {
       const values = { a: { status: 200 } };
       const source$ = createRetryableStream(
