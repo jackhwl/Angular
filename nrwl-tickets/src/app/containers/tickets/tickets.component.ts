@@ -10,9 +10,9 @@ import { TicketsFacade } from "../../services";
   styleUrls: ["./tickets.component.css"]
 })
 export class TicketsComponent implements OnInit, OnDestroy {
-  error$: Observable<any> = this.ticketsFacade.error$;
-  q$: Observable<any> = this.ticketsFacade.q$;
-  subject = new Subject();
+  q$: Observable<string> = this.ticketsFacade.q$;
+  error$: Observable<string | null> = this.ticketsFacade.error$;
+  subject = new Subject<string>();
   querySub: Subscription | undefined;
   mutationSub: Subscription | undefined;
 
@@ -26,7 +26,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
     this.querySub = this.subject
       .pipe(
         debounce(() => interval(200)),
-        map(q =>
+        map((q: string) =>
           this.router.navigate(["tickets"], {
             queryParams: { q },
             queryParamsHandling: "merge"
@@ -36,7 +36,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  query(q) {
+  query(q: string) {
     this.subject.next(q);
   }
 

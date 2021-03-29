@@ -4,6 +4,7 @@ import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { BackendService, User } from "../services/backend.service";
 import { UsersActions, UsersApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class UsersEffects {

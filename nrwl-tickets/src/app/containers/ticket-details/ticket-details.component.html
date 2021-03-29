@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>
-    <span *ngIf="currentTicket.id !== undefined; else elseBlock">
+    <span *ngIf="currentTicket.id !== null; else elseBlock">
       Editing
     </span>
     <ng-template #elseBlock>
@@ -10,25 +10,37 @@
   <form #form="ngForm" (submit)="saved(currentTicket)">
     <mat-card-content>
       <mat-form-field class="full-width">
+        <mat-label>Assignee</mat-label>
         <mat-select name="AssigneeId" [(ngModel)]="currentTicket.assigneeId">
           <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{
             user.name
           }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-select name="Completed" [(ngModel)]="currentTicket.completed">
+      <!-- <mat-form-field class="full-width"> -->
+
+      <mat-radio-group
+        aria-label="Select an option"
+        name="Completed"
+        [(ngModel)]="currentTicket.completed"
+      >
+        <mat-radio-button [value]="false">Not finished</mat-radio-button>
+        <mat-radio-button [value]="true">Completed</mat-radio-button>
+      </mat-radio-group>
+
+      <!-- <mat-select name="Completed" [(ngModel)]="currentTicket.completed">
           <mat-option [value]="false">false</mat-option>
-          <mat-option [value]="true">true</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-option [value]="true">true  </mat-option>
+        </mat-select> -->
+      <!-- </mat-form-field> -->
       <mat-form-field class="full-width">
-        <input
+        <mat-label>Description</mat-label>
+        <textarea
           matInput
           [(ngModel)]="currentTicket.description"
           type="text"
           name="Description"
-        />
+        ></textarea>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
@@ -36,16 +48,14 @@
         id="save"
         [disabled]="form.invalid"
         type="submit"
-        mat-button
+        mat-raised-button
         color="primary"
       >
         Save
       </button>
-      <button id="cancel" type="button" mat-button (click)="cancelled()">
+      <button id="cancel" type="button" mat-raised-button (click)="cancelled()">
         Cancel
       </button>
     </mat-card-actions>
   </form>
-  <pre>{{ form.value | json }}</pre>
-  {{ form.valid }}
 </mat-card>

@@ -67,6 +67,14 @@ const _ticketsReducer = createReducer(
     ...state,
     error
   })),
+  on(TicketsActions.createTicket, (state, { ticket }) => ({
+    ...state,
+    loaded: false
+  })),
+  on(TicketsActions.updateTicket, (state, { ticket }) => ({
+    ...state,
+    loaded: false
+  })),
 
   // on(TicketsApiActions.createTicketSuccess, (state, { ticket }) =>
   //   Object.assign({}, state, { selectedId: ticket.id })

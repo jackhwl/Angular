@@ -20,7 +20,7 @@ import { MatSelectModule } from "@angular/material/select";
 // import { MatGridListModule } from '@angular/material/grid-list';
 // import { MatMenuModule } from '@angular/material/menu';
 // import { MatProgressBarModule } from '@angular/material/progress-bar';
-// import { MatRadioModule } from '@angular/material/radio';
+import { MatRadioModule } from "@angular/material/radio";
 // import { MatSelectModule } from '@angular/material/select';
 // import { MatSliderModule } from '@angular/material/slider';
 // import { MatStepperModule } from '@angular/material/stepper';
@@ -43,7 +43,7 @@ import { MatTableModule } from "@angular/material/table";
     MatButtonToggleModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
 
     // MatAutocompleteModule,
     // MatGridListModule,
@@ -52,7 +52,7 @@ import { MatTableModule } from "@angular/material/table";
     // MatExpansionModule,
     // MatMenuModule,
     // MatProgressBarModule,
-    // MatRadioModule,
+    MatRadioModule
     // MatSelectModule,
     // MatSliderModule,
     // MatTableModule,

@@ -9,6 +9,7 @@ import { TicketsFacade } from "../../services";
   styleUrls: ["./tickets-list.component.scss"]
 })
 export class TicketsListComponent {
+  loaded$: Observable<boolean> = this.ticketsFacade.loaded$;
   tickets$: Observable<TicketVm[]> = this.ticketsFacade.allTicketVms$;
   constructor(private ticketsFacade: TicketsFacade) {}
 }

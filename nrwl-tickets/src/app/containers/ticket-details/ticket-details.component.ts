@@ -12,17 +12,22 @@ import { Ticket, User } from "../../services/backend.service";
 export class TicketDetailsComponent implements OnInit {
   users$: Observable<User[]> = this.ticketsFacade.allUsers$;
 
-  currentTicket: Ticket;
+  currentTicket: Ticket = {
+    id: null,
+    description: "",
+    assigneeId: null,
+    completed: false
+  };
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
   ngOnInit(): void {
     this.ticketsFacade.selectTicketByRoute();
     this.ticketsFacade.selectedTicketByRoute$.subscribe(
-      ticket => (this.currentTicket = { ...ticket })
+      (ticket: Ticket) => (this.currentTicket = { ...ticket })
     );
   }
 
-  saved(ticket) {
+  saved(ticket: Ticket) {
     if (ticket.id !== null && ticket.id !== undefined) {
       this.ticketsFacade.updateTicket(ticket);
     } else {

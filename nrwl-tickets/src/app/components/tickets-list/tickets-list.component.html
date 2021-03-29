@@ -1,22 +1,29 @@
 <mat-card>
   <mat-card-content>
-    <mat-list data-cy="widgets-list">
-      <mat-list-item
-        *ngFor="let ticket of tickets$ | async"
-        attr.data-cy="widget-{{ ticket.id }}-item"
-        class="mat-list-option"
-      >
-        <span matLine attr.data-cy="widget-{{ ticket.id }}-item-title">
-          {{ ticket.id }}
+    <table *ngIf="loaded$ | async; else loading">
+      <tr>
+        <th>Id</th>
+        <th>Assignee</th>
+        <th>Completed</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let ticket of tickets$ | async" class="mat-list-option">
+        <td>{{ ticket.id }}</td>
+        <td>
           <span *ngFor="let user of ticket.assignees">{{ user.name }} </span>
-          {{ ticket.completed }}
-          {{ ticket.description }}
-        </span>
-        <a [routerLink]="['/tickets', ticket.id]" queryParamsHandling="merge"
-          >Edit</a
-        >
-      </mat-list-item>
-    </mat-list>
+        </td>
+        <td>{{ ticket.completed }}</td>
+        <td>{{ ticket.description }}</td>
+        <td>
+          <a [routerLink]="['/tickets', ticket.id]" queryParamsHandling="merge"
+            >Edit</a
+          >
+        </td>
+      </tr>
+    </table>
+
+    <ng-template #loading><h1>Loading...</h1></ng-template>
   </mat-card-content>
 </mat-card>
 <!-- <table mat-table [dataSource]="tickets$ | async">

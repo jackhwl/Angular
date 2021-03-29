@@ -53,7 +53,7 @@ export const getSelected = createSelector(
 export const getSelectedByRoute = createSelector(
   getTicketsEntities,
   selectRouteParams,
-  (entities, { id }) => (id !== null ? entities[id] : emptyTicket)
+  (entities, { id }) => (id in entities ? entities[id] : emptyTicket)
 );
 
 export const getLoaded = createSelector(

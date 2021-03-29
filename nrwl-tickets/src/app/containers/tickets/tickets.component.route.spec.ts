@@ -120,7 +120,7 @@ describe("TicketsComponent (route)", () => {
     );
   });
 
-  it("should call query method with value of q$", fakeAsync(() => {
+  it("should call query method with value of q$", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
     spyOn(component, "query").and.callThrough();
@@ -135,5 +135,5 @@ describe("TicketsComponent (route)", () => {
       expect(component.query).toHaveBeenCalled();
       expect(component.query).toHaveBeenCalledWith("move");
     });
-  }));
+  });
 });

@@ -149,8 +149,8 @@ describe("Tickets Facade", () => {
     );
   });
 
-  it("should dispatch load Tickets action when call getAll method", () => {
-    ticketsFacade.getAll();
+  it("should dispatch load Tickets action when call loadAll method", () => {
+    ticketsFacade.loadAll();
     expect(store.dispatch).toHaveBeenCalledWith(TicketsActions.loadTickets());
   });
 

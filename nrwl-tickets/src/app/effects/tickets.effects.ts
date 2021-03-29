@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { BackendService, Ticket } from "../services/backend.service";
-import { TicketsActions, TicketsApiActions } from "../actions";
 import { switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
+import { createEffect, Actions, ofType } from "@ngrx/effects";
+import { BackendService, Ticket } from "../services/backend.service";
+import { TicketsActions, TicketsApiActions } from "../actions";
 import { selectQueryParam } from "../reducers/router.selectors";
-import { throwError } from "rxjs";
 
 @Injectable()
 export class TicketsEffects {
@@ -86,12 +85,13 @@ export class TicketsEffects {
       ofType(TicketsActions.loadTicket),
       fetch({
         run: action =>
-          this.ticketService.ticket(action.ticket.id).pipe(
-            tap(t => console.log("t=", t)),
-            switchMap((ticket: Ticket) => [
-              TicketsApiActions.loadTicketSuccess({ ticket })
-            ])
-          ),
+          this.ticketService
+            .ticket(action.ticket.id)
+            .pipe(
+              switchMap((ticket: Ticket) => [
+                TicketsApiActions.loadTicketSuccess({ ticket })
+              ])
+            ),
         onError: (action, error) =>
           TicketsApiActions.loadTicketFailure({ error })
       })
