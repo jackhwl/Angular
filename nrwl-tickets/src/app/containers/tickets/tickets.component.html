@@ -1,11 +1,5 @@
 <div class="component-container">
-  <input
-    type="text"
-    placeholder="Search"
-    name="querytodo"
-    [ngModel]="q$ | async"
-    (ngModelChange)="query($event)"
-  />
+  <input type="text" placeholder="Search" name="querytodo" [formControl]="qb" />
   (Enter 'error' to trigger an exception)
   <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
     >Add New Ticket</a
