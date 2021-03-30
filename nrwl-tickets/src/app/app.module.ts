@@ -14,6 +14,7 @@ import { routerReducer, StoreRouterConnectingModule } from "@ngrx/router-store";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
     AppRoutingModule,
     StoreModule.forRoot({ router: routerReducer }),
     EffectsModule.forRoot([]),

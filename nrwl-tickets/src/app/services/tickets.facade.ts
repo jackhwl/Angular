@@ -40,10 +40,9 @@ export class TicketsFacade {
   getMutations(): Observable<Action> {
     return this.actions$.pipe(
       filter(
-        (action: Action) =>
-          action.type === routerNavigatedAction.type ||
-          action.type === TicketsApiActions.createTicketSuccess.type ||
-          action.type === TicketsApiActions.updateTicketSuccess.type
+        (action: Action) => action.type === routerNavigatedAction.type //||
+        //action.type === TicketsApiActions.createTicketSuccess.type ||
+        //action.type === TicketsApiActions.updateTicketSuccess.type
       )
     );
   }

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BackendService } from "./services/backend.service";
 import { TicketsComponentsModule } from "./components";
 import { StoreModule } from "@ngrx/store";
@@ -17,6 +17,7 @@ import { UsersEffects } from "./effects/users.effects";
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     TicketsComponentsModule,
     TicketsRoutingModule,
     StoreModule.forFeature(

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { switchMap, tap, withLatestFrom } from "rxjs/operators";
+import { map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService, Ticket } from "../services/backend.service";
@@ -23,7 +23,7 @@ export class TicketsEffects {
           this.ticketService
             .tickets()
             .pipe(
-              switchMap((tickets: Ticket[]) => [
+              mergeMap((tickets: Ticket[]) => [
                 TicketsApiActions.loadTicketsSuccess({ tickets })
               ])
             ),
