@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student';
 import { StudentsFacade, StudentsStoreFacade } from '../services';
 import { Observable } from 'rxjs';
+import { ConfirmationDialogComponent } from './confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'vi-students',
@@ -15,7 +17,10 @@ export class StudentsComponent implements OnInit {
 
   primaryColor = 'red';
 
-  constructor(private studentsFacade: StudentsFacade) {}
+  constructor(
+    private studentsFacade: StudentsFacade,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.reset();
@@ -44,7 +49,21 @@ export class StudentsComponent implements OnInit {
   }
 
   deleteStudent(student) {
-    this.studentsFacade.deleteStudent(student);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Save',
+          cancel: 'No'
+        }
+      }
+    });
+    //if(confirm("Are you sure to delete "))
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.studentsFacade.deleteStudent(student);
+      }
+    });
   }
 
   // getStudents() {
