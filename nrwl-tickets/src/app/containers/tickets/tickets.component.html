@@ -1,5 +1,10 @@
 <div class="component-container">
-  <input type="text" placeholder="Search" name="querytodo" [formControl]="qb" />
+  <input
+    type="text"
+    placeholder="Search"
+    name="querytodo"
+    [formControl]="search"
+  />
   (Enter 'error' to trigger an exception)
   <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
     >Add New Ticket</a

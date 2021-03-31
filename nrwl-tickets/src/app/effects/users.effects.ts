@@ -5,6 +5,7 @@ import { BackendService, User } from "../services/backend.service";
 import { UsersActions, UsersApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { routerNavigatedAction } from "@ngrx/router-store";
 
 @Injectable()
 export class UsersEffects {
@@ -12,7 +13,7 @@ export class UsersEffects {
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UsersActions.loadUsers),
+      ofType(routerNavigatedAction),
       fetch({
         run: action =>
           this.userService

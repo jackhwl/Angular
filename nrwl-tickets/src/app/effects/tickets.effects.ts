@@ -6,6 +6,7 @@ import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService, Ticket } from "../services/backend.service";
 import { TicketsActions, TicketsApiActions } from "../actions";
 import { selectQueryParam } from "../reducers/router.selectors";
+import { routerNavigatedAction } from "@ngrx/router-store";
 
 @Injectable()
 export class TicketsEffects {
@@ -59,7 +60,7 @@ export class TicketsEffects {
 
   loadFilterTicketsByRoute$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.loadFilterTicketsByRoute),
+      ofType(routerNavigatedAction),
       withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
       fetch({
         run: (action, q) => {

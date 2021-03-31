@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { filter, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { combineLatest, Observable } from "rxjs";
-import { routerNavigatedAction } from "@ngrx/router-store";
 import { Action, ActionsSubject, select, Store } from "@ngrx/store";
 
 import { TicketVm } from "../models/ticketvm";
@@ -9,11 +8,13 @@ import { Ticket, User } from "./backend.service";
 import * as UsersSelectors from "../reducers/users.selectors";
 import { selectQueryParam } from "../reducers/router.selectors";
 import * as TicketsSelectors from "../reducers/tickets.selectors";
-import { TicketsActions, TicketsApiActions, UsersActions } from "../actions";
+import { TicketsActions, UsersActions } from "../actions";
 
 @Injectable()
 export class TicketsFacade {
-  q$: Observable<string> = this.store.pipe(select(selectQueryParam("q")));
+  routerQueryParam$: Observable<string> = this.store.pipe(
+    select(selectQueryParam("q"))
+  );
   error$: Observable<string | null> = this.store.pipe(
     select(TicketsSelectors.getError)
   );
@@ -23,7 +24,7 @@ export class TicketsFacade {
   allUsers$: Observable<User[]> = this.store.pipe(
     select(UsersSelectors.getAllUsers)
   );
-  mutations$: Observable<Action> = this.getMutations();
+  //mutations$: Observable<Action> = this.getMutations();
   allTickets$: Observable<Ticket[]> = this.store.pipe(
     select(TicketsSelectors.getAllTickets)
   );
@@ -37,15 +38,15 @@ export class TicketsFacade {
 
   constructor(private store: Store<{}>, private actions$: ActionsSubject) {}
 
-  getMutations(): Observable<Action> {
-    return this.actions$.pipe(
-      filter(
-        (action: Action) => action.type === routerNavigatedAction.type //||
-        //action.type === TicketsApiActions.createTicketSuccess.type ||
-        //action.type === TicketsApiActions.updateTicketSuccess.type
-      )
-    );
-  }
+  // getMutations(): Observable<Action> {
+  //   return this.actions$.pipe(
+  //     filter(
+  //       (action: Action) => action.type === routerNavigatedAction.type //||
+  //       //action.type === TicketsApiActions.createTicketSuccess.type ||
+  //       //action.type === TicketsApiActions.updateTicketSuccess.type
+  //     )
+  //   );
+  // }
 
   getAllTicketVms(): Observable<TicketVm[]> {
     return combineLatest([this.allTickets$, this.allUsers$]).pipe(
