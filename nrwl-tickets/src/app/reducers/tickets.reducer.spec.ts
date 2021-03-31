@@ -3,6 +3,13 @@ import { TicketsActions, TicketsApiActions } from "../actions";
 import { createAction } from "@ngrx/store";
 import { Action } from "@ngrx/store";
 
+const ticket = {
+  id: null,
+  description: "new ticket",
+  assigneeId: 111,
+  completed: false
+};
+
 const tickets = [
   {
     id: 0,
@@ -123,6 +130,26 @@ describe("Tickets Reducer", () => {
       const state = fromTickets.ticketsReducer(undefined, action);
 
       expect(state).toBe(initialTicketsState);
+    });
+  });
+
+  describe("create ticket action", () => {
+    it("should set the loaded to false", () => {
+      const { initialTicketsState } = fromTickets;
+      const action = TicketsActions.createTicket({ ticket });
+      const state = fromTickets.ticketsReducer(initialTicketsState, action);
+
+      expect(state.loaded).toBe(false);
+    });
+  });
+
+  describe("update ticket action", () => {
+    it("should set the loaded to false", () => {
+      const { initialTicketsState } = fromTickets;
+      const action = TicketsActions.updateTicket({ ticket: tickets[1] });
+      const state = fromTickets.ticketsReducer(initialTicketsState, action);
+
+      expect(state.loaded).toBe(false);
     });
   });
 

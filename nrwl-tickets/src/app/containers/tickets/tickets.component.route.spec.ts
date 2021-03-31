@@ -120,23 +120,65 @@ describe("TicketsComponent (route)", () => {
     );
   });
 
-  it("should call query method with value of q$", () => {
+  it("should navigate with value of search box 1", fakeAsync(() => {
+    const search = "move";
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
-    //spyOn(component, "query").and.callThrough();
-    //component.search.setValue("move");
+    component.ngOnInit();
+    component.search.setValue(search);
+
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      tick(200);
+      fixture.detectChanges();
+      expect(component.search.value).toEqual(search);
+      const actualPath = routerSpy.navigate.calls.mostRecent().args[1]
+        .queryParams.q;
+      const expectedPath = search;
+      expect(actualPath).toBe(expectedPath);
+      expect(routerSpy.navigate).toHaveBeenCalled();
+    });
+  }));
+
+  it("should navigate with value of search box 2", fakeAsync(() => {
+    const search = "move";
+    const fixture = TestBed.createComponent(TicketsComponent);
+    const component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       const queryBox = fixture.debugElement.query(
         By.css('input[name="querytodo"]')
       ).nativeElement;
-      queryBox.value = "move"; //.dispatchEvent(new Event("input"));
+      queryBox.value = search;
+      queryBox.dispatchEvent(new Event("input"));
       tick(200);
-      const actualPath = routerSpy.navigate.calls
-        .mostRecent()
-        .args[0][0].join("/");
-      const expectedPath = "/tickets?q=move";
+      fixture.detectChanges();
+      expect(component.search.value).toEqual(search);
+      const actualPath = routerSpy.navigate.calls.mostRecent().args[1]
+        .queryParams.q;
+      const expectedPath = search;
       expect(actualPath).toBe(expectedPath);
+      expect(routerSpy.navigate).toHaveBeenCalled();
     });
-  });
+  }));
+
+  it("should navigate with value of routerQueryParam", fakeAsync(() => {
+    const search = "move";
+    const fixture = TestBed.createComponent(TicketsComponent);
+    const component = fixture.componentInstance;
+    spyOn(component.search, "setValue").and.callThrough();
+    component.ngOnInit();
+    ticketsFacade.routerQueryParam$ = of(search);
+    fixture.detectChanges();
+    tick(200);
+    fixture.whenStable().then(() => {
+      const actualPath = routerSpy.navigate.calls.mostRecent().args[1]
+        .queryParams.q;
+      const expectedPath = search;
+      expect(actualPath).toBe(expectedPath);
+      expect(component.search.setValue).toHaveBeenCalled();
+      expect(component.search.setValue).toHaveBeenCalledWith(search);
+    });
+  }));
 });
