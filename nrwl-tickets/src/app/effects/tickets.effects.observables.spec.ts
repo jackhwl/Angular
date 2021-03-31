@@ -6,7 +6,7 @@ import { TicketsEffects } from "./tickets.effects";
 import { TicketsActions, TicketsApiActions } from "../actions";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { routerReducer } from "@ngrx/router-store";
+import { routerNavigatedAction, routerReducer } from "@ngrx/router-store";
 
 describe("Tickets Effects (Observables)", () => {
   const newTicket = {
@@ -117,10 +117,10 @@ describe("Tickets Effects (Observables)", () => {
     });
   });
 
-  describe("loadFilterTicketsByRoute$", () => {
+  describe("routerNavigatedAction$", () => {
     it("should return a stream with success action", done => {
       const spy = spyOn(ticketService, "filteredTickets").and.callThrough();
-      actions$ = of(TicketsActions.loadFilterTicketsByRoute());
+      actions$ = of(routerNavigatedAction);
       effects.loadFilterTicketsByRoute$.subscribe(res => {
         expect(res).toEqual(
           TicketsApiActions.loadFilterTicketsSuccess({ tickets })
@@ -133,7 +133,7 @@ describe("Tickets Effects (Observables)", () => {
     it("should fail and return an action with the error", done => {
       const error = new Error("some error") as any;
       const spy = spyOn(ticketService, "filteredTickets").and.throwError(error);
-      actions$ = of(TicketsActions.loadFilterTicketsByRoute());
+      actions$ = of(routerNavigatedAction);
       effects.loadFilterTicketsByRoute$.subscribe(res => {
         expect(res).toEqual(
           TicketsApiActions.loadFilterTicketsFailure({ error })

@@ -19,7 +19,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
   ngOnInit() {
-    this.searchSetSub = this.ticketsFacade.routerQueryParam$.subscribe(_ =>
+    this.searchSetSub = this.ticketsFacade.routerQueryParam$?.subscribe(_ =>
       this.search.setValue(_)
     );
     this.searchValueChangesSub = this.search.valueChanges

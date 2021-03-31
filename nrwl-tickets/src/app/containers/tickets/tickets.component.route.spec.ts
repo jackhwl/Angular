@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsFacade } from "../../services";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Directive({
   selector: "[routerLink]"
@@ -62,7 +62,7 @@ describe("TicketsComponent (route)", () => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
-      imports: [FormsModule],
+      imports: [FormsModule, ReactiveFormsModule],
       providers: [
         { provide: TicketsFacade, useValue: ticketsFacadeStub },
         { provide: Router, useValue: routerSpy }
@@ -123,17 +123,20 @@ describe("TicketsComponent (route)", () => {
   it("should call query method with value of q$", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
-    spyOn(component, "query").and.callThrough();
-    component.q$ = of("move");
+    //spyOn(component, "query").and.callThrough();
+    //component.search.setValue("move");
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       const queryBox = fixture.debugElement.query(
         By.css('input[name="querytodo"]')
       ).nativeElement;
-      queryBox.dispatchEvent(new Event("input"));
+      queryBox.value = "move"; //.dispatchEvent(new Event("input"));
       tick(200);
-      expect(component.query).toHaveBeenCalled();
-      expect(component.query).toHaveBeenCalledWith("move");
+      const actualPath = routerSpy.navigate.calls
+        .mostRecent()
+        .args[0][0].join("/");
+      const expectedPath = "/tickets?q=move";
+      expect(actualPath).toBe(expectedPath);
     });
   });
 });
