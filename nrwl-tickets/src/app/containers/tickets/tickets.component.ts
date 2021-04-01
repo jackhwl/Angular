@@ -18,7 +18,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
 
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.searchSetSub = this.ticketsFacade.routerQueryParam$?.subscribe(_ =>
       this.search.setValue(_)
     );
@@ -35,7 +35,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.searchSetSub) this.searchSetSub.unsubscribe();
     if (this.searchValueChangesSub) this.searchValueChangesSub.unsubscribe();
   }

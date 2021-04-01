@@ -20,14 +20,14 @@ export class TicketDetailsComponent implements OnInit {
   };
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.ticketsFacade.selectTicketByRoute();
     this.ticketsFacade.selectedTicketByRoute$.subscribe(
       (ticket: Ticket) => (this.currentTicket = { ...ticket })
     );
   }
 
-  saved(ticket: Ticket) {
+  saved(ticket: Ticket): void {
     if (ticket.id !== null && ticket.id !== undefined) {
       this.ticketsFacade.updateTicket(ticket);
     } else {
@@ -36,7 +36,7 @@ export class TicketDetailsComponent implements OnInit {
     this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
   }
 
-  cancelled() {
+  cancelled(): void {
     this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
   }
 }

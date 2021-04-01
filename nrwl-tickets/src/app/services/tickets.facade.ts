@@ -59,51 +59,51 @@ export class TicketsFacade {
     );
   }
 
-  loadAll() {
+  loadAll(): void {
     this.dispatch(TicketsActions.loadTickets());
   }
 
-  selectTicketById(selectedId: string) {
+  selectTicketById(selectedId: string): void {
     this.dispatch(TicketsActions.selectTicketById({ selectedId }));
   }
 
-  selectTicket(ticket: Ticket) {
+  selectTicket(ticket: Ticket): void {
     this.dispatch(TicketsActions.selectTicket({ ticket }));
   }
 
-  selectTicketByRoute() {
+  selectTicketByRoute(): void {
     this.dispatch(TicketsActions.selectTicketByRoute());
   }
 
-  loadTickets() {
+  loadTickets(): void {
     this.dispatch(TicketsActions.loadTickets());
   }
 
-  loadFilterTickets(queryStr: string) {
+  loadFilterTickets(queryStr: string): void {
     this.dispatch(TicketsActions.loadFilterTickets({ queryStr }));
   }
 
-  loadFilterTicketsByRoute() {
+  loadFilterTicketsByRoute(): void {
     this.dispatch(TicketsActions.loadFilterTicketsByRoute());
   }
 
-  loadUsers() {
+  loadUsers(): void {
     this.dispatch(UsersActions.loadUsers());
   }
 
-  createTicket(ticket: Ticket) {
+  createTicket(ticket: Ticket): void {
     this.dispatch(TicketsActions.createTicket({ ticket }));
   }
 
-  updateTicket(ticket: Ticket) {
+  updateTicket(ticket: Ticket): void {
     this.dispatch(TicketsActions.updateTicket({ ticket }));
   }
 
-  deleteTicket(ticket: Ticket) {
+  deleteTicket(ticket: Ticket): void {
     this.dispatch(TicketsActions.deleteTicket({ ticket }));
   }
 
-  dispatch(action: Action) {
+  dispatch(action: Action): void {
     this.store.dispatch(action);
   }
 }
