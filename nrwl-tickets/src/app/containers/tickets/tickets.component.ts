@@ -11,7 +11,7 @@ import { TicketsFacade } from "../../services";
   styleUrls: ["./tickets.component.css"]
 })
 export class TicketsComponent implements OnInit, OnDestroy {
-  error$: Observable<string | null> = this.ticketsFacade.error$;
+  error$ = this.ticketsFacade.error$;
   searchSetSub: Subscription | undefined;
   searchValueChangesSub: Subscription | undefined;
   search = new FormControl("");

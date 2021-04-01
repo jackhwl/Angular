@@ -10,7 +10,7 @@ import { Ticket, User } from "../../services/backend.service";
   styleUrls: ["./ticket-details.component.scss"]
 })
 export class TicketDetailsComponent implements OnInit {
-  users$: Observable<User[]> = this.ticketsFacade.allUsers$;
+  users$ = this.ticketsFacade.allUsers$;
 
   currentTicket: Ticket = {
     id: null,
@@ -20,7 +20,7 @@ export class TicketDetailsComponent implements OnInit {
   };
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.ticketsFacade.selectTicketByRoute();
     this.ticketsFacade.selectedTicketByRoute$.subscribe(
       (ticket: Ticket) => (this.currentTicket = { ...ticket })

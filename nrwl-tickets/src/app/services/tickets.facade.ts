@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { combineLatest, Observable } from "rxjs";
-import { Action, ActionsSubject, select, Store } from "@ngrx/store";
+import { Action, select, Store } from "@ngrx/store";
 
 import { TicketVm } from "../models/ticketvm";
 import { Ticket, User } from "./backend.service";
@@ -36,7 +36,7 @@ export class TicketsFacade {
     select(TicketsSelectors.getSelectedByRoute)
   );
 
-  constructor(private store: Store<{}>, private actions$: ActionsSubject) {}
+  constructor(private store: Store<{}>) {}
 
   // getMutations(): Observable<Action> {
   //   return this.actions$.pipe(
