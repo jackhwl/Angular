@@ -1,0 +1,30 @@
+<div class="component-container">
+  <input
+    type="text"
+    placeholder="Search"
+    name="querytodo"
+    [formControl]="search"
+  />
+  (Enter 'error' to trigger an exception)
+  <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
+    >Add New Ticket</a
+  >
+  <div style="color: red;" *ngIf="error$ | async">
+    error:{{ error$ | async | json }}
+  </div>
+  <router-outlet></router-outlet>
+  <!-- <vi-tickets-list
+      *ngIf="!(selectedTicket$ | async)"
+      [tickets]="tickets$ | async"
+      (selected)="selecteTicket($event)"
+      (deleted)="deleteTicket($event)"
+    >
+    </vi-tickets-list>
+    <vi-ticket-details
+      *ngIf="selectedTicket$ | async"
+      [ticket]="selectedTicket$ | async"
+      (saved)="saveTicket($event)"
+      (cancelled)="reset()"
+    >
+    </vi-ticket-details> -->
+</div>
