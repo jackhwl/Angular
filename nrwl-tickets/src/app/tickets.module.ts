@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { BackendService } from "./services/backend.service";
-import { TicketsComponentsModule } from "./components";
+import { TicketsComponentsModule } from "./components/TicketsComponentsModule";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import * as fromTicketModule from "./reducers";
@@ -16,6 +16,7 @@ import { UsersEffects } from "./effects/users.effects";
   declarations: [TicketsComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     TicketsComponentsModule,
     TicketsRoutingModule,
     StoreModule.forFeature(
