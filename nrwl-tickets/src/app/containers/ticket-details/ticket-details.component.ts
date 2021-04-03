@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 import { TicketsFacade } from "../../services";
 import { Ticket, User } from "../../services/backend.service";
 
@@ -12,19 +11,7 @@ import { Ticket, User } from "../../services/backend.service";
 })
 export class TicketDetailsComponent implements OnInit {
   users$ = this.ticketsFacade.allUsers$;
-  //currentTicket$ = this.ticketsFacade.selectedTicketByRoute$;
-  //detailForm: FormGroup;
-  currentTicket: Ticket = {
-    id: null,
-    description: "",
-    assigneeId: null,
-    completed: false
-  };
-  detailForm = new FormGroup({
-    assigneeId: new FormControl(this.currentTicket.assigneeId),
-    completed: new FormControl(this.currentTicket.completed),
-    description: new FormControl(this.currentTicket.description)
-  });
+  detailForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -33,19 +20,24 @@ export class TicketDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.detailForm = this.fb.group({
-    //   assigneeId: [""],
-    //   completed: [""],
-    //   description: [""]
-    // });
+    this.detailForm = this.fb.group({
+      status: [""],
+      id: [""],
+      assigneeId: [""],
+      completed: [""],
+      description: [""]
+    });
 
-    //this.ticketsFacade.selectTicketByRoute();
     this.ticketsFacade.selectedTicketByRoute$.subscribe((ticket: Ticket) =>
-      this.detailForm.patchValue(ticket)
+      this.detailForm.patchValue({
+        ...ticket,
+        status: ticket.id === null ? "New Ticket" : "Edit Ticket"
+      })
     );
   }
 
-  saved(ticket: Ticket): void {
+  onSubmit(): void {
+    const ticket = this.detailForm.value as Ticket;
     if (ticket.id !== null && ticket.id !== undefined) {
       this.ticketsFacade.updateTicket(ticket);
     } else {
