@@ -80,27 +80,21 @@ describe("TicketsComponent (route)", () => {
     //tick();
     fixture.detectChanges();
     //tick();
-    fixture.detectChanges();
+    //fixture.detectChanges();
   });
 
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
 
-  function setInputValue(selector: string, value: string) {
-    fixture.detectChanges();
-    tick();
-
-    let input = fixture.debugElement.query(By.css(selector)).nativeElement;
-    input.value = value;
-    input.dispatchEvent(new Event("input"));
-    tick();
-  }
-  function sendInput(inputElement: any, text: string) {
-    inputElement.value = text;
-    dispatchEvent(new Event("change"));
-    fixture.detectChanges();
-    return fixture.whenStable();
+  function createNewEvent(
+    eventName: string,
+    bubbles = false,
+    cancelable = false
+  ) {
+    let evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(eventName, bubbles, cancelable, null);
+    return evt;
   }
 
   it("navigates to tickets/new when addNew link is clicked", () => {
@@ -121,64 +115,50 @@ describe("TicketsComponent (route)", () => {
   });
 
   it("should navigate with value of search box 1", fakeAsync(() => {
-    const search = "move";
+    const searchKey = "move";
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
     component.ngOnInit();
-    component.search.setValue(search);
+    component.search.setValue(searchKey);
+    tick(200);
 
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      tick(200);
-      fixture.detectChanges();
-      expect(component.search.value).toEqual(search);
-      const actualPath = routerSpy.navigate.calls.mostRecent().args[1]
-        .queryParams.q;
-      const expectedPath = search;
-      expect(actualPath).toBe(expectedPath);
-      expect(routerSpy.navigate).toHaveBeenCalled();
-    });
+    expect(component.search.value).toEqual(searchKey);
+    const actualPath = routerSpy.navigate.calls.mostRecent().args[1].queryParams
+      .q;
+    const expectedPath = searchKey;
+    expect(actualPath).toBe(expectedPath);
+    expect(routerSpy.navigate).toHaveBeenCalled();
   }));
 
   it("should navigate with value of search box 2", fakeAsync(() => {
-    const search = "move";
-    const fixture = TestBed.createComponent(TicketsComponent);
-    const component = fixture.componentInstance;
+    const searchKey = "move";
     component.ngOnInit();
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      const queryBox = fixture.debugElement.query(
-        By.css('input[name="querytodo"]')
-      ).nativeElement;
-      queryBox.value = search;
-      queryBox.dispatchEvent(new Event("input"));
-      tick(200);
-      fixture.detectChanges();
-      expect(component.search.value).toEqual(search);
-      const actualPath = routerSpy.navigate.calls.mostRecent().args[1]
-        .queryParams.q;
-      const expectedPath = search;
-      expect(actualPath).toBe(expectedPath);
-      expect(routerSpy.navigate).toHaveBeenCalled();
-    });
+
+    const queryBox = fixture.nativeElement.querySelector("input");
+    queryBox.value = searchKey;
+    const event = createNewEvent("input");
+    queryBox.dispatchEvent(event);
+    tick(200);
+
+    expect(component.search.value).toEqual(searchKey);
+    const actualPath = routerSpy.navigate.calls.mostRecent().args[1].queryParams
+      .q;
+    const expectedPath = searchKey;
+    expect(actualPath).toBe(expectedPath);
+    expect(routerSpy.navigate).toHaveBeenCalled();
   }));
 
   it("should navigate with value of routerQueryParam", fakeAsync(() => {
     const search = "move";
-    const fixture = TestBed.createComponent(TicketsComponent);
-    const component = fixture.componentInstance;
     spyOn(component.search, "setValue").and.callThrough();
-    component.ngOnInit();
     ticketsFacade.routerQueryParam$ = of(search);
-    fixture.detectChanges();
+    component.ngOnInit();
     tick(200);
-    fixture.whenStable().then(() => {
-      const actualPath = routerSpy.navigate.calls.mostRecent().args[1]
-        .queryParams.q;
-      const expectedPath = search;
-      expect(actualPath).toBe(expectedPath);
-      expect(component.search.setValue).toHaveBeenCalled();
-      expect(component.search.setValue).toHaveBeenCalledWith(search);
-    });
+    const actualPath = routerSpy.navigate.calls.mostRecent().args[1].queryParams
+      .q;
+    const expectedPath = search;
+    expect(actualPath).toBe(expectedPath);
+    expect(component.search.setValue).toHaveBeenCalled();
+    expect(component.search.setValue).toHaveBeenCalledWith(search);
   }));
 });

@@ -28,7 +28,7 @@ getTestBed().initTestEnvironment(
 const context = require.context(
   "./",
   true,
-  /\/app\/containers\/tickets\/tickets\.component\.reactive\.spec\.ts$/
+  /\/app\/containers\/tickets\/tickets\.component\.route\.spec\.ts$/
 );
 // And load the modules.
 context.keys().map(context);
