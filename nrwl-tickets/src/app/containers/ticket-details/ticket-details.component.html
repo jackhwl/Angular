@@ -7,11 +7,11 @@
       New Ticket
     </ng-template>
   </mat-card-title>
-  <form #form="ngForm" (submit)="saved(currentTicket)">
+  <form [formGroup]="detailForm" (ngSubmit)="saved(currentTicket)">
     <mat-card-content>
       <mat-form-field class="full-width">
         <mat-label>Assignee</mat-label>
-        <mat-select name="AssigneeId" [(ngModel)]="currentTicket.assigneeId">
+        <mat-select name="AssigneeId" formControlName="assigneeId">
           <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{
             user.name
           }}</mat-option>
@@ -22,7 +22,7 @@
       <mat-radio-group
         aria-label="Select an option"
         name="Completed"
-        [(ngModel)]="currentTicket.completed"
+        formControlName="completed"
       >
         <mat-radio-button [value]="false">Not finished</mat-radio-button>
         <mat-radio-button [value]="true">Completed</mat-radio-button>
@@ -37,7 +37,7 @@
         <mat-label>Description</mat-label>
         <textarea
           matInput
-          [(ngModel)]="currentTicket.description"
+          formControlName="description"
           type="text"
           name="Description"
         ></textarea>

@@ -16,8 +16,6 @@ import { UsersEffects } from "./effects/users.effects";
   declarations: [TicketsComponent],
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     TicketsComponentsModule,
     TicketsRoutingModule,
     StoreModule.forFeature(
