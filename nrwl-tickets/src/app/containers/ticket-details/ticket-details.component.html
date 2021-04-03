@@ -44,13 +44,7 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        id="save"
-        [disabled]="form.invalid"
-        type="submit"
-        mat-raised-button
-        color="primary"
-      >
+      <button id="save" type="submit" mat-raised-button color="primary">
         Save
       </button>
       <button id="cancel" type="button" mat-raised-button (click)="cancelled()">
@@ -59,3 +53,4 @@
     </mat-card-actions>
   </form>
 </mat-card>
+{{ currentTicket | json }}

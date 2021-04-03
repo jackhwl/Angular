@@ -12,18 +12,19 @@ import { Ticket, User } from "../../services/backend.service";
 })
 export class TicketDetailsComponent implements OnInit {
   users$ = this.ticketsFacade.allUsers$;
-  detailForm: FormGroup;
+  //currentTicket$ = this.ticketsFacade.selectedTicketByRoute$;
+  //detailForm: FormGroup;
   currentTicket: Ticket = {
     id: null,
     description: "",
     assigneeId: null,
     completed: false
   };
-  // detailForm = new FormGroup({
-  //   assigneeId: new FormControl(this.currentTicket.assigneeId),
-  //   completed: new FormControl(this.currentTicket.completed),
-  //   description: new FormControl(this.currentTicket.description)
-  // });
+  detailForm = new FormGroup({
+    assigneeId: new FormControl(this.currentTicket.assigneeId),
+    completed: new FormControl(this.currentTicket.completed),
+    description: new FormControl(this.currentTicket.description)
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -32,15 +33,15 @@ export class TicketDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.detailForm = this.fb.group({
-      assigneeId: [""],
-      completed: [""],
-      description: [""]
-    });
+    // this.detailForm = this.fb.group({
+    //   assigneeId: [""],
+    //   completed: [""],
+    //   description: [""]
+    // });
 
-    this.ticketsFacade.selectTicketByRoute();
-    this.ticketsFacade.selectedTicketByRoute$.subscribe(
-      (ticket: Ticket) => (this.currentTicket = { ...ticket })
+    //this.ticketsFacade.selectTicketByRoute();
+    this.ticketsFacade.selectedTicketByRoute$.subscribe((ticket: Ticket) =>
+      this.detailForm.patchValue(ticket)
     );
   }
 
