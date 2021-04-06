@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { TicketsFacade } from "../../services";
 import { Ticket, User } from "../../services/backend.service";
@@ -11,7 +11,13 @@ import { Ticket, User } from "../../services/backend.service";
 })
 export class TicketDetailsComponent implements OnInit {
   users$ = this.ticketsFacade.allUsers$;
-  detailForm: FormGroup;
+  detailForm = this.fb.group({
+    title: [""],
+    id: [""],
+    assigneeId: ["", Validators.required],
+    completed: ["", Validators.required],
+    description: ["", Validators.required]
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -20,18 +26,10 @@ export class TicketDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.detailForm = this.fb.group({
-      status: [""],
-      id: [""],
-      assigneeId: [""],
-      completed: [""],
-      description: [""]
-    });
-
     this.ticketsFacade.selectedTicketByRoute$.subscribe((ticket: Ticket) =>
       this.detailForm.patchValue({
         ...ticket,
-        status: ticket.id === null ? "New Ticket" : "Edit Ticket"
+        title: ticket.id === null ? "New Ticket" : "Edit Ticket"
       })
     );
   }
