@@ -1,5 +1,5 @@
 <div class="component-container">
-  <div *ngIf="listMode">
+  <div *ngIf="(routerRouteParamId$ | async) === undefined">
     <input
       type="text"
       placeholder="Search"

@@ -15,7 +15,7 @@ import { TicketsActions, UsersActions } from "../actions";
 
 @Injectable()
 export class TicketsFacade {
-  routerRouteParam$: Observable<string> = this.store.pipe(
+  routerRouteParamId$: Observable<string> = this.store.pipe(
     select(selectRouteParam("id"))
   );
   routerQueryParam$: Observable<string> = this.store.pipe(
