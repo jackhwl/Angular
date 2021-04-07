@@ -6,12 +6,18 @@ import { Action, select, Store } from "@ngrx/store";
 import { TicketVm } from "../models/ticketvm";
 import { Ticket, User } from "./backend.service";
 import * as UsersSelectors from "../reducers/users.selectors";
-import { selectQueryParam } from "../reducers/router.selectors";
+import {
+  selectQueryParam,
+  selectRouteParam
+} from "../reducers/router.selectors";
 import * as TicketsSelectors from "../reducers/tickets.selectors";
 import { TicketsActions, UsersActions } from "../actions";
 
 @Injectable()
 export class TicketsFacade {
+  routerRouteParam$: Observable<string> = this.store.pipe(
+    select(selectRouteParam("id"))
+  );
   routerQueryParam$: Observable<string> = this.store.pipe(
     select(selectQueryParam("q"))
   );

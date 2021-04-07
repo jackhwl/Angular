@@ -3,6 +3,7 @@ import { FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 import { debounceTime, map } from "rxjs/operators";
+import { Ticket } from "src/app/services/backend.service";
 import { TicketsFacade } from "../../services";
 
 @Component({
@@ -12,9 +13,11 @@ import { TicketsFacade } from "../../services";
 })
 export class TicketsComponent implements OnInit, OnDestroy {
   error$ = this.ticketsFacade.error$;
+  routeSub: Subscription | undefined;
   searchSetSub: Subscription | undefined;
   searchValueChangesSub: Subscription | undefined;
   search = new FormControl("");
+  listMode = true;
 
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
@@ -33,9 +36,13 @@ export class TicketsComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe();
+    this.routeSub = this.ticketsFacade.routerRouteParam$.subscribe(
+      id => (this.listMode = id === undefined)
+    );
   }
 
   ngOnDestroy(): void {
+    if (this.routeSub) this.routeSub.unsubscribe();
     if (this.searchSetSub) this.searchSetSub.unsubscribe();
     if (this.searchValueChangesSub) this.searchValueChangesSub.unsubscribe();
   }

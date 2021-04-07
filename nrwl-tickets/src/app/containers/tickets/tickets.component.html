@@ -1,14 +1,16 @@
 <div class="component-container">
-  <input
-    type="text"
-    placeholder="Search"
-    name="querytodo"
-    [formControl]="search"
-  />
-  (Enter 'error' to trigger an exception)
-  <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
-    >Add New Ticket</a
-  >
+  <div *ngIf="listMode">
+    <input
+      type="text"
+      placeholder="Search"
+      name="querytodo"
+      [formControl]="search"
+    />
+    (Enter 'error' to trigger an exception)
+    <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
+      >Add New Ticket</a
+    >
+  </div>
   <div style="color: red;" *ngIf="error$ | async">
     error:{{ error$ | async | json }}
   </div>
