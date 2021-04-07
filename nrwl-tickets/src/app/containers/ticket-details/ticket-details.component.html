@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>
-    {{ detailForm.get("title").value }}
+    {{ title.value }}
   </mat-card-title>
   <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
     <input type="hidden" formControlName="id" />

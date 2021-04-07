@@ -34,6 +34,10 @@ export class TicketDetailsComponent implements OnInit {
     );
   }
 
+  get title() {
+    return this.detailForm.get("title");
+  }
+
   onSubmit(): void {
     const ticket = this.detailForm.value as Ticket;
     if (ticket.id !== null && ticket.id !== undefined) {
