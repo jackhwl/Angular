@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -7,7 +8,8 @@ import { Ticket, User } from "../../services/backend.service";
 @Component({
   selector: "vi-ticket-details",
   templateUrl: "./ticket-details.component.html",
-  styleUrls: ["./ticket-details.component.scss"]
+  styleUrls: ["./ticket-details.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketDetailsComponent implements OnInit {
   users$ = this.ticketsFacade.allUsers$;

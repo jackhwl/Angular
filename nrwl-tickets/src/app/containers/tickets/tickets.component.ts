@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit
+} from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
@@ -8,7 +13,8 @@ import { TicketsFacade } from "../../services";
 @Component({
   selector: "vi-tickets-root",
   templateUrl: "./tickets.component.html",
-  styleUrls: ["./tickets.component.css"]
+  styleUrls: ["./tickets.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketsComponent implements OnInit, OnDestroy {
   error$ = this.ticketsFacade.error$;
