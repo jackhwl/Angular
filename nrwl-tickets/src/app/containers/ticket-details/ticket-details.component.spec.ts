@@ -1,19 +1,10 @@
-import {
-  fakeAsync,
-  inject,
-  TestBed,
-  tick,
-  waitForAsync
-} from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-import { FormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import { Router, RouterLinkWithHref } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { of } from "rxjs";
 import { MaterialModule } from "../../material.module";
-//import { TicketsComponent } from "./tickets.component";
-//import { TicketsListComponent } from "../../components/tickets-list/tickets-list.component";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
 import { TicketsFacade } from "../../services";
 
@@ -26,8 +17,8 @@ describe("Ticket Details Component", () => {
   };
   const newTicket = {
     id: null,
-    description: "",
-    assigneeId: null,
+    description: "aaa",
+    assigneeId: 222,
     completed: false
   };
   const ticketsFacadeStub = {
@@ -53,7 +44,7 @@ describe("Ticket Details Component", () => {
       imports: [
         BrowserAnimationsModule,
         RouterTestingModule,
-        FormsModule,
+        ReactiveFormsModule,
         MaterialModule
       ],
       providers: [
@@ -67,26 +58,40 @@ describe("Ticket Details Component", () => {
     //});
   });
 
-  it(`should have currentTicket assigned`, () => {
-    //spyOnProperty(ticketsFacade, "selectedTicketByRoute$", "get").and.returnValue(of(ticket));
+  it(`should have New Ticket map to form`, () => {
+    ticketsFacadeStub.selectedTicketByRoute$ = of(newTicket);
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-    expect(component.currentTicket).toEqual(ticket);
+    expect(component.detailForm.value).toEqual({
+      title: "New Ticket",
+      ...newTicket
+    });
+  });
+
+  it(`should have Edit Ticket map to form`, () => {
+    ticketsFacadeStub.selectedTicketByRoute$ = of(ticket);
+    const fixture = TestBed.createComponent(TicketDetailsComponent);
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+    expect(component.detailForm.value).toEqual({
+      title: "Edit Ticket",
+      ...ticket
+    });
   });
 
   it(`should updateTicket and navigate when save button clicked`, () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-    spyOn(component, "saved").and.callThrough();
+    spyOn(component, "onSubmit").and.callThrough();
     spyOn(ticketsFacade, "updateTicket").and.callThrough();
 
-    let saveButton = fixture.debugElement.nativeElement.querySelector("#save");
+    let saveButton = fixture.nativeElement.querySelector("#save");
     saveButton.click();
 
     fixture.detectChanges();
-    expect(component.saved).toHaveBeenCalled();
+    expect(component.onSubmit).toHaveBeenCalled();
 
     fixture.whenStable().then(() => {
       expect(ticketsFacade.updateTicket).toHaveBeenCalled();
@@ -102,18 +107,18 @@ describe("Ticket Details Component", () => {
     });
   });
 
-  xit(`should createTicket and navigate when save button clicked`, () => {
+  it(`should createTicket and navigate when save button clicked`, () => {
     ticketsFacade.selectedTicketByRoute$ = of(newTicket);
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-    spyOn(component, "saved").and.callThrough();
+    spyOn(component, "onSubmit").and.callThrough();
 
-    let saveButton = fixture.debugElement.nativeElement.querySelector("#save");
+    let saveButton = fixture.nativeElement.querySelector("#save");
     saveButton.click();
 
     fixture.detectChanges();
-    expect(component.saved).toHaveBeenCalled();
+    expect(component.onSubmit).toHaveBeenCalled();
 
     fixture.whenStable().then(() => {
       expect(ticketsFacade.createTicket).toHaveBeenCalled();
@@ -129,15 +134,13 @@ describe("Ticket Details Component", () => {
     });
   });
 
-  xit(`should cancelled method been called when cancel button clicked`, () => {
+  it(`should cancelled method been called when cancel button clicked`, () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
     spyOn(component, "cancelled").and.callThrough();
 
-    let cancelButton = fixture.debugElement.nativeElement.querySelector(
-      "#cancel"
-    );
+    let cancelButton = fixture.nativeElement.querySelector("#cancel");
     cancelButton.click();
 
     fixture.detectChanges();

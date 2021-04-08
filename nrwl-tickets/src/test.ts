@@ -28,7 +28,7 @@ getTestBed().initTestEnvironment(
 const context = require.context(
   "./",
   true,
-  /\/app\/containers\/tickets\/tickets\.component\.route\.spec\.ts$/
+  /\/app\/containers\/ticket-details\/ticket-details\.component\.spec\.ts$/
 );
 // And load the modules.
 context.keys().map(context);

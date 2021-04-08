@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { TicketsFacade } from "../../services";
-import { Ticket, User } from "../../services/backend.service";
+import { Ticket } from "../../services/backend.service";
 
 @Component({
   selector: "vi-ticket-details",
