@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit
 } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
 import { debounceTime, map } from "rxjs/operators";
@@ -21,15 +21,18 @@ export class TicketsComponent implements OnInit, OnDestroy {
   routerRouteParamId$ = this.ticketsFacade.routerRouteParamId$;
   searchSetSub: Subscription | undefined;
   searchValueChangesSub: Subscription | undefined;
-  search = new FormControl("");
+  form = new FormGroup({
+    search: new FormControl("")
+  });
+  //search = new FormControl("");
 
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
   ngOnInit(): void {
     this.searchSetSub = this.ticketsFacade.routerQueryParam$?.subscribe(_ =>
-      this.search.setValue(_)
+      this.form.controls.search.setValue(_)
     );
-    this.searchValueChangesSub = this.search.valueChanges
+    this.searchValueChangesSub = this.form.controls.search.valueChanges
       .pipe(
         debounceTime(200),
         map((q: string) =>

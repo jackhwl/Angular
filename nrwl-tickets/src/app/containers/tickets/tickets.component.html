@@ -1,11 +1,15 @@
 <div class="component-container">
   <div *ngIf="(routerRouteParamId$ | async) === undefined">
-    <input
-      type="text"
-      placeholder="Search"
-      name="querytodo"
-      [formControl]="search"
-    />
+    <form [formGroup]="form">
+      <input
+        type="text"
+        placeholder="Search"
+        name="querytodo"
+        id="abc"
+        class="cde"
+        formControlName="search"
+      />
+    </form>
     (Enter 'error' to trigger an exception)
     <a [routerLink]="['/tickets', 'new']" queryParamsHandling="merge"
       >Add New Ticket</a
