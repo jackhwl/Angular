@@ -25,17 +25,17 @@ getTestBed().initTestEnvironment(
 );
 // Then we find all the tests.
 // ng test --include=**/containers/tickets/*.spec.ts
-const context = require.context("./", true, /\.spec\.ts$/);
+//const context = require.context("./", true, /\.spec\.ts$/);
 // const context = require.context(
 //   "./",
 //   true,
 //   /\/app\/containers\/ticket-details\/ticket-details\.component\.spec\.ts$/
 // );
-// const context = require.context(
-//   "./",
-//   true,
-//   /\/app\/containers\/tickets\/tickets\.component\.route\.spec\.ts$/
-// );
+const context = require.context(
+  "./",
+  true,
+  /\/app\/containers\/tickets\/tickets\.component\.route\.spec\.ts$/
+);
 // const context = require.context(
 //   "./",
 //   true,

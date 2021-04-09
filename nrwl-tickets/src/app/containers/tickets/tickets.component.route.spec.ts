@@ -52,6 +52,7 @@ describe("TicketsComponent (route)", () => {
   const ticketsFacadeStub = {
     allTicketVms$: of(tickets),
     mutations$: of(false),
+    routerRouteParamId$: of(undefined),
     selectTicketById() {},
     loadFilterTicketsByRoute() {},
     loadUsers() {},
@@ -134,10 +135,10 @@ describe("TicketsComponent (route)", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
     component.ngOnInit();
-    component.form.controls.search.setValue(searchKey);
+    component.search.setValue(searchKey);
     tick(200);
 
-    expect(component.form.controls.search.value).toEqual(searchKey);
+    expect(component.search.value).toEqual(searchKey);
     const actualPath = routerSpy.navigate.calls.mostRecent().args[1].queryParams
       .q;
     const expectedPath = searchKey;
@@ -145,7 +146,7 @@ describe("TicketsComponent (route)", () => {
     expect(routerSpy.navigate).toHaveBeenCalled();
   }));
 
-  xit("should navigate with value of search box 2", fakeAsync(() => {
+  it("should navigate with value of search box 2", fakeAsync(() => {
     const searchKey = "move";
     component.ngOnInit();
 
@@ -155,7 +156,7 @@ describe("TicketsComponent (route)", () => {
     queryBox.dispatchEvent(event);
     tick(200);
 
-    expect(component.form.controls.search.value).toEqual(searchKey);
+    expect(component.search.value).toEqual(searchKey);
     const actualPath = routerSpy.navigate.calls.mostRecent().args[1].queryParams
       .q;
     const expectedPath = searchKey;
@@ -165,7 +166,7 @@ describe("TicketsComponent (route)", () => {
 
   it("should navigate with value of routerQueryParam", fakeAsync(() => {
     const search = "move";
-    spyOn(component.form.controls.search, "setValue").and.callThrough();
+    spyOn(component.search, "setValue").and.callThrough();
     ticketsFacade.routerQueryParam$ = of(search);
     component.ngOnInit();
     tick(200);
@@ -173,9 +174,7 @@ describe("TicketsComponent (route)", () => {
       .q;
     const expectedPath = search;
     expect(actualPath).toBe(expectedPath);
-    expect(component.form.controls.search.setValue).toHaveBeenCalled();
-    expect(component.form.controls.search.setValue).toHaveBeenCalledWith(
-      search
-    );
+    expect(component.search.setValue).toHaveBeenCalled();
+    expect(component.search.setValue).toHaveBeenCalledWith(search);
   }));
 });

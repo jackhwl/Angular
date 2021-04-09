@@ -36,6 +36,7 @@ describe("Tickets Component", () => {
   const ticketsFacadeStub = {
     allTicketVms$: of(tickets),
     mutations$: of(false),
+    routerRouteParamId$: of(undefined),
     selectTicketById() {},
     loadFilterTicketsByRoute() {},
     loadTickets() {},
@@ -70,13 +71,7 @@ describe("Tickets Component", () => {
     expect(app).toBeTruthy();
   });
 
-  xit(`should have as title 'ticket managing'`, () => {
-    const fixture = TestBed.createComponent(TicketsComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual("ticket managing");
-  });
-
-  xit("should have '/tickets/new' in 'Add New' link", () => {
+  it("should have '/tickets/new' in 'Add New' link", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     fixture.detectChanges();
     const debugElements = fixture.debugElement.queryAll(
@@ -100,7 +95,7 @@ describe("Tickets Component", () => {
     expect(component).toBeDefined();
   });
 
-  xit("should have TicketsListComponent render", () => {
+  it("should have TicketsListComponent render", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     fixture.detectChanges();
     const debugElements = fixture.debugElement.queryAll(
@@ -109,8 +104,10 @@ describe("Tickets Component", () => {
     expect(debugElements.length).toEqual(1);
   });
 
-  xit(`should have ${tickets.length} tickets render`, () => {
-    const fixture = TestBed.createComponent(TicketsListComponent);
+  it(`should have ${tickets.length} tickets render`, () => {
+    const fixture = TestBed.createComponent(TicketsComponent);
+    const component = fixture.componentInstance;
+    component.ngOnInit();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       const debugElements = fixture.debugElement.queryAll(
@@ -118,36 +115,5 @@ describe("Tickets Component", () => {
       );
       expect(debugElements.length).toEqual(tickets.length);
     });
-  });
-
-  xit(`should query method been called when query button clicked`, () => {
-    const fixture = TestBed.createComponent(TicketsComponent);
-    const component = fixture.componentInstance;
-    //spyOn(component, "query");
-
-    let button = fixture.debugElement.nativeElement.querySelector("button");
-    button.click();
-
-    //fixture.whenStable().then(() => {
-    fixture.detectChanges();
-    //expect(component.query).toHaveBeenCalled();
-
-    //});
-  });
-
-  xit("should update the value in the control (333model to view)", () => {
-    const fixture = TestBed.createComponent(TicketsComponent);
-    //component.search.setValue("Move");
-
-    //const input = fixture.debugElement.nativeElement.querySelector("input"); //fixture.debugElement.query(By.css('#abc')); //.querySelector('input[id="abc"]'); //fixture.debugElement.query(By.css('#abc')); //
-    const input = fixture.debugElement.query(By.css("#cde"));
-    //fixture.detectChanges();
-    expect(input).not.toBe(null);
-    // fixture.whenStable().then(() => {
-    //   const input = fixture.debugElement.queryAll(
-    //     By.css(".cde")
-    //   );
-    //   expect(input.length).toEqual(10);
-    // });
   });
 });

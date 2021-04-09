@@ -21,18 +21,15 @@ export class TicketsComponent implements OnInit, OnDestroy {
   routerRouteParamId$ = this.ticketsFacade.routerRouteParamId$;
   searchSetSub: Subscription | undefined;
   searchValueChangesSub: Subscription | undefined;
-  form = new FormGroup({
-    search: new FormControl("")
-  });
-  //search = new FormControl("");
+  search = new FormControl("");
 
   constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
 
   ngOnInit(): void {
     this.searchSetSub = this.ticketsFacade.routerQueryParam$?.subscribe(_ =>
-      this.form.controls.search.setValue(_)
+      this.search.setValue(_)
     );
-    this.searchValueChangesSub = this.form.controls.search.valueChanges
+    this.searchValueChangesSub = this.search.valueChanges
       .pipe(
         debounceTime(200),
         map((q: string) =>
