@@ -16,7 +16,7 @@ import { Router, RouterLinkWithHref } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsFacade } from "../../services";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
 
 @Directive({
@@ -84,6 +84,7 @@ describe("TicketsComponent (route)", () => {
     fixture.detectChanges();
     //tick();
     //fixture.detectChanges();
+    //const injector = fixture.debugElement.injector;
   });
 
   let component: TicketsComponent;
@@ -100,24 +101,11 @@ describe("TicketsComponent (route)", () => {
     return evt;
   }
 
-  xit("navigates to tickets/new when addNew link is clicked", () => {
-    const debugElements = fixture.debugElement.queryAll(
-      By.directive(RouterLinkWithHref)
-    );
-    const index = debugElements.findIndex(de => {
-      return de.properties["href"] === "/";
-    });
-    expect(index).toBeGreaterThan(-1);
-
-    let href = fixture.debugElement
-      .query(By.css("a"))
-      .nativeElement.getAttribute("href");
-    expect(href).toEqual("/settings/testing/edit/1");
-
+  it("navigates to tickets/new when addNew link is clicked", () => {
     const firstLink = fixture.debugElement.query(By.css("a"));
 
     firstLink.triggerEventHandler("click", { button: leftMouseButton });
-    //tick();
+
     fixture.detectChanges();
 
     const expectedPath = "/tickets/new";
