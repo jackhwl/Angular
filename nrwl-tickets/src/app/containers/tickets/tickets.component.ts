@@ -7,7 +7,12 @@ import {
 import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Observable, Subscription } from "rxjs";
-import { debounceTime, map } from "rxjs/operators";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap
+} from "rxjs/operators";
 import { TicketsFacade } from "../../services";
 
 @Component({
@@ -32,7 +37,8 @@ export class TicketsComponent implements OnInit, OnDestroy {
     this.searchValueChangesSub = this.search.valueChanges
       .pipe(
         debounceTime(200),
-        map((q: string) =>
+        distinctUntilChanged(),
+        switchMap((q: string) =>
           this.router.navigate(["tickets"], {
             queryParams: { q },
             queryParamsHandling: "merge"
@@ -41,6 +47,15 @@ export class TicketsComponent implements OnInit, OnDestroy {
       )
       .subscribe();
   }
+
+  // debounceMap(delay: number) {
+  //   return function<T>(source: Observable<T>) {
+  //     return source.pipe(
+  //       debounceTime(200),
+  //     distinctUntilChanged(),
+  //     switchMap();
+  //     )}
+  // }
 
   ngOnDestroy(): void {
     if (this.searchSetSub) this.searchSetSub.unsubscribe();
