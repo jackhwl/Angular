@@ -13,6 +13,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ErrorService {
+  // https://stackblitz.com/angular/xljvjlylmrp?file=src%2Fapp%2Fhttp-error-handler.service.ts
   catchReThrowError() {
     return catchError(this.handleError);
   }
@@ -46,6 +47,7 @@ export class ErrorService {
   }
 
   private handleError(err: any): Observable<never> {
+    // Two types of errors can occur. https://angular.io/guide/http#getting-error-details
     console.error(err);
     // 99in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
