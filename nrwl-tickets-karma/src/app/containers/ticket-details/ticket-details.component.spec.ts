@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { of } from "rxjs";
 import { MaterialModule } from "../../material.module";
-import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
+import { TicketDetailsComponent } from "./ticket-details.component";
 import { TicketsFacade } from "../../services";
 
 describe("Ticket Details Component", () => {

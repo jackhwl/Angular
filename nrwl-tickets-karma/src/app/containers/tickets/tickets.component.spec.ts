@@ -14,7 +14,7 @@ import { of } from "rxjs";
 import { MaterialModule } from "../../material.module";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsListComponent } from "../../components/tickets-list/tickets-list.component";
-import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
+import { TicketDetailsComponent } from "../ticket-details/ticket-details.component";
 import { TicketsFacade } from "../../services";
 
 describe("Tickets Component", () => {

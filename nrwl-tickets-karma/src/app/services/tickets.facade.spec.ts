@@ -1,5 +1,5 @@
 import { TestBed, waitForAsync } from "@angular/core/testing";
-import { BackendService, TicketsFacade } from "../services";
+import { BackendService, TicketsFacade } from ".";
 import { TicketsListComponent } from "../components/tickets-list/tickets-list.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { RouterTestingModule } from "@angular/router/testing";
