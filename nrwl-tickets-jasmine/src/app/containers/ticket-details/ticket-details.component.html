@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-title>
+    {{ title.value }}
+  </mat-card-title>
+  <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="id" />
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <mat-label>Assignee</mat-label>
+        <mat-select name="AssigneeId" formControlName="assigneeId">
+          <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{
+            user.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field class="full-width"> -->
+
+      <mat-radio-group
+        aria-label="Select an option"
+        formControlName="completed"
+      >
+        <mat-radio-button [value]="false">Not finished</mat-radio-button>
+        <mat-radio-button [value]="true">Completed</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          type="text"
+          required
+        ></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        id="save"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="!detailForm.valid"
+      >
+        Save
+      </button>
+      <button id="cancel" type="button" mat-raised-button (click)="cancelled()">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
+{{ detailForm.status }}
