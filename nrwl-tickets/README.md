@@ -22,3 +22,8 @@ Build a ticket managing app, where the user can add, filter, assign, and complet
 ## Submitting your solution
 
 Please send us the link to your Stackblitz fork. We will continue to work on it during the pair-programming sessions. Please also indicate approximately how long you spent on the submission.
+
+# [use jest to replace jasmine & karma](https://itnext.io/angular-testing-series-how-to-add-jest-to-angular-project-smoothly-afffd77cc1cb)
+
+npm install jest jest-preset-angular @types/jest --save-dev
+npm uninstall karma karma-chrome-launcher karma-coverage-istanbul-reporter karma-jasmine karma-jasmine-html-reporter
