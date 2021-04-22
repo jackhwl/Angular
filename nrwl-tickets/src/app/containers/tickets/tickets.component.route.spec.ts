@@ -33,6 +33,19 @@ class FakeRouterLink {
     this.router.navigate([this.routerLink]);
   }
 }
+
+@Directive({
+  selector: "[routerLink]"
+})
+export class RouterLinkDirectiveStub {
+  @Input("routerLink") linkParams: any;
+  navigatedTo: any = null;
+
+  @HostListener("click")
+  onClick() {
+    this.navigatedTo = this.linkParams;
+  }
+}
 describe("TicketsComponent (route)", () => {
   const leftMouseButton = 0;
   const tickets = [
@@ -60,8 +73,10 @@ describe("TicketsComponent (route)", () => {
   };
   let ticketsFacade: TicketsFacade;
   let router: Router;
+  let linkDes: any;
+  let routerLinks: any;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
@@ -73,11 +88,11 @@ describe("TicketsComponent (route)", () => {
       schemas: [NO_ERRORS_SCHEMA]
     });
 
-    await TestBed.compileComponents();
+    TestBed.compileComponents();
     ticketsFacade = TestBed.inject(TicketsFacade);
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(TicketsComponent);
     component = fixture.componentInstance;
     //tick();
@@ -85,11 +100,16 @@ describe("TicketsComponent (route)", () => {
     //tick();
     //fixture.detectChanges();
     //const injector = fixture.debugElement.injector;
+
+    linkDes = fixture.debugElement.queryAll(
+      By.directive(RouterLinkDirectiveStub)
+    );
+    routerLinks = linkDes.map(de => de.injector.get(RouterLinkDirectiveStub));
   });
 
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let routerSpy: any;
 
   function createNewEvent(
     eventName: string,
@@ -100,6 +120,11 @@ describe("TicketsComponent (route)", () => {
     evt.initCustomEvent(eventName, bubbles, cancelable, null);
     return evt;
   }
+
+  it("can get RouterLinks from template", () => {
+    expect(routerLinks.length).toBe(1);
+    expect(routerLinks[0].linkParams).toBe("/tickets/new");
+  });
 
   it("navigates to tickets/new when addNew link is clicked", () => {
     const firstLink = fixture.debugElement.query(By.css("a"));
