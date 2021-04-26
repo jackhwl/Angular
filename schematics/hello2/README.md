@@ -1,9 +1,5 @@
 # Getting Started With Schematics
 
-https://medium.com/@tomastrajan/total-guide-to-custom-angular-schematics-5c50cf90cdb4
-https://www.youtube.com/watch?v=M5YSPas3qFo
-46:28
-https://developer.okta.com/blog/2019/02/13/angular-schematics
 This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
 
 ### Testing
