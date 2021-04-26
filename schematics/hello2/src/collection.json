@@ -3,7 +3,8 @@
   "schematics": {
     "hello2": {
       "description": "A blank schematic.",
-      "factory": "./hello2/index#hello2"
+      "factory": "./hello2/index#hello2",
+      "schema": "./hello2/schema.json"
     }
   }
 }
