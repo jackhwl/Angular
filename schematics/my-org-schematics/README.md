@@ -30,3 +30,6 @@ npm publish
 ```
 
 That's it!
+
+https://developer.okta.com/blog/2019/02/13/angular-schematics#run-your-schematics-with-angular-cli
+doesn't work
