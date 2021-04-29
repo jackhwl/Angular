@@ -46,13 +46,13 @@ describe("hello2", () => {
 
   it("works", done => {
     schematicRunner
-      .runSchematicAsync("my-component", schemaOptions, appTree)
+      .runSchematicAsync("hello2", schemaOptions, appTree)
       .toPromise()
       .then(tree => {
         const appComponent = tree.readContent(
           "/projects/schematest/src/app/app.component.ts"
         );
-        expect(appComponent).toContain(`name = '${schemaOptions.name}'`);
+        expect(appComponent).toContain(`name = "${schemaOptions.name}"`);
         done();
       }, done.fail);
   });
