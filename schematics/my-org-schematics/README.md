@@ -32,4 +32,6 @@ npm publish
 That's it!
 
 https://developer.okta.com/blog/2019/02/13/angular-schematics#run-your-schematics-with-angular-cli
-doesn't work
+now create 2 files from hello2 is working, but update doesn't, use --force
+in schematics\my-test-app
+ng g hello2:hello2 --force
