@@ -33,7 +33,9 @@ export function hello2(_options: any): Rule {
     await setupOptions(tree, _options);
 
     const movePath = normalize(_options.path + "/");
-    const templateSource = apply(url("./files/src"), [
+    const sourceTemplates = url("./files/src");
+
+    const templateSource = apply(sourceTemplates, [
       template({ ..._options }),
       move(movePath)
     ]);

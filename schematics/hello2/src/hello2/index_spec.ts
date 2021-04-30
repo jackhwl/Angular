@@ -5,10 +5,8 @@ import {
 import * as path from "path";
 
 describe("hello2", () => {
-  const schematicRunner = new SchematicTestRunner(
-    "schematics",
-    path.join(__dirname, "./../collection.json")
-  );
+  const collectionPath = path.join(__dirname, "./../collection.json");
+  const schematicRunner = new SchematicTestRunner("schematics", collectionPath);
 
   const workspaceOptions: any = {
     name: "workspace",
