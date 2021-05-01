@@ -2,8 +2,8 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  chain,
-  externalSchematic
+  chain
+  //externalSchematic
 } from "@angular-devkit/schematics";
 
 const licenseText = `
@@ -21,7 +21,7 @@ const licenseText = `
 export function callsca(_options: any): Rule {
   console.log("init _options=", _options);
   return chain([
-    externalSchematic("@schematics/angular", "component", _options),
+    //externalSchematic("@schematics/angular", "component", _options),
     (tree: Tree, _context: SchematicContext) => {
       console.log("_options.sourceDir=", _options.sourceDir);
       tree.getDir(_options.sourceDir).visit(filePath => {

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsMyComponent",
+  "title": "My Component Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Your Name",
+      "x-prompt": "What is your sca name?"
+    },
+    "sourceDir": {
+      "type": "string",
+      "description": "source-dir",
+      "x-prompt": "What is your source-dir?"
+    }
+  },
+  "required": ["name", "sourceDir"]
+}

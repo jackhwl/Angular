@@ -13,6 +13,11 @@
     "callsca": {
       "description": "A blank schematic.",
       "factory": "./callsca/index#callsca"
+    },
+    "ng-add": {
+      "factory": "./ng-add/index",
+      "description": "Add schematic",
+      "schema": "./callsca/schema.json"
     }
   }
 }
