@@ -35,3 +35,14 @@ https://developer.okta.com/blog/2019/02/13/angular-schematics#run-your-schematic
 now create 2 files from hello2 is working, but update doesn't, use --force
 in schematics\my-test-app
 ng g hello2:hello2 --force
+
+## generate .d.ts file
+
+npx -p dtsgenerator dtsgen schema.json -o schema.d.ts
+
+## create a file
+
+cd hello2
+schematics blank --name=add
+npm run build
+schematics .:add --name=test --debug=false
