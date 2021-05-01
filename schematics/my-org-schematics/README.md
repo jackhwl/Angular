@@ -46,3 +46,5 @@ cd hello2
 schematics blank --name=add
 npm run build
 schematics .:add --name=test --debug=false
+
+ng g hello2:callsca --sourceDir=/src/app --name=mike

@@ -9,6 +9,10 @@
     "add": {
       "description": "A blank schematic.",
       "factory": "./add/index#add"
+    },
+    "callsca": {
+      "description": "A blank schematic.",
+      "factory": "./callsca/index#callsca"
     }
   }
 }
