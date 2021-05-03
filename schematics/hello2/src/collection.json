@@ -18,6 +18,10 @@
       "factory": "./ng-add/index",
       "description": "Add schematic",
       "schema": "./callsca/schema.json"
+    },
+    "actions": {
+      "description": "A blank schematic.",
+      "factory": "./actions/index#actions"
     }
   }
 }

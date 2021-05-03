@@ -8,6 +8,6 @@ import {
 
 export default function(options: any): Rule {
   return (host: Tree, context: SchematicContext) => {
-    return chain([schematic("callsca", options)])(host, context);
+    return chain([schematic("actions", options)])(host, context);
   };
 }
