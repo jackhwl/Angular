@@ -1,45 +1,79 @@
 import {
-  apply,
-  chain,
-  MergeStrategy,
-  mergeWith,
-  move,
   Rule,
-  SchematicContext,
-  SchematicsException,
-  template,
   Tree,
-  url
+  SchematicsException,
+  apply,
+  url,
+  applyTemplates,
+  move,
+  chain,
+  mergeWith
 } from "@angular-devkit/schematics";
-import { join, normalize } from "path";
-import { getWorkspace } from "@schematics/angular/utility/workspace";
 
-export async function setupOptions(host: Tree, options: any): Promise<Tree> {
-  const workspace = await getWorkspace(host);
-  if (!options.project) {
-    options.project = workspace.projects.keys().next().value;
-  }
-  const project = workspace.projects.get(options.project);
-  if (!project) {
-    throw new SchematicsException(`Invalid project name: ${options.project}`);
-  }
+import {
+  strings,
+  normalize,
+  virtualFs,
+  workspaces
+} from "@angular-devkit/core";
 
-  options.path = join(normalize(project.root), "src");
-  return host;
+import { Schema as MyServiceSchema } from "./schema";
+
+function createHost(tree: Tree): workspaces.WorkspaceHost {
+  console.log("createHost start");
+  return {
+    async readFile(path: string): Promise<string> {
+      const data = tree.read(path);
+      if (!data) {
+        throw new SchematicsException("File not found.");
+      }
+      return virtualFs.fileBufferToString(data);
+    },
+    async writeFile(path: string, data: string): Promise<void> {
+      return tree.overwrite(path, data);
+    },
+    async isDirectory(path: string): Promise<boolean> {
+      return !tree.exists(path) && tree.getDir(path).subfiles.length > 0;
+    },
+    async isFile(path: string): Promise<boolean> {
+      return tree.exists(path);
+    }
+  };
 }
 
-export function actions(_options: any): Rule {
-  return async (tree: Tree, _context: SchematicContext) => {
-    await setupOptions(tree, _options);
+export function actions(options: MyServiceSchema): Rule {
+  console.log("actions start");
+  return async (tree: Tree) => {
+    const host = createHost(tree);
+    const { workspace } = await workspaces.readWorkspace("/", host);
 
-    const movePath = normalize(_options.path + "/");
-    const sourceTemplates = url("./files/src");
+    if (!options.project) {
+      options.project = workspace.extensions.defaultProject as string;
+    }
 
-    const templateSource = apply(sourceTemplates, [
-      template({ ..._options }),
-      move(movePath)
+    console.log("options=", options);
+    const project = workspace.projects.get(options.project);
+    if (!project) {
+      throw new SchematicsException(`Invalid project name: ${options.project}`);
+    }
+
+    const projectType =
+      project.extensions.projectType === "application" ? "app" : "lib";
+
+    console.log("options.path=", options.path);
+    if (options.path === undefined) {
+      options.path = `${project.sourceRoot}/${projectType}`;
+    }
+
+    const templateSource = apply(url("./files"), [
+      applyTemplates({
+        classify: strings.classify,
+        dasherize: strings.dasherize,
+        name: options.name
+      }),
+      move(normalize(options.path as string))
     ]);
 
-    return chain([mergeWith(templateSource, MergeStrategy.Overwrite)]);
+    return chain([mergeWith(templateSource)]);
   };
 }

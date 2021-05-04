@@ -50,3 +50,5 @@ schematics .:add --name=test --debug=false
 ng g hello2:callsca --sourceDir=/src/app --name=mike
 
 https://medium.com/@tomastrajan/%EF%B8%8F-how-to-create-your-first-custom-angular-schematics-with-ease-%EF%B8%8F-bca859f3055d
+
+ng g hello2:actions --name=Ticket --path=app\actions --project=my-test-app --force
