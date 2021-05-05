@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { TicketDetailsComponent } from "./containers/ticket-details/ticket-details.component";
-import { TicketsListComponent } from "./components/tickets-list/tickets-list.component";
+import { TicketsListComponent } from "./containers/tickets-list/tickets-list.component";
 import { TicketsComponent } from "./containers/tickets/tickets.component";
 
 export const routes: Routes = [

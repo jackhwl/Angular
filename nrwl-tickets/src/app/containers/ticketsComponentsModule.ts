@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../material.module";
 import { RouterModule } from "@angular/router";
 
-import { TicketDetailsComponent } from "../containers/ticket-details/ticket-details.component";
+import { TicketDetailsComponent } from "./ticket-details/ticket-details.component";
 import { TicketsListComponent } from "./tickets-list/tickets-list.component";
 
 export const COMPONENTS = [TicketsListComponent, TicketDetailsComponent];

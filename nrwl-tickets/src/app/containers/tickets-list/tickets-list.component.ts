@@ -15,16 +15,15 @@ import { Ticket, User } from "src/app/services/backend.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketsListComponent {
-  loaded$ = this.store.pipe(select(TicketsSelectors.getLoaded));
-
-  allTickets$: Observable<Ticket[]> = this.store.pipe(
+  private allTickets$: Observable<Ticket[]> = this.store.pipe(
     select(TicketsSelectors.getAllTickets)
   );
 
-  allUsers$: Observable<User[]> = this.store.pipe(
+  private allUsers$: Observable<User[]> = this.store.pipe(
     select(UsersSelectors.getAllUsers)
   );
 
+  loaded$ = this.store.pipe(select(TicketsSelectors.getLoaded));
   tickets$ = this.getAllTicketVms();
 
   constructor(private store: Store<{}>) {}

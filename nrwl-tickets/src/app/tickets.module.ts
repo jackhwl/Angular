@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BackendService } from "./services/backend.service";
-import { TicketsComponentsModule } from "./components/TicketsComponentsModule";
+import { TicketsComponentsModule } from "./containers/ticketsComponentsModule";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import * as fromTicketModule from "./reducers";

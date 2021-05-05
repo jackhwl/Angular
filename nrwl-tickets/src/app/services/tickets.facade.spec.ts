@@ -1,6 +1,6 @@
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import { BackendService, TicketsFacade } from "../services";
-import { TicketsListComponent } from "../components/tickets-list/tickets-list.component";
+import { TicketsListComponent } from "../containers/tickets-list/tickets-list.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
