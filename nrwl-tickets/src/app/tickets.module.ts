@@ -6,7 +6,6 @@ import { TicketsComponentsModule } from "./containers/ticketsComponentsModule";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import * as fromTicketModule from "./reducers";
-import { TicketsFacade } from "./services";
 import { TicketsEffects } from "./effects/tickets.effects";
 import { TicketsComponent } from "./containers/tickets/tickets.component";
 import { TicketsRoutingModule } from "./tickets-routing.module";
@@ -25,6 +24,6 @@ import { UsersEffects } from "./effects/users.effects";
     ),
     EffectsModule.forFeature([TicketsEffects, UsersEffects])
   ],
-  providers: [BackendService, TicketsFacade]
+  providers: [BackendService]
 })
 export class TicketsModule {}

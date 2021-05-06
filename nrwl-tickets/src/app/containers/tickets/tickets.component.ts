@@ -6,6 +6,7 @@ import {
 } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
+import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import {
   debounceTime,
@@ -13,7 +14,11 @@ import {
   map,
   switchMap
 } from "rxjs/operators";
-import { TicketsFacade } from "../../services";
+import {
+  selectQueryParam,
+  selectRouteParam
+} from "src/app/reducers/router.selectors";
+import * as TicketsSelectors from "../../reducers/tickets.selectors";
 
 @Component({
   selector: "vi-tickets-root",
@@ -22,16 +27,24 @@ import { TicketsFacade } from "../../services";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketsComponent implements OnInit, OnDestroy {
-  error$ = this.ticketsFacade.error$;
-  routerRouteParamId$ = this.ticketsFacade.routerRouteParamId$;
+  error$: Observable<string | null> = this.store.pipe(
+    select(TicketsSelectors.getError)
+  );
+  routerRouteParamId$: Observable<string> = this.store.pipe(
+    select(selectRouteParam("id"))
+  );
+  routerQueryParam$: Observable<string> = this.store.pipe(
+    select(selectQueryParam("q"))
+  );
+
   searchSetSub: Subscription | undefined;
   searchValueChangesSub: Subscription | undefined;
   search = new FormControl("");
 
-  constructor(private ticketsFacade: TicketsFacade, private router: Router) {}
+  constructor(private store: Store<{}>, private router: Router) {}
 
   ngOnInit(): void {
-    this.searchSetSub = this.ticketsFacade.routerQueryParam$?.subscribe(_ =>
+    this.searchSetSub = this.routerQueryParam$?.subscribe(_ =>
       this.search.setValue(_)
     );
     this.searchValueChangesSub = this.search.valueChanges
