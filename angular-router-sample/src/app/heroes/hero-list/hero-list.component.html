@@ -1,16 +1,14 @@
-<h2>Heroes</h2>
+<h2>HEROES</h2>
 <ul class="heroes">
   <li
     *ngFor="let hero of heroes$ | async"
-    [class.selected]="hero === selectedHero"
-    (click)="onSelect(hero)"
+    [class.selected]="hero.id === selectedId"
   >
-    <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+    <a [routerLink]="['/hero', hero.id]">
+      <span class="badge">{{ hero.id }}</span
+      >{{ hero.name }}
+    </a>
   </li>
 </ul>
 
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
--->
+<button routerLink="/sidekicks">Go to sidekicks</button>
