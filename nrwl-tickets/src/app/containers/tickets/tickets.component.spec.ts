@@ -15,7 +15,9 @@ import { MaterialModule } from "../../material.module";
 import { TicketsComponent } from "./tickets.component";
 import { TicketsListComponent } from "../tickets-list/tickets-list.component";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
-import { TicketsFacade } from "../../services";
+import { provideMockStore, MockStore } from "@ngrx/store/testing";
+import { StoreModule } from "@ngrx/store";
+import * as fromTickets from "../../reducers/tickets.reducer";
 
 describe("Tickets Component", () => {
   const tickets = [
@@ -42,7 +44,8 @@ describe("Tickets Component", () => {
     loadTickets() {},
     loadUsers() {}
   };
-  let ticketsFacade: TicketsFacade;
+  let store: MockStore;
+
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -56,7 +59,10 @@ describe("Tickets Component", () => {
           RouterTestingModule,
           //FormsModule,
           ReactiveFormsModule,
-          MaterialModule
+          MaterialModule,
+          StoreModule.forRoot({
+            [fromTickets.TICKETS_FEATURE_KEY]: fromTickets.ticketsReducer
+          })
         ],
         providers: [{ provide: TicketsFacade, useValue: ticketsFacadeStub }]
       }).compileComponents();
