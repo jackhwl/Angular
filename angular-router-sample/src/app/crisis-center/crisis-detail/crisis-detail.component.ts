@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Location } from '@angular/common';
-import { switchMap } from 'rxjs/operators';
-import { Crisis } from '../crisis';
-import { CrisisService } from '../crisis.service';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
+import { Crisis } from '../crisis';
+import { DialogService } from '../../dialog.service';
 
 @Component({
   selector: 'app-crisis-detail',
@@ -12,45 +11,49 @@ import { Observable } from 'rxjs';
   styleUrls: ['./crisis-detail.component.css']
 })
 export class CrisisDetailComponent implements OnInit {
-  crisis$: Observable<Crisis>;
+  crisis: Crisis;
+  editName: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: CrisisService,
-    private location: Location
+    public dialogService: DialogService
   ) {}
 
-  ngOnInit(): void {
-    // const id = this.route.snapshot.paramMap.get('id');
-
-    // this.crisis$ = this.service.getCrisis(id);
-
-    this.crisis$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.service.getCrisis(params.get('id')))
-    );
-  }
-
-  gotoCrises(crisis: Crisis) {
-    const crisisId = crisis ? crisis.id : null;
-    // Pass along the crisis id if available
-    // so that the CrisisList component can select that crisis.
-    // Include a junk 'foo' property for fun.
-    this.router.navigate(['../', { id: crisisId, foo: 'foo' }], {
-      relativeTo: this.route
+  ngOnInit() {
+    this.route.data.subscribe((data: { crisis: Crisis }) => {
+      this.editName = data.crisis.name;
+      this.crisis = data.crisis;
     });
   }
 
-  getCrisis(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    //this.service.getCrisis(id).subscribe(crisis => (this.crisis = crisis));
+  cancel() {
+    this.gotoCrises();
   }
 
-  goBack(): void {
-    this.location.back();
+  save() {
+    this.crisis.name = this.editName;
+    this.gotoCrises();
   }
 
-  save(): void {
-    //this.crisisService.updateCrisis(this.crisis).subscribe(() => this.goBack());
+  canDeactivate(): Observable<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (!this.crisis || this.crisis.name === this.editName) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // observable which resolves to true or false when the user decides
+    return this.dialogService.confirm('Discard changes?');
+  }
+
+  gotoCrises() {
+    const crisisId = this.crisis ? this.crisis.id : null;
+    // Pass along the crisis id if available
+    // so that the CrisisListComponent can select that crisis.
+    // Add a totally useless `foo` parameter for kicks.
+    // Relative navigation back to the crises
+    this.router.navigate(['../', { id: crisisId, foo: 'foo' }], {
+      relativeTo: this.route
+    });
   }
 }
