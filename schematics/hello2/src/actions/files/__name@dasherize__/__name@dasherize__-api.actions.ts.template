@@ -1,0 +1,91 @@
+import { createAction, props } from "@ngrx/store";
+import { <%=classify(name)%> } from "../models";
+
+export const resetSelected<%=classify(name)%> = createAction(
+  "[<%=classify(name)%>s/API] Reset Selected <%=classify(name)%>s"
+);
+
+export const load<%=classify(name)%>sSuccess = createAction(
+  "[<%=classify(name)%>s/API] Load <%=classify(name)%>s Success",
+  props<{ tickets: <%=classify(name)%>[] }>()
+);
+
+export const load<%=classify(name)%>sFailure = createAction(
+  "[<%=classify(name)%>s/API] Load <%=classify(name)%>s Failure",
+  props<{ error: any }>()
+);
+
+export const loadFilter<%=classify(name)%>sSuccess = createAction(
+  "[<%=classify(name)%>s/API] Load Filter <%=classify(name)%>s Success",
+  props<{ tickets: <%=classify(name)%>[] }>()
+);
+
+export const loadFilter<%=classify(name)%>sFailure = createAction(
+  "[<%=classify(name)%>s/API] Load Filter <%=classify(name)%>s Failure",
+  props<{ error: any }>()
+);
+
+export const load<%=classify(name)%>Success = createAction(
+  "[<%=classify(name)%>s/API] Load <%=classify(name)%> Success",
+  props<{ ticket: <%=classify(name)%> }>()
+);
+
+export const load<%=classify(name)%>Failure = createAction(
+  "[<%=classify(name)%>s/API] Load <%=classify(name)%> Failure",
+  props<{ error: any }>()
+);
+
+export const notifyLoad<%=classify(name)%>sSuccess = createAction(
+  "[Toastr Notification/API] Display Load <%=classify(name)%>s Success",
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
+export const create<%=classify(name)%>Success = createAction(
+  "[<%=classify(name)%>s/API] Create <%=classify(name)%> Success",
+  props<{ ticket: <%=classify(name)%> }>()
+);
+
+export const notifyCreate<%=classify(name)%>Success = createAction(
+  "[Toastr Notification/API] Create <%=classify(name)%> Success",
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
+export const create<%=classify(name)%>Failure = createAction(
+  "[<%=classify(name)%>s/API] Create <%=classify(name)%> Failure",
+  props<{ error: any }>()
+);
+
+export const update<%=classify(name)%>Success = createAction(
+  "[<%=classify(name)%>s/API] Update <%=classify(name)%> Success",
+  props<{ ticket: <%=classify(name)%> }>()
+);
+
+export const notifyUpdate<%=classify(name)%>Success = createAction(
+  "[Toastr Notification/API] Update <%=classify(name)%> Success",
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
+export const update<%=classify(name)%>Failure = createAction(
+  "[<%=classify(name)%>s/API] Update <%=classify(name)%> Failure",
+  props<{ error: any }>()
+);
+
+export const notifyUpdate<%=classify(name)%>Failure = createAction(
+  "[Toastr Notification/API] Update <%=classify(name)%> Failure",
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
+export const delete<%=classify(name)%>Success = createAction(
+  "[<%=classify(name)%>s/API] Delete <%=classify(name)%> Success",
+  props<{ ticket: <%=classify(name)%> }>()
+);
+
+export const notifyDelete<%=classify(name)%>Success = createAction(
+  "[Toastr Notification/API] Delete <%=classify(name)%> Success",
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
+export const delete<%=classify(name)%>Failure = createAction(
+  "[<%=classify(name)%>s/API] Delete <%=classify(name)%> Failure",
+  props<{ error: any }>()
+);
