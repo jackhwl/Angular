@@ -14,7 +14,6 @@ import { By } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { of } from "rxjs";
 import { TicketsComponent } from "./tickets.component";
-import { TicketsFacade } from "../../services";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Directive({
@@ -55,22 +54,17 @@ describe("TicketsComponent (reactive form)", () => {
     loadUsers() {},
     loadTickets() {}
   };
-  let ticketsFacade: TicketsFacade;
 
   beforeEach(async () => {
     routerSpy = jasmine.createSpyObj("Router", ["navigateByUrl", "navigate"]);
     TestBed.configureTestingModule({
       declarations: [TicketsComponent, FakeRouterLink],
       imports: [FormsModule, ReactiveFormsModule],
-      providers: [
-        { provide: TicketsFacade, useValue: ticketsFacadeStub },
-        { provide: Router, useValue: routerSpy }
-      ],
+      providers: [{ provide: Router, useValue: routerSpy }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
 
     await TestBed.compileComponents();
-    ticketsFacade = TestBed.inject(TicketsFacade);
   });
 
   beforeEach(async () => {
@@ -84,7 +78,7 @@ describe("TicketsComponent (reactive form)", () => {
 
   let component: TicketsComponent;
   let fixture: ComponentFixture<TicketsComponent>;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let routerSpy: any; //jasmine.SpyObj<Router>;
 
   function createNewEvent(
     eventName: string,

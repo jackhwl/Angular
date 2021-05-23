@@ -16,7 +16,7 @@ import { TicketsComponent } from "./tickets.component";
 import { TicketsListComponent } from "../tickets-list/tickets-list.component";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
-import { StoreModule } from "@ngrx/store";
+import { ActionsSubject, StoreModule } from "@ngrx/store";
 import * as fromTickets from "../../reducers/tickets.reducer";
 
 describe("Tickets Component", () => {
@@ -34,7 +34,32 @@ describe("Tickets Component", () => {
       completed: false
     }
   ];
-
+  const initialState = {
+    tickets: {
+      ids: [0, 1],
+      entities: {
+        0: {
+          id: 0,
+          description: "Install a monitor arm",
+          assigneeId: 111,
+          completed: false
+        },
+        1: {
+          id: 1,
+          description: "Move the desk to the new location",
+          assigneeId: 111,
+          completed: false
+        }
+      },
+      error: null,
+      loaded: false,
+      selectedId: null
+    }
+  };
+  const initialTicketModuleState = {
+    users: {},
+    tickets: initialState.tickets
+  };
   const ticketsFacadeStub = {
     allTicketVms$: of(tickets),
     mutations$: of(false),
@@ -45,9 +70,11 @@ describe("Tickets Component", () => {
     loadUsers() {}
   };
   let store: MockStore;
+  let actions$: ActionsSubject;
 
   beforeEach(
     waitForAsync(() => {
+      const actionSub: ActionsSubject = new ActionsSubject();
       TestBed.configureTestingModule({
         declarations: [
           TicketsListComponent,
@@ -64,10 +91,15 @@ describe("Tickets Component", () => {
             [fromTickets.TICKETS_FEATURE_KEY]: fromTickets.ticketsReducer
           })
         ],
-        providers: [{ provide: TicketsFacade, useValue: ticketsFacadeStub }]
+        providers: [
+          provideMockStore({ initialState }),
+          { provide: ActionsSubject, useValue: actionSub }
+        ]
       }).compileComponents();
 
-      ticketsFacade = TestBed.inject(TicketsFacade);
+      store = TestBed.inject(MockStore);
+      spyOn(store, "dispatch").and.callThrough();
+      actions$ = TestBed.inject(ActionsSubject);
     })
   );
 
