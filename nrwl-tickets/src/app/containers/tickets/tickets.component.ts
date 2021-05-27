@@ -12,8 +12,10 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  switchMap
+  switchMap,
+  takeUntil
 } from "rxjs/operators";
+import { TakeUntilDestroy } from "src/app/decorators/take-until-destory";
 import {
   selectQueryParam,
   selectRouteParam
@@ -26,7 +28,10 @@ import * as TicketsSelectors from "../../reducers/tickets.selectors";
   styleUrls: ["./tickets.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@TakeUntilDestroy
 export class TicketsComponent implements OnInit, OnDestroy {
+  private componentDestroy: () => Observable<unknown>;
+
   error$: Observable<string | null> = this.store.pipe(
     select(TicketsSelectors.getError)
   );
@@ -44,9 +49,9 @@ export class TicketsComponent implements OnInit, OnDestroy {
   constructor(private store: Store<{}>, private router: Router) {}
 
   ngOnInit(): void {
-    this.searchSetSub = this.routerQueryParam$?.subscribe(_ =>
-      this.search.setValue(_)
-    );
+    this.searchSetSub = this.routerQueryParam$
+      ?.pipe(takeUntil(this.componentDestroy()))
+      .subscribe(_ => this.search.setValue(_));
     this.searchValueChangesSub = this.search.valueChanges
       .pipe(
         debounceTime(200),
@@ -56,7 +61,8 @@ export class TicketsComponent implements OnInit, OnDestroy {
             queryParams: { q },
             queryParamsHandling: "merge"
           })
-        )
+        ),
+        takeUntil(this.componentDestroy())
       )
       .subscribe();
   }
@@ -71,7 +77,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
   // }
 
   ngOnDestroy(): void {
-    if (this.searchSetSub) this.searchSetSub.unsubscribe();
-    if (this.searchValueChangesSub) this.searchValueChangesSub.unsubscribe();
+    // if (this.searchSetSub) this.searchSetSub.unsubscribe();
+    // if (this.searchValueChangesSub) this.searchValueChangesSub.unsubscribe();
   }
 }
