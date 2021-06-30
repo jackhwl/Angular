@@ -1,0 +1,41 @@
+{
+  "npmScope": "happyorg",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "NmYyNGFlOTMtMThmMS00NjJmLTg2ZjktODAwMTYyNjllYjRkfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "shop": {
+      "tags": []
+    },
+    "shop-e2e": {
+      "tags": [],
+      "implicitDependencies": ["shop"]
+    }
+  }
+}
