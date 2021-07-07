@@ -29,6 +29,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -37,7 +39,6 @@
     "@angular/cli": "~11.0.7",
     "@angular/compiler-cli": "~11.0.9",
     "@angular/language-service": "~11.0.9",
-    "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/jest": "^26.0.22",
     "@types/node": "^8.10.66",
