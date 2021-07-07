@@ -9,6 +9,7 @@ import { TicketDetailsComponent } from "./../ticket-details/ticket-details.compo
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { ActionsSubject, StoreModule } from "@ngrx/store";
 //import { TicketsFacade } from "../../services";
+import { render, screen, fireEvent } from "@testing-library/angular";
 
 describe("Ticket Details Component", () => {
   const ticket = {
@@ -23,12 +24,12 @@ describe("Ticket Details Component", () => {
     assigneeId: 222,
     completed: false
   };
-  const ticketsFacadeStub = {
-    selectedTicketByRoute$: of(ticket),
-    selectTicketByRoute() {},
-    updateTicket(ticket) {},
-    createTicket(ticket) {}
-  };
+  // const ticketsFacadeStub = {
+  //   selectedTicketByRoute$: of(ticket),
+  //   selectTicketByRoute() {},
+  //   updateTicket(ticket) {},
+  //   createTicket(ticket) {}
+  // };
   const initialState = {
     tickets: {
       ids: [0, 1],
@@ -91,23 +92,22 @@ describe("Ticket Details Component", () => {
     //});
   });
 
-  xit(`should have New Ticket map to form`, () => {
-    ticketsFacadeStub.selectedTicketByRoute$ = of(newTicket);
+  it(`should have New Ticket map to form`, () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
-    //router = TestBed.inject(Router);
-    //store = TestBed.inject(Store);
+    component.selectedTicketByRoute$ = of(newTicket);
     fixture.detectChanges();
+
     expect(component.detailForm.value).toEqual({
       title: "New Ticket",
       ...newTicket
     });
   });
 
-  xit(`should have Edit Ticket map to form`, () => {
-    ticketsFacadeStub.selectedTicketByRoute$ = of(ticket);
+  it(`should have Edit Ticket map to form`, () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
+    component.selectedTicketByRoute$ = of(ticket);
     fixture.detectChanges();
     expect(component.detailForm.value).toEqual({
       title: "Edit Ticket",
@@ -115,15 +115,15 @@ describe("Ticket Details Component", () => {
     });
   });
 
-  it(`should updateTicket and navigate when save button clicked`, () => {
+  xit(`should updateTicket and navigate when save button clicked`, () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
     const spy = jest.spyOn(component, "onSubmit");
-    component.onSubmit();
+    //component.onSubmit();
     //spyOn(ticketsFacade, "updateTicket").and.callThrough();
 
-    let saveButton = fixture.nativeElement.querySelector("#save");
+    let saveButton = screen.getByText(/Save/i);
     saveButton.click();
 
     fixture.detectChanges();
@@ -173,26 +173,26 @@ describe("Ticket Details Component", () => {
   //   });
   // });
 
-  // it(`should cancelled method been called when cancel button clicked`, () => {
-  //   const fixture = TestBed.createComponent(TicketDetailsComponent);
-  //   const component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  //   spyOn(component, "cancelled").and.callThrough();
+  it(`should cancelled method been called when cancel button clicked`, () => {
+    const fixture = TestBed.createComponent(TicketDetailsComponent);
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+    const spy = jest.spyOn(component, "cancelled");
 
-  //   let cancelButton = fixture.nativeElement.querySelector("#cancel");
-  //   cancelButton.click();
+    const cancelButton = screen.getByText(/cancel/i);
+    fireEvent.click(cancelButton);
 
-  //   fixture.detectChanges();
-  //   expect(component.cancelled).toHaveBeenCalled();
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalled();
 
-  //   fixture.whenStable().then(() => {
-  //     //expect(ticketsFacade.updateTicket).not.toHaveBeenCalled();
+    // fixture.whenStable().then(() => {
+    //   //expect(ticketsFacade.updateTicket).not.toHaveBeenCalled();
 
-  //     const expectedPath = "tickets";
-  //     const actualPath = routerSpy.navigate.calls
-  //       .mostRecent()
-  //       .args[0].toString();
-  //     expect(actualPath).toBe(expectedPath);
-  //   });
-  // });
+    //   const expectedPath = "tickets";
+    //   const actualPath = routerSpy.navigate.calls
+    //     .mostRecent()
+    //     .args[0].toString();
+    //   expect(actualPath).toBe(expectedPath);
+    // });
+  });
 });
