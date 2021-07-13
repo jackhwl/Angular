@@ -2,7 +2,7 @@
   <mat-card-title>
     {{ title.value }}
   </mat-card-title>
-  <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="detailForm" (ngSubmit)="onSubmit()" data-testid="form">
     <input type="hidden" formControlName="id" />
     <mat-card-content>
       <mat-form-field class="full-width">

@@ -115,19 +115,31 @@ describe("Ticket Details Component", () => {
     });
   });
 
-  xit(`should updateTicket and navigate when save button clicked`, () => {
+  it(`should call onSubmit and updateTicket when form is submit`, async () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-    const spy = jest.spyOn(component, "onSubmit");
-    //component.onSubmit();
-    //spyOn(ticketsFacade, "updateTicket").and.callThrough();
+
+    const submitSpy = jest.spyOn(component, "onSubmit");
+    const updateSpy = jest.spyOn(component, "updateTicket");
+    const form = screen.getByTestId("form");
+    fireEvent.submit(form);
+
+    expect(submitSpy).toHaveBeenCalled();
+    expect(updateSpy).toHaveBeenCalled();
+  });
+
+  it(`should updateTicket and navigate when save button clicked`, async () => {
+    const fixture = TestBed.createComponent(TicketDetailsComponent);
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+    const submitSpy = jest.spyOn(component, "onSubmit");
 
     let saveButton = screen.getByText(/Save/i);
     saveButton.click();
 
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalled();
+    setTimeout(() => expect(submitSpy).toHaveBeenCalled());
+    //await expect(submitSpy).toHaveBeenCalled();
 
     // fixture.whenStable().then(() => {
     //   //expect(ticketsFacade.updateTicket).toHaveBeenCalled();
@@ -177,13 +189,15 @@ describe("Ticket Details Component", () => {
     const fixture = TestBed.createComponent(TicketDetailsComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-    const spy = jest.spyOn(component, "cancelled");
+    const cancelSpy = jest.spyOn(component, "cancelled");
+    const updateSpy = jest.spyOn(component, "updateTicket");
 
     const cancelButton = screen.getByText(/cancel/i);
     fireEvent.click(cancelButton);
 
     fixture.detectChanges();
-    expect(spy).toHaveBeenCalled();
+    expect(cancelSpy).toHaveBeenCalled();
+    expect(updateSpy).not.toHaveBeenCalled();
 
     // fixture.whenStable().then(() => {
     //   //expect(ticketsFacade.updateTicket).not.toHaveBeenCalled();
