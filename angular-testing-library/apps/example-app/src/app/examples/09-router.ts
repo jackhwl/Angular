@@ -23,7 +23,7 @@ export class MasterComponent {}
     <p>{{ text | async }} {{ subtext | async }}</p>
 
     <a [routerLink]="'../..'">Back to parent</a>
-    <a routerLink="/hidden-detail">hidden x</a>
+    <a routerLink="../../hidden-detail">hidden x</a>
   `,
 })
 export class DetailComponent {
