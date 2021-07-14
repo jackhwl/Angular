@@ -16,5 +16,10 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

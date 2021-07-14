@@ -40,6 +40,7 @@
     "@angular/compiler-cli": "~11.0.9",
     "@angular/language-service": "~11.0.9",
     "@testing-library/angular": "^10.9.2",
+    "@testing-library/jest-dom": "^5.14.1",
     "@types/jasminewd2": "~2.0.3",
     "@types/jest": "^26.0.22",
     "@types/node": "^8.10.66",
