@@ -7,7 +7,7 @@ import { CartItem } from '@ngrx-nx-workshop/api-interfaces';
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private cartItemsSubject$ = new BehaviorSubject<CartItem[]>([]);
-  cartItems$ = this.cartItemsSubject$.asObservable();
+  readonly cartItems$ = this.cartItemsSubject$.asObservable();
 
   constructor(private readonly http: HttpClient) {}
 

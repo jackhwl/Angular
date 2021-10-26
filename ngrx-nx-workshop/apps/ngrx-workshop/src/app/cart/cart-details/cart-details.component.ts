@@ -14,10 +14,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart-details.component.scss']
 })
 export class CartDetailsComponent {
-  cartProducts$: Observable<CartProduct[] | undefined> = combineLatest(
+  cartProducts$: Observable<CartProduct[] | undefined> = combineLatest([
     this.cartService.cartItems$,
     this.productService.getProducts()
-  ).pipe(
+  ]).pipe(
     map(([cartItems, products]) => {
       if (!cartItems || !products) return undefined;
       return cartItems
