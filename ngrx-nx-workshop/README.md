@@ -2,6 +2,20 @@
 
 ## https://ncjamieson.com/
 
+## git clone https://github.com/alex-okrushko/ngrx-nx-workshop.git
+
+## git checkout m1
+
+## npm install
+
+## npm run ng serve api
+
+## npm run ng serve ngrx-workshop
+
+## To follow along see the slides at
+
+## http://ngrx-workshop-v3.okrushko.com/
+
 shareReplay inside component need refCount: true
 
 This project was generated using [Nx](https://nx.dev).

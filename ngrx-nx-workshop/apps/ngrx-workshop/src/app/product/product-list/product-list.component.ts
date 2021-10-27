@@ -6,23 +6,26 @@ import { ProductService } from '../product.service';
 import { RatingService } from '../rating.service';
 import { map, shareReplay } from 'rxjs/operators';
 
+import { Store } from '@ngrx/store';
+import { Product } from '@ngrx-nx-workshop/api-interfaces';
+
 @Component({
   selector: 'ngrx-nx-workshop-home',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  products$?: Observable<BasicProduct[]>;
+  products$?: Observable<BasicProduct[]> = this.store.select(
+    state => state.product.products
+  );
   customerRatings$?: Observable<Map<string, Rating>>;
 
   constructor(
-    private readonly productService: ProductService,
+    private readonly store: Store<{ product: { products: Product[] } }>,
     private readonly ratingService: RatingService
   ) {}
 
   ngOnInit() {
-    this.products$ = this.productService.getProducts();
-
     this.customerRatings$ = this.ratingService.getRatings().pipe(
       map(arr => {
         const ratingsMap = new Map<string, Rating>();
