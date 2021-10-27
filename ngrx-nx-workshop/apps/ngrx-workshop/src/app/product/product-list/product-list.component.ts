@@ -8,6 +8,7 @@ import { map, shareReplay } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
 import { Product } from '@ngrx-nx-workshop/api-interfaces';
+import { productsOpened } from './actions';
 
 @Component({
   selector: 'ngrx-nx-workshop-home',
@@ -23,7 +24,9 @@ export class ProductListComponent implements OnInit {
   constructor(
     private readonly store: Store<{ product: { products: Product[] } }>,
     private readonly ratingService: RatingService
-  ) {}
+  ) {
+    this.store.dispatch(productsOpened());
+  }
 
   ngOnInit() {
     this.customerRatings$ = this.ratingService.getRatings().pipe(
