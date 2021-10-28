@@ -36,6 +36,8 @@ export class ProductEffects {
           this.snackBar.open('Error fetching products', 'Error', {
             duration: 2500
           });
+          // This is needed to   trigger change detection. The other ooption would
+          // be to wrap 'open' call with setTimeout or Promise.resolve
           this.appRef.tick();
         })
       ),

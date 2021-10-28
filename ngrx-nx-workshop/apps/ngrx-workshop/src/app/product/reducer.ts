@@ -23,3 +23,7 @@ export function reducer(
 ): ProductState {
   return productsReducer(state, action);
 }
+
+export interface GlobalState {
+  product: ProductState;
+}
