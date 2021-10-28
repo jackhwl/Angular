@@ -12,7 +12,7 @@ const initState: ProductState = {
 
 const productsReducer = createReducer(
   initState,
-  on(apiActions.productsFetched, (state, { products }) => ({
+  on(apiActions.productsFetchedSuccess, (state, { products }) => ({
     products: [...products]
   }))
 );
