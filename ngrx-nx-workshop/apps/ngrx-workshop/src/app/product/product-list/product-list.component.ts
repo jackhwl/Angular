@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { Product } from '@ngrx-nx-workshop/api-interfaces';
 import { productsOpened } from './actions';
 import * as selectors from '../selectors';
+import { GlobalState } from '../reducer';
 
 @Component({
   selector: 'ngrx-nx-workshop-home',
@@ -23,7 +24,7 @@ export class ProductListComponent implements OnInit {
   customerRatings$?: Observable<Map<string, Rating>>;
 
   constructor(
-    private readonly store: Store<{ product: { products: Product[] } }>,
+    private readonly store: Store<GlobalState>,
     private readonly ratingService: RatingService
   ) {
     this.store.dispatch(productsOpened());
