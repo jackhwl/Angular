@@ -14,9 +14,9 @@ function stripDescription(originalData: Product[]): BasicProduct[] {
 @Injectable()
 export class ProductService {
   getProductList(): BasicProduct[] {
-    if (Math.random() < 0.25) {
-      throw new HttpException('products failed', HttpStatus.FORBIDDEN);
-    }
+    // if (Math.random() < 0.25) {
+    //   throw new HttpException('products failed', HttpStatus.FORBIDDEN);
+    // }
     return stripDescription(data);
   }
 
