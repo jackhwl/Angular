@@ -10,7 +10,5 @@ import * as cartSelectors from '../selectors';
 export class CartIconComponent {
   cartItemsCounter$ = this.store.select(cartSelectors.getCartItemsCount);
 
-  constructor(private readonly store: Store<{}>) {
-    this.store.select(cartSelectors.getCartItems);
-  }
+  constructor(private readonly store: Store<{}>) {}
 }

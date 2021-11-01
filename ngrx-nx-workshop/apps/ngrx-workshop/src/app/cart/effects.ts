@@ -6,7 +6,7 @@ import * as actions from './actions';
 import * as cartDetailsActions from './cart-details/actions';
 import { CartService } from './cart.service';
 
-const REFRESH_CART_ITEMS_INTERVAL_MS = 12000;
+const REFRESH_CART_ITEMS_INTERVAL_MS = 20 * 1000; // 20 seconds
 
 @Injectable()
 export class CartEffects {
