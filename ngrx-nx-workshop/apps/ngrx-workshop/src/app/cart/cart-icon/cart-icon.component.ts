@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-
+import { Store } from '@ngrx/store';
 import { CartService } from '../cart.service';
+import * as cartSelectors from '../selectors';
 
 @Component({
   selector: 'ngrx-nx-workshop-cart',
@@ -9,11 +9,12 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart-icon.component.scss']
 })
 export class CartIconComponent {
-  cartItemsCounter$ = this.cartService.cartItems$.pipe(
-    map(cartItems => cartItems.reduce((acc, { quantity }) => acc + quantity, 0))
-  );
+  cartItemsCounter$ = this.store.select(cartSelectors.getCartItemsCount);
 
-  constructor(private readonly cartService: CartService) {
+  constructor(
+    private readonly cartService: CartService,
+    private readonly store: Store<{}>
+  ) {
     this.cartService.getCartProducts();
   }
 }
