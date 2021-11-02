@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as productDetailsActions from '../product/product-details/actions';
 import * as actions from './actions';
@@ -37,7 +38,21 @@ const cartReducer = createReducer(
       },
       {}
     )
-  }))
+  })),
+  on(actions.addToCartError, (state, { productId }) => {
+    const currentQuantity = state.cartItems && state.cartItems[productId];
+    const newCartItems = { ...state.cartItems };
+    if (currentQuantity && currentQuantity > 1) {
+      newCartItems[productId] = currentQuantity - 1;
+    } else {
+      delete newCartItems[productId];
+    }
+
+    return {
+      ...state,
+      cartItems: newCartItems
+    };
+  })
 );
 
 export function reducer(
