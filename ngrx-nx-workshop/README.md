@@ -18,6 +18,10 @@
 
 shareReplay inside component need refCount: true
 
+## M8: Initializing effect
+
+https://dev.to/jonrimmer/where-to-initiate-data-load-in-ngrx-358l
+
 This project was generated using [Nx](https://nx.dev).
 
 <p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
