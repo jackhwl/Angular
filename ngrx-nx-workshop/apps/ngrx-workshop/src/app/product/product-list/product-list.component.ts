@@ -6,11 +6,12 @@ import { ProductService } from '../product.service';
 import { RatingService } from '../rating.service';
 import { map, shareReplay } from 'rxjs/operators';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Product } from '@ngrx-nx-workshop/api-interfaces';
 import { productsOpened } from './actions';
 import * as selectors from '../selectors';
 import { GlobalState } from '../reducer';
+import { CallState, LoadingState } from '../../shared/call_state';
 
 @Component({
   selector: 'ngrx-nx-workshop-home',
@@ -22,6 +23,11 @@ export class ProductListComponent implements OnInit {
     selectors.getProducts
   );
   customerRatings$?: Observable<Map<string, Rating>>;
+  productsCallState$: Observable<CallState> = this.store.select(
+    selectors.getProductsCallState
+  );
+  // Make LoadingState be available in the template.
+  readonly LoadingState = LoadingState;
 
   constructor(
     private readonly store: Store<GlobalState>,

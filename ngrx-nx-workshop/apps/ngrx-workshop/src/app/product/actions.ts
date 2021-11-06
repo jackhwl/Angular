@@ -18,3 +18,5 @@ export const productFetchedSuccess = createAction(
   '[Product API] single product fetched success',
   props<{ product: Product }>()
 );
+
+export const productsFetch = createAction('[Product Effect] fetching products');
