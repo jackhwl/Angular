@@ -5,3 +5,7 @@
 ## publish will hide subject from multicast so outside can only call subscribe not next, complete
 
 ## AsyncSubject emits last value when complete.
+
+## behavior Subject has an initial value
+
+## replySubject will reply buffer value
