@@ -1,7 +1,7 @@
 <div class="tool-bar">
     <span class="search-tool">
         <label for="herosearch">Search: </label>
-        <input name="herosearch" />
+        <input name="herosearch" (input)="doSearch($event)" />
     </span>
     <span class="page-tool">
         <label>Page ? of ? : </label>

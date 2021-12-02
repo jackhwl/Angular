@@ -83,7 +83,7 @@ export class HeroService {
                 .get(HERO_API, {
                     params: new HttpParams({ fromObject: { ...params } }),
                 })
-                .pipe(map((res: any) => res.data.results)),
+                .pipe(map((res: any) => res.data?.results)),
         ),
     );
 
