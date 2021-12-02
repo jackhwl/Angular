@@ -22,6 +22,6 @@
         <label>Total Results: ???</label>
     </span>
 </div>
-<div class="table-content">
+<div class="table-content" *ngIf="heroes$ | async as heroes">
     <rx-hero-badge *ngFor="let hero of heroes" [hero]="hero"></rx-hero-badge>
 </div>
