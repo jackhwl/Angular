@@ -9,10 +9,19 @@ import { Hero, HeroService } from '../../services/hero.service';
 })
 export class HeroTableComponent {
     heroes$: Observable<Hero[]> = this.hero.heroes$;
+    search$ = this.hero.searchBS;
+    page$ = this.hero.userPage$;
+    totalResults$ = this.hero.totalResults$;
+    totalPages$ = this.hero.totalPages$;
 
     constructor(public hero: HeroService) {}
 
     doSearch(event: any) {
         this.hero.searchBS.next(event.target.value);
+    }
+
+    movePageBy(moveBy) {
+        const currentPage = this.hero.pageBS.getValue();
+        this.hero.pageBS.next(currentPage + moveBy);
     }
 }

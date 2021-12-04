@@ -1,13 +1,17 @@
 <div class="tool-bar">
     <span class="search-tool">
         <label for="herosearch">Search: </label>
-        <input name="herosearch" (input)="doSearch($event)" />
+        <input
+            name="herosearch"
+            [value]="search$ | async"
+            (input)="doSearch($event)"
+        />
     </span>
     <span class="page-tool">
-        <label>Page ? of ? : </label>
+        <label>Page {{ page$ | async }} of {{ totalPages$ | async }} : </label>
         <span class="buttons">
-            <button class="prev">Prev</button>
-            <button class="next">Next</button>
+            <button class="prev" (click)="movePageBy(-1)">Prev</button>
+            <button class="next" (click)="movePageBy(1)">Next</button>
         </span>
     </span>
     <span class="result-tool">
@@ -19,7 +23,7 @@
         </span>
     </span>
     <span class="total-tool">
-        <label>Total Results: ???</label>
+        <label>Total Results: {{ totalResults$ | async }}</label>
     </span>
 </div>
 <div class="table-content" *ngIf="heroes$ | async as heroes">

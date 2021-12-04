@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { fn } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { debounceTime, map, shareReplay, switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface Hero {
@@ -62,7 +63,13 @@ export class HeroService {
     limitBS = new BehaviorSubject<number>(DEFAULT_LIMIT);
     pageBS = new BehaviorSubject<number>(DEFAULT_PAGE);
 
-    params$ = combineLatest([this.searchBS, this.limitBS, this.pageBS]).pipe(
+    userPage$ = this.pageBS.pipe(map(p => p + 1));
+
+    private params$ = combineLatest([
+        this.searchBS,
+        this.limitBS,
+        this.pageBS,
+    ]).pipe(
         map(([searchTerm, limit, page]) => {
             const params: HeroQueryParams = {
                 apikey: environment.MARVEL_API.PUBLIC_KEY,
@@ -77,14 +84,26 @@ export class HeroService {
         }),
     );
 
-    heroes$: Observable<Hero[]> = this.params$.pipe(
+    private heroesResponse$ = this.params$.pipe(
+        debounceTime(500),
         switchMap(params =>
-            this.http
-                .get(HERO_API, {
-                    params: new HttpParams({ fromObject: { ...params } }),
-                })
-                .pipe(map((res: any) => res.data?.results)),
+            this.http.get(HERO_API, {
+                params: new HttpParams({ fromObject: { ...params } }),
+            }),
         ),
+        shareReplay(1),
+    );
+
+    heroes$: Observable<Hero[]> = this.heroesResponse$.pipe(
+        map((res: any) => res.data?.results),
+    );
+
+    totalResults$ = this.heroesResponse$.pipe(
+        map((res: any) => res.data?.total),
+    );
+
+    totalPages$ = combineLatest([this.totalResults$, this.limitBS]).pipe(
+        map(([totalResults, limit]) => Math.ceil(totalResults / limit)),
     );
 
     constructor(private http: HttpClient) {}
