@@ -1,7 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    shareReplay,
+    switchMap,
+    tap,
+} from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface Hero {
@@ -63,6 +70,8 @@ export class HeroService {
     private pageBS = new BehaviorSubject<number>(DEFAULT_PAGE);
     private loadingBS = new BehaviorSubject(false);
 
+    private heroesResponseCache = {};
+
     search$ = this.searchBS.asObservable();
     limit$ = this.limitBS.asObservable();
     //page$ = this.pageBS.asObservable();
@@ -75,6 +84,9 @@ export class HeroService {
         this.limitBS,
         this.pageBS,
     ]).pipe(
+        distinctUntilChanged(
+            (prev, curr) => JSON.stringify(prev) === JSON.stringify(curr),
+        ),
         map(([searchTerm, limit, page]) => {
             const params: HeroQueryParams = {
                 apikey: environment.MARVEL_API.PUBLIC_KEY,
@@ -92,11 +104,17 @@ export class HeroService {
     private heroesResponse$ = this.params$.pipe(
         debounceTime(500),
         tap(() => this.loadingBS.next(true)),
-        switchMap(params =>
-            this.http.get(HERO_API, {
-                params: new HttpParams({ fromObject: { ...params } }),
-            }),
-        ),
+        switchMap(params => {
+            const paramsStr = JSON.stringify(params);
+            if (this.heroesResponseCache[paramsStr]) {
+                return of(this.heroesResponseCache[paramsStr]);
+            }
+            return this.http
+                .get(HERO_API, {
+                    params: new HttpParams({ fromObject: { ...params } }),
+                })
+                .pipe(tap(res => (this.heroesResponseCache[paramsStr] = res)));
+        }),
         tap(() => this.loadingBS.next(false)),
         shareReplay(1),
     );
