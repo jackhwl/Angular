@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HeroService } from '../../services/hero.service';
@@ -7,8 +7,9 @@ import { HeroService } from '../../services/hero.service';
     selector: 'rx-hero-table',
     templateUrl: './hero-table.component.html',
     styleUrls: ['./hero-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroTableComponent {
+export class HeroTableComponent implements OnDestroy {
     vm$ = combineLatest([
         this.hero.heroes$,
         this.hero.search$,
@@ -55,5 +56,9 @@ export class HeroTableComponent {
 
     setLimit(limmit) {
         this.hero.setLimit(limmit);
+    }
+
+    ngOnDestroy() {
+        this.hero.resetCache();
     }
 }

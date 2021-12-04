@@ -40,7 +40,7 @@ export interface HeroSubItem {
     name: string;
 }
 
-export interface HeroQueryParams {
+export interface HeroRequestParams {
     apikey: string;
     limit: number;
     offset: number;
@@ -70,7 +70,7 @@ export class HeroService {
     private pageBS = new BehaviorSubject<number>(DEFAULT_PAGE);
     private loadingBS = new BehaviorSubject(false);
 
-    private heroesResponseCache = {};
+    private heroesResponseCache = new Map();
 
     search$ = this.searchBS.asObservable();
     limit$ = this.limitBS.asObservable();
@@ -79,16 +79,16 @@ export class HeroService {
 
     userPage$ = this.pageBS.pipe(map(p => p + 1));
 
-    private params$: Observable<HeroQueryParams> = combineLatest([
-        this.searchBS,
+    private params$: Observable<HeroRequestParams> = combineLatest([
+        this.searchBS.pipe(debounceTime(500)),
         this.limitBS,
-        this.pageBS,
+        this.pageBS.pipe(debounceTime(500)),
     ]).pipe(
         distinctUntilChanged(
             (prev, curr) => JSON.stringify(prev) === JSON.stringify(curr),
         ),
         map(([searchTerm, limit, page]) => {
-            const params: HeroQueryParams = {
+            const params: HeroRequestParams = {
                 apikey: environment.MARVEL_API.PUBLIC_KEY,
                 limit: +`${limit}`,
                 offset: +`${page * limit}`, // page * limit
@@ -102,18 +102,19 @@ export class HeroService {
     );
 
     private heroesResponse$ = this.params$.pipe(
-        debounceTime(500),
         tap(() => this.loadingBS.next(true)),
         switchMap(params => {
-            const paramsStr = JSON.stringify(params);
-            if (this.heroesResponseCache[paramsStr]) {
-                return of(this.heroesResponseCache[paramsStr]);
+            const paramsAsStr = JSON.stringify(params);
+            if (this.heroesResponseCache.has(paramsAsStr)) {
+                return of(this.heroesResponseCache.get(paramsAsStr));
             }
             return this.http
                 .get(HERO_API, {
                     params: new HttpParams({ fromObject: { ...params } }),
                 })
-                .pipe(tap(res => (this.heroesResponseCache[paramsStr] = res)));
+                .pipe(
+                    tap(res => this.heroesResponseCache.set(paramsAsStr, res)),
+                );
         }),
         tap(() => this.loadingBS.next(false)),
         shareReplay(1),
@@ -133,18 +134,26 @@ export class HeroService {
 
     constructor(private http: HttpClient) {}
 
-    doSearch(term: string) {
+    doSearch(term: string): void {
         this.searchBS.next(term);
-        this.pageBS.next(DEFAULT_PAGE);
+        this.resetPage();
     }
 
-    movePageBy(moveBy: number) {
+    movePageBy(moveBy: number): void {
         const currentPage = this.pageBS.getValue();
         this.pageBS.next(currentPage + moveBy);
     }
 
-    setLimit(newLimmit: number) {
+    setLimit(newLimmit: number): void {
         this.limitBS.next(newLimmit);
+        this.resetPage();
+    }
+
+    resetCache() {
+        this.heroesResponseCache.clear();
+    }
+
+    private resetPage() {
         this.pageBS.next(DEFAULT_PAGE);
     }
 }
