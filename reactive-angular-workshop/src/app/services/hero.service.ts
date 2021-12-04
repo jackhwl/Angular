@@ -1,8 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { fn } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, shareReplay, switchMap } from 'rxjs/operators';
+import { debounceTime, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface Hero {
@@ -59,13 +58,19 @@ export const DEFAULT_PAGE = 0;
 export class HeroService {
     limits = LIMITS;
 
-    searchBS = new BehaviorSubject<string>(DEFAULT_SEARCH);
-    limitBS = new BehaviorSubject<number>(DEFAULT_LIMIT);
-    pageBS = new BehaviorSubject<number>(DEFAULT_PAGE);
+    private searchBS = new BehaviorSubject<string>(DEFAULT_SEARCH);
+    private limitBS = new BehaviorSubject<number>(DEFAULT_LIMIT);
+    private pageBS = new BehaviorSubject<number>(DEFAULT_PAGE);
+    private loadingBS = new BehaviorSubject(false);
+
+    search$ = this.searchBS.asObservable();
+    limit$ = this.limitBS.asObservable();
+    //page$ = this.pageBS.asObservable();
+    loading$ = this.loadingBS.asObservable();
 
     userPage$ = this.pageBS.pipe(map(p => p + 1));
 
-    private params$ = combineLatest([
+    private params$: Observable<HeroQueryParams> = combineLatest([
         this.searchBS,
         this.limitBS,
         this.pageBS,
@@ -86,20 +91,22 @@ export class HeroService {
 
     private heroesResponse$ = this.params$.pipe(
         debounceTime(500),
+        tap(() => this.loadingBS.next(true)),
         switchMap(params =>
             this.http.get(HERO_API, {
                 params: new HttpParams({ fromObject: { ...params } }),
             }),
         ),
+        tap(() => this.loadingBS.next(false)),
         shareReplay(1),
     );
 
     heroes$: Observable<Hero[]> = this.heroesResponse$.pipe(
-        map((res: any) => res.data?.results),
+        map((res: any) => res.data.results),
     );
 
     totalResults$ = this.heroesResponse$.pipe(
-        map((res: any) => res.data?.total),
+        map((res: any) => res.data.total),
     );
 
     totalPages$ = combineLatest([this.totalResults$, this.limitBS]).pipe(
@@ -107,4 +114,19 @@ export class HeroService {
     );
 
     constructor(private http: HttpClient) {}
+
+    doSearch(term: string) {
+        this.searchBS.next(term);
+        this.pageBS.next(DEFAULT_PAGE);
+    }
+
+    movePageBy(moveBy: number) {
+        const currentPage = this.pageBS.getValue();
+        this.pageBS.next(currentPage + moveBy);
+    }
+
+    setLimit(newLimmit: number) {
+        this.limitBS.next(newLimmit);
+        this.pageBS.next(DEFAULT_PAGE);
+    }
 }
