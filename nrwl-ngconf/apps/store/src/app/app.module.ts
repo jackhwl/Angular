@@ -5,14 +5,14 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
-import { StoreSharedUiModule } from '@nrwl-ngconf/store/shared-ui';
+import { StoreUiSharedModule } from '@nrwl-ngconf/store/ui-shared';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     MatCardModule,
-    StoreSharedUiModule,
+    StoreUiSharedModule,
     RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' })
   ],
   providers: [],

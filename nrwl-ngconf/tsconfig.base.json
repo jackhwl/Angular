@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nrwl-ngconf/store/shared-ui": ["libs/store/shared-ui/src/index.ts"]
+      "@nrwl-ngconf/store/ui-shared": ["libs/store/ui-shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

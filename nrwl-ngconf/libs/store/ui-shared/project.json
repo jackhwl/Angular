@@ -1,14 +1,14 @@
 {
   "projectType": "library",
-  "root": "libs/store/shared-ui",
-  "sourceRoot": "libs/store/shared-ui/src",
+  "root": "libs/store/ui-shared",
+  "sourceRoot": "libs/store/ui-shared/src",
   "prefix": "nrwl-ngconf",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/store/shared-ui"],
+      "outputs": ["coverage/libs/store/ui-shared"],
       "options": {
-        "jestConfig": "libs/store/shared-ui/jest.config.js",
+        "jestConfig": "libs/store/ui-shared/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -16,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/store/shared-ui/src/**/*.ts",
-          "libs/store/shared-ui/src/**/*.html"
+          "libs/store/ui-shared/src/**/*.ts",
+          "libs/store/ui-shared/src/**/*.html"
         ]
       }
     }

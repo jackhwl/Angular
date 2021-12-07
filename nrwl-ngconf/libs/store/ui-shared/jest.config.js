@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'store-shared-ui',
+  displayName: 'store-ui-shared',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$'
     }
   },
-  coverageDirectory: '../../../coverage/libs/store/shared-ui',
+  coverageDirectory: '../../../coverage/libs/store/ui-shared',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular'
   },
