@@ -5,5 +5,13 @@
     "store-e2e": "apps/store-e2e",
     "store-ui-shared": "libs/store/ui-shared",
     "store-util-formatters": "libs/store/util-formatters"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/src/tasks-runner/default-tasks-runner",
+      "options": {
+        "cacheableOperations": ["test"]
+      }
+    }
   }
 }
