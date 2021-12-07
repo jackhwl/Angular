@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nrwl-ngconf/store/ui-shared": ["libs/store/ui-shared/src/index.ts"]
+      "@nrwl-ngconf/store/ui-shared": ["libs/store/ui-shared/src/index.ts"],
+      "@nrwl-ngconf/store/util-formatters": [
+        "libs/store/util-formatters/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

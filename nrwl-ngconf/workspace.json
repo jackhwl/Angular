@@ -3,6 +3,7 @@
   "projects": {
     "store": "apps/store",
     "store-e2e": "apps/store-e2e",
-    "store-ui-shared": "libs/store/ui-shared"
+    "store-ui-shared": "libs/store/ui-shared",
+    "store-util-formatters": "libs/store/util-formatters"
   }
 }
