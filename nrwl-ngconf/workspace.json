@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "store": "apps/store",
-    "store-e2e": "apps/store-e2e"
+    "store-e2e": "apps/store-e2e",
+    "store-shared-ui": "libs/store/shared-ui"
   }
 }
