@@ -13,7 +13,18 @@ import { StoreUiSharedModule } from '@nrwl-ngconf/store/ui-shared';
     BrowserModule,
     MatCardModule,
     StoreUiSharedModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' })
+    RouterModule.forRoot(
+      [
+        {
+          path: 'game/:id',
+          loadChildren: () =>
+            import('@nrwl-ngconf/store/feature-game-detail').then(
+              module => module.StoreFeatureGameDetailModule
+            )
+        }
+      ],
+      { initialNavigation: 'enabledBlocking' }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
