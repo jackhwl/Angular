@@ -65,6 +65,7 @@
       },
       "defaultConfiguration": "development",
       "options": {
+        "browserTarget": "store:build",
         "proxyConfig": "apps/store/proxy.conf.json"
       }
     },

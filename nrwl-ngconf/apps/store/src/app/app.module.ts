@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { StoreUiSharedModule } from '@nrwl-ngconf/store/ui-shared';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { StoreUiSharedModule } from '@nrwl-ngconf/store/ui-shared';
     BrowserModule,
     MatCardModule,
     StoreUiSharedModule,
+    HttpClientModule,
     RouterModule.forRoot(
       [
         {

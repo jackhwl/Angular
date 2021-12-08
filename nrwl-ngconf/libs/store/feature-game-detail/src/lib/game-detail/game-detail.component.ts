@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map } from 'rxjs';
+import { map, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { formatRating } from '@nrwl-ngconf/store/util-formatters';
 
 @Component({
   selector: 'nrwl-ngconf-game-detail',
@@ -8,9 +10,12 @@ import { map } from 'rxjs';
   styleUrls: ['./game-detail.component.css']
 })
 export class GameDetailComponent {
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
-  gameId$ = this.route.paramMap.pipe(
-    map((params: ParamMap) => params.get('id'))
+  game$ = this.route.paramMap.pipe(
+    map((params: ParamMap) => params.get('id')),
+    switchMap(id => this.http.get<any>(`/api/games/${id}`))
   );
+
+  formatRating = formatRating;
 }
