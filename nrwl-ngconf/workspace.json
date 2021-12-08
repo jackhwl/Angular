@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "api": "apps/api",
     "store": "apps/store",
     "store-e2e": "apps/store-e2e",
     "store-feature-game-detail": "libs/store/feature-game-detail",
