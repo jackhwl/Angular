@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { formatRating } from '@nrwl-ngconf/store/util-formatters';
+import { Game } from '@nrwl-ngconf/util-interface';
 
 @Component({
   selector: 'nrwl-ngconf-game-detail',
@@ -14,7 +15,7 @@ export class GameDetailComponent {
 
   game$ = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('id')),
-    switchMap(id => this.http.get<any>(`/api/games/${id}`))
+    switchMap(id => this.http.get<Game>(`/api/games/${id}`))
   );
 
   formatRating = formatRating;

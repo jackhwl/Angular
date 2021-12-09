@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { Game } from '@nrwl-ngconf/util-interface';
 
-const games = [
+const games: Game[] = [
   {
     id: 'settlers-in-the-can',
     name: 'Settlers in the Can',

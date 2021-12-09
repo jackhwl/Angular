@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { getAllGames } from './fake-api';
 import { formatRating } from '@nrwl-ngconf/store/util-formatters';
 import { HttpClient } from '@angular/common/http';
+import { Game } from '@nrwl-ngconf/util-interface';
 
 @Component({
   selector: 'bg-hoard-root',
@@ -13,5 +14,5 @@ export class AppComponent {
 
   title = 'Board Game Hoard';
   formatRating = formatRating;
-  games = this.http.get<any[]>('/api/games');
+  games = this.http.get<Game[]>('/api/games');
 }
