@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'bg-hoard-header',
+  selector: 'nrwl-ngconf-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

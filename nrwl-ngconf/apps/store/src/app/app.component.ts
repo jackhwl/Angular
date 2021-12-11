@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { getAllGames } from './fake-api';
 import { formatRating } from '@nrwl-ngconf/store/util-formatters';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@nrwl-ngconf/util-interface';
 
 @Component({
-  selector: 'bg-hoard-root',
+  selector: 'nrwl-ngconf-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
