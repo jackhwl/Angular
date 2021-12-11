@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { formatRating } from '@nrwl-ngconf/store/util-formatters';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@nrwl-ngconf/util-interface';
+//import { sendNotification } from '@nrwl-ngconf/api-util-notifications';
 
 @Component({
   selector: 'nrwl-ngconf-root',

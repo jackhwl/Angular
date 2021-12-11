@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nrwl-ngconf/api/util-notifications": [
+        "libs/api/util-notifications/src/index.ts"
+      ],
       "@nrwl-ngconf/store/feature-game-detail": [
         "libs/store/feature-game-detail/src/index.ts"
       ],
