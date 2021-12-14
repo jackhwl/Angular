@@ -18,7 +18,7 @@
     "@ngrx/router-store": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "@ngrx/store-devtools": "^13.0.2",
-    "@nrwl/angular": "^11.6.3",
+    "@nrwl/angular": "^13.3.2",
     "core-js": "^2.6.12",
     "node-sass": "^5.0.0",
     "rxjs": "6.6.3",
