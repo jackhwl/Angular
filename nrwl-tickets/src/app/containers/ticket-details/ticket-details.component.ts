@@ -54,12 +54,13 @@ export class TicketDetailsComponent implements OnInit {
     // );
   }
 
-  get id() {
-    return this.detailForm.get("id");
-  }
+  // only needed in Template-Driven Forms when display {{id.value}} in form
+  // get id() {
+  //   return this.detailForm.get("id");
+  // }
 
-  onSubmit(fm: FormGroup): void {
-    const ticket = fm.value as Ticket;
+  onSubmit(detailForm: FormGroup): void {
+    const ticket = detailForm.value as Ticket;
     //console.log(fm);
     if (ticket.id !== null && ticket.id !== undefined) {
       this.updateTicket(ticket);
