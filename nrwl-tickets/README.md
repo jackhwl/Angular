@@ -27,3 +27,11 @@ Please send us the link to your Stackblitz fork. We will continue to work on it 
 
 npm install jest jest-preset-angular @types/jest --save-dev
 npm uninstall karma karma-chrome-launcher karma-coverage-istanbul-reporter karma-jasmine karma-jasmine-html-reporter
+
+## Key Differences Between Reactive Forms and Template-Driven Forms
+
+Reactive forms are synchronous in nature, whereas template-driven forms are asynchronous.
+The data model in reactive forms is more structured than template-driven forms.
+Form validations in reactive forms are handled through functions, whereas in template-driven forms they are handled through directives.
+Reactive forms are immutable in nature, whereas template-driven forms are mutable.
+Reactive forms are more explicit and created in the component class and template-driven forms are less explicit and created by directives.
