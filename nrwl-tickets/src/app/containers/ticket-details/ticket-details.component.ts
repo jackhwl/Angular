@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
@@ -8,6 +8,8 @@ import { TicketsActions } from "src/app/actions";
 import { Ticket } from "../../services/backend.service";
 import * as TicketsSelectors from "../../reducers/tickets.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
+import { tick } from "@angular/core/testing";
+import { map, tap } from "rxjs/operators";
 
 @Component({
   selector: "vi-ticket-details",
@@ -16,6 +18,7 @@ import * as UsersSelectors from "../../reducers/users.selectors";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketDetailsComponent implements OnInit {
+  detailForm$: Observable<FormGroup>;
   users$ = this.store.pipe(select(UsersSelectors.getAllUsers));
   detailForm = this.fb.group({
     title: [""],
@@ -34,20 +37,30 @@ export class TicketDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selectedTicketByRoute$.subscribe((ticket: Ticket) =>
-      this.detailForm.patchValue({
-        ...ticket,
-        title: ticket.id === null ? "New Ticket" : "Edit Ticket"
-      })
+    this.detailForm$ = this.selectedTicketByRoute$.pipe(
+      //tap(ticket => console.log(ticket)),
+      map(ticket =>
+        this.fb.group({
+          ...ticket,
+          title: ticket.id === null ? "New Ticket" : "Edit Ticket"
+        })
+      )
     );
+    // this.selectedTicketByRoute$.subscribe((ticket: Ticket) =>
+    //   this.detailForm.patchValue({
+    //     ...ticket,
+    //     title: ticket.id === null ? "New Ticket" : "Edit Ticket"
+    //   })
+    // );
   }
 
-  get title() {
-    return this.detailForm.get("title");
+  get id() {
+    return this.detailForm.get("id");
   }
 
-  onSubmit(): void {
-    const ticket = this.detailForm.value as Ticket;
+  onSubmit(fm: FormGroup): void {
+    const ticket = fm.value as Ticket;
+    //console.log(fm);
     if (ticket.id !== null && ticket.id !== undefined) {
       this.updateTicket(ticket);
     } else {
