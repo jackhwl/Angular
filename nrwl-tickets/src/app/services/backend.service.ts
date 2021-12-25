@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { title } from "process";
 import { Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { ErrorService } from "./error.service";
@@ -19,6 +20,12 @@ export type Ticket = {
   description: string;
   assigneeId: number;
   completed: boolean;
+  phones: Phone[];
+};
+
+export type Phone = {
+  type: string;
+  number: string;
 };
 
 function randomDelay() {
@@ -34,13 +41,21 @@ export class BackendService {
       id: 0,
       description: "Install a monitor arm",
       assigneeId: 111,
-      completed: false
+      completed: false,
+      phones: [
+        { type: "home", number: "111" },
+        { type: "mobile", number: "222" }
+      ]
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 111,
-      completed: false
+      completed: false,
+      phones: [
+        { type: "home", number: "333" },
+        { type: "mobile", number: "444" }
+      ]
     }
   ];
 
@@ -92,12 +107,17 @@ export class BackendService {
     return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 
-  newTicket(payload: { description: string; assigneeId: number }) {
+  newTicket(payload: {
+    description: string;
+    assigneeId: number;
+    phones: Phone[];
+  }) {
     const newTicket: Ticket = {
       id: ++this.lastId,
       description: payload.description,
       assigneeId: payload.assigneeId,
-      completed: false
+      completed: false,
+      phones: payload.phones
     };
 
     this.storedTickets = this.storedTickets.concat(newTicket);
