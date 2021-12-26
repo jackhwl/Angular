@@ -1,5 +1,4 @@
-<ng-container>
-  *ngIf="detailForm$ | async as detailForm"
+<ng-container *ngIf="detailForm$ | async as detailForm">
   <mat-card>
     <mat-card-title>
       {{ detailForm.value.title }}
@@ -39,7 +38,6 @@
           ></textarea>
         </mat-form-field>
       </mat-card-content>
-      ===== detailForm.value.phones.number
       <div formArrayName="phones">
         <div
           *ngFor="
@@ -49,7 +47,6 @@
           [formGroupName]="index"
         >
           <div>
-            [formGroup]="formGroup"
             <input type="text" formControlName="type" />
             <input type="text" formControlName="number" />
           </div>
