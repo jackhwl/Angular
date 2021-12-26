@@ -10,6 +10,7 @@ import * as TicketsSelectors from "../../reducers/tickets.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
 import { tick } from "@angular/core/testing";
 import { map, tap } from "rxjs/operators";
+import { fn } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "vi-ticket-details",
@@ -25,10 +26,35 @@ export class TicketDetailsComponent implements OnInit {
     id: [""],
     assigneeId: ["", Validators.required],
     completed: ["", Validators.required],
-    description: ["", Validators.required]
+    description: ["", Validators.required],
+    phones: this.fb.array([
+      this.fb.group({
+        type: "",
+        number: ""
+      })
+    ])
   });
   selectedTicketByRoute$: Observable<Ticket> = this.store.pipe(
     select(TicketsSelectors.getSelectedByRoute)
+  );
+  formGroup$ = this.selectedTicketByRoute$.pipe(
+    map((ticket: Ticket) =>
+      this.fb.group({
+        id: [ticket.id],
+        assigneeId: [ticket.assigneeId, Validators.required],
+        completed: [ticket.completed, Validators.required],
+        description: [ticket.description, Validators.required],
+        phones: this.fb.array(
+          ticket.phones.map(phone =>
+            this.fb.group({
+              type: [phone.type],
+              number: [phone.number]
+            })
+          )
+        ),
+        title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
+      })
+    )
   );
   constructor(
     private fb: FormBuilder,
@@ -37,27 +63,24 @@ export class TicketDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.detailForm$ = this.selectedTicketByRoute$.pipe(
-      //tap(ticket => console.log(ticket)),
-      map(ticket =>
-        this.fb.group({
-          ...ticket,
-          title: ticket.id === null ? "New Ticket" : "Edit Ticket"
-        })
-      )
-    );
-    // this.selectedTicketByRoute$.subscribe((ticket: Ticket) =>
-    //   this.detailForm.patchValue({
-    //     ...ticket,
-    //     title: ticket.id === null ? "New Ticket" : "Edit Ticket"
-    //   })
+    // this.detailForm$ = this.selectedTicketByRoute$.pipe(
+    //   //tap(ticket => console.log(ticket)),
+    //   map(ticket =>
+    //     this.fb.group({
+    //       ...ticket,
+    //       title: ticket.id === null ? "New Ticket" : "Edit Ticket"
+    //     })
+    //   )
     // );
+    this.formGroup$.subscribe(
+      (ticket: FormGroup) => (this.detailForm = ticket)
+    );
   }
 
   // only needed in Template-Driven Forms when display {{id.value}} in form
-  // get id() {
-  //   return this.detailForm.get("id");
-  // }
+  get id() {
+    return this.detailForm.get("id");
+  }
 
   onSubmit(detailForm: FormGroup): void {
     const ticket = detailForm.value as Ticket;
