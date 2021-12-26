@@ -40,7 +40,8 @@ export const emptyTicket: Ticket = {
   id: null,
   description: "",
   assigneeId: null,
-  completed: false
+  completed: false,
+  phones: []
 };
 
 export const getSelected = createSelector(
