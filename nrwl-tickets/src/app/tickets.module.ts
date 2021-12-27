@@ -10,6 +10,7 @@ import { TicketsEffects } from "./effects/tickets.effects";
 import { TicketsComponent } from "./containers/tickets/tickets.component";
 import { TicketsRoutingModule } from "./tickets-routing.module";
 import { UsersEffects } from "./effects/users.effects";
+import { UtilService } from "./services";
 
 @NgModule({
   declarations: [TicketsComponent],
@@ -24,6 +25,6 @@ import { UsersEffects } from "./effects/users.effects";
     ),
     EffectsModule.forFeature([TicketsEffects, UsersEffects])
   ],
-  providers: [BackendService]
+  providers: [BackendService, UtilService]
 })
 export class TicketsModule {}
