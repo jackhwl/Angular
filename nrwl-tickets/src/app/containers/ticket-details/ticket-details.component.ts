@@ -9,6 +9,7 @@ import { Ticket } from "../../services/backend.service";
 import * as TicketsSelectors from "../../reducers/tickets.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
 import { map, tap } from "rxjs/operators";
+import { UtilService } from "src/app/services";
 
 @Component({
   selector: "vi-ticket-details",
@@ -23,30 +24,14 @@ export class TicketDetailsComponent implements OnInit {
     select(TicketsSelectors.getSelectedByRoute)
   );
   constructor(
-    private fb: FormBuilder,
     private store: Store<{}>,
-    private router: Router
+    private router: Router,
+    private service: UtilService
   ) {}
 
   ngOnInit(): void {
     this.detailForm$ = this.selectedTicketByRoute$.pipe(
-      map((ticket: Ticket) =>
-        this.fb.group({
-          id: [ticket.id],
-          assigneeId: [ticket.assigneeId, Validators.required],
-          completed: [ticket.completed, Validators.required],
-          description: [ticket.description, Validators.required],
-          phones: this.fb.array(
-            ticket.phones.map(phone =>
-              this.fb.group({
-                type: [phone.type],
-                number: [phone.number]
-              })
-            )
-          ),
-          title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
-        })
-      )
+      map((ticket: Ticket) => this.service.generateTicketForm(ticket))
     );
     // this.detailForm$.subscribe(
     //   (ticket: FormGroup) => (this.detailForm = ticket)
