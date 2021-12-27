@@ -64,4 +64,17 @@ export class TicketDetailsComponent implements OnInit {
   updateTicket(ticket: Ticket): void {
     this.store.dispatch(TicketsActions.updateTicket({ ticket }));
   }
+
+  createPhone() {
+    // return this.fb.group({
+    //   name: '',
+    //   description: '',
+    //   price: ''
+    // });
+  }
+
+  addPhone(): void {
+    // this.items = this.orderForm.get('items') as FormArray;
+    // this.items.push(this.createPhone());
+  }
 }

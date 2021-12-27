@@ -6,8 +6,13 @@ import { RouterModule } from "@angular/router";
 
 import { TicketDetailsComponent } from "./ticket-details/ticket-details.component";
 import { TicketsListComponent } from "./tickets-list/tickets-list.component";
+import { PhoneComponent } from "./phone/phone.component";
 
-export const COMPONENTS = [TicketsListComponent, TicketDetailsComponent];
+export const COMPONENTS = [
+  TicketsListComponent,
+  TicketDetailsComponent,
+  PhoneComponent
+];
 
 @NgModule({
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule],
