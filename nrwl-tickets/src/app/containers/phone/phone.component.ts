@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from "@angular/core";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "vi-phone",
@@ -7,7 +15,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhoneComponent implements OnInit {
+  @Input() formGroup: FormGroup;
+  @Input() index: number;
+  @Output() deletePhone: EventEmitter<number> = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
+
+  delete() {
+    this.deletePhone.emit(this.index);
+  }
 }

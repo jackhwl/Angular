@@ -77,4 +77,9 @@ export class TicketDetailsComponent implements OnInit {
     // this.items = this.orderForm.get('items') as FormArray;
     // this.items.push(this.createPhone());
   }
+
+  deletePhone(index: number) {
+    console.log("delete phone index:", index);
+    //this.teamFormService.deletePlayer(index)
+  }
 }

@@ -1,15 +1,11 @@
-<div>
+<div [formGroup]="formGroup">
   <mat-form-field>
     <mat-label>Type</mat-label>
-    <input type="text" matInput formControlNamea="type" placeholder="Type" />
+    <input type="text" matInput formControlName="type" placeholder="Type" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Number</mat-label>
-    <input
-      type="text"
-      matInput
-      formControlNamea="number"
-      placeholder="Number"
-    />
+    <input type="text" matInput formControlName="number" placeholder="Number" />
   </mat-form-field>
+  <button mat-raised-button (click)="delete()">Delete</button>
 </div>
