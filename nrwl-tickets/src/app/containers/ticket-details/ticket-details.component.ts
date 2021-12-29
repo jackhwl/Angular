@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { TicketsActions } from "src/app/actions";
 import { Ticket } from "../../services/backend.service";
 import * as TicketsSelectors from "../../reducers/tickets.selectors";
@@ -73,7 +73,14 @@ export class TicketDetailsComponent implements OnInit {
     // });
   }
 
-  addPhone(): void {
+  addPhone(detailForm): void {
+    console.log("detailForm.value", detailForm.value);
+    const t = detailForm.value;
+    t.phones.push({
+      type: "",
+      number: "string"
+    });
+    this.detailForm$ = of(this.service.generateTicketForm(t));
     // this.items = this.orderForm.get('items') as FormArray;
     // this.items.push(this.createPhone());
   }

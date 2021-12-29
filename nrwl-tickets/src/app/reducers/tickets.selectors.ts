@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { getTicketModuleState, TicketModuleState } from ".";
-import { Ticket } from "../services/backend.service";
+import { emptyTicket, Ticket } from "../services/backend.service";
 import {
   TICKETS_FEATURE_KEY,
   TicketState,
@@ -35,14 +35,6 @@ export const getSelectedId = createSelector(
   getTicketsState,
   (state: TicketState) => state.selectedId
 );
-
-export const emptyTicket: Ticket = {
-  id: null,
-  description: "",
-  assigneeId: null,
-  completed: false,
-  phones: []
-};
 
 export const getSelected = createSelector(
   getTicketsEntities,

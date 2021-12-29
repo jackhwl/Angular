@@ -46,10 +46,6 @@
           "
           [formGroupName]="index"
         >
-          <!-- <div>
-            <input type="text" formControlName="type" />
-            <input type="text" formControlName="number" />
-          </div> -->
           <vi-phone
             [formGroup]="formGroup"
             [index]="index"
@@ -57,7 +53,7 @@
           ></vi-phone>
         </div>
       </div>
-      <button type="button" (click)="addPhone()">Add Phone</button>
+      <button type="button" (click)="addPhone(detailForm)">Add Phone</button>
       <mat-card-actions>
         <button
           id="save"
