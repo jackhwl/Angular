@@ -138,4 +138,24 @@ export class TicketsEffects {
       })
     )
   );
+
+  addPhone$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketsActions.addPhone),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService.addPhone(action.ticket).pipe(
+            switchMap(_ => [
+              TicketsApiActions.addPhoneSuccess({
+                ticket: action.ticket
+              })
+            ])
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketsApiActions.addPhoneFailure({ error });
+        }
+      })
+    )
+  );
 }

@@ -91,7 +91,14 @@ const _ticketsReducer = createReducer(
   on(TicketsApiActions.updateTicketFailure, (state, { error }) => ({
     ...state,
     error
-  }))
+  })),
+  on(TicketsActions.addPhone, (state, { ticket }) => ({
+    ...state,
+    loaded: false
+  })),
+  on(TicketsApiActions.addPhoneSuccess, (state, { ticket }) =>
+    ticketsAdapter.upsertOne(ticket, { ...state, loaded: true, error: null })
+  )
 );
 
 export function ticketsReducer(state: TicketState | undefined, action: Action) {

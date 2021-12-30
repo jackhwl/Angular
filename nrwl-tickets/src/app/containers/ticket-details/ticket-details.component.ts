@@ -73,16 +73,9 @@ export class TicketDetailsComponent implements OnInit {
     // });
   }
 
-  addPhone(detailForm): void {
-    console.log("detailForm.value", detailForm.value);
-    const t = detailForm.value;
-    t.phones.push({
-      type: "",
-      number: "string"
-    });
-    this.detailForm$ = of(this.service.generateTicketForm(t));
-    // this.items = this.orderForm.get('items') as FormArray;
-    // this.items.push(this.createPhone());
+  addPhone(detailForm: FormGroup): void {
+    const ticket = detailForm.value as Ticket;
+    this.store.dispatch(TicketsActions.addPhone({ ticket }));
   }
 
   deletePhone(index: number) {
