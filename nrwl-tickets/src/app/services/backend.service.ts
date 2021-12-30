@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { ErrorService } from "./error.service";
@@ -42,23 +41,34 @@ function randomDelay() {
 
 @Injectable()
 export class BackendService {
-  private ticketForm: BehaviorSubject<
-    FormGroup | undefined
-  > = new BehaviorSubject(this.fb.group(emptyTicket));
-  ticketForm$: Observable<FormGroup> = this.ticketForm.asObservable();
+  // private ticketForm: BehaviorSubject<
+  //   FormGroup | undefined
+  // > = new BehaviorSubject(this.fb.group(emptyTicket));
+  // ticketForm$: Observable<FormGroup> = this.ticketForm.asObservable();
 
-  addPhone() {
-    const currentTeam = this.ticketForm.getValue();
-    // const currentPlayers = currentTeam.get('players') as FormArray
-    // currentPlayers.push(
-    //   this.fb.group(
-    //     new PhoneForm(new Player('', '', 0, ''))
-    //   )
-    // )
-    this.ticketForm.next(currentTeam);
+  addPhone(updates: Ticket) {
+    const updatedTicket = { ...updates, phones: [...updates.phones] };
+    updatedTicket.phones.push({ type: "", number: "" });
+
+    this.storedTickets = this.storedTickets.map(t =>
+      t.id === updatedTicket.id ? updatedTicket : t
+    );
+
+    return of(updatedTicket).pipe(delay(randomDelay()));
   }
 
-  constructor(private errorService: ErrorService, private fb: FormBuilder) {}
+  // addPhone0() {
+  //   const currentTeam = this.ticketForm.getValue();
+  //   // const currentPlayers = currentTeam.get('players') as FormArray
+  //   // currentPlayers.push(
+  //   //   this.fb.group(
+  //   //     new PhoneForm(new Player('', '', 0, ''))
+  //   //   )
+  //   // )
+  //   this.ticketForm.next(currentTeam);
+  // }
+
+  constructor(private errorService: ErrorService) {}
 
   storedTickets: Ticket[] = [
     {
