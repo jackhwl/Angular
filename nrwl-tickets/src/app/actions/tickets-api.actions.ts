@@ -70,6 +70,21 @@ export const updateTicketFailure = createAction(
   props<{ error: any }>()
 );
 
+export const addPhoneSuccess = createAction(
+  "[Tickets/API] Add Phone Success",
+  props<{ ticket: Ticket }>()
+);
+
+export const notifyAddPhoneSuccess = createAction(
+  "[Toastr Notification/API] Add Phone Success",
+  props<{ title: string; description: string; interpolateParams?: Object }>()
+);
+
+export const addPhoneFailure = createAction(
+  "[Tickets/API] Add Phone Failure",
+  props<{ error: any }>()
+);
+
 export const notifyUpdateTicketFailure = createAction(
   "[Toastr Notification/API] Update Ticket Failure",
   props<{ title: string; description: string; interpolateParams?: Object }>()

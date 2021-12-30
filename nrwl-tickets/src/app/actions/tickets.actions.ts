@@ -61,3 +61,9 @@ export const deleteTicket = createAction(
 export const deleteTicketCancelled = createAction(
   "[Tickets] Delete Ticket Cancelled"
 );
+
+// Add Phone
+export const addPhone = createAction(
+  "[Tickets] Add Phone",
+  props<{ ticket: Ticket }>()
+);
