@@ -67,3 +67,8 @@ export const addPhone = createAction(
   "[Tickets] Add Phone",
   props<{ ticket: Ticket }>()
 );
+
+export const addPhone2 = createAction(
+  "[Tickets] Add Phone2",
+  props<{ test: string }>()
+);

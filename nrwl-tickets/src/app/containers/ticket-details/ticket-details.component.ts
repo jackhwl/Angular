@@ -76,6 +76,10 @@ export class TicketDetailsComponent implements OnInit {
   addPhone(detailForm: FormGroup): void {
     const ticket = detailForm.value as Ticket;
     this.store.dispatch(TicketsActions.addPhone({ ticket }));
+    // const test = 'abc'
+    // let ac = TicketsActions.addPhone2({ test });
+    // console.log('ac=', ac);
+    // {test: 'abc', type: '[Tickets] Add Phone2'}
   }
 
   deletePhone(index: number) {

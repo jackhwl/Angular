@@ -35,3 +35,5 @@ The data model in reactive forms is more structured than template-driven forms.
 Form validations in reactive forms are handled through functions, whereas in template-driven forms they are handled through directives.
 Reactive forms are immutable in nature, whereas template-driven forms are mutable.
 Reactive forms are more explicit and created in the component class and template-driven forms are less explicit and created by directives.
+
+- The createAction function returns a function, that when called returns an object in the shape of the Action interface.
