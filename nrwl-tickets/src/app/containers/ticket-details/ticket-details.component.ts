@@ -74,12 +74,66 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   addPhone(detailForm: FormGroup): void {
-    const ticket = detailForm.value as Ticket;
-    this.store.dispatch(TicketsActions.addPhone({ ticket }));
-    // const test = 'abc'
-    // let ac = TicketsActions.addPhone2({ test });
-    // console.log('ac=', ac);
+    //const ticket = detailForm.value as Ticket;
+    //this.store.dispatch(TicketsActions.addPhone({ ticket }));
+    const test = "abc";
+    let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
+    let testObj = { test: "123" };
+    let addPhone02 = TicketsActions.addPhone2(testObj);
+    console.log("addPhone2=", addPhone2);
+    let ap = addPhone2(testObj);
+    console.log("addPhone2({test})=", ap);
+    ap.type0 = "aaa";
+    console.log("ap", ap);
+    console.log("addPhone02=", addPhone02);
+    console.log("testObj=", testObj);
+
+    //a1.type = 'aaa';
+    //let ac = this.defineType("[Tickets] Add Phone", { test });
+    //console.log('ac=', ac);
     // {test: 'abc', type: '[Tickets] Add Phone2'}
+  }
+
+  createAction(type, config) {
+    // REGISTERED_ACTION_TYPES[type] = (REGISTERED_ACTION_TYPES[type] || 0) + 1;
+    // if (typeof config === 'function') {
+    //     return defineType(type, (...args) => ({
+    //         ...config(...args),
+    //         type,
+    //     }));
+    // }
+    console.log("config=", config);
+    const as = config ? config._as : "empty";
+    switch (as) {
+      case "empty":
+        return this.defineType(type, () => ({ type }));
+      case "props":
+        let aa = this.defineType(type, props => ({
+          ...props,
+          type
+        }));
+        console.log("aa=", aa.type);
+        return aa;
+      default:
+        throw new Error("Unexpected config.");
+    }
+  }
+
+  props() {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/naming-convention
+    return { _as: "props", _p: undefined };
+  }
+
+  defineType(type, creator) {
+    console.log("creator1=", creator);
+    console.log("creator1.type=", creator.type);
+    Object.defineProperty(creator, "type", {
+      value: type,
+      writable: false
+    });
+    console.log("creator2=", creator);
+    console.log("creator2.type=", creator.type);
+    return creator;
   }
 
   deletePhone(index: number) {
