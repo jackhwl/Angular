@@ -1,0 +1,46 @@
+{
+  "name": "@ngrx/component",
+  "version": "13.0.2",
+  "description": "Reactive Extensions for Angular Components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngrx/platform.git"
+  },
+  "keywords": [
+    "Angular",
+    "RxJS",
+    "NgRx",
+    "Components",
+    "Angular CLI"
+  ],
+  "author": "NgRx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ngrx/platform/issues"
+  },
+  "homepage": "https://github.com/ngrx/platform#readme",
+  "peerDependencies": {
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0",
+    "rxjs": "^6.5.3 || ^7.4.0"
+  },
+  "schematics": "./schematics/collection.json",
+  "sideEffects": false,
+  "ng-update": {
+    "packageGroup": [
+      "@ngrx/store",
+      "@ngrx/effects",
+      "@ngrx/entity",
+      "@ngrx/router-store",
+      "@ngrx/data",
+      "@ngrx/schematics",
+      "@ngrx/store-devtools",
+      "@ngrx/component-store",
+      "@ngrx/component"
+    ],
+    "migrations": "./migrations/migration.json"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
