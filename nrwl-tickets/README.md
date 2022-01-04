@@ -38,3 +38,4 @@ Reactive forms are more explicit and created in the component class and template
 
 - The createAction function returns a function, that when called returns an object in the shape of the Action interface.
 - https://ncjamieson.com/how-to-reduce-action-boilerplate/
+ - ngrx source code: platform - modules - store
