@@ -88,6 +88,11 @@ export class TicketDetailsComponent implements OnInit {
     console.log("addPhone02=", addPhone02);
     console.log("testObj=", testObj);
 
+    this.on(TicketsActions.addPhone, TicketsActions.createTicket, (state, { ticket }) => ({
+      ...state,
+      loaded: false
+    }))
+
     //a1.type = 'aaa';
     //let ac = this.defineType("[Tickets] Add Phone", { test });
     //console.log('ac=', ac);
@@ -139,5 +144,15 @@ export class TicketDetailsComponent implements OnInit {
   deletePhone(index: number) {
     console.log("delete phone index:", index);
     //this.teamFormService.deletePlayer(index)
+  }
+
+  on(...args) {
+    //console.log('on--args:', args);
+    const reducer = args.pop();
+    const types = args.map((creator) => creator.type);
+    console.log('on--args:', args);
+    console.log('on--reducer:', reducer);
+    console.log('on--types:', types);
+    return { reducer, types };
   }
 }
