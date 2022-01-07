@@ -27,7 +27,7 @@ export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
 
 //const onFailure = (state, { error }) => ({ ...state, error });
 
-const _ticketsReducer = createReducer(
+export const ticketsReducer = createReducer(
   initialTicketsState,
   on(TicketsActions.selectTicketById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
@@ -101,6 +101,6 @@ const _ticketsReducer = createReducer(
   )
 );
 
-export function ticketsReducer(state: TicketState | undefined, action: Action) {
-  return _ticketsReducer(state, action);
-}
+// export function ticketsReducer(state: TicketState | undefined, action: Action) {
+//   return _ticketsReducer(state, action);
+// }
