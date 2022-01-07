@@ -25,7 +25,7 @@ export const initialUsersState: UserState = usersAdapter.getInitialState({
 
 // const onFailure = (state, { error }) => ({ ...state, error });
 
-const _usersReducer = createReducer(
+export const usersReducer = createReducer(
   initialUsersState,
   on(UsersActions.selectUserById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
@@ -50,6 +50,6 @@ const _usersReducer = createReducer(
   }))
 );
 
-export function usersReducer(state: UserState | undefined, action: Action) {
-  return _usersReducer(state, action);
-}
+// export function usersReducer(state: UserState | undefined, action: Action) {
+//   return _usersReducer(state, action);
+// }
