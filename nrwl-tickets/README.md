@@ -41,3 +41,4 @@ Reactive forms are more explicit and created in the component class and template
  - ngrx source code: platform - modules - store
  - reducer on function use rest parameters
  - effect: service-based application vs store-based application
+ - entity:

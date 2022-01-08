@@ -16,9 +16,7 @@ export interface TicketsPartialState {
   readonly [TICKETS_FEATURE_KEY]: TicketState;
 }
 
-export const ticketsAdapter: EntityAdapter<Ticket> = createEntityAdapter<
-  Ticket
->();
+export const ticketsAdapter: EntityAdapter<Ticket> = createEntityAdapter<Ticket>();
 
 export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
   // set initial required properties
@@ -76,13 +74,14 @@ export const ticketsReducer = createReducer(
     loaded: false
   })),
 
-  // on(TicketsApiActions.createTicketSuccess, (state, { ticket }) =>
-  //   Object.assign({}, state, { selectedId: ticket.id })
-  // ),
+  on(TicketsApiActions.createTicketSuccess, (state, { ticket }) =>
+    ticketsAdapter.addOne(ticket, { ...state, selectedId: ticket.id })
+    //Object.assign({}, state, { selectedId: ticket.id })
+  ),
   // ({
   //   ...state,
   //   error: null,
-  //   selectedId: ticket.id
+  //   c
   // })),
   // on(TicketsApiActions.updateTicketSuccess, (state, { ticket }) => ({
   //   ...state,
