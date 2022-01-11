@@ -41,5 +41,8 @@ Reactive forms are more explicit and created in the component class and template
  - ngrx source code: platform - modules - store
  - reducer on function use rest parameters
  - effect: service-based application vs store-based application
- - entity:
+ - entity: export const adapter = creteEntityAdapter<Course>({
+     sortComparer: compareCourse,
+     selectId: course => course.courseId
+ })
   - https://blog.angular-university.io/angular-ngrx-store-and-effects-crash-course/
