@@ -83,10 +83,9 @@ export const ticketsReducer = createReducer(
   //   error: null,
   //   c
   // })),
-  // on(TicketsApiActions.updateTicketSuccess, (state, { ticket }) => ({
-  //   ...state,
-  //   error: null
-  // })),
+  on(TicketsApiActions.updateTicketSuccess, (state, { ticket }) => 
+    ticketsAdapter.updateOne({id: ticket.id, changes: ticket}, state)
+  ), 
   on(TicketsApiActions.updateTicketFailure, (state, { error }) => ({
     ...state,
     error
