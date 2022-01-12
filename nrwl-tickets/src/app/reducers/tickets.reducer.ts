@@ -75,7 +75,7 @@ export const ticketsReducer = createReducer(
   })),
 
   on(TicketsApiActions.createTicketSuccess, (state, { ticket }) =>
-    ticketsAdapter.addOne(ticket, { ...state, selectedId: ticket.id })
+    ticketsAdapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
     //Object.assign({}, state, { selectedId: ticket.id })
   ),
   // ({
