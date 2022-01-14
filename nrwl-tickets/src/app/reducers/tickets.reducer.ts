@@ -95,7 +95,7 @@ export const ticketsReducer = createReducer(
     loaded: false
   })),
   on(TicketsApiActions.addPhoneSuccess, (state, { ticket }) =>
-    ticketsAdapter.setOne(ticket, state)
+    ticketsAdapter.setOne(ticket, {...state, loaded: true})
   )
 );
 

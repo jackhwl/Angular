@@ -145,10 +145,8 @@ export class TicketsEffects {
       pessimisticUpdate({
         run: action =>
           this.ticketService.addPhone(action.ticket).pipe(
-            switchMap(_ => [
-              TicketsApiActions.addPhoneSuccess({
-                ticket: action.ticket
-              })
+            switchMap((ticket: Ticket) => [
+              TicketsApiActions.addPhoneSuccess({ ticket })
             ])
           ),
         onError: (action, error) => {

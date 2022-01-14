@@ -74,24 +74,24 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   addPhone(detailForm: FormGroup): void {
-    //const ticket = detailForm.value as Ticket;
-    //this.store.dispatch(TicketsActions.addPhone({ ticket }));
-    const test = "abc";
-    let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
-    let testObj = { test: "123" };
-    let addPhone02 = TicketsActions.addPhone2(testObj);
-    console.log("addPhone2=", addPhone2);
-    let ap = addPhone2(testObj);
-    console.log("addPhone2({test})=", ap);
-    ap.type0 = "aaa";
-    console.log("ap", ap);
-    console.log("addPhone02=", addPhone02);
-    console.log("testObj=", testObj);
+    const ticket = detailForm.value as Ticket;
+    this.store.dispatch(TicketsActions.addPhone({ ticket }));
+    // const test = "abc";
+    // let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
+    // let testObj = { test: "123" };
+    // let addPhone02 = TicketsActions.addPhone2(testObj);
+    // console.log("addPhone2=", addPhone2);
+    // let ap = addPhone2(testObj);
+    // console.log("addPhone2({test})=", ap);
+    // ap.type0 = "aaa";
+    // console.log("ap", ap);
+    // console.log("addPhone02=", addPhone02);
+    // console.log("testObj=", testObj);
 
-    this.on(TicketsActions.addPhone, TicketsActions.createTicket, (state, { ticket }) => ({
-      ...state,
-      loaded: false
-    }))
+    // this.on(TicketsActions.addPhone, TicketsActions.createTicket, (state, { ticket }) => ({
+    //   ...state,
+    //   loaded: false
+    // }))
 
     //a1.type = 'aaa';
     //let ac = this.defineType("[Tickets] Add Phone", { test });

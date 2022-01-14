@@ -50,9 +50,9 @@ export class BackendService {
     const updatedTicket = { ...updates, phones: [...updates.phones] };
     updatedTicket.phones.push({ type: "", number: "" });
 
-    this.storedTickets = this.storedTickets.map(t =>
-      t.id === updatedTicket.id ? updatedTicket : t
-    );
+    // this.storedTickets = this.storedTickets.map(t =>
+    //   t.id === updatedTicket.id ? updatedTicket : t
+    // );
 
     return of(updatedTicket).pipe(delay(randomDelay()));
   }
