@@ -10,7 +10,7 @@ import * as TicketsSelectors from "../../reducers/tickets.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
 import { map, tap } from "rxjs/operators";
 import { UtilService } from "src/app/services";
-import { Ticket } from "src/app/models/model";
+import { Ticket, Ticket_vm } from "src/app/models/model";
 
 @Component({
   selector: "vi-ticket-details",
@@ -45,7 +45,8 @@ export class TicketDetailsComponent implements OnInit {
   // }
 
   onSubmit(detailForm: FormGroup): void {
-    const ticket = detailForm.value as Ticket;
+    const ticket_vm = detailForm.value as Ticket_vm;
+    const ticket = this.service.getTicketFromVm(ticket_vm)
     if (ticket.id !== null && ticket.id !== undefined) {
       this.updateTicket(ticket);
     } else {
@@ -74,14 +75,14 @@ export class TicketDetailsComponent implements OnInit {
     // });
   }
 
-  deletePhone(index: number) {
-    console.log("delete phone index:", index);
-    //this.store.dispatch(TicketsActions.addPhone({ ticket }));
+  deletePhone(ticketId: string, id: number) {
+    this.store.dispatch(TicketsActions.deletePhone({ ticketId, id }));
   }
 
-  addPhone(detailForm: FormGroup): void {
-    const ticket = detailForm.value as Ticket;
-    this.store.dispatch(TicketsActions.addPhone({ ticket }));
+  addPhone(ticketId: string): void {
+    //const ticket = detailForm.value as Ticket;
+    console.log(ticketId);
+    this.store.dispatch(TicketsActions.addPhone({ ticketId }));
     // const test = "abc";
     // let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
     // let testObj = { test: "123" };

@@ -5,12 +5,17 @@ export interface User  {
     name: string;
   };
   
-  export interface Ticket {
+  interface TicketBase {
     id: number;
     description: string;
     assigneeId: number;
     completed: boolean;
+  };
+  export interface Ticket extends TicketBase {
     phones: EntityState<Phone>;
+  }  
+  export interface Ticket_vm extends TicketBase {
+    phones: Phone[];
   };
   
   export interface Phone {

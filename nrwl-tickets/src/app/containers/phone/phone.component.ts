@@ -22,7 +22,7 @@ export class PhoneComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  delete() {
-    this.deletePhone.emit(this.index);
+  delete(id) {
+    this.deletePhone.emit(id);
   }
 }

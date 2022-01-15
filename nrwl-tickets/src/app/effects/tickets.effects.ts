@@ -145,11 +145,12 @@ export class TicketsEffects {
   //     ofType(TicketsActions.addPhone),
   //     pessimisticUpdate({
   //       run: action =>
-  //         this.ticketService.addPhone(action.ticket).pipe(
+  //         this.ticketService.addPhone(action.ticketId).pipe(
   //           switchMap((ticket: Ticket) => [
   //             TicketsApiActions.addPhoneSuccess({ ticket })
   //           ])
-  //         ),
+  //         )
+  //         ,
   //       onError: (action, error) => {
   //         console.error("Error", error);
   //         return TicketsApiActions.addPhoneFailure({ error });

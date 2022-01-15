@@ -92,13 +92,27 @@ export const ticketsReducer = createReducer(
     ...state,
     error
   })),
-  on(TicketsActions.addPhone, (state, { ticket }) => ({
-    ...state,
-    loaded: false
-  })),
-  on(TicketsApiActions.addPhoneSuccess, (state, { ticket }) =>
-    ticketsAdapter.setOne(ticket, {...state, loaded: true})
-  )
+  on(TicketsActions.addPhone, (state, { ticketId }) => 
+    ticketsAdapter.updateOne({
+      id: ticketId, 
+      changes: {
+        phones: phoneAdapter.addOne({id: state.entities[ticketId].phones.ids.length+1, type: '', number: ''}, state.entities[ticketId].phones)
+      } 
+    },
+    {...state, loaded: true})
+  ),
+  on(TicketsActions.deletePhone, (state, { ticketId, id }) => 
+    ticketsAdapter.updateOne({
+      id: ticketId, 
+      changes: {
+        phones: phoneAdapter.removeOne(id, state.entities[ticketId].phones)
+      } 
+    },
+    {...state, loaded: true})
+  ),
+    // on(TicketsApiActions.addPhoneSuccess, (state, { ticket }) =>
+  //   ticketsAdapter.setOne(ticket, {...state, loaded: true})
+  // )
 );
 
 // export function ticketsReducer(state: TicketState | undefined, action: Action) {

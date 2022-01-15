@@ -65,10 +65,15 @@ export const deleteTicketCancelled = createAction(
 // Add Phone
 export const addPhone = createAction(
   "[Tickets] Add Phone",
-  props<{ ticket: Ticket }>()
+  props<{ ticketId: string }>()
 );
 
 export const addPhone2 = createAction(
   "[Tickets] Add Phone2",
   props<{ test: string }>()
+);
+
+export const deletePhone = createAction(
+  "[Tickets] Delete Phone",
+  props<{ ticketId: string, id: number }>()
 );

@@ -30,7 +30,7 @@ export class BackendService {
   // > = new BehaviorSubject(this.fb.group(emptyTicket));
   // ticketForm$: Observable<FormGroup> = this.ticketForm.asObservable();
 
-  addPhone(updates: Ticket) {
+  addPhone(ticketId: string) {
     //const updatedTicket = { ...updates, phones: [...updates.phones] };
     //updatedTicket.phones.push({ id: -1, type: "", number: "" });
 
@@ -61,8 +61,8 @@ export class BackendService {
       assigneeId: 111,
       completed: false,
       phones: phoneAdapter.setAll([
-        { id: 11, type: "home", number: "111" },
-        { id: 12, type: "mobile", number: "222" }
+        { id: 1, type: "home", number: "111" },
+        { id: 2, type: "mobile", number: "222" }
       ], initialPhoneState)
     },
     {
@@ -71,8 +71,8 @@ export class BackendService {
       assigneeId: 111,
       completed: false,
       phones: phoneAdapter.setAll([
-        { id: 21, type: "home", number: "333" },
-        { id: 22, type: "mobile", number: "444" }
+        { id: 1, type: "home", number: "333" },
+        { id: 2, type: "mobile", number: "444" }
       ], initialPhoneState)
     }
   ];

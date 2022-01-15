@@ -49,11 +49,11 @@
           <vi-phone
             [formGroup]="formGroup"
             [index]="index"
-            (deletePhone)="deletePhone($event)"
+            (deletePhone)="deletePhone(detailForm.value.id, $event)"
           ></vi-phone>
         </div>
       </div>
-      <button type="button" (click)="addPhone(detailForm)">Add Phone</button>
+      <button type="button" (click)="addPhone(detailForm.value.id)">Add Phone</button>
       <mat-card-actions>
         <button
           id="save"
