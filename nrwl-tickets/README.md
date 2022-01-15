@@ -48,4 +48,4 @@ Reactive forms are more explicit and created in the component class and template
   - https://blog.angular-university.io/angular-ngrx-store-and-effects-crash-course/
 
   - Add Delete Phone in Nested Entity, will refresh all fields in form, previous change will be lost.
-  
+  - https://timdeschryver.dev/blog/nested-ngrx-entity-state#example-code
