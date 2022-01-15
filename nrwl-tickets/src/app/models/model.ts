@@ -1,3 +1,5 @@
+import { EntityState } from "@ngrx/entity";
+
 export interface User  {
     id: number;
     name: string;
@@ -12,6 +14,7 @@ export interface User  {
   };
   
   export interface Phone {
+    id: number;
     type: string;
     number: string;
   };

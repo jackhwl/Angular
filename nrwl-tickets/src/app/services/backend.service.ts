@@ -31,7 +31,7 @@ export class BackendService {
 
   addPhone(updates: Ticket) {
     const updatedTicket = { ...updates, phones: [...updates.phones] };
-    updatedTicket.phones.push({ type: "", number: "" });
+    updatedTicket.phones.push({ id: -1, type: "", number: "" });
 
     // this.storedTickets = this.storedTickets.map(t =>
     //   t.id === updatedTicket.id ? updatedTicket : t
@@ -60,8 +60,8 @@ export class BackendService {
       assigneeId: 111,
       completed: false,
       phones: [
-        { type: "home", number: "111" },
-        { type: "mobile", number: "222" }
+        { id: 1, type: "home", number: "111" },
+        { id: 2, type: "mobile", number: "222" }
       ]
     },
     {
@@ -70,8 +70,8 @@ export class BackendService {
       assigneeId: 111,
       completed: false,
       phones: [
-        { type: "home", number: "333" },
-        { type: "mobile", number: "444" }
+        { id: 10, type: "home", number: "333" },
+        { id: 11, type: "mobile", number: "444" }
       ]
     }
   ];

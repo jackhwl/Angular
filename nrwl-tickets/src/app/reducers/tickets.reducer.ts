@@ -2,7 +2,7 @@ import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
 import { TicketsActions, TicketsApiActions } from "../actions";
-import { Ticket } from "../models/model";
+import { Phone, Ticket } from "../models/model";
 
 export const TICKETS_FEATURE_KEY = "tickets";
 
@@ -16,6 +16,7 @@ export interface TicketsPartialState {
   readonly [TICKETS_FEATURE_KEY]: TicketState;
 }
 
+export const phoneAdapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
 export const ticketsAdapter: EntityAdapter<Ticket> = createEntityAdapter<Ticket>();
 
 export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
