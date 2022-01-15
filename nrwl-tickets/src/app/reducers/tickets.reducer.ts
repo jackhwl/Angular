@@ -11,7 +11,7 @@ export interface TicketState extends EntityState<Ticket> {
   loaded: boolean; // has the Tickets list been loaded
   error?: string | null; // last known error (if any)
 }
-
+export interface PhoneState extends EntityState<Phone>{};
 export interface TicketsPartialState {
   readonly [TICKETS_FEATURE_KEY]: TicketState;
 }
@@ -19,6 +19,7 @@ export interface TicketsPartialState {
 export const phoneAdapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
 export const ticketsAdapter: EntityAdapter<Ticket> = createEntityAdapter<Ticket>();
 
+export const initialPhoneState: PhoneState = phoneAdapter.getInitialState();
 export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
   // set initial required properties
   loaded: false

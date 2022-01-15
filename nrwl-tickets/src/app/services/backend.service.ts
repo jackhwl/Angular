@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { Phone, Ticket, User } from "../models/model";
-import { phoneAdapter } from "../reducers/tickets.reducer";
+import { initialPhoneState, phoneAdapter } from "../reducers/tickets.reducer";
 import { ErrorService } from "./error.service";
 
 /**
@@ -60,20 +60,20 @@ export class BackendService {
       description: "Install a monitor arm",
       assigneeId: 111,
       completed: false,
-      phones: phoneAdapter.getInitialState([
-        { id: 1, type: "home", number: "111" },
-        { id: 2, type: "mobile", number: "222" }
-      ])
+      phones: phoneAdapter.setAll([
+        { id: 11, type: "home", number: "111" },
+        { id: 12, type: "mobile", number: "222" }
+      ], initialPhoneState)
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 111,
       completed: false,
-      phones: phoneAdapter.getInitialState([
-        { id: 10, type: "home", number: "333" },
-        { id: 11, type: "mobile", number: "444" }
-      ])
+      phones: phoneAdapter.setAll([
+        { id: 21, type: "home", number: "333" },
+        { id: 22, type: "mobile", number: "444" }
+      ], initialPhoneState)
     }
   ];
 
