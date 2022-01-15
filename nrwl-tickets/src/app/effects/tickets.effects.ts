@@ -100,25 +100,25 @@ export class TicketsEffects {
     )
   );
 
-  createTicket$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketsActions.createTicket),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService
-            .newTicket(action.ticket)
-            .pipe(
-              switchMap((ticket: Ticket) => [
-                TicketsApiActions.createTicketSuccess({ ticket })
-              ])
-            ),
-        onError: (action, error) => {
-          console.error("Error", error);
-          TicketsApiActions.createTicketFailure({ error });
-        }
-      })
-    )
-  );
+  // createTicket$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketsActions.createTicket),
+  //     pessimisticUpdate({
+  //       run: action =>
+  //         this.ticketService
+  //           .newTicket(action.ticket)
+  //           .pipe(
+  //             switchMap((ticket: Ticket) => [
+  //               TicketsApiActions.createTicketSuccess({ ticket })
+  //             ])
+  //           ),
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         TicketsApiActions.createTicketFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 
   updateTicket$ = createEffect(() =>
     this.actions$.pipe(
@@ -140,21 +140,21 @@ export class TicketsEffects {
     )
   );
 
-  addPhone$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketsActions.addPhone),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService.addPhone(action.ticket).pipe(
-            switchMap((ticket: Ticket) => [
-              TicketsApiActions.addPhoneSuccess({ ticket })
-            ])
-          ),
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketsApiActions.addPhoneFailure({ error });
-        }
-      })
-    )
-  );
+  // addPhone$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketsActions.addPhone),
+  //     pessimisticUpdate({
+  //       run: action =>
+  //         this.ticketService.addPhone(action.ticket).pipe(
+  //           switchMap((ticket: Ticket) => [
+  //             TicketsApiActions.addPhoneSuccess({ ticket })
+  //           ])
+  //         ),
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketsApiActions.addPhoneFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 }

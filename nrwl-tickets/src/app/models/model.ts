@@ -10,7 +10,7 @@ export interface User  {
     description: string;
     assigneeId: number;
     completed: boolean;
-    phones: Phone[];
+    phones: EntityState<Phone>;
   };
   
   export interface Phone {

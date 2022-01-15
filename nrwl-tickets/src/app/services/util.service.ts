@@ -13,10 +13,11 @@ export class UtilService {
       completed: [ticket.completed, Validators.required],
       description: [ticket.description, Validators.required],
       phones: this.fb.array(
-        ticket.phones.map(phone =>
+        ticket.phones.ids.map(id =>
           this.fb.group({
-            type: [phone.type],
-            number: [phone.number]
+            id,
+            type: [ticket.phones.entities[id].type],
+            number: [ticket.phones.entities[id].number]
           })
         )
       ),

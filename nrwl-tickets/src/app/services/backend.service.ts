@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { Phone, Ticket, User } from "../models/model";
+import { phoneAdapter } from "../reducers/tickets.reducer";
 import { ErrorService } from "./error.service";
 
 /**
@@ -15,7 +16,7 @@ export const emptyTicket: Ticket = {
   description: "",
   assigneeId: null,
   completed: false,
-  phones: []
+  phones: phoneAdapter.getInitialState()
 };
 
 function randomDelay() {
@@ -30,14 +31,14 @@ export class BackendService {
   // ticketForm$: Observable<FormGroup> = this.ticketForm.asObservable();
 
   addPhone(updates: Ticket) {
-    const updatedTicket = { ...updates, phones: [...updates.phones] };
-    updatedTicket.phones.push({ id: -1, type: "", number: "" });
+    //const updatedTicket = { ...updates, phones: [...updates.phones] };
+    //updatedTicket.phones.push({ id: -1, type: "", number: "" });
 
     // this.storedTickets = this.storedTickets.map(t =>
     //   t.id === updatedTicket.id ? updatedTicket : t
     // );
 
-    return of(updatedTicket).pipe(delay(randomDelay()));
+    //return of(updatedTicket).pipe(delay(randomDelay()));
   }
 
   // addPhone0() {
@@ -59,20 +60,20 @@ export class BackendService {
       description: "Install a monitor arm",
       assigneeId: 111,
       completed: false,
-      phones: [
+      phones: phoneAdapter.getInitialState([
         { id: 1, type: "home", number: "111" },
         { id: 2, type: "mobile", number: "222" }
-      ]
+      ])
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 111,
       completed: false,
-      phones: [
+      phones: phoneAdapter.getInitialState([
         { id: 10, type: "home", number: "333" },
         { id: 11, type: "mobile", number: "444" }
-      ]
+      ])
     }
   ];
 
@@ -134,7 +135,7 @@ export class BackendService {
       description: payload.description,
       assigneeId: payload.assigneeId,
       completed: false,
-      phones: payload.phones
+      phones: phoneAdapter.getInitialState(payload.phones)
     };
 
     this.storedTickets = this.storedTickets.concat(newTicket);
