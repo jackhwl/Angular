@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Ticket } from "../services/backend.service";
+import { Ticket } from "../models/model";
 
 export const resetSelectedTicket = createAction(
   "[Tickets/API] Reset Selected Tickets"

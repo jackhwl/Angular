@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { getTicketModuleState, TicketModuleState } from ".";
-import { User } from "../services/backend.service";
+import { User } from "../models/model";
+
 import {
   USERS_FEATURE_KEY,
   UserState,

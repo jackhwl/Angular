@@ -5,11 +5,12 @@ import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { TicketsActions } from "src/app/actions";
-import { Ticket } from "../../services/backend.service";
+
 import * as TicketsSelectors from "../../reducers/tickets.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
 import { map, tap } from "rxjs/operators";
 import { UtilService } from "src/app/services";
+import { Ticket } from "src/app/models/model";
 
 @Component({
   selector: "vi-ticket-details",
@@ -71,6 +72,11 @@ export class TicketDetailsComponent implements OnInit {
     //   description: '',
     //   price: ''
     // });
+  }
+
+  deletePhone(index: number) {
+    console.log("delete phone index:", index);
+    //this.store.dispatch(TicketsActions.addPhone({ ticket }));
   }
 
   addPhone(detailForm: FormGroup): void {
@@ -141,10 +147,6 @@ export class TicketDetailsComponent implements OnInit {
     return creator;
   }
 
-  deletePhone(index: number) {
-    console.log("delete phone index:", index);
-    //this.teamFormService.deletePlayer(index)
-  }
 
   on(...args) {
     //console.log('on--args:', args);

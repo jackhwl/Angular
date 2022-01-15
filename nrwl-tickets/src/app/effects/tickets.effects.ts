@@ -3,10 +3,11 @@ import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { BackendService, Ticket } from "../services/backend.service";
+import { BackendService } from "../services/backend.service";
 import { TicketsActions, TicketsApiActions } from "../actions";
 import { selectQueryParam } from "../reducers/router.selectors";
 import { routerNavigatedAction } from "@ngrx/router-store";
+import { Ticket } from "../models/model";
 
 @Injectable()
 export class TicketsEffects {

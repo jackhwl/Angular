@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
+import { Phone, Ticket, User } from "../models/model";
 import { ErrorService } from "./error.service";
 
 /**
@@ -8,24 +9,6 @@ import { ErrorService } from "./error.service";
  *
  * You are free to modify it as you see.
  */
-
-export type User = {
-  id: number;
-  name: string;
-};
-
-export type Ticket = {
-  id: number;
-  description: string;
-  assigneeId: number;
-  completed: boolean;
-  phones: Phone[];
-};
-
-export type Phone = {
-  type: string;
-  number: string;
-};
 
 export const emptyTicket: Ticket = {
   id: null,

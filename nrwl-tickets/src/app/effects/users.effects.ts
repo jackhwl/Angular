@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { BackendService, User } from "../services/backend.service";
+import { BackendService } from "../services/backend.service";
 import { UsersActions, UsersApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
+import { User } from "../models/model";
 
 @Injectable()
 export class UsersEffects {

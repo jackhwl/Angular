@@ -2,7 +2,7 @@ import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
 import { TicketsActions, TicketsApiActions } from "../actions";
-import { Ticket } from "../services/backend.service";
+import { Ticket } from "../models/model";
 
 export const TICKETS_FEATURE_KEY = "tickets";
 

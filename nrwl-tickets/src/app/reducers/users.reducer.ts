@@ -2,7 +2,7 @@ import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
 import { UsersActions, UsersApiActions } from "../actions";
-import { User } from "../services/backend.service";
+import { User } from "../models/model";
 
 export const USERS_FEATURE_KEY = "users";
 

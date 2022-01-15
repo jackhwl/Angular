@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
 import * as TicketsSelectors from "../../reducers/tickets.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
 import { TicketVm } from "src/app/models/ticketvm";
-import { Ticket, User } from "src/app/services/backend.service";
+import { Ticket, User } from "src/app/models/model";
 
 @Component({
   selector: "vi-tickets-list",

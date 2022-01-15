@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Ticket } from "./backend.service";
+import { Ticket } from "../models/model";
 
 @Injectable()
 export class UtilService {

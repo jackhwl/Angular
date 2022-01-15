@@ -1,4 +1,4 @@
-import { Ticket, User } from "../services/backend.service";
+import { Ticket, User } from "./model";
 
 export interface TicketVm extends Ticket {
   assignees: User[];
