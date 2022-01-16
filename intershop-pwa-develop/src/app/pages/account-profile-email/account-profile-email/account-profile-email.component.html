@@ -1,0 +1,33 @@
+<h1>{{ 'account.update_email.heading' | translate }}</h1>
+
+<!-- Error message -->
+<ish-error-message [error]="error"></ish-error-message>
+
+<div class="row">
+  <div class="col-md-10 col-xl-8">
+    <div class="section">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="form-horizontal" novalidate="novalidate">
+        <div class="row form-group">
+          <label class="col-md-4 col-form-label"> {{ 'account.update_email.email.label' | translate }} </label>
+          <div *ngIf="currentUser" class="col-md-8 col-form-label">{{ currentUser.email }}</div>
+        </div>
+
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+
+        <div class="row">
+          <div class="offset-md-4 col-md-8">
+            <button type="submit" class="btn btn-primary" [disabled]="buttonDisabled">
+              {{ 'account.update.button.label' | translate }}
+            </button>
+            <a routerLink="/account/profile" class="btn btn-secondary">{{ 'account.cancel.link' | translate }}</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<h4 class="form-text">{{ 'account.help.heading' | translate }}</h4>
+<p class="form-text">
+  {{ 'account.update_email.question.text' | translate }}<br />{{ 'account.update_email.answer.text' | translate }}
+</p>

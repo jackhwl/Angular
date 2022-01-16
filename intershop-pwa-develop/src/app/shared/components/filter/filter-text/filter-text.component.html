@@ -1,0 +1,35 @@
+<!--- TODO: implement Show All-->
+<ul class="filter-list">
+  <ng-container *ngFor="let facet of getFacets()">
+    <li class="filter-item filter-layer{{ facet.level }}" [ngClass]="{ 'filter-selected': facet.selected }">
+      <!-- selected -->
+      <ng-container *ngIf="facet.selected; else notSelectedBox">
+        <a (click)="filter(facet)" [attr.data-testing-id]="'filter-link-' + (facet.name | sanitize)">
+          <span class="filter-item-name"> {{ facet.displayName }} </span>
+          <span class="count"> ({{ facet.count }}) </span>
+          <ng-container *ngIf="filterElement.displayType === 'text_clear'">
+            <fa-icon [icon]="['fas', 'times']" class="float-right filter-clear"></fa-icon>
+          </ng-container>
+        </a>
+      </ng-container>
+
+      <!-- not selected -->
+      <ng-template #notSelectedBox>
+        <a
+          class="filter-item-name"
+          (click)="filter(facet)"
+          [attr.data-testing-id]="'filter-link-' + (facet.name | sanitize)"
+        >
+          {{ facet.displayName }}
+          <ng-container *ngIf="facet.level === maxLevel"> ({{ facet.count }}) </ng-container>
+        </a>
+      </ng-template>
+    </li>
+  </ng-container>
+  <!-- show all/less -->
+  <li class="filter-item" *ngIf="filterElement.limitCount !== -1 && facets.length > filterElement.limitCount">
+    <a class="btn-link" (click)="showAll = !showAll">{{
+      (showAll ? 'search.filter.show_less.link' : 'search.filter.show_all.link') | translate
+    }}</a>
+  </li>
+</ul>

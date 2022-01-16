@@ -1,0 +1,84 @@
+/* purgecss start ignore */
+.toast-container {
+  z-index: 1030; // appears on top of the page but below the modal windows
+
+  .ngx-toastr {
+    background-size: 20px;
+
+    .toast-close-button {
+      height: 21px;
+    }
+  }
+
+  &.toast-top-full-width {
+    position: absolute;
+    top: 130px;
+
+    &.toast-sticky {
+      position: fixed;
+      top: 0;
+
+      & > div {
+        @media (max-width: $screen-sm-max) {
+          margin-top: $header-height-mobile;
+        }
+      }
+    }
+
+    & > div {
+      width: 100% !important;
+      margin-top: $top-header-height;
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+      opacity: 1;
+
+      @media (min-width: $screen-md-min) {
+        max-width: calc(#{$screen-md-min} - 2 * #{$grid-gutter-width});
+      }
+
+      @media (min-width: $screen-lg-min) {
+        max-width: calc(1170px - #{$grid-gutter-width});
+      }
+
+      & + div {
+        margin-top: $space-default * 0.5;
+        margin-bottom: $space-default * 0.5;
+      }
+    }
+  }
+
+  &.toast-bottom-center {
+    position: fixed;
+    bottom: 0;
+
+    & > div {
+      width: 100% !important;
+    }
+  }
+}
+
+.toast-error {
+  width: 1.25rem;
+  background-color: theme-color-level('danger', $alert-border-level);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="#{$toastViewBox}" fill="#{$toast-error-color}">#{$toast-error-icon}</svg>');
+  fill: #ff0;
+}
+
+.toast-warning {
+  background-color: theme-color-level('warning', $alert-border-level);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="#{$toastViewBox}" fill="#{$toast-warning-color}">#{$toast-warning-icon}</svg>');
+}
+
+.toast-success {
+  width: 100%;
+  background-color: theme-color-level('success', $alert-border-level);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="#{$toastViewBox}" fill="#{$toast-success-color}">#{$toast-success-icon}</svg>');
+}
+
+.toast-info {
+  width: 100%;
+  background-color: theme-color-level('info', $alert-border-level);
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="#{$toastViewBox}" fill="#{$toast-info-color}">#{$toast-info-icon}</svg>');
+}
+
+/* purgecss end ignore */

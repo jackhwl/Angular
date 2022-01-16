@@ -1,0 +1,18 @@
+import { <%= classify(name) %>Helper } from './<%= dasherize(name) %>.helper';
+import { <%= classify(name) %> } from './<%= dasherize(name) %>.model';
+
+describe('<%= classify(name) %> Helper', () => {
+  describe('equal', () => {
+    it.each([
+        [false, undefined,  undefined],
+        [false, { id: 'test' } as <%= classify(name) %>,  undefined],
+        [false, undefined,  { id: 'test' } as <%= classify(name) %>],
+        [false, { id: 'test' } as <%= classify(name) %>,  { id: 'other' } as <%= classify(name) %>],
+        [true, { id: 'test' } as <%= classify(name) %>,  { id: 'test' } as <%= classify(name) %>],
+      ])
+      (`should return %s when comparing %j and %j`,
+      (expected, o1, o2) => {
+        expect(<%= classify(name) %>Helper.equal(o1, o2)).toEqual(expected);
+      });
+  });
+});

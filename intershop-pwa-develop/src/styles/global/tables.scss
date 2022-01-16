@@ -1,0 +1,330 @@
+// SPECIFIC TABLE MIXINS
+@mixin list-header-mixin() {
+  border-top: 0;
+  border-bottom: 1px solid $border-color-default;
+
+  &.no-separator {
+    border-bottom: 0;
+  }
+}
+
+@mixin list-header-item() {
+  padding: $table-cell-padding $table-cell-padding $table-cell-padding 0;
+  overflow: hidden;
+  font-family: $font-family-condensedregular;
+  font-size: 18px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+// RESPONSIVE TABLE
+.table-responsive {
+  border: none;
+}
+
+@media (max-width: $screen-xs-max) {
+  .table-responsive {
+    td,
+    th {
+      white-space: nowrap;
+    }
+  }
+}
+
+.table {
+  display: table;
+  margin-bottom: $space-default * 2;
+
+  > thead {
+    > tr {
+      > th {
+        @include list-header-item();
+        @include list-header-mixin();
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  > tbody {
+    > tr {
+      > td {
+        padding: $table-cell-padding $table-cell-padding $table-cell-padding 0;
+        border: none;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      &:last-child {
+        > td {
+          border-bottom: 1px solid $border-color-lighter;
+        }
+      }
+    }
+  }
+
+  &.table-lg {
+    td {
+      padding-top: $table-cell-padding * 1.4;
+      padding-bottom: $table-cell-padding * 1.4;
+      border-bottom: 1px solid $border-color-lighter;
+    }
+  }
+
+  // legacy col- styles that where used in tables
+  .legacy-col-6 {
+    width: 25%;
+  }
+
+  @media (min-width: $screen-md) {
+    .legacy-col-md-3 {
+      width: 25%;
+    }
+  }
+}
+
+// RESPONSIVE LIST
+
+.list-header {
+  @include list-header-mixin();
+
+  @media (max-width: $screen-xs-max) {
+    display: none;
+  }
+
+  .list-header-item {
+    @include list-header-item();
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &.column-price {
+      padding-right: 0;
+      white-space: nowrap;
+    }
+  }
+}
+
+.list-body {
+  margin-bottom: $space-default * 2;
+
+  .list-item-row {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: ($space-default);
+      border-bottom: 1px solid $border-color-lighter;
+    }
+
+    &.list-item-row-big {
+      padding-bottom: ($space-default * 0.5);
+      margin-top: ($space-default * 0.5);
+      border-bottom: 1px solid $border-color-lighter;
+
+      &:first-child {
+        @media (max-width: $screen-xs-max) {
+          border-top: 1px solid $border-color-lighter;
+        }
+      }
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $border-color-lighter;
+    }
+
+    .list-item {
+      padding: $table-cell-padding * 0.9 $table-cell-padding * 0.7 $table-cell-padding * 0.9 0;
+
+      .list-item {
+        padding: 0;
+      }
+
+      .list-item-promo {
+        font-family: $font-family-condensedbold;
+        text-transform: uppercase;
+      }
+
+      .form-group {
+        margin-bottom: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &.column-price {
+        padding-right: 0;
+      }
+
+      &.form-check {
+        margin-top: 0;
+      }
+
+      .form-control-feedback {
+        display: none !important;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        label {
+          margin-right: $space-default * 0.5;
+        }
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      .clearfix.visible-xs-block + .list-item {
+        padding-top: 0;
+      }
+    }
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      .clearfix.visible-sm-block + .list-item {
+        padding-top: 0;
+      }
+    }
+
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+      .clearfix.visible-md-block + .list-item {
+        padding-top: 0;
+      }
+    }
+  }
+}
+
+// SPECIAL TABLE COLUMNS
+.column-price,
+.column-action {
+  text-align: right;
+
+  @media (max-width: $screen-xs-max) {
+    text-align: left;
+  }
+}
+
+// form element in tables
+
+.form-horizontal {
+  .list-item {
+    .form-group {
+      margin: 0;
+    }
+  }
+}
+
+// TABLE COMPARE
+
+.table-compare > .fixed-column {
+  position: absolute;
+  display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .table-compare > .fixed-column {
+    display: none;
+  }
+}
+
+.table-compare {
+  .table {
+    > tbody {
+      > tr {
+        > td {
+          padding: $space-default;
+          border: none;
+          border-bottom: 1px solid $border-color-lighter;
+
+          .product-image {
+            position: relative;
+
+            .btn-tool {
+              position: absolute;
+              top: 0;
+              right: 0;
+            }
+          }
+        }
+
+        > th {
+          border: none;
+          border-bottom: 1px solid $border-color-lighter;
+        }
+      }
+    }
+
+    .btn {
+      width: auto;
+    }
+
+    .product-title {
+      text-align: left;
+    }
+
+    .no-border {
+      padding-top: 0;
+      padding-bottom: 0;
+      border: 0;
+    }
+
+    @media (max-width: 767px) {
+      td,
+      th {
+        min-width: 400px;
+        white-space: normal;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .table-compare th {
+    display: none;
+  }
+}
+
+// RESPONSIVE TABLE
+// switch to card view for mobile
+table.mobile-optimized,
+table.mobile-optimized.table-lg {
+  @include media-breakpoint-only(xs) {
+    margin-bottom: divide($space-default, 3);
+
+    thead {
+      display: none;
+    }
+
+    tr {
+      float: left;
+      width: 100%;
+      padding-bottom: divide($space-default * 2, 3);
+      margin-bottom: $space-default;
+      border-bottom: 1px solid $border-color-lighter;
+
+      td {
+        display: flex;
+        align-items: flex-start;
+        float: left;
+        width: 100%;
+        padding: 0;
+        margin-bottom: divide($space-default, 3);
+        clear: both;
+        border: none;
+
+        &::before {
+          width: 40%;
+          content: '';
+        }
+
+        &[data-label]::before {
+          content: attr(data-label) ':';
+        }
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+}

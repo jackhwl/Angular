@@ -1,0 +1,16 @@
+<ish-error-message [error]="loginError$ | async" [toast]="false"></ish-error-message>
+
+<form [formGroup]="form" class="form-horizontal" (ngSubmit)="loginUser()">
+  <formly-form [form]="form" [fields]="fields"></formly-form>
+
+  <div class="row form-group">
+    <div [ngClass]="signInClass || 'offset-md-3 col-md-auto'">
+      <button type="submit" value="Login" name="login" class="btn btn-primary" [disabled]="buttonDisabled">
+        {{ 'account.signin.button.label' | translate }}
+      </button>
+    </div>
+    <div [ngClass]="forgotPasswordClass || 'col-md-auto pl-md-0'">
+      <a class="btn btn-link" [routerLink]="'/forgotPassword'">{{ 'account.send_password.heading' | translate }}</a>
+    </div>
+  </div>
+</form>

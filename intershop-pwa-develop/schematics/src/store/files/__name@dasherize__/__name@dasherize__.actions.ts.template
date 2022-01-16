@@ -1,0 +1,13 @@
+import { createAction } from '@ngrx/store';<% if(entity) { %>
+
+import { <%= classify(entity) %> } from '<% if(!extension) { %>ish-core<% } else { %>../..<% } %>/models/<%= dasherize(entity) %>/<%= dasherize(entity) %>.model';
+import { httpError, payload } from 'ish-core/utils/ngrx-creators';
+<% } %>
+
+export const load<%= classify(name) %> = createAction('[<%= classify(name) %>] Load <%= classify(name) %>');
+
+<% if(entity) { %>
+export const load<%= classify(name) %>Fail = createAction('[<%= classify(name) %> API] Load <%= classify(name) %> Fail', httpError());
+
+export const load<%= classify(name) %>Success = createAction('[<%= classify(name) %> API] Load <%= classify(name) %> Success', payload<{ <%= camelize(name) %>: <%= classify(entity) %>[] }>())
+<% } %>

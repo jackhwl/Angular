@@ -1,0 +1,61 @@
+name: Updates
+
+on:
+  push:
+    branches:
+      - develop
+      - upgrade/**
+      - update/**
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  Updates:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          cache: npm
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install e2e dependencies
+        run: |
+          cd e2e
+          npm i
+
+      - name: Possible Angular Updates
+        if: always()
+        run: npm run ng -- update
+
+      - name: Possible npm Updates
+        if: always()
+        run: npm outdated --long || true
+
+      - name: Must Have Updates for PWA
+        run: npm audit --production
+        if: always()
+
+      - name: Peer Dependency Incompatibilities
+        if: always()
+        run: npm ls >/dev/null || true
+
+      - name: npm audit -- PWA
+        if: always()
+        run: npm audit || true
+
+      - name: npm audit -- e2e
+        if: always()
+        run: |
+          npm --prefix e2e outdated --long || true
+          npm --prefix e2e audit || true
+
+      - name: browserslist
+        if: always()
+        run: npx browserslist || true

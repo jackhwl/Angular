@@ -1,0 +1,7 @@
+<ng-container *ngIf="product$ | async">
+  <ish-product-tile *ngIf="isTile"></ish-product-tile>
+
+  <ish-product-row *ngIf="isRow"></ish-product-row>
+</ng-container>
+
+<ish-loading *ngIf="loading$ | async"></ish-loading>

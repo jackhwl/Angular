@@ -1,0 +1,360 @@
+/**************** CATEGORY FILTER PANEL ******************/
+
+/* FILTER PANEL */
+
+.category-panel h3 {
+  text-transform: uppercase;
+}
+
+.filter-panel {
+  padding-right: ($space-default * 2);
+  user-select: none;
+
+  @media (max-width: $screen-sm-max) {
+    padding-right: 0;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: $space-default;
+  }
+
+  h3 {
+    cursor: pointer;
+
+    .ng-fa-icon {
+      color: $text-color-corporate;
+    }
+  }
+
+  .filter-group {
+    &.collapsed {
+      .filter-item:not(.filter-selected) {
+        display: none;
+      }
+
+      .filter-dropdown {
+        display: none;
+      }
+    }
+
+    &:first-child {
+      h3 {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.filter-group {
+  position: relative;
+  padding-bottom: $space-default;
+  margin-bottom: $space-default;
+  font-size: 14px;
+  border-bottom: $border-width-default solid $border-color-light;
+
+  .filter-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .filter-checkbox {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .filter-item-checkbox-label-native {
+    display: block;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+
+  .ng-fa-icon {
+    &:hover {
+      color: $link-hover-color;
+      cursor: pointer;
+    }
+  }
+
+  li {
+    &.filter-item {
+      padding: 3px 0;
+      color: $text-color-quaternary;
+
+      a {
+        display: block;
+
+        &.filter-item-name {
+          color: $text-color-quaternary;
+        }
+
+        &.filter-swatch {
+          span[style='background-color:#fcfcfc;'] {
+            border: 1px solid $border-color-light;
+          }
+        }
+      }
+
+      span {
+        &.icon-notselected {
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          margin-right: divide($space-default, 3);
+          background-color: $color-tertiary;
+          border: 1px solid $border-color-light;
+        }
+
+        &.filter-count {
+          margin-left: divide($space-default, 3);
+        }
+      }
+    }
+
+    &.filter-selected {
+      color: $text-color-primary;
+
+      .filter-item-name,
+      a.filter-item-name {
+        //font-weight: bold; // todo?
+        color: $text-color-primary;
+      }
+
+      a.filter-clear {
+        float: right;
+        width: 16px;
+        height: 16px;
+        line-height: 14px;
+        text-align: center;
+      }
+
+      span {
+        font-weight: normal;
+        color: $text-color-quaternary;
+
+        &.icon-selected {
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          margin-right: divide($space-default, 3);
+          background-color: $color-corporate;
+          border: 1px solid $border-color-default;
+        }
+      }
+
+      &.filter-color {
+        border-color: $text-color-quaternary;
+
+        a {
+          display: inline-block;
+          width: $swatch-image-diameter + 2 * $swatch-image-padding-to-border + 2px;
+          height: $swatch-image-diameter + 2 * $swatch-image-padding-to-border + 2px; // diameter + 2 * padding + 2 * border-width
+        }
+      }
+    }
+
+    @mixin filter-list-item-layer($layer) {
+      padding-left: $layer * $space-default;
+    }
+
+    &.filter-layer1 {
+      @include filter-list-item-layer(1);
+    }
+
+    &.filter-layer2 {
+      @include filter-list-item-layer(2);
+    }
+
+    &.filter-layer3 {
+      @include filter-list-item-layer(3);
+    }
+
+    &.filter-layer4 {
+      @include filter-list-item-layer(4);
+    }
+
+    &.filter-layer5 {
+      @include filter-list-item-layer(5);
+    }
+
+    &.filter-layer6 {
+      @include filter-list-item-layer(6);
+    }
+
+    &.filter-layer7 {
+      @include filter-list-item-layer(7);
+    }
+
+    &.filter-layer8 {
+      @include filter-list-item-layer(8);
+    }
+
+    &.filter-layer9 {
+      @include filter-list-item-layer(9);
+    }
+  }
+
+  > ul {
+    .filter-list {
+      max-height: 155px;
+      overflow-y: auto;
+    }
+  }
+}
+
+.filter-dropdown {
+  position: relative;
+  padding-bottom: 15px;
+
+  .dropdown-menu {
+    width: 100%;
+    padding: 0;
+
+    a.dropdown-item {
+      color: $input-color;
+
+      &.selected {
+        color: $text-color-corporate;
+        background-color: $color-inverse;
+
+        .icon-checked {
+          position: absolute;
+          right: 15px;
+          padding-top: divide($space-default, 6);
+        }
+      }
+    }
+  }
+
+  .dropdown,
+  .dropup {
+    &.show {
+      color: $input-focus-color;
+      background-color: $input-focus-bg;
+      border-color: $input-focus-border-color;
+      outline: 0;
+    }
+
+    .dropdown-toggle {
+      color: $text-color-primary;
+
+      &:hover {
+        color: $text-color-primary;
+      }
+
+      &::after {
+        position: absolute;
+        top: calc(#{$input-height} / 2);
+        right: $space-default * 0.5;
+      }
+    }
+  }
+}
+
+.non-parametric-panel {
+  .filter-group {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+
+    ul {
+      ul {
+        padding-left: 15px;
+
+        &.filter-list {
+          max-height: none;
+          padding-top: 5px;
+          overflow-y: visible;
+        }
+      }
+
+      li {
+        &.filter-item {
+          a {
+            &.filter-item-name {
+              &.filter-selected {
+                color: $text-color-primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+input {
+  &.filter-checkbox {
+    display: none;
+  }
+}
+
+label {
+  &.filter-checkbox-label {
+    float: left;
+    width: 12px;
+    height: 12px;
+    margin: 3px 5px 0 0;
+    font-size: 0;
+    text-indent: 999em;
+    background: $color-tertiary;
+    border: $border-width-default solid $border-color-light;
+
+    &.selected {
+      background: $color-corporate;
+      border: $border-width-default solid $border-color-light;
+    }
+  }
+}
+
+.filter-clear.ng-fa-icon {
+  line-height: inherit;
+}
+
+.filter-color {
+  float: left;
+  width: $swatch-image-diameter + 2 * $swatch-image-padding-to-border + 2px;
+  height: $swatch-image-diameter + 2 * $swatch-image-padding-to-border + 2px;
+  padding: 0 !important;
+  margin: 1px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+
+.filter-swatch {
+  span {
+    position: relative;
+    top: $swatch-image-padding-to-border;
+    left: $swatch-image-padding-to-border;
+    display: inline-block;
+    width: $swatch-image-diameter;
+    height: $swatch-image-diameter;
+    border-radius: 50%;
+
+    &.filter-color-bright {
+      border: 1px solid $border-color-light;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .mobile-filter-toggle {
+    display: block;
+    padding: $space-default 0;
+    margin-bottom: $space-default;
+    font-family: $font-family-condensedregular;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    .ng-fa-icon {
+      display: block;
+    }
+  }
+}

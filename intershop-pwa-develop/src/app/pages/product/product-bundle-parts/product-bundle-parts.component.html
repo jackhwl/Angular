@@ -1,0 +1,33 @@
+<div *ngIf="visible$ | async" class="bundled-product-list">
+  <h3>{{ 'product.productBundle.products.heading' | translate }}</h3>
+
+  <div class="product-list row">
+    <ng-container *ngFor="let part of parts$ | async">
+      <div class="col-lg-8 product-list-item list-view">
+        <ish-product-item
+          displayType="row"
+          ishProductContext
+          [sku]="part.sku"
+          [quantity]="part.quantity"
+          [configuration]="{
+            readOnly: true,
+            price: false,
+            inventory: false,
+            shipment: false,
+            promotions: false,
+            addToBasket: false,
+            addToWishlist: false,
+            addToOrderTemplate: false,
+            addToQuote: false,
+            addToCompare: false
+          }"
+        ></ish-product-item>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row product-info">
+    <div class="col align-self-start no-gutters">
+      <ish-product-add-to-basket></ish-product-add-to-basket>
+    </div>
+  </div>
+</div>

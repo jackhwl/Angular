@@ -1,0 +1,106 @@
+<ng-container *ngIf="quote$ | async as quote">
+  <ng-container *ngIf="state$ | async as state">
+    <!-- Description -->
+    <!-- Quote Header ( shown once if quote request submitted ) -->
+    <ng-container *ngIf="state === 'Submitted'; else quotePending">
+      <ng-container *ngIf="justSubmitted$ | async; else previouslySubmitted">
+        <p>
+          {{ 'quote.edit.submitted.your_quote_number.text' | translate }}
+          <a [routerLink]="['/account/quotes', quote.id]">{{ quote.number }}</a>
+        </p>
+        <p
+          [ishServerHtml]="
+            'quote.edit.submitted.your_quote_request.text'
+              | translate: { '0': 'route://account/quotes', '1': 'route://account' }
+          "
+        ></p>
+        <p>{{ 'quote.edit.submitted.we_will_email.text' | translate: { '0': userEmail$ | async } }}</p>
+      </ng-container>
+      <ng-template #previouslySubmitted>
+        <ish-info-message
+          message="{{
+            'quote.edit.submitted.your_quote_request_has_been_submitted.text'
+              | translate: { '0': asQuoteRequest(quote).submittedDate || quote.creationDate | ishDate: 'shortDate' }
+          }}"
+          [toast]="false"
+        >
+        </ish-info-message>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #quotePending>
+      <ish-info-message
+        *ngIf="state === 'Responded' && !(isQuoteStarted$ | async)"
+        message="quote.error.not_started"
+        [toast]="false"
+      ></ish-info-message>
+    </ng-template>
+
+    <div class="row">
+      <label class="col-4 col-md-3 col-xl-2 col-form-label">{{
+        'quote.edit.unsubmitted.quote_no.label' | translate
+      }}</label>
+      <div class="col-8 col-md-9 col-xl-10">
+        <p class="form-control-plaintext" data-testing-id="quoteId" [attr.data-quote-id]="quote.id">
+          {{ quote.number }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-4 col-md-3 col-xl-2 col-form-label">{{
+        'quote.edit.unsubmitted.status.label' | translate
+      }}</label>
+      <div class="col-8 col-md-9 col-xl-10">
+        <p class="form-control-plaintext"><ish-quote-state [quoteId]="quote.id"></ish-quote-state></p>
+      </div>
+    </div>
+
+    <!-- Shows the valid from/to date  -->
+    <div *ngIf="state === 'Responded'" class="row">
+      <label class="col-4 col-md-3 col-xl-2 col-form-label">{{
+        'quote.edit.unsubmitted.valid.label' | translate
+      }}</label>
+      <div class="col-8 col-md-9 col-xl-10">
+        <p class="form-control-plaintext">
+          {{ asQuote(quote).validFromDate | ishDate: 'shortDate' }} -
+          {{ asQuote(quote).validToDate | ishDate: 'shortDate' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <!-- displayName -->
+      <div class="row has-feedback">
+        <label class="col-4 col-md-3 col-xl-2 col-form-label">{{
+          'quote.edit.unsubmitted.name.label' | translate
+        }}</label>
+        <div class="col-8 col-md-9 col-xl-10">
+          <p class="form-control-plaintext">{{ quote.displayName }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="quote.description" class="row">
+        <label for="quote-description" class="col-4 col-md-3 col-xl-2 col-form-label">{{
+          'quote.edit.unsubmitted.comment.label' | translate
+        }}</label>
+        <div class="col-8 col-md-9 col-xl-10">
+          <p class="form-control-plaintext">{{ quote.description }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="asQuote(quote).sellerComment" class="row">
+        <label for="" class="col-4 col-md-3 col-xl-2 col-form-label">{{
+          'quote.edit.unsubmitted.seller_comment.label' | translate
+        }}</label>
+        <div class="col-8 col-md-9 col-xl-10">
+          <p class="form-control-plaintext">{{ asQuote(quote).sellerComment }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>{{ 'quote.items.table.heading' | translate }}</h3>
+      <ish-quote-line-item-list *ngIf="quote.items"></ish-quote-line-item-list>
+    </div>
+  </ng-container>
+</ng-container>

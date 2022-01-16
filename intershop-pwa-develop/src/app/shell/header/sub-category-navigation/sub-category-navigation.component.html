@@ -1,0 +1,29 @@
+<ul
+  *ngIf="navigationCategories$ | async as categories"
+  class="category-level{{ subCategoriesDepth }}"
+  [ngClass]="{ 'dropdown-menu': subCategoriesDepth === 1 }"
+>
+  <li
+    *ngFor="let subcategory of categories"
+    class="main-navigation-level{{ subCategoriesDepth }}-item"
+    [ngClass]="{ open: isOpened(subcategory.uniqueId) }"
+  >
+    <a
+      [routerLink]="subcategory.url"
+      [ngStyle]="{
+        width: !(subCategoriesDepth < mainNavigationMaxSubCategoriesDepth && subcategory.hasChildren) ? '100%' : ''
+      }"
+      >{{ subcategory.name }}</a
+    >
+    <ng-container *ngIf="subCategoriesDepth < mainNavigationMaxSubCategoriesDepth && subcategory.hasChildren">
+      <a class="dropdown-toggle" [ngClass]="{ 'd-none': view === 'full' }" (click)="toggleOpen(subcategory.uniqueId)">
+        <fa-icon *ngIf="isOpened(subcategory.uniqueId); else closed" [icon]="['fas', 'minus']"></fa-icon>
+        <ng-template #closed> <fa-icon [icon]="['fas', 'plus']"></fa-icon> </ng-template>
+      </a>
+      <ish-sub-category-navigation
+        [categoryUniqueId]="subcategory.uniqueId"
+        [subCategoriesDepth]="subCategoriesDepth + 1"
+      ></ish-sub-category-navigation>
+    </ng-container>
+  </li>
+</ul>

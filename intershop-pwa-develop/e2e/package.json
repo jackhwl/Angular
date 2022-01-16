@@ -1,0 +1,22 @@
+{
+  "name": "intershop-pwa-e2e",
+  "version": "1.0.0",
+  "description": "Cypress Tests for Intershop PWA",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intershop/intershop-pwa.git",
+    "directory": "e2e"
+  },
+  "scripts": {
+    "test": "node open-cypress"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cypress": "^7.0.0",
+    "cypress-failed-log": "^2.0.0",
+    "cypress-log-to-output": "^1.1.2",
+    "har-validator": "^5.1.5",
+    "typescript": "*"
+  }
+}

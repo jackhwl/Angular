@@ -1,0 +1,63 @@
+<!-- Error message -->
+<ish-error-message [error]="orderTemplateError$ | async"></ish-error-message>
+
+<ng-container *ngIf="orderTemplate$ | async as orderTemplate" ishProductContext>
+  <h1>
+    {{ orderTemplate?.title }}
+    <a
+      (click)="editOrderTemplateDialog.show()"
+      class="btn btn-secondary float-right"
+      [title]="'account.order_template.edit.heading' | translate"
+      data-testing-id="order-template-details-edit"
+      >{{ 'account.order_template.order_template.edit.rename' | translate }}</a
+    >
+  </h1>
+
+  <div class="section">
+    <ng-container *ngIf="orderTemplate.itemsCount && orderTemplate.itemsCount > 0; else noItems" class="section">
+      <div class="list-header d-md-flex">
+        <div class="col-6 list-header-item">{{ 'account.order_template.table.header.item' | translate }}</div>
+        <div class="col-2 list-header-item text-right">
+          {{ 'shopping_cart.qty.heading' | translate }}
+        </div>
+        <div class="col-2 list-header-item text-right">
+          {{ 'account.order_template.table.header.date_added' | translate }}
+        </div>
+        <div class="col-2 list-header-item column-price text-right">
+          {{ 'account.order_template.table.header.price' | translate }}
+        </div>
+      </div>
+      <div class="list-body">
+        <ng-container *ngFor="let item of orderTemplate.items; let i = index">
+          <div class="list-item-row list-item-row-big">
+            <ish-account-order-template-detail-line-item
+              ishProductContext
+              [propagateIndex]="i"
+              [sku]="item.sku"
+              [quantity]="item.desiredQuantity.value"
+              [orderTemplateItemData]="item"
+              [currentOrderTemplate]="orderTemplate"
+            ></ish-account-order-template-detail-line-item>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+  <ish-product-add-to-basket
+    *ngIf="orderTemplate.itemsCount"
+    [cssClass]="'btn btn-primary float-right'"
+  ></ish-product-add-to-basket>
+
+  <ng-template #noItems>
+    <p>{{ 'account.order_template.no_entries' | translate }}</p>
+  </ng-template>
+
+  <ish-order-template-preferences-dialog
+    #editOrderTemplateDialog
+    [orderTemplate]="orderTemplate"
+    (submit)="editPreferences($event, orderTemplate.id)"
+  ></ish-order-template-preferences-dialog>
+</ng-container>
+
+<a routerLink="/account/order-templates">{{ 'account.order_template.list.link.back' | translate }}</a>
+<ish-loading *ngIf="orderTemplateLoading$ | async"></ish-loading>

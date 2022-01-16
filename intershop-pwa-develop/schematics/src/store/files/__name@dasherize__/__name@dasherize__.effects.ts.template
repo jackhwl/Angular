@@ -1,0 +1,19 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { EMPTY, Observable } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+
+import { load<%= classify(name) %> } from './<%= dasherize(name) %>.actions';
+
+@Injectable()
+export class <%= classify(name) %>Effects {
+  constructor(private actions$: Actions) {}
+
+  load<%= classify(name) %>$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(load<%= classify(name) %>),
+      concatMap(() => EMPTY as Observable<Action>)
+    )
+  );
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsPWAService",
+  "title": "PWA Service Options Schema",
+  "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "visible": false
+    },
+    "restricted": {
+      "type": "boolean",
+      "visible": false,
+      "default": true
+    },
+    "project": {
+      "type": "string",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the service.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the service?"
+    },
+    "extension": {
+      "type": "string",
+      "description": "The extension to generate the service in. If empty it is generated in core.",
+      "alias": "e"
+    }
+  }
+}

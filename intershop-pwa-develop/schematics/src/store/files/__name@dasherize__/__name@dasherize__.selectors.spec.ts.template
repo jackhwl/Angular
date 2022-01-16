@@ -1,0 +1,100 @@
+import { TestBed } from '@angular/core/testing';
+
+import { CoreStoreModule } from 'ish-core/store/core/core-store.module';
+import { StoreWithSnapshots, provideStoreSnapshots } from 'ish-core/utils/dev/ngrx-testing';
+<% if (feature && feature !== 'core') { %>import { <%= classify(feature) %>StoreModule } from 'ish-core/store/<%= dasherize(feature) %>/<%= dasherize(feature) %>-store.module';<% } else if (extension) { %>import { <%= classify(extension) %>StoreModule } from '../<%= dasherize(extension) %>-store.module';<% } %>
+<% if(entity) { %>import { makeHttpError } from 'ish-core/utils/dev/api-service-utils';
+import { <%= classify(entity) %> } from '<% if(!extension) { %>ish-core<% } else { %>../..<% } %>/models/<%= dasherize(entity) %>/<%= dasherize(entity) %>.model';<% } %>
+
+import { load<%= classify(name) %><% if (entity) { %>, load<%= classify(name) %>Fail, load<%= classify(name) %>Success<% } %> } from './<%= dasherize(name) %>.actions';
+import { <% if (entity) { %>getNumberOf<%= classify(name) %>, get<%= classify(name) %>, get<%= classify(name) %>Entities, get<%= classify(name) %>Error, <% } %>get<%= classify(name) %>Loading } from './<%= dasherize(name) %>.selectors';
+
+describe('<%= classify(name) %> Selectors', () => {
+  let store$: StoreWithSnapshots;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        CoreStoreModule.forTesting(<% if (feature === 'core') { %>['<%= camelize(name) %>']<% } %>),
+        <% if (feature && feature !== 'core') { %><%= classify(feature) %>StoreModule.forTesting('<%= camelize(name) %>'),<% } else if (extension) { %><%= classify(extension) %>StoreModule.forTesting('<%= camelize(name) %>'),<% } %>
+      ],
+      providers: [provideStoreSnapshots()],
+    });
+
+    store$ = TestBed.inject(StoreWithSnapshots);
+  });
+
+  describe('initial state', () => {
+    it('should not be loading when in initial state', () => {
+      expect(get<%= classify(name) %>Loading(store$.state)).toBeFalse();
+    });
+<% if (entity) { %>
+    it('should not have an error when in initial state', () => {
+      expect(get<%= classify(name) %>Error(store$.state)).toBeUndefined();
+    });
+
+    it('should not have entities when in initial state', () => {
+      expect(get<%= classify(name) %>Entities(store$.state)).toBeEmpty();
+      expect(get<%= classify(name) %>(store$.state)).toBeEmpty();
+      expect(getNumberOf<%= classify(name) %>(store$.state)).toBe(0);
+    });
+<% } %>  });
+
+  describe('load<%= classify(name) %>', () =>{
+    const action = load<%= classify(name) %>();
+
+    beforeEach(() => {
+      store$.dispatch(action);
+    });
+
+    it('should set loading to true', () => {
+      expect(get<%= classify(name) %>Loading(store$.state)).toBeTrue();
+    });
+<% if (entity) { %>
+    describe('load<%= classify(name) %>Success', () => {
+      const <%= camelize(name) %> = [{ id: '1' }, { id: '2' }] as <%= classify(entity) %>[];
+      const successAction = load<%= classify(name) %>Success({ <%= camelize(name) %> });
+
+      beforeEach(() => {
+        store$.dispatch(successAction);
+      });
+
+      it('should set loading to false', () => {
+        expect(get<%= classify(name) %>Loading(store$.state)).toBeFalse();
+      });
+
+      it('should not have an error when successfully loaded entities', () => {
+        expect(get<%= classify(name) %>Error(store$.state)).toBeUndefined();
+      });
+
+      it('should have entities when successfully loading', () => {
+        expect(get<%= classify(name) %>Entities(store$.state)).not.toBeEmpty();
+        expect(get<%= classify(name) %>(store$.state)).not.toBeEmpty();
+        expect(getNumberOf<%= classify(name) %>(store$.state)).toBe(2);
+      });
+    });
+
+    describe('load<%= classify(name) %>Fail', () => {
+      const error = makeHttpError({ message: 'ERROR' });
+      const failAction = load<%= classify(name) %>Fail({ error });
+
+      beforeEach(() => {
+        store$.dispatch(failAction);
+      });
+
+      it('should set loading to false', () => {
+        expect(get<%= classify(name) %>Loading(store$.state)).toBeFalse();
+      });
+
+      it('should have an error when reducing', () => {
+        expect(get<%= classify(name) %>Error(store$.state)).toBeTruthy();
+      });
+
+      it('should not have entities when reducing error', () => {
+        expect(get<%= classify(name) %>Entities(store$.state)).toBeEmpty();
+        expect(get<%= classify(name) %>(store$.state)).toBeEmpty();
+        expect(getNumberOf<%= classify(name) %>(store$.state)).toBe(0);
+      });
+    });
+<% } %>  });
+});

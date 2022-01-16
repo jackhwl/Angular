@@ -1,0 +1,26 @@
+<div *ngIf="product$ | async" class="row">
+  <div class="col-lg-3 d-none d-lg-block">
+    <div class="product-img-thumbs" data-type="S">
+      <div
+        *ngFor="let imageView of getImageViewIDs$('S') | async; index as i"
+        class="product-thumb-set"
+        [ngClass]="{ active: isActiveSlide(i) }"
+        (click)="setActiveSlide(i)"
+      >
+        <ish-product-image imageType="S" [imageView]="imageView"></ish-product-image>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="getImageViewIDs$('L') | async as largeImages" class="col-12 col-lg-9 product-detail-img clearfix">
+    <div class="product-image-container">
+      <swiper #carousel [navigation]="true" [(index)]="activeSlide">
+        <ng-container *ngFor="let imageView of largeImages">
+          <ng-template swiperSlide>
+            <ish-product-image imageType="L" [imageView]="imageView"></ish-product-image>
+          </ng-template>
+        </ng-container>
+      </swiper>
+      <ish-product-label></ish-product-label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div data-testing-id="checkout-payment-page">
+  <h1>{{ 'checkout.payment.pagetitle' | translate }}</h1>
+
+  <ish-checkout-payment
+    [basket]="basket$ | async"
+    [paymentMethods]="paymentMethods$ | async"
+    [priceType]="priceType$ | async"
+    [error]="basketError$ | async"
+    (updatePaymentMethod)="updateBasketPaymentMethod($event)"
+    (createPaymentInstrument)="createPaymentInstrument($event)"
+    (deletePaymentInstrument)="deletePaymentInstrument($event)"
+    (nextStep)="nextStep()"
+  ></ish-checkout-payment>
+
+  <ish-loading *ngIf="loading$ | async"></ish-loading>
+</div>

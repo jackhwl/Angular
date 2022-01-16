@@ -1,0 +1,117 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "address-form-configuration": {
+      "aliases": ["afc"],
+      "factory": "./address-form-configuration/factory#createAddressFormConfiguration",
+      "description": "Create an address form configuration",
+      "schema": "./address-form-configuration/schema.json"
+    },
+    "cms-component": {
+      "aliases": ["cms"],
+      "factory": "./cms-component/factory#createCMSComponent",
+      "description": "Create a CMS component.",
+      "schema": "./cms-component/schema.json"
+    },
+    "component": {
+      "aliases": ["c"],
+      "factory": "./component/factory#createComponent",
+      "description": "Create a presentation component.",
+      "schema": "./component/schema.json"
+    },
+    "module": {
+      "aliases": ["m"],
+      "factory": "./module/factory#createModule",
+      "description": "Create a module.",
+      "schema": "./module/schema.json"
+    },
+    "service": {
+      "aliases": ["s"],
+      "factory": "./service/factory#createService",
+      "description": "Create a ICM compatible REST Service.",
+      "schema": "./service/schema.json"
+    },
+    "pipe": {
+      "factory": "./pipe/factory#createPipe",
+      "description": "Create a pipe.",
+      "schema": "./pipe/schema.json"
+    },
+    "page": {
+      "aliases": ["p"],
+      "factory": "./page/factory#createPage",
+      "description": "Create a page.",
+      "schema": "./page/schema.json"
+    },
+    "model": {
+      "factory": "./model/factory#createModel",
+      "description": "Create a model.",
+      "schema": "./model/schema.json"
+    },
+    "extension": {
+      "aliases": ["e"],
+      "factory": "./extension/factory#createExtension",
+      "description": "Create an extension.",
+      "schema": "./extension/schema.json"
+    },
+    "lazy-component": {
+      "factory": "./lazy-component/factory#createLazyComponent",
+      "description": "Create a lazy component for an existing component in an extension.",
+      "schema": "./lazy-component/schema.json"
+    },
+    "lazy-components": {
+      "factory": "./helpers/lazy-components/factory#createLazyComponents",
+      "description": "Create lazy components for all annotated components in extensions.",
+      "schema": "./helpers/lazy-components/schema.json",
+      "hidden": true
+    },
+    "store": {
+      "factory": "./store/factory#createStore",
+      "description": "Create a store.",
+      "schema": "./store/schema.json"
+    },
+    "store-group": {
+      "factory": "./store-group/factory#createStoreGroup",
+      "description": "Create a store group.",
+      "schema": "./store-group/schema.json"
+    },
+    "kubernetes-deployment": {
+      "factory": "./kubernetes-deployment/factory#createKubernetesDeployment",
+      "description": "Create Kubernetes Charts.",
+      "schema": "./kubernetes-deployment/schema.json",
+      "hidden": true
+    },
+    "azure-pipeline": {
+      "factory": "./azure-pipeline/factory#createAzurePipeline",
+      "description": "Create Azure Pipeline.",
+      "schema": "./azure-pipeline/schema.json",
+      "hidden": true
+    },
+    "move-component": {
+      "factory": "./helpers/move-component/factory#move",
+      "description": "Move Component.",
+      "schema": "./helpers/move-component/schema.json",
+      "hidden": true
+    },
+    "decontainerize-0.16-to-0.17": {
+      "factory": "./migration/decontainerize-0.16-to-0.17/factory#decontainerize",
+      "description": "Perform de-containerization from 0.15 to 0.16.",
+      "schema": "./migration/decontainerize-0.16-to-0.17/schema.json",
+      "hidden": true
+    },
+    "customized-copy": {
+      "factory": "./helpers/customized-copy/factory#customize",
+      "description": "Create a copy of Component for customization.",
+      "schema": "./helpers/customized-copy/schema.json"
+    },
+    "add-destroy": {
+      "factory": "./helpers/add-destroy/factory#add",
+      "description": "Add destroy subject to an existing Angular artifact.",
+      "schema": "./helpers/add-destroy/schema.json"
+    },
+    "override": {
+      "factory": "./helpers/override/factory#override",
+      "description": "Override a source for customization.",
+      "schema": "./helpers/override/schema.json"
+    }
+  }
+}

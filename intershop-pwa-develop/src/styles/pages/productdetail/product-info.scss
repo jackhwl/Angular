@@ -1,0 +1,208 @@
+.product-title {
+  font-family: $font-family-condensedbold;
+  font-size: 16px;
+  color: $text-color-primary;
+}
+
+a.product-title {
+  font-family: $font-family-condensedregular;
+  color: $text-color-corporate;
+}
+
+.product-id {
+  font-size: $font-size-corporate;
+  color: $text-color-quaternary;
+
+  label {
+    padding-right: divide($space-default, 3);
+  }
+}
+
+.product-info {
+  font-family: $font-family-condensedregular;
+  color: $text-color-quaternary;
+
+  label {
+    text-transform: uppercase;
+  }
+
+  .product-brand {
+    text-transform: uppercase;
+
+    a {
+      color: $text-color-quaternary;
+
+      &:hover {
+        color: darken($text-color-quaternary, 10%);
+      }
+    }
+  }
+
+  .current-price {
+    font-family: $font-family-condensedregular;
+    font-size: 30px;
+
+    .price-note {
+      margin-left: $space-default;
+      font-size: $font-size-corporate;
+    }
+  }
+
+  .sale-price {
+    font-size: 30px;
+  }
+
+  .old-price {
+    margin: 0;
+  }
+
+  .was-price {
+    font-size: 18px;
+    color: $text-color-quaternary;
+    text-decoration: line-through;
+  }
+
+  .ready-for-shipment,
+  .product-availability {
+    color: $text-color-primary;
+  }
+
+  .ready-for-shipment {
+    padding-bottom: $space-default;
+  }
+
+  .product-quantity,
+  .product-variation {
+    label {
+      padding-bottom: 0;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    &.read-only {
+      label {
+        padding-right: divide($space-default, 3);
+      }
+    }
+
+    .form-group {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+
+  .product-variation {
+    .form-group {
+      margin-bottom: divide($space-default, 3);
+
+      label {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .product-variation-container {
+    margin-bottom: $space-default * 2;
+  }
+
+  .add-to-cart {
+    margin-top: $space-default;
+    margin-bottom: $space-default;
+  }
+
+  .add-to-wishlist {
+    padding-left: 0;
+  }
+
+  .btn.btn-block {
+    margin-bottom: $space-default * 0.5;
+  }
+
+  .secondary-actions {
+    button {
+      &:first-child {
+        margin-right: 0;
+      }
+
+      &:last-child {
+        float: right;
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+          float: left;
+        }
+      }
+    }
+  }
+
+  .promotion-list {
+    border-spacing: 0 $space-default;
+    border-collapse: separate;
+  }
+}
+
+.cross-sell-product {
+  padding-top: ($space-default * 4);
+  clear: both;
+  text-align: center;
+
+  a {
+    &.product-title {
+      display: block;
+      padding-top: ($space-default * 0.5);
+      font-family: $font-family-condensedregular;
+      font-size: 14px;
+      color: $text-color-secondary;
+      text-align: center;
+      text-decoration: none !important;
+    }
+  }
+}
+
+.bundle-product {
+  position: relative;
+  padding-top: ($space-default * 4);
+  margin-top: ($space-default * 6);
+  clear: both;
+  text-align: center;
+  border-top: $border-width-default solid $border-color-light;
+
+  h3 {
+    position: absolute;
+    top: -35px;
+    left: 38%;
+    width: 28%;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: $color-inverse;
+  }
+
+  a {
+    &.product-title {
+      display: block;
+      padding-top: ($space-default * 0.5);
+      font-family: $font-family-condensedregular;
+      font-size: 14px;
+      color: $text-color-secondary;
+      text-align: center;
+      text-decoration: none !important;
+    }
+  }
+}
+
+.product-end-of-live-status {
+  padding-bottom: divide($space-default, 3);
+}
+
+.product-lifecycle-status {
+  padding-bottom: divide($space-default, 3);
+  color: $text-color-special;
+
+  span {
+    display: block;
+  }
+
+  span.product-lifecycle-status-title {
+    font-family: $font-family-bold;
+    font-size: $font-size-lg;
+  }
+}

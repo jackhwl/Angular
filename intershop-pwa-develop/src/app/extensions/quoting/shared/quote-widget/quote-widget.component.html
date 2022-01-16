@@ -1,0 +1,40 @@
+<ish-info-box
+  heading="account.quotes.widget.my_quotes.heading"
+  class="infobox-wrapper h-100"
+  cssClass="infobox-color-widget d-flex flex-column"
+>
+  <div class="loading-container mt-auto">
+    <div *ngIf="!(loading$ | async); else loading">
+      <div class="row align-items-end no-gutters">
+        <div class="col">
+          <div class="infobox-count" data-testing-id="responded-counter">
+            {{ respondedQuotes$ | async }}
+          </div>
+          <div>
+            {{ 'account.quotes.widget.responded.label' | translate }}
+          </div>
+        </div>
+        <div class="col text-right">
+          <div class="infobox-count-large" data-testing-id="submitted-counter">
+            {{ submittedQuoteRequests$ | async }}
+          </div>
+          <div>
+            {{ 'account.quotes.widget.submitted.label' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <a routerLink="/account/quotes" data-testing-id="quote-list-link">
+            {{ 'account.quotes.widget.view_all_quotes.link' | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ish-info-box>
+
+<ng-template #loading>
+  <ish-loading></ish-loading>
+</ng-template>

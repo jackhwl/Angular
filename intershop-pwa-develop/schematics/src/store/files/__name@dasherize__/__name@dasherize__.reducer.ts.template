@@ -1,0 +1,38 @@
+<% if(entity) { %>import { EntityState, createEntityAdapter } from '@ngrx/entity';
+
+import { HttpError } from 'ish-core/models/http-error/http-error.model';
+import { <%= classify(entity) %> } from '<% if(!extension) { %>ish-core<% } else { %>../..<% } %>/models/<%= dasherize(entity) %>/<%= dasherize(entity) %>.model';
+
+<% } %>
+import { createReducer<% if(entity) { %>, on<% } %> } from '@ngrx/store';
+import { <% if(entity) { %>setErrorOn, unsetLoadingAndErrorOn, <% } %>setLoadingOn } from 'ish-core/utils/ngrx-creators';
+
+import { load<%= classify(name) %><% if(entity) { %>, load<%= classify(name) %>Fail, load<%= classify(name) %>Success<% } %> } from './<%= dasherize(name) %>.actions';
+<% if(entity) { %>
+export const <%= camelize(name) %>Adapter = createEntityAdapter<<%= classify(entity) %>>();
+
+export interface <%= classify(name) %>State extends EntityState<<%= classify(entity) %>> {
+  loading: boolean;
+  error: HttpError;
+}
+
+const initialState: <%= classify(name) %>State = <%= camelize(name) %>Adapter.getInitialState({
+  loading: false,
+  error: undefined,
+});
+<% } else { %>
+export interface <%= classify(name) %>State {
+  loading: boolean;
+}
+
+const initialState: <%= classify(name) %>State = {
+  loading: false,
+};
+<% } %>
+export const <%= camelize(name) %>Reducer = createReducer(
+  initialState,
+  setLoadingOn(load<%= classify(name) %>)<% if(entity) { %>,
+  setErrorOn(load<%= classify(name) %>Fail),
+  unsetLoadingAndErrorOn(load<%= classify(name) %>Success),
+  on(load<%= classify(name) %>Success, (state, action) => <%= camelize(name) %>Adapter.upsertMany(action.payload.<%= camelize(name) %>, state))<% } %>
+);

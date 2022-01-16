@@ -1,0 +1,31 @@
+.ng-fa-icon {
+  line-height: 1;
+}
+
+.btn-tool {
+  .ng-fa-icon {
+    font-size: 22px;
+  }
+
+  & ~ .btn-tool {
+    margin-left: divide($space-default * 2, 3);
+  }
+}
+
+.btn-circle .ng-fa-icon {
+  font-size: 12px;
+}
+
+/* Icons (.btn-tool) after a list within a product line item description */
+.pli-description {
+  dl {
+    + .btn-tool {
+      margin-top: 7.5px;
+
+      & ~ .btn-tool {
+        margin-top: 7.5px;
+        margin-left: divide($space-default * 2, 3);
+      }
+    }
+  }
+}

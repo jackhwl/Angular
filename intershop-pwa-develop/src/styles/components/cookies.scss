@@ -1,0 +1,34 @@
+.cookies-banner {
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 20px;
+  color: $color-inverse;
+  background-color: $color-primary !important;
+  opacity: 0.9;
+
+  h4 {
+    color: $color-inverse;
+  }
+
+  a {
+    color: $color-inverse !important;
+    text-decoration: underline;
+
+    &:hover {
+      color: $text-color-quaternary !important;
+    }
+  }
+}
+
+.cookies-modal {
+  .cookie-option {
+    label {
+      span {
+        padding-left: $space-default * 0.5;
+        font-family: $font-family-bold;
+      }
+    }
+  }
+}

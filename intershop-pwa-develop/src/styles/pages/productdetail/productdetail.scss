@@ -1,0 +1,144 @@
+//
+// PRODUCT DETAILS
+
+.product-page {
+  padding: $space-default 0 $space-default 0;
+}
+
+.product-details {
+  padding: 0;
+
+  .label-quantity {
+    padding-top: 7px;
+  }
+
+  .bundled-product-list,
+  .retail-product-list {
+    margin-bottom: $space-default;
+
+    .quantity {
+      font-family: $font-family-condensedregular;
+      font-size: $font-size-lg;
+    }
+
+    .bundled-product-list-item,
+    .retail-product-list-item {
+      list-style: none;
+    }
+  }
+
+  .bundled-product-list-actions {
+    form {
+      display: inline;
+    }
+
+    .add-to-wishlist,
+    .price-notification {
+      display: inline;
+      padding-left: 0;
+    }
+  }
+}
+
+.product-details-top-line {
+  margin-bottom: ($space-default * 3);
+
+  @media (max-width: $screen-sm-max) {
+    margin-top: divide($space-default, 3);
+    margin-bottom: ($space-default);
+  }
+
+  .product-rating {
+    float: right;
+
+    .rating-display {
+      margin-left: $space-default;
+    }
+  }
+}
+
+.product-photo {
+  float: left;
+}
+
+.product-alt-images {
+  float: left;
+
+  .product-alt-images-list {
+    float: left;
+    padding-left: 0;
+    list-style: none;
+
+    .product-alt-images-list-item {
+      padding: $space-default;
+      margin-bottom: $space-default;
+      border: 1px solid $border-color-lighter;
+    }
+  }
+}
+
+.panel-group {
+  margin: $space-default 0;
+
+  .panel-heading {
+    padding: divide($space-default, 3) 0;
+
+    a {
+      color: $text-color-quaternary;
+
+      &:hover {
+        color: darken($text-color-quaternary, 10%);
+      }
+    }
+
+    + .panel-collapse {
+      .panel-body {
+        border-top: none;
+      }
+    }
+  }
+
+  .panel-body {
+    padding: $space-default 0;
+    color: $text-color-primary;
+
+    .product-attachment {
+      margin-bottom: $space-default;
+
+      .product-attachment-description {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.product-warranty {
+  margin-top: $space-default;
+  font-family: $font-family-regular;
+  color: $text-color-primary;
+
+  .product-warranty-title {
+    font-weight: bold;
+  }
+
+  .product-warranty-list {
+    margin-top: divide($space-default, 3);
+  }
+}
+
+// product links with tabs or as accordion
+.collection .tab-content > .tab-pane,
+.accordion .panel-collapse {
+  display: block;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.collection .tab-content > .active,
+.accordion .panel-collapse.in {
+  display: block;
+  height: auto;
+  pointer-events: auto;
+  visibility: visible;
+}

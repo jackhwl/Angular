@@ -1,0 +1,169 @@
+//
+// CHECKOUT
+
+/************* Checkout Step 1 - Address ***************/
+
+.multiple-address-container {
+  .list-body .list-item-row .list-item {
+    overflow: inherit;
+
+    @media (min-width: $screen-lg-min) {
+      address {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/************* Checkout Step 2 - Shipping ***************/
+
+.shipping-methods {
+  margin-bottom: $space-default;
+}
+
+.cart-summary-checkout {
+  font-size: $font-size-sm;
+
+  h5 {
+    margin-top: 0;
+  }
+
+  .cart-pli-data {
+    color: $text-color-quaternary;
+
+    span {
+      display: inline-block;
+      width: 80px;
+    }
+  }
+}
+
+.packslip-message {
+  .form-check {
+    margin-bottom: ($space-default * 0.5);
+  }
+}
+
+//
+// GIFT WRAP
+
+.dialog-giftwrap-content {
+  width: 100%;
+  padding: $space-default * 2;
+  text-align: center;
+}
+
+/************* Checkout Step 5 - Checkout Receipt ***************/
+
+.checkout-signup {
+  height: 100%;
+  padding-bottom: ($space-default * 2);
+  color: $text-color-inverse;
+  background: $color-secondary;
+
+  @media (max-width: $screen-xs-max) {
+    padding-top: 1px;
+    margin-top: ($space-default * 2);
+  }
+
+  input {
+    border: $border-width-default solid $border-color-default;
+  }
+}
+
+.addressDeleteConfirmation {
+  display: none;
+}
+
+.infobox-wrapper {
+  display: flex;
+  width: 100%;
+
+  .infobox {
+    width: 100%;
+    padding: $space-default $space-default 0;
+    margin-bottom: $space-default * 2;
+    background-color: $color-tertiary;
+
+    h3 {
+      margin-top: 0;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      .col-md-6 ~ .col-md-6 {
+        padding-left: $space-default * 2;
+      }
+    }
+
+    &.infobox-color-widget {
+      padding-bottom: $space-default;
+      color: $text-color-inverse;
+      background: $CORPORATE-PRIMARY;
+
+      h3 {
+        font-size: $font-size-navbar-item;
+        color: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-transform: none;
+
+        &:hover {
+          color: darken($text-color-inverse, 15%);
+        }
+      }
+
+      button.btn {
+        color: $text-color-inverse;
+
+        &:hover {
+          color: darken($text-color-inverse, 15%);
+        }
+      }
+
+      .infobox-count {
+        font-size: $font-size-lg * 2;
+        line-height: 1;
+      }
+
+      .infobox-count-large {
+        font-size: 3.75rem;
+        line-height: 1;
+      }
+
+      .row {
+        text-transform: uppercase;
+      }
+
+      .row:last-of-type {
+        margin-top: 0.5rem;
+      }
+    }
+
+    &.infobox-widget {
+      min-height: 175px;
+      padding-bottom: $space-default;
+
+      .row:last-of-type {
+        margin-top: $space-default;
+      }
+    }
+  }
+}
+
+/* Promotions Carousel */
+
+.promotionsCarousel {
+  padding-bottom: $space-default * 3;
+
+  .carousel-indicators {
+    bottom: -25px;
+  }
+
+  .carousel-inner > .active {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}

@@ -1,0 +1,74 @@
+//
+// User Session Information
+
+.system-notification {
+  padding: 15px 0;
+  background-color: map-get($theme-colors, 'warning');
+
+  .system-notification-icon {
+    float: left;
+    padding: $space-default $space-default * 4 $space-default 0;
+
+    .ng-fa-icon {
+      font-size: 300%;
+    }
+  }
+
+  .system-notification-text {
+    float: left;
+  }
+
+  .system-notification-close {
+    float: right;
+    font-size: 200%;
+    color: $text-color-primary;
+  }
+}
+
+// inline alert box, e.g. for alerts in the basket item list
+.alert-inline {
+  background-color: #fff;
+  border-width: 2px;
+}
+
+// alert box, e.g. for product out of stock notification
+
+.alert-box {
+  border: 3px solid $error-color;
+
+  .alert-box-header {
+    padding-bottom: $space-default;
+    color: $error-color;
+  }
+
+  .alert-box-body {
+    padding: 0 $space-default;
+  }
+
+  .list-body {
+    margin-bottom: 0;
+  }
+
+  .list-item-row {
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    .alert-box-body {
+      padding: 0;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: $space-default * 0.5;
+    }
+
+    .list-item-row {
+      padding: 0 $space-default;
+    }
+  }
+}

@@ -1,0 +1,239 @@
+/*********** SEARCH CONTAINER **********/
+
+.search-container {
+  position: relative;
+
+  .btn-reset:active,
+  .btn-search:active {
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  button {
+    margin-right: 0 !important;
+
+    &:focus,
+    &:active {
+      box-shadow: none !important;
+    }
+
+    &.btn-reset {
+      opacity: 0.6;
+    }
+
+    &.btn-reset,
+    &.btn-search {
+      position: absolute;
+      right: 0;
+      width: auto;
+      font-size: $font-size-lg;
+      background: 0;
+      border: 0;
+
+      span::before {
+        font-size: $font-size-lg;
+        color: $text-color-inverse;
+      }
+    }
+  }
+
+  ul.search-suggest-results {
+    position: absolute;
+    top: 37px;
+    z-index: 9999;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background: $color-inverse;
+    border: $border-width-default solid $border-color-light;
+
+    li {
+      width: 100%;
+      padding: 0 $space-default;
+
+      &:hover {
+        color: $text-color-inverse;
+        background: $border-color-corporate;
+        border-bottom: $border-width-default solid $border-color-default;
+
+        button {
+          color: $text-color-inverse;
+          border-top: $border-width-default solid transparent;
+        }
+
+        + li button {
+          border: none;
+        }
+      }
+
+      &.active-suggestion {
+        color: $text-color-inverse;
+        background: $color-corporate;
+        border-bottom: $border-width-default solid $border-color-corporate;
+
+        button {
+          color: $text-color-inverse;
+          border-top: $border-width-default solid transparent;
+        }
+
+        + li button {
+          border: none;
+        }
+      }
+
+      &:first-child button {
+        border: 0;
+      }
+
+      button {
+        width: 100%;
+        font-family: $font-family-regular;
+        font-size: 13px;
+        line-height: 47px;
+        color: $text-color-quaternary;
+        text-align: left;
+        background: none;
+        border: 0;
+        border-top: $border-width-default solid $border-color-light;
+
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  input {
+    &:focus {
+      color: $text-color-primary;
+      background: $color-inverse;
+
+      + .buttons {
+        button {
+          color: $text-color-primary;
+
+          .ng-fa-icon {
+            color: $text-color-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.header-search-container {
+  @include media-breakpoint-only(xs) {
+    height: $search-container-height;
+  }
+
+  @include media-breakpoint-only(md) {
+    height: 0;
+  }
+
+  input {
+    &.form-control {
+      float: right;
+      height: $search-container-height;
+      padding-left: ($search-container-height * 0.5);
+      font-size: 14px;
+      color: $white;
+      background: $color-primary;
+      border: $border-width-default solid $border-color-default;
+
+      &::-ms-clear {
+        display: none;
+      }
+
+      @include media-breakpoint-down(sm) {
+        border: $border-width-default solid $border-color-default;
+
+        &:focus {
+          background: $color-tertiary;
+        }
+      }
+    }
+
+    &:focus {
+      font-size: 14px;
+      color: $text-color-primary;
+      background: $color-inverse;
+      border: $border-width-default solid $border-color-light;
+      box-shadow: none;
+    }
+  }
+
+  ul.search-suggest-results {
+    width: 100%;
+  }
+}
+
+.header-utility {
+  .search-container {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 999999;
+    width: 400px;
+    margin-top: 0;
+    background: $color-inverse;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.23);
+
+    .btn-search {
+      @include media-breakpoint-down(md) {
+        right: divide($space-default * 2, 3);
+        margin-right: 0;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      height: 0;
+      overflow: hidden;
+    }
+  }
+
+  .search-toggler {
+    position: relative;
+
+    &.active-search {
+      background-color: $color-primary;
+
+      .ng-fa-icon {
+        color: $text-color-inverse;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .search-container.header-search-container {
+      top: $header-height-mobile;
+      display: block;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      transition: height 500ms ease-in-out;
+    }
+
+    .search-toggler {
+      position: static;
+    }
+  }
+}
+
+.main-search-container ul.search-suggest-results {
+  width: 100%;
+}
+
+.error-search-container {
+  ul.search-suggest-results {
+    top: 33px;
+    width: 100%;
+  }
+}
+
+.no-search-result {
+  + .search-container {
+    .buttons button {
+      color: $text-color-primary !important;
+    }
+  }
+}

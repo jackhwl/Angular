@@ -1,0 +1,31 @@
+<ng-template #modal let-rejectModal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">{{ 'approval.rejectform.reject_order.heading' | translate }}</h2>
+      <button
+        type="button"
+        class="close"
+        [title]="'dialog.close.text' | translate"
+        [attr.aria-label]="'dialog.close.text' | translate"
+        (click)="hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="rejectForm" (ngSubmit)="submitForm()" class="clearfix">
+        <formly-form [form]="rejectForm" [fields]="fields"></formly-form>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="submit" (click)="submitForm()" [disabled]="formDisabled">
+        {{ 'approval.rejectform.button.reject.label' | translate }}
+      </button>
+      <button class="btn btn-secondary" type="button" (click)="hide()">
+        {{ 'approval.rejectform.button.cancel.label' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

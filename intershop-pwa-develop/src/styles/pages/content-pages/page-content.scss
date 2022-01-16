@@ -1,0 +1,94 @@
+.content-page {
+  padding: $space-default 0 $space-default 0;
+}
+
+ul {
+  &.collection {
+    padding-left: 0;
+    list-style: none outside none;
+  }
+}
+
+ol {
+  &.collection {
+    padding-left: 24px;
+    list-style: outside none decimal;
+  }
+}
+
+// HELPDESK
+
+/* purgecss start ignore */
+.helpdesk-info-box {
+  width: 100%;
+  padding: $space-default * 0.5;
+  margin-bottom: $space-default;
+  color: $text-color-inverse;
+  background: $color-corporate;
+
+  a {
+    color: $text-color-inverse;
+    text-decoration: underline;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: $text-color-inverse;
+  }
+}
+
+/* purgecss end ignore */
+
+// SITEMAP
+
+.sitemap-navigation {
+  .navbar {
+    min-height: auto;
+  }
+}
+
+.sitemap-category-list {
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    padding-bottom: $space-default;
+    font-family: $font-family-condensedbold;
+    font-size: $font-size-lg;
+
+    a {
+      font-size: $font-size-lg;
+      color: $text-color-primary;
+      text-transform: uppercase;
+    }
+  }
+
+  .sitemap-category-list {
+    padding-left: $space-default;
+
+    li {
+      padding-top: 0;
+      padding-bottom: divide($space-default, 3);
+      font-family: $font-family-regular;
+      font-size: $font-size-lg;
+      text-decoration: none;
+
+      a {
+        font-size: ($grid-gutter-width * 0.5);
+      }
+    }
+  }
+}
+
+.sitemap-product-list {
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    a {
+      font-family: $font-family-condensedregular;
+      font-size: $font-size-lg;
+      text-decoration: none;
+    }
+  }
+}

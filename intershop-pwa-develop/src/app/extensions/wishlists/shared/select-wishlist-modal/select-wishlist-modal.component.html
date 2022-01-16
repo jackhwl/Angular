@@ -1,0 +1,51 @@
+<ng-template #modal let-selectModal>
+  <div class="modal-header">
+    <h2 class="modal-title">{{ headerTranslationKey | translate }}</h2>
+    <button
+      type="button"
+      class="close"
+      [title]="'dialog.close.text' | translate"
+      [attr.aria-label]="'dialog.close.text' | translate"
+      (click)="hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <ng-container *ngIf="showForm; else showSuccess">
+    <div class="modal-body">
+      <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+        <ish-select-wishlist-form [formGroup]="formGroup" [addMoveProduct]="addMoveProduct"></ish-select-wishlist-form>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="submitForm()">
+        {{ submitButtonTranslationKey | translate }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="hide()">
+        {{ 'account.wishlists.add_to_wishlist.cancel_button.text' | translate }}
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-template #showSuccess>
+    <div class="modal-body" *ishProductContextAccess="let product = product">
+      <span
+        [ishServerHtml]="
+          successTranslationKey
+            | translate
+              : { '0': product.name, '1': (selectedWishlistRoute$ | async), '2': (selectedWishlistTitle$ | async) }
+        "
+        [callbacks]="{ callbackHideDialogModal: callbackHideDialogModal }"
+        data-testing-id="wishlist-success-link"
+      ></span>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="hide()">
+        {{ 'account.wishlists.add_to_wishlist.confirmation.ok_button.text' | translate }}
+      </button>
+    </div>
+  </ng-template>
+</ng-template>

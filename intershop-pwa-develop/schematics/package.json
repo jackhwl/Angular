@@ -1,0 +1,42 @@
+{
+  "name": "intershop-schematics",
+  "version": "0.0.1",
+  "description": "Angular CLI schematics for Intershop PWA",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intershop/intershop-pwa.git",
+    "directory": "schematics"
+  },
+  "scripts": {
+    "prebuild": "npm i --no-save json-schema-to-typescript && npm run generate:schemas",
+    "build": "npm i --no-save typescript-transpile-only && tsc-transpile-only",
+    "test": "../node_modules/.bin/jest -i",
+    "generate:schemas": "node scripts/generate-schema-defs.js"
+  },
+  "keywords": [
+    "schematics",
+    "intershop"
+  ],
+  "schematics": "./src/collection.json",
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    },
+    "testRunner": "jest-jasmine2",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/src/.*spec\\.ts$",
+    "testPathIgnorePatterns": [
+      "<rootDir>/.*/(files|other-files)",
+      "<rootDir>/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "setupFilesAfterEnv": ["jest-extended/all"]
+  }
+}

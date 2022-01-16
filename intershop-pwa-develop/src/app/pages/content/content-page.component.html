@@ -1,0 +1,8 @@
+<ng-container *ngIf="contentPage$ | async as contentPage">
+  <ish-content-pagelet
+    *ngIf="contentPage.pageletIDs.length"
+    [pageletId]="contentPage.pageletIDs[0]"
+  ></ish-content-pagelet>
+</ng-container>
+
+<ish-loading *ngIf="contentPageLoading$ | async"></ish-loading>

@@ -1,0 +1,6 @@
+# outputs
+src/**/*.js
+src/**/*.d.ts
+
+# dependencies
+package-lock.json

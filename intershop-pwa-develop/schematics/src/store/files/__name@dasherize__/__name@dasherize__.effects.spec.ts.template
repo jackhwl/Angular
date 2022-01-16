@@ -1,0 +1,34 @@
+import { TestBed } from '@angular/core/testing';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { Action } from '@ngrx/store';
+import { cold, hot } from 'jest-marbles';
+import { Observable } from 'rxjs';
+
+import { load<%= classify(name) %> } from './<%= dasherize(name) %>.actions';
+import { <%= classify(name) %>Effects } from './<%= dasherize(name) %>.effects';
+
+describe('<%= classify(name) %> Effects', () => {
+  let actions$: Observable<Action>;
+  let effects: <%= classify(name) %>Effects;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        <%= classify(name) %>Effects,
+        provideMockActions(() => actions$),
+      ],
+    });
+
+    effects = TestBed.inject(<%= classify(name) %>Effects);
+  });
+
+  describe('load<%= classify(name) %>$', () => {
+    it('should not dispatch actions when encountering load<%= classify(name) %>', () => {
+      const action = load<%= classify(name) %>();
+      actions$ = hot('-a-a-a', { a: action });
+      const expected$ = cold('------');
+
+      expect(effects.load<%= classify(name) %>$).toBeObservable(expected$);
+    });
+  });
+});

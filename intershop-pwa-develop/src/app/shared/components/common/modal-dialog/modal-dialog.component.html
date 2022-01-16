@@ -1,0 +1,38 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h2 *ngIf="options?.titleText" class="modal-title">{{ options.titleText }}</h2>
+    <button
+      type="button"
+      class="close"
+      [title]="'dialog.close.text' | translate"
+      [attr.aria-label]="'dialog.close.text' | translate"
+      (click)="hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body"><ng-content></ng-content></div>
+
+  <div *ngIf="options.confirmText || options.rejectText" class="modal-footer">
+    <button
+      *ngIf="options.confirmText"
+      type="button"
+      class="btn btn-primary"
+      [disabled]="options.confirmDisabled"
+      (click)="confirm()"
+      data-testing-id="confirm"
+    >
+      {{ options.confirmText }}
+    </button>
+    <button
+      *ngIf="options.rejectText"
+      type="button"
+      class="btn btn-secondary"
+      (click)="hide()"
+      data-testing-id="reject"
+    >
+      {{ options.rejectText }}
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,20 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// THEME SPECIFIC CONFIGURATION
+//
+///////////////////////////////////////////////////////////////////////////////
+
+// set theme specific variables
+@import 'variables';
+
+// import general main theme
+@import '../../main';
+
+// customizations
+.badge-primary {
+  background-color: #1db5b5;
+}
+
+.badge.border-primary {
+  border-color: #1db5b5 !important;
+}

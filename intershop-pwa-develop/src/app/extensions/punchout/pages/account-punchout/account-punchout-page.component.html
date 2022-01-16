@@ -1,0 +1,88 @@
+<ish-account-punchout-header
+  [punchoutTypes]="punchoutTypes$ | async"
+  [selectedType]="selectedPunchoutType$ | async"
+  [error]="error$ | async"
+></ish-account-punchout-header>
+
+<div *ngIf="selectedPunchoutType$ | async as selectedType" class="section">
+  <h2 class="mt-1">
+    {{ 'account.punchout.user.list.heading' | translate: { '0': selectedType } }}
+    <a
+      [routerLink]="['/account/punchout/create', { format: selectedType }]"
+      class="btn btn-secondary"
+      data-testing-id="add-user-button"
+    >
+      {{ 'account.punchout.user.add.button.label' | translate }}
+    </a>
+  </h2>
+
+  <ng-container *ngIf="punchoutUsers$ | async as users; else emptyList">
+    <div *ngIf="users.length; else emptyList" class="list-body" data-testing-id="user-list">
+      <ng-container *ngFor="let user of users">
+        <div *ngIf="user" class="list-item-row row mx-0">
+          <div class="col-10 list-item">
+            <p>
+              <span class="d-block">{{ user.login }}</span>
+              <span *ngIf="user.active === false" class="input-help">{{
+                'account.user.list.status.inactive' | translate
+              }}</span>
+            </p>
+          </div>
+          <div class="col-2 list-item text-right">
+            <div class="float-right">
+              <a
+                [routerLink]="[user.login]"
+                class="btn-tool"
+                title="{{ 'account.profile.update.link' | translate }}"
+                data-testing-id="edit-user"
+              >
+                <fa-icon [icon]="['fas', 'pencil-alt']"></fa-icon>
+              </a>
+              <a
+                class="btn-tool"
+                title="{{ 'account.user.delete_user_dialog.header' | translate: { '0': user.login } }}"
+                (click)="modalDialog.show(user)"
+                data-testing-id="delete-user"
+              >
+                <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+              </a>
+
+              <ish-modal-dialog
+                #modalDialog
+                [options]="{
+                  titleText: 'account.user.delete_user_dialog.header' | translate: { '0': user.login },
+                  confirmText: 'account.user.delete_user_dialog.delete_button.text' | translate,
+                  rejectText: 'account.user.delete_user_dialog.cancel_button.text' | translate
+                }"
+                (confirmed)="deleteUser($event)"
+              >
+                <p>{{ 'account.punchout.user.delete.text' | translate }}</p>
+              </ish-modal-dialog>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <ng-container [ngSwitch]="selectedType">
+      <ng-template [ngSwitchCase]="'oci'">
+        <p>
+          {{ 'account.punchout.oci.info.url.helptext' | translate }}
+        </p>
+        <p>{{ ociPunchoutUrl }}</p>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'cxml'">
+        <p>
+          {{ 'account.punchout.cxml.info.url.helptext' | translate }}
+        </p>
+        <p>{{ cxmlPunchoutUrl$ | async }}</p>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+  <ng-template #emptyList>
+    <p data-testing-id="empty-user-list">
+      {{ 'account.punchout.no_user.text' | translate: { '0': selectedType } }}
+    </p>
+  </ng-template>
+</div>
+
+<ish-loading *ngIf="loading$ | async"></ish-loading>

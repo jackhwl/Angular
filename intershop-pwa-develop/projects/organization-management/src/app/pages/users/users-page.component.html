@@ -1,0 +1,64 @@
+<h1>
+  {{ 'account.organization.user_management' | translate }}
+  <a *ngIf="!(error$ | async)" routerLink="create" class="btn btn-secondary" data-testing-id="add-user-link">{{
+    'account.user.list.link.add_user' | translate
+  }}</a>
+</h1>
+
+<ish-error-message [error]="error$ | async"></ish-error-message>
+
+<div class="section">
+  <div class="list-body" data-testing-id="user-list">
+    <ng-container *ngFor="let user of users$ | async">
+      <div *ngIf="user" class="list-item-row row mx-0">
+        <div class="col-6 col-sm-2 list-item order-1">
+          <a [routerLink]="[user.login]" class="d-block">{{ user.firstName }} {{ user.lastName }}</a>
+          <span *ngIf="user.active === false" class="input-help">{{
+            'account.user.list.status.inactive' | translate
+          }}</span>
+        </div>
+        <div class="col-5 col-sm-4 list-item order-2">
+          <dl [attr.data-testing-id]="'user-roles-' + user.login">
+            <ish-user-roles-badges [roleIDs]="user.roleIDs"></ish-user-roles-badges>
+          </dl>
+        </div>
+        <div class="col-12 col-sm-5 list-item order-4 order-sm-3">
+          <ish-user-budget
+            *ngIf="'services.OrderApprovalServiceDefinition.runnable' | ishServerSetting"
+            [budget]="user.userBudget"
+            [attr.data-testing-id]="'user-budget-' + user.login"
+          ></ish-user-budget>
+        </div>
+        <div class="col-1 list-item text-right order-sm-4 order-3">
+          <div *ngIf="user.login !== (currentUser$ | async)?.login" class="float-right">
+            <a
+              data-testing-id="remove-user"
+              class="btn-tool"
+              title="{{
+                'account.user.delete_user_dialog.header' | translate: { '0': user.firstName + ' ' + user.lastName }
+              }}"
+              (click)="modalDialog.show(user)"
+            >
+              <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
+            </a>
+
+            <ish-modal-dialog
+              #modalDialog
+              [options]="{
+                titleText:
+                  'account.user.delete_user_dialog.header' | translate: { '0': user.firstName + ' ' + user.lastName },
+                confirmText: 'account.user.delete_user_dialog.delete_button.text' | translate,
+                rejectText: 'account.user.delete_user_dialog.cancel_button.text' | translate
+              }"
+              (confirmed)="deleteUser($event)"
+            >
+              <p>{{ 'account.user.delete_user_dialog.are_you_sure_paragraph' | translate }}</p>
+            </ish-modal-dialog>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ish-loading *ngIf="loading$ | async"></ish-loading>
