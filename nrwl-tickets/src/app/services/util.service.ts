@@ -7,22 +7,22 @@ import { initialPhoneState, phoneAdapter } from "../reducers/phones.reducer";
 export class UtilService {
   constructor(private readonly fb: FormBuilder) {}
 
-  generateTicketForm(ticket: Ticket): FormGroup {
+  generateTicketForm(ticket: Ticket_vm): FormGroup {
     //console.log('generateTicketForm', ticket)
     const ticketForm = this.fb.group({
       id: [ticket.id],
       assigneeId: [ticket.assigneeId, Validators.required],
       completed: [ticket.completed, Validators.required],
       description: [ticket.description, Validators.required],
-      // phones: this.fb.array(
-      //   Object.values(ticket.phones.entities??[]).map(phone =>
-      //     this.fb.group({
-      //       id: [phone.id],
-      //       type: [phone.type],
-      //       number: [phone.number]
-      //     })
-      //   )
-      // ),
+      phones: this.fb.array(
+        Object.values(ticket.phones).map(phone =>
+          this.fb.group({
+            id: [phone.id],
+            type: [phone.type],
+            number: [phone.number]
+          })
+        )
+      ),
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
     });
 

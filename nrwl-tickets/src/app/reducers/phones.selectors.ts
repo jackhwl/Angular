@@ -9,10 +9,14 @@ export const getPhoneState = createSelector(
     (state: TicketModuleState) => state.phones
 );
   
-const { selectEntities } = phoneAdapter.getSelectors();
+const { selectAll, selectEntities } = phoneAdapter.getSelectors();
+
+export const getAllPhones = createSelector(getPhoneState, (state: PhoneState) =>
+  selectAll(state)
+);
 
 export const getPhoneEntities = createSelector(
     getPhoneState,
     (state: PhoneState) => selectEntities(state)
-  );
+);
   

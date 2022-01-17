@@ -21,8 +21,8 @@ import { Ticket, Ticket_vm } from "src/app/models/model";
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
   users$ = this.store.pipe(select(UsersSelectors.getAllUsers));
-  selectedTicketByRoute$: Observable<Ticket> = this.store.pipe(
-    select(TicketsSelectors.getSelectedByRoute)
+  selectedTicketByRoute$: Observable<Ticket_vm> = this.store.pipe(
+    select(TicketsSelectors.getSelectedTicketVmByRoute)
   );
   constructor(
     private store: Store<{}>,
@@ -32,7 +32,8 @@ export class TicketDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.detailForm$ = this.selectedTicketByRoute$.pipe(
-      map((ticket: Ticket) => this.service.generateTicketForm(ticket))
+      tap(console.log),
+      map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
     );
     // this.detailForm$.subscribe(
     //   (ticket: FormGroup) => (this.detailForm = ticket)
