@@ -96,7 +96,7 @@ export const ticketsReducer = createReducer(
     ticketsAdapter.updateOne({
       id: ticketId, 
       changes: {
-        phones: phoneAdapter.addOne({id: state.entities[ticketId].phones.ids.length+1, type: '', number: ''}, state.entities[ticketId].phones)
+        //phones: phoneAdapter.addOne({id: state.entities[ticketId].phones.ids.length+1, type: '', number: ''}, state.entities[ticketId].phones)
       } 
     },
     {...state, loaded: true})
@@ -105,7 +105,7 @@ export const ticketsReducer = createReducer(
     ticketsAdapter.updateOne({
       id: ticketId, 
       changes: {
-        phones: phoneAdapter.removeOne(id, state.entities[ticketId].phones)
+        //phones: phoneAdapter.removeOne(id, state.entities[ticketId].phones)
       } 
     },
     {...state, loaded: true})

@@ -16,7 +16,8 @@ export const emptyTicket: Ticket = {
   description: "",
   assigneeId: null,
   completed: false,
-  phones: phoneAdapter.getInitialState()
+  phoneIds: [],
+  addressIds: []
 };
 
 function randomDelay() {
@@ -60,21 +61,24 @@ export class BackendService {
       description: "Install a monitor arm",
       assigneeId: 111,
       completed: false,
-      phones: phoneAdapter.setAll([
-        { id: 1, type: "home", number: "111" },
-        { id: 2, type: "mobile", number: "222" }
-      ], initialPhoneState)
+      phoneIds: [1, 2],
+      addressIds: []
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 111,
       completed: false,
-      phones: phoneAdapter.setAll([
-        { id: 1, type: "home", number: "333" },
-        { id: 2, type: "mobile", number: "444" }
-      ], initialPhoneState)
+      phoneIds: [3,4],
+      addressIds: []
     }
+  ];
+
+  storedPhones: Phone[] = [
+    { id: 1, type: "home", number: "111" },
+    { id: 2, type: "mobile", number: "222" },
+    { id: 3, type: "home", number: "333" },
+    { id: 4, type: "mobile", number: "444" }
   ];
 
   storedUsers: User[] = [
@@ -135,7 +139,8 @@ export class BackendService {
       description: payload.description,
       assigneeId: payload.assigneeId,
       completed: false,
-      phones: phoneAdapter.getInitialState(payload.phones)
+      phoneIds: [],
+      addressIds: []
     };
 
     this.storedTickets = this.storedTickets.concat(newTicket);
