@@ -16,9 +16,9 @@ export interface PhonesPartialState {
   readonly [PHONES_FEATURE_KEY]: PhoneState;
 }
 
-export const phonesAdapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
+export const phoneAdapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
 
-export const initialPhonesState: PhoneState = phonesAdapter.getInitialState({
+export const initialPhoneState: PhoneState = phoneAdapter.getInitialState({
   // set initial required properties
   loaded: false
 });
@@ -26,7 +26,7 @@ export const initialPhonesState: PhoneState = phonesAdapter.getInitialState({
 // const onFailure = (state, { error }) => ({ ...state, error });
 
 export const phonesReducer = createReducer(
-  initialPhonesState,
+  initialPhoneState,
   on(PhonesActions.selectPhoneById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
   ),
@@ -42,7 +42,7 @@ export const phonesReducer = createReducer(
     error: null
   })),
   on(PhonesApiActions.loadPhonesSuccess, (state, { phones }) =>
-    phonesAdapter.setAll(phones, { ...state, loaded: true, error: null })
+    phoneAdapter.setAll(phones, { ...state, loaded: true, error: null })
   ),
   on(PhonesApiActions.loadPhonesFailure, (state, { error }) => ({
     ...state,

@@ -6,10 +6,12 @@ import {
 
 import * as fromTicket from "./tickets.reducer";
 import * as fromUser from "./users.reducer";
+import * as fromPhone from "./phones.reducer";
 
 export const TICKETMODULE_FEATURE_KEY = "ticketModule";
 
 export interface TicketModuleState {
+  phones: fromPhone.PhoneState;
   users: fromUser.UserState;
   tickets: fromTicket.TicketState;
 }
@@ -20,6 +22,7 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<TicketModuleState, any> = {
+  phones: fromPhone.phonesReducer,
   users: fromUser.usersReducer,
   tickets: fromTicket.ticketsReducer
 };

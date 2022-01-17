@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Ticket, Ticket_vm } from "../models/model";
-import { initialPhoneState, phoneAdapter } from "../reducers/tickets.reducer";
+import { initialPhoneState, phoneAdapter } from "../reducers/phones.reducer";
 
 @Injectable()
 export class UtilService {

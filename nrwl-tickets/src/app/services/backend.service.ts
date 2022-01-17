@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { Phone, Ticket, User } from "../models/model";
-import { initialPhoneState, phoneAdapter } from "../reducers/tickets.reducer";
+import { initialPhoneState, phoneAdapter } from "../reducers/phones.reducer";
 import { ErrorService } from "./error.service";
 
 /**
