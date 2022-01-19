@@ -8,8 +8,6 @@ import {
   ticketsAdapter
 } from "./tickets.reducer";
 import { selectRouteParams } from "./router.selectors";
-import { getPhoneEntities } from "./phones.selectors";
-import { Phone, Ticket_vm } from "../models/model";
 
 // Lookup the 'Tickets' feature state managed by NgRx
 // export const getTicketsState = createFeatureSelector<
@@ -49,32 +47,6 @@ export const getSelectedByRoute = createSelector(
   getTicketsEntities,
   selectRouteParams,
   (entities, { id }) => (id in entities ? entities[id] : emptyTicket)
-);
-
-export const getPhonesOfTicket = createSelector(
-  getSelected,
-  getPhoneEntities,
-  (ticket, phones): Phone[] => {
-    console.log('getSelected ticket=', ticket);
-    console.log('phoneEntities=', phones);
-    return ticket ? ticket.phoneIds.map(pId => phones[pId]) : [] }
-);
-
-export const getSelectedTicketVmByRoute = createSelector(
-  getSelectedByRoute,
-  getPhonesOfTicket,
-  (ticket, phones): Ticket_vm => {
-    console.log('ticket=', ticket);
-    console.log('phones=', phones);
-    return ticket && {
-    id: ticket.id,
-    description: ticket.description,
-    assigneeId: ticket.assigneeId,
-    completed: ticket.completed,
-    phones,
-    addresses: []
-  }
-}
 );
 
 export const getLoaded = createSelector(

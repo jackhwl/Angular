@@ -20,7 +20,7 @@ export class PhonesEffects {
           this.phoneService
             .phones()
             .pipe(
-              //tap(t => console.log('PhonesActions.loadPhones=', t)),
+              tap(t => console.log('PhonesActions.loadPhones=', t)),
               switchMap((phones: Phone[]) => [
                 PhonesApiActions.loadPhonesSuccess({ phones })
               ])

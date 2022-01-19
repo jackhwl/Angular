@@ -15,12 +15,15 @@ export class UtilService {
       completed: [ticket.completed, Validators.required],
       description: [ticket.description, Validators.required],
       phones: this.fb.array(
-        Object.values(ticket.phones).map(phone =>
+        Object.values(ticket.phones).map(phone => {
+          console.log(phone)
+          if (phone) return
           this.fb.group({
             id: [phone.id],
             type: [phone.type],
             number: [phone.number]
           })
+        }
         )
       ),
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]

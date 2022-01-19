@@ -6,7 +6,7 @@ import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { TicketsActions } from "src/app/actions";
 
-import * as TicketsSelectors from "../../reducers/tickets.selectors";
+import * as TicketsVmSelectors from "../../reducers/tickets-vm.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
 import * as PhonesSelectors from "../../reducers/phones.selectors";
 
@@ -22,12 +22,14 @@ import { Phone, Ticket, Ticket_vm } from "src/app/models/model";
 })
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
-  //users$ = this.store.pipe(select(UsersSelectors.getAllUsers));
+  users$ = this.store.pipe(select(UsersSelectors.getAllUsers));
   // phones$: Observable<Phone[]> = this.store.pipe(
   //   select(PhonesSelectors.getAllPhones)
   // );
+  phonesOfTicket$ = this.store.pipe(select(TicketsVmSelectors.getPhonesOfTicket));
+  
   selectedTicketByRoute$: Observable<Ticket_vm> = this.store.pipe(
-    select(TicketsSelectors.getSelectedTicketVmByRoute)
+    select(TicketsVmSelectors.getSelectedTicketVmByRoute)
   );
   constructor(
     private store: Store<{}>,
@@ -37,7 +39,7 @@ export class TicketDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.detailForm$ = this.selectedTicketByRoute$.pipe(
-      tap(t=>console.log('ngOnInit',t)),
+      //tap(t=>console.log('ngOnInit',t)),
       map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
     );
     // this.detailForm$.subscribe(

@@ -1,3 +1,5 @@
+{{ this.pt$ | async | json}}
+{{ this.selectedTicketByRoute$ | async | json}}
 <ng-container *ngIf="detailForm$ | async as detailForm">
   <mat-card>
     <mat-card-title>
@@ -41,13 +43,13 @@
       <div formArrayName="phones">
         <div
           *ngFor="
-            let formGroup of detailForm.controls['phones'].controls;
+            let phoneformGroup of detailForm.get('phones')['controls'];
             let index = index
           "
           [formGroupName]="index"
         >
           <vi-phone
-            [formGroup]="formGroup"
+            [formGroup]="phoneformGroup"
             [index]="index"
             (deletePhone)="deletePhone(detailForm.value.id, $event)"
           ></vi-phone>

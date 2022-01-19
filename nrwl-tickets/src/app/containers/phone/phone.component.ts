@@ -20,7 +20,9 @@ export class PhoneComponent implements OnInit {
   @Output() deletePhone: EventEmitter<number> = new EventEmitter();
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('phone compoent', this.formGroup.value)
+  }
 
   delete(id) {
     this.deletePhone.emit(id);

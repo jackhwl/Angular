@@ -61,13 +61,12 @@ export class TicketsEffects {
 
   loadTicketByRoute$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction),
+      ofType(routerNavigatedAction, TicketsActions.loadTicket),
       withLatestFrom(this.store.pipe(select(selectRouteParams))),
       filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
         run: (action, p) => 
-          this.ticketService
-          .ticket(p['id'])
+          this.ticketService.ticket(p['id'])
           .pipe(
             switchMap((ticket: Ticket) => [
               TicketsApiActions.loadTicketSuccess({ ticket })
