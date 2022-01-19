@@ -54,7 +54,10 @@ export const getSelectedByRoute = createSelector(
 export const getPhonesOfTicket = createSelector(
   getSelected,
   getPhoneEntities,
-  (ticket, phones): Phone[] => ticket ? ticket.phoneIds.map(pId => phones[pId]) : []
+  (ticket, phones): Phone[] => {
+    console.log('getSelected ticket=', ticket);
+    console.log('phoneEntities=', phones);
+    return ticket ? ticket.phoneIds.map(pId => phones[pId]) : [] }
 );
 
 export const getSelectedTicketVmByRoute = createSelector(

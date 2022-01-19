@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
+import { filter, map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
 import { TicketsActions, TicketsApiActions } from "../actions";
-import { selectQueryParam } from "../reducers/router.selectors";
-import { routerNavigatedAction } from "@ngrx/router-store";
+import { selectQueryParam, selectRouteParams } from "../reducers/router.selectors";
+import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Ticket } from "../models/model";
 
 @Injectable()
@@ -59,28 +59,55 @@ export class TicketsEffects {
     )
   );
 
-  loadFilterTicketsByRoute$ = createEffect(() =>
+  loadTicketByRoute$ = createEffect(() =>
     this.actions$.pipe(
       ofType(routerNavigatedAction),
-      withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
+      withLatestFrom(this.store.pipe(select(selectRouteParams))),
+      filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
-        run: (action, q) => {
-          return this.ticketService
-            .filteredTickets(q)
-            .pipe(
-              switchMap((tickets: Ticket[]) => [
-                TicketsApiActions.loadFilterTicketsSuccess({ tickets })
-              ])
-            );
-        },
-
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketsApiActions.loadFilterTicketsFailure({ error });
-        }
+        run: (action, p) => 
+          this.ticketService
+          .ticket(p['id'])
+          .pipe(
+            switchMap((ticket: Ticket) => [
+              TicketsApiActions.loadTicketSuccess({ ticket })
+            ])
+          ),
+      onError: (action, error) =>
+        TicketsApiActions.loadTicketFailure({ error })
       })
     )
   );
+
+  // loadFilterTicketsByRoute$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(routerNavigatedAction),
+  //     tap(({ payload }) => {
+  //       //console.log(this.getAllRouteParameters(payload.routerState));
+  //       //console.log(this.getAllQueryParameters(payload.routerState));
+  //     }),
+  //     withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
+  //     fetch({
+  //       run: (action, q) => {
+  //         //console.log('q=',q)
+  //         //console.log('action=',action)
+  //         return this.ticketService
+  //           .filteredTickets(q)
+  //           .pipe(
+  //             tap(t => console.log('tt=', t)),
+  //             switchMap((tickets: Ticket[]) => [
+  //               TicketsApiActions.loadFilterTicketsSuccess({ tickets })
+  //             ])
+  //           );
+  //       },
+
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketsApiActions.loadFilterTicketsFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 
   loadTicket$ = createEffect(() =>
     this.actions$.pipe(
@@ -140,6 +167,26 @@ export class TicketsEffects {
     )
   );
 
+  private getAllRouteParameters(snapshot: SerializedRouterStateSnapshot) {
+    let route = snapshot.root;
+    let params = new Map(Object.keys(route.params).map(key => [key, route.params[key]]));
+    while (route.firstChild) {
+      route = route.firstChild;
+      Object.keys(route.params).forEach(key => params.set(key, route.params[key]));
+    }
+    return params;
+  }
+  
+  private getAllQueryParameters(snapshot: SerializedRouterStateSnapshot) {
+    let route = snapshot.root;
+    let params = new Map(Object.keys(route.queryParams).map(key => [key, route.queryParams[key]]));
+    while (route.firstChild) {
+      route = route.firstChild;
+      Object.keys(route.queryParams).forEach(key => params.set(key, route.queryParams[key]));
+    }
+    return params;
+  }
+  
   // addPhone$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(TicketsActions.addPhone),
