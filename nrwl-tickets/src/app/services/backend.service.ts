@@ -118,7 +118,12 @@ export class BackendService {
   }
 
   ticket(id: number): Observable<Ticket> {
-    return of(this.findTicketById(id));
+    const foundTicket = this.findTicketById(id)
+    if (!foundTicket) {
+      throw "ticket not found";
+      //return throwError(new Error("ticket not found 2"));
+    }
+    return of(foundTicket);
   }
 
 

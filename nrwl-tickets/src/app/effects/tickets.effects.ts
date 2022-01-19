@@ -72,8 +72,8 @@ export class TicketsEffects {
               TicketsApiActions.loadTicketSuccess({ ticket })
             ])
           ),
-      onError: (action, error) =>
-        TicketsApiActions.loadTicketFailure({ error })
+      onError: (action, error) => 
+         TicketsApiActions.loadTicketFailure({ error })
       })
     )
   );

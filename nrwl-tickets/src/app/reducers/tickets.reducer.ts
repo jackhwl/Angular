@@ -49,8 +49,11 @@ export const ticketsReducer = createReducer(
     //Object.assign({}, state, { selectedId: ticket.id })
     console.log('reducer ticket=', ticket);
     return ticketsAdapter.setOne(ticket, { ...state, loaded: true, selectedId: ticket.id, error: null })
-  }
-  ),
+  }),
+  on(TicketsApiActions.loadTicketFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
   on(TicketsApiActions.loadTicketsSuccess, (state, { tickets }) =>
     ticketsAdapter.setAll(tickets, { ...state, loaded: true, error: null })
   ),
