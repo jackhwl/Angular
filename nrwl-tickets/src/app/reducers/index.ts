@@ -27,7 +27,4 @@ export const reducers: ActionReducerMap<TicketModuleState, any> = {
   tickets: fromTicket.ticketsReducer
 };
 
-export const getTicketModuleState = createFeatureSelector<
-  State,
-  TicketModuleState
->(TICKETMODULE_FEATURE_KEY);
+export const getTicketModuleState = createFeatureSelector<TicketModuleState>(TICKETMODULE_FEATURE_KEY);

@@ -60,7 +60,10 @@ export const getPhonesOfTicket = createSelector(
 export const getSelectedTicketVmByRoute = createSelector(
   getSelectedByRoute,
   getPhonesOfTicket,
-  (ticket, phones): Ticket_vm => ticket && {
+  (ticket, phones): Ticket_vm => {
+    console.log('ticket=', ticket);
+    console.log('phones=', phones);
+    return ticket && {
     id: ticket.id,
     description: ticket.description,
     assigneeId: ticket.assigneeId,
@@ -68,6 +71,7 @@ export const getSelectedTicketVmByRoute = createSelector(
     phones,
     addresses: []
   }
+}
 );
 
 export const getLoaded = createSelector(

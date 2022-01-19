@@ -121,6 +121,11 @@ export class BackendService {
     return of(this.findTicketById(id));
   }
 
+
+  phones() {
+    return of(this.storedPhones).pipe(delay(randomDelay()));
+  }
+
   users() {
     return of(this.storedUsers).pipe(delay(randomDelay()));
   }

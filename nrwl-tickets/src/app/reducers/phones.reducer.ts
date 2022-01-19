@@ -36,13 +36,17 @@ export const phonesReducer = createReducer(
   // on(PhonesActions.resetPhones, (state) => widgetsAdapter.removeAll(state)),
 
   // Load widgets
-  on(PhonesActions.loadPhones, state => ({
+  on(PhonesActions.loadPhones, state => {
+    console.log('ccc');
+    return ({
     ...state,
     loaded: false,
     error: null
-  })),
-  on(PhonesApiActions.loadPhonesSuccess, (state, { phones }) =>
-    phoneAdapter.setAll(phones, { ...state, loaded: true, error: null })
+  })}),
+  on(PhonesApiActions.loadPhonesSuccess, (state, { phones }) => {
+    console.log('reducer phones=', phones);
+    return phoneAdapter.setAll(phones, { ...state, loaded: true, error: null })
+  }
   ),
   on(PhonesApiActions.loadPhonesFailure, (state, { error }) => ({
     ...state,
