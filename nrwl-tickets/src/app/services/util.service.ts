@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Ticket, Ticket_vm } from "../models/model";
 import { initialPhoneState, phoneAdapter } from "../reducers/phones.reducer";
 
 @Injectable()
 export class UtilService {
   constructor(private readonly fb: FormBuilder) {}
-
+  
   generateTicketForm(ticket: Ticket_vm): FormGroup {
     //console.log('generateTicketForm', ticket)
     const ticketForm = this.fb.group({
@@ -14,22 +14,24 @@ export class UtilService {
       assigneeId: [ticket.assigneeId, Validators.required],
       completed: [ticket.completed, Validators.required],
       description: [ticket.description, Validators.required],
-      phones: this.fb.array(
-        Object.values(ticket.phones).map(phone => {
-          console.log(phone)
-          if (phone) return
+      phones: this.fb.array([]),
+      title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
+    });
+    Object.values(ticket.phones).map(phone => {
+      console.log('generateTicketForm inner= ', phone)
+      if (phone != null) {
+        var pFA = ticketForm.get('phones') as FormArray;
+        pFA.push(
           this.fb.group({
             id: [phone.id],
             type: [phone.type],
             number: [phone.number]
-          })
-        }
-        )
-      ),
-      title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
-    });
+          }))
+    }}
+    )
+  
 
-    //console.log('generateTicketForm', ticketForm)
+    console.log('generateTicketForm', ticketForm)
 
     return ticketForm;
   }
