@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { BackendService } from "../services/backend.service";
-import { PhonesActions, PhonesApiActions } from "../actions";
+import { PhonesActions, PhonesApiActions, TicketsApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
@@ -14,7 +14,7 @@ export class PhonesEffects {
 
   loadPhones$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction, PhonesActions.loadPhones),
+      ofType(routerNavigatedAction, PhonesActions.loadPhones, TicketsApiActions.addPhoneSuccess),
       fetch({
         run: action =>
           this.phoneService

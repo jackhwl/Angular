@@ -194,7 +194,6 @@ export class TicketsEffects {
           this.ticketService.addPhone().pipe(
             switchMap((phone: Phone) => [
               TicketsApiActions.addPhoneSuccess({ ticketId: action.ticketId, phone }),
-              
             ])
           )
           ,
