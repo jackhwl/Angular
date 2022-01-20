@@ -31,17 +31,6 @@ export class BackendService {
   // > = new BehaviorSubject(this.fb.group(emptyTicket));
   // ticketForm$: Observable<FormGroup> = this.ticketForm.asObservable();
 
-  addPhone(ticketId: string) {
-    //const updatedTicket = { ...updates, phones: [...updates.phones] };
-    //updatedTicket.phones.push({ id: -1, type: "", number: "" });
-
-    // this.storedTickets = this.storedTickets.map(t =>
-    //   t.id === updatedTicket.id ? updatedTicket : t
-    // );
-
-    //return of(updatedTicket).pipe(delay(randomDelay()));
-  }
-
   // addPhone0() {
   //   const currentTeam = this.ticketForm.getValue();
   //   // const currentPlayers = currentTeam.get('players') as FormArray
@@ -95,6 +84,21 @@ export class BackendService {
   };
 
   private findUserById = id => this.storedUsers.find(user => user.id === +id);
+
+  addPhone(): Observable<Phone> {
+    let id = this.storedPhones.length;
+    const newPhone: Phone = { id: ++id, type: "", number: "" }
+    this.storedPhones = this.storedPhones.concat(newPhone);
+    return of(newPhone).pipe(delay(randomDelay()));
+    //const updatedTicket = { ...updates, phones: [...updates.phones] };
+    //updatedTicket.phones.push({ id: -1, type: "", number: "" });
+
+    // this.storedTickets = this.storedTickets.map(t =>
+    //   t.id === updatedTicket.id ? updatedTicket : t
+    // );
+
+    //return of(updatedTicket).pipe(delay(randomDelay()));
+  }
 
   tickets() {
     return of(this.storedTickets).pipe(delay(randomDelay()));

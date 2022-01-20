@@ -4,10 +4,10 @@ import { filter, map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/oper
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
-import { TicketsActions, TicketsApiActions } from "../actions";
+import { PhonesActions, TicketsActions, TicketsApiActions } from "../actions";
 import { selectQueryParam, selectRouteParams } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
-import { Ticket } from "../models/model";
+import { Phone, Ticket } from "../models/model";
 
 @Injectable()
 export class TicketsEffects {
@@ -186,22 +186,23 @@ export class TicketsEffects {
     return params;
   }
   
-  // addPhone$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(TicketsActions.addPhone),
-  //     pessimisticUpdate({
-  //       run: action =>
-  //         this.ticketService.addPhone(action.ticketId).pipe(
-  //           switchMap((ticket: Ticket) => [
-  //             TicketsApiActions.addPhoneSuccess({ ticket })
-  //           ])
-  //         )
-  //         ,
-  //       onError: (action, error) => {
-  //         console.error("Error", error);
-  //         return TicketsApiActions.addPhoneFailure({ error });
-  //       }
-  //     })
-  //   )
-  // );
+  addPhone$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketsActions.addPhone),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService.addPhone().pipe(
+            switchMap((phone: Phone) => [
+              TicketsApiActions.addPhoneSuccess({ ticketId: action.ticketId, phone }),
+              
+            ])
+          )
+          ,
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketsApiActions.addPhoneFailure({ error });
+        }
+      })
+    )
+  );
 }

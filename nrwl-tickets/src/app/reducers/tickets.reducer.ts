@@ -117,9 +117,16 @@ export const ticketsReducer = createReducer(
     },
     {...state, loaded: true})
   ),
-    // on(TicketsApiActions.addPhoneSuccess, (state, { ticket }) =>
-  //   ticketsAdapter.setOne(ticket, {...state, loaded: true})
-  // )
+    on(TicketsApiActions.addPhoneSuccess, (state, { ticketId, phone }) =>
+    ticketsAdapter.updateOne({
+      id: ticketId, 
+      changes: {
+        phoneIds: state.entities[ticketId].phoneIds.concat(phone.id)
+      }
+    },
+    {...state, loaded: true}
+    )
+    )
 );
 
 // export function ticketsReducer(state: TicketState | undefined, action: Action) {
