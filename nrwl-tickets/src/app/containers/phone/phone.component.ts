@@ -21,7 +21,7 @@ export class PhoneComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('phone compoent', this.formGroup.value)
+    //console.log('phone compoent', this.formGroup.value)
   }
 
   delete(id) {

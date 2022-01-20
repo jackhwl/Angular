@@ -37,14 +37,14 @@ export const phonesReducer = createReducer(
 
   // Load widgets
   on(PhonesActions.loadPhones, state => {
-    console.log('ccc');
+    //console.log('ccc');
     return ({
     ...state,
     loaded: false,
     error: null
   })}),
   on(PhonesApiActions.loadPhonesSuccess, (state, { phones }) => {
-    console.log('reducer phones=', phones);
+    //console.log('reducer phones=', phones);
     return phoneAdapter.setAll(phones, { ...state, loaded: true, error: null })
   }
   ),

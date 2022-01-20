@@ -18,7 +18,7 @@ export class UtilService {
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
     });
     Object.values(ticket.phones).map(phone => {
-      console.log('generateTicketForm inner= ', phone)
+      //console.log('generateTicketForm inner= ', phone)
       if (phone != null) {
         var pFA = ticketForm.get('phones') as FormArray;
         pFA.push(
@@ -31,7 +31,7 @@ export class UtilService {
     )
   
 
-    console.log('generateTicketForm', ticketForm)
+    //console.log('generateTicketForm', ticketForm)
 
     return ticketForm;
   }

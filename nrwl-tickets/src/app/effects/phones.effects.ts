@@ -20,14 +20,14 @@ export class PhonesEffects {
           this.phoneService
             .phones()
             .pipe(
-              tap(t => console.log('PhonesActions.loadPhones=', t)),
+              //tap(t => console.log('PhonesActions.loadPhones=', t)),
               switchMap((phones: Phone[]) => [
                 PhonesApiActions.loadPhonesSuccess({ phones })
               ])
             ),
 
         onError: (action, error) => {
-          console.error("Error", error);
+          //console.error("Error", error);
           return PhonesApiActions.loadPhonesFailure({ error });
         }
       })
