@@ -104,3 +104,13 @@ export const deleteTicketFailure = createAction(
   "[Tickets/API] Delete Ticket Failure",
   props<{ error: any }>()
 );
+
+export const deletePhoneSuccess = createAction(
+  "[Tickets/API] Delete Phone Success",
+  props<{ ticketId: string, id: Number  }>()
+);
+
+export const deletePhoneFailure = createAction(
+  "[Tickets/API] Delete Phone Failure",
+  props<{ error: any }>()
+);

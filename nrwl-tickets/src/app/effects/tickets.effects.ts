@@ -204,4 +204,25 @@ export class TicketsEffects {
       })
     )
   );
+
+  deletePhone$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketsActions.deletePhone),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService.deletePhone(action.id).pipe(
+            switchMap((success: Boolean) => [
+              success 
+              ? TicketsApiActions.deletePhoneSuccess({ ticketId: action.ticketId, id: action.id })
+              : TicketsApiActions.deletePhoneFailure({ error: 'something wrong' })
+            ])
+          )
+          ,
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketsApiActions.deletePhoneFailure({ error });
+        }
+      })
+    )
+  );
 }

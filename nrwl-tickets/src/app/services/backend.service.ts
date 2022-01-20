@@ -86,10 +86,23 @@ export class BackendService {
   private findUserById = id => this.storedUsers.find(user => user.id === +id);
 
   addPhone(): Observable<Phone> {
-    let id = this.storedPhones.length;
+    let id = Math.max(...this.storedPhones.map(p=> p.id));
     const newPhone: Phone = { id: ++id, type: "", number: "" }
     this.storedPhones = this.storedPhones.concat(newPhone);
     return of(newPhone).pipe(delay(randomDelay()));
+    //const updatedTicket = { ...updates, phones: [...updates.phones] };
+    //updatedTicket.phones.push({ id: -1, type: "", number: "" });
+
+    // this.storedTickets = this.storedTickets.map(t =>
+    //   t.id === updatedTicket.id ? updatedTicket : t
+    // );
+
+    //return of(updatedTicket).pipe(delay(randomDelay()));
+  }
+
+  deletePhone(id: number): Observable<Boolean> {
+    this.storedPhones = this.storedPhones.filter(p => p.id !== id);
+    return of(true).pipe(delay(randomDelay()));
     //const updatedTicket = { ...updates, phones: [...updates.phones] };
     //updatedTicket.phones.push({ id: -1, type: "", number: "" });
 
