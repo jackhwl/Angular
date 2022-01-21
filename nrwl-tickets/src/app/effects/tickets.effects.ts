@@ -78,35 +78,36 @@ export class TicketsEffects {
     )
   );
 
-  // loadFilterTicketsByRoute$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(routerNavigatedAction),
-  //     tap(({ payload }) => {
-  //       //console.log(this.getAllRouteParameters(payload.routerState));
-  //       //console.log(this.getAllQueryParameters(payload.routerState));
-  //     }),
-  //     withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
-  //     fetch({
-  //       run: (action, q) => {
-  //         //console.log('q=',q)
-  //         //console.log('action=',action)
-  //         return this.ticketService
-  //           .filteredTickets(q)
-  //           .pipe(
-  //             tap(t => console.log('tt=', t)),
-  //             switchMap((tickets: Ticket[]) => [
-  //               TicketsApiActions.loadFilterTicketsSuccess({ tickets })
-  //             ])
-  //           );
-  //       },
+  loadFilterTicketsByRoute$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(routerNavigatedAction),
+      tap(({ payload }) => {
+        console.log(this.getAllRouteParameters(payload.routerState));
+        console.log(this.getAllQueryParameters(payload.routerState));
+      }),
+      withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
+      //filter(([, p]) => !Object.keys(p).includes('id')),
+      fetch({
+        run: (action, q) => {
+          //console.log('q=',q)
+          //console.log('action=',action)
+          return this.ticketService
+            .filteredTickets(q)
+            .pipe(
+              tap(t => console.log('tt=', t)),
+              switchMap((tickets: Ticket[]) => [
+                TicketsApiActions.loadFilterTicketsSuccess({ tickets })
+              ])
+            );
+        },
 
-  //       onError: (action, error) => {
-  //         console.error("Error", error);
-  //         return TicketsApiActions.loadFilterTicketsFailure({ error });
-  //       }
-  //     })
-  //   )
-  // );
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketsApiActions.loadFilterTicketsFailure({ error });
+        }
+      })
+    )
+  );
 
   loadTicket$ = createEffect(() =>
     this.actions$.pipe(

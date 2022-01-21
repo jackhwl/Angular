@@ -68,7 +68,7 @@ export const ticketsReducer = createReducer(
     error: null
   })),
   on(TicketsApiActions.loadFilterTicketsSuccess, (state, { tickets }) =>
-    ticketsAdapter.setAll(tickets, { ...state, loaded: true, selectedId: tickets[0].id, error: null })
+    ticketsAdapter.setAll(tickets, { ...state, loaded: true, error: null })
   ),
   on(TicketsApiActions.loadFilterTicketsFailure, (state, { error }) => ({
     ...state,
