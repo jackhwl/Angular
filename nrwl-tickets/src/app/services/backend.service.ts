@@ -113,6 +113,11 @@ export class BackendService {
     //return of(updatedTicket).pipe(delay(randomDelay()));
   }
 
+  updatePhones(phones: Phone[]): Observable<Boolean> {
+    this.storedPhones = this.storedPhones.filter(p => !phones.map(p=>p.id).includes(p.id) ).concat(phones);
+    return of(true).pipe(delay(randomDelay()));
+  }
+
   tickets() {
     return of(this.storedTickets).pipe(delay(randomDelay()));
   }

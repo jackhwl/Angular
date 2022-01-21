@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { TicketsActions } from "src/app/actions";
+import { PhonesActions, TicketsActions } from "src/app/actions";
 
 import * as TicketsVmSelectors from "../../reducers/tickets-vm.selectors";
 import * as UsersSelectors from "../../reducers/users.selectors";
@@ -56,6 +56,7 @@ export class TicketDetailsComponent implements OnInit {
     const ticket_vm = detailForm.value as Ticket_vm;
     const ticket = this.service.getTicketFromVm(ticket_vm)
     if (ticket.id !== null && ticket.id !== undefined) {
+      this.updatePhones(ticket_vm.phones)
       this.updateTicket(ticket);
     } else {
       this.createTicket(ticket);
@@ -73,6 +74,10 @@ export class TicketDetailsComponent implements OnInit {
 
   updateTicket(ticket: Ticket): void {
     this.store.dispatch(TicketsActions.updateTicket({ ticket }));
+  }
+
+  updatePhones(phones: Phone[]): void {
+    this.store.dispatch(PhonesActions.updatePhones({ phones }));
   }
 
   createPhone() {

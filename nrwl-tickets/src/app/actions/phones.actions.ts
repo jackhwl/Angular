@@ -12,3 +12,8 @@ export const loadPhone = createAction(
   "[Phones] Load Phone",
   props<{ phone: Phone }>()
 );
+
+export const updatePhones = createAction(
+  "[Phones] Update Phones",
+  props<{ phones: Phone[] }>()
+)

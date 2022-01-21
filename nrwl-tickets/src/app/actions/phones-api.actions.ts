@@ -20,3 +20,13 @@ export const loadPhoneFailure = createAction(
   "[Phones/API] Load Phone Failure",
   props<{ error: any }>()
 );
+
+export const updatePhonesSuccess = createAction(
+  "[Phones/API] Update Phones Success",
+  props<{ phones: Phone[] }>()
+);
+
+export const updatePhonesFailure = createAction(
+  "[Phones/API] XXXXXXX Update Phones Failure",
+  props<{ error: any }>()
+);

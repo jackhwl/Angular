@@ -43,7 +43,7 @@ export class UtilService {
       assigneeId: ticket_vm.assigneeId,
       completed: ticket_vm.completed,
       phoneIds: ticket_vm.phones.map(p => p.id),
-      addressIds: ticket_vm.addresses.map(a => a.id)
+      addressIds: []//ticket_vm.addresses.map(a => a.id)
     };
   }
 }
