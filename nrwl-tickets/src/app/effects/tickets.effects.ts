@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { filter, map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
+import { combineLatest, filter, map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
 import { PhonesActions, TicketsActions, TicketsApiActions } from "../actions";
-import { selectCurrentRoute, selectQueryParam, selectRouteParams } from "../reducers/router.selectors";
+import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
 
@@ -83,21 +83,14 @@ export class TicketsEffects {
   loadFilterTicketsByRoute$ = createEffect(() =>
     this.actions$.pipe(
       ofType(routerNavigatedAction),
-      // tap(({ payload }) => {
-      //   console.log(this.getAllRouteParameters(payload.routerState));
-      //   console.log(this.getAllQueryParameters(payload.routerState));
-      // }),
-      //withLatestFrom(this.store.pipe(select(selectCurrentRoute))),
-      withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
-      //filter(([, p]) => !Object.keys(p).includes('id')),
+      withLatestFrom(this.store.pipe(select(selectUrl))),
+      filter(([, url]) => url.startsWith('/tickets') && !url.startsWith('/tickets/new')),
       fetch({
-        run: (action, q) => {
-          // console.log('action=',action)
-          // console.log('q=',q)
+        run: action => {
+          const qmaps = this.getAllQueryParameters(action.payload.routerState)
           return this.ticketService
-            .filteredTickets(q)
+            .filteredTickets(qmaps.get('q'))
             .pipe(
-              //tap(t => console.log('tt=', t)),
               switchMap((tickets: Ticket[]) => [
                 TicketsApiActions.loadFilterTicketsSuccess({ tickets })
               ])
