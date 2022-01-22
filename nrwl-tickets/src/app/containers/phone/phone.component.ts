@@ -24,7 +24,7 @@ export class PhoneComponent implements OnInit {
     //console.log('phone compoent', this.formGroup.value)
   }
 
-  delete(id) {
-    this.deletePhone.emit(id);
+  delete(pa, index) {
+    this.deletePhone.emit(index);
   }
 }

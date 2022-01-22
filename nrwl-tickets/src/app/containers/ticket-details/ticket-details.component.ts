@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
@@ -23,6 +23,7 @@ import { Phone, Ticket, Ticket_vm } from "src/app/models/model";
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
   users$ = this.store.pipe(select(UsersSelectors.getAllUsers));
+  pIndex: number;
   // phones$: Observable<Phone[]> = this.store.pipe(
   //   select(PhonesSelectors.getAllPhones)
   // );
@@ -80,6 +81,14 @@ export class TicketDetailsComponent implements OnInit {
     this.store.dispatch(PhonesActions.updatePhones({ phones }));
   }
 
+  deletePhone(pa: FormArray, id: number) {
+    pa.removeAt(id);
+  }
+
+  addPhone(pa: FormArray) {
+    pa.push(this.service.getEmptyPhoneFG())
+  }
+
   createPhone() {
     // return this.fb.group({
     //   name: '',
@@ -88,11 +97,7 @@ export class TicketDetailsComponent implements OnInit {
     // });
   }
 
-  deletePhone(ticketId: string, id: number) {
-    this.store.dispatch(TicketsActions.deletePhone({ ticketId, id }));
-  }
-
-  addPhone(ticketId: string): void {
+  addPhone2(ticketId: string): void {
     //const ticket = detailForm.value as Ticket;
     console.log(ticketId);
     this.store.dispatch(TicketsActions.addPhone({ ticketId }));
