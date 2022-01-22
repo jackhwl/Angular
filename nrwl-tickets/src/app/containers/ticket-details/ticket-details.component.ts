@@ -61,7 +61,7 @@ export class TicketDetailsComponent implements OnInit {
     } else {
       this.createTicket(ticket);
     }
-    //this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
+    this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
   }
 
   cancelled(): void {

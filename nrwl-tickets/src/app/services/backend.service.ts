@@ -140,6 +140,8 @@ export class BackendService {
   }
 
   ticket(id: number): Observable<Ticket> {
+    if (id.toString() === 'new') return of(emptyTicket);
+
     const foundTicket = this.findTicketById(id)
     if (!foundTicket) {
       throw "ticket not found";
@@ -161,15 +163,11 @@ export class BackendService {
     return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 
-  newTicket(payload: {
-    description: string;
-    assigneeId: number;
-    phones: Phone[];
-  }) {
+  newTicket(ticket: Ticket) {
     const newTicket: Ticket = {
       id: ++this.lastId,
-      description: payload.description,
-      assigneeId: payload.assigneeId,
+      description: ticket.description,
+      assigneeId: ticket.assigneeId,
       completed: false,
       phoneIds: [],
       addressIds: []

@@ -69,7 +69,6 @@ export class TicketsEffects {
         run: (action, p) => 
           this.ticketService.ticket(p['id'])
           .pipe(
-            
             switchMap((ticket: Ticket) => [
               TicketsApiActions.loadTicketSuccess({ ticket })
             ])
@@ -123,25 +122,25 @@ export class TicketsEffects {
     )
   );
 
-  // createTicket$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(TicketsActions.createTicket),
-  //     pessimisticUpdate({
-  //       run: action =>
-  //         this.ticketService
-  //           .newTicket(action.ticket)
-  //           .pipe(
-  //             switchMap((ticket: Ticket) => [
-  //               TicketsApiActions.createTicketSuccess({ ticket })
-  //             ])
-  //           ),
-  //       onError: (action, error) => {
-  //         console.error("Error", error);
-  //         TicketsApiActions.createTicketFailure({ error });
-  //       }
-  //     })
-  //   )
-  // );
+  createTicket$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketsActions.createTicket),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService
+            .newTicket(action.ticket)
+            .pipe(
+              switchMap((ticket: Ticket) => [
+                TicketsApiActions.createTicketSuccess({ ticket })
+              ])
+            ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          TicketsApiActions.createTicketFailure({ error });
+        }
+      })
+    )
+  );
 
   updateTicket$ = createEffect(() =>
     this.actions$.pipe(
