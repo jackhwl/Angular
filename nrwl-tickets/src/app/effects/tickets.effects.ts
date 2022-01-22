@@ -5,7 +5,7 @@ import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
 import { PhonesActions, TicketsActions, TicketsApiActions } from "../actions";
-import { selectQueryParam, selectRouteParams } from "../reducers/router.selectors";
+import { selectCurrentRoute, selectQueryParam, selectRouteParams } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
 
@@ -46,6 +46,7 @@ export class TicketsEffects {
           this.ticketService
             .filteredTickets(action.queryStr)
             .pipe(
+              tap(t => console.log('aa=', t)),
               switchMap((tickets: Ticket[]) => [
                 TicketsApiActions.loadFilterTicketsSuccess({ tickets })
               ])
@@ -68,6 +69,7 @@ export class TicketsEffects {
         run: (action, p) => 
           this.ticketService.ticket(p['id'])
           .pipe(
+            
             switchMap((ticket: Ticket) => [
               TicketsApiActions.loadTicketSuccess({ ticket })
             ])
@@ -81,20 +83,21 @@ export class TicketsEffects {
   loadFilterTicketsByRoute$ = createEffect(() =>
     this.actions$.pipe(
       ofType(routerNavigatedAction),
-      tap(({ payload }) => {
-        console.log(this.getAllRouteParameters(payload.routerState));
-        console.log(this.getAllQueryParameters(payload.routerState));
-      }),
+      // tap(({ payload }) => {
+      //   console.log(this.getAllRouteParameters(payload.routerState));
+      //   console.log(this.getAllQueryParameters(payload.routerState));
+      // }),
+      //withLatestFrom(this.store.pipe(select(selectCurrentRoute))),
       withLatestFrom(this.store.pipe(select(selectQueryParam("q")))),
       //filter(([, p]) => !Object.keys(p).includes('id')),
       fetch({
         run: (action, q) => {
-          //console.log('q=',q)
-          //console.log('action=',action)
+          // console.log('action=',action)
+          // console.log('q=',q)
           return this.ticketService
             .filteredTickets(q)
             .pipe(
-              tap(t => console.log('tt=', t)),
+              //tap(t => console.log('tt=', t)),
               switchMap((tickets: Ticket[]) => [
                 TicketsApiActions.loadFilterTicketsSuccess({ tickets })
               ])

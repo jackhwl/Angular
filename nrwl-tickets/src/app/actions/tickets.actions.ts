@@ -30,15 +30,6 @@ export const loadFilterTicketsByRoute = createAction(
   "[Tickets] Load Filtered Ticket By Route"
 );
 
-export const loadFilterTicketsSuccess = createAction(
-  "[Tickets/API] Load Filter Tickets Success",
-  props<{ tickets: Ticket[] }>()
-);
-
-export const loadFilterTicketsFailure = createAction(
-  "[Tickets/API] Load Filter Tickets Failure",
-  props<{ error: any }>()
-);
 
 // Create Ticket
 export const createTicket = createAction(
