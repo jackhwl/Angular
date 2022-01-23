@@ -8,13 +8,14 @@ import { PhonesActions, TicketsActions, TicketsApiActions } from "../actions";
 import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
+import { TicketService } from "../services/ticket.service";
 
 @Injectable()
 export class TicketsEffects {
   constructor(
     private store: Store<{}>,
     private actions$: Actions,
-    private ticketService: BackendService
+    private ticketService: TicketService
   ) {}
 
   loadTickets$ = createEffect(() =>

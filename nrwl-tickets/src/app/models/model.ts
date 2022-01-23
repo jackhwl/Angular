@@ -6,13 +6,24 @@ export interface User  {
 };
   
 
-  export interface Address  {
+  interface AddressBase  {
     id: string;
     addr1: string;
     addr2: string;
     postcode: string;
+    countryId: string;
+    cityId: string;
+    ticketId: number;
   };
 
+  export interface Address extends AddressBase {
+    phoneIds: number[];
+  };
+
+  export interface Address_vm extends AddressBase {
+    phones: Phone[];
+  };
+  
   interface TicketBase {
     id: number;
     description: string;
