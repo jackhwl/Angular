@@ -84,7 +84,7 @@ export class TicketsEffects {
     this.actions$.pipe(
       ofType(routerNavigatedAction),
       withLatestFrom(this.store.pipe(select(selectUrl))),
-      filter(([, url]) => url.startsWith('/tickets') && !url.startsWith('/tickets/new')),
+      filter(([, url]) => url.startsWith('/tickets') && !url.startsWith('/tickets/')),
       fetch({
         run: action => {
           const qmaps = this.getAllQueryParameters(action.payload.routerState)

@@ -25,7 +25,7 @@ export const initialPhoneState: PhoneState = phoneAdapter.getInitialState({
 
 // const onFailure = (state, { error }) => ({ ...state, error });
 
-export const phonesReducer = createReducer(
+export const reducer = createReducer(
   initialPhoneState,
   on(PhoneActions.selectPhoneById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
