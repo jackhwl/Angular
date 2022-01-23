@@ -11,9 +11,9 @@ const users = [
 describe("Users Reducer", () => {
   describe("undefined action", () => {
     it("should return the default state", () => {
-      const { initialUsersState } = fromUsers;
+      const { initialState: initialUsersState } = fromUsers;
       const action = {} as Action;
-      const state = fromUsers.usersReducer(undefined, action);
+      const state = fromUsers.reducer(undefined, action);
 
       expect(state).toBe(initialUsersState);
     });
@@ -21,13 +21,13 @@ describe("Users Reducer", () => {
 
   describe("selectUserById action", () => {
     it("should set the selectedId of user state", () => {
-      const initialState = fromUsers.usersReducer(
-        fromUsers.initialUsersState,
+      const initialState = fromUsers.reducer(
+        fromUsers.initialState,
         UserApiActions.loadUsersSuccess({ users })
       );
       const selectedId = "1";
       const action = UserActions.selectUserById({ selectedId });
-      const state = fromUsers.usersReducer(initialState, action);
+      const state = fromUsers.reducer(initialState, action);
 
       expect(state.selectedId).toBe(selectedId);
       expect(state.entities).toBe(initialState.entities);
@@ -36,9 +36,9 @@ describe("Users Reducer", () => {
 
   describe("loadUsers actioon", () => {
     it("should return users", () => {
-      const { initialUsersState } = fromUsers;
+      const { initialState: initialUsersState } = fromUsers;
       const action = UserActions.loadUsers();
-      const state = fromUsers.usersReducer(initialUsersState, action);
+      const state = fromUsers.reducer(initialUsersState, action);
 
       expect(state.loaded).toBe(false);
       expect(state.error).toBe(null);
@@ -48,9 +48,9 @@ describe("Users Reducer", () => {
 
   describe("API/loadUsersSuccess action", () => {
     it("should return users", () => {
-      const { initialUsersState } = fromUsers;
+      const { initialState: initialUsersState } = fromUsers;
       const action = UserApiActions.loadUsersSuccess({ users });
-      const state = fromUsers.usersReducer(initialUsersState, action);
+      const state = fromUsers.reducer(initialUsersState, action);
 
       expect(state.loaded).toBe(true);
       expect(state.error).toBe(null);
@@ -60,13 +60,13 @@ describe("Users Reducer", () => {
 
   describe("API/loadUsersFailure action", () => {
     it("should return error object", () => {
-      const initialState = fromUsers.usersReducer(
-        fromUsers.initialUsersState,
+      const initialState = fromUsers.reducer(
+        fromUsers.initialState,
         UserApiActions.loadUsersSuccess({ users })
       );
       const error = new Error("http error");
       const action = UserApiActions.loadUsersFailure({ error });
-      const state = fromUsers.usersReducer(initialState, action);
+      const state = fromUsers.reducer(initialState, action);
 
       expect(state.error).not.toBe(null);
       expect(state.error.toString()).toContain(error.message);

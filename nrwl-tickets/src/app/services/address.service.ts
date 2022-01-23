@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { Address, Phone, Ticket, User } from "../models/model";
-import { initialPhoneState, phoneAdapter } from "../reducers/phone.reducer";
+import { initialState, adapter } from "../reducers/phone.reducer";
 import { ErrorService } from "./error.service";
 
 export const emptyAddress: Address = {

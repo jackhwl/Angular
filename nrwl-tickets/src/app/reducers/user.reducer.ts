@@ -6,19 +6,15 @@ import { User } from "../models/model";
 
 export const USERS_FEATURE_KEY = "users";
 
-export interface UserState extends EntityState<User> {
+export interface State extends EntityState<User> {
   selectedId?: string | number; // which Users record has been selected
   loaded: boolean; // has the Users list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export interface UsersPartialState {
-  readonly [USERS_FEATURE_KEY]: UserState;
-}
+export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
 
-export const usersAdapter: EntityAdapter<User> = createEntityAdapter<User>();
-
-export const initialUsersState: UserState = usersAdapter.getInitialState({
+export const initialState: State = adapter.getInitialState({
   // set initial required properties
   loaded: false
 });
@@ -26,7 +22,7 @@ export const initialUsersState: UserState = usersAdapter.getInitialState({
 // const onFailure = (state, { error }) => ({ ...state, error });
 
 export const reducer = createReducer(
-  initialUsersState,
+  initialState,
   on(UserActions.selectUserById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
   ),
@@ -42,7 +38,7 @@ export const reducer = createReducer(
     error: null
   })),
   on(UserApiActions.loadUsersSuccess, (state, { users }) =>
-    usersAdapter.setAll(users, { ...state, loaded: true, error: null })
+    adapter.setAll(users, { ...state, loaded: true, error: null })
   ),
   on(UserApiActions.loadUsersFailure, (state, { error }) => ({
     ...state,

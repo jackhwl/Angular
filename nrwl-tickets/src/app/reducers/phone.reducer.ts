@@ -6,19 +6,16 @@ import { Phone } from "../models/model";
 
 export const PHONES_FEATURE_KEY = "phones";
 
-export interface PhoneState extends EntityState<Phone> {
+export interface State extends EntityState<Phone> {
   selectedId?: string | number; // which Phones record has been selected
   loaded: boolean; // has the Phones list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export interface PhonesPartialState {
-  readonly [PHONES_FEATURE_KEY]: PhoneState;
-}
 
-export const phoneAdapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
+export const adapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
 
-export const initialPhoneState: PhoneState = phoneAdapter.getInitialState({
+export const initialState: State = adapter.getInitialState({
   // set initial required properties
   loaded: false
 });
@@ -26,7 +23,7 @@ export const initialPhoneState: PhoneState = phoneAdapter.getInitialState({
 // const onFailure = (state, { error }) => ({ ...state, error });
 
 export const reducer = createReducer(
-  initialPhoneState,
+  initialState,
   on(PhoneActions.selectPhoneById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
   ),
@@ -45,7 +42,7 @@ export const reducer = createReducer(
   })}),
   on(PhoneApiActions.loadPhonesSuccess, (state, { phones }) => {
     //console.log('reducer phones=', phones);
-    return phoneAdapter.setAll(phones, { ...state, loaded: true, error: null })
+    return adapter.setAll(phones, { ...state, loaded: true, error: null })
   }
   ),
   on(PhoneApiActions.loadPhonesFailure, (state, { error }) => ({

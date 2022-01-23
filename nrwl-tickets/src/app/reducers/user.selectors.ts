@@ -4,9 +4,8 @@ import { User } from "../models/model";
 
 import {
   USERS_FEATURE_KEY,
-  UserState,
-  UsersPartialState,
-  usersAdapter
+  State,
+  adapter
 } from "./user.reducer";
 
 // Lookup the 'Users' feature state managed by NgRx
@@ -20,20 +19,20 @@ export const getUsersState = createSelector(
   (state: TicketModuleState) => state.users
 );
 
-const { selectAll, selectEntities } = usersAdapter.getSelectors();
+const { selectAll, selectEntities } = adapter.getSelectors();
 
-export const getAllUsers = createSelector(getUsersState, (state: UserState) =>
+export const getAllUsers = createSelector(getUsersState, (state: State) =>
   selectAll(state)
 );
 
 export const getUsersEntities = createSelector(
   getUsersState,
-  (state: UserState) => selectEntities(state)
+  (state: State) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getUsersState,
-  (state: UserState) => state.selectedId
+  (state: State) => state.selectedId
 );
 
 export const emptyUser: User = {
@@ -50,10 +49,10 @@ export const getSelected = createSelector(
 
 export const getLoaded = createSelector(
   getUsersState,
-  (state: UserState) => state.loaded
+  (state: State) => state.loaded
 );
 
 export const getError = createSelector(
   getUsersState,
-  (state: UserState) => state.error
+  (state: State) => state.error
 );

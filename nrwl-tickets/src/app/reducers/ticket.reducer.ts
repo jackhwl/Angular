@@ -11,14 +11,13 @@ export interface TicketState extends EntityState<Ticket> {
   loaded: boolean; // has the Tickets list been loaded
   error?: string | null; // last known error (if any)
 }
-export interface TicketsPartialState {
-  readonly [TICKETS_FEATURE_KEY]: TicketState;
-}
+// export interface TicketsPartialState {
+//   readonly [TICKETS_FEATURE_KEY]: TicketState;
+// }
 
-export const phoneAdapter: EntityAdapter<Phone> = createEntityAdapter<Phone>();
-export const ticketsAdapter: EntityAdapter<Ticket> = createEntityAdapter<Ticket>();
+export const adapter: EntityAdapter<Ticket> = createEntityAdapter<Ticket>();
 
-export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
+export const initialState: TicketState = adapter.getInitialState({
   // set initial required properties
   loaded: false
 });
@@ -26,7 +25,7 @@ export const initialTicketsState: TicketState = ticketsAdapter.getInitialState({
 //const onFailure = (state, { error }) => ({ ...state, error });
 
 export const reducer = createReducer(
-  initialTicketsState,
+  initialState,
   on(TicketActions.selectTicketById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
   ),
@@ -48,14 +47,14 @@ export const reducer = createReducer(
   on(TicketApiActions.loadTicketSuccess, (state, { ticket }) =>{
     //Object.assign({}, state, { selectedId: ticket.id })
     //console.log('reducer ticket=', ticket);
-    return ticketsAdapter.setOne(ticket, { ...state, loaded: true, selectedId: ticket.id, error: null })
+    return adapter.setOne(ticket, { ...state, loaded: true, selectedId: ticket.id, error: null })
   }),
   on(TicketApiActions.loadTicketFailure, (state, { error }) => ({
     ...state,
     error
   })),
   on(TicketApiActions.loadTicketsSuccess, (state, { tickets }) =>
-    ticketsAdapter.setAll(tickets, { ...state, loaded: true, error: null })
+    adapter.setAll(tickets, { ...state, loaded: true, error: null })
   ),
   on(TicketApiActions.loadTicketsFailure, (state, { error }) => ({
     ...state,
@@ -68,7 +67,7 @@ export const reducer = createReducer(
     error: null
   })),
   on(TicketApiActions.loadFilterTicketsSuccess, (state, { tickets }) =>
-    ticketsAdapter.setAll(tickets, { ...state, loaded: true, error: null })
+    adapter.setAll(tickets, { ...state, loaded: true, error: null })
   ),
   on(TicketApiActions.loadFilterTicketsFailure, (state, { error }) => ({
     ...state,
@@ -84,7 +83,7 @@ export const reducer = createReducer(
   })),
 
   on(TicketApiActions.createTicketSuccess, (state, { ticket }) =>
-    ticketsAdapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
+    adapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
     //Object.assign({}, state, { selectedId: ticket.id })
   ),
   // ({
@@ -93,14 +92,14 @@ export const reducer = createReducer(
   //   c
   // })),
   on(TicketApiActions.updateTicketSuccess, (state, { ticket }) => 
-    ticketsAdapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
+    adapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
   ), 
   on(TicketApiActions.updateTicketFailure, (state, { error }) => ({
     ...state,
     error
   })),
   on(TicketActions.addPhone, (state, { ticketId }) => 
-    ticketsAdapter.updateOne({
+    adapter.updateOne({
       id: ticketId, 
       changes: {
         //phones: phoneAdapter.addOne({id: state.entities[ticketId].phones.ids.length+1, type: '', number: ''}, state.entities[ticketId].phones)
@@ -109,7 +108,7 @@ export const reducer = createReducer(
     {...state, loaded: true})
   ),
   on(TicketActions.deletePhone, (state, { ticketId, id }) => 
-    ticketsAdapter.updateOne({
+    adapter.updateOne({
       id: ticketId, 
       changes: {
         //phones: phoneAdapter.removeOne(id, state.entities[ticketId].phones)
@@ -118,7 +117,7 @@ export const reducer = createReducer(
     {...state, loaded: true})
   ),
     on(TicketApiActions.addPhoneSuccess, (state, { ticketId, phone }) =>
-      ticketsAdapter.updateOne({
+      adapter.updateOne({
         id: ticketId, 
         changes: {
           phoneIds: state.entities[ticketId].phoneIds.concat(phone.id)
@@ -128,7 +127,7 @@ export const reducer = createReducer(
       )
     ),
     on(TicketApiActions.deletePhoneSuccess, (state, { ticketId, id }) =>
-      ticketsAdapter.updateOne({
+      adapter.updateOne({
         id: ticketId, 
         changes: {
           phoneIds: state.entities[ticketId].phoneIds.filter(d => d !== id)

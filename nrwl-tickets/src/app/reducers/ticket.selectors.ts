@@ -4,8 +4,7 @@ import { emptyTicket } from "../services/backend.service";
 import {
   TICKETS_FEATURE_KEY,
   TicketState,
-  TicketsPartialState,
-  ticketsAdapter
+  adapter
 } from "./ticket.reducer";
 import { selectRouteParams } from "./router.selectors";
 
@@ -19,7 +18,7 @@ export const getTicketsState = createSelector(
   (state: TicketModuleState) => state.tickets
 );
 
-const { selectAll, selectEntities } = ticketsAdapter.getSelectors();
+const { selectAll, selectEntities } = adapter.getSelectors();
 
 export const getAllTickets = createSelector(
   getTicketsState,

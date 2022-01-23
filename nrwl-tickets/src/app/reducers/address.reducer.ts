@@ -4,20 +4,16 @@ import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import { AddressActions, AddressApiActions } from "../actions";
 import { Address } from "../models/model";
 
-export const ADDRESSES_FEATURE_KEY = "addresses";
+export const addressesFeatureKey = "addresses";
 
-export interface AddressState extends EntityState<Address> {
+export interface State extends EntityState<Address> {
   loaded: boolean; // has the Addresss list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export interface AddresssPartialState {
-  readonly [ADDRESSES_FEATURE_KEY]: AddressState;
-}
+export const adapter: EntityAdapter<Address> = createEntityAdapter<Address>();
 
-export const addressAdapter: EntityAdapter<Address> = createEntityAdapter<Address>();
-
-export const initialAddressState: AddressState = addressAdapter.getInitialState({
+export const initialState: State = adapter.getInitialState({
   // set initial required properties
   loaded: false
 });
@@ -25,7 +21,7 @@ export const initialAddressState: AddressState = addressAdapter.getInitialState(
 // const onFailure = (state, { error }) => ({ ...state, error });
 
 export const reducer = createReducer(
-  initialAddressState,
+  initialState,
 //   on(AddressActions.loadAddressesOfTicket, (state, { selectedId }) =>
 //     Object.assign({}, state, { selectedId })
 //   ),
@@ -37,7 +33,7 @@ export const reducer = createReducer(
   // Load widgets
   on(AddressApiActions.loadAddressesOfTicketSuccess, (state, { addresses }) => {
     //console.log('reducer addresses=', addresses);
-    return addressAdapter.setAll(addresses, { ...state, loaded: true, error: null })
+    return adapter.setAll(addresses, { ...state, loaded: true, error: null })
   }
   ),
   on(AddressApiActions.loadAddressesOfTicketFailure, (state, { error }) => ({

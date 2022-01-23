@@ -12,10 +12,10 @@ import * as fromAddress from "./address.reducer";
 export const TICKETMODULE_FEATURE_KEY = "ticketModule";
 
 export interface TicketModuleState {
-  phones: fromPhone.PhoneState;
-  users: fromUser.UserState;
+  phones: fromPhone.State;
+  users: fromUser.State;
   tickets: fromTicket.TicketState;
-  addresses: fromAddress.AddressState;
+  addresses: fromAddress.State;
 }
 
 export interface State {
@@ -27,7 +27,7 @@ export const reducers: ActionReducerMap<TicketModuleState, any> = {
   [fromPhone.PHONES_FEATURE_KEY]: fromPhone.reducer,
   [fromUser.USERS_FEATURE_KEY]: fromUser.reducer,
   [fromTicket.TICKETS_FEATURE_KEY]: fromTicket.reducer,
-  [fromAddress.ADDRESSES_FEATURE_KEY]: fromAddress.reducer
+  [fromAddress.addressesFeatureKey]: fromAddress.reducer
 };
 
 export const getTicketModuleState = createFeatureSelector<TicketModuleState>(TICKETMODULE_FEATURE_KEY);
