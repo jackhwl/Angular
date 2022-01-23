@@ -8,7 +8,7 @@ import {
   getAllTickets,
   getSelectedByRoute,
   emptyTicket
-} from "./tickets.selectors";
+} from "./ticket.selectors";
 
 describe("Tickets Selectors", () => {
   const initialState = {

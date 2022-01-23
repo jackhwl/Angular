@@ -4,9 +4,9 @@ import {
   ActionReducerMap
 } from "@ngrx/store";
 
-import * as fromTicket from "./tickets.reducer";
-import * as fromUser from "./users.reducer";
-import * as fromPhone from "./phones.reducer";
+import * as fromTicket from "./ticket.reducer";
+import * as fromUser from "./user.reducer";
+import * as fromPhone from "./phone.reducer";
 
 export const TICKETMODULE_FEATURE_KEY = "ticketModule";
 

@@ -1,5 +1,5 @@
-import * as fromTickets from "./tickets.reducer";
-import { TicketsActions, TicketsApiActions } from "../actions";
+import * as fromTickets from "./ticket.reducer";
+import { TicketActions, TicketApiActions } from "../actions";
 import { createAction } from "@ngrx/store";
 import { Action } from "@ngrx/store";
 
@@ -45,7 +45,7 @@ describe("Tickets Reducer loadTickets", () => {
   it("should return loaded is false", () => {
     const newState = fromTickets.ticketsReducer(
       fromTickets.initialTicketsState,
-      TicketsActions.loadTickets
+      TicketActions.loadTickets
     );
     expect(newState.loaded).toBe(false);
   });
@@ -53,7 +53,7 @@ describe("Tickets Reducer loadTickets", () => {
   it("should return loaded is true and error is null if load tickets success", () => {
     const newState = fromTickets.ticketsReducer(
       fromTickets.initialTicketsState,
-      TicketsApiActions.loadTicketsSuccess({ tickets })
+      TicketApiActions.loadTicketsSuccess({ tickets })
     );
     expect(newState.loaded).toBe(true);
     expect(newState.error).toBeNull();
@@ -64,7 +64,7 @@ describe("Tickets Reducer loadTickets", () => {
     const error = new Error("http error");
     const newState = fromTickets.ticketsReducer(
       fromTickets.initialTicketsState,
-      TicketsApiActions.loadTicketsFailure({ error })
+      TicketApiActions.loadTicketsFailure({ error })
     );
     expect(newState.loaded).toBe(false);
     expect(newState.error.toString()).toContain(error.message);
@@ -96,7 +96,7 @@ describe("Tickets Reducer loadFilterTickets", () => {
   it("should return loaded is false", () => {
     const newState = fromTickets.ticketsReducer(
       fromTickets.initialTicketsState,
-      TicketsActions.loadFilterTickets
+      TicketActions.loadFilterTickets
     );
     expect(newState.loaded).toBe(false);
   });
@@ -104,7 +104,7 @@ describe("Tickets Reducer loadFilterTickets", () => {
   it("should return loaded is true and error is null if loadFilterTickets success", () => {
     const newState = fromTickets.ticketsReducer(
       fromTickets.initialTicketsState,
-      TicketsApiActions.loadFilterTicketsSuccess({ tickets })
+      TicketApiActions.loadFilterTicketsSuccess({ tickets })
     );
     expect(newState.loaded).toBe(true);
     expect(newState.error).toBeNull();
@@ -115,7 +115,7 @@ describe("Tickets Reducer loadFilterTickets", () => {
     const error = new Error("http error");
     const newState = fromTickets.ticketsReducer(
       fromTickets.initialTicketsState,
-      TicketsApiActions.loadFilterTicketsFailure({ error })
+      TicketApiActions.loadFilterTicketsFailure({ error })
     );
     expect(newState.loaded).toBe(false);
     expect(newState.error.toString()).toContain(error.message);
@@ -136,7 +136,7 @@ describe("Tickets Reducer", () => {
   describe("create ticket action", () => {
     it("should set the loaded to false", () => {
       const { initialTicketsState } = fromTickets;
-      const action = TicketsActions.createTicket({ ticket });
+      const action = TicketActions.createTicket({ ticket });
       const state = fromTickets.ticketsReducer(initialTicketsState, action);
 
       expect(state.loaded).toBe(false);
@@ -146,7 +146,7 @@ describe("Tickets Reducer", () => {
   describe("update ticket action", () => {
     it("should set the loaded to false", () => {
       const { initialTicketsState } = fromTickets;
-      const action = TicketsActions.updateTicket({ ticket: tickets[1] });
+      const action = TicketActions.updateTicket({ ticket: tickets[1] });
       const state = fromTickets.ticketsReducer(initialTicketsState, action);
 
       expect(state.loaded).toBe(false);
@@ -157,10 +157,10 @@ describe("Tickets Reducer", () => {
     it("should set the selectedId of ticket state", () => {
       const initialState = fromTickets.ticketsReducer(
         fromTickets.initialTicketsState,
-        TicketsApiActions.loadTicketsSuccess({ tickets })
+        TicketApiActions.loadTicketsSuccess({ tickets })
       );
       const selectedId = "1";
-      const action = TicketsActions.selectTicketById({ selectedId });
+      const action = TicketActions.selectTicketById({ selectedId });
       const state = fromTickets.ticketsReducer(initialState, action);
 
       expect(state.selectedId).toBe(selectedId);
@@ -172,10 +172,10 @@ describe("Tickets Reducer", () => {
     it("should set the selected ticket state", () => {
       const initialState = fromTickets.ticketsReducer(
         fromTickets.initialTicketsState,
-        TicketsApiActions.loadTicketsSuccess({ tickets })
+        TicketApiActions.loadTicketsSuccess({ tickets })
       );
       const ticket = tickets[1];
-      const action = TicketsActions.selectTicket({ ticket });
+      const action = TicketActions.selectTicket({ ticket });
       const state = fromTickets.ticketsReducer(initialState, action);
 
       expect(state.selectedId).toBe(ticket.id);
@@ -187,9 +187,9 @@ describe("Tickets Reducer", () => {
     it("should set the selectedId to undefined", () => {
       const initialState = fromTickets.ticketsReducer(
         fromTickets.initialTicketsState,
-        TicketsApiActions.loadTicketsSuccess({ tickets })
+        TicketApiActions.loadTicketsSuccess({ tickets })
       );
-      const action = TicketsActions.selectTicketByRoute();
+      const action = TicketActions.selectTicketByRoute();
       const state = fromTickets.ticketsReducer(initialState, action);
 
       expect(state.selectedId).toBe(undefined);
@@ -201,9 +201,9 @@ describe("Tickets Reducer", () => {
     it("should set the selectedId to -1", () => {
       const initialState = fromTickets.ticketsReducer(
         fromTickets.initialTicketsState,
-        TicketsApiActions.loadTicketsSuccess({ tickets })
+        TicketApiActions.loadTicketsSuccess({ tickets })
       );
-      const action = TicketsApiActions.resetSelectedTicket();
+      const action = TicketApiActions.resetSelectedTicket();
       const state = fromTickets.ticketsReducer(initialState, action);
 
       expect(state.selectedId).toBe(-1);
@@ -214,7 +214,7 @@ describe("Tickets Reducer", () => {
   describe("API/loadFilterTicketsSuccess action", () => {
     it("should return filtered tickets", () => {
       const { initialTicketsState } = fromTickets;
-      const action = TicketsApiActions.loadFilterTicketsSuccess({ tickets });
+      const action = TicketApiActions.loadFilterTicketsSuccess({ tickets });
       const state = fromTickets.ticketsReducer(initialTicketsState, action);
 
       expect(state.loaded).toBe(true);
@@ -227,10 +227,10 @@ describe("Tickets Reducer", () => {
     it("should return error object", () => {
       const initialState = fromTickets.ticketsReducer(
         fromTickets.initialTicketsState,
-        TicketsApiActions.loadTicketsSuccess({ tickets })
+        TicketApiActions.loadTicketsSuccess({ tickets })
       );
       const error = new Error("http error");
-      const action = TicketsApiActions.updateTicketFailure({ error });
+      const action = TicketApiActions.updateTicketFailure({ error });
       const state = fromTickets.ticketsReducer(initialState, action);
 
       expect(state.error).not.toBe(null);

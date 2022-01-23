@@ -1,7 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { Phone, Ticket_vm } from "../models/model";
-import { getPhoneEntities } from "./phones.selectors";
-import { getSelected as getSelectedTicket, getSelectedByRoute as getSelectedTicketByRoute } from "./tickets.selectors";
+import { getPhoneEntities } from "./phone.selectors";
+import { getSelected as getSelectedTicket, getSelectedByRoute as getSelectedTicketByRoute } from "./ticket.selectors";
 
 export const getPhonesOfTicket = createSelector(
     getSelectedTicket,

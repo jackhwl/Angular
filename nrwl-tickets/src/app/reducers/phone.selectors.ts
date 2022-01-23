@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { getTicketModuleState, TicketModuleState } from ".";
-import { phoneAdapter } from "./phones.reducer";
-import { PhoneState } from "./phones.reducer";
+import { phoneAdapter } from "./phone.reducer";
+import { PhoneState } from "./phone.reducer";
 
 export const getPhoneState = createSelector(
     getTicketModuleState,

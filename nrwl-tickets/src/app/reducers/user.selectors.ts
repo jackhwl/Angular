@@ -7,7 +7,7 @@ import {
   UserState,
   UsersPartialState,
   usersAdapter
-} from "./users.reducer";
+} from "./user.reducer";
 
 // Lookup the 'Users' feature state managed by NgRx
 // export const getUsersState = createFeatureSelector<

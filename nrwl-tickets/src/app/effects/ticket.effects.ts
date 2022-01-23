@@ -4,7 +4,7 @@ import { combineLatest, filter, map, mergeMap, switchMap, tap, withLatestFrom } 
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
-import { PhonesActions, TicketsActions, TicketsApiActions } from "../actions";
+import { PhoneActions, TicketActions, TicketApiActions } from "../actions";
 import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
@@ -20,20 +20,20 @@ export class TicketsEffects {
 
   loadTickets$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.loadTickets),
+      ofType(TicketActions.loadTickets),
       fetch({
         run: action =>
           this.ticketService
             .tickets()
             .pipe(
               mergeMap((tickets: Ticket[]) => [
-                TicketsApiActions.loadTicketsSuccess({ tickets })
+                TicketApiActions.loadTicketsSuccess({ tickets })
               ])
             ),
 
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketsApiActions.loadTicketsFailure({ error });
+          return TicketApiActions.loadTicketsFailure({ error });
         }
       })
     )
@@ -41,7 +41,7 @@ export class TicketsEffects {
 
   loadFilterTickets$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.loadFilterTickets),
+      ofType(TicketActions.loadFilterTickets),
       fetch({
         run: action =>
           this.ticketService
@@ -49,13 +49,13 @@ export class TicketsEffects {
             .pipe(
               tap(t => console.log('aa=', t)),
               switchMap((tickets: Ticket[]) => [
-                TicketsApiActions.loadFilterTicketsSuccess({ tickets })
+                TicketApiActions.loadFilterTicketsSuccess({ tickets })
               ])
             ),
 
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketsApiActions.loadFilterTicketsFailure({ error });
+          return TicketApiActions.loadFilterTicketsFailure({ error });
         }
       })
     )
@@ -63,7 +63,7 @@ export class TicketsEffects {
 
   loadTicketByRoute$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction, TicketsActions.loadTicket),
+      ofType(routerNavigatedAction, TicketActions.loadTicket),
       withLatestFrom(this.store.pipe(select(selectRouteParams))),
       filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
@@ -71,11 +71,11 @@ export class TicketsEffects {
           this.ticketService.ticket(p['id'])
           .pipe(
             switchMap((ticket: Ticket) => [
-              TicketsApiActions.loadTicketSuccess({ ticket })
+              TicketApiActions.loadTicketSuccess({ ticket })
             ])
           ),
       onError: (action, error) => 
-         TicketsApiActions.loadTicketFailure({ error })
+         TicketApiActions.loadTicketFailure({ error })
       })
     )
   );
@@ -92,14 +92,14 @@ export class TicketsEffects {
             .filteredTickets(qmaps.get('q'))
             .pipe(
               switchMap((tickets: Ticket[]) => [
-                TicketsApiActions.loadFilterTicketsSuccess({ tickets })
+                TicketApiActions.loadFilterTicketsSuccess({ tickets })
               ])
             );
         },
 
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketsApiActions.loadFilterTicketsFailure({ error });
+          return TicketApiActions.loadFilterTicketsFailure({ error });
         }
       })
     )
@@ -107,37 +107,37 @@ export class TicketsEffects {
 
   loadTicket$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.loadTicket),
+      ofType(TicketActions.loadTicket),
       fetch({
         run: action =>
           this.ticketService
             .ticket(action.ticket.id)
             .pipe(
               switchMap((ticket: Ticket) => [
-                TicketsApiActions.loadTicketSuccess({ ticket })
+                TicketApiActions.loadTicketSuccess({ ticket })
               ])
             ),
         onError: (action, error) =>
-          TicketsApiActions.loadTicketFailure({ error })
+          TicketApiActions.loadTicketFailure({ error })
       })
     )
   );
 
   createTicket$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.createTicket),
+      ofType(TicketActions.createTicket),
       pessimisticUpdate({
         run: action =>
           this.ticketService
             .newTicket(action.ticket)
             .pipe(
               switchMap((ticket: Ticket) => [
-                TicketsApiActions.createTicketSuccess({ ticket })
+                TicketApiActions.createTicketSuccess({ ticket })
               ])
             ),
         onError: (action, error) => {
           console.error("Error", error);
-          TicketsApiActions.createTicketFailure({ error });
+          TicketApiActions.createTicketFailure({ error });
         }
       })
     )
@@ -145,19 +145,19 @@ export class TicketsEffects {
 
   updateTicket$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.updateTicket),
+      ofType(TicketActions.updateTicket),
       pessimisticUpdate({
         run: action =>
           this.ticketService.update(action.ticket.id, action.ticket).pipe(
             switchMap(_ => [
-              TicketsApiActions.updateTicketSuccess({
+              TicketApiActions.updateTicketSuccess({
                 ticket: action.ticket
               })
             ])
           ),
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketsApiActions.updateTicketFailure({ error });
+          return TicketApiActions.updateTicketFailure({ error });
         }
       })
     )
@@ -185,18 +185,18 @@ export class TicketsEffects {
   
   addPhone$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.addPhone),
+      ofType(TicketActions.addPhone),
       pessimisticUpdate({
         run: action =>
           this.ticketService.addPhone().pipe(
             switchMap((phone: Phone) => [
-              TicketsApiActions.addPhoneSuccess({ ticketId: action.ticketId, phone }),
+              TicketApiActions.addPhoneSuccess({ ticketId: action.ticketId, phone }),
             ])
           )
           ,
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketsApiActions.addPhoneFailure({ error });
+          return TicketApiActions.addPhoneFailure({ error });
         }
       })
     )
@@ -204,20 +204,20 @@ export class TicketsEffects {
 
   deletePhone$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketsActions.deletePhone),
+      ofType(TicketActions.deletePhone),
       pessimisticUpdate({
         run: action =>
           this.ticketService.deletePhone(action.id).pipe(
             switchMap((success: Boolean) => [
               success 
-              ? TicketsApiActions.deletePhoneSuccess({ ticketId: action.ticketId, id: action.id })
-              : TicketsApiActions.deletePhoneFailure({ error: 'something wrong' })
+              ? TicketApiActions.deletePhoneSuccess({ ticketId: action.ticketId, id: action.id })
+              : TicketApiActions.deletePhoneFailure({ error: 'something wrong' })
             ])
           )
           ,
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketsApiActions.deletePhoneFailure({ error });
+          return TicketApiActions.deletePhoneFailure({ error });
         }
       })
     )

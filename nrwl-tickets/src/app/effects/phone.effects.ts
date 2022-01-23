@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { BackendService } from "../services/backend.service";
-import { PhonesActions, PhonesApiActions, TicketsActions, TicketsApiActions } from "../actions";
+import { PhoneActions, PhoneApiActions, TicketActions, TicketApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
@@ -15,21 +15,21 @@ export class PhonesEffects {
 
   loadPhones$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction, PhonesActions.loadPhones, TicketsApiActions.addPhoneSuccess, PhonesApiActions.updatePhonesSuccess),
+      ofType(routerNavigatedAction, PhoneActions.loadPhones, TicketApiActions.addPhoneSuccess, PhoneApiActions.updatePhonesSuccess),
       fetch({
         run: action =>
           this.phoneService
             .phones()
             .pipe(
-              //tap(t => console.log('PhonesActions.loadPhones=', t)),
+              //tap(t => console.log('PhoneActions.loadPhones=', t)),
               switchMap((phones: Phone[]) => [
-                PhonesApiActions.loadPhonesSuccess({ phones })
+                PhoneApiActions.loadPhonesSuccess({ phones })
               ])
             ),
 
         onError: (action, error) => {
           //console.error("Error", error);
-          return PhonesApiActions.loadPhonesFailure({ error });
+          return PhoneApiActions.loadPhonesFailure({ error });
         }
       })
     )
@@ -37,35 +37,35 @@ export class PhonesEffects {
 
   updatePhones$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(PhonesActions.updatePhones),
+      ofType(PhoneActions.updatePhones),
       pessimisticUpdate({
         run: action =>
           this.phoneService.updatePhones(action.phones).pipe(
             switchMap(success => [
-              success ? PhonesApiActions.updatePhonesSuccess({
+              success ? PhoneApiActions.updatePhonesSuccess({
                 phones: action.phones
-              }) : PhonesApiActions.updatePhonesFailure({ error: 'something wrong' })
+              }) : PhoneApiActions.updatePhonesFailure({ error: 'something wrong' })
             ])
           ),
         onError: (action, error) => {
           console.error("Error", error);
-          return PhonesApiActions.updatePhonesFailure({ error });
+          return PhoneApiActions.updatePhonesFailure({ error });
         }
       })
     )
   );
 //   loadPhone$ = createEffect(() =>
 //     this.actions$.pipe(
-//       ofType(PhonesActions.loadPhone),
+//       ofType(PhoneActions.loadPhone),
 //       fetch({
 //         run: action =>
 //           this.phoneService.phone(action.phone.id).pipe(
 //             tap(t => console.log("t=", t)),
 //             switchMap((phone: Phone) => [
-//               PhonesApiActions.loadPhoneSuccess({ phone })
+//               PhoneApiActions.loadPhoneSuccess({ phone })
 //             ])
 //           ),
-//         onError: (action, error) => PhonesApiActions.loadPhoneFailure({ error })
+//         onError: (action, error) => PhoneApiActions.loadPhoneFailure({ error })
 //       })
 //     )
 //   );

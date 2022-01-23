@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { BackendService } from "../services/backend.service";
-import { UsersActions, UsersApiActions } from "../actions";
+import { UserActions, UserApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
@@ -21,13 +21,13 @@ export class UsersEffects {
             .users()
             .pipe(
               switchMap((users: User[]) => [
-                UsersApiActions.loadUsersSuccess({ users })
+                UserApiActions.loadUsersSuccess({ users })
               ])
             ),
 
         onError: (action, error) => {
           console.error("Error", error);
-          return UsersApiActions.loadUsersFailure({ error });
+          return UserApiActions.loadUsersFailure({ error });
         }
       })
     )
@@ -35,16 +35,16 @@ export class UsersEffects {
 
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UsersActions.loadUser),
+      ofType(UserActions.loadUser),
       fetch({
         run: action =>
           this.userService.user(action.user.id).pipe(
             tap(t => console.log("t=", t)),
             switchMap((user: User) => [
-              UsersApiActions.loadUserSuccess({ user })
+              UserApiActions.loadUserSuccess({ user })
             ])
           ),
-        onError: (action, error) => UsersApiActions.loadUserFailure({ error })
+        onError: (action, error) => UserApiActions.loadUserFailure({ error })
       })
     )
   );

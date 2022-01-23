@@ -1,10 +1,10 @@
-import * as TicketsActions from "./tickets.actions";
-import * as TicketsApiActions from "./tickets-api.actions";
-import * as UsersActions from "./users.actions";
-import * as UsersApiActions from "./users-api.actions";
-import * as PhonesActions from "./phones.actions";
-import * as PhonesApiActions from "./phones-api.actions";
+import * as TicketActions from "./ticket.actions";
+import * as TicketApiActions from "./ticket-api.actions";
+import * as UserActions from "./user.actions";
+import * as UserApiActions from "./user-api.actions";
+import * as PhoneActions from "./phone.actions";
+import * as PhoneApiActions from "./phone-api.actions";
 import * as AddressActions from "./address.actions";
 import * as AddressApiActions from "./address-api.actions";
 
-export { TicketsActions, TicketsApiActions, UsersActions, UsersApiActions, PhonesActions, PhonesApiActions, AddressActions, AddressApiActions };
+export { TicketActions, TicketApiActions, UserActions, UserApiActions, PhoneActions, PhoneApiActions, AddressActions, AddressApiActions };

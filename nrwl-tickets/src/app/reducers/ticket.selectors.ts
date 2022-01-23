@@ -6,7 +6,7 @@ import {
   TicketState,
   TicketsPartialState,
   ticketsAdapter
-} from "./tickets.reducer";
+} from "./ticket.reducer";
 import { selectRouteParams } from "./router.selectors";
 
 // Lookup the 'Tickets' feature state managed by NgRx

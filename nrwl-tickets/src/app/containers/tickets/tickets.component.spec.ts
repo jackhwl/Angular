@@ -17,7 +17,7 @@ import { TicketsListComponent } from "../tickets-list/tickets-list.component";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { ActionsSubject, StoreModule } from "@ngrx/store";
-import * as fromTickets from "../../reducers/tickets.reducer";
+import * as fromTickets from "../../reducers/ticket.reducer";
 
 describe("Tickets Component", () => {
   const tickets = [

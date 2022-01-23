@@ -20,7 +20,7 @@ import {
   selectQueryParam,
   selectRouteParam
 } from "src/app/reducers/router.selectors";
-import * as TicketsSelectors from "../../reducers/tickets.selectors";
+import * as TicketsSelectors from "../../reducers/ticket.selectors";
 
 @Component({
   selector: "vi-tickets-root",

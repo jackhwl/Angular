@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from "@ngrx/store";
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
-import { UsersActions, UsersApiActions } from "../actions";
+import { UserActions, UserApiActions } from "../actions";
 import { User } from "../models/model";
 
 export const USERS_FEATURE_KEY = "users";
@@ -27,24 +27,24 @@ export const initialUsersState: UserState = usersAdapter.getInitialState({
 
 export const usersReducer = createReducer(
   initialUsersState,
-  on(UsersActions.selectUserById, (state, { selectedId }) =>
+  on(UserActions.selectUserById, (state, { selectedId }) =>
     Object.assign({}, state, { selectedId })
   ),
-  //   on(UsersActions.selectUser, (state, { user }) =>
+  //   on(UserActions.selectUser, (state, { user }) =>
   //     Object.assign({}, state, { selectedId: user?.id })
   //   ),
-  // on(UsersActions.resetUsers, (state) => widgetsAdapter.removeAll(state)),
+  // on(UserActions.resetUsers, (state) => widgetsAdapter.removeAll(state)),
 
   // Load widgets
-  on(UsersActions.loadUsers, state => ({
+  on(UserActions.loadUsers, state => ({
     ...state,
     loaded: false,
     error: null
   })),
-  on(UsersApiActions.loadUsersSuccess, (state, { users }) =>
+  on(UserApiActions.loadUsersSuccess, (state, { users }) =>
     usersAdapter.setAll(users, { ...state, loaded: true, error: null })
   ),
-  on(UsersApiActions.loadUsersFailure, (state, { error }) => ({
+  on(UserApiActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     error
   }))

@@ -3,9 +3,9 @@ import { Component } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { combineLatest, Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
-import * as TicketsSelectors from "../../reducers/tickets.selectors";
-import * as UsersSelectors from "../../reducers/users.selectors";
-import * as PhonesSelectors from "../../reducers/phones.selectors";
+import * as TicketsSelectors from "../../reducers/ticket.selectors";
+import * as UsersSelectors from "../../reducers/user.selectors";
+import * as PhonesSelectors from "../../reducers/phone.selectors";
 import { TicketVm } from "src/app/models/ticketvm";
 import { Phone, Ticket, Ticket_vm, User } from "src/app/models/model";
 

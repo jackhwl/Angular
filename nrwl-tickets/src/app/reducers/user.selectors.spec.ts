@@ -7,7 +7,7 @@ import {
   getSelected,
   getAllUsers,
   emptyUser
-} from "./users.selectors";
+} from "./user.selectors";
 
 describe("Users Selectors", () => {
   const initialState = {

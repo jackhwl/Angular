@@ -1,7 +1,7 @@
 import {
     getPhoneEntities
 
-} from "./phones.selectors";
+} from "./phone.selectors";
 
 describe("Phones Selectors", () => {
     const initialState = {

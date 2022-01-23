@@ -4,8 +4,8 @@ import { Action, StoreModule } from "@ngrx/store";
 import { cold, hot } from "jasmine-marbles";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { BackendService } from "../services";
-import { TicketsEffects } from "./tickets.effects";
-import { TicketsActions, TicketsApiActions } from "../actions";
+import { TicketsEffects } from "./ticket.effects";
+import { TicketActions, TicketApiActions } from "../actions";
 import { EffectsModule } from "@ngrx/effects";
 import { routerReducer } from "@ngrx/router-store";
 
@@ -49,8 +49,8 @@ describe("Tickets Effects (Marble)", () => {
 
   describe("loadTickets$", () => {
     it("should return a stream with success action", () => {
-      const action = TicketsActions.loadTickets();
-      const outcome = TicketsApiActions.loadTicketsSuccess({ tickets });
+      const action = TicketActions.loadTickets();
+      const outcome = TicketApiActions.loadTicketsSuccess({ tickets });
       const values = { a: action, b: tickets, c: outcome };
 
       actions$ = hot("-a", values);
@@ -62,9 +62,9 @@ describe("Tickets Effects (Marble)", () => {
     });
 
     it("should fail and return an action with the error", () => {
-      const action = TicketsActions.loadTickets();
+      const action = TicketActions.loadTickets();
       const error = new Error("some error") as any;
-      const outcome = TicketsApiActions.loadTicketsFailure({ error });
+      const outcome = TicketApiActions.loadTicketsFailure({ error });
       const values = { a: action, b: tickets, c: outcome };
 
       actions$ = hot("-a", values);

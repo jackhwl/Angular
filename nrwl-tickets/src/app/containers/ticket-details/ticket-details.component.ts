@@ -4,11 +4,11 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { PhonesActions, TicketsActions } from "src/app/actions";
+import { PhoneActions, TicketActions } from "src/app/actions";
 
-import * as TicketsVmSelectors from "../../reducers/tickets-vm.selectors";
-import * as UsersSelectors from "../../reducers/users.selectors";
-import * as PhonesSelectors from "../../reducers/phones.selectors";
+import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
+import * as UsersSelectors from "../../reducers/user.selectors";
+import * as PhonesSelectors from "../../reducers/phone.selectors";
 
 import { map, tap } from "rxjs/operators";
 import { UtilService } from "src/app/services";
@@ -70,15 +70,15 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   createTicket(ticket: Ticket): void {
-    this.store.dispatch(TicketsActions.createTicket({ ticket }));
+    this.store.dispatch(TicketActions.createTicket({ ticket }));
   }
 
   updateTicket(ticket: Ticket): void {
-    this.store.dispatch(TicketsActions.updateTicket({ ticket }));
+    this.store.dispatch(TicketActions.updateTicket({ ticket }));
   }
 
   updatePhones(phones: Phone[]): void {
-    this.store.dispatch(PhonesActions.updatePhones({ phones }));
+    this.store.dispatch(PhoneActions.updatePhones({ phones }));
   }
 
   deletePhone(pa: FormArray, id: number) {
@@ -100,11 +100,11 @@ export class TicketDetailsComponent implements OnInit {
   addPhone2(ticketId: string): void {
     //const ticket = detailForm.value as Ticket;
     console.log(ticketId);
-    this.store.dispatch(TicketsActions.addPhone({ ticketId }));
+    this.store.dispatch(TicketActions.addPhone({ ticketId }));
     // const test = "abc";
     // let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
     // let testObj = { test: "123" };
-    // let addPhone02 = TicketsActions.addPhone2(testObj);
+    // let addPhone02 = TicketActions.addPhone2(testObj);
     // console.log("addPhone2=", addPhone2);
     // let ap = addPhone2(testObj);
     // console.log("addPhone2({test})=", ap);
@@ -113,7 +113,7 @@ export class TicketDetailsComponent implements OnInit {
     // console.log("addPhone02=", addPhone02);
     // console.log("testObj=", testObj);
 
-    // this.on(TicketsActions.addPhone, TicketsActions.createTicket, (state, { ticket }) => ({
+    // this.on(TicketActions.addPhone, TicketActions.createTicket, (state, { ticket }) => ({
     //   ...state,
     //   loaded: false
     // }))
