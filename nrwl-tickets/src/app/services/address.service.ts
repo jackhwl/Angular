@@ -71,4 +71,8 @@ export class AddressService {
   private error = new Subject();
   error$ = this.error.asObservable();
 
+  addressOfTicket(ticketId: number): Observable<Address[]> {
+    const adds = this.storedAddresses.filter(a => a.ticketId == ticketId);
+    return of(adds).pipe(delay(randomDelay()));
+  }
 }

@@ -14,6 +14,7 @@ export interface TicketModuleState {
   phones: fromPhone.PhoneState;
   users: fromUser.UserState;
   tickets: fromTicket.TicketState;
+  //addresses: 
 }
 
 export interface State {
