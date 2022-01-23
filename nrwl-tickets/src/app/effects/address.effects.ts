@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { routerNavigatedAction } from "@ngrx/router-store";
 import { select, Store } from "@ngrx/store";
 import { filter, switchMap, withLatestFrom } from "rxjs/operators";
-import { AddressesActions, AddressesApiActions } from "../actions";
+import { AddressActions, AddressApiActions } from "../actions";
 import { Address } from "../models/model";
 import { selectRouteParams } from "../reducers/router.selectors";
 import { AddressService } from "../services/address.service";
@@ -19,7 +19,7 @@ export class AddressEffects {
 
   loadAddressByRoute$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction, AddressesActions.loadAddressesOfTicket),
+      ofType(routerNavigatedAction, AddressActions.loadAddressesOfTicket),
       withLatestFrom(this.store.pipe(select(selectRouteParams))),
       filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
@@ -27,11 +27,11 @@ export class AddressEffects {
           this.service.addressOfTicket(p['id'])
           .pipe(
             switchMap((addresses: Address[]) => [
-              AddressesApiActions.loadAddressesOfTicketSuccess({ addresses })
+              AddressApiActions.loadAddressesOfTicketSuccess({ addresses })
             ])
           ),
       onError: (action, error) => 
-        AddressesApiActions.loadAddressesOfTicketFailure({ error })
+        AddressApiActions.loadAddressesOfTicketFailure({ error })
       })
     )
   );
