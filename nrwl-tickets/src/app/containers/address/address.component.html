@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label>Address 1</mat-label>
+      <input type="text" matInput formControlName="addr1" placeholder="Address 1" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Address 2</mat-label>
+        <input type="text" matInput formControlName="addr2" placeholder="Address 2" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Postal Code</mat-label>
+      <input type="text" matInput formControlName="postcode" placeholder="Postal Codes" />
+    </mat-form-field>
+    <button type="button" (click)="delete(pa, index)">Delete</button>
+  </div>
+  

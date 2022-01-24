@@ -15,8 +15,23 @@ export class UtilService {
       completed: [ticket.completed, Validators.required],
       description: [ticket.description, Validators.required],
       phones: this.fb.array([]),
+      addresses: this.fb.array([]),
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
     });
+    Object.values(ticket.addresses).map(address => {
+      //console.log('generateTicketForm inner= ', address)
+      if (address != null) {
+        var aFA = ticketForm.get('addresses') as FormArray;
+        aFA.push(
+          this.fb.group({
+            id: [address.id],
+            addr1: [address.addr1],
+            addr2: [address.addr1],
+            postcode: [address.postcode],
+          })
+        )
+      }
+    })
     Object.values(ticket.phones).map(phone => {
       //console.log('generateTicketForm inner= ', phone)
       if (phone != null) {
@@ -26,9 +41,10 @@ export class UtilService {
             id: [phone.id],
             type: [phone.type],
             number: [phone.number]
-          }))
-    }}
-    )
+          })
+        )
+      }
+    })
   
 
     //console.log('generateTicketForm', ticketForm)
