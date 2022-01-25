@@ -2,6 +2,7 @@
   <mat-card>
     <mat-card-title>
       {{ detailForm.value.title }}
+      {{ detailForm.value | json}}
     </mat-card-title>
     <form
       [formGroup]="detailForm"
@@ -41,24 +42,24 @@
       <div formArrayName="addresses">
         <div
           *ngFor="
-            let addressformGroup of detailForm.get('addresses')['controls'];
+            let addressformGroup of detailForm.controls.addresses.controls;
             let index = index
           "
-          [formGroupName]="indexa"
+          [formGroupName]="index"
         >
           <vi-address
             [formGroup]="addressformGroup"
             [index]="index"
-            (deleteAddress)="deleteAddress(detailForm.get('addresses'), $event)"
+            (deleteAddress)="deleteAddress(detailForm.controls.addresses, $event)"
           ></vi-address>
         </div>
       </div>
-      <button type="button" (click)="addAddress(detailForm.get('addresses'))">Add Address</button>
+      <button type="button" (click)="addAddress(detailForm.controls.addresses)">Add Address</button>
 
       <div formArrayName="phones">
         <div
           *ngFor="
-            let phoneformGroup of detailForm.get('phones')['controls'];
+            let phoneformGroup of detailForm.controls.phones.controls;
             let index = index
           "
           [formGroupName]="index"
@@ -66,11 +67,11 @@
           <vi-phone
             [formGroup]="phoneformGroup"
             [index]="index"
-            (deletePhone)="deletePhone(detailForm.get('phones'), $event)"
+            (deletePhone)="deletePhone(detailForm.controls.phones, $event)"
           ></vi-phone>
         </div>
       </div>
-      <button type="button" (click)="addPhone(detailForm.get('phones'))">Add Phone</button>
+      <button type="button" (click)="addPhone(detailForm.controls.phones)">Add Phone</button>
       <mat-card-actions>
         <button
           id="save"

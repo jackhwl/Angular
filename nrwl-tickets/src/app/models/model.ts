@@ -11,8 +11,8 @@ export interface User  {
     addr1: string;
     addr2: string;
     postcode: string;
-    countryId: string;
-    cityId: string;
+    // countryId: string;
+    // cityId: string;
     ticketId: number;
   };
 

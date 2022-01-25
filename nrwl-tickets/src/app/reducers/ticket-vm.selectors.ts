@@ -19,8 +19,9 @@ export const getAddressesOfTicket = createSelector(
   (ticket, addressEntities): Address[] => {
     //console.log('getSelected ticket=', ticket);
     //console.log('address=', addressEntities);
-    return ticket ? ticket.addressIds.map(id => addressEntities[id]) : [] }
-);
+    return Object.keys(addressEntities).filter(id => ticket.addressIds.includes(id)).map(id => addressEntities[id]) }
+    //return ticket && Object.keys(addressEntities) ? ticket.addressIds.map(id => addressEntities[id]) : [] }
+)
   
   export const getSelectedTicketVmByRoute = createSelector(
     getSelectedTicketByRoute,

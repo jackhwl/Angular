@@ -19,9 +19,9 @@ export class UtilService {
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
     });
     Object.values(ticket.addresses).map(address => {
-      //console.log('generateTicketForm inner= ', address)
-      if (address != null) {
-        var aFA = ticketForm.get('addresses') as FormArray;
+      console.log('generateTicketForm inner= ', address)
+      if (address) {
+        var aFA = ticketForm.controls.addresses as FormArray;
         aFA.push(
           this.fb.group({
             id: [address.id],
@@ -33,9 +33,9 @@ export class UtilService {
       }
     })
     Object.values(ticket.phones).map(phone => {
-      //console.log('generateTicketForm inner= ', phone)
+      console.log('generateTicketForm inner phone= ', phone)
       if (phone != null) {
-        var pFA = ticketForm.get('phones') as FormArray;
+        var pFA = ticketForm.controls.phones as FormArray;
         pFA.push(
           this.fb.group({
             id: [phone.id],
@@ -59,7 +59,7 @@ export class UtilService {
       assigneeId: ticket_vm.assigneeId,
       completed: ticket_vm.completed,
       phoneIds: ticket_vm.phones.map(p => p.id),
-      addressIds: []//ticket_vm.addresses.map(a => a.id)
+      addressIds: ticket_vm.addresses.map(a => a.id)
     };
   }
 
@@ -77,7 +77,8 @@ export class UtilService {
       id: [],
       addr1: [],
       addr2: [],
-      postcode: []
+      postcode: [],
+      //ticketId: []
     })
 
   }
