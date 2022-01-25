@@ -47,7 +47,7 @@ export class UtilService {
     })
   
 
-    //console.log('generateTicketForm', ticketForm)
+    console.log('generateTicketForm', ticketForm)
 
     return ticketForm;
   }
@@ -71,4 +71,15 @@ export class UtilService {
     })
 
   }
+
+  getEmptyAddressFG() {
+    return this.fb.group({
+      id: [],
+      addr1: [],
+      addr2: [],
+      postcode: []
+    })
+
+  }
+
 }

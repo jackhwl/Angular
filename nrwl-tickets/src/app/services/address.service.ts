@@ -32,7 +32,7 @@ export class AddressService {
       addr2: "11",
       countryId: "c1",
       cityId: "ct1",
-      postcode: "",
+      postcode: "M1W2G2",
       ticketId: 0,
       phoneIds: []
     },
@@ -42,8 +42,8 @@ export class AddressService {
         addr2: "22",
         countryId: "c1",
         cityId: "ct1",
-        postcode: "",
-        ticketId: 1,
+        postcode: "M2W3G3",
+        ticketId: 0,
         phoneIds: []
       },
       {
@@ -63,7 +63,7 @@ export class AddressService {
           countryId: "c1",
           cityId: "ct1",
           postcode: "",
-          ticketId: 0,
+          ticketId: 1,
           phoneIds: []
         }
     ];

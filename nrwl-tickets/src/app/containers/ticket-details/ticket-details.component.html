@@ -38,6 +38,23 @@
           ></textarea>
         </mat-form-field>
       </mat-card-content>
+      <div formArrayName="addresses">
+        <div
+          *ngFor="
+            let addressformGroup of detailForm.get('addresses')['controls'];
+            let index = index
+          "
+          [formGroupName]="indexa"
+        >
+          <vi-address
+            [formGroup]="addressformGroup"
+            [index]="index"
+            (deleteAddress)="deleteAddress(detailForm.get('addresses'), $event)"
+          ></vi-address>
+        </div>
+      </div>
+      <button type="button" (click)="addAddress(detailForm.get('addresses'))">Add Address</button>
+
       <div formArrayName="phones">
         <div
           *ngFor="

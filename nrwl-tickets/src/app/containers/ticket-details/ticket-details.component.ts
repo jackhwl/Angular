@@ -40,7 +40,7 @@ export class TicketDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.detailForm$ = this.selectedTicketByRoute$.pipe(
-      tap(t=>console.log('ngOnInit',t)),
+      //tap(t=>console.log('ngOnInit',t)),
       map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
     );
     // this.detailForm$.subscribe(
@@ -87,6 +87,14 @@ export class TicketDetailsComponent implements OnInit {
 
   addPhone(pa: FormArray) {
     pa.push(this.service.getEmptyPhoneFG())
+  }
+
+  deleteAddress(pa: FormArray, id: number) {
+    pa.removeAt(id);
+  }
+
+  addAddress(pa: FormArray) {
+    pa.push(this.service.getEmptyAddressFG())
   }
 
   createPhone() {
