@@ -4,7 +4,7 @@ import { combineLatest, filter, map, mergeMap, switchMap, tap, withLatestFrom } 
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
-import { PhoneActions, TicketActions, TicketApiActions } from "../actions";
+import { AddressActions, PhoneActions, TicketActions, TicketApiActions } from "../actions";
 import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
@@ -71,6 +71,7 @@ export class TicketsEffects {
           this.ticketService.ticket(p['id'])
           .pipe(
             switchMap((ticket: Ticket) => [
+              AddressActions.loadAddressesOfTicket({ ticketId: ticket.id}),
               TicketApiActions.loadTicketSuccess({ ticket })
             ])
           ),

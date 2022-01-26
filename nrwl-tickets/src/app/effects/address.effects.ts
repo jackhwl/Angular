@@ -19,12 +19,12 @@ export class AddressEffects {
 
   loadAddressByRoute$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction, AddressActions.loadAddressesOfTicket),
-      withLatestFrom(this.store.pipe(select(selectRouteParams))),
-      filter(([, p]) => Object.keys(p).includes('id')),
+      ofType(AddressActions.loadAddressesOfTicket),
+      //withLatestFrom(this.store.pipe(select(selectRouteParams))),
+      //filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
-        run: (action, p) => 
-          this.service.addressOfTicket(p['id'])
+        run: (action) => 
+          this.service.addressOfTicket(action.ticketId)
           .pipe(
             switchMap((addresses: Address[]) => [
               PhoneActions.loadPhonesOfAddress({ addressIds: addresses.map(a => a.id) }),
