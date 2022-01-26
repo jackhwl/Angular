@@ -78,7 +78,6 @@ export class UtilService {
       type: [],
       number: []
     })
-
   }
 
   getEmptyAddressFG() {
@@ -87,9 +86,8 @@ export class UtilService {
       addr1: [],
       addr2: [],
       postcode: [],
-      //ticketId: []
+      phones: this.fb.array([])
     })
-
   }
 
 }

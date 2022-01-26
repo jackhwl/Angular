@@ -81,21 +81,12 @@ export class TicketDetailsComponent implements OnInit {
     this.store.dispatch(PhoneActions.updatePhones({ phones }));
   }
 
-  deletePhone(pa: FormArray, id: number) {
-    pa.removeAt(id);
-  }
-
-  addPhone(pa: FormArray) {
-    console.log('phone FA=', pa)
-    pa.push(this.service.getEmptyPhoneFG())
-  }
-
   deleteAddress(pa: FormArray, id: number) {
     pa.removeAt(id);
   }
 
   addAddress(pa: FormArray) {
-    console.log('address FA=', pa)
+    //console.log('address FA=', pa)
     pa.push(this.service.getEmptyAddressFG())
   }
 

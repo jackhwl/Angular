@@ -12,5 +12,23 @@
       <input type="text" matInput formControlName="postcode" placeholder="Postal Codes" />
     </mat-form-field>
     <button type="button" (click)="delete(pa, index)">Delete</button>
+    <div formArrayName="phones">
+      <div
+        *ngFor="
+          let phoneformGroup of formGroup.controls.phones.controls;
+          let index = index
+        "
+        [formGroupName]="index"
+      >
+        <vi-phone
+          [formGroup]="phoneformGroup"
+          [index]="index"
+          (deletePhone)="deletePhone(formGroup.controls.phones, $event)"
+        ></vi-phone>
+      </div>
+    </div>
+    <button type="button" (click)="addPhone(formGroup.controls.phones)">Add Phone</button>
+
+
   </div>
   

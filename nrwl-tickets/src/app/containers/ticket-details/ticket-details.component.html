@@ -56,22 +56,6 @@
       </div>
       <button type="button" (click)="addAddress(detailForm.controls.addresses)">Add Address</button>
 
-      <div formArrayName="phones">
-        <div
-          *ngFor="
-            let phoneformGroup of detailForm.controls.phones.controls;
-            let index = index
-          "
-          [formGroupName]="index"
-        >
-          <vi-phone
-            [formGroup]="phoneformGroup"
-            [index]="index"
-            (deletePhone)="deletePhone(detailForm.controls.phones, $event)"
-          ></vi-phone>
-        </div>
-      </div>
-      <button type="button" (click)="addPhone(detailForm.controls.phones)">Add Phone</button>
       <mat-card-actions>
         <button
           id="save"
