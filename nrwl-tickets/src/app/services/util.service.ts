@@ -21,15 +21,24 @@ export class UtilService {
     Object.values(ticket.addresses).map(address => {
       console.log('generateTicketForm inner= ', address)
       if (address) {
-        var aFA = ticketForm.controls.addresses as FormArray;
-        aFA.push(
-          this.fb.group({
-            id: [address.id],
-            addr1: [address.addr1],
-            addr2: [address.addr1],
-            postcode: [address.postcode],
+        let aFA = ticketForm.controls.addresses as FormArray;
+        let addressForm = this.fb.group({
+          id: [address.id],
+          addr1: [address.addr1],
+          addr2: [address.addr1],
+          postcode: [address.postcode],
+          phones: this.fb.array([])
+        })
+        Object.values(address.phones).map(phone => {
+          let pFa = addressForm.controls.phones as FormArray;
+          let phoneForm = this.fb.group({
+            id: [phone.id],
+            type: [phone.type],
+            number: [phone.number]
           })
-        )
+          pFa.push(phoneForm)
+        })
+        aFA.push(addressForm)
       }
     })
     // Object.values(ticket.phones).map(phone => {

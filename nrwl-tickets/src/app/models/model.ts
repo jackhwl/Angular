@@ -36,7 +36,7 @@ export interface User  {
   }  
 
   export interface Ticket_vm extends TicketBase {
-    addresses: Address[];
+    addresses: Address_vm[];
   };
   
   export interface Phone {
