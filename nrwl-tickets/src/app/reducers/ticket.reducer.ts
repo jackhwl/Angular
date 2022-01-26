@@ -116,26 +116,26 @@ export const reducer = createReducer(
     },
     {...state, loaded: true})
   ),
-    on(TicketApiActions.addPhoneSuccess, (state, { ticketId, phone }) =>
-      adapter.updateOne({
-        id: ticketId, 
-        changes: {
-          phoneIds: state.entities[ticketId].phoneIds.concat(phone.id)
-        }
-      },
-      {...state, loaded: true}
-      )
-    ),
-    on(TicketApiActions.deletePhoneSuccess, (state, { ticketId, id }) =>
-      adapter.updateOne({
-        id: ticketId, 
-        changes: {
-          phoneIds: state.entities[ticketId].phoneIds.filter(d => d !== id)
-        }
-      },
-      {...state, loaded: true}
-      )
-    )
+    // on(TicketApiActions.addPhoneSuccess, (state, { ticketId, phone }) =>
+    //   adapter.updateOne({
+    //     id: ticketId, 
+    //     changes: {
+    //       phoneIds: state.entities[ticketId].phoneIds.concat(phone.id)
+    //     }
+    //   },
+    //   {...state, loaded: true}
+    //   )
+    // ),
+    // on(TicketApiActions.deletePhoneSuccess, (state, { ticketId, id }) =>
+    //   adapter.updateOne({
+    //     id: ticketId, 
+    //     changes: {
+    //       phoneIds: state.entities[ticketId].phoneIds.filter(d => d !== id)
+    //     }
+    //   },
+    //   {...state, loaded: true}
+    //   )
+    // )
 );
 
 // export function ticketsReducer(state: TicketState | undefined, action: Action) {

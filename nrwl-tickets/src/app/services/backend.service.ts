@@ -16,7 +16,6 @@ export const emptyTicket: Ticket = {
   description: "",
   assigneeId: null,
   completed: false,
-  phoneIds: [],
   addressIds: []
 };
 
@@ -50,7 +49,6 @@ export class BackendService {
       description: "Install a monitor arm",
       assigneeId: 111,
       completed: false,
-      phoneIds: [1, 2],
       addressIds: []
     },
     {
@@ -58,7 +56,6 @@ export class BackendService {
       description: "Move the desk to the new location",
       assigneeId: 222,
       completed: false,
-      phoneIds: [3,4],
       addressIds: []
     }
   ];
@@ -169,7 +166,6 @@ export class BackendService {
       description: ticket.description,
       assigneeId: ticket.assigneeId,
       completed: false,
-      phoneIds: [],
       addressIds: []
     };
 

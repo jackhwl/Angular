@@ -57,7 +57,7 @@ export class TicketDetailsComponent implements OnInit {
     const ticket_vm = detailForm.value as Ticket_vm;
     const ticket = this.service.getTicketFromVm(ticket_vm)
     if (ticket.id !== null && ticket.id !== undefined) {
-      this.updatePhones(ticket_vm.phones)
+      //this.updatePhones(ticket_vm.phones)
       this.updateTicket(ticket);
     } else {
       this.createTicket(ticket);

@@ -32,19 +32,19 @@ export class UtilService {
         )
       }
     })
-    Object.values(ticket.phones).map(phone => {
-      console.log('generateTicketForm inner phone= ', phone)
-      if (phone != null) {
-        var pFA = ticketForm.controls.phones as FormArray;
-        pFA.push(
-          this.fb.group({
-            id: [phone.id],
-            type: [phone.type],
-            number: [phone.number]
-          })
-        )
-      }
-    })
+    // Object.values(ticket.phones).map(phone => {
+    //   console.log('generateTicketForm inner phone= ', phone)
+    //   if (phone != null) {
+    //     var pFA = ticketForm.controls.phones as FormArray;
+    //     pFA.push(
+    //       this.fb.group({
+    //         id: [phone.id],
+    //         type: [phone.type],
+    //         number: [phone.number]
+    //       })
+    //     )
+    //   }
+    // })
   
 
     console.log('generateTicketForm', ticketForm)
@@ -58,7 +58,7 @@ export class UtilService {
       description: ticket_vm.description,
       assigneeId: ticket_vm.assigneeId,
       completed: ticket_vm.completed,
-      phoneIds: ticket_vm.phones.map(p => p.id),
+      //phoneIds: ticket_vm.phones.map(p => p.id),
       addressIds: ticket_vm.addresses.map(a => a.id)
     };
   }
