@@ -60,13 +60,6 @@ export class TicketService {
     }
   ];
 
-  storedPhones: Phone[] = [
-    { id: 1, type: "home", number: "111" },
-    { id: 2, type: "mobile", number: "222" },
-    { id: 3, type: "home", number: "333" },
-    { id: 4, type: "mobile", number: "444" }
-  ];
-
   storedUsers: User[] = [
     { id: 111, name: "Victor" },
     { id: 222, name: "Jack" }
@@ -82,38 +75,6 @@ export class TicketService {
 
   private findUserById = id => this.storedUsers.find(user => user.id === +id);
 
-  addPhone(): Observable<Phone> {
-    let id = Math.max(...this.storedPhones.map(p=> p.id));
-    const newPhone: Phone = { id: ++id, type: "", number: "" }
-    this.storedPhones = this.storedPhones.concat(newPhone);
-    return of(newPhone).pipe(delay(randomDelay()));
-    //const updatedTicket = { ...updates, phones: [...updates.phones] };
-    //updatedTicket.phones.push({ id: -1, type: "", number: "" });
-
-    // this.storedTickets = this.storedTickets.map(t =>
-    //   t.id === updatedTicket.id ? updatedTicket : t
-    // );
-
-    //return of(updatedTicket).pipe(delay(randomDelay()));
-  }
-
-  deletePhone(id: number): Observable<Boolean> {
-    this.storedPhones = this.storedPhones.filter(p => p.id !== id);
-    return of(true).pipe(delay(randomDelay()));
-    //const updatedTicket = { ...updates, phones: [...updates.phones] };
-    //updatedTicket.phones.push({ id: -1, type: "", number: "" });
-
-    // this.storedTickets = this.storedTickets.map(t =>
-    //   t.id === updatedTicket.id ? updatedTicket : t
-    // );
-
-    //return of(updatedTicket).pipe(delay(randomDelay()));
-  }
-
-  updatePhones(phones: Phone[]): Observable<Boolean> {
-    this.storedPhones = this.storedPhones.filter(p => !phones.map(p=>p.id).includes(p.id) ).concat(phones);
-    return of(true).pipe(delay(randomDelay()));
-  }
 
   tickets() {
     return of(this.storedTickets).pipe(delay(randomDelay()));
@@ -145,11 +106,6 @@ export class TicketService {
       //return throwError(new Error("ticket not found 2"));
     }
     return of(foundTicket);
-  }
-
-
-  phones() {
-    return of(this.storedPhones).pipe(delay(randomDelay()));
   }
 
   users() {

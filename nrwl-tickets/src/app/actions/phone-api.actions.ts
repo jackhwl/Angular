@@ -1,13 +1,13 @@
 import { createAction, props } from "@ngrx/store";
 import { Phone } from "../models/model";
 
-export const loadPhonesSuccess = createAction(
-  "[Phones/API] Load Phones Success",
+export const loadPhonesOfAddressSuccess = createAction(
+  "[Phones/API] Load Phones of Address Success",
   props<{ phones: Phone[] }>()
 );
 
-export const loadPhonesFailure = createAction(
-  "[Phones/API] Load Phones Failure",
+export const loadPhonesOfAddressFailure = createAction(
+  "[Phones/API] Load Phones of Address Failure",
   props<{ error: any }>()
 );
 

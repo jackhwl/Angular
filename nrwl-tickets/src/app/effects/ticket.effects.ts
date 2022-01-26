@@ -183,43 +183,43 @@ export class TicketsEffects {
     return params;
   }
   
-  addPhone$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.addPhone),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService.addPhone().pipe(
-            switchMap((phone: Phone) => [
-              TicketApiActions.addPhoneSuccess({ ticketId: action.ticketId, phone }),
-            ])
-          )
-          ,
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketApiActions.addPhoneFailure({ error });
-        }
-      })
-    )
-  );
+  // addPhone$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.addPhone),
+  //     pessimisticUpdate({
+  //       run: action =>
+  //         this.ticketService.addPhone().pipe(
+  //           switchMap((phone: Phone) => [
+  //             TicketApiActions.addPhoneSuccess({ ticketId: action.ticketId, phone }),
+  //           ])
+  //         )
+  //         ,
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketApiActions.addPhoneFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 
-  deletePhone$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.deletePhone),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService.deletePhone(action.id).pipe(
-            switchMap((success: Boolean) => [
-              success 
-              ? TicketApiActions.deletePhoneSuccess({ ticketId: action.ticketId, id: action.id })
-              : TicketApiActions.deletePhoneFailure({ error: 'something wrong' })
-            ])
-          )
-          ,
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketApiActions.deletePhoneFailure({ error });
-        }
-      })
-    )
-  );
+  // deletePhone$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.deletePhone),
+  //     pessimisticUpdate({
+  //       run: action =>
+  //         this.ticketService.deletePhone(action.id).pipe(
+  //           switchMap((success: Boolean) => [
+  //             success 
+  //             ? TicketApiActions.deletePhoneSuccess({ ticketId: action.ticketId, id: action.id })
+  //             : TicketApiActions.deletePhoneFailure({ error: 'something wrong' })
+  //           ])
+  //         )
+  //         ,
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketApiActions.deletePhoneFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 }

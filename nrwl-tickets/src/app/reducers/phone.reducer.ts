@@ -33,19 +33,19 @@ export const reducer = createReducer(
   // on(PhoneActions.resetPhones, (state) => widgetsAdapter.removeAll(state)),
 
   // Load widgets
-  on(PhoneActions.loadPhones, state => {
+  on(PhoneActions.loadPhonesOfAddress, state => {
     //console.log('ccc');
     return ({
     ...state,
     loaded: false,
     error: null
   })}),
-  on(PhoneApiActions.loadPhonesSuccess, (state, { phones }) => {
+  on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
     //console.log('reducer phones=', phones);
     return adapter.setAll(phones, { ...state, loaded: true, error: null })
   }
   ),
-  on(PhoneApiActions.loadPhonesFailure, (state, { error }) => ({
+  on(PhoneApiActions.loadPhonesOfAddressFailure, (state, { error }) => ({
     ...state,
     error
   }))

@@ -43,5 +43,6 @@ export interface User  {
     id: number;
     type: string;
     number: string;
+    addressId: string;
   };
   

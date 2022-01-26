@@ -15,6 +15,7 @@ import { PhonesEffects } from "./effects/phone.effects";
 import { TicketService } from "./services/ticket.service";
 import { AddressService } from "./services/address.service";
 import { AddressEffects } from "./effects/address.effects";
+import { PhoneService } from "./services/phone.service";
 
 @NgModule({
   declarations: [TicketsComponent],
@@ -29,6 +30,6 @@ import { AddressEffects } from "./effects/address.effects";
     ),
     EffectsModule.forFeature([PhonesEffects, TicketsEffects, UsersEffects, AddressEffects])
   ],
-  providers: [BackendService, TicketService, UtilService, AddressService]
+  providers: [BackendService, TicketService, UtilService, AddressService, PhoneService]
 })
 export class TicketsModule {}

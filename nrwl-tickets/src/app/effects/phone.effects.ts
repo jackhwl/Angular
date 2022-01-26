@@ -7,29 +7,30 @@ import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
 import { Phone } from "../models/model";
+import { PhoneService } from "../services/phone.service";
 
 @Injectable()
 export class PhonesEffects {
   ticketService: any;
-  constructor(private actions$: Actions, private phoneService: BackendService) {}
+  constructor(private actions$: Actions, private service: PhoneService) {}
 
-  loadPhones$ = createEffect(() =>
+  loadPhonesOfAddress$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction, PhoneActions.loadPhones, TicketApiActions.addPhoneSuccess, PhoneApiActions.updatePhonesSuccess),
+      ofType(PhoneActions.loadPhonesOfAddress),
       fetch({
         run: action =>
-          this.phoneService
-            .phones()
+          this.service
+            .phones(action.addressIds)
             .pipe(
               //tap(t => console.log('PhoneActions.loadPhones=', t)),
               switchMap((phones: Phone[]) => [
-                PhoneApiActions.loadPhonesSuccess({ phones })
+                PhoneApiActions.loadPhonesOfAddressSuccess({ phones })
               ])
             ),
 
         onError: (action, error) => {
           //console.error("Error", error);
-          return PhoneApiActions.loadPhonesFailure({ error });
+          return PhoneApiActions.loadPhonesOfAddressFailure({ error });
         }
       })
     )
@@ -40,7 +41,7 @@ export class PhonesEffects {
       ofType(PhoneActions.updatePhones),
       pessimisticUpdate({
         run: action =>
-          this.phoneService.updatePhones(action.phones).pipe(
+          this.service.updatePhones(action.phones).pipe(
             switchMap(success => [
               success ? PhoneApiActions.updatePhonesSuccess({
                 phones: action.phones

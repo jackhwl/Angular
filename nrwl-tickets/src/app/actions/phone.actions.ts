@@ -1,7 +1,10 @@
 import { createAction, props } from "@ngrx/store";
 import { Phone } from "../models/model";
 
-export const loadPhones = createAction("[Phones] Load Phones");
+export const loadPhonesOfAddress = createAction(
+  "[Phones] Load Phones of Address",
+  props<{ addressIds: string[] }>()
+  );
 
 export const selectPhoneById = createAction(
   "[Phones] Select Phone by id",
