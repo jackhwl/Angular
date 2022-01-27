@@ -54,9 +54,10 @@ export class PhoneService {
         //return of(updatedTicket).pipe(delay(randomDelay()));
       }
     
-      updatePhones(phones: Phone[]): Observable<Boolean> {
+      updatePhones(phones: Phone[]): Observable<Phone[]> {
         this.storedPhones = this.storedPhones.filter(p => !phones.map(p=>p.id).includes(p.id) ).concat(phones);
-        return of(true).pipe(delay(randomDelay()));
+        const phs = this.storedPhones.filter(p => phones.map(p=>p.id).includes(p.id) )
+        return of(phs).pipe(delay(randomDelay()));
       }
         
 }

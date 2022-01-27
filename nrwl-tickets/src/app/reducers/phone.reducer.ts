@@ -40,6 +40,13 @@ export const reducer = createReducer(
     loaded: false,
     error: null
   })}),
+  on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => 
+    adapter.updateMany(phones, {...state, loaded: true})
+  ), 
+  on(PhoneApiActions.updatePhonesFailure, (state, { error }) => ({
+    ...state,
+    error
+  })), 
   on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
     //console.log('reducer phones=', phones);
     return adapter.setAll(phones, { ...state, loaded: true, error: null })

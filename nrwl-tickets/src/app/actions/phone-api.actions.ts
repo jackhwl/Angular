@@ -1,3 +1,4 @@
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { Phone } from "../models/model";
 
@@ -23,7 +24,7 @@ export const loadPhoneFailure = createAction(
 
 export const updatePhonesSuccess = createAction(
   "[Phones/API] Update Phones Success",
-  props<{ phones: Phone[] }>()
+  props<{ phones: Update<Phone>[] }>()
 );
 
 export const updatePhonesFailure = createAction(

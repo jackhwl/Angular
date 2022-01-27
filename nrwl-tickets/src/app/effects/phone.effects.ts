@@ -42,10 +42,10 @@ export class PhonesEffects {
       pessimisticUpdate({
         run: action =>
           this.service.updatePhones(action.phones).pipe(
-            switchMap(success => [
-              success ? PhoneApiActions.updatePhonesSuccess({
-                phones: action.phones
-              }) : PhoneApiActions.updatePhonesFailure({ error: 'something wrong' })
+            switchMap(phones => [
+              PhoneApiActions.updatePhonesSuccess({
+                phones: phones.map(p => ({id: p.id, changes: {...p}}))
+              })
             ])
           ),
         onError: (action, error) => {
