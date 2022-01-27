@@ -6,5 +6,6 @@ import * as PhoneActions from "./phone.actions";
 import * as PhoneApiActions from "./phone-api.actions";
 import * as AddressActions from "./address.actions";
 import * as AddressApiActions from "./address-api.actions";
+import * as TicketDetailsPageActions from "./ticket-details-page.actions"
 
-export { TicketActions, TicketApiActions, UserActions, UserApiActions, PhoneActions, PhoneApiActions, AddressActions, AddressApiActions };
+export { TicketActions, TicketApiActions, TicketDetailsPageActions, UserActions, UserApiActions, PhoneActions, PhoneApiActions, AddressActions, AddressApiActions };

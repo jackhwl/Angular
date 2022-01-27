@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { AddressActions, PhoneActions, TicketActions } from "src/app/actions";
+import { AddressActions, PhoneActions, TicketActions, TicketDetailsPageActions } from "src/app/actions";
 
 import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
 import * as UsersSelectors from "../../reducers/user.selectors";
@@ -43,6 +43,7 @@ export class TicketDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(TicketDetailsPageActions.opened());
     this.detailForm$ = this.selectedTicketByRoute$.pipe(
       //tap(t=>console.log('ngOnInit',t)),
       map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
@@ -61,7 +62,9 @@ export class TicketDetailsComponent implements OnInit {
     const ticket_vm = detailForm.value as Ticket_vm;
     const ticket = this.ticketService.getTicketFromVm(ticket_vm)
     const addresses = ticket_vm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
+    const phones = ticket_vm.addresses.map(a => a.phones).reduce((a,b) => a.concat(b))
     if (ticket.id !== null && ticket.id !== undefined) {
+      this.updatePhones(phones)
       this.updateAddresses(addresses)
       this.updateTicket(ticket);
     } else {
@@ -99,91 +102,91 @@ export class TicketDetailsComponent implements OnInit {
     pa.push(this.service.getEmptyAddressFG())
   }
 
-  createPhone() {
-    // return this.fb.group({
-    //   name: '',
-    //   description: '',
-    //   price: ''
-    // });
-  }
+  // createPhone() {
+  //   // return this.fb.group({
+  //   //   name: '',
+  //   //   description: '',
+  //   //   price: ''
+  //   // });
+  // }
 
-  addPhone2(ticketId: string): void {
-    //const ticket = detailForm.value as Ticket;
-    console.log(ticketId);
-    this.store.dispatch(TicketActions.addPhone({ ticketId }));
-    // const test = "abc";
-    // let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
-    // let testObj = { test: "123" };
-    // let addPhone02 = TicketActions.addPhone2(testObj);
-    // console.log("addPhone2=", addPhone2);
-    // let ap = addPhone2(testObj);
-    // console.log("addPhone2({test})=", ap);
-    // ap.type0 = "aaa";
-    // console.log("ap", ap);
-    // console.log("addPhone02=", addPhone02);
-    // console.log("testObj=", testObj);
+  // addPhone2(ticketId: string): void {
+  //   //const ticket = detailForm.value as Ticket;
+  //   console.log(ticketId);
+  //   this.store.dispatch(TicketActions.addPhone({ ticketId }));
+  //   // const test = "abc";
+  //   // let addPhone2 = this.createAction("[Tickets] Add Phone2", this.props());
+  //   // let testObj = { test: "123" };
+  //   // let addPhone02 = TicketActions.addPhone2(testObj);
+  //   // console.log("addPhone2=", addPhone2);
+  //   // let ap = addPhone2(testObj);
+  //   // console.log("addPhone2({test})=", ap);
+  //   // ap.type0 = "aaa";
+  //   // console.log("ap", ap);
+  //   // console.log("addPhone02=", addPhone02);
+  //   // console.log("testObj=", testObj);
 
-    // this.on(TicketActions.addPhone, TicketActions.createTicket, (state, { ticket }) => ({
-    //   ...state,
-    //   loaded: false
-    // }))
+  //   // this.on(TicketActions.addPhone, TicketActions.createTicket, (state, { ticket }) => ({
+  //   //   ...state,
+  //   //   loaded: false
+  //   // }))
 
-    //a1.type = 'aaa';
-    //let ac = this.defineType("[Tickets] Add Phone", { test });
-    //console.log('ac=', ac);
-    // {test: 'abc', type: '[Tickets] Add Phone2'}
-  }
+  //   //a1.type = 'aaa';
+  //   //let ac = this.defineType("[Tickets] Add Phone", { test });
+  //   //console.log('ac=', ac);
+  //   // {test: 'abc', type: '[Tickets] Add Phone2'}
+  // }
 
-  createAction(type, config) {
-    // REGISTERED_ACTION_TYPES[type] = (REGISTERED_ACTION_TYPES[type] || 0) + 1;
-    // if (typeof config === 'function') {
-    //     return defineType(type, (...args) => ({
-    //         ...config(...args),
-    //         type,
-    //     }));
-    // }
-    console.log("config=", config);
-    const as = config ? config._as : "empty";
-    switch (as) {
-      case "empty":
-        return this.defineType(type, () => ({ type }));
-      case "props":
-        let aa = this.defineType(type, props => ({
-          ...props,
-          type
-        }));
-        console.log("aa=", aa.type);
-        return aa;
-      default:
-        throw new Error("Unexpected config.");
-    }
-  }
+  // createAction(type, config) {
+  //   // REGISTERED_ACTION_TYPES[type] = (REGISTERED_ACTION_TYPES[type] || 0) + 1;
+  //   // if (typeof config === 'function') {
+  //   //     return defineType(type, (...args) => ({
+  //   //         ...config(...args),
+  //   //         type,
+  //   //     }));
+  //   // }
+  //   console.log("config=", config);
+  //   const as = config ? config._as : "empty";
+  //   switch (as) {
+  //     case "empty":
+  //       return this.defineType(type, () => ({ type }));
+  //     case "props":
+  //       let aa = this.defineType(type, props => ({
+  //         ...props,
+  //         type
+  //       }));
+  //       console.log("aa=", aa.type);
+  //       return aa;
+  //     default:
+  //       throw new Error("Unexpected config.");
+  //   }
+  // }
 
-  props() {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/naming-convention
-    return { _as: "props", _p: undefined };
-  }
+  // props() {
+  //   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/naming-convention
+  //   return { _as: "props", _p: undefined };
+  // }
 
-  defineType(type, creator) {
-    console.log("creator1=", creator);
-    console.log("creator1.type=", creator.type);
-    Object.defineProperty(creator, "type", {
-      value: type,
-      writable: false
-    });
-    console.log("creator2=", creator);
-    console.log("creator2.type=", creator.type);
-    return creator;
-  }
+  // defineType(type, creator) {
+  //   console.log("creator1=", creator);
+  //   console.log("creator1.type=", creator.type);
+  //   Object.defineProperty(creator, "type", {
+  //     value: type,
+  //     writable: false
+  //   });
+  //   console.log("creator2=", creator);
+  //   console.log("creator2.type=", creator.type);
+  //   return creator;
+  // }
 
 
-  on(...args) {
-    //console.log('on--args:', args);
-    const reducer = args.pop();
-    const types = args.map((creator) => creator.type);
-    console.log('on--args:', args);
-    console.log('on--reducer:', reducer);
-    console.log('on--types:', types);
-    return { reducer, types };
-  }
+  // on(...args) {
+  //   //console.log('on--args:', args);
+  //   const reducer = args.pop();
+  //   const types = args.map((creator) => creator.type);
+  //   console.log('on--args:', args);
+  //   console.log('on--reducer:', reducer);
+  //   console.log('on--types:', types);
+  //   return { reducer, types };
+  // }
 }
