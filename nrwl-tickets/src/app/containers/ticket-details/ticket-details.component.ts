@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { TicketActions, TicketDetailsPageActions } from "src/app/actions";
 
 import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
-import * as UsersSelectors from "../../reducers/user.selectors";
 
 import { map, tap } from "rxjs/operators";
 import { UtilService } from "src/app/services";
@@ -22,9 +21,6 @@ import { Ticket, Ticket_vm } from "src/app/models/model";
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
   
-  selectedTicketByRoute$: Observable<Ticket_vm> = this.store.pipe(
-    select(TicketsVmSelectors.getSelectedTicketVmByRoute)
-  );
   constructor(
     private store: Store<{}>,
     private router: Router,
@@ -33,7 +29,8 @@ export class TicketDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(TicketDetailsPageActions.opened());
-    this.detailForm$ = this.selectedTicketByRoute$.pipe(
+    this.detailForm$ = this.store.pipe(
+      select(TicketsVmSelectors.getSelectedTicketVmByRoute),
       //tap(t=>console.log('ngOnInit',t)),
       map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
     );
