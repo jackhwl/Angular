@@ -76,9 +76,10 @@ export class AddressService {
     return of(adds).pipe(delay(randomDelay()));
   }
 
-  updateAddresses(addresses: Address[]): Observable<Boolean> {
+  updateAddresses(addresses: Address[]): Observable<Address[]> {
     this.storedAddresses = this.storedAddresses.filter(a0 => !addresses.map(a=>a.ticketId).includes(a0.ticketId) ).concat(addresses);
-    return of(true).pipe(delay(randomDelay()));
+    const adds = this.storedAddresses.filter(a0 => addresses.map(a=>a.ticketId).includes(a0.ticketId) )
+    return of(adds).pipe(delay(randomDelay()));
   }
 
   getAddressFromVm(address_vm: Address_vm): Address {

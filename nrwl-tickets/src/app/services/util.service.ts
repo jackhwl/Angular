@@ -25,7 +25,7 @@ export class UtilService {
         let addressForm = this.fb.group({
           id: [address.id],
           addr1: [address.addr1],
-          addr2: [address.addr1],
+          addr2: [address.addr2],
           postcode: [address.postcode],
           ticketId: [address.ticketId],
           phones: this.fb.array([])

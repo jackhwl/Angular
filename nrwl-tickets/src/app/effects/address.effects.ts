@@ -43,10 +43,10 @@ export class AddressEffects {
       pessimisticUpdate({
         run: action =>
           this.service.updateAddresses(action.addresses).pipe(
-            switchMap(success => [
-              success ? AddressApiActions.updateAddressesSuccess({
-                addresses: action.addresses.map(a => ({id: a.id, changes: {...a}}))
-              }) : AddressApiActions.updateAddressesFailure({ error: 'something wrong' })
+            switchMap(addresses => [
+              AddressApiActions.updateAddressesSuccess({
+                addresses: addresses.map(a => ({id: a.id, changes: {...a}}))
+              }) 
             ])
           ),
         onError: (action, error) => {
