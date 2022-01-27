@@ -27,8 +27,8 @@ export class AddressEffects {
           this.service.addressOfTicket(action.ticketId)
           .pipe(
             switchMap((addresses: Address[]) => [
+              AddressApiActions.loadAddressesOfTicketSuccess({ addresses }),
               PhoneActions.loadPhonesOfAddress({ addressIds: addresses.map(a => a.id) }),
-              AddressApiActions.loadAddressesOfTicketSuccess({ addresses })
             ])
           ),
       onError: (action, error) => 

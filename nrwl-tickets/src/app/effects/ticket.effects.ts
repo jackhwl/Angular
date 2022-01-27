@@ -66,14 +66,14 @@ export class TicketsEffects {
       //ofType(routerNavigatedAction, TicketActions.loadTicket),
       ofType(TicketDetailsPageActions.opened),
       withLatestFrom(this.store.pipe(select(selectRouteParams))),
-      filter(([, p]) => Object.keys(p).includes('id')),
+      //filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
         run: (action, p) => 
           this.ticketService.ticket(p['id'])
           .pipe(
             switchMap((ticket: Ticket) => [
-              AddressActions.loadAddressesOfTicket({ ticketId: ticket.id}),
-              TicketApiActions.loadTicketSuccess({ ticket })
+              TicketApiActions.loadTicketSuccess({ ticket }),
+              AddressActions.loadAddressesOfTicket({ ticketId: ticket.id})
             ])
           ),
       onError: (action, error) => 
