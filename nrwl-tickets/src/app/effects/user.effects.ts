@@ -14,7 +14,7 @@ export class UsersEffects {
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction),
+      ofType(UserActions.loadUsers),
       fetch({
         run: action =>
           this.userService

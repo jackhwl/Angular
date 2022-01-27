@@ -13,7 +13,7 @@
         <mat-form-field class="full-width">
           <mat-label>Assignee</mat-label>
           <mat-select name="AssigneeId" formControlName="assigneeId">
-            <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{
+            <mat-option *ngFor="let user of detailForm.value.assignees" [value]="user.id">{{
               user.name
             }}</mat-option>
           </mat-select>

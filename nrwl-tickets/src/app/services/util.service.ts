@@ -16,7 +16,8 @@ export class UtilService {
       description: [ticket.description, Validators.required],
       phones: this.fb.array([]),
       addresses: this.fb.array([]),
-      title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
+      title: [ticket.id === null ? "New Ticket" : "Edit Ticket"],
+      assignees: [ticket.assignees]
     });
     Object.values(ticket.addresses).map(address => {
       //console.log('generateTicketForm inner= ', address)

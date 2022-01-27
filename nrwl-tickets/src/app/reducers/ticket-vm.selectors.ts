@@ -3,6 +3,7 @@ import { Address, Phone, Ticket_vm } from "../models/model";
 import { getAllPhones, getPhoneEntities } from "./phone.selectors";
 import { getAddressEntities } from "./address.selectors";
 import { getSelected as getSelectedTicket, getSelectedByRoute as getSelectedTicketByRoute } from "./ticket.selectors";
+import { getAllUsers } from "./user.selectors";
 
 export const getAddressesOfTicket = createSelector(
   getSelectedTicket,
@@ -27,9 +28,10 @@ export const getAddressesOfTicket = createSelector(
 
 export const getSelectedTicketVmByRoute = createSelector(
     getSelectedTicketByRoute,
+    getAllUsers,
     getAddressesOfTicket,
     getAllPhones,
-    (ticket, addresses, phones): Ticket_vm => {
+    (ticket, users, addresses, phones): Ticket_vm => {
       // console.log('ticket=', ticket);
       // console.log('addresses=', addresses);
       //console.log('phones=', phones);
@@ -38,7 +40,8 @@ export const getSelectedTicketVmByRoute = createSelector(
         description: ticket.description,
         assigneeId: ticket.assigneeId,
         completed: ticket.completed,
-        addresses: addresses.map(address => ({ ...address, phones: phones.filter(p => address.phoneIds.includes(p.id))}))
+        addresses: addresses.map(address => ({ ...address, phones: phones.filter(p => address.phoneIds.includes(p.id))})),
+        assignees: users
       }
     }
   );

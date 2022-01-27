@@ -21,12 +21,6 @@ import { Ticket, Ticket_vm } from "src/app/models/model";
 })
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
-  users$ = this.store.pipe(select(UsersSelectors.getAllUsers));
-  pIndex: number;
-  // phones$: Observable<Phone[]> = this.store.pipe(
-  //   select(PhonesSelectors.getAllPhones)
-  // );
-  //phonesOfTicket$ = this.store.pipe(select(TicketsVmSelectors.getPhonesOfTicket));
   
   selectedTicketByRoute$: Observable<Ticket_vm> = this.store.pipe(
     select(TicketsVmSelectors.getSelectedTicketVmByRoute)
