@@ -16,6 +16,7 @@ import { TicketService } from "./services/ticket.service";
 import { AddressService } from "./services/address.service";
 import { AddressEffects } from "./effects/address.effects";
 import { PhoneService } from "./services/phone.service";
+import { TicketVmEffects } from "./effects/ticket-vm.effects";
 
 @NgModule({
   declarations: [TicketsComponent],
@@ -28,7 +29,7 @@ import { PhoneService } from "./services/phone.service";
       fromTicketModule.TICKETMODULE_FEATURE_KEY,
       fromTicketModule.reducers
     ),
-    EffectsModule.forFeature([PhonesEffects, TicketsEffects, UsersEffects, AddressEffects])
+    EffectsModule.forFeature([PhonesEffects, TicketsEffects, TicketVmEffects, UsersEffects, AddressEffects])
   ],
   providers: [BackendService, TicketService, UtilService, AddressService, PhoneService]
 })
