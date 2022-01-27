@@ -5,3 +5,8 @@ export const loadAddressesOfTicket = createAction(
     "[Addresses] Load Addresses of Ticket",
     props<{ ticketId: number }>()
 );
+
+export const updateAddresses = createAction(
+    "[Phones] Update Addresses",
+    props<{ addresses: Address[] }>()
+)

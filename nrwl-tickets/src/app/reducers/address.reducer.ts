@@ -39,7 +39,14 @@ export const reducer = createReducer(
   on(AddressApiActions.loadAddressesOfTicketFailure, (state, { error }) => ({
     ...state,
     error
-  }))
+  })),
+  on(AddressApiActions.updateAddressesSuccess, (state, { addresses }) => 
+    adapter.updateMany(addresses, {...state, loaded: true})
+  ), 
+  on(AddressApiActions.updateAddressesFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),  
 );
 
 // export function addressesReducer(state: AddressState | undefined, action: Action) {

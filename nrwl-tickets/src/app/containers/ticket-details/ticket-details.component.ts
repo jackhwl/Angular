@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { PhoneActions, TicketActions } from "src/app/actions";
+import { AddressActions, PhoneActions, TicketActions } from "src/app/actions";
 
 import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
 import * as UsersSelectors from "../../reducers/user.selectors";
@@ -12,7 +12,9 @@ import * as PhonesSelectors from "../../reducers/phone.selectors";
 
 import { map, tap } from "rxjs/operators";
 import { UtilService } from "src/app/services";
-import { Phone, Ticket, Ticket_vm } from "src/app/models/model";
+import { Address, Address_vm, Phone, Ticket, Ticket_vm } from "src/app/models/model";
+import { TicketService } from "src/app/services/ticket.service";
+import { AddressService } from "src/app/services/address.service";
 
 @Component({
   selector: "vi-ticket-details",
@@ -35,12 +37,14 @@ export class TicketDetailsComponent implements OnInit {
   constructor(
     private store: Store<{}>,
     private router: Router,
-    private service: UtilService
+    private service: UtilService,
+    private addressService: AddressService,
+    private ticketService: TicketService
   ) {}
 
   ngOnInit(): void {
     this.detailForm$ = this.selectedTicketByRoute$.pipe(
-      tap(t=>console.log('ngOnInit',t)),
+      //tap(t=>console.log('ngOnInit',t)),
       map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
     );
     // this.detailForm$.subscribe(
@@ -55,14 +59,15 @@ export class TicketDetailsComponent implements OnInit {
 
   onSubmit(detailForm: FormGroup): void {
     const ticket_vm = detailForm.value as Ticket_vm;
-    const ticket = this.service.getTicketFromVm(ticket_vm)
+    const ticket = this.ticketService.getTicketFromVm(ticket_vm)
+    const addresses = ticket_vm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
     if (ticket.id !== null && ticket.id !== undefined) {
-      //this.updatePhones(ticket_vm.phones)
+      this.updateAddresses(addresses)
       this.updateTicket(ticket);
     } else {
       this.createTicket(ticket);
     }
-    this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
+    //this.router.navigate(["tickets"], { queryParamsHandling: "merge" });
   }
 
   cancelled(): void {
@@ -75,6 +80,10 @@ export class TicketDetailsComponent implements OnInit {
 
   updateTicket(ticket: Ticket): void {
     this.store.dispatch(TicketActions.updateTicket({ ticket }));
+  }
+
+  updateAddresses(addresses: Address[]): void {
+    this.store.dispatch(AddressActions.updateAddresses({ addresses }));
   }
 
   updatePhones(phones: Phone[]): void {

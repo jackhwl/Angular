@@ -37,4 +37,23 @@ export class AddressEffects {
     )
   );
 
+  updateAddresses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AddressActions.updateAddresses),
+      pessimisticUpdate({
+        run: action =>
+          this.service.updateAddresses(action.addresses).pipe(
+            switchMap(success => [
+              success ? AddressApiActions.updateAddressesSuccess({
+                addresses: action.addresses.map(a => ({id: a.id, changes: {...a}}))
+              }) : AddressApiActions.updateAddressesFailure({ error: 'something wrong' })
+            ])
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return AddressApiActions.updateAddressesFailure({ error });
+        }
+      })
+    )
+  );
 }

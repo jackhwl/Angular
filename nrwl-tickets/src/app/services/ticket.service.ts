@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
-import { Phone, Ticket, User } from "../models/model";
+import { Phone, Ticket, Ticket_vm, User } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
 import { ErrorService } from "./error.service";
 
@@ -75,6 +75,16 @@ export class TicketService {
 
   private findUserById = id => this.storedUsers.find(user => user.id === +id);
 
+
+  getTicketFromVm(ticket_vm: Ticket_vm): Ticket {
+    return {
+      id: ticket_vm.id,
+      description: ticket_vm.description,
+      assigneeId: ticket_vm.assigneeId,
+      completed: ticket_vm.completed,
+      addressIds: ticket_vm.addresses.map(a => a.id)
+    };
+  }
 
   tickets() {
     return of(this.storedTickets).pipe(delay(randomDelay()));

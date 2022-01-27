@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
-import { Address, Phone, Ticket, User } from "../models/model";
+import { Address, Address_vm, Phone, Ticket, User } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
 import { ErrorService } from "./error.service";
 
@@ -75,4 +75,23 @@ export class AddressService {
     const adds = this.storedAddresses.filter(a => a.ticketId == ticketId);
     return of(adds).pipe(delay(randomDelay()));
   }
+
+  updateAddresses(addresses: Address[]): Observable<Boolean> {
+    this.storedAddresses = this.storedAddresses.filter(a0 => !addresses.map(a=>a.ticketId).includes(a0.ticketId) ).concat(addresses);
+    return of(true).pipe(delay(randomDelay()));
+  }
+
+  getAddressFromVm(address_vm: Address_vm): Address {
+    return {
+      id: address_vm.id,
+      addr1: address_vm.addr1,
+      addr2: address_vm.addr2,
+      postcode: address_vm.postcode,
+      ticketId: address_vm.ticketId,
+      countryId: address_vm.countryId,
+      cityId: address_vm.cityId,
+      phoneIds: address_vm.phones.map(p => p.id),
+    };
+  }
+
 }

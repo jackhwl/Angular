@@ -19,7 +19,7 @@ export class UtilService {
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"]
     });
     Object.values(ticket.addresses).map(address => {
-      console.log('generateTicketForm inner= ', address)
+      //console.log('generateTicketForm inner= ', address)
       if (address) {
         let aFA = ticketForm.controls.addresses as FormArray;
         let addressForm = this.fb.group({
@@ -27,6 +27,7 @@ export class UtilService {
           addr1: [address.addr1],
           addr2: [address.addr1],
           postcode: [address.postcode],
+          ticketId: [address.ticketId],
           phones: this.fb.array([])
         })
         Object.values(address.phones).map(phone => {
@@ -34,7 +35,8 @@ export class UtilService {
           let phoneForm = this.fb.group({
             id: [phone.id],
             type: [phone.type],
-            number: [phone.number]
+            number: [phone.number],
+            addressId: [phone.addressId],
           })
           pFa.push(phoneForm)
         })
@@ -56,21 +58,11 @@ export class UtilService {
     // })
   
 
-    console.log('generateTicketForm', ticketForm)
+    //console.log('generateTicketForm', ticketForm)
 
     return ticketForm;
   }
 
-  getTicketFromVm(ticket_vm: Ticket_vm): Ticket {
-    return {
-      id: ticket_vm.id,
-      description: ticket_vm.description,
-      assigneeId: ticket_vm.assigneeId,
-      completed: ticket_vm.completed,
-      //phoneIds: ticket_vm.phones.map(p => p.id),
-      addressIds: ticket_vm.addresses.map(a => a.id)
-    };
-  }
 
   getEmptyPhoneFG() {
     return this.fb.group({
