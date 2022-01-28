@@ -57,7 +57,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
         debounceTime(200),
         distinctUntilChanged(),
         switchMap((q: string) =>
-          this.router.navigate(["tickets"], {
+          this.router.navigate(["./"], {
             queryParams: { q },
             queryParamsHandling: "merge"
           })

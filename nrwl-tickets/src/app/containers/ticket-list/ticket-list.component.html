@@ -17,7 +17,7 @@
         <td>{{ ticket.completed }}</td>
         <td>{{ ticket.description }}</td>
         <td>
-          <a [routerLink]="['/tickets', ticket.id]" queryParamsHandling="merge"
+          <a [routerLink]="['./', ticket.id]" queryParamsHandling="merge"
             >Edit</a
           >
         </td>

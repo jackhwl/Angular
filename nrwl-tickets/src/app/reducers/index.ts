@@ -10,6 +10,7 @@ import * as fromPhone from "./phone.reducer";
 import * as fromAddress from "./address.reducer";
 
 export const TICKETMODULE_FEATURE_KEY = "ticketModule";
+export const TICKETMODULE_ROUTE_KEY = "tickets";
 
 export interface TicketModuleState {
   phones: fromPhone.State;

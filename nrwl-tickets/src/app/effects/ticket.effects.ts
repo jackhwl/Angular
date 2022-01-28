@@ -9,6 +9,7 @@ import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } fr
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
 import { TicketService } from "../services/ticket.service";
+import { TICKETMODULE_ROUTE_KEY } from "../reducers";
 
 @Injectable()
 export class TicketsEffects {
@@ -87,9 +88,10 @@ export class TicketsEffects {
     this.actions$.pipe(
       ofType(routerNavigatedAction),
       withLatestFrom(this.store.pipe(select(selectUrl))),
-      filter(([, url]) => url.startsWith('/tickets') && !url.startsWith('/tickets/')),
+      filter(([, url]) => url.startsWith(`/${TICKETMODULE_ROUTE_KEY}`) && !url.startsWith(`/${TICKETMODULE_ROUTE_KEY}/`)),
       fetch({
         run: (action) => {
+          console.log(action)
           const qmaps = this.getAllQueryParameters(action.payload.routerState)
           return this.ticketService
             .filteredTickets(qmaps.get('q'))
