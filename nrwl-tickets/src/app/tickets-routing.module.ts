@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { TicketDetailsComponent } from "./containers/ticket-details/ticket-details.component";
-import { TicketsListComponent } from "./containers/tickets-list/tickets-list.component";
+import { TicketListComponent } from "./containers/ticket-list/ticket-list.component";
 import { TicketsComponent } from "./containers/tickets/tickets.component";
 
 export const routes: Routes = [
@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: TicketsComponent,
     children: [
       { path: ":id", component: TicketDetailsComponent },
-      { path: "", component: TicketsListComponent }
+      { path: "", component: TicketListComponent }
     ]
   }
 ];

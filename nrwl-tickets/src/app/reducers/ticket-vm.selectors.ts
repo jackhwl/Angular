@@ -2,7 +2,7 @@ import { createSelector } from "@ngrx/store";
 import { Address, Phone, Ticket_vm } from "../models/model";
 import { getAllPhones, getPhoneEntities } from "./phone.selectors";
 import { getAddressEntities } from "./address.selectors";
-import { getSelected as getSelectedTicket, getSelectedByRoute as getSelectedTicketByRoute } from "./ticket.selectors";
+import { getAllTickets, getSelected as getSelectedTicket, getSelectedByRoute as getSelectedTicketByRoute } from "./ticket.selectors";
 import { getAllUsers } from "./user.selectors";
 
 export const getAddressesOfTicket = createSelector(
@@ -44,5 +44,15 @@ export const getSelectedTicketVmByRoute = createSelector(
         assignees: users
       }
     }
-  );
-  
+);
+
+export const getFilterTicketsVmByRoute =  createSelector(
+  getAllTickets,
+  getAllUsers,
+  (tickets, users): Ticket_vm[] => 
+     tickets.map(ticket => ({
+        ...ticket,
+        assignees: users.filter(user => user.id === ticket.assigneeId),
+        addresses: []
+    }))
+);

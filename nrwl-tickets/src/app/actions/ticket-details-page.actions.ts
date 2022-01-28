@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Ticket, Ticket_vm } from "../models/model";
+import { Ticket_vm } from "../models/model";
 
 export const opened = createAction(
   "[Ticket Detail Page] Opened"

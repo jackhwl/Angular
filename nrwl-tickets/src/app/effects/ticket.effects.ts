@@ -4,7 +4,7 @@ import { combineLatest, filter, map, mergeMap, switchMap, tap, withLatestFrom } 
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
-import { AddressActions, PhoneActions, TicketActions, TicketApiActions, TicketDetailsPageActions, UserActions } from "../actions";
+import { AddressActions, PhoneActions, TicketActions, TicketApiActions, TicketDetailsPageActions, TicketListPageActions, UserActions } from "../actions";
 import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
@@ -89,13 +89,14 @@ export class TicketsEffects {
       withLatestFrom(this.store.pipe(select(selectUrl))),
       filter(([, url]) => url.startsWith('/tickets') && !url.startsWith('/tickets/')),
       fetch({
-        run: action => {
+        run: (action) => {
           const qmaps = this.getAllQueryParameters(action.payload.routerState)
           return this.ticketService
             .filteredTickets(qmaps.get('q'))
             .pipe(
               switchMap((tickets: Ticket[]) => [
-                TicketApiActions.loadFilterTicketsSuccess({ tickets })
+                TicketApiActions.loadFilterTicketsSuccess({ tickets }),
+                UserActions.loadUsers()
               ])
             );
         },

@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { of } from "rxjs";
 import { MaterialModule } from "../../material.module";
 import { TicketsComponent } from "./tickets.component";
-import { TicketsListComponent } from "../tickets-list/tickets-list.component";
+import { TicketListComponent } from "../ticket-list/ticket-list.component";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { ActionsSubject, StoreModule } from "@ngrx/store";
@@ -77,7 +77,7 @@ describe("Tickets Component", () => {
       const actionSub: ActionsSubject = new ActionsSubject();
       TestBed.configureTestingModule({
         declarations: [
-          TicketsListComponent,
+          TicketListComponent,
           TicketDetailsComponent,
           TicketsComponent
         ],
@@ -128,7 +128,7 @@ describe("Tickets Component", () => {
   });
 
   it("should create TicketsListComponent", () => {
-    const fixture = TestBed.createComponent(TicketsListComponent);
+    const fixture = TestBed.createComponent(TicketListComponent);
     const component = fixture.componentInstance;
     expect(component).toBeDefined();
   });
@@ -143,7 +143,7 @@ describe("Tickets Component", () => {
     component.search.setValue("a");
     tick(210);
     const debugElements = fixture.debugElement.queryAll(
-      By.directive(TicketsListComponent)
+      By.directive(TicketListComponent)
     );
     expect(debugElements.length).toEqual(1);
   }));
