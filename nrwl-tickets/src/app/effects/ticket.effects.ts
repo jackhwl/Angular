@@ -5,7 +5,7 @@ import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { BackendService } from "../services/backend.service";
 import { AddressActions, PhoneActions, TicketActions, TicketApiActions, TicketDetailsPageActions, TicketListPageActions, UserActions } from "../actions";
-import { selectCurrentRoute, selectQueryParam, selectRouteParams, selectUrl } from "../reducers/router.selectors";
+import { selectCurrentRoute, selectQueryParam, selectQueryParams, selectRouteParams, selectUrl } from "../reducers/router.selectors";
 import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
 import { Phone, Ticket } from "../models/model";
 import { TicketService } from "../services/ticket.service";
@@ -86,15 +86,17 @@ export class TicketsEffects {
 
   loadFilterTicketsByRoute$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(routerNavigatedAction),
-      withLatestFrom(this.store.pipe(select(selectUrl))),
-      filter(([, url]) => url.startsWith(`/${TICKETMODULE_ROUTE_KEY}`) && !url.startsWith(`/${TICKETMODULE_ROUTE_KEY}/`)),
+      //ofType(routerNavigatedAction),
+      //withLatestFrom(this.store.pipe(select(selectUrl))),
+      //filter(([, url]) => url.startsWith(`/${TICKETMODULE_ROUTE_KEY}`) && !url.startsWith(`/${TICKETMODULE_ROUTE_KEY}/`)),
+      ofType(TicketListPageActions.opened, TicketListPageActions.filterParamChanged),
+      //withLatestFrom(this.store.pipe(select(selectQueryParams))),
       fetch({
         run: (action) => {
           console.log(action)
-          const qmaps = this.getAllQueryParameters(action.payload.routerState)
+          //const qmaps = this.getAllQueryParameters(action.payload.routerState)
           return this.ticketService
-            .filteredTickets(qmaps.get('q'))
+            .filteredTickets('q' in action ? action.q : '')
             .pipe(
               switchMap((tickets: Ticket[]) => [
                 TicketApiActions.loadFilterTicketsSuccess({ tickets }),

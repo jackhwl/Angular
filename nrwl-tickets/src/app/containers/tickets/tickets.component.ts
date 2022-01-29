@@ -13,8 +13,10 @@ import {
   distinctUntilChanged,
   map,
   switchMap,
-  takeUntil
+  takeUntil,
+  tap
 } from "rxjs/operators";
+import { TicketListPageActions } from "src/app/actions";
 import { TakeUntilDestroy } from "src/app/decorators/take-until-destory";
 import {
   selectQueryParam,
@@ -56,11 +58,13 @@ export class TicketsComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(200),
         distinctUntilChanged(),
-        switchMap((q: string) =>
+        switchMap((q: string) => [
           this.router.navigate(["./"], {
             queryParams: { q },
             queryParamsHandling: "merge"
-          })
+          }),
+          this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+        ]
         ),
         takeUntil(this.componentDestroy())
       )
