@@ -4,17 +4,14 @@ import {
   OnDestroy,
   OnInit
 } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
+import { FormControl } from "@angular/forms";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,
-  map,
   switchMap,
   takeUntil,
-  tap
 } from "rxjs/operators";
 import { TicketListPageActions } from "src/app/actions";
 import { TakeUntilDestroy } from "src/app/decorators/take-until-destory";
@@ -48,7 +45,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
   searchValueChangesSub: Subscription | undefined;
   search = new FormControl("");
 
-  constructor(private store: Store<{}>, private router: Router) {}
+  constructor(private store: Store<{}>) {}
 
   ngOnInit(): void {
     this.searchSetSub = this.routerQueryParam$
@@ -59,13 +56,8 @@ export class TicketsComponent implements OnInit, OnDestroy {
         debounceTime(200),
         distinctUntilChanged(),
         switchMap((q: string) => [
-          this.router.navigate(["./"], {
-            queryParams: { q },
-            queryParamsHandling: "merge"
-          }),
           this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
-        ]
-        ),
+        ]),
         takeUntil(this.componentDestroy())
       )
       .subscribe();

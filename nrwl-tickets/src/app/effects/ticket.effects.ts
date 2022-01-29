@@ -10,13 +10,16 @@ import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/rout
 import { Phone, Ticket } from "../models/model";
 import { TicketService } from "../services/ticket.service";
 import { TICKETMODULE_ROUTE_KEY } from "../reducers";
+import { Router } from "@angular/router";
+import { query } from "@angular/animations";
 
 @Injectable()
 export class TicketsEffects {
   constructor(
     private store: Store<{}>,
     private actions$: Actions,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private router: Router
   ) {}
 
   loadTickets$ = createEffect(() =>
@@ -98,10 +101,17 @@ export class TicketsEffects {
           return this.ticketService
             .filteredTickets('q' in action ? action.q : '')
             .pipe(
+              tap(() => 'q' in action
+                    ? this.router.navigate(["./"], {
+                        queryParams: { q: action.q },
+                        queryParamsHandling: "merge"
+                      })
+                    : ''
+              ),
               switchMap((tickets: Ticket[]) => [
                 TicketApiActions.loadFilterTicketsSuccess({ tickets }),
                 UserActions.loadUsers()
-              ])
+              ]),
             );
         },
 
