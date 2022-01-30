@@ -36,9 +36,9 @@ import * as TicketsSelectors from "../../reducers/ticket.selectors";
 @TakeUntilDestroy
 export class TicketsComponent implements OnInit, OnDestroy {
   private componentDestroy: () => Observable<unknown>;
-  listForm$: Observable<FormGroup>;
+  //listForm$: Observable<FormGroup>;
   
-  //listForm: FormGroup;
+  listForm: FormGroup;
 
 
   error$: Observable<string | null> = this.store.pipe(
@@ -58,37 +58,38 @@ export class TicketsComponent implements OnInit, OnDestroy {
   constructor(private store: Store<{}>, private service: UtilService) {}
   
   ngOnInit(): void {
-    this.listForm$ = this.routerQueryParam$?.pipe(
-      map((q: string) => this.service.generateTicketSearchForm(q)),
-      tap(fg => 
-        fg.get('search').valueChanges.pipe(
-          debounceTime(200),
-          distinctUntilChanged(),
-          tap(console.log),
-          switchMap((q: string) => [
-            this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
-          ]),
-          takeUntil(this.componentDestroy())
-        ).subscribe()
-      )
-    );
-    
-    // this.searchSetSub = this.routerQueryParam$
-    //   ?.pipe(takeUntil(this.componentDestroy()))
-    //   .subscribe(q => { 
-    //     this.listForm = this.service.generateTicketSearchForm(q)
-    //     this.listForm.get('search').valueChanges
-    //     .pipe(
+    // use listForm$ 
+    // this.listForm$ = this.routerQueryParam$?.pipe(
+    //   map((q: string) => this.service.generateTicketSearchForm(q)),
+    //   tap(fg => 
+    //     fg.get('search').valueChanges.pipe(
     //       debounceTime(200),
     //       distinctUntilChanged(),
-    //       //tap(console.log),
+    //       tap(console.log),
     //       switchMap((q: string) => [
     //         this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
     //       ]),
     //       takeUntil(this.componentDestroy())
-    //     )
-    //     .subscribe();
-    //   });
+    //     ).subscribe()
+    //   )
+    // );
+    
+    this.searchSetSub = this.routerQueryParam$
+      ?.pipe(takeUntil(this.componentDestroy()))
+      .subscribe(q => { 
+        this.listForm = this.service.generateTicketSearchForm(q)
+        this.listForm.get('search').valueChanges
+        .pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          //tap(console.log),
+          switchMap((q: string) => [
+            this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+          ]),
+          takeUntil(this.componentDestroy())
+        )
+        .subscribe();
+      });
 
     //this.searchValueChangesSub = 
     // this.listForm.get('search').valueChanges

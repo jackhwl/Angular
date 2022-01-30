@@ -1,6 +1,6 @@
 <div class="component-container">
   <div *ngIf="(routerRouteParamId$ | async) === undefined" >
-    <ng-container *ngIf="listForm$ | async as listForm">
+    <ng-container>
       {{ listForm.value | json}}
     <form [formGroup]="listForm">
       <input
