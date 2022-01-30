@@ -96,7 +96,7 @@ export class TicketsEffects {
       //withLatestFrom(this.store.pipe(select(selectQueryParams))),
       fetch({
         run: (action) => {
-          console.log(action)
+          //console.log(action)
           //const qmaps = this.getAllQueryParameters(action.payload.routerState)
           return this.ticketService
             .filteredTickets('q' in action ? action.q : '')

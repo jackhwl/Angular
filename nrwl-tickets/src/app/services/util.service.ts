@@ -64,6 +64,9 @@ export class UtilService {
     return ticketForm;
   }
 
+  generateTicketSearchForm(q: string): FormGroup {
+    return this.fb.group({search: [q]})
+  }
 
   getEmptyPhoneFG() {
     return this.fb.group({

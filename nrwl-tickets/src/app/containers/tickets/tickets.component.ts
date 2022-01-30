@@ -1,17 +1,20 @@
+import { coerceCssPixelValue } from "@angular/cdk/coercion";
 import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
   OnInit
 } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { select, Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,
+  map,
   switchMap,
   takeUntil,
+  tap,
 } from "rxjs/operators";
 import { TicketListPageActions } from "src/app/actions";
 import { TakeUntilDestroy } from "src/app/decorators/take-until-destory";
@@ -19,6 +22,7 @@ import {
   selectQueryParam,
   selectRouteParam
 } from "src/app/reducers/router.selectors";
+import { UtilService } from "src/app/services";
 import * as TicketsSelectors from "../../reducers/ticket.selectors";
 
 @Component({
@@ -30,6 +34,10 @@ import * as TicketsSelectors from "../../reducers/ticket.selectors";
 @TakeUntilDestroy
 export class TicketsComponent implements OnInit, OnDestroy {
   private componentDestroy: () => Observable<unknown>;
+  listForm$: Observable<FormGroup>;
+  
+  listForm: FormGroup;
+
 
   error$: Observable<string | null> = this.store.pipe(
     select(TicketsSelectors.getError)
@@ -43,24 +51,71 @@ export class TicketsComponent implements OnInit, OnDestroy {
 
   searchSetSub: Subscription | undefined;
   searchValueChangesSub: Subscription | undefined;
-  search = new FormControl("");
+  //search = new FormControl("");
 
-  constructor(private store: Store<{}>) {}
-
+  constructor(private store: Store<{}>, private service: UtilService) {}
+  
   ngOnInit(): void {
+    this.listForm$ = this.routerQueryParam$?.pipe(
+      tap(console.log),
+      map((q: string) => { 
+        const fg = this.service.generateTicketSearchForm(q);
+        // fg.get('search').valueChanges.pipe(
+        //   tap(console.log),
+        //   debounceTime(200),
+        //   distinctUntilChanged(),
+        //   switchMap((q: string) => [
+        //     this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+        //   ])
+        // )
+        return fg
+      })
+    );
+    
     this.searchSetSub = this.routerQueryParam$
       ?.pipe(takeUntil(this.componentDestroy()))
-      .subscribe(_ => this.search.setValue(_));
-    this.searchValueChangesSub = this.search.valueChanges
-      .pipe(
-        debounceTime(200),
-        distinctUntilChanged(),
-        switchMap((q: string) => [
-          this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
-        ]),
-        takeUntil(this.componentDestroy())
-      )
-      .subscribe();
+      .subscribe(q => { 
+        this.listForm = this.service.generateTicketSearchForm(q)
+        this.listForm.get('search').valueChanges
+        .pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          //tap(console.log),
+          switchMap((q: string) => [
+            this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+          ]),
+          takeUntil(this.componentDestroy())
+        )
+        .subscribe();
+      });
+
+    //this.searchValueChangesSub = 
+    // this.listForm.get('search').valueChanges
+    //   .pipe(
+    //     tap(console.log),
+    //     debounceTime(200),
+    //     distinctUntilChanged(),
+    //     switchMap((q: string) => [
+    //       this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+    //     ]),
+    //     //takeUntil(this.componentDestroy())
+    //   )
+    //   .subscribe();
+
+    // this.searchSetSub = this.routerQueryParam$
+    //   ?.pipe(takeUntil(this.componentDestroy()))
+    //   .subscribe(_ => this.search.setValue(_));
+
+    // this.searchValueChangesSub = this.search.valueChanges
+    //   .pipe(
+    //     debounceTime(200),
+    //     distinctUntilChanged(),
+    //     switchMap((q: string) => [
+    //       this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+    //     ]),
+    //     takeUntil(this.componentDestroy())
+    //   )
+    //   .subscribe();
   }
 
   // debounceMap(delay: number) {

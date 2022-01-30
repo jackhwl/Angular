@@ -1,15 +1,19 @@
 <div class="component-container">
-  <div *ngIf="(routerRouteParamId$ | async) === undefined">
-    <input
-      type="text"
-      placeholder="Search"
-      name="querytodo"
-      [formControl]="search"
-    />
-    (Enter 'error' to trigger an exception)
-    <a [routerLink]="['./', 'new']" queryParamsHandling="merge"
-      >Add New Ticket</a
-    >
+  <div *ngIf="(routerRouteParamId$ | async) === undefined" >
+    <ng-container >
+      {{ listForm.value | json}}
+    <form [formGroup]="listForm">
+      <input
+        type="text"
+        placeholder="Search"
+        formControlName="search"
+      />
+      (Enter 'error' to trigger an exception)
+      <a [routerLink]="['./', 'new']" queryParamsHandling="merge"
+        >Add New Ticket</a
+      >
+    </form>
+  </ng-container>
   </div>
   <div style="color: red;" *ngIf="error$ | async">
     error:{{ error$ | async | json }}
