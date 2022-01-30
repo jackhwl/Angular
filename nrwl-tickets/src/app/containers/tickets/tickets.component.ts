@@ -11,7 +11,9 @@ import { Observable, Subscription } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,
+  flatMap,
   map,
+  mergeMap,
   switchMap,
   takeUntil,
   tap,
@@ -36,7 +38,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
   private componentDestroy: () => Observable<unknown>;
   listForm$: Observable<FormGroup>;
   
-  listForm: FormGroup;
+  //listForm: FormGroup;
 
 
   error$: Observable<string | null> = this.store.pipe(
@@ -57,37 +59,36 @@ export class TicketsComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.listForm$ = this.routerQueryParam$?.pipe(
-      tap(console.log),
-      map((q: string) => { 
-        const fg = this.service.generateTicketSearchForm(q);
-        // fg.get('search').valueChanges.pipe(
-        //   tap(console.log),
-        //   debounceTime(200),
-        //   distinctUntilChanged(),
-        //   switchMap((q: string) => [
-        //     this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
-        //   ])
-        // )
-        return fg
-      })
-    );
-    
-    this.searchSetSub = this.routerQueryParam$
-      ?.pipe(takeUntil(this.componentDestroy()))
-      .subscribe(q => { 
-        this.listForm = this.service.generateTicketSearchForm(q)
-        this.listForm.get('search').valueChanges
-        .pipe(
+      map((q: string) => this.service.generateTicketSearchForm(q)),
+      tap(fg => 
+        fg.get('search').valueChanges.pipe(
           debounceTime(200),
           distinctUntilChanged(),
-          //tap(console.log),
+          tap(console.log),
           switchMap((q: string) => [
             this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
           ]),
           takeUntil(this.componentDestroy())
-        )
-        .subscribe();
-      });
+        ).subscribe()
+      )
+    );
+    
+    // this.searchSetSub = this.routerQueryParam$
+    //   ?.pipe(takeUntil(this.componentDestroy()))
+    //   .subscribe(q => { 
+    //     this.listForm = this.service.generateTicketSearchForm(q)
+    //     this.listForm.get('search').valueChanges
+    //     .pipe(
+    //       debounceTime(200),
+    //       distinctUntilChanged(),
+    //       //tap(console.log),
+    //       switchMap((q: string) => [
+    //         this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+    //       ]),
+    //       takeUntil(this.componentDestroy())
+    //     )
+    //     .subscribe();
+    //   });
 
     //this.searchValueChangesSub = 
     // this.listForm.get('search').valueChanges
