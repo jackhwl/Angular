@@ -55,8 +55,13 @@ export class PhoneService {
       }
     
       updatePhones(phones: Phone[]): Observable<Phone[]> {
-        this.storedPhones = this.storedPhones.filter(p => !phones.map(p=>p.id).includes(p.id) ).concat(phones);
-        const phs = this.storedPhones.filter(p => phones.map(p=>p.id).includes(p.id) )
+        let id = Math.max(...this.storedPhones.map(p=> p.id));
+        const newPhones = phones.filter(p => p.id === null).map(p => ({...p, id: ++id}))
+        this.storedPhones = this.storedPhones.concat(newPhones);
+        const phones2 = phones.filter(p=> p.id!==null)
+        this.storedPhones = this.storedPhones.filter(p => !phones2.map(p=>p.id).includes(p.id) ).concat(phones2);
+        console.log(this.storedPhones)
+        const phs = this.storedPhones.filter(p => phones.map(p=>p.id).includes(p.id) ).concat(newPhones);
         return of(phs).pipe(delay(randomDelay()));
       }
         

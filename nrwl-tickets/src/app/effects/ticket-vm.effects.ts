@@ -31,10 +31,10 @@ export class TicketVmEffects {
             const phones = action.ticketVm.addresses.map(a => a.phones).reduce((a,b) => a.concat(b))
             return of(action).pipe(
                 switchMap (_ => [
-                    TicketActions.updateTicket({ ticket }),
+                    PhoneActions.updatePhones({ phones }),
                     AddressActions.updateAddresses({ addresses }),
-                    PhoneActions.updatePhones({ phones })
-                ])
+                    TicketActions.updateTicket({ ticket }),
+                  ])
         )},
         onError: (action, error) => {
           console.error("Error", error);

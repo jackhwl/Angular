@@ -4,6 +4,7 @@ import { delay, tap } from "rxjs/operators";
 import { Address, Address_vm, Phone, Ticket, User } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
 import { ErrorService } from "./error.service";
+import { PhoneService } from "./phone.service";
 
 export const emptyAddress: Address = {
   id: null,
@@ -23,7 +24,7 @@ function randomDelay() {
 @Injectable()
 export class AddressService {
 
-  constructor(private errorService: ErrorService) {}
+  constructor(private errorService: ErrorService, private phoneService: PhoneService) {}
 
   storedAddresses: Address[] = [
     {
@@ -34,7 +35,7 @@ export class AddressService {
       cityId: "ct1",
       postcode: "M1W2G2",
       ticketId: 0,
-      phoneIds: [1, 2],
+      phoneIds: [],
     },
     {
         id: "a2",
@@ -44,7 +45,7 @@ export class AddressService {
         cityId: "ct1",
         postcode: "M2W3G3",
         ticketId: 0,
-        phoneIds: [3,4],
+        phoneIds: [],
       },
       {
         id: "a3",
@@ -72,14 +73,18 @@ export class AddressService {
   error$ = this.error.asObservable();
 
   addressOfTicket(ticketId: number): Observable<Address[]> {
-    const adds = this.storedAddresses.filter(a => a.ticketId == ticketId);
+    const adds = this.getAll().filter(a => a.ticketId == ticketId);
     return of(adds).pipe(delay(randomDelay()));
   }
 
   updateAddresses(addresses: Address[]): Observable<Address[]> {
-    this.storedAddresses = this.storedAddresses.filter(a0 => !addresses.map(a=>a.ticketId).includes(a0.ticketId) ).concat(addresses);
-    const adds = this.storedAddresses.filter(a0 => addresses.map(a=>a.ticketId).includes(a0.ticketId) )
+    this.storedAddresses = this.getAll().filter(a0 => !addresses.map(a=>a.ticketId).includes(a0.ticketId) ).concat(addresses);
+    const adds = this.getAll().filter(a0 => addresses.map(a=>a.ticketId).includes(a0.ticketId) )
     return of(adds).pipe(delay(randomDelay()));
+  }
+
+  getAll(): Address[] {
+    return this.storedAddresses.map(a => ({...a, phoneIds: this.phoneService.storedPhones.filter(p => p.addressId === a.id).map(p => p.id)}))
   }
 
   getAddressFromVm(address_vm: Address_vm): Address {

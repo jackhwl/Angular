@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { UtilService } from 'src/app/services';
 
 @Component({
@@ -26,8 +26,9 @@ export class AddressComponent implements OnInit {
   }
 
   addPhone(pa: FormArray) {
-    //console.log('phone FA=', pa)
-    pa.push(this.service.getEmptyPhoneFG())
+    const ep = this.service.getEmptyPhoneFG();
+    ep.addControl('addressId', new FormControl(this.formGroup.value.id));
+    pa.push(ep)
   }
 
 }
