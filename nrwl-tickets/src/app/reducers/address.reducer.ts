@@ -3,6 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
 import { AddressActions, AddressApiActions } from "../actions";
 import { Address } from "../models/model";
+import { tap } from "rxjs/operators";
 
 export const addressesFeatureKey = "addresses";
 
@@ -47,6 +48,10 @@ export const reducer = createReducer(
     ...state,
     error
   })),  
+  on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => {
+  console.log('state=', state, addresses)
+  return Object.assign({}, state, { addresses })}
+), 
 );
 
 // export function addressesReducer(state: AddressState | undefined, action: Action) {

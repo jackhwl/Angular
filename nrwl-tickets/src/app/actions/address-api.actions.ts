@@ -22,3 +22,7 @@ export const updateAddressesFailure = createAction(
     props<{ error: any }>()
 );
   
+export const addNewPhonesSuccess = createAction(
+    "[Addresses/API] Add new phone to Address Success",
+    props<{ addresses: Partial<Address>[] }>()
+);

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
 import { BackendService } from "../services/backend.service";
-import { PhoneActions, PhoneApiActions, TicketActions, TicketApiActions } from "../actions";
+import { AddressApiActions, PhoneActions, PhoneApiActions, TicketActions, TicketApiActions } from "../actions";
 import { switchMap, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { routerNavigatedAction } from "@ngrx/router-store";
@@ -42,11 +42,29 @@ export class PhonesEffects {
       pessimisticUpdate({
         run: action =>
           this.service.updatePhones(action.phones).pipe(
-            switchMap(phones => [
-              PhoneApiActions.updatePhonesSuccess({
-                phones: phones.map(p => ({id: p.id, changes: {...p}}))
-              })
-            ])
+            switchMap(phones => {
+              const newPhoneAddressIds = action.phones.filter(p => p.id === null).map(p => p.addressId)
+              if (newPhoneAddressIds.length>0) {
+                return [
+                  PhoneApiActions.updatePhonesSuccess({
+                    phones: phones.map(p => ({id: p.id, changes: {...p}}))
+                  }),
+                  AddressApiActions.addNewPhonesSuccess({ addresses: newPhoneAddressIds.map(addressId => 
+                    ({ id: addressId, 
+                      changes: {
+                        phoneIds: phones.filter(p => p.addressId === addressId).map(p => p.id) 
+                      }
+                    })
+                  )})
+                ]
+              } else {
+                return [
+                  PhoneApiActions.updatePhonesSuccess({
+                    phones: phones.map(p => ({id: p.id, changes: {...p}}))
+                  })
+                ]
+              }
+          })
           ),
         onError: (action, error) => {
           console.error("Error", error);
