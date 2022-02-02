@@ -24,7 +24,7 @@ export const loadPhoneFailure = createAction(
 
 export const updatePhonesSuccess = createAction(
   "[Phones/API] Update Phones Success",
-  props<{ phones: Update<Phone>[] }>()
+  props<{ phones: Phone[] }>()
 );
 
 export const updatePhonesFailure = createAction(

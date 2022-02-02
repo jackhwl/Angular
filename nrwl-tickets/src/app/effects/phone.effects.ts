@@ -46,9 +46,7 @@ export class PhonesEffects {
               const newPhoneAddressIds = action.phones.filter(p => p.id === null).map(p => p.addressId)
               if (newPhoneAddressIds.length>0) {
                 return [
-                  PhoneApiActions.updatePhonesSuccess({
-                    phones: phones.map(p => ({id: p.id, changes: {...p}}))
-                  }),
+                  PhoneApiActions.updatePhonesSuccess({ phones }),
                   AddressApiActions.addNewPhonesSuccess(
                     { addresses: newPhoneAddressIds.map(addressId => 
                       ({ id: addressId, 
@@ -61,9 +59,7 @@ export class PhonesEffects {
                 ]
               } else {
                 return [
-                  PhoneApiActions.updatePhonesSuccess({
-                    phones: phones.map(p => ({id: p.id, changes: {...p}}))
-                  })
+                  PhoneApiActions.updatePhonesSuccess({ phones })
                 ]
               }
           })

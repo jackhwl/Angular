@@ -40,11 +40,9 @@ export const reducer = createReducer(
     loaded: false,
     error: null
   })}),
-  // on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => {
-  //   console.log('phones@reducer', phones)
-  //   return adapter.upsertMany(phones, {...state, loaded: true})
-  //   }
-  // ), 
+  on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => 
+      adapter.upsertMany(phones, {...state, loaded: true})
+  ), 
   on(PhoneApiActions.updatePhonesFailure, (state, { error }) => ({
     ...state,
     error
