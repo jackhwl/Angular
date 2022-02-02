@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
-import { FormArray, FormGroup } from "@angular/forms";
+import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
@@ -20,6 +20,7 @@ import { Ticket, Ticket_vm } from "src/app/models/model";
 })
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
+  ticketId: number;
   
   constructor(
     private store: Store<{}>,
@@ -71,8 +72,11 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   addAddress(pa: FormArray) {
-    //console.log('address FA=', pa)
-    pa.push(this.service.getEmptyAddressFG())
+    const [first] = pa.value
+    const ea = this.service.getEmptyAddressFG()
+    ea.addControl('ticketId', new FormControl(first.ticketId));
+    //console.log(ea)
+    pa.push(ea)
   }
 
   // createPhone() {

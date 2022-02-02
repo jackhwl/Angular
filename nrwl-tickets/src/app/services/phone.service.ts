@@ -60,7 +60,7 @@ export class PhoneService {
         this.storedPhones = this.storedPhones.concat(newPhones);
         const phones2 = phones.filter(p=> p.id!==null)
         this.storedPhones = this.storedPhones.filter(p => !phones2.map(p=>p.id).includes(p.id) ).concat(phones2);
-        console.log(this.storedPhones)
+        //console.log(this.storedPhones)
         const phs = this.storedPhones.filter(p => phones.map(p=>p.id).includes(p.id) ).concat(newPhones);
         return of(phs).pipe(delay(randomDelay()));
       }
