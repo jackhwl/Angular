@@ -16,7 +16,7 @@ import { Ticket, Ticket_vm } from "src/app/models/model";
   selector: "vi-ticket-details",
   templateUrl: "./ticket-details.component.html",
   styleUrls: ["./ticket-details.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;

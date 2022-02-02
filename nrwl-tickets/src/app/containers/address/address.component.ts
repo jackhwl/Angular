@@ -6,7 +6,7 @@ import { UtilService } from 'src/app/services';
   selector: 'vi-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressComponent implements OnInit {
   @Input() formGroup: FormGroup;

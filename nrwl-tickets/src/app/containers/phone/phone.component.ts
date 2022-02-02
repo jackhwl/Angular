@@ -12,7 +12,7 @@ import { FormGroup } from "@angular/forms";
   selector: "vi-phone",
   templateUrl: "./phone.component.html",
   styleUrls: ["./phone.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhoneComponent implements OnInit {
   @Input() formGroup: FormGroup;

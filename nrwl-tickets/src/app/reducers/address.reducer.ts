@@ -48,10 +48,9 @@ export const reducer = createReducer(
     ...state,
     error
   })),  
-  on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => {
-  console.log('state=', state, addresses)
-  return Object.assign({}, state, { addresses })}
-), 
+  on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => 
+    adapter.updateMany(addresses, {...state, loaded: true})
+  ), 
 );
 
 // export function addressesReducer(state: AddressState | undefined, action: Action) {

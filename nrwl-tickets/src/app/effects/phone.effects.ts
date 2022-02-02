@@ -49,13 +49,15 @@ export class PhonesEffects {
                   PhoneApiActions.updatePhonesSuccess({
                     phones: phones.map(p => ({id: p.id, changes: {...p}}))
                   }),
-                  AddressApiActions.addNewPhonesSuccess({ addresses: newPhoneAddressIds.map(addressId => 
-                    ({ id: addressId, 
-                      changes: {
-                        phoneIds: phones.filter(p => p.addressId === addressId).map(p => p.id) 
-                      }
-                    })
-                  )})
+                  AddressApiActions.addNewPhonesSuccess(
+                    { addresses: newPhoneAddressIds.map(addressId => 
+                      ({ id: addressId, 
+                        changes: {
+                          phoneIds: phones.filter(p => p.addressId === addressId).map(p => p.id) 
+                        }
+                      })
+                    )}
+                  )
                 ]
               } else {
                 return [
