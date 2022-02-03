@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
-import { Phone, Ticket, Ticket_vm, User } from "../models/model";
+import { Phone, Ticket, TicketBase, Ticket_vm, User } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
 import { AddressService } from "./address.service";
 import { ErrorService } from "./error.service";
@@ -158,12 +158,14 @@ export class TicketService {
       return throwError(new Error("ticket not found"));
     }
 
-    const updatedTicket = { ...foundTicket, ...updates };
+    //console.log(foundTicket, updates);
+    let updatedTicket = { ...foundTicket, ...updates };
+
 
     this.storedTickets = this.storedTickets.map(t =>
-      t.id === ticketId ? updatedTicket : t
+      t.id === ticketId ? { ...updatedTicket } : t
     );
-
+    delete updatedTicket.addressIds
     return of(updatedTicket).pipe(delay(randomDelay()));
   }
 }

@@ -24,7 +24,7 @@ export interface User  {
     phones: Phone[];
   };
   
-  interface TicketBase {
+  export interface TicketBase {
     id: number;
     description: string;
     assigneeId: number;

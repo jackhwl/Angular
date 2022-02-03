@@ -141,6 +141,24 @@ export class TicketsEffects {
     )
   );
 
+  // loadTicketWithNewAddresses$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketApiActions.addNewAddressesSuccess),
+  //     fetch({
+  //       run: action =>
+  //         this.ticketService
+  //           .ticket(action.id)
+  //           .pipe(
+  //             switchMap((ticket: Ticket) => [
+  //               TicketApiActions.loadTicketSuccess({ ticket })
+  //             ])
+  //           ),
+  //       onError: (action, error) =>
+  //         TicketApiActions.loadTicketFailure({ error })
+  //     })
+  //   )
+  // );
+
   createTicket$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TicketActions.createTicket),
@@ -167,9 +185,9 @@ export class TicketsEffects {
       pessimisticUpdate({
         run: action =>
           this.ticketService.update(action.ticket.id, action.ticket).pipe(
-            switchMap(_ => [
+            switchMap(ticket => [
               TicketApiActions.updateTicketSuccess({
-                ticket: action.ticket
+                ticket
               })
             ])
           ),

@@ -1,6 +1,6 @@
 import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
-import { Phone, Ticket } from "../models/model";
+import { Phone, Ticket, TicketBase } from "../models/model";
 
 export const resetSelectedTicket = createAction(
   "[Tickets/API] Reset Selected Tickets"
@@ -58,7 +58,7 @@ export const createTicketFailure = createAction(
 
 export const updateTicketSuccess = createAction(
   "[Tickets/API] Update Ticket Success",
-  props<{ ticket: Ticket }>()
+  props<{ ticket: TicketBase }>()
 );
 
 export const notifyUpdateTicketSuccess = createAction(

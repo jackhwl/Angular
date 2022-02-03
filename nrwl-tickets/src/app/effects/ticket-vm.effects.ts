@@ -34,8 +34,8 @@ export class TicketVmEffects {
                 switchMap (_ => [
                   TicketActions.updateTicket({ ticket }),
                   PhoneActions.updatePhones({ phones }),
-                    AddressActions.updateAddresses({ addresses }),
-                  ])
+                  AddressActions.updateAddresses({ addresses }),
+                ])
         )},
         onError: (action, error) => {
           console.error("Error", error);
