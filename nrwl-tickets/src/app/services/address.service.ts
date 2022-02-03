@@ -78,10 +78,9 @@ export class AddressService {
   }
 
   updateAddresses(addresses: Address[]): Observable<Address[]> {
-    let id = 'a'+new Date().getTime()
     const [first] = addresses
     const ticketId = first.ticketId
-    const newAddresses = addresses.filter(a => a.id === null).map(a => ({...a, id}))
+    const newAddresses = addresses.filter(a => a.id === null).map(a => ({...a, id: this.getId()}))
     //console.log(newAddresses)
     this.storedAddresses = this.getAll().concat(newAddresses);
     const existingAddresses = addresses.filter(a => a.id !== null)
@@ -93,6 +92,10 @@ export class AddressService {
     const adds = this.getAll().filter(a => a.ticketId === ticketId)
     //console.log(adds)
     return of(adds).pipe(delay(randomDelay()));
+  }
+
+  getId() {
+    return 'a'+Math.random()
   }
 
   getAll(): Address[] {

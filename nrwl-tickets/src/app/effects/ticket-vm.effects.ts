@@ -32,9 +32,9 @@ export class TicketVmEffects {
             //console.log(addresses)
             return of(action).pipe(
                 switchMap (_ => [
-                    PhoneActions.updatePhones({ phones }),
+                  TicketActions.updateTicket({ ticket }),
+                  PhoneActions.updatePhones({ phones }),
                     AddressActions.updateAddresses({ addresses }),
-                    TicketActions.updateTicket({ ticket }),
                   ])
         )},
         onError: (action, error) => {
