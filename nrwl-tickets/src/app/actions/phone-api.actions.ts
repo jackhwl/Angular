@@ -31,8 +31,3 @@ export const updatePhonesFailure = createAction(
   "[Phones/API] XXXXXXX Update Phones Failure",
   props<{ error: any }>()
 );
-
-// export const addNewPhonesSuccess = createAction(
-//   "[Phones/API] Add new phone to Address Success",
-//   props<{ addressIds: string[], phones: Phone[] }>()
-// );

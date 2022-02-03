@@ -14,7 +14,7 @@ export const loadAddressesOfTicketFailure = createAction(
   
 export const updateAddressesSuccess = createAction(
     "[Addresses/API] Update Addresses Success",
-    props<{ addresses: Update<Address>[] }>()
+    props<{ addresses: Address[] }>()
 );
   
 export const updateAddressesFailure = createAction(

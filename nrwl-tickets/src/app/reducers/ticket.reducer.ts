@@ -116,6 +116,9 @@ export const reducer = createReducer(
     },
     {...state, loaded: true})
   ),
+  on(TicketApiActions.addNewAddressesSuccess, (state, { ticket }) => 
+    adapter.updateOne(ticket, {...state, loaded: true})
+  ), 
     // on(TicketApiActions.addPhoneSuccess, (state, { ticketId, phone }) =>
     //   adapter.updateOne({
     //     id: ticketId, 

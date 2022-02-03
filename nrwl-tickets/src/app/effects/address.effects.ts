@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { routerNavigatedAction } from "@ngrx/router-store";
 import { select, Store } from "@ngrx/store";
 import { filter, switchMap, withLatestFrom } from "rxjs/operators";
-import { AddressActions, AddressApiActions, PhoneActions } from "../actions";
+import { AddressActions, AddressApiActions, PhoneActions, TicketApiActions } from "../actions";
 import { Address } from "../models/model";
 import { selectRouteParams } from "../reducers/router.selectors";
 import { AddressService } from "../services/address.service";
@@ -43,11 +43,27 @@ export class AddressEffects {
       pessimisticUpdate({
         run: action =>
           this.service.updateAddresses(action.addresses).pipe(
-            switchMap(addresses => [
-              AddressApiActions.updateAddressesSuccess({
-                addresses: addresses.map(a => ({id: a.id, changes: {...a}}))
-              }) 
-            ])
+            switchMap(addresses => {
+              const [first] = action.addresses;
+              const newAddressesTicketIds = action.addresses.filter(p => p.id === null).map(p => p.ticketId)
+              if (newAddressesTicketIds.length>0) {
+                return [
+                  AddressApiActions.updateAddressesSuccess({ addresses }),
+                  TicketApiActions.addNewAddressesSuccess({ 
+                    ticket: {
+                        id: first.ticketId, 
+                        changes: {
+                          addressIds: addresses.map(p => p.id) 
+                        }
+                      }
+                  })
+                ]
+              } else {
+                return [
+                  AddressApiActions.updateAddressesSuccess({ addresses })
+                ]
+              }
+            })
           ),
         onError: (action, error) => {
           console.error("Error", error);

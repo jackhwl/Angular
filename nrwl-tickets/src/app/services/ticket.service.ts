@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
 import { delay, tap } from "rxjs/operators";
 import { Phone, Ticket, Ticket_vm, User } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
+import { AddressService } from "./address.service";
 import { ErrorService } from "./error.service";
 
 /**
@@ -41,7 +42,7 @@ export class TicketService {
   //   this.ticketForm.next(currentTeam);
   // }
 
-  constructor(private errorService: ErrorService) {}
+  constructor(private errorService: ErrorService, private addressService: AddressService) {}
 
   storedTickets: Ticket[] = [
     {
@@ -49,14 +50,14 @@ export class TicketService {
       description: "Install a monitor arm",
       assigneeId: 111,
       completed: false,
-      addressIds: ["a1","a2"]
+      addressIds: []
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 222,
       completed: false,
-      addressIds: ["a3","a4"]
+      addressIds: []
     }
   ];
 
@@ -70,7 +71,9 @@ export class TicketService {
   error$ = this.error.asObservable();
 
   private findTicketById = id => {
-    return this.storedTickets.find(ticket => ticket.id === +id);
+    const ticket = this.storedTickets.find(ticket => ticket.id === +id);
+    const addressIds = this.addressService.getAll().filter(a => a.ticketId === +id).map(a => a.id)
+    return { ...ticket, addressIds };
   };
 
   private findUserById = id => this.storedUsers.find(user => user.id === +id);

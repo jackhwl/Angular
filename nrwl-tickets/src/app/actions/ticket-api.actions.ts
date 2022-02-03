@@ -1,3 +1,4 @@
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { Phone, Ticket } from "../models/model";
 
@@ -113,4 +114,9 @@ export const deletePhoneSuccess = createAction(
 export const deletePhoneFailure = createAction(
   "[Tickets/API] Delete Phone Failure",
   props<{ error: any }>()
+);
+
+export const addNewAddressesSuccess = createAction(
+  "[Tickets/API] Add new Addresses Success",
+  props<{ ticket: Update<Ticket> }>()
 );
