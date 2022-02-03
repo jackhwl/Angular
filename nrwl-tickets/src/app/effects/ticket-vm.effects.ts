@@ -28,13 +28,13 @@ export class TicketVmEffects {
         run: action => {
             const ticket = this.ticketService.getTicketFromVm(action.ticketVm)
             const addresses = action.ticketVm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
-            const phones = action.ticketVm.addresses.map(a => a.phones).reduce((a,b) => a.concat(b))
+            const phones = action.ticketVm.addresses.map(a => a.phones).reduce((a,b) => a.concat(b), [])
             //console.log(addresses)
             return of(action).pipe(
                 switchMap (_ => [
                   TicketActions.updateTicket({ ticket }),
                   PhoneActions.updatePhones({ phones }),
-                  AddressActions.updateAddresses({ addresses }),
+                  AddressActions.updateAddresses({ ticketId: action.ticketVm.id, addresses }),
                 ])
         )},
         onError: (action, error) => {

@@ -41,8 +41,10 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  on(AddressApiActions.updateAddressesSuccess, (state, { addresses }) => 
-    adapter.upsertMany(addresses, {...state, loaded: true})
+  on(AddressApiActions.updateAddressesSuccess, (state, { addresses }) => {
+    console.log(addresses);
+    return adapter.setAll(addresses, {...state, loaded: true})
+  }
   ), 
   on(AddressApiActions.updateAddressesFailure, (state, { error }) => ({
     ...state,
