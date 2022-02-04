@@ -13,11 +13,11 @@ export interface User  {
     postcode: string;
     countryId: string;
     cityId: string;
-    ticketId: number;
+    ticketId: string;
   };
 
   export interface Address extends AddressBase {
-    phoneIds: number[];
+    phoneIds: string[];
   };
 
   export interface Address_vm extends AddressBase {
@@ -25,7 +25,7 @@ export interface User  {
   };
   
   export interface TicketBase {
-    id: number;
+    id: string;
     description: string;
     assigneeId: number;
     completed: boolean;
@@ -41,7 +41,7 @@ export interface User  {
   };
   
   export interface Phone {
-    id: number;
+    id: string;
     type: string;
     number: string;
     addressId: string;

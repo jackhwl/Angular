@@ -8,6 +8,7 @@ import { TicketsEffects } from "./ticket.effects";
 import { TicketActions, TicketApiActions } from "../actions";
 import { EffectsModule } from "@ngrx/effects";
 import { routerReducer } from "@ngrx/router-store";
+import { TicketService } from "../services/ticket.service";
 
 describe("Tickets Effects (Marble)", () => {
   const tickets = [
@@ -26,7 +27,7 @@ describe("Tickets Effects (Marble)", () => {
   ];
   let actions$: Observable<Action>;
   let effects: TicketsEffects;
-  let ticketService: jasmine.SpyObj<BackendService>;
+  let ticketService: jasmine.SpyObj<TicketService>;
   const ticketServiceSpy = jasmine.createSpyObj("BackendService", ["tickets"]);
   beforeEach(() => {
     TestBed.configureTestingModule({

@@ -3,10 +3,10 @@ import { Address } from "../models/model";
 
 export const loadAddressesOfTicket = createAction(
     "[Addresses] Load Addresses of Ticket",
-    props<{ ticketId: number }>()
+    props<{ ticketId: string }>()
 );
 
 export const updateAddresses = createAction(
     "[Phones] Update Addresses",
-    props<{ ticketId: number, addresses: Address[] }>()
+    props<{ ticketId: string, addresses: Address[] }>()
 )

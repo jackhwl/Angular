@@ -28,43 +28,43 @@ export class AddressService {
 
   storedAddresses: Address[] = [
     {
-      id: "a1",
+      id: "8410bd6e-7edb-4ba2-a6f4-1147cb442a0e",
       addr1: "111",
       addr2: "11",
       countryId: "c1",
       cityId: "ct1",
       postcode: "M1W2G2",
-      ticketId: 0,
+      ticketId: 'f2ff9752-217e-4ee3-ab25-6f842132d42f',
       phoneIds: [],
     },
     {
-        id: "a2",
+        id: "d0dca54d-925e-4083-a52c-77c8a70d6628",
         addr1: "222111",
         addr2: "22",
         countryId: "c1",
         cityId: "ct1",
         postcode: "M2W3G3",
-        ticketId: 0,
+        ticketId: 'f2ff9752-217e-4ee3-ab25-6f842132d42f',
         phoneIds: [],
       },
       {
-        id: "a3",
+        id: "92460e88-119f-482a-9761-1ec3f97bf7d2",
         addr1: "333",
         addr2: "33",
         countryId: "c1",
         cityId: "ct1",
         postcode: "",
-        ticketId: 1,
+        ticketId: '774c5999-5031-402d-bd4c-588d933dda20',
         phoneIds: []
       },
       {
-          id: "a4",
+          id: "78ffe723-5a31-429f-b50a-eca5515ecb8f",
           addr1: "444111",
           addr2: "44",
           countryId: "c1",
           cityId: "ct1",
           postcode: "",
-          ticketId: 1,
+          ticketId: '774c5999-5031-402d-bd4c-588d933dda20',
           phoneIds: []
         }
     ];
@@ -72,12 +72,12 @@ export class AddressService {
   private error = new Subject();
   error$ = this.error.asObservable();
 
-  addressOfTicket(ticketId: number): Observable<Address[]> {
+  addressOfTicket(ticketId: string): Observable<Address[]> {
     const adds = this.getAll().filter(a => a.ticketId == ticketId);
     return of(adds).pipe(delay(randomDelay()));
   }
 
-  updateAddresses(ticketId: number, addresses: Address[]): Observable<Address[]> {
+  updateAddresses(ticketId: string, addresses: Address[]): Observable<Address[]> {
     const newAddresses = addresses.filter(a => a.id === null).map(a => ({...a, id: this.getId()}))
     const existingAddresses = addresses.filter(a => a.id !== null)
     //console.log(newAddresses)

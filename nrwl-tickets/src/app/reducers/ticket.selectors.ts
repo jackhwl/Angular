@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { getTicketModuleState, TicketModuleState } from ".";
-import { emptyTicket } from "../services/backend.service";
+import { emptyTicket } from "../services/ticket.service";
 import {
   TICKETS_FEATURE_KEY,
   TicketState,

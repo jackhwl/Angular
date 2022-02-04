@@ -5,6 +5,7 @@ import { Phone, Ticket, TicketBase, Ticket_vm, User } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
 import { AddressService } from "./address.service";
 import { ErrorService } from "./error.service";
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * This service acts as a mock backend.
@@ -46,14 +47,14 @@ export class TicketService {
 
   storedTickets: Ticket[] = [
     {
-      id: 0,
+      id: 'f2ff9752-217e-4ee3-ab25-6f842132d42f',
       description: "Install a monitor arm",
       assigneeId: 111,
       completed: false,
       addressIds: []
     },
     {
-      id: 1,
+      id: '774c5999-5031-402d-bd4c-588d933dda20',
       description: "Move the desk to the new location",
       assigneeId: 222,
       completed: false,
@@ -71,8 +72,8 @@ export class TicketService {
   error$ = this.error.asObservable();
 
   private findTicketById = id => {
-    const ticket = this.storedTickets.find(ticket => ticket.id === +id);
-    const addressIds = this.addressService.getAll().filter(a => a.ticketId === +id).map(a => a.id)
+    const ticket = this.storedTickets.find(ticket => ticket.id === id);
+    const addressIds = this.addressService.getAll().filter(a => a.ticketId === id).map(a => a.id)
     return { ...ticket, addressIds };
   };
 
@@ -110,7 +111,7 @@ export class TicketService {
     ).pipe(delay(randomDelay()), this.errorService.retryAfter());
   }
 
-  ticket(id: number): Observable<Ticket> {
+  ticket(id: string): Observable<Ticket> {
     if (id.toString() === 'new') return of(emptyTicket);
 
     const foundTicket = this.findTicketById(id)
@@ -131,7 +132,7 @@ export class TicketService {
 
   newTicket(ticket: Ticket) {
     const newTicket: Ticket = {
-      id: ++this.lastId,
+      id: uuidv4(),
       description: ticket.description,
       assigneeId: ticket.assigneeId,
       completed: false,
@@ -143,15 +144,15 @@ export class TicketService {
     return of(newTicket).pipe(delay(randomDelay()));
   }
 
-  assign(ticketId: number, userId: number) {
+  assign(ticketId: string, userId: number) {
     return this.update(ticketId, { assigneeId: userId });
   }
 
-  complete(ticketId: number, completed: boolean) {
+  complete(ticketId: string, completed: boolean) {
     return this.update(ticketId, { completed });
   }
 
-  update(ticketId: number, updates: Partial<Omit<Ticket, "id">>) {
+  update(ticketId: string, updates: Partial<Omit<Ticket, "id">>) {
     const foundTicket = this.findTicketById(ticketId);
 
     if (!foundTicket) {
