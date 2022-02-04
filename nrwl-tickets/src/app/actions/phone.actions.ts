@@ -18,5 +18,5 @@ export const loadPhone = createAction(
 
 export const updatePhones = createAction(
   "[Phones] Update Phones",
-  props<{ phones: Phone[] }>()
+  props<{ aIdPhones: {addressId: string, phones: Phone[]}[] }>()
 )

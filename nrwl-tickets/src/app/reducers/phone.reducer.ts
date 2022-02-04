@@ -41,7 +41,7 @@ export const reducer = createReducer(
     error: null
   })}),
   on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => 
-      adapter.upsertMany(phones, {...state, loaded: true})
+      adapter.setAll(phones, {...state, loaded: true})
   ), 
   on(PhoneApiActions.updatePhonesFailure, (state, { error }) => ({
     ...state,

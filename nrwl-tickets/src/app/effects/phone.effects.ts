@@ -41,27 +41,27 @@ export class PhonesEffects {
       ofType(PhoneActions.updatePhones),
       pessimisticUpdate({
         run: action =>
-          this.service.updatePhones(action.phones).pipe(
+          this.service.updatePhones(action.aIdPhones).pipe(
             switchMap(phones => {
-              const newPhoneAddressIds = action.phones.filter(p => p.id === null).map(p => p.addressId)
-              if (newPhoneAddressIds.length>0) {
-                return [
-                  PhoneApiActions.updatePhonesSuccess({ phones }),
-                  AddressApiActions.addNewPhonesSuccess(
-                    { addresses: newPhoneAddressIds.map(addressId => 
-                      ({ id: addressId, 
-                        changes: {
-                          phoneIds: phones.filter(p => p.addressId === addressId).map(p => p.id) 
-                        }
-                      })
-                    )}
-                  )
-                ]
-              } else {
+              // const newPhoneAddressIds = action.aIdPhones.filter(p => p.id === null).map(p => p.addressId)
+              // if (newPhoneAddressIds.length>0) {
+              //   return [
+              //     PhoneApiActions.updatePhonesSuccess({ phones }),
+              //     AddressApiActions.addNewPhonesSuccess(
+              //       { addresses: newPhoneAddressIds.map(addressId => 
+              //         ({ id: addressId, 
+              //           changes: {
+              //             phoneIds: phones.filter(p => p.addressId === addressId).map(p => p.id) 
+              //           }
+              //         })
+              //       )}
+              //     )
+              //   ]
+              // } else {
                 return [
                   PhoneApiActions.updatePhonesSuccess({ phones })
                 ]
-              }
+              //}
           })
           ),
         onError: (action, error) => {

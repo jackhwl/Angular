@@ -54,14 +54,21 @@ export class PhoneService {
         //return of(updatedTicket).pipe(delay(randomDelay()));
       }
     
-      updatePhones(phones: Phone[]): Observable<Phone[]> {
+      updatePhones(aIdPhones: {addressId: string, phones: Phone[]}[]): Observable<Phone[]> {
         let id = Math.max(...this.storedPhones.map(p=> p.id));
-        const newPhones = phones.filter(p => p.id === null).map(p => ({...p, id: ++id}))
-        this.storedPhones = this.storedPhones.concat(newPhones);
-        const phones2 = phones.filter(p=> p.id!==null)
-        this.storedPhones = this.storedPhones.filter(p => !phones2.map(p=>p.id).includes(p.id) ).concat(phones2);
+        let aIds = [];
+        aIdPhones.forEach(ap => {
+          aIds.push(ap.addressId)
+          const newPhones = ap.phones.filter(p => p.id === null).map(p => ({...p, id: ++id}))
+          const existingPhones = ap.phones.filter(p => p.id !== null)
+          this.storedPhones = this.storedPhones.filter(p => p.addressId !== ap.addressId).concat(newPhones, existingPhones);
+        })
+        // const newPhones = phones.filter(p => p.id === null).map(p => ({...p, id: ++id}))
+        // this.storedPhones = this.storedPhones.concat(newPhones);
+        // const phones2 = phones.filter(p=> p.id!==null)
+        // this.storedPhones = this.storedPhones.filter(p => !phones2.map(p=>p.id).includes(p.id) ).concat(phones2);
         //console.log(this.storedPhones)
-        const phs = this.storedPhones.filter(p => phones.map(p=>p.id).includes(p.id) ).concat(newPhones);
+        const phs = this.storedPhones.filter(p => aIds.includes(p.addressId));
         return of(phs).pipe(delay(randomDelay()));
       }
         
