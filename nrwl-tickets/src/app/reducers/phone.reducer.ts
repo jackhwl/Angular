@@ -24,9 +24,9 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(PhoneActions.selectPhoneById, (state, { selectedId }) =>
-    Object.assign({}, state, { selectedId })
-  ),
+  // on(PhoneActions.selectPhoneById, (state, { selectedId }) =>
+  //   Object.assign({}, state, { selectedId })
+  // ),
   //   on(PhoneActions.selectPhone, (state, { phone }) =>
   //     Object.assign({}, state, { selectedId: phone?.id })
   //   ),
@@ -48,11 +48,9 @@ export const reducer = createReducer(
     error
   })), 
   on(PhoneApiActions.deleteAddressesPhonesSuccess, (state, { ids }) => {
-    //console.log(addresses);
     return adapter.removeMany(ids, {...state, loaded: true})
   }),   
   on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
-    //console.log('reducer phones=', phones);
     return adapter.setAll(phones, { ...state, loaded: true, error: null })
   }
   ),

@@ -32,6 +32,21 @@ export const upsertTicketFailure = createAction(
   props<{ error: any }>()
 );
 
+export const deleteTicketSuccess = createAction(
+  "[Tickets/API] Delete Ticket Success",
+  props<{ id: string }>()
+);
+
+export const deleteTicketFailure = createAction(
+  "[Tickets/API] Delete Ticket Failure",
+  props<{ error: any }>()
+);
+
+export const updateAddressesSuccess = createAction(
+  "[Tickets/API] Update Addresses Success",
+  props<{ ticket: Update<Ticket> }>()
+);
+
 // export const resetSelectedTicket = createAction(
 //   "[Tickets/API] Reset Selected Tickets"
 // );
@@ -101,20 +116,12 @@ export const upsertTicketFailure = createAction(
 //   props<{ title: string; description: string; interpolateParams?: Object }>()
 // );
 
-export const deleteTicketSuccess = createAction(
-  "[Tickets/API] Delete Ticket Success",
-  props<{ id: string }>()
-);
 
-export const notifyDeleteTicketSuccess = createAction(
-  "[Toastr Notification/API] Delete Ticket Success",
-  props<{ title: string; description: string; interpolateParams?: Object }>()
-);
+// export const notifyDeleteTicketSuccess = createAction(
+//   "[Toastr Notification/API] Delete Ticket Success",
+//   props<{ title: string; description: string; interpolateParams?: Object }>()
+// );
 
-export const deleteTicketFailure = createAction(
-  "[Tickets/API] Delete Ticket Failure",
-  props<{ error: any }>()
-);
 
 // export const deletePhoneSuccess = createAction(
 //   "[Tickets/API] Delete Phone Success",
@@ -126,7 +133,3 @@ export const deleteTicketFailure = createAction(
 //   props<{ error: any }>()
 // );
 
-export const updateAddressesSuccess = createAction(
-  "[Tickets/API] Update Addresses Success",
-  props<{ ticket: Update<Ticket> }>()
-);

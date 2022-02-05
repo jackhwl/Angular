@@ -1,34 +1,45 @@
 import { createAction, props } from "@ngrx/store";
 import { Ticket } from "../models/model";
 
-export const selectTicketById = createAction(
-  "[Tickets] Select Ticket by id",
-  props<{ selectedId: string }>()
-);
-
-export const selectTicket = createAction(
-  "[Tickets] Select Ticket",
+export const upsertTicket = createAction(
+  "[Tickets] Upsert Ticket",
   props<{ ticket: Ticket }>()
 );
 
-export const selectTicketByRoute = createAction(
-  "[Tickets] Select Ticket By Route"
+export const deleteTicket = createAction(
+  "[Tickets] Delete Ticket",
+  props<{ id: string }>()
 );
 
-export const loadTickets = createAction("[Tickets] Load Tickets");
 
-export const loadTicket = createAction(
-  "[Tickets] Load Ticket",
-  props<{ ticket: Ticket }>()
-);
-export const loadFilterTickets = createAction(
-  "[Tickets] Load Filtered Ticket",
-  props<{ queryStr: string }>()
-);
+// export const selectTicketById = createAction(
+//   "[Tickets] Select Ticket by id",
+//   props<{ selectedId: string }>()
+// );
 
-export const loadFilterTicketsByRoute = createAction(
-  "[Tickets] Load Filtered Ticket By Route"
-);
+// export const selectTicket = createAction(
+//   "[Tickets] Select Ticket",
+//   props<{ ticket: Ticket }>()
+// );
+
+// export const selectTicketByRoute = createAction(
+//   "[Tickets] Select Ticket By Route"
+// );
+
+// export const loadTickets = createAction("[Tickets] Load Tickets");
+
+// export const loadTicket = createAction(
+//   "[Tickets] Load Ticket",
+//   props<{ ticket: Ticket }>()
+// );
+// export const loadFilterTickets = createAction(
+//   "[Tickets] Load Filtered Ticket",
+//   props<{ queryStr: string }>()
+// );
+
+// export const loadFilterTicketsByRoute = createAction(
+//   "[Tickets] Load Filtered Ticket By Route"
+// );
 
 
 // // Create Ticket
@@ -43,20 +54,10 @@ export const loadFilterTicketsByRoute = createAction(
 //   props<{ ticket: Ticket }>()
 // );
 
-export const upsertTicket = createAction(
-  "[Tickets] Upsert Ticket",
-  props<{ ticket: Ticket }>()
-);
 
-// Delete Ticket
-export const deleteTicket = createAction(
-  "[Tickets] Delete Ticket",
-  props<{ id: string }>()
-);
-
-export const deleteTicketCancelled = createAction(
-  "[Tickets] Delete Ticket Cancelled"
-);
+// export const deleteTicketCancelled = createAction(
+//   "[Tickets] Delete Ticket Cancelled"
+// );
 
 // // Add Phone
 // export const addPhone = createAction(

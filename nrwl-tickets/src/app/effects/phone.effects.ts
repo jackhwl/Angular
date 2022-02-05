@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { BackendService } from "../services/backend.service";
-import { AddressApiActions, PhoneActions, PhoneApiActions, TicketActions, TicketApiActions } from "../actions";
-import { switchMap, tap } from "rxjs/operators";
-import { Observable } from "rxjs";
-import { routerNavigatedAction } from "@ngrx/router-store";
+import { PhoneActions, PhoneApiActions } from "../actions";
+import { switchMap } from "rxjs/operators";
 import { Phone } from "../models/model";
 import { PhoneService } from "../services/phone.service";
 
@@ -22,16 +19,13 @@ export class PhonesEffects {
           this.service
             .phones(action.addressIds)
             .pipe(
-              //tap(t => console.log('PhoneActions.loadPhones=', t)),
               switchMap((phones: Phone[]) => [
                 PhoneApiActions.loadPhonesOfAddressSuccess({ phones })
               ])
             ),
 
-        onError: (action, error) => {
-          //console.error("Error", error);
-          return PhoneApiActions.loadPhonesOfAddressFailure({ error });
-        }
+        onError: (action, error) => 
+          PhoneApiActions.loadPhonesOfAddressFailure({ error })
       })
     )
   );
@@ -42,27 +36,11 @@ export class PhonesEffects {
       pessimisticUpdate({
         run: action =>
           this.service.updatePhones(action.aIdPhones).pipe(
-            switchMap(phones => {
-              // const newPhoneAddressIds = action.aIdPhones.filter(p => p.id === null).map(p => p.addressId)
-              // if (newPhoneAddressIds.length>0) {
-              //   return [
-              //     PhoneApiActions.updatePhonesSuccess({ phones }),
-              //     AddressApiActions.addNewPhonesSuccess(
-              //       { addresses: newPhoneAddressIds.map(addressId => 
-              //         ({ id: addressId, 
-              //           changes: {
-              //             phoneIds: phones.filter(p => p.addressId === addressId).map(p => p.id) 
-              //           }
-              //         })
-              //       )}
-              //     )
-              //   ]
-              // } else {
-                return [
+            switchMap(phones => 
+                 [
                   PhoneApiActions.updatePhonesSuccess({ phones })
                 ]
-              //}
-          })
+            )
           ),
         onError: (action, error) => {
           console.error("Error", error);
@@ -78,11 +56,9 @@ export class PhonesEffects {
       pessimisticUpdate({
         run: action =>
           this.service.deleteAddressesPhones(action.addressIds).pipe(
-            switchMap(ids => {
-                return [
-                  PhoneApiActions.deleteAddressesPhonesSuccess({ ids })
-                ]
-            })
+            switchMap(ids => 
+                [ PhoneApiActions.deleteAddressesPhonesSuccess({ ids }) ]
+            )
           ),
         onError: (action, error) => {
           console.error("Error", error);

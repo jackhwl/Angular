@@ -26,24 +26,24 @@ export const initialState: TicketState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(TicketActions.selectTicketById, (state, { selectedId }) =>
-    Object.assign({}, state, { selectedId })
-  ),
-  on(TicketActions.selectTicket, (state, { ticket }) =>
-    Object.assign({}, state, { selectedId: ticket.id })
-  ),
-  on(TicketActions.selectTicketByRoute, state => Object.assign({}, state)),
+  // on(TicketActions.selectTicketById, (state, { selectedId }) =>
+  //   Object.assign({}, state, { selectedId })
+  // ),
+  // on(TicketActions.selectTicket, (state, { ticket }) =>
+  //   Object.assign({}, state, { selectedId: ticket.id })
+  // ),
+  // on(TicketActions.selectTicketByRoute, state => Object.assign({}, state)),
   // on(TicketApiActions.resetSelectedTicket, state =>
   //   Object.assign({}, state, { selectedId: -1 })
   // ),
   // on(TicketActions.resetTickets, (state) => widgetsAdapter.removeAll(state)),
 
   // Load widgets
-  on(TicketActions.loadTickets, state => ({
-    ...state,
-    loaded: false,
-    error: null
-  })),
+  // on(TicketActions.loadTickets, state => ({
+  //   ...state,
+  //   loaded: false,
+  //   error: null
+  // })),
   on(TicketApiActions.loadTicketSuccess, (state, { ticket }) =>{
     //Object.assign({}, state, { selectedId: ticket.id })
     //console.log('reducer ticket=', ticket);
@@ -61,11 +61,11 @@ export const reducer = createReducer(
   //   error
   // })),
 
-  on(TicketActions.loadFilterTickets, state => ({
-    ...state,
-    loaded: false,
-    error: null
-  })),
+  // on(TicketActions.loadFilterTickets, state => ({
+  //   ...state,
+  //   loaded: false,
+  //   error: null
+  // })),
   on(TicketApiActions.loadFilterTicketsSuccess, (state, { tickets }) =>
     adapter.setAll(tickets, { ...state, loaded: true, error: null })
   ),
