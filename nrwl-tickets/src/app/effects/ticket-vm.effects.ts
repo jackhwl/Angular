@@ -32,7 +32,7 @@ export class TicketVmEffects {
             return of(action).pipe(
               tap(() => console.log(addresses)),
                 switchMap (_ => [
-                  TicketActions.updateTicket({ ticket }),
+                  TicketActions.upsertTicket({ ticket }),
                   PhoneActions.updatePhones({ aIdPhones }),
                   AddressActions.updateAddresses({ ticketId: action.ticketVm.id, addresses }),
                 ])

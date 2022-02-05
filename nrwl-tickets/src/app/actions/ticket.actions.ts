@@ -43,6 +43,11 @@ export const updateTicket = createAction(
   props<{ ticket: Ticket }>()
 );
 
+export const upsertTicket = createAction(
+  "[Tickets] Upsert Ticket",
+  props<{ ticket: Ticket }>()
+);
+
 // Delete Ticket
 export const deleteTicket = createAction(
   "[Tickets] Delete Ticket",

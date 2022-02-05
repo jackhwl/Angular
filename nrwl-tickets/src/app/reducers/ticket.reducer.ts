@@ -94,6 +94,9 @@ export const reducer = createReducer(
   on(TicketApiActions.updateTicketSuccess, (state, { ticket }) => 
     adapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
   ), 
+  on(TicketApiActions.upsertTicketSuccess, (state, { ticket }) => 
+    adapter.upsertOne(ticket, {...state, loaded: true})
+  ), 
   on(TicketApiActions.updateTicketFailure, (state, { error }) => ({
     ...state,
     error

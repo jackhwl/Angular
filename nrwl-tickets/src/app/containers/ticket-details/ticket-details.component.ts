@@ -20,7 +20,7 @@ import { Ticket, Ticket_vm } from "src/app/models/model";
 })
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
-  ticketId: number;
+  ticketId: string;
   
   constructor(
     private store: Store<{}>,

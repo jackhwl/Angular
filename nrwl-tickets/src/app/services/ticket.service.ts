@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
  */
 
 export const emptyTicket: Ticket = {
-  id: null,
+  id: uuidv4(),
   description: "",
   assigneeId: null,
   completed: false,
@@ -73,6 +73,7 @@ export class TicketService {
 
   private findTicketById = id => {
     const ticket = this.storedTickets.find(ticket => ticket.id === id);
+    if (!ticket) return undefined;
     const addressIds = this.addressService.getAll().filter(a => a.ticketId === id).map(a => a.id)
     return { ...ticket, addressIds };
   };
@@ -95,6 +96,7 @@ export class TicketService {
   }
 
   filteredTickets(queryStr: string) {
+    console.log(this.storedTickets)
     if (!queryStr) return this.tickets();
     const ids = this.storedUsers
       .filter(user => user.name.toLowerCase().includes(queryStr.toLowerCase()))
@@ -166,6 +168,29 @@ export class TicketService {
     this.storedTickets = this.storedTickets.map(t =>
       t.id === ticketId ? { ...updatedTicket } : t
     );
+    delete updatedTicket.addressIds
+    return of(updatedTicket).pipe(delay(randomDelay()));
+  }
+
+  upsert(ticket: Ticket) {
+    console.log('upsert', ticket)
+    let foundTicket = this.findTicketById(ticket.id);
+
+    if (!foundTicket) {
+      this.storedTickets = this.storedTickets.concat(ticket);
+      //delete ticket.addressIds
+      console.log('after upsert', this.storedTickets)
+      return of(ticket).pipe(delay(randomDelay()));
+    }
+    console.log('upsert update', foundTicket)
+    //console.log(foundTicket, updates);
+    let updatedTicket = { ...foundTicket, ...ticket };
+
+
+    this.storedTickets = this.storedTickets.map(t =>
+      t.id === ticket.id ? { ...updatedTicket } : t
+    );
+
     delete updatedTicket.addressIds
     return of(updatedTicket).pipe(delay(randomDelay()));
   }

@@ -44,14 +44,14 @@ export class AddressEffects {
         run: action =>
           this.service.updateAddresses(action.ticketId, action.addresses).pipe(
             switchMap(addresses => {
-              const [first] = action.addresses;
+              //const [first] = action.addresses;
               // const newAddressesTicketIds = action.addresses.filter(p => p.id === null).map(p => p.ticketId)
               // if (newAddressesTicketIds.length>0) {
                 return [
                   AddressApiActions.updateAddressesSuccess({ addresses }),
                   TicketApiActions.updateAddressesSuccess({ 
                     ticket: {
-                        id: first.ticketId, 
+                        id: action.ticketId, 
                         changes: {
                           addressIds: addresses.map(p => p.id) 
                         }

@@ -108,6 +108,7 @@ export class TicketsEffects {
                       })
                     : ''
               ),
+              tap(console.log),
               switchMap((tickets: Ticket[]) => [
                 TicketApiActions.loadFilterTicketsSuccess({ tickets }),
                 UserActions.loadUsers()
@@ -194,6 +195,26 @@ export class TicketsEffects {
         onError: (action, error) => {
           console.error("Error", error);
           return TicketApiActions.updateTicketFailure({ error });
+        }
+      })
+    )
+  );
+
+  upsertTicket$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketActions.upsertTicket),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService.upsert(action.ticket).pipe(
+            switchMap(ticket => [
+              TicketApiActions.upsertTicketSuccess({
+                ticket
+              })
+            ])
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketApiActions.upsertTicketFailure({ error });
         }
       })
     )

@@ -60,7 +60,14 @@ export const updateTicketSuccess = createAction(
   "[Tickets/API] Update Ticket Success",
   props<{ ticket: TicketBase }>()
 );
-
+export const upsertTicketSuccess = createAction(
+  "[Tickets/API] Upsert Ticket Success",
+  props<{ ticket: Ticket }>()
+);
+export const upsertTicketFailure = createAction(
+  "[Tickets/API] Upsert Ticket Failure",
+  props<{ error: any }>()
+);
 export const notifyUpdateTicketSuccess = createAction(
   "[Toastr Notification/API] Update Ticket Success",
   props<{ title: string; description: string; interpolateParams?: Object }>()
