@@ -10,3 +10,9 @@ export const updateAddresses = createAction(
     "[Phones] Update Addresses",
     props<{ ticketId: string, addresses: Address[] }>()
 )
+
+export const deleteTicketAddresses = createAction(
+    "[Phones] Delete Ticket Addresses",
+    props<{ ticketId: string }>()
+)
+

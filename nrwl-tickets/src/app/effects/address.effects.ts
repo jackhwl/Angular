@@ -72,4 +72,24 @@ export class AddressEffects {
       })
     )
   );
+
+  deleteTicketAddresses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AddressActions.deleteTicketAddresses),
+      pessimisticUpdate({
+        run: action =>
+          this.service.deleteTicketAddresses(action.ticketId).pipe(
+            switchMap(ticketId => {
+                return [
+                  AddressApiActions.deleteTicketAddressesSuccess({ ticketId }),
+                ]
+            })
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return AddressApiActions.deleteTicketAddressesFailure({ error });
+        }
+      })
+    )
+  );
 }

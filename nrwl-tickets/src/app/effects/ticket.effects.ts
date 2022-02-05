@@ -78,23 +78,42 @@ export class TicketsEffects {
   );
 
   upsertTicket$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(TicketActions.upsertTicket),
-    pessimisticUpdate({
-      run: action =>
-        this.ticketService.upsert(action.ticket).pipe(
-          switchMap(ticket => [
-            TicketApiActions.upsertTicketSuccess({
-              ticket
-            })
-          ])
-        ),
-      onError: (action, error) => {
-        console.error("Error", error);
-        return TicketApiActions.upsertTicketFailure({ error });
-      }
-    })
-  ));
+    this.actions$.pipe(
+      ofType(TicketActions.upsertTicket),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService.upsert(action.ticket).pipe(
+            switchMap(ticket => [
+              TicketApiActions.upsertTicketSuccess({
+                ticket
+              })
+            ])
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketApiActions.upsertTicketFailure({ error });
+        }
+      })
+    )
+  );
+
+  deleteTicket$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketActions.deleteTicket),
+      pessimisticUpdate({
+        run: action =>
+          this.ticketService.delete(action.id).pipe(
+            switchMap(id => [
+              TicketApiActions.deleteTicketSuccess({ id })
+            ])
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketApiActions.deleteTicketFailure({ error });
+        }
+      })
+    )
+  );
 
   // loadTickets$ = createEffect(() =>
   //   this.actions$.pipe(

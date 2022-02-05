@@ -9,3 +9,8 @@ export const upsertTicketVm = createAction(
   "[Ticket Detail Page] Upsert Ticket-vm",
   props<{ ticketVm: Ticket_vm }>()
 );
+
+export const deleteTicketVm = createAction(
+  "[Ticket Detail Page] Delete Ticket-vm",
+  props<{ ticketVm: Ticket_vm }>()
+);

@@ -60,6 +60,15 @@ export class TicketDetailsComponent implements OnInit {
     this.router.navigate(["./"], { queryParamsHandling: "merge" });
   }
 
+  delete(detailForm: FormGroup) {
+    //var del=confirm("Are you sure you want to delete this ticket?");
+    //if (del){
+      const ticketVm = detailForm.value as Ticket_vm;
+      this.store.dispatch(TicketDetailsPageActions.deleteTicketVm({ ticketVm }));
+      this.router.navigate(["./"], { queryParamsHandling: "merge" });
+    //}
+  }
+
   // createTicket(ticket: Ticket): void {
   //   this.store.dispatch(TicketActions.createTicket({ ticket }));
   // }

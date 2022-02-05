@@ -93,6 +93,11 @@ export class AddressService {
     return of(adds).pipe(delay(randomDelay()));
   }
 
+  deleteTicketAddresses(ticketId: string) {
+    this.storedAddresses = this.storedAddresses.filter(a => a.ticketId !== ticketId);
+    return of(ticketId).pipe(delay(randomDelay()));
+  }
+  
   getId() {
     return 'a'+Math.random()
   }

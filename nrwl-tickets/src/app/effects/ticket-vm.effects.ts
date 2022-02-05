@@ -45,4 +45,28 @@ export class TicketVmEffects {
     )
   );
 
+  deleteTicketVm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TicketDetailsPageActions.deleteTicketVm),
+      pessimisticUpdate({
+        run: action => {
+            const ticket = this.ticketService.getTicketFromVm(action.ticketVm)
+            const addresses = action.ticketVm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
+            const aIdPhones = action.ticketVm.addresses.map(a => ({addressId: a.id, phones: a.phones}))
+            return of(action).pipe(
+              //tap(() => console.log(addresses)),
+                switchMap (_ => [
+                  TicketActions.deleteTicket({ id: ticket.id }),
+                  PhoneActions.updatePhones({ aIdPhones }),
+                  AddressActions.deleteTicketAddresses({ ticketId: ticket.id }),
+                ])
+        )},
+        onError: (action, error) => {
+          console.error("Error", error);
+          return TicketApiActions.upsertTicketFailure({ error });
+        }
+      })
+    )
+  );  
+
 }

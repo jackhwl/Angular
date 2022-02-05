@@ -51,7 +51,7 @@ export const upsertTicket = createAction(
 // Delete Ticket
 export const deleteTicket = createAction(
   "[Tickets] Delete Ticket",
-  props<{ ticket: Ticket }>()
+  props<{ id: string }>()
 );
 
 export const deleteTicketCancelled = createAction(

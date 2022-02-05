@@ -26,3 +26,14 @@ export const addNewPhonesSuccess = createAction(
     "[Addresses/API] Add new phone to Address Success",
     props<{ addresses: Update<Address>[] }>()
 );
+
+export const deleteTicketAddressesSuccess = createAction(
+    "[Addresses/API] Delete Ticket Addresses Success",
+    props<{ ticketId: string }>()
+);
+  
+export const deleteTicketAddressesFailure = createAction(
+    "[Addresses/API] XXXXXXX Delete Ticket Addresses Failure",
+    props<{ error: any }>()
+);
+  

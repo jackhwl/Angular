@@ -194,4 +194,9 @@ export class TicketService {
     delete updatedTicket.addressIds
     return of(updatedTicket).pipe(delay(randomDelay()));
   }
+
+  delete(id: string) {
+    this.storedTickets = this.storedTickets.filter(t => t.id !== id);
+    return of(id).pipe(delay(randomDelay()));
+  }
 }

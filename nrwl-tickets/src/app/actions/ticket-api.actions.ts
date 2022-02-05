@@ -103,7 +103,7 @@ export const upsertTicketFailure = createAction(
 
 export const deleteTicketSuccess = createAction(
   "[Tickets/API] Delete Ticket Success",
-  props<{ ticket: Ticket }>()
+  props<{ id: string }>()
 );
 
 export const notifyDeleteTicketSuccess = createAction(
