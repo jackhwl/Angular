@@ -29,7 +29,7 @@ export const addNewPhonesSuccess = createAction(
 
 export const deleteTicketAddressesSuccess = createAction(
     "[Addresses/API] Delete Ticket Addresses Success",
-    props<{ ticketId: string }>()
+    props<{ ids: string[] }>()
 );
   
 export const deleteTicketAddressesFailure = createAction(

@@ -72,5 +72,11 @@ export class PhoneService {
         const phs = this.storedPhones.filter(p => aIds.includes(p.addressId));
         return of(phs).pipe(delay(randomDelay()));
       }
+
+      deleteAddressesPhones(addressIds: string[]): Observable<string[]> {
+        const ids = this.storedPhones.filter(a => addressIds.includes(a.addressId)).map(a => a.id)
+        this.storedPhones = this.storedPhones.filter(a => !addressIds.includes(a.addressId));
+        return of(ids).pipe(delay(randomDelay()));        
+      }
         
 }

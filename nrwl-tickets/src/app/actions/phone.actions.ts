@@ -20,3 +20,8 @@ export const updatePhones = createAction(
   "[Phones] Update Phones",
   props<{ aIdPhones: {addressId: string, phones: Phone[]}[] }>()
 )
+
+export const deleteAddressesPhones = createAction(
+  "[Phones] Delete Addresses Phones",
+  props<{ addressIds: string[] }>()
+)

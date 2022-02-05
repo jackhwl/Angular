@@ -79,9 +79,9 @@ export class AddressEffects {
       pessimisticUpdate({
         run: action =>
           this.service.deleteTicketAddresses(action.ticketId).pipe(
-            switchMap(ticketId => {
+            switchMap(ids => {
                 return [
-                  AddressApiActions.deleteTicketAddressesSuccess({ ticketId }),
+                  AddressApiActions.deleteTicketAddressesSuccess({ ids }),
                 ]
             })
           ),

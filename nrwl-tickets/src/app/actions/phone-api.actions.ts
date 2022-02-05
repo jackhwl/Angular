@@ -31,3 +31,14 @@ export const updatePhonesFailure = createAction(
   "[Phones/API] XXXXXXX Update Phones Failure",
   props<{ error: any }>()
 );
+
+
+export const deleteAddressesPhonesSuccess = createAction(
+  "[Phones/API] Delete Addresses Phones Success",
+  props<{ ids: string[] }>()
+);
+
+export const deleteAddressesPhonesFailure = createAction(
+  "[Phones/API] XXXXXXX Delete Addresses Phones Failure",
+  props<{ error: any }>()
+);

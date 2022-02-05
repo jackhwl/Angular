@@ -47,6 +47,10 @@ export const reducer = createReducer(
     ...state,
     error
   })), 
+  on(PhoneApiActions.deleteAddressesPhonesSuccess, (state, { ids }) => {
+    //console.log(addresses);
+    return adapter.removeMany(ids, {...state, loaded: true})
+  }),   
   on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
     //console.log('reducer phones=', phones);
     return adapter.setAll(phones, { ...state, loaded: true, error: null })

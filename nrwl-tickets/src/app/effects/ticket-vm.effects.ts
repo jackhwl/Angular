@@ -51,19 +51,18 @@ export class TicketVmEffects {
       pessimisticUpdate({
         run: action => {
             const ticket = this.ticketService.getTicketFromVm(action.ticketVm)
-            const addresses = action.ticketVm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
-            const aIdPhones = action.ticketVm.addresses.map(a => ({addressId: a.id, phones: a.phones}))
+            const addressIds = action.ticketVm.addresses.map(a => a.id)
             return of(action).pipe(
               //tap(() => console.log(addresses)),
                 switchMap (_ => [
                   TicketActions.deleteTicket({ id: ticket.id }),
-                  PhoneActions.updatePhones({ aIdPhones }),
                   AddressActions.deleteTicketAddresses({ ticketId: ticket.id }),
+                  PhoneActions.deleteAddressesPhones({ addressIds }),
                 ])
         )},
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketApiActions.upsertTicketFailure({ error });
+          return TicketApiActions.deleteTicketFailure({ error });
         }
       })
     )

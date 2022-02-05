@@ -93,11 +93,12 @@ export class AddressService {
     return of(adds).pipe(delay(randomDelay()));
   }
 
-  deleteTicketAddresses(ticketId: string) {
+  deleteTicketAddresses(ticketId: string): Observable<string[]> {
+    const ids = this.storedAddresses.filter(a => a.ticketId === ticketId).map(a => a.id)
     this.storedAddresses = this.storedAddresses.filter(a => a.ticketId !== ticketId);
-    return of(ticketId).pipe(delay(randomDelay()));
+    return of(ids).pipe(delay(randomDelay()));
   }
-  
+
   getId() {
     return 'a'+Math.random()
   }

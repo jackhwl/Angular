@@ -44,12 +44,15 @@ export const reducer = createReducer(
   on(AddressApiActions.updateAddressesSuccess, (state, { addresses }) => {
     console.log(addresses);
     return adapter.setAll(addresses, {...state, loaded: true})
-  }
-  ), 
+  }), 
   on(AddressApiActions.updateAddressesFailure, (state, { error }) => ({
     ...state,
     error
   })),  
+  on(AddressApiActions.deleteTicketAddressesSuccess, (state, { ids }) => {
+    //console.log(addresses);
+    return adapter.removeMany(ids, {...state, loaded: true})
+  }),   
   on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => 
     adapter.updateMany(addresses, {...state, loaded: true})
   ), 

@@ -104,6 +104,9 @@ export const reducer = createReducer(
   on(TicketApiActions.updateAddressesSuccess, (state, { ticket }) => 
     adapter.updateOne(ticket, {...state, loaded: true})
   ), 
+  on(TicketApiActions.deleteTicketSuccess, (state, { id }) => 
+    adapter.removeOne(id, {...state, loaded: true})
+  ), 
   // on(TicketActions.addPhone, (state, { ticketId }) => 
   //   adapter.updateOne({
   //     id: ticketId, 

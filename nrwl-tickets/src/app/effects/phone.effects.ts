@@ -71,6 +71,27 @@ export class PhonesEffects {
       })
     )
   );
+
+  deleteAddressesPhones$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PhoneActions.deleteAddressesPhones),
+      pessimisticUpdate({
+        run: action =>
+          this.service.deleteAddressesPhones(action.addressIds).pipe(
+            switchMap(ids => {
+                return [
+                  PhoneApiActions.deleteAddressesPhonesSuccess({ ids })
+                ]
+            })
+          ),
+        onError: (action, error) => {
+          console.error("Error", error);
+          return PhoneApiActions.deleteAddressesPhonesFailure({ error });
+        }
+      })
+    )
+  );
+
 //   loadPhone$ = createEffect(() =>
 //     this.actions$.pipe(
 //       ofType(PhoneActions.loadPhone),
