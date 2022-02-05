@@ -8,7 +8,7 @@
         <th>Completed</th>
         <th>Description</th>
         <th></th>
-        <th></th>
+        
       </tr>
       <tr *ngFor="let ticket of tickets$ | async" class="mat-list-option">
         <td>{{ ticket.id }}</td>
@@ -23,7 +23,7 @@
           >
         </td>
         <td>
-          <a [routerLink]="['./', ticket.id]" queryParamsHandling="merge"
+          <a [routerLink]="" (click)="delete(ticket.id)"
             >Delete</a
           >
         </td>
