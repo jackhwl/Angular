@@ -31,17 +31,17 @@ export const loadFilterTicketsByRoute = createAction(
 );
 
 
-// Create Ticket
-export const createTicket = createAction(
-  "[Tickets] Create Ticket",
-  props<{ ticket: Ticket }>()
-);
+// // Create Ticket
+// export const createTicket = createAction(
+//   "[Tickets] Create Ticket",
+//   props<{ ticket: Ticket }>()
+// );
 
-// Update Ticket
-export const updateTicket = createAction(
-  "[Tickets] Update Ticket",
-  props<{ ticket: Ticket }>()
-);
+// // Update Ticket
+// export const updateTicket = createAction(
+//   "[Tickets] Update Ticket",
+//   props<{ ticket: Ticket }>()
+// );
 
 export const upsertTicket = createAction(
   "[Tickets] Upsert Ticket",
@@ -58,18 +58,18 @@ export const deleteTicketCancelled = createAction(
   "[Tickets] Delete Ticket Cancelled"
 );
 
-// Add Phone
-export const addPhone = createAction(
-  "[Tickets] Add Phone",
-  props<{ ticketId: string }>()
-);
+// // Add Phone
+// export const addPhone = createAction(
+//   "[Tickets] Add Phone",
+//   props<{ ticketId: string }>()
+// );
 
-export const addPhone2 = createAction(
-  "[Tickets] Add Phone2",
-  props<{ test: string }>()
-);
+// export const addPhone2 = createAction(
+//   "[Tickets] Add Phone2",
+//   props<{ test: string }>()
+// );
 
-export const deletePhone = createAction(
-  "[Tickets] Delete Phone",
-  props<{ ticketId: string, id: number }>()
-);
+// export const deletePhone = createAction(
+//   "[Tickets] Delete Phone",
+//   props<{ ticketId: string, id: number }>()
+// );

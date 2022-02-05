@@ -47,11 +47,12 @@ export class TicketDetailsComponent implements OnInit {
 
   onSubmit(detailForm: FormGroup): void {
     const ticketVm = detailForm.value as Ticket_vm;
-    if (ticketVm.id !== null && ticketVm.id !== undefined) {
-      this.updateTicketVm(ticketVm);
-    } else {
+    this.store.dispatch(TicketDetailsPageActions.upsertTicketVm({ ticketVm }));
+    //if (ticketVm.id !== null && ticketVm.id !== undefined) {
+    //  this.updateTicketVm(ticketVm);
+    //} else {
       //this.createTicket(ticket);
-    }
+    //}
     //this.router.navigate(["./"], { queryParamsHandling: "merge" });
   }
 
@@ -59,13 +60,13 @@ export class TicketDetailsComponent implements OnInit {
     this.router.navigate(["./"], { queryParamsHandling: "merge" });
   }
 
-  createTicket(ticket: Ticket): void {
-    this.store.dispatch(TicketActions.createTicket({ ticket }));
-  }
+  // createTicket(ticket: Ticket): void {
+  //   this.store.dispatch(TicketActions.createTicket({ ticket }));
+  // }
 
-  updateTicketVm(ticketVm: Ticket_vm): void {
-    this.store.dispatch(TicketDetailsPageActions.updateTicketVm({ ticketVm }));
-  }
+  // updateTicketVm(ticketVm: Ticket_vm): void {
+  //   this.store.dispatch(TicketDetailsPageActions.upsertTicketVm({ ticketVm }));
+  // }
 
   deleteAddress(pa: FormArray, id: number) {
     pa.removeAt(id);

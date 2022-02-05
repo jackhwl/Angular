@@ -5,7 +5,7 @@ export const opened = createAction(
   "[Ticket Detail Page] Opened"
 );
 
-export const updateTicketVm = createAction(
-  "[Ticket Detail Page] Update Ticket-vm",
+export const upsertTicketVm = createAction(
+  "[Ticket Detail Page] Upsert Ticket-vm",
   props<{ ticketVm: Ticket_vm }>()
 );

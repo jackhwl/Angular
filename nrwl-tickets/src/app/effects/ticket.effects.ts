@@ -1,17 +1,13 @@
 import { Injectable } from "@angular/core";
 import { fetch, pessimisticUpdate } from "@nrwl/angular";
-import { combineLatest, filter, map, mergeMap, switchMap, tap, withLatestFrom } from "rxjs/operators";
+import { switchMap, tap, withLatestFrom } from "rxjs/operators";
 import { select, Store } from "@ngrx/store";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { BackendService } from "../services/backend.service";
-import { AddressActions, PhoneActions, TicketActions, TicketApiActions, TicketDetailsPageActions, TicketListPageActions, UserActions } from "../actions";
-import { selectCurrentRoute, selectQueryParam, selectQueryParams, selectRouteParams, selectUrl } from "../reducers/router.selectors";
-import { routerNavigatedAction, SerializedRouterStateSnapshot } from "@ngrx/router-store";
-import { Phone, Ticket } from "../models/model";
+import { AddressActions, TicketActions, TicketApiActions, TicketDetailsPageActions, TicketListPageActions, UserActions } from "../actions";
+import { selectRouteParams } from "../reducers/router.selectors";
+import { Ticket } from "../models/model";
 import { TicketService } from "../services/ticket.service";
-import { TICKETMODULE_ROUTE_KEY } from "../reducers";
 import { Router } from "@angular/router";
-import { query } from "@angular/animations";
 
 @Injectable()
 export class TicketsEffects {
@@ -21,49 +17,6 @@ export class TicketsEffects {
     private ticketService: TicketService,
     private router: Router
   ) {}
-
-  loadTickets$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.loadTickets),
-      fetch({
-        run: action =>
-          this.ticketService
-            .tickets()
-            .pipe(
-              mergeMap((tickets: Ticket[]) => [
-                TicketApiActions.loadTicketsSuccess({ tickets })
-              ])
-            ),
-
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketApiActions.loadTicketsFailure({ error });
-        }
-      })
-    )
-  );
-
-  loadFilterTickets$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.loadFilterTickets),
-      fetch({
-        run: action =>
-          this.ticketService
-            .filteredTickets(action.queryStr)
-            .pipe(
-              tap(t => console.log('aa=', t)),
-              switchMap((tickets: Ticket[]) => [
-                TicketApiActions.loadFilterTicketsSuccess({ tickets })
-              ])
-            ),
-
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketApiActions.loadFilterTicketsFailure({ error });
-        }
-      })
-    )
-  );
 
   loadTicketByRoute$ = createEffect(() =>
     this.actions$.pipe(
@@ -124,23 +77,85 @@ export class TicketsEffects {
     )
   );
 
-  loadTicket$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.loadTicket),
-      fetch({
-        run: action =>
-          this.ticketService
-            .ticket(action.ticket.id)
-            .pipe(
-              switchMap((ticket: Ticket) => [
-                TicketApiActions.loadTicketSuccess({ ticket })
-              ])
-            ),
-        onError: (action, error) =>
-          TicketApiActions.loadTicketFailure({ error })
-      })
-    )
-  );
+  upsertTicket$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(TicketActions.upsertTicket),
+    pessimisticUpdate({
+      run: action =>
+        this.ticketService.upsert(action.ticket).pipe(
+          switchMap(ticket => [
+            TicketApiActions.upsertTicketSuccess({
+              ticket
+            })
+          ])
+        ),
+      onError: (action, error) => {
+        console.error("Error", error);
+        return TicketApiActions.upsertTicketFailure({ error });
+      }
+    })
+  ));
+
+  // loadTickets$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.loadTickets),
+  //     fetch({
+  //       run: action =>
+  //         this.ticketService
+  //           .tickets()
+  //           .pipe(
+  //             mergeMap((tickets: Ticket[]) => [
+  //               TicketApiActions.loadTicketsSuccess({ tickets })
+  //             ])
+  //           ),
+
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketApiActions.loadTicketsFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
+
+  // loadFilterTickets$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.loadFilterTickets),
+  //     fetch({
+  //       run: action =>
+  //         this.ticketService
+  //           .filteredTickets(action.queryStr)
+  //           .pipe(
+  //             tap(t => console.log('aa=', t)),
+  //             switchMap((tickets: Ticket[]) => [
+  //               TicketApiActions.loadFilterTicketsSuccess({ tickets })
+  //             ])
+  //           ),
+
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketApiActions.loadFilterTicketsFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
+
+  // loadTicket$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.loadTicket),
+  //     fetch({
+  //       run: action =>
+  //         this.ticketService
+  //           .ticket(action.ticket.id)
+  //           .pipe(
+  //             switchMap((ticket: Ticket) => [
+  //               TicketApiActions.loadTicketSuccess({ ticket })
+  //             ])
+  //           ),
+  //       onError: (action, error) =>
+  //         TicketApiActions.loadTicketFailure({ error })
+  //     })
+  //   )
+  // );
 
   // loadTicketWithNewAddresses$ = createEffect(() =>
   //   this.actions$.pipe(
@@ -160,85 +175,67 @@ export class TicketsEffects {
   //   )
   // );
 
-  createTicket$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.createTicket),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService
-            .newTicket(action.ticket)
-            .pipe(
-              switchMap((ticket: Ticket) => [
-                TicketApiActions.createTicketSuccess({ ticket })
-              ])
-            ),
-        onError: (action, error) => {
-          console.error("Error", error);
-          TicketApiActions.createTicketFailure({ error });
-        }
-      })
-    )
-  );
+  // createTicket$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.createTicket),
+  //     pessimisticUpdate({
+  //       run: action =>
+  //         this.ticketService
+  //           .newTicket(action.ticket)
+  //           .pipe(
+  //             switchMap((ticket: Ticket) => [
+  //               TicketApiActions.createTicketSuccess({ ticket })
+  //             ])
+  //           ),
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         TicketApiActions.createTicketFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 
-  updateTicket$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.updateTicket),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService.update(action.ticket.id, action.ticket).pipe(
-            switchMap(ticket => [
-              TicketApiActions.updateTicketSuccess({
-                ticket
-              })
-            ])
-          ),
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketApiActions.updateTicketFailure({ error });
-        }
-      })
-    )
-  );
+  // updateTicket$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(TicketActions.updateTicket),
+  //     pessimisticUpdate({
+  //       run: action =>
+  //         this.ticketService.update(action.ticket.id, action.ticket).pipe(
+  //           switchMap(ticket => [
+  //             TicketApiActions.updateTicketSuccess({
+  //               ticket
+  //             })
+  //           ])
+  //         ),
+  //       onError: (action, error) => {
+  //         console.error("Error", error);
+  //         return TicketApiActions.updateTicketFailure({ error });
+  //       }
+  //     })
+  //   )
+  // );
 
-  upsertTicket$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TicketActions.upsertTicket),
-      pessimisticUpdate({
-        run: action =>
-          this.ticketService.upsert(action.ticket).pipe(
-            switchMap(ticket => [
-              TicketApiActions.upsertTicketSuccess({
-                ticket
-              })
-            ])
-          ),
-        onError: (action, error) => {
-          console.error("Error", error);
-          return TicketApiActions.upsertTicketFailure({ error });
-        }
-      })
-    )
-  );
 
-  private getAllRouteParameters(snapshot: SerializedRouterStateSnapshot) {
-    let route = snapshot.root;
-    let params = new Map(Object.keys(route.params).map(key => [key, route.params[key]]));
-    while (route.firstChild) {
-      route = route.firstChild;
-      Object.keys(route.params).forEach(key => params.set(key, route.params[key]));
-    }
-    return params;
-  }
+
+  // private getAllRouteParameters(snapshot: SerializedRouterStateSnapshot) {
+  //   let route = snapshot.root;
+  //   let params = new Map(Object.keys(route.params).map(key => [key, route.params[key]]));
+  //   while (route.firstChild) {
+  //     route = route.firstChild;
+  //     Object.keys(route.params).forEach(key => params.set(key, route.params[key]));
+  //   }
+  //   return params;
+  // }
   
-  private getAllQueryParameters(snapshot: SerializedRouterStateSnapshot) {
-    let route = snapshot.root;
-    let params = new Map(Object.keys(route.queryParams).map(key => [key, route.queryParams[key]]));
-    while (route.firstChild) {
-      route = route.firstChild;
-      Object.keys(route.queryParams).forEach(key => params.set(key, route.queryParams[key]));
-    }
-    return params;
-  }
+  // private getAllQueryParameters(snapshot: SerializedRouterStateSnapshot) {
+  //   let route = snapshot.root;
+  //   let params = new Map(Object.keys(route.queryParams).map(key => [key, route.queryParams[key]]));
+  //   while (route.firstChild) {
+  //     route = route.firstChild;
+  //     Object.keys(route.queryParams).forEach(key => params.set(key, route.queryParams[key]));
+  //   }
+  //   return params;
+  // }
   
   // addPhone$ = createEffect(() =>
   //   this.actions$.pipe(

@@ -21,16 +21,16 @@ export class TicketVmEffects {
     private addressService: AddressService
   ) {}
 
-  updateTicketVm$ = createEffect(() =>
+  upsertTicketVm$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TicketDetailsPageActions.updateTicketVm),
+      ofType(TicketDetailsPageActions.upsertTicketVm),
       pessimisticUpdate({
         run: action => {
             const ticket = this.ticketService.getTicketFromVm(action.ticketVm)
             const addresses = action.ticketVm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
             const aIdPhones = action.ticketVm.addresses.map(a => ({addressId: a.id, phones: a.phones}))
             return of(action).pipe(
-              tap(() => console.log(addresses)),
+              //tap(() => console.log(addresses)),
                 switchMap (_ => [
                   TicketActions.upsertTicket({ ticket }),
                   PhoneActions.updatePhones({ aIdPhones }),
@@ -39,7 +39,7 @@ export class TicketVmEffects {
         )},
         onError: (action, error) => {
           console.error("Error", error);
-          return TicketApiActions.updateTicketFailure({ error });
+          return TicketApiActions.upsertTicketFailure({ error });
         }
       })
     )

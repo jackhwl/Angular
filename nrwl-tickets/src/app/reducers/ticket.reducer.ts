@@ -33,9 +33,9 @@ export const reducer = createReducer(
     Object.assign({}, state, { selectedId: ticket.id })
   ),
   on(TicketActions.selectTicketByRoute, state => Object.assign({}, state)),
-  on(TicketApiActions.resetSelectedTicket, state =>
-    Object.assign({}, state, { selectedId: -1 })
-  ),
+  // on(TicketApiActions.resetSelectedTicket, state =>
+  //   Object.assign({}, state, { selectedId: -1 })
+  // ),
   // on(TicketActions.resetTickets, (state) => widgetsAdapter.removeAll(state)),
 
   // Load widgets
@@ -53,13 +53,13 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  on(TicketApiActions.loadTicketsSuccess, (state, { tickets }) =>
-    adapter.setAll(tickets, { ...state, loaded: true, error: null })
-  ),
-  on(TicketApiActions.loadTicketsFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),
+  // on(TicketApiActions.loadTicketsSuccess, (state, { tickets }) =>
+  //   adapter.setAll(tickets, { ...state, loaded: true, error: null })
+  // ),
+  // on(TicketApiActions.loadTicketsFailure, (state, { error }) => ({
+  //   ...state,
+  //   error
+  // })),
 
   on(TicketActions.loadFilterTickets, state => ({
     ...state,
@@ -73,55 +73,56 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  on(TicketActions.createTicket, (state, { ticket }) => ({
-    ...state,
-    loaded: false
-  })),
-  on(TicketActions.updateTicket, (state, { ticket }) => ({
-    ...state,
-    loaded: false
-  })),
+  // on(TicketActions.createTicket, (state, { ticket }) => ({
+  //   ...state,
+  //   loaded: false
+  // })),
+  // on(TicketActions.updateTicket, (state, { ticket }) => ({
+  //   ...state,
+  //   loaded: false
+  // })),
 
-  on(TicketApiActions.createTicketSuccess, (state, { ticket }) =>
-    adapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
-    //Object.assign({}, state, { selectedId: ticket.id })
-  ),
+  // on(TicketApiActions.createTicketSuccess, (state, { ticket }) =>
+  //   adapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
+  //   //Object.assign({}, state, { selectedId: ticket.id })
+  // ),
   // ({
   //   ...state,
   //   error: null,
   //   c
   // })),
-  on(TicketApiActions.updateTicketSuccess, (state, { ticket }) => 
-    adapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
-  ), 
+  // on(TicketApiActions.updateTicketSuccess, (state, { ticket }) => 
+  //   adapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
+  // ), 
   on(TicketApiActions.upsertTicketSuccess, (state, { ticket }) => 
     adapter.upsertOne(ticket, {...state, loaded: true})
   ), 
-  on(TicketApiActions.updateTicketFailure, (state, { error }) => ({
+  on(TicketApiActions.upsertTicketFailure, (state, { error }) => ({
     ...state,
     error
   })),
-  on(TicketActions.addPhone, (state, { ticketId }) => 
-    adapter.updateOne({
-      id: ticketId, 
-      changes: {
-        //phones: phoneAdapter.addOne({id: state.entities[ticketId].phones.ids.length+1, type: '', number: ''}, state.entities[ticketId].phones)
-      } 
-    },
-    {...state, loaded: true})
-  ),
-  on(TicketActions.deletePhone, (state, { ticketId, id }) => 
-    adapter.updateOne({
-      id: ticketId, 
-      changes: {
-        //phones: phoneAdapter.removeOne(id, state.entities[ticketId].phones)
-      } 
-    },
-    {...state, loaded: true})
-  ),
   on(TicketApiActions.updateAddressesSuccess, (state, { ticket }) => 
     adapter.updateOne(ticket, {...state, loaded: true})
   ), 
+  // on(TicketActions.addPhone, (state, { ticketId }) => 
+  //   adapter.updateOne({
+  //     id: ticketId, 
+  //     changes: {
+  //       //phones: phoneAdapter.addOne({id: state.entities[ticketId].phones.ids.length+1, type: '', number: ''}, state.entities[ticketId].phones)
+  //     } 
+  //   },
+  //   {...state, loaded: true})
+  // ),
+  // on(TicketActions.deletePhone, (state, { ticketId, id }) => 
+  //   adapter.updateOne({
+  //     id: ticketId, 
+  //     changes: {
+  //       //phones: phoneAdapter.removeOne(id, state.entities[ticketId].phones)
+  //     } 
+  //   },
+  //   {...state, loaded: true})
+  // ),
+
     // on(TicketApiActions.addPhoneSuccess, (state, { ticketId, phone }) =>
     //   adapter.updateOne({
     //     id: ticketId, 
