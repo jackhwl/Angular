@@ -71,10 +71,9 @@ export class TicketDetailsComponent implements OnInit {
     pa.removeAt(id);
   }
 
-  addAddress(pa: FormArray) {
-    const [first] = pa.value
+  addAddress(id: string, pa: FormArray) {
     const ea = this.service.getEmptyAddressFG()
-    ea.addControl('ticketId', new FormControl(first.ticketId));
+    ea.addControl('ticketId', new FormControl(id));
     //console.log(ea)
     pa.push(ea)
   }
