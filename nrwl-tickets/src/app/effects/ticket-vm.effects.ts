@@ -30,7 +30,7 @@ export class TicketVmEffects {
             const addresses = action.ticketVm.addresses.map(a_vm => this.addressService.getAddressFromVm(a_vm))
             const aIdPhones = action.ticketVm.addresses.map(a => ({addressId: a.id, phones: a.phones}))
             return of(action).pipe(
-              tap(() => console.log(aIdPhones)),
+              tap(() => console.log(addresses)),
                 switchMap (_ => [
                   TicketActions.updateTicket({ ticket }),
                   PhoneActions.updatePhones({ aIdPhones }),

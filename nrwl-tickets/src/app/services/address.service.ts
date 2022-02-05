@@ -78,10 +78,10 @@ export class AddressService {
   }
 
   updateAddresses(ticketId: string, addresses: Address[]): Observable<Address[]> {
-    const newAddresses = addresses.filter(a => a.id === null).map(a => ({...a, id: this.getId()}))
-    const existingAddresses = addresses.filter(a => a.id !== null)
+    //const newAddresses = addresses.filter(a => a.id === null).map(a => ({...a, id: this.getId()}))
+    //const existingAddresses = addresses.filter(a => a.id !== null)
     //console.log(newAddresses)
-    this.storedAddresses = this.getAll().filter(a => a.ticketId !== ticketId).concat(newAddresses, existingAddresses);
+    this.storedAddresses = this.getAll().filter(a => a.ticketId !== ticketId).concat(addresses);
 
     //console.log(this.storedAddresses)
     

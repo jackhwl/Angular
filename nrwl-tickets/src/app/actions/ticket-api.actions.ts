@@ -116,7 +116,7 @@ export const deletePhoneFailure = createAction(
   props<{ error: any }>()
 );
 
-export const addNewAddressesSuccess = createAction(
-  "[Tickets/API] Add new Addresses Success",
+export const updateAddressesSuccess = createAction(
+  "[Tickets/API] Update Addresses Success",
   props<{ ticket: Update<Ticket> }>()
 );
