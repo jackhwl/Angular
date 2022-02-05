@@ -56,13 +56,13 @@ export class PhoneService {
       }
     
       updatePhones(aIdPhones: {addressId: string, phones: Phone[]}[]): Observable<Phone[]> {
-        let id = uuidv4();
+        // let id = uuidv4();
         let aIds = [];
         aIdPhones.forEach(ap => {
           aIds.push(ap.addressId)
-          const newPhones = ap.phones.filter(p => p.id === null).map(p => ({...p, id}))
-          const existingPhones = ap.phones.filter(p => p.id !== null)
-          this.storedPhones = this.storedPhones.filter(p => p.addressId !== ap.addressId).concat(newPhones, existingPhones);
+          // const newPhones = ap.phones.filter(p => p.id === null).map(p => ({...p, id}))
+          // const existingPhones = ap.phones.filter(p => p.id !== null)
+          this.storedPhones = this.storedPhones.filter(p => p.addressId !== ap.addressId).concat(ap.phones) //(newPhones, existingPhones);
         })
         // const newPhones = phones.filter(p => p.id === null).map(p => ({...p, id: ++id}))
         // this.storedPhones = this.storedPhones.concat(newPhones);

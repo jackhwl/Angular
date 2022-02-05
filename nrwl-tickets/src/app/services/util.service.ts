@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Ticket, Ticket_vm } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class UtilService {
@@ -70,7 +71,7 @@ export class UtilService {
 
   getEmptyPhoneFG() {
     return this.fb.group({
-      id: [],
+      id: [uuidv4()],
       type: [],
       number: []
     })
@@ -78,7 +79,7 @@ export class UtilService {
 
   getEmptyAddressFG() {
     return this.fb.group({
-      id: [],
+      id: [uuidv4()],
       addr1: [],
       addr2: [],
       postcode: [],
