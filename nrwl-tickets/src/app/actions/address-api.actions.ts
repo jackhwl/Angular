@@ -1,4 +1,3 @@
-import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { Address } from "../models/model";
 
@@ -22,10 +21,10 @@ export const updateAddressesFailure = createAction(
     props<{ error: any }>()
 );
   
-export const addNewPhonesSuccess = createAction(
-    "[Addresses/API] Add new phone to Address Success",
-    props<{ addresses: Update<Address>[] }>()
-);
+// export const addNewPhonesSuccess = createAction(
+//     "[Addresses/API] Add new phone to Address Success",
+//     props<{ addresses: Update<Address>[] }>()
+// );
 
 export const deleteTicketAddressesSuccess = createAction(
     "[Addresses/API] Delete Ticket Addresses Success",

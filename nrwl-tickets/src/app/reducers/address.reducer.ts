@@ -53,9 +53,9 @@ export const reducer = createReducer(
     //console.log(addresses);
     return adapter.removeMany(ids, {...state, loaded: true})
   }),   
-  on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => 
-    adapter.updateMany(addresses, {...state, loaded: true})
-  ), 
+  // on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => 
+  //   adapter.updateMany(addresses, {...state, loaded: true})
+  // ), 
 );
 
 // export function addressesReducer(state: AddressState | undefined, action: Action) {

@@ -26,24 +26,7 @@ export const initialState: TicketState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  // on(TicketActions.selectTicketById, (state, { selectedId }) =>
-  //   Object.assign({}, state, { selectedId })
-  // ),
-  // on(TicketActions.selectTicket, (state, { ticket }) =>
-  //   Object.assign({}, state, { selectedId: ticket.id })
-  // ),
-  // on(TicketActions.selectTicketByRoute, state => Object.assign({}, state)),
-  // on(TicketApiActions.resetSelectedTicket, state =>
-  //   Object.assign({}, state, { selectedId: -1 })
-  // ),
-  // on(TicketActions.resetTickets, (state) => widgetsAdapter.removeAll(state)),
 
-  // Load widgets
-  // on(TicketActions.loadTickets, state => ({
-  //   ...state,
-  //   loaded: false,
-  //   error: null
-  // })),
   on(TicketApiActions.loadTicketSuccess, (state, { ticket }) =>{
     //Object.assign({}, state, { selectedId: ticket.id })
     //console.log('reducer ticket=', ticket);
@@ -53,19 +36,6 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  // on(TicketApiActions.loadTicketsSuccess, (state, { tickets }) =>
-  //   adapter.setAll(tickets, { ...state, loaded: true, error: null })
-  // ),
-  // on(TicketApiActions.loadTicketsFailure, (state, { error }) => ({
-  //   ...state,
-  //   error
-  // })),
-
-  // on(TicketActions.loadFilterTickets, state => ({
-  //   ...state,
-  //   loaded: false,
-  //   error: null
-  // })),
   on(TicketApiActions.loadFilterTicketsSuccess, (state, { tickets }) =>
     adapter.setAll(tickets, { ...state, loaded: true, error: null })
   ),
@@ -73,27 +43,7 @@ export const reducer = createReducer(
     ...state,
     error
   })),
-  // on(TicketActions.createTicket, (state, { ticket }) => ({
-  //   ...state,
-  //   loaded: false
-  // })),
-  // on(TicketActions.updateTicket, (state, { ticket }) => ({
-  //   ...state,
-  //   loaded: false
-  // })),
 
-  // on(TicketApiActions.createTicketSuccess, (state, { ticket }) =>
-  //   adapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
-  //   //Object.assign({}, state, { selectedId: ticket.id })
-  // ),
-  // ({
-  //   ...state,
-  //   error: null,
-  //   c
-  // })),
-  // on(TicketApiActions.updateTicketSuccess, (state, { ticket }) => 
-  //   adapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
-  // ), 
   on(TicketApiActions.upsertTicketSuccess, (state, { ticket }) => 
     adapter.upsertOne(ticket, {...state, loaded: true})
   ), 
@@ -107,6 +57,23 @@ export const reducer = createReducer(
   on(TicketApiActions.deleteTicketSuccess, (state, { id }) => 
     adapter.removeOne(id, {...state, loaded: true})
   ), 
+  on(TicketApiActions.deleteTicketFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
+    // on(TicketApiActions.loadTicketsSuccess, (state, { tickets }) =>
+  //   adapter.setAll(tickets, { ...state, loaded: true, error: null })
+  // ),
+  // on(TicketApiActions.loadTicketsFailure, (state, { error }) => ({
+  //   ...state,
+  //   error
+  // })),
+
+  // on(TicketActions.loadFilterTickets, state => ({
+  //   ...state,
+  //   loaded: false,
+  //   error: null
+  // })),
   // on(TicketActions.addPhone, (state, { ticketId }) => 
   //   adapter.updateOne({
   //     id: ticketId, 
@@ -145,7 +112,46 @@ export const reducer = createReducer(
     //   },
     //   {...state, loaded: true}
     //   )
-    // )
+    // ),
+  // on(TicketActions.createTicket, (state, { ticket }) => ({
+  //   ...state,
+  //   loaded: false
+  // })),
+  // on(TicketActions.updateTicket, (state, { ticket }) => ({
+  //   ...state,
+  //   loaded: false
+  // })),
+
+  // on(TicketApiActions.createTicketSuccess, (state, { ticket }) =>
+  //   adapter.addOne(ticket, { ...state, selectedId: ticket.id, loaded: true})
+  //   //Object.assign({}, state, { selectedId: ticket.id })
+  // ),
+  // ({
+  //   ...state,
+  //   error: null,
+  //   c
+  // })),
+  // on(TicketApiActions.updateTicketSuccess, (state, { ticket }) => 
+  //   adapter.updateOne({id: ticket.id, changes: ticket }, {...state, loaded: true})
+  // ), 
+  // on(TicketActions.selectTicketById, (state, { selectedId }) =>
+  //   Object.assign({}, state, { selectedId })
+  // ),
+  // on(TicketActions.selectTicket, (state, { ticket }) =>
+  //   Object.assign({}, state, { selectedId: ticket.id })
+  // ),
+  // on(TicketActions.selectTicketByRoute, state => Object.assign({}, state)),
+  // on(TicketApiActions.resetSelectedTicket, state =>
+  //   Object.assign({}, state, { selectedId: -1 })
+  // ),
+  // on(TicketActions.resetTickets, (state) => widgetsAdapter.removeAll(state)),
+
+  // Load widgets
+  // on(TicketActions.loadTickets, state => ({
+  //   ...state,
+  //   loaded: false,
+  //   error: null
+  // })),
 );
 
 // export function ticketsReducer(state: TicketState | undefined, action: Action) {

@@ -24,15 +24,7 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  // on(PhoneActions.selectPhoneById, (state, { selectedId }) =>
-  //   Object.assign({}, state, { selectedId })
-  // ),
-  //   on(PhoneActions.selectPhone, (state, { phone }) =>
-  //     Object.assign({}, state, { selectedId: phone?.id })
-  //   ),
-  // on(PhoneActions.resetPhones, (state) => widgetsAdapter.removeAll(state)),
 
-  // Load widgets
   on(PhoneActions.loadPhonesOfAddress, state => {
     //console.log('ccc');
     return ({
@@ -57,7 +49,16 @@ export const reducer = createReducer(
   on(PhoneApiActions.loadPhonesOfAddressFailure, (state, { error }) => ({
     ...state,
     error
-  }))
+  })),
+    // on(PhoneActions.selectPhoneById, (state, { selectedId }) =>
+  //   Object.assign({}, state, { selectedId })
+  // ),
+  //   on(PhoneActions.selectPhone, (state, { phone }) =>
+  //     Object.assign({}, state, { selectedId: phone?.id })
+  //   ),
+  // on(PhoneActions.resetPhones, (state) => widgetsAdapter.removeAll(state)),
+
+  // Load widgets
 );
 
 // export function phonesReducer(state: PhoneState | undefined, action: Action) {
