@@ -78,7 +78,7 @@ export class TicketService {
     return { ...ticket, addressIds };
   };
 
-  private findUserById = id => this.storedUsers.find(user => user.id === +id);
+  //private findUserById = id => this.storedUsers.find(user => user.id === +id);
 
 
   getTicketFromVm(ticket_vm: Ticket_vm): Ticket {
@@ -96,7 +96,7 @@ export class TicketService {
   }
 
   filteredTickets(queryStr: string) {
-    console.log(this.storedTickets)
+    //console.log(this.storedTickets)
     if (!queryStr) return this.tickets();
     const ids = this.storedUsers
       .filter(user => user.name.toLowerCase().includes(queryStr.toLowerCase()))
@@ -124,53 +124,45 @@ export class TicketService {
     return of(foundTicket);
   }
 
-  users() {
-    return of(this.storedUsers).pipe(delay(randomDelay()));
-  }
+  // newTicket(ticket: Ticket) {
+  //   const newTicket: Ticket = {
+  //     id: uuidv4(),
+  //     description: ticket.description,
+  //     assigneeId: ticket.assigneeId,
+  //     completed: false,
+  //     addressIds: []
+  //   };
 
-  user(id: number) {
-    return of(this.findUserById(id)).pipe(delay(randomDelay()));
-  }
+  //   this.storedTickets = this.storedTickets.concat(newTicket);
 
-  newTicket(ticket: Ticket) {
-    const newTicket: Ticket = {
-      id: uuidv4(),
-      description: ticket.description,
-      assigneeId: ticket.assigneeId,
-      completed: false,
-      addressIds: []
-    };
+  //   return of(newTicket).pipe(delay(randomDelay()));
+  // }
 
-    this.storedTickets = this.storedTickets.concat(newTicket);
+  // assign(ticketId: string, userId: number) {
+  //   return this.update(ticketId, { assigneeId: userId });
+  // }
 
-    return of(newTicket).pipe(delay(randomDelay()));
-  }
+  // complete(ticketId: string, completed: boolean) {
+  //   return this.update(ticketId, { completed });
+  // }
 
-  assign(ticketId: string, userId: number) {
-    return this.update(ticketId, { assigneeId: userId });
-  }
+  // update(ticketId: string, updates: Partial<Omit<Ticket, "id">>) {
+  //   const foundTicket = this.findTicketById(ticketId);
 
-  complete(ticketId: string, completed: boolean) {
-    return this.update(ticketId, { completed });
-  }
+  //   if (!foundTicket) {
+  //     return throwError(new Error("ticket not found"));
+  //   }
 
-  update(ticketId: string, updates: Partial<Omit<Ticket, "id">>) {
-    const foundTicket = this.findTicketById(ticketId);
-
-    if (!foundTicket) {
-      return throwError(new Error("ticket not found"));
-    }
-
-    //console.log(foundTicket, updates);
-    let updatedTicket = { ...foundTicket, ...updates };
+  //   //console.log(foundTicket, updates);
+  //   let updatedTicket = { ...foundTicket, ...updates };
 
 
-    this.storedTickets = this.storedTickets.map(t =>
-      t.id === ticketId ? { ...updatedTicket } : t
-    );
-    delete updatedTicket.addressIds
-    return of(updatedTicket).pipe(delay(randomDelay()));
-  }
+  //   this.storedTickets = this.storedTickets.map(t =>
+  //     t.id === ticketId ? { ...updatedTicket } : t
+  //   );
+  //   delete updatedTicket.addressIds
+  //   return of(updatedTicket).pipe(delay(randomDelay()));
+  // }
 
   upsert(ticket: Ticket) {
     console.log('upsert', ticket)

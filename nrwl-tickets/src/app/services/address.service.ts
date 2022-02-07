@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of, Subject, throwError } from "rxjs";
+import { Observable, of, Subject } from "rxjs";
 import { delay, tap } from "rxjs/operators";
-import { Address, Address_vm, Phone, Ticket, User } from "../models/model";
-import { initialState, adapter } from "../reducers/phone.reducer";
+import { Address, Address_vm } from "../models/model";
 import { ErrorService } from "./error.service";
 import { PhoneService } from "./phone.service";
 
@@ -97,10 +96,6 @@ export class AddressService {
     const ids = this.storedAddresses.filter(a => a.ticketId === ticketId).map(a => a.id)
     this.storedAddresses = this.storedAddresses.filter(a => a.ticketId !== ticketId);
     return of(ids).pipe(delay(randomDelay()));
-  }
-
-  getId() {
-    return 'a'+Math.random()
   }
 
   getAll(): Address[] {
