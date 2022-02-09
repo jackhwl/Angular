@@ -4,19 +4,17 @@ import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { TicketActions, TicketDetailsPageActions } from "src/app/actions";
-
-import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
-
-import { map, tap } from "rxjs/operators";
-import { UtilService } from "src/app/services";
-import { Ticket, Ticket_vm } from "src/app/models/model";
+import { TicketDetailsPageActions } from "../../actions";
+import * as TicketVmSelectors from "../../reducers/ticket-vm.selectors";
+import { map } from "rxjs/operators";
+import { UtilService } from "../../services";
+import { Ticket_vm } from "../../models/model";
 
 @Component({
   selector: "vi-ticket-details",
   templateUrl: "./ticket-details.component.html",
   styleUrls: ["./ticket-details.component.scss"],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketDetailsComponent implements OnInit {
   detailForm$: Observable<FormGroup>;
@@ -31,7 +29,7 @@ export class TicketDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(TicketDetailsPageActions.opened());
     this.detailForm$ = this.store.pipe(
-      select(TicketsVmSelectors.getSelectedTicketVmByRoute),
+      select(TicketVmSelectors.getSelectedTicketVmByRoute),
       //tap(t=>console.log('ngOnInit',t)),
       map((ticket: Ticket_vm) => this.service.generateTicketForm(ticket))
     );
