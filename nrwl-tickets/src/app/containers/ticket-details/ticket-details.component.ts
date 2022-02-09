@@ -4,11 +4,11 @@ import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { TicketDetailsPageActions } from "../../actions";
-import * as TicketVmSelectors from "../../reducers/ticket-vm.selectors";
+import { TicketDetailsPageActions } from "src/app/actions";
+import * as TicketVmSelectors from "src/app/reducers/ticket-vm.selectors";
 import { map } from "rxjs/operators";
-import { UtilService } from "../../services";
-import { Ticket_vm } from "../../models/model";
+import { UtilService } from "src/app/services";
+import { Ticket_vm } from "src/app/models/model";
 
 @Component({
   selector: "vi-ticket-details",
