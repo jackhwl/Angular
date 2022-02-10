@@ -1,9 +1,11 @@
 import {render, screen, fireEvent} from '@testing-library/angular'
-import { async } from 'rxjs';
 import { AppComponent } from "./app.component";
+import { AppModule } from '../app.module';
 describe("AppComponent", () => {
   it("should create the app", async () => {
-    await render(AppComponent);
+    await render(AppComponent, {
+        //imports: [AppModule]
+    });
     expect(screen.getByText('Run all tests')).toBeInTheDocument();
   });
 //   xit(`should have as title 'app'`, async () => {
