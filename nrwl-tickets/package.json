@@ -28,8 +28,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --coverage --config ./jest.config.js",
+    "test:watch": "jest -o --watch --config ./jest.config.js",
     "test:ci": "jest --runInBand",
     "lint": "ng lint",
     "e2e": "ng e2e"

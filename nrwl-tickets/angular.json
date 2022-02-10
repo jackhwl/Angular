@@ -68,6 +68,9 @@
           "options": {
             "browserTarget": "demo:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
         }
       }
     },
@@ -84,6 +87,8 @@
         }
       }
     }
+
   },
-  "defaultProject": "demo"
+  "defaultProject": "demo",
+
 }
