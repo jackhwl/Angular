@@ -7,6 +7,10 @@ import { TicketListComponent } from './ticket-list.component';
 import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
 import * as TicketsSelectors from "../../reducers/ticket.selectors";
 import { MaterialModule } from 'src/app/material.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { APP_BASE_HREF } from '@angular/common';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -24,11 +28,12 @@ const tickets: Ticket_vm[] = [{
   addresses: [],
   assignees: []
 }];
-
-  test("should render the list", async () => {
+describe('TicketListComponent', () => {
+  it("should render the list", async () => {
     await render(TicketListComponent, {
-        imports: [MaterialModule],
+        imports: [MaterialModule, RouterTestingModule],
         providers: [
+          {provide: APP_BASE_HREF, useValue: '/'},
           provideMockStore({ 
             selectors: [{
               selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
@@ -62,3 +67,4 @@ const tickets: Ticket_vm[] = [{
 //     );
 //   });
 
+})

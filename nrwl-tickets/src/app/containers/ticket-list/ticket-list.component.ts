@@ -22,6 +22,7 @@ export class TicketListComponent implements OnInit {
   loaded$ = this.store.pipe(select(TicketsSelectors.getLoaded));
 
   constructor(private store: Store) {}
+  
   ngOnInit(): void {
     this.store.dispatch(TicketListPageActions.opened());
   }
