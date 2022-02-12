@@ -9,6 +9,7 @@ import * as TicketsSelectors from "../../reducers/ticket.selectors";
 import { MaterialModule } from 'src/app/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
+import { within } from '@testing-library/dom';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -52,6 +53,13 @@ describe('TicketListComponent', () => {
     const store = TestBed.inject(MockStore);
     store.dispatch = jest.fn();
 
+    // const row = screen.getByRole('cell', {
+    //   name: "Delete"
+    // });
+
+    // const btn = within(row).getByRole('button');
+    expect(screen.getAllByRole('button')[0]).toBeInTheDocument();
+    expect(screen.getAllByRole('button')[1]).toBeInTheDocument();
     expect(screen.getAllByRole('link')).toHaveLength(tickets.length);
   });
 //   xit(`should have as title 'app'`, async () => {
