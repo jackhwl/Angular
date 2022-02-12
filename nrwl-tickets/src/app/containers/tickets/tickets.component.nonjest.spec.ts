@@ -6,7 +6,7 @@ import {
   waitForAsync
 } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { RouterLinkWithHref } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -16,7 +16,7 @@ import { TicketsComponent } from "./tickets.component";
 import { TicketListComponent } from "../ticket-list/ticket-list.component";
 import { TicketDetailsComponent } from "../ticket-details/ticket-details.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
-import { ActionsSubject, StoreModule } from "@ngrx/store";
+import { ActionsSubject, Store, StoreModule } from "@ngrx/store";
 import * as fromTickets from "../../reducers/ticket.reducer";
 import { UtilService } from "src/app/services";
 
@@ -57,25 +57,25 @@ describe("Tickets Component", () => {
       selectedId: null
     }
   };
-  const initialTicketModuleState = {
-    users: {},
-    tickets: initialState.tickets
-  };
-  const ticketsFacadeStub = {
-    allTicketVms$: of(tickets),
-    mutations$: of(false),
-    routerRouteParamId$: of(undefined),
-    selectTicketById() {},
-    loadFilterTicketsByRoute() {},
-    loadTickets() {},
-    loadUsers() {}
-  };
-  const utilServiceStub = {
-    generateTicketSearchForm(q) {},
-  };
+  // const initialTicketModuleState = {
+  //   users: {},
+  //   tickets: initialState.tickets
+  // };
+  // const ticketsFacadeStub = {
+  //   allTicketVms$: of(tickets),
+  //   mutations$: of(false),
+  //   routerRouteParamId$: of(undefined),
+  //   selectTicketById() {},
+  //   loadFilterTicketsByRoute() {},
+  //   loadTickets() {},
+  //   loadUsers() {}
+  // };
+  // const utilServiceStub = {
+  //   generateTicketSearchForm(q) {},
+  // };
   let store: MockStore;
-  let actions$: ActionsSubject;
-  let service: UtilService;
+  //let actions$: ActionsSubject;
+  let service: UtilService = new UtilService(new FormBuilder());
 
   beforeEach(
     waitForAsync(() => {
@@ -99,13 +99,14 @@ describe("Tickets Component", () => {
         providers: [
           provideMockStore({ initialState }),
           //{ provide: ActionsSubject, useValue: actionSub },
-          { provide: UtilService, useValue: utilServiceStub}
+          { provide: UtilService, useValue: service}
         ]
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      //spyOn(store, "dispatch").and.callThrough();
+      jest.spyOn(store, "dispatch");
       //actions$ = TestBed.inject(ActionsSubject);
+      //initComponent();
     })
   );
 
@@ -130,6 +131,7 @@ describe("Tickets Component", () => {
   it("should create TicketsComponent", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     const component = fixture.componentInstance;
+    
     expect(component).toBeDefined();
   });
 

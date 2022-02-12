@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { render, screen, fireEvent } from '@testing-library/angular';
 import { Ticket_vm } from 'src/app/models/model';
@@ -10,6 +10,8 @@ import { MaterialModule } from 'src/app/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { within } from '@testing-library/dom';
+import { TicketListPageActions } from 'src/app/actions';
+import { TicketsComponentsModule } from '../ticketsComponentsModule';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -27,10 +29,32 @@ const tickets: Ticket_vm[] = [{
   addresses: [],
   assignees: []
 }];
-
+const initialState = {
+  tickets: {
+    ids: [0, 1],
+    entities: {
+      0: {
+        id: 0,
+        description: "Install a monitor arm",
+        assigneeId: 111,
+        completed: false
+      },
+      1: {
+        id: 1,
+        description: "Move the desk to the new location",
+        assigneeId: 111,
+        completed: false
+      }
+    },
+    error: null,
+    loaded: false,
+    selectedId: null
+  }
+};
 const providers = [
   {provide: APP_BASE_HREF, useValue: '/'},
   provideMockStore({ 
+    initialState,
     selectors: [{
       selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
       value: tickets
@@ -50,8 +74,8 @@ describe('TicketListComponent', () => {
         providers
     });
 
-    const store = TestBed.inject(MockStore);
-    store.dispatch = jest.fn();
+    //const store = TestBed.inject(MockStore);
+    //store.dispatch = jest.fn();
 
     // const row = screen.getByRole('cell', {
     //   name: "Delete"
@@ -62,4 +86,31 @@ describe('TicketListComponent', () => {
     expect(screen.getAllByRole('button')[1]).toBeInTheDocument();
     expect(screen.getAllByRole('link')).toHaveLength(tickets.length);
   });
+})
+
+describe('TicketListComponent TestBed', () => {
+  let store: MockStore;
+  
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ TicketsComponentsModule ],
+        providers
+      }).compileComponents();
+
+      store = TestBed.inject(MockStore);
+      jest.spyOn(store, "dispatch");
+    })
+  );
+
+  it("should dispatch TicketListPageActions.opened() action", () => {
+
+    const fixture = TestBed.createComponent(TicketListComponent);
+    const component = fixture.componentInstance;
+    component.ngOnInit();
+    
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
+  });
+
 })
