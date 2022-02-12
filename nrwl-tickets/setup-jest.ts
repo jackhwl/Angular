@@ -1,6 +1,7 @@
 import "jest-preset-angular/setup-jest";
 import "@testing-library/jest-dom";
 
+//The Window object mocking 
 Object.defineProperty(window, "CSS", { value: null });
 // Object.defineProperty(window, "getComputedStyle", {
 //   value: () => {
@@ -11,6 +12,7 @@ Object.defineProperty(window, "CSS", { value: null });
 //   }
 // });
 
+// HTML Template parsing using docType
 Object.defineProperty(document, "doctype", {
   value: "<!DOCTYPE html>"
 });

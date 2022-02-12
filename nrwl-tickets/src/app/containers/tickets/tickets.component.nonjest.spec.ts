@@ -18,6 +18,7 @@ import { TicketDetailsComponent } from "../ticket-details/ticket-details.compone
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { ActionsSubject, StoreModule } from "@ngrx/store";
 import * as fromTickets from "../../reducers/ticket.reducer";
+import { UtilService } from "src/app/services";
 
 describe("Tickets Component", () => {
   const tickets = [
@@ -69,12 +70,16 @@ describe("Tickets Component", () => {
     loadTickets() {},
     loadUsers() {}
   };
+  const utilServiceStub = {
+    generateTicketSearchForm(q) {},
+  };
   let store: MockStore;
   let actions$: ActionsSubject;
+  let service: UtilService;
 
   beforeEach(
     waitForAsync(() => {
-      const actionSub: ActionsSubject = new ActionsSubject();
+      //const actionSub: ActionsSubject = new ActionsSubject();
       TestBed.configureTestingModule({
         declarations: [
           TicketListComponent,
@@ -88,18 +93,19 @@ describe("Tickets Component", () => {
           ReactiveFormsModule,
           MaterialModule,
           StoreModule.forRoot({
-            [fromTickets.TICKETS_FEATURE_KEY]: fromTickets.ticketsReducer
+            [fromTickets.TICKETS_FEATURE_KEY]: fromTickets.reducer
           })
         ],
         providers: [
           provideMockStore({ initialState }),
-          { provide: ActionsSubject, useValue: actionSub }
+          //{ provide: ActionsSubject, useValue: actionSub },
+          { provide: UtilService, useValue: utilServiceStub}
         ]
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      spyOn(store, "dispatch").and.callThrough();
-      actions$ = TestBed.inject(ActionsSubject);
+      //spyOn(store, "dispatch").and.callThrough();
+      //actions$ = TestBed.inject(ActionsSubject);
     })
   );
 
@@ -140,7 +146,7 @@ describe("Tickets Component", () => {
     component.ngOnInit();
     fixture.detectChanges();
     //ticketsFacade.allTicketVms$.subscribe(_=> console.log('_333',_));
-    component.search.setValue("a");
+    //component.search.setValue("a");
     tick(210);
     const debugElements = fixture.debugElement.queryAll(
       By.directive(TicketListComponent)
@@ -154,7 +160,7 @@ describe("Tickets Component", () => {
 
     component.ngOnInit();
     fixture.detectChanges();
-    component.search.setValue("a");
+    //component.search.setValue("a");
     tick(210);
     fixture.whenStable().then(() => {
       const debugElements = fixture.debugElement.queryAll(

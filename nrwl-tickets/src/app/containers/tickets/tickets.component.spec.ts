@@ -11,61 +11,59 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { within } from '@testing-library/dom';
 import { UtilService } from 'src/app/services';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
-const tickets: Ticket_vm[] = [{
-  id: '0',
-  description: "Install a monitor arm",
-  assigneeId: 111,
-  completed: false,
-  addresses: [],
-  assignees: []
-  },
-   {
-  id: '1',
-  description: "aaa",
-  assigneeId: 222,
-  completed: false,
-  addresses: [],
-  assignees: []
-}];
-
+const initialState = {
+  tickets: {
+    ids: ['0', '1'],
+    entities: {
+      0: {
+        id: '0',
+        description: "Install a monitor arm",
+        assigneeId: 111,
+        completed: false
+      },
+      1: {
+        id: '1',
+        description: "Move the desk to the new location",
+        assigneeId: 111,
+        completed: false
+      }
+    },
+    error: null,
+    loaded: false,
+    selectedId: null
+  }
+};
 const utilServiceStub = {
   generateTicketSearchForm(q) {},
 };
 
 const providers = [
-  { provide: APP_BASE_HREF, useValue: '/'},
-  { provide: UtilService, useValue: utilServiceStub },
+  {provide: APP_BASE_HREF, useValue: '/'},
   provideMockStore({ 
-    selectors: [{
-      selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
-      value: tickets
-    },
-    {
-      selector: TicketsSelectors.getLoaded,
-      value: true
-    }
-  ]
+    initialState
   })
 ]
 
 describe('TicketsComponent', () => {
+  // let component: TicketsComponent;
+  // let store = provideMockStore({ initialState })[0]
+  // ;
+  // let fb: FormBuilder;
+  // let service: UtilService = new UtilService(fb);
+
+  // beforeEach(() => {
+  //   component = new TicketsComponent(store, service);
+  // })
+
   it("should render the list", async () => {
-    await render(TicketsComponent, {
-        imports: [MaterialModule, RouterTestingModule],
-        providers
-    });
+    const component = await render(TicketsComponent, {
+      imports: [MaterialModule, RouterTestingModule],
+      providers
+  });
+    expect(component).toBe('')
 
-    const store = TestBed.inject(MockStore);
-    store.dispatch = jest.fn();
-
-    // const row = screen.getByRole('cell', {
-    //   name: "Delete"
-    // });
-
-    // const btn = within(row).getByRole('button');
-    // expect(screen.getAllByRole('button')[0]).toBeInTheDocument();
-    // expect(screen.getAllByRole('button')[1]).toBeInTheDocument();
-    expect(screen.getByRole('link', {name: 'Add New Ticket'})).toBeInTheDocument();
   });
 })

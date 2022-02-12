@@ -58,22 +58,6 @@ export class TicketsComponent implements OnInit, OnDestroy {
   constructor(private store: Store<{}>, private service: UtilService) {}
   
   ngOnInit(): void {
-    // use listForm$ version
-    // this.listForm$ = this.routerQueryParam$?.pipe(
-    //   map((q: string) => this.service.generateTicketSearchForm(q)),
-    //   tap(fg => 
-    //     fg.get('search').valueChanges.pipe(
-    //       debounceTime(200),
-    //       distinctUntilChanged(),
-    //       tap(console.log),
-    //       switchMap((q: string) => [
-    //         this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
-    //       ]),
-    //       takeUntil(this.componentDestroy())
-    //     ).subscribe()
-    //   )
-    // );
-    
     // use listForm version
     this.searchSetSub = this.routerQueryParam$
       ?.pipe(takeUntil(this.componentDestroy()))
@@ -92,6 +76,22 @@ export class TicketsComponent implements OnInit, OnDestroy {
         .subscribe();
       });
 
+    // use listForm$ version
+    // this.listForm$ = this.routerQueryParam$?.pipe(
+    //   map((q: string) => this.service.generateTicketSearchForm(q)),
+    //   tap(fg => 
+    //     fg.get('search').valueChanges.pipe(
+    //       debounceTime(200),
+    //       distinctUntilChanged(),
+    //       tap(console.log),
+    //       switchMap((q: string) => [
+    //         this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+    //       ]),
+    //       takeUntil(this.componentDestroy())
+    //     ).subscribe()
+    //   )
+    // );
+    
     // without formGroup listForm version
     // this.searchSetSub = this.routerQueryParam$
     //   ?.pipe(takeUntil(this.componentDestroy()))
