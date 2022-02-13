@@ -23,7 +23,7 @@
           >
         </td>
         <td>
-          <button (click)="delete(ticket.id)"
+          <button (click)="delete(ticket.id)" [attr.aria-label]="ticket.description"
             >Delete</button
           >
         </td>

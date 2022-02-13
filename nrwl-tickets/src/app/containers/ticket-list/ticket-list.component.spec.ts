@@ -11,7 +11,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
 import { within } from '@testing-library/dom';
-import { TicketListPageActions } from 'src/app/actions';
+import { TicketActions, TicketListPageActions } from 'src/app/actions';
 import { TicketsComponentsModule } from '../ticketsComponentsModule';
 import { cold } from 'jasmine-marbles';
 
@@ -87,9 +87,28 @@ describe('TicketListComponent', () => {
     expect(screen.getAllByRole('button')[0]).toBeInTheDocument();
     expect(screen.getAllByRole('button')[1]).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('button')[0])
-    //expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
     expect(screen.getAllByRole('link')).toHaveLength(tickets.length);
+
+    const btn = screen.getByRole('button', {
+      name: /install a monitor arm/i
+    });
+    userEvent.click(btn)
+    //userEvent.click(screen.getByRole('button', {: '0'}))
+    //expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
+  });
+
+  it("should dispatch deleteTicket action after delete button clicked", async () => {
+    await render(TicketListComponent, {
+        imports: [MaterialModule, RouterTestingModule],
+        providers
+    });
+
+    const btn = screen.getByRole('button', {
+      name: /install a monitor arm/i
+    });
+    userEvent.click(btn)
+    //userEvent.click(screen.getByRole('button', {: '0'}))
+    //expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
   });
 })
 
@@ -116,6 +135,8 @@ describe('TicketListComponent TestBed', () => {
     
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
+
+
   });
 
   it("should dispatch TicketListPageActions.opened() action MockStore", () => {
@@ -125,5 +146,17 @@ describe('TicketListComponent TestBed', () => {
     
     const expected = cold('a', {a: TicketListPageActions.opened()})
     expect(store.scannedActions$).toBeObservable(expected)
+
+    //fixture.detectChanges();
+    // const row = screen.getByRole('row', {
+    //   name: /0/i
+    // });
+    
+    // const btn = screen.getByRole('button', {
+    //   name: /install a monitor arm/i
+    // });
+    // userEvent.click(btn)
+    // expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
+
   });
 })

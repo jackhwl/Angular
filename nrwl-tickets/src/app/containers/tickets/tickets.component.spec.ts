@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { render, screen, fireEvent } from '@testing-library/angular';
 import { Ticket_vm } from 'src/app/models/model';
@@ -13,19 +13,37 @@ import { within } from '@testing-library/dom';
 import { UtilService } from 'src/app/services';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import userEvent from '@testing-library/user-event';
+import { TicketsComponentsModule } from '../ticketsComponentsModule';
 
+const tickets: Ticket_vm[] = [{
+  id: '0',
+  description: "Install a monitor arm",
+  assigneeId: 111,
+  completed: false,
+  addresses: [],
+  assignees: []
+  },
+   {
+  id: '1',
+  description: "aaa",
+  assigneeId: 222,
+  completed: false,
+  addresses: [],
+  assignees: []
+}];
 const initialState = {
   tickets: {
-    ids: ['0', '1'],
+    ids: [0, 1],
     entities: {
       0: {
-        id: '0',
+        id: 0,
         description: "Install a monitor arm",
         assigneeId: 111,
         completed: false
       },
       1: {
-        id: '1',
+        id: 1,
         description: "Move the desk to the new location",
         assigneeId: 111,
         completed: false
@@ -36,34 +54,73 @@ const initialState = {
     selectedId: null
   }
 };
+const providers = [
+  {provide: APP_BASE_HREF, useValue: '/'},
+  provideMockStore({ 
+    initialState,
+    selectors: [{
+      selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
+      value: tickets
+    },
+    {
+      selector: TicketsSelectors.getLoaded,
+      value: true
+    }
+  ]
+  })
+]
 const utilServiceStub = {
   generateTicketSearchForm(q) {},
 };
 
-const providers = [
-  {provide: APP_BASE_HREF, useValue: '/'},
-  provideMockStore({ 
-    initialState
-  })
-]
+describe('TicketsComponent TestBed', () => {
+  let store: MockStore;
 
-describe('TicketsComponent', () => {
-  // let component: TicketsComponent;
-  // let store = provideMockStore({ initialState })[0]
-  // ;
-  // let fb: FormBuilder;
-  // let service: UtilService = new UtilService(fb);
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ TicketsComponentsModule ],
+        providers
+      }).compileComponents();
 
-  // beforeEach(() => {
-  //   component = new TicketsComponent(store, service);
-  // })
+      store = TestBed.inject(MockStore);
+      
+    })
+  );
 
-  it("should render the list", async () => {
-    const component = await render(TicketsComponent, {
-      imports: [MaterialModule, RouterTestingModule],
-      providers
+
+  it("should dispatch TicketListPageActions.opened() action MockStore", () => {
+    const fixture = TestBed.createComponent(TicketsComponent);
+    const component = fixture.componentInstance;
+    component.ngOnInit();
+    
+
+
+    userEvent.click(screen.getByRole('button'))
+    expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
   });
-    expect(component).toBe('')
+})
 
-  });
+// describe('TicketsComponent', () => {
+//   // let component: TicketsComponent;
+//   // let store = provideMockStore({ initialState })[0]
+//   // ;
+//   // let fb: FormBuilder;
+//   // let service: UtilService = new UtilService(fb);
+
+//   // beforeEach(() => {
+//   //   component = new TicketsComponent(store, service);
+//   // })
+
+//   it("should render the list", async () => {
+//     const component = await render(TicketsComponent, {
+//       imports: [TicketsComponentsModule],
+//       providers
+//     });
+//     userEvent.click(screen.getByRole('link'))
+//     expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
+
+//     expect(component).toBe('')
+
+//   });
 })
