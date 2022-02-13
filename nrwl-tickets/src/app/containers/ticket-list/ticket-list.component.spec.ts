@@ -1,6 +1,7 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { render, screen, fireEvent } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event'
 import { Ticket_vm } from 'src/app/models/model';
 
 import { TicketListComponent } from './ticket-list.component';
@@ -12,6 +13,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { within } from '@testing-library/dom';
 import { TicketListPageActions } from 'src/app/actions';
 import { TicketsComponentsModule } from '../ticketsComponentsModule';
+import { cold } from 'jasmine-marbles';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -84,13 +86,16 @@ describe('TicketListComponent', () => {
     // const btn = within(row).getByRole('button');
     expect(screen.getAllByRole('button')[0]).toBeInTheDocument();
     expect(screen.getAllByRole('button')[1]).toBeInTheDocument();
+
+    userEvent.click(screen.getAllByRole('button')[0])
+    //expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
     expect(screen.getAllByRole('link')).toHaveLength(tickets.length);
   });
 })
 
 describe('TicketListComponent TestBed', () => {
   let store: MockStore;
-  
+
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -99,12 +104,12 @@ describe('TicketListComponent TestBed', () => {
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      jest.spyOn(store, "dispatch");
+      
     })
   );
 
-  it("should dispatch TicketListPageActions.opened() action", () => {
-
+  it("should dispatch TicketListPageActions.opened() action StoreModule+jasmine", () => {
+    jest.spyOn(store, "dispatch");
     const fixture = TestBed.createComponent(TicketListComponent);
     const component = fixture.componentInstance;
     component.ngOnInit();
@@ -113,4 +118,12 @@ describe('TicketListComponent TestBed', () => {
     expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
   });
 
+  it("should dispatch TicketListPageActions.opened() action MockStore", () => {
+    const fixture = TestBed.createComponent(TicketListComponent);
+    const component = fixture.componentInstance;
+    component.ngOnInit();
+    
+    const expected = cold('a', {a: TicketListPageActions.opened()})
+    expect(store.scannedActions$).toBeObservable(expected)
+  });
 })
