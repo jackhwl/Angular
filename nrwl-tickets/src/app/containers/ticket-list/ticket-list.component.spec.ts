@@ -1,4 +1,4 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { render, screen, fireEvent } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event'
@@ -10,10 +10,11 @@ import * as TicketsSelectors from "../../reducers/ticket.selectors";
 import { MaterialModule } from 'src/app/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_BASE_HREF } from '@angular/common';
-import { within } from '@testing-library/dom';
+import { waitFor, waitForElementToBeRemoved, within } from '@testing-library/dom';
 import { TicketActions, TicketListPageActions } from 'src/app/actions';
 import { TicketsComponentsModule } from '../ticketsComponentsModule';
 import { cold } from 'jasmine-marbles';
+import { provideRoutes } from '@angular/router';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -54,27 +55,44 @@ const initialState = {
   }
 };
 const providers = [
-  {provide: APP_BASE_HREF, useValue: '/'},
+  { provide: APP_BASE_HREF, useValue: '/' },
   provideMockStore({ 
     initialState,
     selectors: [{
-      selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
-      value: tickets
-    },
-    {
-      selector: TicketsSelectors.getLoaded,
-      value: true
-    }
-  ]
+        selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
+        value: tickets
+      },
+      {
+        selector: TicketsSelectors.getLoaded,
+        value: true
+      }
+    ]
   })
 ]
 
+
 describe('TicketListComponent', () => {
-  it("should render the list", async () => {
+  async function setup(tickets, loaded=true) {
     await render(TicketListComponent, {
-        imports: [MaterialModule, RouterTestingModule],
-        providers
+      imports: [MaterialModule, RouterTestingModule],
+      providers: [
+        provideMockStore({ 
+          selectors: [{
+              selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
+              value: tickets
+            },
+            {
+              selector: TicketsSelectors.getLoaded,
+              value: loaded
+            }
+          ]
+        })
+      ]
     });
+  }
+
+  it("should render the list", async () => {
+    await setup(tickets);
 
     //const store = TestBed.inject(MockStore);
     //store.dispatch = jest.fn();
@@ -97,16 +115,27 @@ describe('TicketListComponent', () => {
     //expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
   });
 
-  it("should dispatch deleteTicket action after delete button clicked", async () => {
-    await render(TicketListComponent, {
-        imports: [MaterialModule, RouterTestingModule],
-        providers
-    });
-
+  it("should delete one record after delete button clicked", async () => {
+    await setup(tickets);
     const btn = screen.getByRole('button', {
       name: /install a monitor arm/i
     });
     userEvent.click(btn)
+    //const expected = cold('a', {a: TicketListPageActions.opened()})
+    //expect(store.scannedActions$).toBeObservable(expected)
+
+    //await waitFor(() => expect(screen.queryByRole('button', { name: /install a monitor arm/i })).not.toBeInTheDocument()); //.then(() => {
+      
+    //expect(screen.getByRole('button', { name: /aaa/i })).toBeInTheDocument();
+    //})
+    //await screen.findByRole('button', { name: /install a monitor arm/i })
+    //tick(200)
+    //setTimeout(() => {
+        //expect(screen.queryByRole('button', { name: /install a monitor arm/i })).not.toBeInTheDocument();
+        //expect(screen.queryByRole('button', { name: /aaa/i })).toBeInTheDocument();
+        //expect(screen.getAllByRole('link')).toHaveLength(tickets.length-1);
+      //}
+    //);
     //userEvent.click(screen.getByRole('button', {: '0'}))
     //expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
   });
