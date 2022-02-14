@@ -72,7 +72,7 @@ const providers = [
 
 
 describe('TicketListComponent', () => {
-  async function setup(tickets, loaded=true) {
+  async function setup(tickets: Ticket_vm[], loaded=true) {
     await render(TicketListComponent, {
       imports: [MaterialModule, RouterTestingModule],
       providers: [
@@ -89,6 +89,10 @@ describe('TicketListComponent', () => {
         })
       ]
     });
+
+    const store = TestBed.inject(MockStore);
+    store.dispatch = jest.fn();
+    return { dispatchSpy: store.dispatch };
   }
 
   it("should render the list", async () => {
@@ -107,37 +111,22 @@ describe('TicketListComponent', () => {
 
     expect(screen.getAllByRole('link')).toHaveLength(tickets.length);
 
-    const btn = screen.getByRole('button', {
-      name: /install a monitor arm/i
-    });
-    userEvent.click(btn)
+    // const btn = screen.getByRole('button', {
+    //   name: /install a monitor arm/i
+    // });
+    // userEvent.click(btn)
     //userEvent.click(screen.getByRole('button', {: '0'}))
     //expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
   });
 
-  it("should delete one record after delete button clicked", async () => {
-    await setup(tickets);
-    const btn = screen.getByRole('button', {
-      name: /install a monitor arm/i
-    });
-    userEvent.click(btn)
-    //const expected = cold('a', {a: TicketListPageActions.opened()})
-    //expect(store.scannedActions$).toBeObservable(expected)
+  it("should dispatch deleteTicket action after delete button click", async () => {
+    const { dispatchSpy } = await setup(tickets);
 
-    //await waitFor(() => expect(screen.queryByRole('button', { name: /install a monitor arm/i })).not.toBeInTheDocument()); //.then(() => {
-      
-    //expect(screen.getByRole('button', { name: /aaa/i })).toBeInTheDocument();
-    //})
-    //await screen.findByRole('button', { name: /install a monitor arm/i })
-    //tick(200)
-    //setTimeout(() => {
-        //expect(screen.queryByRole('button', { name: /install a monitor arm/i })).not.toBeInTheDocument();
-        //expect(screen.queryByRole('button', { name: /aaa/i })).toBeInTheDocument();
-        //expect(screen.getAllByRole('link')).toHaveLength(tickets.length-1);
-      //}
-    //);
-    //userEvent.click(screen.getByRole('button', {: '0'}))
-    //expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
+    const btn = screen.getByRole('button', { name: /install a monitor arm/i });
+
+    userEvent.click(btn);
+
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
   });
 })
 
