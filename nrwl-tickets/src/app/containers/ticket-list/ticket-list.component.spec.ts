@@ -1,6 +1,6 @@
-import { TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { render, screen, fireEvent } from '@testing-library/angular';
+import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event'
 import { Ticket_vm } from 'src/app/models/model';
 
@@ -9,12 +9,9 @@ import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
 import * as TicketsSelectors from "../../reducers/ticket.selectors";
 import { MaterialModule } from 'src/app/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { APP_BASE_HREF } from '@angular/common';
-import { waitFor, waitForElementToBeRemoved, within } from '@testing-library/dom';
 import { TicketActions, TicketListPageActions } from 'src/app/actions';
 import { TicketsComponentsModule } from '../ticketsComponentsModule';
 import { cold } from 'jasmine-marbles';
-import { provideRoutes } from '@angular/router';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -55,7 +52,6 @@ const initialState = {
   }
 };
 const providers = [
-  { provide: APP_BASE_HREF, useValue: '/' },
   provideMockStore({ 
     initialState,
     selectors: [{
@@ -69,7 +65,6 @@ const providers = [
     ]
   })
 ]
-
 
 describe('TicketListComponent', () => {
   async function setup(tickets: Ticket_vm[], loaded=true) {
