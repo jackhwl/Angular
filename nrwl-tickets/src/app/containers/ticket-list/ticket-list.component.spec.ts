@@ -120,13 +120,56 @@ describe('TicketListComponent', () => {
   });
 
   it("should dispatch deleteTicket action after delete button click", async () => {
-    const { dispatchSpy } = await setup(tickets);
+    const tickets2: Ticket_vm[] = [{
+      id: '111',
+      description: "Install a monitor arm",
+      assigneeId: 3,
+      completed: false,
+      addresses: [],
+      assignees: []
+      },
+       {
+      id: '222',
+      description: "Debug rust program",
+      assigneeId: 4,
+      completed: false,
+      addresses: [],
+      assignees: []
+    }];
+    
+    const { dispatchSpy } = await setup(tickets2);
 
-    const btn = screen.getByRole('button', { name: /install a monitor arm/i });
+    tickets2.forEach(ticket => {
+      const btn = screen.getByRole('button', { name: ticket.description });
 
-    userEvent.click(btn);
+      userEvent.click(btn);
+  
+      expect(dispatchSpy).toHaveBeenCalledWith(TicketActions.deleteTicket({id: ticket.id}));
+    })
+  });
 
-    expect(dispatchSpy).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
+  it("should display loading when load state is false", async () => {
+    const tickets2: Ticket_vm[] = [{
+      id: '111',
+      description: "Install a monitor arm",
+      assigneeId: 3,
+      completed: false,
+      addresses: [],
+      assignees: []
+      },
+       {
+      id: '222',
+      description: "Debug rust program",
+      assigneeId: 4,
+      completed: false,
+      addresses: [],
+      assignees: []
+    }];
+    
+    await setup(tickets2, false);
+    expect(screen.queryAllByRole('link')).toHaveLength(0);
+    expect(screen.queryByText('Loading...')).toBeVisible();
+
   });
 })
 
