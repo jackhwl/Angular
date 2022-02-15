@@ -20,35 +20,49 @@ const ticket: Ticket_vm = {
   assigneeId: 111,
   completed: false,
   addresses: [],
-  assignees: []
+  assignees: [
+    {id: 111, name: 'Victor'},
+    {id: 222, name: 'Jack'}
+  ]
 };
-const initialState = {
-  tickets: {
-    ids: ['0'],
-    entities: {
-      0: {
-        id: '0',
-        description: "Install a monitor arm",
-        assigneeId: 111,
-        completed: false
-      }
-    },
-    error: null,
-    loaded: true,
-    selectedId: '0'
-  }
-};
-const providers = [
-  //{ provide: APP_BASE_HREF, useValue: '/' },
-  provideMockStore({ 
-    initialState,
-    selectors: [{
-        selector: TicketsVmSelectors.getSelectedTicketVmByRoute,
-        value: ticket
-      }
-    ]
-  })
-]
+// const initialState = {
+//   users: {
+//     ids: [111,222],
+//     entities: {
+//       111: {
+//         id: 111, name: 'Victor'
+//       },
+//       222: {
+//         id: 222, name: 'Jack'
+//       }
+//     }
+//   },
+//   tickets: {
+//     ids: ['0'],
+//     entities: {
+//       0: {
+//         id: '0',
+//         description: "Install a monitor arm",
+//         assigneeId: 111,
+//         completed: false
+//       }
+//     },
+//     error: null,
+//     loaded: true,
+//     selectedId: '0'
+//   }
+// };
+// const providers = [
+//   //{ provide: APP_BASE_HREF, useValue: '/' },
+//   provideMockStore({ 
+//     initialState,
+//     selectors: [{
+//         selector: TicketsVmSelectors.getSelectedTicketVmByRoute,
+//         value: ticket
+//       }
+//     ]
+//   })
+// ]
 let service: UtilService = new UtilService(new FormBuilder());
 
 describe('TicketDetailsComponent', () => {
@@ -75,6 +89,7 @@ describe('TicketDetailsComponent', () => {
   it("should render the ticket detail", async () => {
     await setup(ticket);
 
+    expect(await screen.findByText(/victor/i)).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /description/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /description/i })).toHaveValue(ticket.description);
 
