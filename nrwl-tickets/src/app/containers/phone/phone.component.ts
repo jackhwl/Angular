@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
@@ -12,19 +11,15 @@ import { FormGroup } from "@angular/forms";
   selector: "vi-phone",
   templateUrl: "./phone.component.html",
   styleUrls: ["./phone.component.scss"],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PhoneComponent implements OnInit {
+export class PhoneComponent {
   @Input() formGroup: FormGroup;
   @Input() index: number;
   @Output() deletePhone: EventEmitter<number> = new EventEmitter();
   constructor() {}
 
-  ngOnInit(): void {
-    //console.log('phone compoent', this.formGroup.value)
-  }
-
-  delete(pa, index) {
+  delete(index) {
     this.deletePhone.emit(index);
   }
 }

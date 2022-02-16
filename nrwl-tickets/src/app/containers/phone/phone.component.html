@@ -1,11 +1,19 @@
 <div [formGroup]="formGroup">
+  {{ formGroup.value.number }}
   <mat-form-field>
     <mat-label>Type</mat-label>
     <input type="text" matInput formControlName="type" placeholder="Type" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Number</mat-label>
-    <input type="text" matInput formControlName="number" placeholder="Number" />
+    <textarea
+    matInput
+    formControlName="number"
+    type="text"
+    [attr.aria-label]="number"
+  ></textarea>
+    <!-- <input type="text" matInput formControlName="number" placeholder="Number" /> -->
   </mat-form-field>
-  <button type="button" (click)="delete(pa, index)">Delete</button>
+  {{index}}
+  <button type="button" (click)="delete(index)">Delete</button>
 </div>
