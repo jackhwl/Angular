@@ -11,11 +11,11 @@ describe('PhoneComponent', () => {
   let fg = new FormGroup({
     id: new FormControl('1'),
     type: new FormControl('home'),
-    number: new FormControl(416)
+    number: new FormControl('416-333-4455')
   })
   async function setup() {
     //'<vi-phone [formGroup]="phoneformGroup" [index]="index" (deletePhone)="deletePhone(formGroup.controls.phones, $event)" ></vi-phone>'
-    let temp = await render(PhoneComponent, {
+    await render(PhoneComponent, {
       //excludeComponentDeclaration: true,
       //declarations: [PhoneComponent],
       imports: [TicketsComponentsModule, RouterTestingModule],
@@ -26,26 +26,26 @@ describe('PhoneComponent', () => {
       // schemas: [NO_ERRORS_SCHEMA] 
     });
 
-    temp.fixture.componentInstance.formGroup.setValue({
-      id: '2',
-      type: 'mobile',
-      number: '333'
-    });
-    //temp.fixture.componentInstance.index = 2;
-    temp.fixture.detectChanges();
+    // temp.fixture.componentInstance.formGroup.setValue({
+    //   id: '2',
+    //   type: 'mobile',
+    //   number: '333'
+    // });
+    // //temp.fixture.componentInstance.index = 2;
+    // temp.fixture.detectChanges();
 
-    return {temp}
+    // return {temp}
   }
 
   it("should render the phone component", async () => {
 
     //console.log(fg)
-    let { temp } = await setup();
+    await setup();
+    expect(screen.getByRole('textbox', { name: /type/i })).toHaveValue('home');
+    //let label = await temp.findByText(/home/i);
 
-    let label = await temp.findByText(/home/i);
-
-    expect(label).toBeInTheDocument();
-    //expect(await screen.findByText(/416-333-4455/i)).toBeInTheDocument();
+    //expect(label).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /number/i })).toHaveValue('416-333-4455');
 
   });
 });
