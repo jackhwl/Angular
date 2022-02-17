@@ -13,13 +13,19 @@ import { render, screen, fireEvent } from "@testing-library/angular";
 import { UtilService } from "src/app/services";
 import { Ticket_vm } from "src/app/models/model";
 import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
+import { AddressComponent } from "../address/address.component";
+import { PhoneComponent } from "../phone/phone.component";
+import { TicketsComponentsModule } from "../ticketsComponentsModule";
 
 const ticket: Ticket_vm = {
   id: '0',
   description: "Install a monitor arm",
   assigneeId: 111,
   completed: false,
-  addresses: [],
+  addresses: [
+    {id: 'a1', ticketId: '0', addr1: '3050 del mar ave', addr2: null, postcode: '91770', countryId: 'c1', cityId: 'ct1', phones: []},
+    {id: 'a2', ticketId: '0', addr1: '4950 Yonge st', addr2: null, postcode: 'L3K 3M2', countryId: 'c1', cityId: 'ct2', phones: []}
+  ],
   assignees: [
     {id: 111, name: 'Victor'},
     {id: 222, name: 'Jack'}
@@ -68,7 +74,9 @@ let service: UtilService = new UtilService(new FormBuilder());
 describe('TicketDetailsComponent', () => {
   async function setup(ticket: Ticket_vm) {
     await render(TicketDetailsComponent, {
-      imports: [MaterialModule, ReactiveFormsModule, RouterTestingModule],
+      //declarations: [AddressComponent, PhoneComponent],
+      excludeComponentDeclaration: true,
+      imports: [TicketsComponentsModule, RouterTestingModule],
       providers: [
         { provide: UtilService, useValue: service}, 
         provideMockStore({ 
@@ -89,7 +97,8 @@ describe('TicketDetailsComponent', () => {
   it("should render the ticket detail", async () => {
     await setup(ticket);
 
-    expect(await screen.findByText(/victor/i)).toBeInTheDocument();
+    expect(await screen.findByText(ticket.assignees[0].name)).toBeInTheDocument();
+
     expect(screen.getByRole('textbox', { name: /description/i })).toBeInTheDocument();
     expect(screen.getByRole('textbox', { name: /description/i })).toHaveValue(ticket.description);
 
@@ -98,6 +107,16 @@ describe('TicketDetailsComponent', () => {
     expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /remove/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
+
+  });
+
+  it("should render the ticket addresses detail", async () => {
+    await setup(ticket);
+
+    expect(await screen.findByText(/3050 del mar ave/i)).toBeInTheDocument();
+    // expect(await screen.findByText(ticket.addresses[0].postcode)).toBeInTheDocument();
+    // expect(await screen.findByText(ticket.addresses[1].addr1)).toBeInTheDocument();
+    // expect(await screen.findByText(ticket.addresses[1].postcode)).toBeInTheDocument();
 
   });
 });

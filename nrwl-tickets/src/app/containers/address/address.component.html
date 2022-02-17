@@ -12,7 +12,7 @@
       <mat-label>Postal Code</mat-label>
       <input type="text" matInput formControlName="postcode" placeholder="Postal Codes" />
     </mat-form-field>
-    <button type="button" (click)="delete(pa, index)">Delete</button>
+    <button type="button" (click)="delete(index)">Delete</button>
     
    <div formArrayName="phones">
       <button type="button" (click)="addPhone(formGroup.controls.phones)">Add Phone</button>

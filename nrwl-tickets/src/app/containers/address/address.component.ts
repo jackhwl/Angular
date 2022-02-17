@@ -17,12 +17,12 @@ export class AddressComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  delete(pa, index) {
+  delete(index) {
     this.deleteAddress.emit(index);
   }
   
-  deletePhone(pa: FormArray, id: number) {
-    pa.removeAt(id);
+  deletePhone(pa: FormArray, index: number) {
+    pa.removeAt(index);
   }
 
   addPhone(pa: FormArray) {

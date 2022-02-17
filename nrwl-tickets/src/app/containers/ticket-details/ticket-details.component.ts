@@ -76,8 +76,8 @@ export class TicketDetailsComponent implements OnInit {
   //   this.store.dispatch(TicketDetailsPageActions.upsertTicketVm({ ticketVm }));
   // }
 
-  deleteAddress(pa: FormArray, id: number) {
-    pa.removeAt(id);
+  deleteAddress(pa: FormArray, index: number) {
+    pa.removeAt(index);
   }
 
   addAddress(id: string, pa: FormArray) {

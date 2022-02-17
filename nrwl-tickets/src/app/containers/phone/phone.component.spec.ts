@@ -1,29 +1,23 @@
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { TestBed } from "@angular/core/testing";
-import { FormBuilder, FormControl, FormGroup, FormsModule } from "@angular/forms";
-import { RouterTestingModule } from "@angular/router/testing";
+import { FormBuilder } from "@angular/forms";
 import { render, screen, fireEvent } from "@testing-library/angular";
 
 import { PhoneComponent } from "../phone/phone.component";
 import { TicketsComponentsModule } from "../ticketsComponentsModule";
 
+const formGroup = new FormBuilder().group({
+  id: ['1'],
+  type: ['home'],
+  number: ['416-333-4455']
+})
+
 describe('PhoneComponent', () => {
-  let fg = new FormGroup({
-    id: new FormControl('1'),
-    type: new FormControl('home'),
-    number: new FormControl('416-333-4455')
-  })
-  async function setup() {
-    //'<vi-phone [formGroup]="phoneformGroup" [index]="index" (deletePhone)="deletePhone(formGroup.controls.phones, $event)" ></vi-phone>'
+  async function setup(formGroup) {
     await render(PhoneComponent, {
-      //excludeComponentDeclaration: true,
-      //declarations: [PhoneComponent],
-      imports: [TicketsComponentsModule, RouterTestingModule],
+      imports: [TicketsComponentsModule],
       componentProperties: { 
-        formGroup: fg,
-        index: 2
-      },
-      // schemas: [NO_ERRORS_SCHEMA] 
+        formGroup,
+        index: formGroup.value.id.value
+      }
     });
 
     // temp.fixture.componentInstance.formGroup.setValue({
@@ -38,14 +32,9 @@ describe('PhoneComponent', () => {
   }
 
   it("should render the phone component", async () => {
-
-    //console.log(fg)
-    await setup();
-    expect(screen.getByRole('textbox', { name: /type/i })).toHaveValue('home');
-    //let label = await temp.findByText(/home/i);
-
-    //expect(label).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /number/i })).toHaveValue('416-333-4455');
+    await setup(formGroup);
+    expect(screen.getByRole('textbox', { name: /type/i })).toHaveValue(formGroup.value.type.value);
+    expect(screen.getByRole('textbox', { name: /number/i })).toHaveValue(formGroup.value.number.value);
 
   });
 });
