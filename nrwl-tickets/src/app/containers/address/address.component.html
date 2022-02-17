@@ -2,17 +2,17 @@
   
     <mat-form-field>
       <mat-label>Address 1</mat-label>
-      <input type="text" matInput formControlName="addr1" placeholder="Address 1" />
+      <input type="text" matInput formControlName="addr1" aria-label="Address 1" placeholder="Address 1" />
     </mat-form-field>
     <mat-form-field>
         <mat-label>Address 2</mat-label>
-        <input type="text" matInput formControlName="addr2" placeholder="Address 2" />
+        <input type="text" matInput formControlName="addr2" aria-label="Address 2" placeholder="Address 2" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Postal Code</mat-label>
-      <input type="text" matInput formControlName="postcode" placeholder="Postal Codes" />
+      <input type="text" matInput formControlName="postcode" aria-label="Postal Code" placeholder="Postal Codes" />
     </mat-form-field>
-    <button type="button" (click)="delete()">Delete</button>
+    <button type="button" aria-label="delete address" (click)="delete()">Delete</button>
     
    <div formArrayName="phones">
       <button type="button" (click)="addPhone()">Add Phone</button>
