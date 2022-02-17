@@ -1,5 +1,6 @@
 import { FormBuilder } from "@angular/forms";
 import { render, screen, fireEvent } from "@testing-library/angular";
+import userEvent from "@testing-library/user-event";
 
 import { PhoneComponent } from "../phone/phone.component";
 import { TicketsComponentsModule } from "../ticketsComponentsModule";
@@ -11,12 +12,15 @@ const formGroup = new FormBuilder().group({
 })
 
 describe('PhoneComponent', () => {
-  async function setup(formGroup) {
+  async function setup(formGroup, index = 3, spy = jest.fn()) {
     await render(PhoneComponent, {
       imports: [TicketsComponentsModule],
       componentProperties: { 
         formGroup,
-        index: formGroup.value.id.value
+        index,
+        deletePhone: {
+          emit: spy
+        } as any
       }
     });
 
@@ -35,7 +39,17 @@ describe('PhoneComponent', () => {
     await setup(formGroup);
     expect(screen.getByRole('textbox', { name: /type/i })).toHaveValue(formGroup.value.type.value);
     expect(screen.getByRole('textbox', { name: /number/i })).toHaveValue(formGroup.value.number.value);
+  });
 
+  it("should emit index when delete button clicked", async () => {
+    const deletePhoneSpy = jest.fn()
+    const index = 5
+    await setup(formGroup, index, deletePhoneSpy);
+    const btn = screen.getByRole('button', { name: /delete/i });
+
+    userEvent.click(btn);
+
+    expect(deletePhoneSpy).toHaveBeenCalledWith(index);
   });
 });
 
