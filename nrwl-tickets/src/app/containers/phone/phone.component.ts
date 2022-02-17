@@ -16,10 +16,10 @@ import { FormGroup } from "@angular/forms";
 export class PhoneComponent {
   @Input() formGroup: FormGroup;
   @Input() index: number;
-  @Output() deletePhone: EventEmitter<number> = new EventEmitter();
+  @Output() deletePhone: EventEmitter<number> = new EventEmitter<number>();
   constructor() {}
 
-  delete(index) {
-    this.deletePhone.emit(index);
+  delete() {
+    this.deletePhone.emit(this.index);
   }
 }

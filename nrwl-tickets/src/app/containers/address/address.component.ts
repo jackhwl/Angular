@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { UtilService } from 'src/app/services';
 
@@ -6,26 +6,25 @@ import { UtilService } from 'src/app/services';
   selector: 'vi-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddressComponent implements OnInit {
+export class AddressComponent {
   @Input() formGroup: FormGroup;
   @Input() index: number;
   @Output() deleteAddress: EventEmitter<number> = new EventEmitter();
   constructor(private service: UtilService) { }
 
-  ngOnInit(): void {
-  }
-
-  delete(index) {
-    this.deleteAddress.emit(index);
+  delete() {
+    this.deleteAddress.emit(this.index);
   }
   
-  deletePhone(pa: FormArray, index: number) {
+  deletePhone(index: number) {
+    const pa = this.formGroup.controls.phones as FormArray
     pa.removeAt(index);
   }
 
-  addPhone(pa: FormArray) {
+  addPhone() {
+    const pa = this.formGroup.controls.phones as FormArray
     const ep = this.service.getEmptyPhoneFG();
     ep.addControl('addressId', new FormControl(this.formGroup.value.id));
     pa.push(ep)

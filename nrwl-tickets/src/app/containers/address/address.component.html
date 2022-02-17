@@ -12,10 +12,10 @@
       <mat-label>Postal Code</mat-label>
       <input type="text" matInput formControlName="postcode" placeholder="Postal Codes" />
     </mat-form-field>
-    <button type="button" (click)="delete(index)">Delete</button>
+    <button type="button" (click)="delete()">Delete</button>
     
    <div formArrayName="phones">
-      <button type="button" (click)="addPhone(formGroup.controls.phones)">Add Phone</button>
+      <button type="button" (click)="addPhone()">Add Phone</button>
       <div
         *ngFor="
           let phoneformGroup of formGroup.controls.phones.controls;
@@ -26,7 +26,7 @@
         <vi-phone
           [formGroup]="phoneformGroup"
           [index]="index"
-          (deletePhone)="deletePhone(formGroup.controls.phones, $event)"
+          (deletePhone)="deletePhone($event)"
         ></vi-phone>
       </div>
     </div>
