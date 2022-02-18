@@ -24,10 +24,13 @@ export class AddressComponent {
   }
 
   addPhone() {
+    console.log('addPhone clicked')
     const pa = this.formGroup.controls.phones as FormArray
+    console.log(pa.length)
     const ep = this.service.getEmptyPhoneFG();
     ep.addControl('addressId', new FormControl(this.formGroup.value.id));
     pa.push(ep)
+    console.log(pa.length)
   }
 
 }

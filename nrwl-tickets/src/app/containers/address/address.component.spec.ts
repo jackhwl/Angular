@@ -6,12 +6,12 @@ import { UtilService } from "src/app/services";
 
 import { TicketsComponentsModule } from "../ticketsComponentsModule";
 import { AddressComponent } from "./address.component";
-const phoneFormGroup1 = new FormBuilder().group({
+const phoneFormGroup0 = new FormBuilder().group({
   id: ['1'],
   type: ['home'],
   number: ['416-333-4455']
 })
-const phoneFormGroup2 = new FormBuilder().group({
+const phoneFormGroup1 = new FormBuilder().group({
   id: ['2'],
   type: ['mobile'],
   number: ['647-443-1345']
@@ -22,8 +22,8 @@ const formGroup = new FormBuilder().group({
   addr2: ['aaa'],
   postcode: ['91770'],
   phones: new FormBuilder().array([
-    phoneFormGroup1,
-    phoneFormGroup2
+    phoneFormGroup0,
+    phoneFormGroup1
   ])
 })
 
@@ -62,7 +62,46 @@ describe('AddressComponent', () => {
     expect(childComponents).toHaveLength(formGroup.value.phones.length);
   });
 
-  it("should emit index when delete button clicked", async () => {
+  it('should remove a phone component after delete phone event emit', async () => {
+    const formGroup = new FormBuilder().group({
+      id: ['a1'],
+      addr1: ['3050 del mar ave'],
+      addr2: ['aaa'],
+      postcode: ['91770'],
+      phones: new FormBuilder().array([
+        phoneFormGroup0,
+        phoneFormGroup1
+      ])
+    })
+    const { container } = await setup(formGroup);
+    const { debugElement } = container.fixture;
+    const childComponent = debugElement.query(By.css('vi-phone'));    
+    childComponent.triggerEventHandler('deletePhone', 0)
+    container.fixture.detectChanges();
+    const childComponents = debugElement.queryAll(By.css('vi-phone'));
+    expect(childComponents).toHaveLength(formGroup.value.phones.length);
+  });
+
+  it('should add a phone component after add phone button clicked', async () => {
+    const formGroup = new FormBuilder().group({
+      id: ['a1'],
+      addr1: ['3050 del mar ave'],
+      addr2: ['aaa'],
+      postcode: ['91770'],
+      phones: new FormBuilder().array([
+        phoneFormGroup0,
+        phoneFormGroup1
+      ])
+    })
+    const { container } = await setup(formGroup);
+    const { debugElement } = container.fixture;
+    const btn = screen.getByRole('button', { name: /add phone/i });
+    userEvent.click(btn)
+    const childComponents = debugElement.queryAll(By.css('vi-phone'));
+    expect(childComponents).toHaveLength(formGroup.value.phones.length);
+  });
+
+  it("should emit index when delete address button clicked", async () => {
     const deleteAddressSpy = jest.fn()
     const index = 5
     await setup(formGroup, index, deleteAddressSpy);

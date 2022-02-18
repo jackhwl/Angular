@@ -15,7 +15,7 @@
     <button type="button" aria-label="delete address" (click)="delete()">Delete</button>
     
    <div formArrayName="phones">
-      <button type="button" (click)="addPhone()">Add Phone</button>
+      <button type="button" aria-label="add phone" (click)="addPhone()">Add Phone</button>
       <div
         *ngFor="
           let phoneformGroup of formGroup.controls.phones.controls;
