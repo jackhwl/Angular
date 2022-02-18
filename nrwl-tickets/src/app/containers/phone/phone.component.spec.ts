@@ -1,5 +1,5 @@
 import { FormBuilder } from "@angular/forms";
-import { render, screen, fireEvent } from "@testing-library/angular";
+import { render, screen } from "@testing-library/angular";
 import userEvent from "@testing-library/user-event";
 
 import { PhoneComponent } from "../phone/phone.component";
@@ -41,7 +41,7 @@ describe('PhoneComponent', () => {
     expect(screen.getByRole('textbox', { name: /number/i })).toHaveValue(formGroup.value.number.value);
   });
 
-  it("should emit index when delete button clicked", async () => {
+  it("should emit index when delete phone button clicked", async () => {
     const deletePhoneSpy = jest.fn()
     const index = 5
     await setup(formGroup, index, deletePhoneSpy);
@@ -52,24 +52,3 @@ describe('PhoneComponent', () => {
     expect(deletePhoneSpy).toHaveBeenCalledWith(index);
   });
 });
-
-// describe("PhoneComponent", () => {
-//   let component: PhoneComponent;
-//   let fixture: ComponentFixture<PhoneComponent>;
-
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [PhoneComponent]
-//     }).compileComponents();
-//   });
-
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(PhoneComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it("should create", () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
