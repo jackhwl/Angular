@@ -39,6 +39,7 @@ describe('PhoneComponent', () => {
     await setup(formGroup);
     expect(screen.getByRole('textbox', { name: /type/i })).toHaveValue(formGroup.value.type.value);
     expect(screen.getByRole('textbox', { name: /number/i })).toHaveValue(formGroup.value.number.value);
+    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument();
   });
 
   it("should emit index when delete phone button clicked", async () => {

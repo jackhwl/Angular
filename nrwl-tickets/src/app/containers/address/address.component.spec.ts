@@ -1,6 +1,6 @@
 import { FormBuilder } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { render, screen, fireEvent } from "@testing-library/angular";
+import { render, screen } from "@testing-library/angular";
 import userEvent from "@testing-library/user-event";
 import { UtilService } from "src/app/services";
 
@@ -52,6 +52,8 @@ describe('AddressComponent', () => {
     expect(screen.getByRole('textbox', { name: /address 1/i })).toHaveValue(formGroup.value.addr1.value);
     expect(screen.getByRole('textbox', { name: /address 2/i })).toHaveValue(formGroup.value.addr2.value);
     expect(screen.getByRole('textbox', { name: /postal code/i })).toHaveValue(formGroup.value.postcode.value);
+    expect(screen.getByRole('button', { name: /delete address/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /add phone/i })).toBeInTheDocument();
   });
 
   it('renders phone component', async () => {
