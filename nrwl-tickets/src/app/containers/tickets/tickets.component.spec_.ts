@@ -97,7 +97,7 @@ describe('TicketsComponent TestBed', () => {
 
 
     userEvent.click(screen.getByRole('button'))
-    expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
+    expect(store.dispatch).toHaveBeenCalledWith(TicketsActions.deleteTicket({id: '0'}));
   });
 })
 
@@ -123,4 +123,4 @@ describe('TicketsComponent TestBed', () => {
 //     expect(component).toBe('')
 
 //   });
-})
+//})
