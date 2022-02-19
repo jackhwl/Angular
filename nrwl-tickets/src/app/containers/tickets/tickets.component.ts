@@ -45,6 +45,10 @@ export class TicketsComponent implements OnInit, OnDestroy {
     select(TicketsSelectors.getError)
   );
 
+  routerRouteParamId$: Observable<string> = this.store.pipe(
+    select(selectRouteParam("id"))
+  );
+  
   routerQueryParam$: Observable<string> = this.store.pipe(
     select(selectQueryParam("q"))
   );
