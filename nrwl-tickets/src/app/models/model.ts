@@ -11,8 +11,8 @@ export interface User  {
     addr1: string;
     addr2: string;
     postcode: string;
-    countryId: string;
-    cityId: string;
+    countryId?: string;
+    cityId?: string;
     ticketId: string;
   };
 
@@ -21,7 +21,7 @@ export interface User  {
   };
 
   export interface Address_vm extends AddressBase {
-    phones: Phone[];
+    phones?: Phone[];
   };
   
   export interface TicketBase {
@@ -38,6 +38,7 @@ export interface User  {
   export interface Ticket_vm extends TicketBase {
     addresses: Address_vm[];
     assignees: User[];
+    title?: string;
   };
   
   export interface Phone {
