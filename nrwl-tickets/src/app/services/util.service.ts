@@ -15,7 +15,6 @@ export class UtilService {
       assigneeId: [ticket.assigneeId, Validators.required],
       completed: [ticket.completed, Validators.required],
       description: [ticket.description, Validators.required],
-      phones: this.fb.array([]),
       addresses: this.fb.array([]),
       title: [ticket.id === null ? "New Ticket" : "Edit Ticket"],
       assignees: [ticket.assignees]
