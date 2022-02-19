@@ -1,12 +1,28 @@
 import {render, screen, fireEvent} from '@testing-library/angular'
 import { AppComponent } from "./app.component";
 import { AppModule } from '../app.module';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
 describe("AppComponent", () => {
-  xit("should create the app", async () => {
-    await render(AppComponent, {
-        imports: [AppModule]
+  async function setup() {
+    const container = await render(AppComponent, {
+      imports: [AppModule, RouterTestingModule]
     });
-    expect(screen.getByText('Run all tests')).toBeInTheDocument();
+
+    return { container }
+  }
+  
+  it("should create the app", async () => {
+    await setup();
+    expect(screen.getByText(/run all tests/i)).toBeInTheDocument();
+  });
+
+  it("should render footer component", async () => {
+    const { container } = await setup();
+    const { debugElement } = container.fixture;
+    const childComponent = debugElement.query(By.css('app-footer'));
+    expect(childComponent).toBeTruthy();
   });
 //   xit(`should have as title 'app'`, async () => {
 //     const fixture = TestBed.createComponent(AppComponent);
