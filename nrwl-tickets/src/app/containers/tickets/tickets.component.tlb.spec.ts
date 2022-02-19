@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { of } from "rxjs";
 import { MaterialModule } from "../../material.module";
 import { TicketsComponent } from "./tickets.component";
-import { TicketsListComponent } from "../ticket-list/ticket-list.component";
+import { TicketListComponent } from "../ticket-list/ticket-list.component";
 import { TicketDetailsComponent } from "../ticket-details/ticket-details.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { ActionsSubject, StoreModule } from "@ngrx/store";
@@ -119,14 +119,14 @@ describe("Tickets Component", () => {
     const basePath = "base";
     const actionSub: ActionsSubject = new ActionsSubject();
     const { navigate } = await render(TicketsComponent, {
-      declarations: [TicketDetailsComponent, TicketsListComponent],
+      declarations: [TicketDetailsComponent, TicketListComponent],
       imports: [
         BrowserAnimationsModule,
         RouterTestingModule,
         ReactiveFormsModule,
         MaterialModule,
         StoreModule.forRoot({
-          [fromTickets.TICKETS_FEATURE_KEY]: fromTickets.ticketsReducer
+          [fromTickets.TICKETS_FEATURE_KEY]: fromTickets.reducer
         })
       ],
       componentProviders: [

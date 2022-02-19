@@ -12,6 +12,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { selectQueryParam } from 'src/app/reducers/router.selectors';
 import { of } from 'rxjs';
+import { RouterLinkWithHref } from '@angular/router';
 
 const q: string = '0'
 let service: UtilService = new UtilService(new FormBuilder());
@@ -35,8 +36,8 @@ describe('TicketsComponent', () => {
         })
       ],      
       componentProperties: { 
-        listForm: service.generateTicketSearchForm('0'),
-        routerQueryParam$: of('0')
+        listForm: service.generateTicketSearchForm(q),
+        routerQueryParam$: of(q)
       }
     });
 
@@ -44,23 +45,32 @@ describe('TicketsComponent', () => {
     store.dispatch = jest.fn();
     return { container, dispatchSpy: store.dispatch };
   }
+  
+  it("should render ticket component", async() => {
+    await setup('');
+    expect(screen.getByRole('link', { name: /add new ticket/i})).toHaveAttribute('href', '/new');
+    expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue('');
+  });
 
   xit("should dispatch TicketListPageActions.filterParamChanged() action", async () => {
-    const { container, dispatchSpy } = await setup('0');
+    const { container, dispatchSpy } = await setup('');
     const component = container.fixture.componentInstance;
     component.ngOnInit();
     container.fixture.detectChanges();
-    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({q: '0'}));
+
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({q: ''}));
   });
 
   xit("should render ticket list component", async () => {
-    const { container } = await setup('0');
+    const { container } = await setup('');
     const { debugElement } = container.fixture;
     const component = container.fixture.componentInstance;
     component.ngOnInit();
     container.fixture.detectChanges();
     const childComponent = debugElement.query(By.css('vi-ticket-list'));
     expect(childComponent).toBeTruthy();
+
+
     // const childComponents = debugElement.queryAll(By.css('vi-ticket-list'));
     // expect(childComponents).toHaveLength(ticketVm.addresses.length);
   });

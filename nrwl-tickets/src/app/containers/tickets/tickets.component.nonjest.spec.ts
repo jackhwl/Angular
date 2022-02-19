@@ -110,12 +110,6 @@ describe("Tickets Component", () => {
     })
   );
 
-  it("should create the app", () => {
-    const fixture = TestBed.createComponent(TicketsComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
   it("should have '/tickets/new' in 'Add New' link", () => {
     const fixture = TestBed.createComponent(TicketsComponent);
     fixture.detectChanges();
@@ -126,19 +120,6 @@ describe("Tickets Component", () => {
       return de.properties["href"] === "/tickets/new";
     });
     expect(index).toBeGreaterThan(-1);
-  });
-
-  it("should create TicketsComponent", () => {
-    const fixture = TestBed.createComponent(TicketsComponent);
-    const component = fixture.componentInstance;
-    
-    expect(component).toBeDefined();
-  });
-
-  it("should create TicketsListComponent", () => {
-    const fixture = TestBed.createComponent(TicketListComponent);
-    const component = fixture.componentInstance;
-    expect(component).toBeDefined();
   });
 
   xit("should have TicketsListComponent render", fakeAsync(() => {
