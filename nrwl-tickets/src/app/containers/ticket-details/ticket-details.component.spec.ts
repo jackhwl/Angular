@@ -116,6 +116,7 @@ describe('TicketDetailsComponent', () => {
   it("should render the ticket detail", async () => {
     await setup(ticketVm);
 
+    expect(await screen.findByLabelText(/not finished/i)).toBeChecked()
     expect(await screen.findByText(ticketVm.assignees[0].name)).toBeInTheDocument();
 
     expect(screen.getByRole('textbox', { name: /description/i })).toBeInTheDocument();
@@ -167,7 +168,6 @@ describe('TicketDetailsComponent', () => {
     //container.fixture.detectChanges();
     //expect(location).toBe('/tickets')
   });
-
   
   it("should dispatch upsertTicketVm action after submit button click", async () => {
     const { container, dispatchSpy } = await setup(ticketVm);
