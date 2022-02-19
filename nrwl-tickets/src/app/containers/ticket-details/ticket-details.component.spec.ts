@@ -11,20 +11,22 @@ import { TicketsComponentsModule } from "../ticketsComponentsModule";
 import { of } from "rxjs";
 import { By } from "@angular/platform-browser";
 import userEvent from "@testing-library/user-event";
+import { TicketDetailsPageActions } from "src/app/actions";
 
-const ticket: Ticket_vm = {
+const ticketVm: Ticket_vm = {
   id: '0',
   description: "Install a monitor arm",
   assigneeId: 111,
   completed: false,
   addresses: [
-    {id: 'a1', ticketId: '0', addr1: '3050 del mar ave', addr2: null, postcode: '91770', countryId: 'c1', cityId: 'ct1', phones: []},
-    {id: 'a2', ticketId: '0', addr1: '4950 Yonge st', addr2: null, postcode: 'L3K 3M2', countryId: 'c1', cityId: 'ct2', phones: []}
+    {id: 'a1', ticketId: '0', addr1: '3050 del mar ave', addr2: null, postcode: '91770', phones: []},
+    {id: 'a2', ticketId: '0', addr1: '4950 Yonge st', addr2: null, postcode: 'L3K 3M2', phones: []}
   ],
   assignees: [
     {id: 111, name: 'Victor'},
     {id: 222, name: 'Jack'}
-  ]
+  ],
+  title: 'Edit Ticket'
 };
 // const initialState = {
 //   users: {
@@ -82,7 +84,8 @@ describe('TicketDetailsComponent', () => {
         })
       ],
       componentProperties: { 
-        detailForm$: of(service.generateTicketForm(ticket))
+        detailForm$: of(service.generateTicketForm(ticket)),
+        ticketId: ticket.id
       }
     });
 
@@ -92,12 +95,12 @@ describe('TicketDetailsComponent', () => {
   }
 
   it("should render the ticket detail", async () => {
-    await setup(ticket);
+    await setup(ticketVm);
 
-    expect(await screen.findByText(ticket.assignees[0].name)).toBeInTheDocument();
+    expect(await screen.findByText(ticketVm.assignees[0].name)).toBeInTheDocument();
 
     expect(screen.getByRole('textbox', { name: /description/i })).toBeInTheDocument();
-    expect(screen.getByRole('textbox', { name: /description/i })).toHaveValue(ticket.description);
+    expect(screen.getByRole('textbox', { name: /description/i })).toHaveValue(ticketVm.description);
 
     expect(screen.getByRole('button', { name: /add address/i })).toBeInTheDocument();
 
@@ -108,23 +111,43 @@ describe('TicketDetailsComponent', () => {
   });
 
   it("should render addresses component", async () => {
-    const { container } = await setup(ticket);
+    const { container } = await setup(ticketVm);
     const { debugElement } = container.fixture;
     const childComponent = debugElement.query(By.css('vi-address'));
     expect(childComponent).toBeTruthy();
     const childComponents = debugElement.queryAll(By.css('vi-address'));
-    expect(childComponents).toHaveLength(ticket.addresses.length);
+    expect(childComponents).toHaveLength(ticketVm.addresses.length);
+  });
+
+  it('should remove an address component after delete address event emit', async () => {
+    const { container } = await setup(ticketVm);
+    const { debugElement } = container.fixture;
+    const childComponent = debugElement.query(By.css('vi-address'));    
+    childComponent.triggerEventHandler('deleteAddress', 0)
+    container.fixture.detectChanges();
+    const childComponents = debugElement.queryAll(By.css('vi-address'));
+    expect(childComponents).toHaveLength(ticketVm.addresses.length-1);
   });
 
   it('should add an address component after add address button clicked', async () => {
-    const { container } = await setup(ticket);
+    const { container } = await setup(ticketVm);
     const { debugElement } = container.fixture;
     const btn = screen.getByRole('button', { name: /add address/i });
     userEvent.click(btn)
     const childComponents = debugElement.queryAll(By.css('vi-address'));
-    expect(childComponents).toHaveLength(ticket.addresses.length+1);
+    expect(childComponents).toHaveLength(ticketVm.addresses.length+1);
+  });
+
+  it("should dispatch deleteTicket action after delete ticket button click", async () => {
+    const { container, dispatchSpy } = await setup(ticketVm);
+    const { debugElement } = container.fixture;
+    const btn = screen.getByRole('button', { name: /remove/i });
+    userEvent.click(btn)
+
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketDetailsPageActions.deleteTicketVm({ticketVm}));
   });
 });
+
 
 // describe("Ticket Details Component", () => {
 //   const ticket = {
