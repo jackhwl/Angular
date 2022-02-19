@@ -3,7 +3,6 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { FormBuilder } from "@angular/forms";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
-//import { TicketsFacade } from "../../services";
 import { render, screen, fireEvent } from "@testing-library/angular";
 import { UtilService } from "src/app/services";
 import { Ticket_vm } from "src/app/models/model";
@@ -11,34 +10,8 @@ import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
 import { TicketsComponentsModule } from "../ticketsComponentsModule";
 import { of } from "rxjs";
 import { By } from "@angular/platform-browser";
+import userEvent from "@testing-library/user-event";
 
-const addressFormGroup0 = new FormBuilder().group({
-  id: ['a1'],
-  ticketId: ['0'],
-  addr1: ['3050 del mar ave'],
-  addr2: [''],
-  postcode: ['91770'],
-  phones: []
-})
-const addressFormGroup1 = new FormBuilder().group({
-  id: ['a2'],
-  ticketId: ['0'],
-  addr1: ['4950 Yonge st'],
-  addr2: [''],
-  postcode: ['L3K 3M2'],
-  phones: []
-})
-const formGroup = new FormBuilder().group({
-  id: ['0'],
-  description: ['Install a monitor arm'],
-  assigneeId: [111],
-  completed: [false],
-  addresses: new FormBuilder().array([
-    addressFormGroup0,
-    addressFormGroup1
-  ]),
-  assignees: []
-})
 const ticket: Ticket_vm = {
   id: '0',
   description: "Install a monitor arm",
@@ -94,7 +67,7 @@ const ticket: Ticket_vm = {
 let service: UtilService = new UtilService(new FormBuilder());
 
 describe('TicketDetailsComponent', () => {
-  async function setup(ticket: Ticket_vm, formGroup) {
+  async function setup(ticket: Ticket_vm) {
     const container = await render(TicketDetailsComponent, {
       excludeComponentDeclaration: true,
       imports: [TicketsComponentsModule, RouterTestingModule],
@@ -109,7 +82,7 @@ describe('TicketDetailsComponent', () => {
         })
       ],
       componentProperties: { 
-        detailForm$: of(formGroup)
+        detailForm$: of(service.generateTicketForm(ticket))
       }
     });
 
@@ -119,7 +92,7 @@ describe('TicketDetailsComponent', () => {
   }
 
   it("should render the ticket detail", async () => {
-    await setup(ticket, formGroup);
+    await setup(ticket);
 
     expect(await screen.findByText(ticket.assignees[0].name)).toBeInTheDocument();
 
@@ -135,13 +108,21 @@ describe('TicketDetailsComponent', () => {
   });
 
   it("should render addresses component", async () => {
-    const { container } = await setup(ticket, formGroup);
+    const { container } = await setup(ticket);
     const { debugElement } = container.fixture;
     const childComponent = debugElement.query(By.css('vi-address'));
     expect(childComponent).toBeTruthy();
     const childComponents = debugElement.queryAll(By.css('vi-address'));
-    expect(childComponents).toHaveLength(formGroup.value.addresses.length);
+    expect(childComponents).toHaveLength(ticket.addresses.length);
+  });
 
+  it('should add an address component after add address button clicked', async () => {
+    const { container } = await setup(ticket);
+    const { debugElement } = container.fixture;
+    const btn = screen.getByRole('button', { name: /add address/i });
+    userEvent.click(btn)
+    const childComponents = debugElement.queryAll(By.css('vi-address'));
+    expect(childComponents).toHaveLength(ticket.addresses.length+1);
   });
 });
 
