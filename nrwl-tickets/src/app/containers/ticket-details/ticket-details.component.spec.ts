@@ -1,4 +1,4 @@
-import { TestBed } from "@angular/core/testing";
+import { flush, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormBuilder } from "@angular/forms";
 import { TicketDetailsComponent } from "./../ticket-details/ticket-details.component";
@@ -12,6 +12,7 @@ import { of } from "rxjs";
 import { By } from "@angular/platform-browser";
 import userEvent from "@testing-library/user-event";
 import { TicketDetailsPageActions } from "src/app/actions";
+import { cold } from "jasmine-marbles";
 
 const ticketVm: Ticket_vm = {
   id: '0',
@@ -91,8 +92,26 @@ describe('TicketDetailsComponent', () => {
 
     const store = TestBed.inject(MockStore);
     store.dispatch = jest.fn();
-    return { container, dispatchSpy: store.dispatch };
+    return { container, dispatchSpy: store.dispatch, scannedActions$: store.scannedActions$ };
   }
+
+  it("should dispatch TicketDetailsPageActions.opened() action", async () => {
+    const { container, dispatchSpy } = await setup(ticketVm);
+    const component = container.fixture.componentInstance;
+    component.ngOnInit();
+
+    expect(dispatchSpy).toHaveBeenCalledTimes(1);
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketDetailsPageActions.opened());
+  });
+
+  it("should scanned TicketDetailsPageActions.opened() action", async () => {
+    const { container, scannedActions$ } = await setup(ticketVm);
+    const component = container.fixture.componentInstance;
+    component.ngOnInit();
+    
+    const expected = cold('a', {a: TicketDetailsPageActions.opened()})
+    expect(scannedActions$).toBeObservable(expected)
+  });
 
   it("should render the ticket detail", async () => {
     await setup(ticketVm);
@@ -140,11 +159,30 @@ describe('TicketDetailsComponent', () => {
 
   it("should dispatch deleteTicket action after delete ticket button click", async () => {
     const { container, dispatchSpy } = await setup(ticketVm);
-    const { debugElement } = container.fixture;
     const btn = screen.getByRole('button', { name: /remove/i });
     userEvent.click(btn)
 
     expect(dispatchSpy).toHaveBeenCalledWith(TicketDetailsPageActions.deleteTicketVm({ticketVm}));
+    //flush();
+    //container.fixture.detectChanges();
+    //expect(location).toBe('/tickets')
+  });
+
+  
+  it("should dispatch upsertTicketVm action after submit button click", async () => {
+    const { container, dispatchSpy } = await setup(ticketVm);
+    const btn = screen.getByRole('button', { name: /save/i });
+    userEvent.click(btn)
+
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketDetailsPageActions.upsertTicketVm({ticketVm}));
+  });
+    
+  xit("should navigate to list page after cancel button click", async () => {
+    const { container } = await setup(ticketVm);
+    const btn = screen.getByRole('button', { name: /cancel/i });
+    userEvent.click(btn)
+    container.fixture.detectChanges();
+    expect(location).toBe('/tickets')
   });
 });
 
