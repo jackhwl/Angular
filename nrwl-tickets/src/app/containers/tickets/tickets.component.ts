@@ -44,15 +44,13 @@ export class TicketsComponent implements OnInit, OnDestroy {
   error$: Observable<string | null> = this.store.pipe(
     select(TicketsSelectors.getError)
   );
-  routerRouteParamId$: Observable<string> = this.store.pipe(
-    select(selectRouteParam("id"))
-  );
+
   routerQueryParam$: Observable<string> = this.store.pipe(
     select(selectQueryParam("q"))
   );
 
   searchSetSub: Subscription | undefined;
-  searchValueChangesSub: Subscription | undefined;
+  //searchValueChangesSub: Subscription | undefined;
   //search = new FormControl("");
 
   constructor(private store: Store<{}>, private service: UtilService) {}
