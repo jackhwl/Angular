@@ -69,7 +69,7 @@ export class TicketsComponent implements OnInit, OnDestroy {
         .pipe(
           debounceTime(200),
           distinctUntilChanged(),
-          tap(console.log),
+          //tap(console.log),
           switchMap((q: string) => [
             this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
           ]),

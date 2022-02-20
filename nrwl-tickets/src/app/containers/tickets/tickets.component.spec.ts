@@ -36,28 +36,7 @@ const tickets: Ticket_vm[] = [{
   addresses: [],
   assignees: []
 }];
-const initialState = {
-  tickets: {
-    ids: [0, 1],
-    entities: {
-      0: {
-        id: 0,
-        description: "Install a monitor arm",
-        assigneeId: 111,
-        completed: false
-      },
-      1: {
-        id: 1,
-        description: "Move the desk to the new location",
-        assigneeId: 111,
-        completed: false
-      }
-    },
-    error: null,
-    loaded: false,
-    selectedId: null
-  }
-};
+
 describe('TicketsComponent', () => {
   afterEach(() => {
     jest.useRealTimers();
@@ -69,7 +48,6 @@ describe('TicketsComponent', () => {
       providers: [
         { provide: UtilService, useValue: service },
         provideMockStore({
-          //initialState,
           selectors: [
             {
               selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
@@ -95,8 +73,8 @@ describe('TicketsComponent', () => {
     const router = TestBed.inject(Router);
     container.fixture.ngZone.run(() => router.initialNavigation());
     const store = TestBed.inject(MockStore);
-    store.dispatch = jest.fn();
-    return { container, dispatchSpy: store.dispatch, router, scannedActions$: store.scannedActions$ };
+    //store.dispatch = jest.fn();
+    return { container, dispatchSpy: jest.fn(), store, router };
   }
 
   it("should render ticket component in list mode by default", async () => {
@@ -124,16 +102,18 @@ describe('TicketsComponent', () => {
   });
 
   it("should dispatch TicketListPageActions.opened by default route", async () => {
-    const { container, dispatchSpy } = await setup('');
+    const { container, store } = await setup('');
+    store.dispatch = jest.fn();
     const component = container.fixture.componentInstance;
     component.ngOnInit();
     container.fixture.detectChanges();
 
-    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.opened());
+    expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
   });
 
   it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field ", async () => {
-    const { container, dispatchSpy } = await setup('');
+    const { container, store } = await setup('');
+    store.dispatch = jest.fn();
     const component = container.fixture.componentInstance;
     component.ngOnInit();
 
@@ -141,20 +121,23 @@ describe('TicketsComponent', () => {
     userEvent.type(screen.getByRole('textbox', { name: /search/i }), q);
     expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue(q);
     jest.advanceTimersByTime(200);
-    //const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
-    //container.fixture.detectChanges();
-    //expect(scannedActions$).toBeObservable(expected)
 
-    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q }));
+    expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q }));
   });
-  
-  xit("should dispatch TicketListPageActions.filterParamChanged() action", async () => {
-    const { container, dispatchSpy } = await setup('');
+
+  it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field (marble) ", async () => {
+    const { container, store } = await setup('');
     const component = container.fixture.componentInstance;
     component.ngOnInit();
-    container.fixture.detectChanges();
 
-    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q: '' }));
+    const q = 'Move'
+    userEvent.type(screen.getByRole('textbox', { name: /search/i }), q);
+    expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue(q);
+    jest.advanceTimersByTime(210);
+
+    const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
+    expect(store.scannedActions$).toBeObservable(expected)
+
   });
 })
 
