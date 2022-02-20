@@ -12,15 +12,26 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { selectQueryParam } from 'src/app/reducers/router.selectors';
 import { of } from 'rxjs';
-import { RouterLinkWithHref } from '@angular/router';
+import { Router, RouterLinkWithHref } from '@angular/router';
+import { TicketDetailsComponent } from '../ticket-details/ticket-details.component';
+import { TicketListComponent } from '../ticket-list/ticket-list.component';
 
-const q: string = '0'
 let service: UtilService = new UtilService(new FormBuilder());
-
+const tRoute = [
+  {
+    path: "",
+    component: TicketsComponent,
+    children: [
+      { path: ":id", component: TicketDetailsComponent },
+      { path: "", component: TicketListComponent }
+    ]
+  }
+ ];
+ 
 describe('TicketsComponent', () => {
   async function setup(q: string, id: string = undefined, loaded = true) {
     const container = await render(TicketsComponent, {
-      imports: [TicketsComponentsModule, ReactiveFormsModule, RouterTestingModule],
+      imports: [TicketsComponentsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(tRoute)],
       providers: [
         { provide: UtilService, useValue: service}, 
         provideMockStore({ 
@@ -36,15 +47,16 @@ describe('TicketsComponent', () => {
         })
       ],      
       componentProperties: { 
-        //listForm: service.generateTicketSearchForm(q),
         routerQueryParam$: of(q),
         routerRouteParamId$: of(id)
       }
     });
 
+    const router = TestBed.inject(Router);
+    container.fixture.ngZone.run(() => router.initialNavigation());
     const store = TestBed.inject(MockStore);
     store.dispatch = jest.fn();
-    return { container, dispatchSpy: store.dispatch };
+    return { container, dispatchSpy: store.dispatch, router };
   }
   
   it("should render ticket component in list mode by default", async() => {
@@ -59,6 +71,18 @@ describe('TicketsComponent', () => {
     expect(screen.queryByRole('textbox', { name: /search/i })).not.toBeInTheDocument();
   });
 
+  it("should render ticket list component by default", async () => {
+    const { container } = await setup('');
+    const { debugElement } = container.fixture;
+
+    const childComponent = debugElement.
+    query(By.css('vi-ticket-list'));
+    expect(childComponent).toBeTruthy();
+    
+    const childComponents = debugElement.queryAll(By.css('vi-ticket-list'));
+    expect(childComponents).toHaveLength(1);
+  });
+    
   xit("should dispatch TicketListPageActions.filterParamChanged() action", async () => {
     const { container, dispatchSpy } = await setup('');
     const component = container.fixture.componentInstance;
@@ -66,20 +90,6 @@ describe('TicketsComponent', () => {
     container.fixture.detectChanges();
 
     expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({q: ''}));
-  });
-
-  xit("should render ticket list component", async () => {
-    const { container } = await setup('');
-    const { debugElement } = container.fixture;
-    const component = container.fixture.componentInstance;
-    component.ngOnInit();
-    container.fixture.detectChanges();
-    const childComponent = debugElement.query(By.css('vi-ticket-list'));
-    expect(childComponent).toBeTruthy();
-
-
-    // const childComponents = debugElement.queryAll(By.css('vi-ticket-list'));
-    // expect(childComponents).toHaveLength(ticketVm.addresses.length);
   });
 })
 
