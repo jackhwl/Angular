@@ -67,6 +67,9 @@ const providers = [
 ]
 
 describe('TicketListComponent', () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
   async function setup(tickets: Ticket_vm[], loaded=true) {
     await render(TicketListComponent, {
       imports: [MaterialModule, RouterTestingModule],
@@ -85,6 +88,7 @@ describe('TicketListComponent', () => {
       ]
     });
 
+    jest.useFakeTimers();
     const store = TestBed.inject(MockStore);
     store.dispatch = jest.fn();
     return { dispatchSpy: store.dispatch };
