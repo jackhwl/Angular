@@ -1,8 +1,9 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed, tick } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event'
 import * as TicketsSelectors from "../../reducers/ticket.selectors";
+import * as TicketsVmSelectors from "../../reducers/ticket-vm.selectors";
 import { RouterTestingModule } from '@angular/router/testing';
 import { TicketListPageActions } from 'src/app/actions';
 import { TicketsComponentsModule } from '../ticketsComponentsModule';
@@ -12,31 +13,70 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { selectQueryParam } from 'src/app/reducers/router.selectors';
 import { of } from 'rxjs';
-import { Router, RouterLinkWithHref } from '@angular/router';
-import { TicketDetailsComponent } from '../ticket-details/ticket-details.component';
-import { TicketListComponent } from '../ticket-list/ticket-list.component';
+import { Router } from '@angular/router';
+import { routes } from 'src/app/tickets-routing.module';
+
+import { cold } from 'jasmine-marbles';
+import { Ticket_vm } from 'src/app/models/model';
 
 let service: UtilService = new UtilService(new FormBuilder());
-const tRoute = [
-  {
-    path: "",
-    component: TicketsComponent,
-    children: [
-      { path: ":id", component: TicketDetailsComponent },
-      { path: "", component: TicketListComponent }
-    ]
+const tickets: Ticket_vm[] = [{
+  id: '0',
+  description: "Install a monitor arm",
+  assigneeId: 111,
+  completed: false,
+  addresses: [],
+  assignees: []
+  },
+   {
+  id: '1',
+  description: "aaa",
+  assigneeId: 222,
+  completed: false,
+  addresses: [],
+  assignees: []
+}];
+const initialState = {
+  tickets: {
+    ids: [0, 1],
+    entities: {
+      0: {
+        id: 0,
+        description: "Install a monitor arm",
+        assigneeId: 111,
+        completed: false
+      },
+      1: {
+        id: 1,
+        description: "Move the desk to the new location",
+        assigneeId: 111,
+        completed: false
+      }
+    },
+    error: null,
+    loaded: false,
+    selectedId: null
   }
- ];
- 
+};
 describe('TicketsComponent', () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   async function setup(q: string, id: string = undefined, loaded = true) {
     const container = await render(TicketsComponent, {
-      imports: [TicketsComponentsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(tRoute)],
+      imports: [TicketsComponentsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(routes[0].children)],
       providers: [
-        { provide: UtilService, useValue: service}, 
-        provideMockStore({ 
+        { provide: UtilService, useValue: service },
+        provideMockStore({
+          //initialState,
           selectors: [
-            { selector: selectQueryParam('q'), 
+            {
+              selector: TicketsVmSelectors.getFilterTicketsVmByRoute,
+              value: tickets
+            },
+            {
+              selector: selectQueryParam('q'),
               value: q
             },
             {
@@ -45,29 +85,29 @@ describe('TicketsComponent', () => {
             }
           ]
         })
-      ],      
-      componentProperties: { 
+      ],
+      componentProperties: {
         routerQueryParam$: of(q),
         routerRouteParamId$: of(id)
       }
     });
-
+    jest.useFakeTimers();
     const router = TestBed.inject(Router);
     container.fixture.ngZone.run(() => router.initialNavigation());
     const store = TestBed.inject(MockStore);
     store.dispatch = jest.fn();
-    return { container, dispatchSpy: store.dispatch, router };
+    return { container, dispatchSpy: store.dispatch, router, scannedActions$: store.scannedActions$ };
   }
-  
-  it("should render ticket component in list mode by default", async() => {
+
+  it("should render ticket component in list mode by default", async () => {
     await setup('');
-    expect(screen.getByRole('link', { name: /add new ticket/i})).toHaveAttribute('href', '/new');
+    expect(screen.getByRole('link', { name: /add new ticket/i })).toHaveAttribute('href', '/new');
     expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue('');
   });
 
-  it("should render ticket component in edit mode if have id in url", async() => {
+  it("should render ticket component in edit mode if have id in url", async () => {
     await setup('', '0');
-    expect(screen.queryByRole('link', { name: /add new ticket/i})).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /add new ticket/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('textbox', { name: /search/i })).not.toBeInTheDocument();
   });
 
@@ -78,18 +118,43 @@ describe('TicketsComponent', () => {
     const childComponent = debugElement.
     query(By.css('vi-ticket-list'));
     expect(childComponent).toBeTruthy();
-    
+
     const childComponents = debugElement.queryAll(By.css('vi-ticket-list'));
     expect(childComponents).toHaveLength(1);
   });
-    
+
+  it("should dispatch TicketListPageActions.opened by default route", async () => {
+    const { container, dispatchSpy } = await setup('');
+    const component = container.fixture.componentInstance;
+    component.ngOnInit();
+    container.fixture.detectChanges();
+
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.opened());
+  });
+
+  it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field ", async () => {
+    const { container, dispatchSpy } = await setup('');
+    const component = container.fixture.componentInstance;
+    component.ngOnInit();
+
+    const q = 'Move'
+    userEvent.type(screen.getByRole('textbox', { name: /search/i }), q);
+    expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue(q);
+    jest.advanceTimersByTime(200);
+    //const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
+    //container.fixture.detectChanges();
+    //expect(scannedActions$).toBeObservable(expected)
+
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q }));
+  });
+  
   xit("should dispatch TicketListPageActions.filterParamChanged() action", async () => {
     const { container, dispatchSpy } = await setup('');
     const component = container.fixture.componentInstance;
     component.ngOnInit();
     container.fixture.detectChanges();
 
-    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({q: ''}));
+    expect(dispatchSpy).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q: '' }));
   });
 })
 

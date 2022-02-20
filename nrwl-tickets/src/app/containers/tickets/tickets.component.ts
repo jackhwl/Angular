@@ -64,14 +64,12 @@ export class TicketsComponent implements OnInit, OnDestroy {
     this.searchSetSub = this.routerQueryParam$
       ?.pipe(takeUntil(this.componentDestroy()))
       .subscribe(q => { 
-        console.log('subscribe init')
         this.listForm = this.service.generateTicketSearchForm(q)
-        //console.log(this.listForm)
         this.listForm.get('search').valueChanges
         .pipe(
           debounceTime(200),
           distinctUntilChanged(),
-          //tap(console.log),
+          tap(console.log),
           switchMap((q: string) => [
             this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
           ]),
