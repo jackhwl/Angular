@@ -18,7 +18,7 @@ const q: string = '0'
 let service: UtilService = new UtilService(new FormBuilder());
 
 describe('TicketsComponent', () => {
-  async function setup(q: string, loaded = true) {
+  async function setup(q: string, id: string = undefined, loaded = true) {
     const container = await render(TicketsComponent, {
       imports: [TicketsComponentsModule, ReactiveFormsModule, RouterTestingModule],
       providers: [
@@ -36,8 +36,9 @@ describe('TicketsComponent', () => {
         })
       ],      
       componentProperties: { 
-        listForm: service.generateTicketSearchForm(q),
-        routerQueryParam$: of(q)
+        //listForm: service.generateTicketSearchForm(q),
+        routerQueryParam$: of(q),
+        routerRouteParamId$: of(id)
       }
     });
 
@@ -46,10 +47,16 @@ describe('TicketsComponent', () => {
     return { container, dispatchSpy: store.dispatch };
   }
   
-  it("should render ticket component", async() => {
+  it("should render ticket component in list mode by default", async() => {
     await setup('');
     expect(screen.getByRole('link', { name: /add new ticket/i})).toHaveAttribute('href', '/new');
     expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue('');
+  });
+
+  it("should render ticket component in edit mode if have id in url", async() => {
+    await setup('', '0');
+    expect(screen.queryByRole('link', { name: /add new ticket/i})).not.toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /search/i })).not.toBeInTheDocument();
   });
 
   xit("should dispatch TicketListPageActions.filterParamChanged() action", async () => {

@@ -61,7 +61,7 @@ export class TicketsEffects {
                       })
                     : ''
               ),
-              tap(console.log),
+              //tap(console.log),
               switchMap((tickets: Ticket[]) => [
                 TicketApiActions.loadFilterTicketsSuccess({ tickets }),
                 UserActions.loadUsers()
