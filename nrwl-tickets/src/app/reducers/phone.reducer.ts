@@ -1,4 +1,4 @@
-import { createReducer, on, Action } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
 import { PhoneActions, PhoneApiActions } from "../actions";
@@ -28,15 +28,18 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  on(PhoneActions.loadPhonesOfAddress, state => {
-    //console.log('ccc');
-    return ({
-    ...state,
-    loaded: false,
-    error: null
-  })}),
+  // on(PhoneActions.loadPhonesOfAddress, (state, {addressIds})=> {
+  //   //console.log('ccc');
+  //   return ({
+  //   ...state,
+  //   loaded: false,
+  //   error: null
+  // })}),
+  // on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => 
+  //     adapter.setAll(phones, {...state, loaded: true})
+  // ), 
   on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => 
-      adapter.setAll(phones, {...state, loaded: true})
+    adapter.setAll(phones, produce(state, draft => { draft.loaded = true}))
   ), 
   // on(PhoneApiActions.updatePhonesFailure, (state, { error }) => ({
   //   ...state,
