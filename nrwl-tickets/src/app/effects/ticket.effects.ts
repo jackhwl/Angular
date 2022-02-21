@@ -61,7 +61,7 @@ export class TicketsEffects {
                       })
                     : ''
               ),
-              //tap(console.log),
+              tap(() => console.log('TicketListPageActions.filterParamChanged effect')),
               switchMap((tickets: Ticket[]) => [
                 TicketApiActions.loadFilterTicketsSuccess({ tickets }),
                 UserActions.loadUsers()

@@ -13,9 +13,10 @@ describe("AppComponent", () => {
     return { container }
   }
   
-  it("should create the app", async () => {
+  it("should include run test link", async () => {
     await setup();
     expect(screen.getByText(/run all tests/i)).toBeInTheDocument();
+    expect(screen.getByText(/code coverage report for all files/i)).toBeInTheDocument();
   });
 
   it("should render footer component", async () => {

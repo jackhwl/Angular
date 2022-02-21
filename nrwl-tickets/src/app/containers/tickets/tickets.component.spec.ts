@@ -43,7 +43,7 @@ describe('TicketsComponent', () => {
     jest.useRealTimers();
   });
 
-  async function setup(q: string, id: string = undefined, loaded = true) {
+  async function setup(q: string, id: string = undefined, loaded = true, error = '') {
     const container = await render(TicketsComponent, {
       imports: [TicketsComponentsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(routes[0].children)],
       providers: [
@@ -61,13 +61,19 @@ describe('TicketsComponent', () => {
             {
               selector: TicketsSelectors.getLoaded,
               value: loaded
-            }
+            },
+            {
+              selector: TicketsSelectors.getError,
+              value: error
+            },
+            
           ]
         })
       ],
       componentProperties: {
         routerQueryParam$: of(q),
-        routerRouteParamId$: of(id)
+        routerRouteParamId$: of(id),
+        error$: of(error)
       }
     });
     jest.useFakeTimers();
@@ -137,10 +143,10 @@ describe('TicketsComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q }));
     
     // check route url change to 
-    // jest.advanceTimersByTime(2000);
-    // container.fixture.detectChanges();
+    //jest.advanceTimersByTime(2000);
+    //container.fixture.detectChanges();
     // //expect(routerQueryParam$).toBeCalled();
-    // expect(location).toBe('/')
+    //expect(location).toBe('/')
   });
 
   it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field (marble) ", async () => {
@@ -157,6 +163,12 @@ describe('TicketsComponent', () => {
     expect(store.scannedActions$).toBeObservable(expected)
 
   });
+
+  it("should display error message if error$ has value", async () => {
+    const error = 'something wrong'
+    await setup('', undefined, true, error);
+    expect(screen.getByText(new RegExp(`error:"${error}"`, 'g'))).toBeInTheDocument();
+  })
 })
 
 // describe('TicketsComponent', () => {
