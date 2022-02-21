@@ -5,6 +5,7 @@ import { PhoneActions, PhoneApiActions } from "../actions";
 import { Phone } from "../models/model";
 
 import { immerOn } from 'ngrx-immer/store';
+import produce from "immer";
 
 export const PHONES_FEATURE_KEY = "phones";
 
@@ -47,14 +48,15 @@ export const reducer = createReducer(
   on(PhoneApiActions.deleteAddressesPhonesSuccess, (state, { ids }) => {
     return adapter.removeMany(ids, {...state, loaded: true})
   }),   
-  on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
-    return adapter.setAll(phones, { ...state, loaded: true, error: null })
-  }),
-  // immerOn(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
-  //   state.loaded = true;
-  //   state.error = null;
-  //   return adapter.setAll(phones, state)
+  // on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
+  //   return adapter.setAll(phones, { ...state, loaded: true, error: null })
   // }),
+  on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
+    return adapter.setAll(phones, produce(state, draft => {
+      draft.loaded = true;
+      draft.error = null;
+    }))
+  }),
   on(PhoneApiActions.loadPhonesOfAddressFailure, (state, { error }) => ({
     ...state,
     error
