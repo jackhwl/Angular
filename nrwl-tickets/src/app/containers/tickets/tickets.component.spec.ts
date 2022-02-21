@@ -15,6 +15,7 @@ import { selectQueryParam } from 'src/app/reducers/router.selectors';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/tickets-routing.module';
+import { Location } from '@angular/common';
 
 import { cold } from 'jasmine-marbles';
 import { Ticket_vm } from 'src/app/models/model';
@@ -30,7 +31,7 @@ const tickets: Ticket_vm[] = [{
   },
    {
   id: '1',
-  description: "aaa",
+  description: "Move the desk to the new location",
   assigneeId: 222,
   completed: false,
   addresses: [],
@@ -71,10 +72,11 @@ describe('TicketsComponent', () => {
     });
     jest.useFakeTimers();
     const router = TestBed.inject(Router);
+    const location = TestBed.inject(Location);
     container.fixture.ngZone.run(() => router.initialNavigation());
     const store = TestBed.inject(MockStore);
     //store.dispatch = jest.fn();
-    return { container, dispatchSpy: jest.fn(), store, router };
+    return { container, dispatchSpy: jest.fn(), store, router, location };
   }
 
   it("should render ticket component in list mode by default", async () => {
@@ -111,8 +113,18 @@ describe('TicketsComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.opened());
   });
 
-  it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field ", async () => {
+  it("should display list of tickets by default route", async () => {
     const { container, store } = await setup('');
+    store.dispatch = jest.fn();
+    const component = container.fixture.componentInstance;
+    component.ngOnInit();
+    container.fixture.detectChanges();
+
+    expect(screen.getAllByRole('link', {name: /edit/i})).toHaveLength(tickets.length);
+  });
+
+  it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field ", async () => {
+    const { container, store, location } = await setup('');
     store.dispatch = jest.fn();
     const component = container.fixture.componentInstance;
     component.ngOnInit();
@@ -123,6 +135,12 @@ describe('TicketsComponent', () => {
     jest.advanceTimersByTime(200);
 
     expect(store.dispatch).toHaveBeenCalledWith(TicketListPageActions.filterParamChanged({ q }));
+    
+    // check route url change to 
+    // jest.advanceTimersByTime(2000);
+    // container.fixture.detectChanges();
+    // //expect(routerQueryParam$).toBeCalled();
+    // expect(location).toBe('/')
   });
 
   it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field (marble) ", async () => {
