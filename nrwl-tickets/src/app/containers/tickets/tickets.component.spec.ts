@@ -85,8 +85,21 @@ describe('TicketsComponent', () => {
     return { container, dispatchSpy: jest.fn(), store, router, location };
   }
 
+  function currySetup(setup) {
+    return function(q:string) {
+      return function(id: string = undefined) {
+        return function(loaded = true) {
+          return function(error: string = '') {
+            return setup(q, id, loaded, error)
+          }
+        }
+      }
+    }
+  }
+  let setup_fn = currySetup(setup)
+
   it("should render ticket component in list mode by default", async () => {
-    await setup('');
+    await setup_fn('')()()();
     expect(screen.getByRole('link', { name: /add new ticket/i })).toHaveAttribute('href', '/new');
     expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue('');
   });
@@ -166,7 +179,7 @@ describe('TicketsComponent', () => {
 
   it("should display error message if error$ has value", async () => {
     const error = 'something wrong'
-    await setup('', undefined, true, error);
+    await setup_fn('')()()(error);
     expect(screen.getByText(new RegExp(`error:"${error}"`, 'g'))).toBeInTheDocument();
   })
 })
