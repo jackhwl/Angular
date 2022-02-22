@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
-import { PhoneActions, PhoneApiActions } from "../actions";
+import { PhoneApiActions } from "../actions";
 import { Phone } from "../models/model";
 
 import { immerOn } from 'ngrx-immer/store';
@@ -28,13 +28,6 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  // on(PhoneActions.loadPhonesOfAddress, (state, {addressIds})=> {
-  //   //console.log('ccc');
-  //   return ({
-  //   ...state,
-  //   loaded: false,
-  //   error: null
-  // })}),
   // on(PhoneApiActions.updatePhonesSuccess, (state, { phones }) => 
   //     adapter.setAll(phones, {...state, loaded: true})
   // ), 
@@ -48,9 +41,14 @@ export const reducer = createReducer(
   immerOn(PhoneApiActions.updatePhonesFailure, (state, { error }) => {
     state.error = error
   }), 
+
   on(PhoneApiActions.deleteAddressesPhonesSuccess, (state, { ids }) => {
     return adapter.removeMany(ids, {...state, loaded: true})
   }),   
+  immerOn(PhoneApiActions.deleteAddressesPhonesFailure, (state, { error }) => {
+    state.error = error
+  }), 
+  
   // on(PhoneApiActions.loadPhonesOfAddressSuccess, (state, { phones }) => {
   //   return adapter.setAll(phones, { ...state, loaded: true, error: null })
   // }),

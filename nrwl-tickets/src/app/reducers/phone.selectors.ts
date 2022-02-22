@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { createSelector } from "@ngrx/store";
 import { getTicketModuleState, TicketModuleState } from ".";
 import { adapter } from "./phone.reducer";
 import { State } from "./phone.reducer";
