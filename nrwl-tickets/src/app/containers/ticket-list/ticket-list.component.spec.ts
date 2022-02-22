@@ -11,7 +11,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TicketActions, TicketListPageActions } from 'src/app/actions';
 import { TicketsComponentsModule } from '../ticketsComponentsModule';
-import { cold } from 'jasmine-marbles';
+import { TestScheduler } from 'rxjs/testing';
 
 const tickets: Ticket_vm[] = [{
   id: '0',
@@ -175,6 +175,13 @@ describe('TicketListComponent', () => {
 describe('TicketListComponent TestBed', () => {
   let store: MockStore;
 
+  const testScheduler = new TestScheduler((actual, expected) => {
+    // asserting the two objects are equal - required
+    // for TestScheduler assertions to work via your test framework
+    // e.g. using chai.
+    expect(actual).toEqual(expected);
+  });
+
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -200,12 +207,14 @@ describe('TicketListComponent TestBed', () => {
   });
 
   it("should dispatch TicketListPageActions.opened() action MockStore", () => {
-    const fixture = TestBed.createComponent(TicketListComponent);
-    const component = fixture.componentInstance;
-    component.ngOnInit();
-    
-    const expected = cold('a', {a: TicketListPageActions.opened()})
-    expect(store.scannedActions$).toBeObservable(expected)
+    testScheduler.run(async (helpers) => {
+      const { cold, time, expectObservable, expectSubscriptions } = helpers;
+      const fixture = TestBed.createComponent(TicketListComponent);
+      const component = fixture.componentInstance;
+      component.ngOnInit();
+      
+      const expected = cold('a', {a: TicketListPageActions.opened()})
+      expect(store.scannedActions$).toBe(expected)
 
     //fixture.detectChanges();
     // const row = screen.getByRole('row', {
@@ -217,6 +226,6 @@ describe('TicketListComponent TestBed', () => {
     // });
     // userEvent.click(btn)
     // expect(store.dispatch).toHaveBeenCalledWith(TicketActions.deleteTicket({id: '0'}));
-
+  });
   });
 })

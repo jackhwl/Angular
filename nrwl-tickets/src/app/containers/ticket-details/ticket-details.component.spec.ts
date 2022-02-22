@@ -12,7 +12,7 @@ import { of } from "rxjs";
 import { By } from "@angular/platform-browser";
 import userEvent from "@testing-library/user-event";
 import { TicketDetailsPageActions } from "src/app/actions";
-import { cold } from "jasmine-marbles";
+import { TestScheduler } from 'rxjs/testing';
 
 const ticketVm: Ticket_vm = {
   id: '0',
@@ -70,6 +70,13 @@ const ticketVm: Ticket_vm = {
 let service: UtilService = new UtilService(new FormBuilder());
 
 describe('TicketDetailsComponent', () => {
+  const testScheduler = new TestScheduler((actual, expected) => {
+    // asserting the two objects are equal - required
+    // for TestScheduler assertions to work via your test framework
+    // e.g. using chai.
+    expect(actual).toEqual(expected);
+  });
+
   async function setup(ticket: Ticket_vm) {
     const container = await render(TicketDetailsComponent, {
       excludeComponentDeclaration: true,
@@ -105,12 +112,15 @@ describe('TicketDetailsComponent', () => {
   });
 
   it("should scanned TicketDetailsPageActions.opened() action", async () => {
-    const { container, scannedActions$ } = await setup(ticketVm);
-    const component = container.fixture.componentInstance;
-    component.ngOnInit();
-    
-    const expected = cold('a', {a: TicketDetailsPageActions.opened()})
-    expect(scannedActions$).toBeObservable(expected)
+    testScheduler.run(async (helpers) => {
+      const { cold, time, expectObservable, expectSubscriptions } = helpers;
+      const { container, scannedActions$ } = await setup(ticketVm);
+      const component = container.fixture.componentInstance;
+      component.ngOnInit();
+      
+      const expected = cold('a', {a: TicketDetailsPageActions.opened()})
+      expect(scannedActions$).toBe(expected)
+    });
   });
 
   it("should render the ticket detail", async () => {

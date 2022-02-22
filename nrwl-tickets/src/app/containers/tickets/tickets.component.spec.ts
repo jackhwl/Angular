@@ -17,8 +17,9 @@ import { Router } from '@angular/router';
 import { routes } from 'src/app/tickets-routing.module';
 import { Location } from '@angular/common';
 
-import { cold } from 'jasmine-marbles';
 import { Ticket_vm } from 'src/app/models/model';
+import { TestScheduler } from 'rxjs/testing';
+import { throttleTime } from 'rxjs';
 
 let service: UtilService = new UtilService(new FormBuilder());
 const tickets: Ticket_vm[] = [{
@@ -41,6 +42,13 @@ const tickets: Ticket_vm[] = [{
 describe('TicketsComponent', () => {
   afterEach(() => {
     jest.useRealTimers();
+  });
+
+  const testScheduler = new TestScheduler((actual, expected) => {
+    // asserting the two objects are equal - required
+    // for TestScheduler assertions to work via your test framework
+    // e.g. using chai.
+    expect(actual).toEqual(expected);
   });
 
   async function setup(q: string, id: string = undefined, loaded = true, error = '') {
@@ -163,18 +171,22 @@ describe('TicketsComponent', () => {
   });
 
   it("should dispatch TicketListPageActions.filterParamChanged action after type in the search field (marble) ", async () => {
-    const { container, store } = await setup('');
-    const component = container.fixture.componentInstance;
-    component.ngOnInit();
+    testScheduler.run(async (helpers) => {
+      const { cold, time, expectObservable, expectSubscriptions } = helpers;
+      const { container, store } = await setup('');
+      const component = container.fixture.componentInstance;
+      component.ngOnInit();
 
-    const q = 'Move'
-    userEvent.type(screen.getByRole('textbox', { name: /search/i }), q);
-    expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue(q);
-    jest.advanceTimersByTime(210);
+      const q = 'Move'
+      userEvent.type(screen.getByRole('textbox', { name: /search/i }), q);
+      expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue(q);
+      jest.advanceTimersByTime(210);
 
-    const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
-    expect(store.scannedActions$).toBeObservable(expected)
-
+      const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
+      //const t = time('   ---|       '); // t = 3
+      //expectObservable(expected).toBe(store.scannedActions$);
+      expect(store.scannedActions$).toBe(expected)
+    });
   });
 
   it("should display error message if error$ has value", async () => {
@@ -183,6 +195,7 @@ describe('TicketsComponent', () => {
     expect(screen.getByText(new RegExp(`error:"${error}"`, 'g'))).toBeInTheDocument();
   })
 })
+
 
 // describe('TicketsComponent', () => {
 //   // let component: TicketsComponent;
