@@ -118,8 +118,8 @@ describe('TicketDetailsComponent', () => {
       const component = container.fixture.componentInstance;
       component.ngOnInit();
       
-      const expected = cold('a', {a: TicketDetailsPageActions.opened()})
-      expect(scannedActions$).toBe(expected)
+      //const expected = cold('a', {a: TicketDetailsPageActions.opened()})
+      expectObservable(scannedActions$).toBe('a', {a: TicketDetailsPageActions.opened()})
     });
   });
 

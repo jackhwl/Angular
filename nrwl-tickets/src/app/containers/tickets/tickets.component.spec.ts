@@ -182,10 +182,10 @@ describe('TicketsComponent', () => {
       expect(screen.getByRole('textbox', { name: /search/i })).toHaveValue(q);
       jest.advanceTimersByTime(210);
 
-      const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
+      //const expected = cold('a', {a: TicketListPageActions.filterParamChanged({ q })})
       //const t = time('   ---|       '); // t = 3
       //expectObservable(expected).toBe(store.scannedActions$);
-      expect(store.scannedActions$).toBe(expected)
+      expectObservable(store.scannedActions$).toBe('a', {a: TicketListPageActions.filterParamChanged({ q })})
     });
   });
 

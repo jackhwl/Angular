@@ -213,8 +213,8 @@ describe('TicketListComponent TestBed', () => {
       const component = fixture.componentInstance;
       component.ngOnInit();
       
-      const expected = cold('a', {a: TicketListPageActions.opened()})
-      expect(store.scannedActions$).toBe(expected)
+      //const expected = cold('a', {a: TicketListPageActions.opened()})
+      expectObservable(store.scannedActions$).toBe('a', {a: TicketListPageActions.opened()})
 
     //fixture.detectChanges();
     // const row = screen.getByRole('row', {
