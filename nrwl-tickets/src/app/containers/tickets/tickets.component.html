@@ -1,6 +1,7 @@
 <div class="component-container">
+  <ng-container *ngIf="valueChanges$ | async"></ng-container>
   <div *ngIf="(routerRouteParamId$ | async) === undefined" >
-    <form [formGroup]="listForm">
+    <form [formGroup]="listForm$ | async">
       <input
         type="text"
         placeholder="Search"

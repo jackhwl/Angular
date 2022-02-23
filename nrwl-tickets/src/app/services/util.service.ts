@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Ticket, Ticket_vm } from "../models/model";
 import { initialState, adapter } from "../reducers/phone.reducer";
 import { v4 as uuidv4 } from 'uuid';
+import { debounceTime, distinctUntilChanged, switchMap, tap } from "rxjs";
 
 @Injectable()
 export class UtilService {

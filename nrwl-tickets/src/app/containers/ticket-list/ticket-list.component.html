@@ -1,6 +1,5 @@
 <mat-card>
   <mat-card-content>
-    {{allPhones$ | async | json}}
     <table *ngIf="loaded$ | async; else loading">
       <tr>
         <th>Id</th>

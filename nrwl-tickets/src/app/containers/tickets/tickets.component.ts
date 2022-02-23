@@ -1,4 +1,3 @@
-import { coerceCssPixelValue } from "@angular/cdk/coercion";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,11 +6,10 @@ import {
 } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { select, Store } from "@ngrx/store";
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subject, Subscription } from "rxjs";
 import {
   debounceTime,
   distinctUntilChanged,
-  flatMap,
   map,
   mergeMap,
   switchMap,
@@ -33,14 +31,8 @@ import * as TicketsSelectors from "../../reducers/ticket.selectors";
   styleUrls: ["./tickets.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-@TakeUntilDestroy
-export class TicketsComponent implements OnInit, OnDestroy {
-  private componentDestroy: () => Observable<unknown>;
-  //listForm$: Observable<FormGroup>;
-  
-  listForm: FormGroup;
-
-
+//@TakeUntilDestroy
+export class TicketsComponent implements OnInit {
   error$: Observable<string | null> = this.store.pipe(
     select(TicketsSelectors.getError)
   );
@@ -53,7 +45,12 @@ export class TicketsComponent implements OnInit, OnDestroy {
     select(selectQueryParam("q"))
   );
 
-  searchSetSub: Subscription | undefined;
+  listForm$: Observable<FormGroup>;
+  valueChanges$: Observable<any>
+  
+  //private componentDestroy: () => Observable<unknown>;
+  //listForm: FormGroup;
+  //searchSetSub: Subscription | undefined;
   //searchValueChangesSub: Subscription | undefined;
   //search = new FormControl("");
 
@@ -61,38 +58,37 @@ export class TicketsComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     // use listForm version
-    this.searchSetSub = this.routerQueryParam$
-      ?.pipe(takeUntil(this.componentDestroy()))
-      .subscribe(q => { 
-        this.listForm = this.service.generateTicketSearchForm(q)
-        this.listForm.get('search').valueChanges
-        .pipe(
-          debounceTime(200),
-          distinctUntilChanged(),
-          //tap(console.log),
-          switchMap((q: string) => [
-            this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
-          ]),
-          takeUntil(this.componentDestroy())
-        )
-        .subscribe();
-      });
-
-    // use listForm$ version
-    // this.listForm$ = this.routerQueryParam$?.pipe(
-    //   map((q: string) => this.service.generateTicketSearchForm(q)),
-    //   tap(fg => 
-    //     fg.get('search').valueChanges.pipe(
+    // this.searchSetSub = this.routerQueryParam$
+    //   ?.pipe(takeUntil(this.componentDestroy()))
+    //   .subscribe(q => { 
+    //     this.listForm = this.service.generateTicketSearchForm(q)
+    //     this.listForm.get('search').valueChanges
+    //     .pipe(
     //       debounceTime(200),
     //       distinctUntilChanged(),
-    //       tap(console.log),
+    //       //tap(console.log),
     //       switchMap((q: string) => [
     //         this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
     //       ]),
     //       takeUntil(this.componentDestroy())
-    //     ).subscribe()
-    //   )
-    // );
+    //     )
+    //     .subscribe();
+    //   });
+
+    //use listForm$ version
+    this.listForm$ = this.routerQueryParam$?.pipe(
+      map((q: string) => this.service.generateTicketSearchForm(q)),
+      tap(fg => 
+          this.valueChanges$ = fg.get('search').valueChanges.pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          switchMap((q: string) => [
+            this.store.dispatch(TicketListPageActions.filterParamChanged({q}))
+          ])
+        )
+      )
+    );
+    
     
     // without formGroup listForm version
     // this.searchSetSub = this.routerQueryParam$
@@ -120,8 +116,8 @@ export class TicketsComponent implements OnInit, OnDestroy {
   //     )}
   // }
 
-  ngOnDestroy(): void {
-    // if (this.searchSetSub) this.searchSetSub.unsubscribe();
-    // if (this.searchValueChangesSub) this.searchValueChangesSub.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   // if (this.searchSetSub) this.searchSetSub.unsubscribe();
+  //   // if (this.searchValueChangesSub) this.searchValueChangesSub.unsubscribe();
+  // }
 }
