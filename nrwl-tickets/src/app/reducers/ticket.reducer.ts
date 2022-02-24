@@ -30,7 +30,7 @@ export const reducer = createReducer(
   on(TicketApiActions.loadTicketSuccess, (state, { ticket }) =>{
     //Object.assign({}, state, { selectedId: ticket.id })
     //console.log('reducer ticket=', ticket);
-    return adapter.setOne(ticket, { ...state, loaded: true, selectedId: ticket.id, error: null })
+    return adapter.setOne(ticket, { ...state, loaded: true, error: null })
   }),
   on(TicketApiActions.loadTicketFailure, (state, { error }) => ({
     ...state,
@@ -45,7 +45,7 @@ export const reducer = createReducer(
   })),
 
   on(TicketApiActions.upsertTicketSuccess, (state, { ticket }) => 
-    adapter.upsertOne(ticket, {...state, loaded: true})
+    adapter.upsertOne(ticket, {...state, loaded: true, error: null})
   ), 
   on(TicketApiActions.upsertTicketFailure, (state, { error }) => ({
     ...state,

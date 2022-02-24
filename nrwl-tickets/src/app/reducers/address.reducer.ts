@@ -21,8 +21,6 @@ export const initialState: State = adapter.getInitialState({
   loaded: false
 });
 
-// const onFailure = (state, { error }) => ({ ...state, error });
-
 export const reducer = createReducer(
   initialState,
 //   on(AddressActions.loadAddressesOfTicket, (state, { selectedId }) =>
@@ -37,8 +35,7 @@ export const reducer = createReducer(
   on(AddressApiActions.loadAddressesOfTicketSuccess, (state, { addresses }) => {
     //console.log('reducer addresses=', addresses);
     return adapter.setAll(addresses, produce(state, draft => {draft.loaded = true, draft.error = null }))
-  }
-  ),
+  }),
   immerOn(AddressApiActions.loadAddressesOfTicketFailure, (state, { error }) => {
     state.error = error
   }),
