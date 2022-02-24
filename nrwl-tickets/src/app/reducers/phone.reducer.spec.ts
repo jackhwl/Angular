@@ -2,7 +2,7 @@ import { PhoneApiActions } from "../actions"
 import { initialState, reducer } from "./phone.reducer"
 import { Phone } from "../models/model";
 
-it('PhoneActions.updatePhonesSuccess should set load to true ', () => {
+it('PhoneApiActions.updatePhonesSuccess should set load to true ', () => {
     const phones: Phone[] = [
         { id: '2', type: "mobile", number: "222", addressId: "a1" },
         { id: '3', type: "home", number: "333", addressId: "a2" },
@@ -18,7 +18,7 @@ it('PhoneActions.updatePhonesSuccess should set load to true ', () => {
     expect(reducer(initialState, PhoneApiActions.updatePhonesSuccess({phones}))).toEqual(newState)
 })
 
-it('PhoneActions.updatePhonesFailure should set error value ', () => {
+it('PhoneApiActions.updatePhonesFailure should set error value ', () => {
     const error = 'something wrong'
     const newState = {
         ids: [],
@@ -29,7 +29,7 @@ it('PhoneActions.updatePhonesFailure should set error value ', () => {
     expect(reducer(initialState, PhoneApiActions.updatePhonesFailure({error}))).toEqual(newState)
 })
 
-it('PhoneActions.deleteAddressesPhonesSuccess should set load to true ', () => {
+it('PhoneApiActions.deleteAddressesPhonesSuccess should set load to true ', () => {
     const ids: string[] = ['1', '4'];
     const phones: Phone[] = [
         { id: '1', type: "mobile", number: "111", addressId: "a1" },
@@ -49,7 +49,7 @@ it('PhoneActions.deleteAddressesPhonesSuccess should set load to true ', () => {
     expect(reducer(prevState, PhoneApiActions.deleteAddressesPhonesSuccess({ids}))).toEqual(newState)
 })
 
-it('PhoneActions.deleteAddressesPhonesFailure should set error value ', () => {
+it('PhoneApiActions.deleteAddressesPhonesFailure should set error value ', () => {
     const error = 'something wrong'
     const newState = {
         ids: [],
@@ -60,7 +60,7 @@ it('PhoneActions.deleteAddressesPhonesFailure should set error value ', () => {
     expect(reducer(initialState, PhoneApiActions.deleteAddressesPhonesFailure({error}))).toEqual(newState)
 })
 
-it('PhoneActions.loadPhonesOfAddressSuccess should set load to true ', () => {
+it('PhoneApiActions.loadPhonesOfAddressSuccess should set load to true ', () => {
     const phones: Phone[] = [
         { id: '2', type: "mobile", number: "222", addressId: "a1" },
         { id: '3', type: "home", number: "333", addressId: "a2" },
@@ -77,7 +77,7 @@ it('PhoneActions.loadPhonesOfAddressSuccess should set load to true ', () => {
     expect(reducer(initialState, PhoneApiActions.loadPhonesOfAddressSuccess({phones}))).toEqual(newState)
 })
 
-it('PhoneActions.loadPhonesOfAddressFailure should set error value ', () => {
+it('PhoneApiActions.loadPhonesOfAddressFailure should set error value ', () => {
     const error = 'something wrong'
     const newState = {
         ids: [],
