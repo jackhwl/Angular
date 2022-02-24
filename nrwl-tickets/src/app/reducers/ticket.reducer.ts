@@ -3,6 +3,8 @@ import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
 import { TicketActions, TicketApiActions } from "../actions";
 import { Phone, Ticket } from "../models/model";
+import { immerOn } from 'ngrx-immer/store';
+import produce from "immer";
 
 export const TICKETS_FEATURE_KEY = "tickets";
 
@@ -30,37 +32,33 @@ export const reducer = createReducer(
   on(TicketApiActions.loadTicketSuccess, (state, { ticket }) =>{
     //Object.assign({}, state, { selectedId: ticket.id })
     //console.log('reducer ticket=', ticket);
-    return adapter.setOne(ticket, { ...state, loaded: true, error: null })
+    return adapter.setOne(ticket, produce(state, draft => {draft.loaded = true, draft.error = null }))
   }),
-  on(TicketApiActions.loadTicketFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),
+  immerOn(TicketApiActions.loadTicketFailure, (state, { error }) => {
+    state.error = error
+  }),
   on(TicketApiActions.loadFilterTicketsSuccess, (state, { tickets }) =>
-    adapter.setAll(tickets, { ...state, loaded: true, error: null })
+    adapter.setAll(tickets, produce(state, draft => {draft.loaded = true, draft.error = null }))
   ),
-  on(TicketApiActions.loadFilterTicketsFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),
+  immerOn(TicketApiActions.loadFilterTicketsFailure, (state, { error }) => {
+    state.error = error
+  }),
 
   on(TicketApiActions.upsertTicketSuccess, (state, { ticket }) => 
-    adapter.upsertOne(ticket, {...state, loaded: true, error: null})
+    adapter.upsertOne(ticket, produce(state, draft => {draft.loaded = true, draft.error = null }))
   ), 
-  on(TicketApiActions.upsertTicketFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),
+  immerOn(TicketApiActions.upsertTicketFailure, (state, { error }) => {
+    state.error = error
+  }),
   on(TicketApiActions.updateAddressesSuccess, (state, { ticket }) => 
-    adapter.updateOne(ticket, {...state, loaded: true})
+    adapter.updateOne(ticket, produce(state, draft => {draft.loaded = true }))
   ), 
   on(TicketApiActions.deleteTicketSuccess, (state, { id }) => 
-    adapter.removeOne(id, {...state, loaded: true})
+    adapter.removeOne(id, produce(state, draft => {draft.loaded = true }))
   ), 
-  on(TicketApiActions.deleteTicketFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),
+  immerOn(TicketApiActions.deleteTicketFailure, (state, { error }) => {
+    state.error = error
+  }),
     // on(TicketApiActions.loadTicketsSuccess, (state, { tickets }) =>
   //   adapter.setAll(tickets, { ...state, loaded: true, error: null })
   // ),
