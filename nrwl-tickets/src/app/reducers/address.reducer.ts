@@ -4,6 +4,8 @@ import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import { AddressActions, AddressApiActions } from "../actions";
 import { Address } from "../models/model";
 import { tap } from "rxjs/operators";
+import { immerOn } from 'ngrx-immer/store';
+import produce from "immer";
 
 export const addressesFeatureKey = "addresses";
 
@@ -34,24 +36,24 @@ export const reducer = createReducer(
   // Load widgets
   on(AddressApiActions.loadAddressesOfTicketSuccess, (state, { addresses }) => {
     //console.log('reducer addresses=', addresses);
-    return adapter.setAll(addresses, { ...state, loaded: true, error: null })
+    return adapter.setAll(addresses, produce(state, draft => {draft.loaded = true, draft.error = null }))
   }
   ),
-  on(AddressApiActions.loadAddressesOfTicketFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),
+  immerOn(AddressApiActions.loadAddressesOfTicketFailure, (state, { error }) => {
+    state.error = error
+  }),
   on(AddressApiActions.updateAddressesSuccess, (state, { addresses }) => {
-    console.log(addresses);
-    return adapter.setAll(addresses, {...state, loaded: true})
+    return adapter.setAll(addresses, produce(state, draft => {draft.loaded = true, draft.error = null }))
   }), 
-  on(AddressApiActions.updateAddressesFailure, (state, { error }) => ({
-    ...state,
-    error
-  })),  
+  immerOn(AddressApiActions.updateAddressesFailure, (state, { error }) => {
+    state.error = error
+  }),  
   on(AddressApiActions.deleteTicketAddressesSuccess, (state, { ids }) => {
     //console.log(addresses);
-    return adapter.removeMany(ids, {...state, loaded: true})
+    return adapter.removeMany(ids, produce(state, draft => {draft.loaded = true }))
+  }),   
+  immerOn(AddressApiActions.deleteTicketAddressesFailure, (state, { error }) => {
+    state.error = error
   }),   
   // on(AddressApiActions.addNewPhonesSuccess, (state, { addresses }) => 
   //   adapter.updateMany(addresses, {...state, loaded: true})
