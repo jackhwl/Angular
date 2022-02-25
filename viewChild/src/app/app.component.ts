@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { PupComponent } from './pup.component';
 import { SharkDirective } from './shark.directive';
 
 @Component({
@@ -16,8 +17,11 @@ export class AppComponent {
   
   @ViewChild('someInput') someInput!: ElementRef;
 
+  @ViewChild(PupComponent) pup!: PupComponent;
+  
   ngAfterViewInit() {
     console.log(this.extraCreature)
     this.someInput.nativeElement.value = 'Whale!';
+    console.log(this.pup.whoAmI());
   }
 }

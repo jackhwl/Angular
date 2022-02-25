@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { SharkDirective } from './shark.directive';
+import { PupComponent } from './pup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SharkDirective
+    SharkDirective,
+    PupComponent
   ],
   imports: [
     BrowserModule
