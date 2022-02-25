@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { SharkDirective } from './shark.directive';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'viewChild';
+  extraCreature!: string;
+
+  @ViewChild(SharkDirective)
+  set appShark(directive: SharkDirective) {
+    this.extraCreature = directive.creature
+  }
+
+  ngAfterViewInit() {
+    console.log(this.extraCreature)
+  }
 }
