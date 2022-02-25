@@ -32,7 +32,7 @@ export const reducer = createReducer(
   on(TicketApiActions.loadTicketSuccess, (state, { ticket }) =>{
     //Object.assign({}, state, { selectedId: ticket.id })
     //console.log('reducer ticket=', ticket);
-    return adapter.setOne(ticket, produce(state, draft => {draft.loaded = true, draft.error = null }))
+    return adapter.setOne(ticket, produce(state, draft => {draft.loaded = true, draft.selectedId = ticket.id, draft.error = null }))
   }),
   immerOn(TicketApiActions.loadTicketFailure, (state, { error }) => {
     state.error = error

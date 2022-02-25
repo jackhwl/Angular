@@ -16,7 +16,8 @@ it('TicketApiActions.loadTicketSuccess should set load to true ', () => {
             't1': ticket,
         },
         loaded: true, 
-        error: null
+        error: null,
+        selectedId: 't1'
     }
     expect(reducer(initialState, TicketApiActions.loadTicketSuccess({ticket}))).toEqual(newState)
 })
@@ -124,7 +125,8 @@ it('TicketApiActions.updateAddressesSuccess should set load to true ', () => {
             't1': ticket1,
         },
         loaded: true, 
-        error: null
+        error: null,
+        selectedId: 't1'
     }
     const ticket = {id: ticket0.id, changes: {addressIds: ticket1.addressIds}}
     const prevState = reducer(initialState, TicketApiActions.loadTicketSuccess({ticket: ticket0}))
