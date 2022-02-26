@@ -6,6 +6,8 @@ import { SharkDirective } from './shark.directive';
 import { PupComponent } from './pup.component';
 import { RainbowDirective } from './rainbow.directive';
 import { NgxUnlessDirective } from './ngx-unless.directive';
+import { CardComponent } from './card.component';
+import { CardListComponent } from './card-list.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { NgxUnlessDirective } from './ngx-unless.directive';
     SharkDirective,
     PupComponent,
     RainbowDirective,
-    NgxUnlessDirective
+    NgxUnlessDirective,
+    CardComponent,
+    CardListComponent
   ],
   imports: [
     BrowserModule
