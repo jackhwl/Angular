@@ -17,7 +17,12 @@ export class PersonListComponent {
     'hair_color',
     'height',
     'mass',
+    'controls'
   ];
 
   constructor(private readonly _personStore: PersonStore) {}
+
+  editPerson(id: number): void {
+    this._personStore.editPerson(id);
+  }
 }
