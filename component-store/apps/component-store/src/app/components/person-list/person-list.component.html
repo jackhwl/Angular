@@ -28,7 +28,7 @@
       <th mat-header-cell *matHeaderCellDef> Mass (kg) </th>
       <td mat-cell *matCellDef="let element"> {{element.mass}} </td>
     </ng-container>
-    <<ng-container matColumnDef="controls">
+    <ng-container matColumnDef="controls">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="primary" (click)="editPerson(element.id)">
