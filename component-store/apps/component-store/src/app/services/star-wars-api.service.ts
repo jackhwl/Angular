@@ -16,7 +16,7 @@ export class StarWarsApiService {
   getPeople(): Observable<Person[]> {
     return this._httpClient
       .get<ApiResponse>(`${API_ROOT}/people`)
-      .pipe(map((res) => res.results));
+      .pipe(map((res) => res.results.map((person, index) => ({ ...person, id: index}))))
   }
 
   savePerson(id: number, person: Person) {
