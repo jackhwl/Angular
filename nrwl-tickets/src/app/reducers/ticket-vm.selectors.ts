@@ -49,10 +49,16 @@ export const getSelectedTicketVmByRoute = createSelector(
 export const getFilterTicketsVmByRoute =  createSelector(
   getAllTickets,
   getAllUsers,
-  (tickets, users): Ticket_vm[] => 
-     tickets.map(ticket => ({
+  (tickets, users): Ticket_vm[] => {
+    const tickets_vm = tickets.map(ticket => {
+      const { addressIds, ...ticket_vm } = ticket
+      return ticket_vm
+    })
+  
+    return tickets_vm.map(ticket => ({
         ...ticket,
         assignees: users.filter(user => user.id === ticket.assigneeId),
         addresses: []
     }))
+  }
 );
