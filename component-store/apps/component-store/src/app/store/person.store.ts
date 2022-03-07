@@ -76,6 +76,7 @@ export class PersonStore extends ComponentStore<PersonState> implements OnDestro
         })
       )
   )
+  
   readonly updatePerson = this.effect((person$: Observable<Person>) =>
     person$.pipe(
       withLatestFrom(this.people$),

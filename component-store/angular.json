@@ -29,6 +29,9 @@
     },
     "@nrwl/angular:component": {
       "style": "scss"
+    },
+    "@ngneat/spectator:spectator-component": {
+      "jest": true
     }
   },
   "projects": {
