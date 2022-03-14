@@ -7,7 +7,7 @@ import { Phone } from "../models/model";
 import { PhoneService } from "../services/phone.service";
 
 @Injectable()
-export class PhonesEffects {
+export class PhoneEffects {
   ticketService: any;
   constructor(private actions$: Actions, private service: PhoneService) {}
 

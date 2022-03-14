@@ -11,7 +11,7 @@ import { TicketsComponent } from "./containers/tickets/tickets.component";
 import { TicketsRoutingModule } from "./tickets-routing.module";
 import { UsersEffects } from "./effects/user.effects";
 import { UtilService } from "./services";
-import { PhonesEffects } from "./effects/phone.effects";
+import { PhoneEffects } from "./effects/phone.effects";
 import { TicketService } from "./services/ticket.service";
 import { AddressService } from "./services/address.service";
 import { AddressEffects } from "./effects/address.effects";
@@ -29,7 +29,7 @@ import { TicketVmEffects } from "./effects/ticket-vm.effects";
       fromTicketModule.TICKETMODULE_FEATURE_KEY,
       fromTicketModule.reducers
     ),
-    EffectsModule.forFeature([PhonesEffects, TicketsEffects, TicketVmEffects, UsersEffects, AddressEffects])
+    EffectsModule.forFeature([PhoneEffects, TicketsEffects, TicketVmEffects, UsersEffects, AddressEffects])
   ],
   providers: [BackendService, TicketService, UtilService, AddressService, PhoneService]
 })
