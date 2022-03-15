@@ -16,14 +16,11 @@ export class PhoneEffects {
       ofType(PhoneActions.loadPhonesOfAddress),
       fetch({
         run: action =>
-          this.service
-            .phones(action.addressIds)
-            .pipe(
-              switchMap((phones: Phone[]) => [
-                PhoneApiActions.loadPhonesOfAddressSuccess({ phones })
-              ])
-            ),
-
+          this.service.phones(action.addressIds).pipe(
+            switchMap((phones: Phone[]) => [
+              PhoneApiActions.loadPhonesOfAddressSuccess({ phones })
+            ])
+          ),
         onError: (action, error) => 
           PhoneApiActions.loadPhonesOfAddressFailure({ error })
       })
