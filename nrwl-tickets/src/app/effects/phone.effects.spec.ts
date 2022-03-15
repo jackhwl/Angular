@@ -5,6 +5,7 @@ import { PhoneApiActions, PhoneActions } from '../actions';
 import { Phone } from '../models/model';
 import { Observable, of } from "rxjs";
 import { createMockWithValues } from '@testing-library/angular/jest-utils';
+import { subscribeSpyTo, fakeTime } from '@hirez_io/observer-spy';
 
 it('load phones of address dispatches a success action', () => {
     const { service } = setup();
@@ -19,6 +20,20 @@ it('load phones of address dispatches a success action', () => {
 
     expect(result).toEqual([PhoneApiActions.loadPhonesOfAddressSuccess({ phones: newPhones() })])
 })
+
+it('load phones of address dispatches a success action (using observe-spy)', fakeTime( flush => {
+    const { service } = setup();
+    const actions = new ActionsSubject();
+    const effects = new PhoneEffects(actions, service);
+
+    const observerSpy = subscribeSpyTo(effects.loadPhonesOfAddress$)
+
+    const action = PhoneActions.loadPhonesOfAddress({addressIds: ['a']})
+    actions.next(action)
+    flush()
+
+    expect(observerSpy.getValues()).toEqual([PhoneApiActions.loadPhonesOfAddressSuccess({ phones: newPhones() })])
+}))
 
 function setup() {
     const service = createMockWithValues(PhoneService, {
