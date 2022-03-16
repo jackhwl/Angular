@@ -10,7 +10,7 @@ import { TicketService } from "../services/ticket.service";
 import { Router } from "@angular/router";
 
 @Injectable()
-export class TicketsEffects {
+export class TicketEffects {
   constructor(
     private store: Store<{}>,
     private actions$: Actions,

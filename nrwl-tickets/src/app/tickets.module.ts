@@ -6,7 +6,7 @@ import { TicketsComponentsModule } from "./containers/ticketsComponentsModule";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import * as fromTicketModule from "./reducers";
-import { TicketsEffects } from "./effects/ticket.effects";
+import { TicketEffects } from "./effects/ticket.effects";
 import { TicketsComponent } from "./containers/tickets/tickets.component";
 import { TicketsRoutingModule } from "./tickets-routing.module";
 import { UsersEffects } from "./effects/user.effects";
@@ -29,7 +29,7 @@ import { TicketVmEffects } from "./effects/ticket-vm.effects";
       fromTicketModule.TICKETMODULE_FEATURE_KEY,
       fromTicketModule.reducers
     ),
-    EffectsModule.forFeature([PhoneEffects, TicketsEffects, TicketVmEffects, UsersEffects, AddressEffects])
+    EffectsModule.forFeature([PhoneEffects, TicketEffects, TicketVmEffects, UsersEffects, AddressEffects])
   ],
   providers: [BackendService, TicketService, UtilService, AddressService, PhoneService]
 })
