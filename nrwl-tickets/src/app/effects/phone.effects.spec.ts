@@ -7,6 +7,11 @@ import { Observable, of } from "rxjs";
 import { createMockWithValues } from '@testing-library/angular/jest-utils';
 import { subscribeSpyTo, fakeTime } from '@hirez_io/observer-spy';
 
+afterEach(() => {
+    // don't forget to reset the timers
+    jest.useRealTimers();
+});
+
 it('load phones of address dispatches a success action', () => {
     const { service } = setup();
     const actions = new ActionsSubject();
@@ -35,9 +40,44 @@ it('load phones of address dispatches a success action (using observe-spy)', fak
     expect(observerSpy.getValues()).toEqual([PhoneApiActions.loadPhonesOfAddressSuccess({ phones: newPhones() })])
 }))
 
+it('update phones of address dispatches a success action (using jest)', () => {
+    jest.useFakeTimers()
+
+    const { service } = setup();
+    const actions = new ActionsSubject();
+    const effects = new PhoneEffects(actions, service);
+
+    const result: Action[] = []
+    effects.updatePhones$.subscribe(action => result.push(action))
+
+    const action = PhoneActions.updatePhones({aIdPhones: [{addressId: 'a', phones: newPhones() }]})
+    actions.next(action)
+
+    jest.advanceTimersByTime(10_000)
+    jest.runOnlyPendingTimers()
+
+    expect(result).toEqual([PhoneApiActions.updatePhonesSuccess({ phones: newPhones() })])
+})
+
+it('delete phones of address dispatches a success action (using observe-spy)', fakeTime( flush => {
+    const { service } = setup();
+    const actions = new ActionsSubject();
+    const effects = new PhoneEffects(actions, service);
+
+    const observerSpy = subscribeSpyTo(effects.deleteAddressesPhones$)
+
+    const action = PhoneActions.deleteAddressesPhones({addressIds: ['a']})
+    actions.next(action)
+    flush()
+
+    expect(observerSpy.getValues()).toEqual([PhoneApiActions.deleteAddressesPhonesSuccess({ ids: [''] })])
+}))
+
 function setup() {
     const service = createMockWithValues(PhoneService, {
         phones: () => of(newPhones()),
+        updatePhones: () => of(newPhones()),
+        deleteAddressesPhones: () => of([''])
     });
 
     return {service}
