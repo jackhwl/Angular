@@ -25,17 +25,15 @@ export class TicketEffects {
       withLatestFrom(this.store.pipe(select(selectRouteParams))),
       //filter(([, p]) => Object.keys(p).includes('id')),
       fetch({
-        run: (action, p) => {
-          console.log('p=',p)
-          return this.ticketService.ticket(p['id'])
+        run: (action, p) => 
+          this.ticketService.ticket(p['id'])
           .pipe(
-            tap(console.log),
             switchMap((ticket: Ticket) => [
               TicketApiActions.loadTicketSuccess({ ticket }),
               UserActions.loadUsers(),
               AddressActions.loadAddressesOfTicket({ ticketId: ticket.id})
             ])
-          )},
+          ),
       onError: (action, error) => 
          TicketApiActions.loadTicketFailure({ error })
       })
