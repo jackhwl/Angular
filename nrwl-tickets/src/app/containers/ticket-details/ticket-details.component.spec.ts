@@ -96,11 +96,9 @@ describe('TicketDetailsComponent', () => {
         detailForm$: of(service.generateTicketForm(ticket)),
         ticketId: ticket.id
       },
-      routes: [{}]
     });
 
     const store = TestBed.inject(MockStore);
-
     store.dispatch = jest.fn();
     return { container, dispatchSpy: store.dispatch, scannedActions$: store.scannedActions$ };
   }
