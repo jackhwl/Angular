@@ -13,6 +13,7 @@ import { By } from "@angular/platform-browser";
 import userEvent from "@testing-library/user-event";
 import { TicketDetailsPageActions } from "src/app/actions";
 import { TestScheduler } from 'rxjs/testing';
+import { Router } from "@angular/router";
 
 const ticketVm: Ticket_vm = {
   id: '0',
@@ -94,10 +95,12 @@ describe('TicketDetailsComponent', () => {
       componentProperties: { 
         detailForm$: of(service.generateTicketForm(ticket)),
         ticketId: ticket.id
-      }
+      },
+      routes: [{}]
     });
 
     const store = TestBed.inject(MockStore);
+
     store.dispatch = jest.fn();
     return { container, dispatchSpy: store.dispatch, scannedActions$: store.scannedActions$ };
   }
@@ -188,11 +191,16 @@ describe('TicketDetailsComponent', () => {
   });
     
   xit("should navigate to list page after cancel button click", async () => {
+    // https://github.com/testing-library/angular-testing-library/blob/main/apps/example-app/src/app/examples/09-router.spec.ts
     const { container } = await setup(ticketVm);
+
     const btn = screen.getByRole('button', { name: /cancel/i });
     userEvent.click(btn)
-    container.fixture.detectChanges();
-    expect(location).toBe('/tickets')
+    
+    const expectedPath = "/";
+    //const navigateSpy = jest.spyOn(router, 'navigate').mockReturnValue(null);
+    //expect(router.navigate).toHaveBeenCalledWith([expectedPath]);
+
   });
 });
 
