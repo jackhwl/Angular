@@ -21,7 +21,13 @@ export default {
 // This creates a Story for the component
 const Template: Story<LinkComponent> = () => ({
   component: LinkComponent,
-  template: `<app-link></app-link>`,
+  template: `<app-link [color]="color" [href]="href" [target]="target">{{content}}</app-link>`,
+  props: {
+      color: 'primary',
+      content: 'Visit Storybook',
+      href: 'https://storybook.js.org',
+      target: '_blank'
+  }
 });
 export const Base = Template.bind({});
 // Other stories could be added here as well, all you have to do is export them along!
