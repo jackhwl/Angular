@@ -369,7 +369,7 @@
         },
         {
             "name": "LinkComponent",
-            "id": "component-LinkComponent-28d25665bb224aedfdfcfcd8960eb4be1a69a49e6defee86daa7defbba25ee469d1d0f7c54099c8c703e7feec7ae8a0c57f1f887ba6511f93a19acb6252b3941",
+            "id": "component-LinkComponent-e99eab8db96881dcbc39a782c28647fd2a6f268f3c601024e9ab18236feb74984a7ad4cf8d0e4b97a6242228c90cd6d5d2299c583c9547e3dcc6546cc641dc10",
             "file": "src/app/components/link/link.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -385,21 +385,37 @@
                 "./link.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
+            "inputsClass": [
                 {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 12,
+                    "name": "color",
+                    "defaultValue": "'primary'",
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "\"primary\" | \"secondary\"",
+                    "decorators": []
+                },
+                {
+                    "name": "href",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "target",
+                    "defaultValue": "'_self'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "\"_self\" | \"_blank\" | \"_parent\" | \"_top\"",
+                    "decorators": []
                 }
             ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -407,27 +423,27 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-link',\n  templateUrl: './link.component.html',\n  styleUrls: ['./link.component.css']\n})\nexport class LinkComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-link',\n  templateUrl: './link.component.html',\n  styleUrls: ['./link.component.css']\n})\nexport class LinkComponent {\n  \n  @Input()\n  color: 'primary' | 'secondary' = 'primary';\n\n  @Input()\n  href?: string;\n\n  @Input()\n  target?: '_self' | '_blank' | '_parent' | '_top' = '_self';\n  \n  public get classes(): Array<string> {\n    return ['link', `${this.color}-link`];\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ".link {\r\n    text-decoration: none;\r\n    border-bottom: 1px dotted;\r\n    @media screen and (min-width: 600px) {\r\n      font-size: 1.15em;\r\n    }\r\n  }\r\n  .primary-link {\r\n    color: #ff4785;\r\n    border-color: #ff4785;\r\n  }\r\n  .secondary-link {\r\n    color: #1ea7fd;\r\n    border-color: #1ea7fd;\r\n  }",
                     "styleUrl": "./link.component.css"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 8
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "",
+                        "returnType": "Array<string>",
+                        "line": 19
+                    }
+                }
             },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>link works!</p>\n"
+            "templateData": "<a\n  [ngClass]=\"classes\"\n  [href]=\"href\"\n  [target]=\"target\"\n>\n  <ng-content></ng-content>\n</a>"
         },
         {
             "name": "PageComponent",
@@ -751,7 +767,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<LinkComponent>",
-                "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link></app-link>`,\r\n})"
+                "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link [color]=\"color\" [href]=\"href\" [target]=\"target\">{{content}}</app-link>`,\r\n  props: {\r\n      color: 'primary',\r\n      content: 'Visit Storybook',\r\n      href: 'https://storybook.js.org',\r\n      target: '_blank'\r\n  }\r\n})"
             },
             {
                 "name": "WithFullOpacity",
@@ -807,7 +823,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<LinkComponent>",
-                    "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link></app-link>`,\r\n})"
+                    "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link [color]=\"color\" [href]=\"href\" [target]=\"target\">{{content}}</app-link>`,\r\n  props: {\r\n      color: 'primary',\r\n      content: 'Visit Storybook',\r\n      href: 'https://storybook.js.org',\r\n      target: '_blank'\r\n  }\r\n})"
                 }
             ],
             "src/test.ts": [
@@ -1048,7 +1064,7 @@
                 "linktype": "component",
                 "name": "LinkComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
