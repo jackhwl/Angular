@@ -733,21 +733,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/image.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ImageComponent>",
                 "defaultValue": "(args: ImageComponent) => ({\r\n    component: ImageComponent,\r\n    props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Header>",
+                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -767,7 +767,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<LinkComponent>",
-                "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link [color]=\"color\" [href]=\"href\" [target]=\"target\">{{content}}</app-link>`,\r\n  props: {\r\n      color: 'primary',\r\n      content: 'Visit Storybook',\r\n      href: 'https://storybook.js.org',\r\n      target: '_blank'\r\n  }\r\n})"
+                "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link [color]=\"color\" [href]=\"href\" [target]=\"target\">{{content}}</app-link>`,\r\n  props: {\r\n      color: select('Color', ['primary', 'secondary'] , 'primary'),\r\n      content: text('Text', 'Visit Storybooks'),\r\n      href: 'https://storybook.js.org',\r\n      target: '_blank'\r\n  }\r\n})"
             },
             {
                 "name": "WithFullOpacity",
@@ -823,7 +823,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<LinkComponent>",
-                    "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link [color]=\"color\" [href]=\"href\" [target]=\"target\">{{content}}</app-link>`,\r\n  props: {\r\n      color: 'primary',\r\n      content: 'Visit Storybook',\r\n      href: 'https://storybook.js.org',\r\n      target: '_blank'\r\n  }\r\n})"
+                    "defaultValue": "() => ({\r\n  component: LinkComponent,\r\n  template: `<app-link [color]=\"color\" [href]=\"href\" [target]=\"target\">{{content}}</app-link>`,\r\n  props: {\r\n      color: select('Color', ['primary', 'secondary'] , 'primary'),\r\n      content: text('Text', 'Visit Storybooks'),\r\n      href: 'https://storybook.js.org',\r\n      target: '_blank'\r\n  }\r\n})"
                 }
             ],
             "src/test.ts": [
