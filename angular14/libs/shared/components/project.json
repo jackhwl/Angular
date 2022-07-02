@@ -43,6 +43,7 @@
         "browserTarget": "shared-components:build-storybook",
         "compodoc": false
       },
+      "styles": ["apps/myapp/src/styles.css"],
       "configurations": {
         "ci": {
           "quiet": true
