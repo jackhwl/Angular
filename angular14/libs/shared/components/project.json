@@ -41,9 +41,9 @@
         "outputDir": "dist/storybook/shared-components",
         "configDir": "libs/shared/components/.storybook",
         "browserTarget": "shared-components:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["apps/demo/src/styles.scss"]
       },
-      "styles": ["apps/myapp/src/styles.css"],
       "configurations": {
         "ci": {
           "quiet": true
