@@ -4,6 +4,7 @@
   "projects": {
     "demo": "apps/demo",
     "demo-e2e": "apps/demo-e2e",
+    "root-assets": "libs/root/assets",
     "shared-components": "libs/shared/components",
     "shared-components-e2e": "apps/shared-components-e2e"
   }

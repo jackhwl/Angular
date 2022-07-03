@@ -1,0 +1,6 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/root/assets/src",
+  "targets": {},
+  "tags": ["scope:root", "type:assets"]
+}

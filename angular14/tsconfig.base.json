@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular14/root/assets": ["libs/root/assets/src/index.ts"],
       "@angular14/shared/components": ["libs/shared/components/src/index.ts"]
     }
   },
