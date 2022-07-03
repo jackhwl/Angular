@@ -20,6 +20,11 @@
             "output": "./"
           },
           {
+            "glob": "zoom.ico",
+            "input": "libs/root/assets/src",
+            "output": "./"
+          },
+          {
             "glob": "**/*",
             "input": "libs/root/assets/src/assets",
             "output": "assets"
