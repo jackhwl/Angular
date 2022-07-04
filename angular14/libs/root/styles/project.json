@@ -1,0 +1,6 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/root/styles/src",
+  "targets": {},
+  "tags": ["scope:root", "type:styles"]
+}
