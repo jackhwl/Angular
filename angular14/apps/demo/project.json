@@ -30,7 +30,7 @@
             "output": "assets"
           }
         ],
-        "styles": ["apps/demo/src/styles.scss"],
+        "styles": ["libs/root/styles/src/index.scss"],
         "scripts": []
       },
       "configurations": {
