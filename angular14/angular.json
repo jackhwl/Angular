@@ -5,6 +5,7 @@
     "demo": "apps/demo",
     "demo-e2e": "apps/demo-e2e",
     "root-assets": "libs/root/assets",
+    "root-environments": "libs/root/environments",
     "root-styles": "libs/root/styles",
     "shared-components": "libs/shared/components",
     "shared-components-e2e": "apps/shared-components-e2e"
