@@ -1,0 +1,27 @@
+<div class="main">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a routerLink="/">
+        <h1>
+          <img alt="Eteneral" src="/assets/logo.png" />
+          Unforgettable Holidays
+        </h1>
+      </a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-drawer-container autosize>
+    <mat-drawer mode="side" opened>
+      <ul>
+        <li>
+          <a mat-raised-button routerLink="/holidays">Holidays</a>
+        </li>
+        <li>
+          <a mat-raised-button routerLink="/customer">Customers</a>
+        </li>
+      </ul>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
