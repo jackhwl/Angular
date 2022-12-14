@@ -168,7 +168,7 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-import": "latest",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fs-extra": "^2.1.2",
     "glob": "^7.1.2",
     "husky": "^1.2.0",
