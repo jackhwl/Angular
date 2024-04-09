@@ -1,2 +1,2 @@
 # Enterprise Angular
-https://github.com/onehungrymind/enterprisey-apps.git
+- Domain model design 
