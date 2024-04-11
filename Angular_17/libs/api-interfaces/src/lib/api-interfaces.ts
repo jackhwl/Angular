@@ -74,3 +74,7 @@ export interface Workshop extends BaseEntity {
   topic: string;
   instructor_id: string;
 }
+
+export interface Matter extends BaseEntity {
+  description: string;
+}
