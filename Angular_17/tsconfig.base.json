@@ -26,6 +26,7 @@
       "@proto/flashcards-data": ["libs/flashcards-data/src/index.ts"],
       "@proto/flashcards-state": ["libs/flashcards-state/src/index.ts"],
       "@proto/material": ["libs/material/src/index.ts"],
+      "@proto/matters-data": ["libs/matters-data/src/index.ts"],
       "@proto/notes-data": ["libs/notes-data/src/index.ts"],
       "@proto/notes-state": ["libs/notes-state/src/index.ts"],
       "@proto/testing": ["libs/testing/src/index.ts"],
