@@ -10,4 +10,5 @@
         - npx nx show project matters-data --web 
     2. Generate matter service
         - npx nx g @nx/angular:service services/matters --project=matters-data -d
-
+    3. Generate micro-frontend host application workshops
+        - npx nx g @nx/angular:host workshops --directory=school/workshops --style=scss --dynamic=true --e2eTestRunner=cypress --projectNameAndRootFormat=derived --ssr=false -d

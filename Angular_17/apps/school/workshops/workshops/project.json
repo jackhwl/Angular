@@ -1,0 +1,86 @@
+{
+  "name": "school-workshops-workshops",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "proto",
+  "sourceRoot": "apps/school/workshops/workshops/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/school/workshops/workshops",
+        "index": "apps/school/workshops/workshops/src/index.html",
+        "main": "apps/school/workshops/workshops/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/school/workshops/workshops/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/school/workshops/workshops/src/favicon.ico",
+          "apps/school/workshops/workshops/src/assets"
+        ],
+        "styles": ["apps/school/workshops/workshops/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/school/workshops/workshops/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "school-workshops-workshops:build:production"
+        },
+        "development": {
+          "buildTarget": "school-workshops-workshops:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "school-workshops-workshops:build"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "school-workshops-workshops:build",
+        "port": 4200
+      }
+    }
+  }
+}
