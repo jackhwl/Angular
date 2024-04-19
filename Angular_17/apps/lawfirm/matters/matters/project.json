@@ -1,0 +1,86 @@
+{
+  "name": "lawfirm-matters-matters",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "proto",
+  "sourceRoot": "apps/lawfirm/matters/matters/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/lawfirm/matters/matters",
+        "index": "apps/lawfirm/matters/matters/src/index.html",
+        "main": "apps/lawfirm/matters/matters/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/lawfirm/matters/matters/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/lawfirm/matters/matters/src/favicon.ico",
+          "apps/lawfirm/matters/matters/src/assets"
+        ],
+        "styles": ["apps/lawfirm/matters/matters/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/lawfirm/matters/matters/webpack.config.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "lawfirm-matters-matters:build:production"
+        },
+        "development": {
+          "buildTarget": "lawfirm-matters-matters:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "lawfirm-matters-matters:build"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "lawfirm-matters-matters:build",
+        "port": 4200
+      }
+    }
+  }
+}
