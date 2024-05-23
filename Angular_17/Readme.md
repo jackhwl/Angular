@@ -14,4 +14,6 @@
         - npx nx g @nx/angular:host workshops --directory=school/workshops --style=scss --dynamic=true --e2eTestRunner=cypress --projectNameAndRootFormat=derived --ssr=false -d
     4. Generate micro-frontend host application matters
         - npx nx g @nx/angular:host matters --directory=lawfirm/matters --style=scss --dynamic=true --e2eTestRunner=cypress --projectNameAndRootFormat=derived --ssr=false -d
+    5. Generate remote app charllenge
+        - npx nx g @nx/angular:remote sessions --host=workshops --style=scss --e2eTestRunner=cypress --projectNameAndRootFormat=derived -d
 
