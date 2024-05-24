@@ -1,0 +1,10 @@
+{
+  "name": "my-first-library",
+  "version": "0.0.1",
+  "description": "This is my first library with typescript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}

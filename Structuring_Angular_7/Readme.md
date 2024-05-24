@@ -9,4 +9,6 @@
   - Demo: Creating your first javascript module
   - Short Comparison of javascript modules systems
   - Demo: Implement First Typescript Module
-  
+  - Introduction Packages and NPM
+  - Modules vs. Packages
+  - Demo: Implement First Typescript Package
