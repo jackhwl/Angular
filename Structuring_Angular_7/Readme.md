@@ -7,3 +7,6 @@
     - Library: collection of components, services, etc.
 4. Building a Typescript Library
   - Demo: Creating your first javascript module
+  - Short Comparison of javascript modules systems
+  - Demo: Implement First Typescript Module
+  
