@@ -12,3 +12,9 @@
   - Introduction Packages and NPM
   - Modules vs. Packages
   - Demo: Implement First Typescript Package
+5. Creating and Using Your First Angular Library
+  - Requirements of a Library
+  - Angular Package Format
+    - Inlining all the templates
+    - Compile it with "ngc"
+    - Build ESM2015, ESM5 and UMD formats
