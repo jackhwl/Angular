@@ -23,4 +23,5 @@
   - Understanding the Libs Entryfile
     - if you import something from a lib via ES6 import statement is has to be part of the entry file.
   - Demo: Create a Library with ng-packagr
-  
+    - ng-packagr-demo 
+    - https://github.com/FabianGosebrink/angular-libraries
