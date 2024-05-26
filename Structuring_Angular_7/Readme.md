@@ -18,3 +18,9 @@
     - Inlining all the templates
     - Compile it with "ngc"
     - Build ESM2015, ESM5 and UMD formats
+  - Examine the ng-packagr
+    - npm i ng-packagr -g
+  - Understanding the Libs Entryfile
+    - if you import something from a lib via ES6 import statement is has to be part of the entry file.
+  - Demo: Create a Library with ng-packagr
+  
