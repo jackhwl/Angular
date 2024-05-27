@@ -30,3 +30,4 @@
   - Handling Events with Event Bindings
   - Handling Null Values with the Safe Navigation Operator
   - Hiding and Showing Content with *ngIf
+  - Formatting Data with Angular Pipes
