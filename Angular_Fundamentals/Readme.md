@@ -31,3 +31,7 @@
   - Handling Null Values with the Safe Navigation Operator
   - Hiding and Showing Content with *ngIf
   - Formatting Data with Angular Pipes
+5. Styling Angular Components
+  - Styling an Angular Application
+  - CSS Encapsulation
+  - The NgClass Directive
