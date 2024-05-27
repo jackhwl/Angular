@@ -26,3 +26,5 @@
   - Binding to Component Data with Interpolation
   - Using Attribute Bindings and Functions
     - One way binding from component to template.
+  - Repeating Data with *ngFor
+  
