@@ -11,15 +11,15 @@
     <li class="product-item">
       <div class="product">
         <div class="product-details">
-          <img src="" alt="" />
+          <img src="{{'/assets/images/robot-parts/' + product.imageName}}" alt="" />
           <div class="product-info">
-            <div class="name"></div>
-            <div class="description"></div>
-            <div class="category">Part Type: </div>
+            <div class="name">{{ product.name }}</div>
+            <div class="description">{{ product.description }}</div>
+            <div class="category">Part Type: {{ product.category }}</div>
           </div>
         </div>
         <div class="price">
-          <div></div>
+          <div>${{ product.price.toFixed(2) }}</div>
           <button class="cta">Buy</button>
         </div>
       </div>

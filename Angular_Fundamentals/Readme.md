@@ -21,4 +21,6 @@
       - AfterContentChecked
       - AfterViewChecked
   - Creating Additional Components
-  
+4. Using Angular Template Syntax
+  - Understanding Angular Interpolation
+  - Binding to Component Data with Interpolation
