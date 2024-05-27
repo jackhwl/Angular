@@ -36,4 +36,6 @@
   - CSS Encapsulation
   - The NgClass Directive
   - The NgStyle Directive
-  
+  - Using CSS Frameworks with Angular
+6. Communicating Between Angular Components
+  - Communicating with Child Components Using Inputs
