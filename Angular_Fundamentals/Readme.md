@@ -27,4 +27,5 @@
   - Using Attribute Bindings and Functions
     - One way binding from component to template.
   - Repeating Data with *ngFor
+  - Handling Events with Event Bindings
   
