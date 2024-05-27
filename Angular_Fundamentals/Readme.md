@@ -24,3 +24,5 @@
 4. Using Angular Template Syntax
   - Understanding Angular Interpolation
   - Binding to Component Data with Interpolation
+  - Using Attribute Bindings and Functions
+    - One way binding from component to template.

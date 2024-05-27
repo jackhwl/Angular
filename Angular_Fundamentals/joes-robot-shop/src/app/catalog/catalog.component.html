@@ -11,7 +11,7 @@
     <li class="product-item">
       <div class="product">
         <div class="product-details">
-          <img src="{{'/assets/images/robot-parts/' + product.imageName}}" alt="" />
+          <img [src]="getImageUrl(product)" [alt]="product.imageName" />
           <div class="product-info">
             <div class="name">{{ product.name }}</div>
             <div class="description">{{ product.description }}</div>
