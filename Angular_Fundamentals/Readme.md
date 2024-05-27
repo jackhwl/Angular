@@ -40,3 +40,5 @@
 6. Communicating Between Angular Components
   - Communicating with Child Components Using Inputs
   - Communicating with Parent Components Using Outputs
+7. Creating and Using Angular Services
+  - Creating an Angular Service
