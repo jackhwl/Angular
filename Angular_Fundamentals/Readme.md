@@ -43,3 +43,4 @@
 7. Creating and Using Angular Services
   - Creating an Angular Service
   - Injecting a Service into a Component
+  - Encapsulating Business Logic in a Service
