@@ -42,3 +42,4 @@
   - Communicating with Parent Components Using Outputs
 7. Creating and Using Angular Services
   - Creating an Angular Service
+  - Injecting a Service into a Component
