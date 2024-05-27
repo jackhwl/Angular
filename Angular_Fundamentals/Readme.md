@@ -39,3 +39,4 @@
   - Using CSS Frameworks with Angular
 6. Communicating Between Angular Components
   - Communicating with Child Components Using Inputs
+  - Communicating with Parent Components Using Outputs

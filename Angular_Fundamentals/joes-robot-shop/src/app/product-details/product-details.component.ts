@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../catalog/product.model';
 
 @Component({
@@ -6,17 +6,17 @@ import { IProduct } from '../catalog/product.model';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
+
 export class ProductDetailsComponent {
   @Input() product!: IProduct;
-  cart: IProduct[] = [];
+  @Output() buy = new EventEmitter();
 
   getImageUrl(product: IProduct): string {
     return '/assets/images/robot-parts/' + product.imageName;
   }
 
-  addToCart(product: IProduct): void {
-    this.cart.push(product);
-    console.log(`product ${product.name} added to cart`);
+  buyButtonClicked(product: IProduct): void {
+    this.buy.emit();
   }
 
   getDiscountedClasses(product: IProduct): string[] {

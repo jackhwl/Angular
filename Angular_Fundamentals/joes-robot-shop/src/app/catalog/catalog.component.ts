@@ -189,6 +189,11 @@ export class CatalogComponent {
     ];
   }
 
+  addToCart(product: IProduct): void {
+    this.cart.push(product);
+    console.log(`product ${product.name} added to cart`);
+  }
+
   getFilteredProducts() {
     return this.filter === '' ? this.products : this.products.filter(product => product.category === this.filter)
   }
