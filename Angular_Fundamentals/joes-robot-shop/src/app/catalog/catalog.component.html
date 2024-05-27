@@ -19,7 +19,9 @@
           </div>
         </div>
         <div class="price">
-          <div [ngClass]="getDiscountedClasses(product)">{{ product?.price | currency:'USD' }}</div>
+          <div 
+          [ngStyle]="{color: product.discount > 0 ? 'green' : ''}"
+          [ngClass]="getDiscountedClasses(product)">{{ product?.price | currency:'USD' }}</div>
           <div class="discount" *ngIf="product.discount > 0">{{ (product.price * (1-product.discount)) | currency:'USD' }}</div>
           <button class="cta">Buy</button>
         </div>

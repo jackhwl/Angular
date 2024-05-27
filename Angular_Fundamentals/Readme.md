@@ -35,3 +35,5 @@
   - Styling an Angular Application
   - CSS Encapsulation
   - The NgClass Directive
+  - The NgStyle Directive
+  
