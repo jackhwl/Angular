@@ -28,4 +28,4 @@
     - One way binding from component to template.
   - Repeating Data with *ngFor
   - Handling Events with Event Bindings
-  
+  - Handling Null Values with the Safe Navigation Operator
