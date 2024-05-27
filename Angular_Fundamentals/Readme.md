@@ -6,3 +6,7 @@
 3. Creating Angular Components
   - Creating Our First Angular Component
     - ng generate component home
+  - Defining the Application Prefix for Components
+  - Using Inline Templates and Styles
+  - Accessing and Displaying Images
+  
