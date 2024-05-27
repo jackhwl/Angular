@@ -3,3 +3,6 @@
   - node 18.10.0
   - Angular Language Service extension
   - ng new joes-robot-shop
+3. Creating Angular Components
+  - Creating Our First Angular Component
+    - ng generate component home
