@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, title: "Home - Joe's Robot Shop" },
   { path: 'catalog', component: CatalogComponent, title: "Catalog - Joe's Robot Shop" },
   { path: 'cart', component: CartComponent, title: "Cart - Joe's Robot Shop" },
+  { path: '', redirectTo:  '/home', pathMatch: 'full' }
 ]
 
 @NgModule({
