@@ -57,3 +57,4 @@
   - Creating Redirect Routes
   - Linking to Routes
   - Navigating From Code
+  - Defining and Accessing Route Parameters

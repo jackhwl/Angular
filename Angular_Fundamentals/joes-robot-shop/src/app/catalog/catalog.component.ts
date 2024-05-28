@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IProduct } from './product.model';
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'bot-catalog',
@@ -13,10 +13,11 @@ export class CatalogComponent {
   products: IProduct[] = [];
   filter: string = '';
   
-  constructor(private cartSvc: CartService, private productSvc: ProductService, private router: Router) { }
+  constructor(private cartSvc: CartService, private productSvc: ProductService, private router: Router, private route: ActivatedRoute) { }
   
   ngOnInit() {
     this.productSvc.getProducts().subscribe(products => this.products = products);
+    this.route.params.subscribe(params => this.filter = params['filter']??'')
   }
 
   addToCart(product: IProduct): void {
