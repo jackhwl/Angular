@@ -50,3 +50,6 @@
   - Setting up the Proxy Server
   - Making A GET Request
   - Making A POST Request
+9. Routing and Navigating with Angular
+  - Adding Routing to an Existing Project
+    - ng g m app-routing --flat --module=app
