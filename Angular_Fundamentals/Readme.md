@@ -1,3 +1,4 @@
+1. https://github.com/jmcooper/joes-robot-shop/
 2. Getting Started with Angular
   - npm i -g @angular/cli@16.0.0
   - node 18.10.0
@@ -44,3 +45,7 @@
   - Creating an Angular Service
   - Injecting a Service into a Component
   - Encapsulating Business Logic in a Service
+8. Making HTTP Requests with Angular
+  - Observables
+  - Setting up the Proxy Server
+  - Making A GET Request
