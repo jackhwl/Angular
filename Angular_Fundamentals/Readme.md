@@ -55,3 +55,4 @@
     - ng g m app-routing --flat --module=app
   - Creating Routes for Navigation
   - Creating Redirect Routes
+  - Linking to Routes
