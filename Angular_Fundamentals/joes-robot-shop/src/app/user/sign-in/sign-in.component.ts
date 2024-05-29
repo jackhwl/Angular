@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IUserCredentials } from '../user.model';
 
 @Component({
   selector: 'bot-sign-in',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
-
+  credentials: IUserCredentials = {email: '', password: ''}
 }
