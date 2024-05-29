@@ -1,4 +1,6 @@
 1. https://github.com/jmcooper/joes-robot-shop/
+  - Best practice
+  - Reactive Forms
 2. Getting Started with Angular
   - npm i -g @angular/cli@16.0.0
   - node 18.10.0
@@ -61,3 +63,5 @@
   - Accessing Query String Parameters
   - Styling Active Links
   - Cart page and service
+10. Creating Angular Forms
+  - Signin page and user Service
