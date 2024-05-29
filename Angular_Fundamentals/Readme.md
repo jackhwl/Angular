@@ -65,3 +65,4 @@
   - Cart page and service
 10. Creating Angular Forms
   - Signin page and user Service
+  - Adding Template-driven Forms to an Application
