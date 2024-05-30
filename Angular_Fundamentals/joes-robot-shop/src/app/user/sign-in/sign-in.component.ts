@@ -12,10 +12,17 @@ export class SignInComponent {
   credentials: IUserCredentials = {email: '', password: ''}
 
   constructor(private userSvc: UserService, private router: Router){}
+  signInError: boolean = false
+  errorMsg: string = ''
 
   signIn() {
+    this.signInError = false
     this.userSvc.signIn(this.credentials).subscribe({
-      next: () => this.router.navigate(['/catalog'])
+      next: () => this.router.navigate(['/catalog']),
+      error: (err) => { 
+        this.signInError = true
+        this.errorMsg = err.message
+      }
     })
   }
 }

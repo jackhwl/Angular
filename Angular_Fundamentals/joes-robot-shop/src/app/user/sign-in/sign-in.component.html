@@ -20,6 +20,9 @@
           Sign In
         </button>
       </div>
+      <div class="signInError" *ngIf="signInError">
+        Sign-In Failed. Please try again.{{errorMsg}}
+      </div>
     </form>
   </div>
   

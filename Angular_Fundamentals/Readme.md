@@ -67,3 +67,5 @@
   - Signin page and user Service
   - Adding Template-driven Forms to an Application
   - Binding to Form Controls with ngModel
+  - Submitting a Template-driven Form
+  - Providing Better User Feedback from Our Sign-in Events
