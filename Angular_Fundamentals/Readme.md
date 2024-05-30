@@ -70,3 +70,4 @@
   - Submitting a Template-driven Form
   - Providing Better User Feedback from Our Sign-in Events
   - Using Template Variables
+  - Validating Template-driven Forms
