@@ -14,10 +14,8 @@ export class SignInComponent {
   constructor(private userSvc: UserService, private router: Router){}
 
   signIn() {
-    //console.log('sign-in called', this.credentials)
-    this.router.navigate(['/catalog'])
-    // this.userSvc.signIn(this.credentials).subscribe({
-    //   next: () => this.router.navigate(['/catalog'])
-    // })
+    this.userSvc.signIn(this.credentials).subscribe({
+      next: () => this.router.navigate(['/catalog'])
+    })
   }
 }
