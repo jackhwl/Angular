@@ -77,3 +77,8 @@
   - Routing Modules
   - Feature Modules
     - ng g m user
+12. Testing Angular Applications
+  - Unit Testing and End-to-end Testing
+  - Executing Unit and End-to-end Testing
+  - Modifying Unit Tests
+ 
