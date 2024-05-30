@@ -71,3 +71,4 @@
   - Providing Better User Feedback from Our Sign-in Events
   - Using Template Variables
   - Validating Template-driven Forms
+  - Working with Multiple Validators
