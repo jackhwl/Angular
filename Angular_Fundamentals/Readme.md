@@ -72,3 +72,8 @@
   - Using Template Variables
   - Validating Template-driven Forms
   - Working with Multiple Validators
+11. Organizing Angular Applications with Modules
+  - What is a Module?
+  - Routing Modules
+  - Feature Modules
+    - ng g m user
