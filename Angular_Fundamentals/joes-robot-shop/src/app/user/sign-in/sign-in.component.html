@@ -5,13 +5,14 @@
       <div class="sub-text">to acquire awesome bots</div>
       <input
         name="email"
-        required
+        required email
         #email="ngModel"
         [(ngModel)]="credentials.email"
         placeholder="Email Address"
         type="text"
       />
-      <em class="error" *ngIf="email.touched && email.invalid">Email is required</em>
+      <em class="error" *ngIf="email.errors?.['required'] && email.touched">Email is required</em>
+      <em class="error" *ngIf="email.errors?.['email'] && email.touched">Must be a valid email format</em>
       <input
         name="password"
         required
@@ -20,7 +21,7 @@
         placeholder="Password"
         type="password"
       />
-      <em class="error" *ngIf="password.touched && password.invalid">Password is required</em>
+      <em class="error" *ngIf="password.errors?.['required'] && password.touched">Password is required</em>
       <div class="buttons">
         <button type="submit" [disabled]="signInForm.form.invalid" class="button cta">
           Sign In
