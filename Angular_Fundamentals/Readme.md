@@ -69,3 +69,4 @@
   - Binding to Form Controls with ngModel
   - Submitting a Template-driven Form
   - Providing Better User Feedback from Our Sign-in Events
+  - Using Template Variables
