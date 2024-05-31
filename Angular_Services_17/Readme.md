@@ -23,3 +23,4 @@
   - What Are Service Providers and Injectors?
     - Providers: Instructions -> How
     - Injectors: Classes/Objects -> When / Where
+  - How Providers Affect Instantiation
