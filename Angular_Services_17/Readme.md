@@ -29,4 +29,4 @@
   - Using Providers to Create Multiple Service Instances
   - Challenges with Providing Services Using Interfaces
   - Creating a Configurable Cart
-  
+  - Creating useValue() Providers
