@@ -11,3 +11,4 @@
   - Using RxJS for Reactivity
   - Using Angular Signals for Reactivity
   - Improving Service Encapsulation
+  - Configuring Angular Projects to Work with APIs
