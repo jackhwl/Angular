@@ -5,4 +5,4 @@
   - Exploring Our Demo Project
   - Creating an Angular Services
   - Injecting and Using Services
-  
+  - Cross-component Communication with Services
