@@ -1,7 +1,7 @@
 import { Injectable, InjectionToken, computed, signal } from "@angular/core";
 import { Product } from "@shared/product.model";
 
-export const CART_SERVICE_TOKEN = new InjectionToken<CartService>("CartService");
+// export const CART_SERVICE_TOKEN = new InjectionToken<CartService>("CartService");
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
