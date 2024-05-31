@@ -12,3 +12,4 @@
   - Using Angular Signals for Reactivity
   - Improving Service Encapsulation
   - Configuring Angular Projects to Work with APIs
+  - Calling APIs from an Angular Service

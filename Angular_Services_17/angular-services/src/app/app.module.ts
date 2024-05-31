@@ -13,7 +13,7 @@ import { CatalogModule } from '@catalog/catalog.module';
     AppComponent,
     SiteHeaderComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, CatalogModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, CatalogModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
