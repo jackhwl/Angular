@@ -19,3 +19,7 @@
   - Benefits of Dependency Injection
   - Example Implementations fo Dependency Injection
   - Angular Dependency Injection
+5. Angular Service Providers
+  - What Are Service Providers and Injectors?
+    - Providers: Instructions -> How
+    - Injectors: Classes/Objects -> When / Where
