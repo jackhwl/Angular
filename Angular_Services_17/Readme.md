@@ -26,3 +26,5 @@
   - How Providers Affect Instantiation
   - Using Classes as Provider Tokens
   - Creating useFactory() Providers
+  - Using Providers to Create Multiple Service Instances
+  
