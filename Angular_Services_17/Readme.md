@@ -8,4 +8,4 @@
   - Cross-component Communication with Services
 3. Creating Reactive and Asynchronous Angular Services
   - The Need for Reactivity in Angular Services
-  
+  - Using RxJS for Reactivity
