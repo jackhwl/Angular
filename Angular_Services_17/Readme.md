@@ -13,3 +13,4 @@
   - Improving Service Encapsulation
   - Configuring Angular Projects to Work with APIs
   - Calling APIs from an Angular Service
+  - Using the Async Pipe
