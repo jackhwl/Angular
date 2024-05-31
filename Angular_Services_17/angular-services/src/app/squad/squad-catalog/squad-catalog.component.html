@@ -6,7 +6,7 @@
     Prices listed are per hour.
   </div>
   <ul class="products">
-    <li class="product-item" *ngFor="let engineer of squad">
+    <li class="product-item" *ngFor="let engineer of squad | async">
       <bot-product-details [product]="engineer">
         <button class="cta" (click)="addToCart(engineer)">Hire</button>
       </bot-product-details>
