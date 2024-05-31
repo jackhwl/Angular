@@ -10,4 +10,4 @@
   - The Need for Reactivity in Angular Services
   - Using RxJS for Reactivity
   - Using Angular Signals for Reactivity
-  
+  - Improving Service Encapsulation
