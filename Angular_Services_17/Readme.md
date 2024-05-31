@@ -14,3 +14,8 @@
   - Configuring Angular Projects to Work with APIs
   - Calling APIs from an Angular Service
   - Using the Async Pipe
+4. Understanding Angular Dependency Injection
+  - What is Dependency Injection? 
+  - Benefits of Dependency Injection
+  - Example Implementations fo Dependency Injection
+  - Angular Dependency Injection
