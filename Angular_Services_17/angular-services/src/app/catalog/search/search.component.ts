@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
-import { productsArray } from '../products-data'
+import { ProductsService } from '@catalog/products.service';
 
 @Component({
   selector: 'bot-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent {
-  products: Product[] = [...productsArray];
+export class SearchComponent implements OnInit {
+  products: Product[] = [];
   searchTerm: string = '';
   cart: Product[] = [];
 
-  constructor() { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
-    this.products = [...productsArray];
+    this.products = this.productsService.getProducts();
   }
 
   addToCart(product: Product) {
