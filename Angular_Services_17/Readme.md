@@ -31,3 +31,4 @@
   - Creating a Configurable Cart
   - Creating useValue() Providers
   - Supplying Provider Dependencies (deps)
+  - Using the multi Property

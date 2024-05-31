@@ -17,7 +17,8 @@ import { EngineersService } from './engineers.service';
     { 
       provide: CartService, 
       useFactory: (cartOptions: CartOptions) => { return new CartService(cartOptions) },
-      deps: [CART_OPTIONS_TOKEN]
+      deps: [CART_OPTIONS_TOKEN],
+      multi: false
      },
     { 
     provide: IProductsServiceToken, 
