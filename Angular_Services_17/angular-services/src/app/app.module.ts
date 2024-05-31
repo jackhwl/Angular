@@ -20,6 +20,7 @@ import { CartService } from '@core/cart.service';
     // {
     //   provide: CartService,
     //   useClass: CartService
+    //   useFactory: () => new CartService()
     // }
   ],
   bootstrap: [AppComponent],

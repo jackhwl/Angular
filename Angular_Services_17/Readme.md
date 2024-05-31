@@ -25,3 +25,4 @@
     - Injectors: Classes/Objects -> When / Where
   - How Providers Affect Instantiation
   - Using Classes as Provider Tokens
+  - Creating useFactory() Providers
