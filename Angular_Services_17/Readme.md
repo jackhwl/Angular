@@ -32,3 +32,5 @@
   - Creating useValue() Providers
   - Supplying Provider Dependencies (deps)
   - Using the multi Property
+6. Angular Service Injectors
+  - What Are Service Injectors?
