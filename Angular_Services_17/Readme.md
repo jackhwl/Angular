@@ -36,3 +36,4 @@
   - What Are Service Injectors?
   - How Angular's Hierachical Injectors Work
     - Null -> Platform -> Root -> Module/Route -> Element
+  - Configuring Injectors
