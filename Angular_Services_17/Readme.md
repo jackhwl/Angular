@@ -39,3 +39,4 @@
   - Configuring Injectors
   - A Graphical Look at Injectors
   - Defining Component-level Providers
+  - Resolution Modifiers: @Self(), @SkipSelf(), @Host() and @Optional()
