@@ -4,7 +4,7 @@ import { DataRepositoryService } from "../services/data-repository.service";
 
 @Component({
   selector: 'nav-bar',
-  styleUrls: [`../styles/nav-bar.css`],
+  styleUrls: [`../styles/nav-bar.component.css`],
   template: `
     <div class="nav-bar">
       <img class="logo" src="/assets/images/whitebeard-logo.png" alt="Whitebeard Logo" />
