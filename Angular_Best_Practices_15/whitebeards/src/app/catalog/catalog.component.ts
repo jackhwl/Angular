@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 import { DataRepositoryService } from "../services/data-repository.service"
-import { IClass } from '../services/class.model';
+import { IClass } from './class.model';
 
 @Component({
-  styleUrls: ['../styles/catalog.component.css'],
-  templateUrl: '../templates/catalog.component.html'
+  styleUrls: ['./catalog.component.css'],
+  templateUrl: './catalog.component.html'
 })
 export class CatalogComponent {
   classes: IClass[] = [];

@@ -4,3 +4,4 @@
   - Getting Started with the Angular CLI
   - File name best practise
     - catalog componant renaming
+  - Folder organization
