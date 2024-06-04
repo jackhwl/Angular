@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, EMPTY, throwError, timer } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
-import { IUser } from '../user/user.model';
 import { IClass, ICourse } from '../catalog/class.model';
+import { UserRepositoryService } from '../services/user-repository.service';
 
 @Injectable()
-export class DataRepositoryService {
-  currentUser: IUser | null = null;
+export class CatalogRepositoryService {
 
-  constructor() { }
+  constructor(private userRepositoryService: UserRepositoryService) { }
 
   getCatalog(): Observable<IClass[]> {
     const subject = new Subject<IClass[]>();
-    const classes = this.currentUser?.classes || [];
+    const classes = this.userRepositoryService.currentUser?.classes || [];
     const catalogWithEnrollmentStatus: IClass[] =
       COURSE_CATALOG.map(catalogClass => {
         return { ...catalogClass, enrolled: classes.includes(catalogClass.classId) };
@@ -23,54 +22,7 @@ export class DataRepositoryService {
     return subject;
   }
 
-  saveUser(user: IUser): Observable<any> {
-    user.classes = user.classes || [];
-    this.currentUser = user;
-
-    return timer(1000);
-  }
-
-  enroll(classId: string): Observable<any> {
-    if (!this.currentUser)
-      return throwError(() => new Error('User not signed in'));
-
-    if (this.currentUser.classes.includes(classId))
-      return throwError(() => new Error('Already enrolled'));
-
-    this.currentUser.classes.push(classId);
-
-    return timer(1000);
-  }
-
-  drop(classId: string): Observable<any> {
-    if (!this.currentUser)
-      return throwError(() => new Error('User not signed in'));
-
-    if (!this.currentUser.classes.includes(classId))
-      return throwError(() => new Error('Not enrolled'));
-
-    this.currentUser.classes = this.currentUser.classes.filter((c: string) => c !== classId);
-
-    return timer(1000);
-  }
-
-  signIn(credentials: any): Observable<any> {
-    //Never, ever check credentials in client-side code.
-    //This code is only here to supply a fake endpoint for signing in.
-    if (credentials.email !== 'me@whitebeards.edu' || credentials.password !== 'super-secret')
-      return throwError(() => new Error('Invalid login'));
-
-    this.currentUser = {
-      userId: 'e61aebed-dbc5-437a-b514-02b8380d8efc',
-      firstName: 'Jim',
-      lastName: 'Cooper',
-      email: 'me@whitebeards.edu',
-      classes: []
-    };
-
-    return EMPTY;
-  }
-}
+ }
 
 const COURSES: ICourse[] = [{
   courseNumber: 'PO101',

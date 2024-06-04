@@ -25,10 +25,10 @@
         <td class="center">{{class.time}}</td>
         <td class="center">{{class.course.creditHours}}</td>
         <td class="enroll center">
-          <span class="sign-in" *ngIf="!dataRepository.currentUser" disabled>Sign In to Enroll</span>
-          <button *ngIf="dataRepository.currentUser && !class.enrolled && !class.processing"
+          <span class="sign-in" *ngIf="!userRepository.currentUser" disabled>Sign In to Enroll</span>
+          <button *ngIf="userRepository.currentUser && !class.enrolled && !class.processing"
             (click)="enroll(class)">Enroll</button>
-          <button *ngIf="dataRepository.currentUser && class.enrolled && !class.processing"
+          <button *ngIf="userRepository.currentUser && class.enrolled && !class.processing"
             (click)="drop(class)">Drop</button>
           <loading-spinner [loading]="class.processing"></loading-spinner>
         </td>

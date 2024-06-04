@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { DataRepositoryService } from "../services/data-repository.service"
+import { UserRepositoryService } from "../services/user-repository.service"
+import { CatalogRepositoryService } from './catalog-repository.service';
 import { IClass } from './class.model';
 
 @Component({
@@ -11,16 +12,16 @@ export class CatalogComponent {
   classes: IClass[] = [];
   visibleClasses: IClass[] = [];
 
-  constructor(public dataRepository: DataRepositoryService) { }
+  constructor(public userRepository: UserRepositoryService, private catalogRepository: CatalogRepositoryService) { }
 
   ngOnInit() {
-    this.dataRepository.getCatalog()
+    this.catalogRepository.getCatalog()
       .subscribe((classes: IClass[]) => { this.classes = classes; this.applyFilter('') });
   }
 
   enroll(classToEnroll: IClass) {
     classToEnroll.processing = true;
-    this.dataRepository.enroll(classToEnroll.classId)
+    this.userRepository.enroll(classToEnroll.classId)
       .subscribe({
         error: (err) => { console.error(err); classToEnroll.processing = false },
         complete: () => { classToEnroll.processing = false; classToEnroll.enrolled = true; },
@@ -29,7 +30,7 @@ export class CatalogComponent {
 
   drop(classToDrop: IClass) {
     classToDrop.processing = true;
-    this.dataRepository.drop(classToDrop.classId)
+    this.userRepository.drop(classToDrop.classId)
       .subscribe({
         error: (err) => { console.error(err); classToDrop.processing = false },
         complete: () => { classToDrop.processing = false; classToDrop.enrolled = false; }
