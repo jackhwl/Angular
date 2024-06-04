@@ -12,3 +12,6 @@
   - Prefer Immutability
   - Use Small Functions
   - Use Strict Mode
+4. Angular Module Organization
+  - The Code Module (To Be or Not to Be)
+  
