@@ -8,3 +8,4 @@
   - One Item per File
 3. General Coding Best Practices
   - The Single Responsibility Principle
+  - Symbol Naming Best Practices

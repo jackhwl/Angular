@@ -8,7 +8,7 @@ import { NavBarComponent } from './nav-bar.component';
 import { CatalogComponent } from "./catalog/catalog.component";
 import { RegisterComponent } from "./user/register.component";
 import { SignInComponent } from "./user/sign-in.component";
-import { LoadingComponent } from "./components/loading-spinner.component";
+import { LoadingSpinnerComponent } from "./components/loading-spinner.component";
 import { UserRepositoryService } from "./services/user-repository.service"
 import { CatalogRepositoryService } from './catalog/catalog-repository.service';
 import { AccountMenuComponent } from "./account-menu.component";
@@ -20,7 +20,7 @@ import { AccountMenuComponent } from "./account-menu.component";
     CatalogComponent,
     RegisterComponent,
     SignInComponent,
-    LoadingComponent,
+    LoadingSpinnerComponent,
     AccountMenuComponent
   ],
   imports: [
