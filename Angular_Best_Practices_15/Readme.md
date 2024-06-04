@@ -10,3 +10,4 @@
   - The Single Responsibility Principle
   - Symbol Naming Best Practices
   - Prefer Immutability
+  - Use Small Functions
