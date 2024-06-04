@@ -14,4 +14,5 @@
   - Use Strict Mode
 4. Angular Module Organization
   - The Code Module (To Be or Not to Be)
-  
+  - The App Routing Module
+  - Creating a Shared Module
