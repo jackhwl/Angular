@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar.component';
 import { CatalogComponent } from "./catalog/catalog.component";
-import { RegisterComponent } from "./user/sign-in.component";
+import { RegisterComponent } from "./user/register.component";
 import { SignInComponent } from "./user/sign-in.component";
 import { LoadingComponent } from "./components/loading-spinner.component";
 import { DataRepositoryService } from "./services/data-repository.service"

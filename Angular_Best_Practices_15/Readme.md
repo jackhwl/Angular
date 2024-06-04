@@ -5,3 +5,4 @@
   - File name best practise
     - catalog componant renaming
   - Folder organization
+  - One Item per File
