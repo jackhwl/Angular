@@ -11,3 +11,4 @@
   - Symbol Naming Best Practices
   - Prefer Immutability
   - Use Small Functions
+  - Use Strict Mode
