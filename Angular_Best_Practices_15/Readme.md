@@ -21,3 +21,4 @@
   - Prefixing Component Selectors
   - Seperate Component CSS and Template Files
   - Decorating Input and Output Properties
+  - Delegating Complex Logic to Services
