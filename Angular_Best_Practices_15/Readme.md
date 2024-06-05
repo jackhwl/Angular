@@ -16,3 +16,4 @@
   - The Code Module (To Be or Not to Be)
   - The App Routing Module
   - Creating a Shared Module
+  - Creating Feature Modules
