@@ -17,3 +17,6 @@
   - The App Routing Module
   - Creating a Shared Module
   - Creating Feature Modules
+5. Angular Components Best Practices
+  - Prefixing Component Selectors
+  - Seperate Component CSS and Template Files

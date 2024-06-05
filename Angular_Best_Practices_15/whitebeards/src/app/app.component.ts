@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
     `],
   template: `
       <div class="app">
-        <nav-bar></nav-bar>
+        <wb-nav-bar></wb-nav-bar>
         <div class="main">
           <router-outlet></router-outlet>
         </div>

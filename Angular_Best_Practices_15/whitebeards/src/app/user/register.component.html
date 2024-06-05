@@ -24,7 +24,7 @@
     <div class="form-group" >
       <button type="button" (click)="cancel()" *ngIf="!saving">Cancel</button>
       <button class="save" type="submit" *ngIf="!saving" [disabled]="registerForm.invalid">Save</button>
-      <loading-spinner [loading]="saving"></loading-spinner>
+      <wb-loading-spinner [loading]="saving"></wb-loading-spinner>
     </div>
   </form>
 </div>

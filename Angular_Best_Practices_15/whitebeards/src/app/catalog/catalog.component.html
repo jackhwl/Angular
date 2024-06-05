@@ -30,7 +30,7 @@
             (click)="enroll(class)">Enroll</button>
           <button *ngIf="userRepository.currentUser && class.enrolled && !class.processing"
             (click)="drop(class)">Drop</button>
-          <loading-spinner [loading]="class.processing"></loading-spinner>
+          <wb-loading-spinner [loading]="class.processing"></wb-loading-spinner>
         </td>
       </tr>
     </tbody>
