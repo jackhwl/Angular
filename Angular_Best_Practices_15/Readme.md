@@ -20,3 +20,4 @@
 5. Angular Components Best Practices
   - Prefixing Component Selectors
   - Seperate Component CSS and Template Files
+  - Decorating Input and Output Properties
