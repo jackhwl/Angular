@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { UserRepositoryService } from "../services/user-repository.service"
 import { CatalogRepositoryService } from './catalog-repository.service';
@@ -9,7 +9,7 @@ import { FilterClassesService } from './filter-classes.service';
   styleUrls: ['./catalog.component.css'],
   templateUrl: './catalog.component.html'
 })
-export class CatalogComponent {
+export class CatalogComponent implements OnInit {
   classes: IClass[] = [];
   visibleClasses: IClass[] = [];
 

@@ -22,3 +22,5 @@
   - Seperate Component CSS and Template Files
   - Decorating Input and Output Properties
   - Delegating Complex Logic to Services
+  - Component Member Sequence
+  - Implementing Lifecycle Hooks Interface
