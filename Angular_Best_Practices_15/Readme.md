@@ -24,3 +24,5 @@
   - Delegating Complex Logic to Services
   - Component Member Sequence
   - Implementing Lifecycle Hooks Interface
+  - When to (And Not to) Create component
+  - Best Practices for Providing Services

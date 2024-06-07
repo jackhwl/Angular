@@ -4,7 +4,9 @@ import { Observable, EMPTY, throwError, timer } from 'rxjs';
 
 import { IUser } from '../user/user.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserRepositoryService {
   currentUser: IUser | null = null;
 
