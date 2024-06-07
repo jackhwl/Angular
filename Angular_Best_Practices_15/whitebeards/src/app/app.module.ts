@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { CatalogModule } from './catalog/catalog.module';
-import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,6 @@ import { UserModule } from './user/user.module';
   imports: [
     CoreModule,
     CatalogModule,
-    UserModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

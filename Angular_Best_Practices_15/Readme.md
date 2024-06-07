@@ -26,3 +26,5 @@
   - Implementing Lifecycle Hooks Interface
   - When to (And Not to) Create component
   - Best Practices for Providing Services
+6. Angular Performance Best Practices
+  - Lazy Loading Feature Modules
