@@ -12,6 +12,7 @@ import { FilterClassesService } from './filter-classes.service';
 export class CatalogComponent implements OnInit {
   classes: IClass[] = [];
   visibleClasses: IClass[] = [];
+  orderByField: string = '';
 
   constructor(public userRepository: UserRepositoryService, 
     private catalogRepository: CatalogRepositoryService, 

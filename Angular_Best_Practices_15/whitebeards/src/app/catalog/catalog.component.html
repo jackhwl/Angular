@@ -10,14 +10,14 @@
     <thead>
       <th>Course #</th>
       <th>Course Name</th>
-      <th>Professor</th>
+      <th (click)="orderByField = 'professor'">Professor</th>
       <th class="center">Days</th>
       <th class="center">Time</th>
       <th class="center">Credits</th>
       <th class="center">Enroll/Drop</th>
     </thead>
     <tbody>
-      <tr *ngFor="let class of visibleClasses">
+      <tr *ngFor="let class of visibleClasses | orderBy:orderByField">
         <td><a [routerLink]="['/catalog/' + class.course.courseNumber]">{{class.course.courseNumber}}</a></td>
         <td><a [routerLink]="['/catalog/' + class.course.courseNumber]">{{class.course.courseName}}</a></td>
         <td>{{class.professor}}</td>

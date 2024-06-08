@@ -28,3 +28,4 @@
   - Best Practices for Providing Services
 6. Angular Performance Best Practices
   - Lazy Loading Feature Modules
+  - Deploying Production Builds
