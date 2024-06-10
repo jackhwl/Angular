@@ -29,3 +29,4 @@
 6. Angular Performance Best Practices
   - Lazy Loading Feature Modules
   - Deploying Production Builds
+  - Pure and Impure Pipe Performance
