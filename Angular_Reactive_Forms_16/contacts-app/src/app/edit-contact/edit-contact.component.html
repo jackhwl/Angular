@@ -2,14 +2,14 @@
   <h1 class="header">
     Edit Contact
   </h1>
-  <form>
+  <form [formGroup]="contactForm">
     <section>
       <nav>Name/Info</nav>
       <div>
-        <input [formControl]="firstName" type="text" placeholder="First Name" />
-        <input [formControl]="lastName"  placeholder="Last Name" />
-        <input [formControl]="dateOfBirth" placeholder="Date of Birth" />
-        <input [formControl]="favoritesRanking" placeholder="Favorites Ranking" />
+        <input formControlName="firstName" type="text" placeholder="First Name" />
+        <input formControlName="lastName"  placeholder="Last Name" />
+        <input formControlName="dateOfBirth" placeholder="Date of Birth" />
+        <input formControlName="favoritesRanking" placeholder="Favorites Ranking" />
       </div>
     </section>
     <section>
