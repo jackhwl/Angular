@@ -17,4 +17,6 @@
 4. Working with Input Elements and Data Types
   - Working with Radio Buttons
   - Working with Select Lists
+  - Working with Checkboxes
+  - Working with Numeric Inputs
 
