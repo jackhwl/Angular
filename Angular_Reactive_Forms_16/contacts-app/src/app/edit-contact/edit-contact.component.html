@@ -6,10 +6,10 @@
     <section>
       <nav>Name/Info</nav>
       <div>
-        <input placeholder="First Name" />
-        <input placeholder="Last Name" />
-        <input placeholder="Date of Birth" />
-        <input placeholder="Favorites Ranking" />
+        <input [formControl]="firstName" type="text" placeholder="First Name" />
+        <input [formControl]="lastName"  placeholder="Last Name" />
+        <input [formControl]="dateOfBirth" placeholder="Date of Birth" />
+        <input [formControl]="favoritesRanking" placeholder="Favorites Ranking" />
       </div>
     </section>
     <section>
