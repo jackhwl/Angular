@@ -2,7 +2,7 @@
   <h1 class="header">
     Edit Contact
   </h1>
-  <form [formGroup]="contactForm">
+  <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
     <section>
       <nav>Name/Info</nav>
       <div>
@@ -45,9 +45,10 @@
         </div>
       </div>
     </section>
+    <div class="buttons">
+      <button class="secondary">Cancel</button>
+      <button type="submit" class="primary">Save</button>
+    </div>
   </form>
-  <div class="buttons">
-    <button class="secondary">Cancel</button>
-    <button class="primary" (click)="saveContact()">Save</button>
-  </div>
+
 </div>
