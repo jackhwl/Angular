@@ -3,3 +3,5 @@
     - Form Control -> Form Group -> Form Model
   - Template Driven vs. Reative Forms
   - Cloning and Exploring Our Demo Application
+3. Creating Angular Reative Forms
+  - Adding Reactive Forms to a Project
