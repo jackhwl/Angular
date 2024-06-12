@@ -16,4 +16,5 @@
   - Simplifying with FormBuilder and FormGroup.setValue()
 4. Working with Input Elements and Data Types
   - Working with Radio Buttons
+  - Working with Select Lists
 
