@@ -19,4 +19,5 @@
   - Working with Select Lists
   - Working with Checkboxes
   - Working with Numeric Inputs
+  - Working with Range Inputs
 
