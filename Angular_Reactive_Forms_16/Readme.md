@@ -13,3 +13,5 @@
   - Saving Submitted Form Data
   - Adding Unbound FormControls to a FormGroup
   - Creating Nested FormGroups
+  - Simplifying with FormBuilder and FormGroup.setValue()
+  
