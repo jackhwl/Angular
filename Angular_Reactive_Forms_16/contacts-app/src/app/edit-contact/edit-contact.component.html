@@ -14,30 +14,30 @@
     </section>
     <section>
       <nav>Phone</nav>
-      <div class="flex-column">
+      <div formGroupName="phone" class="flex-column">
         <div class="flex-group">
-          <input placeholder="Phone" />
+          <input formControlName="phoneNumber" placeholder="Phone" />
           <img src="/assets/plus-grey-blue.png" class="add" />
         </div>
         <div class="radio">
-          <input type="radio" value="mobile"> Mobile
-          <input type="radio" value="work"> Work
-          <input type="radio" value="other"> Other
+          <input type="radio" formControlName="phoneType" value="mobile"> Mobile
+          <input type="radio" formControlName="phoneType" value="work"> Work
+          <input type="radio" formControlName="phoneType" value="other"> Other
         </div>
       </div>
     </section>
     <section>
       <nav>Address</nav>
       <div>
-        <div class="address">
+        <div formGroupName="address" class="address">
           <div class="flex-group">
-            <input placeholder="Address" />
+            <input formControlName="streetAddress" placeholder="Address" />
             <img src="/assets/plus-grey-blue.png" class="add" />
           </div>
-          <input placeholder="City" />
-          <input placeholder="State/Region" />
-          <input placeholder="Zip/Postal Code" />
-          <select>
+          <input formControlName="city" placeholder="City" />
+          <input formControlName="state" placeholder="State/Region" />
+          <input formControlName="postalCode" placeholder="Zip/Postal Code" />
+          <select formControlName="addressType" >
             <option value="home">Home</option>
             <option value="work">Work</option>
             <option value="mobile">Other</option>
