@@ -6,3 +6,5 @@
 3. Creating Angular Reative Forms
   - Adding Reactive Forms to a Project
   - Creating Form Controlls
+  - The Magic of the ControlValueAccessor Directive
+  - Providing Values to FormControls
