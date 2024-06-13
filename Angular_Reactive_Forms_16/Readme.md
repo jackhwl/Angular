@@ -20,4 +20,5 @@
   - Working with Checkboxes
   - Working with Numeric Inputs
   - Working with Range Inputs
+  - Working with Textarea Elements
 
