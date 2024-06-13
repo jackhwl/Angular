@@ -9,7 +9,7 @@ export class InMemoryContactsApi implements InMemoryDbService {
         personal: false,
         firstName: 'Percival',
         lastName: 'Doodleplumb',
-        dateOfBirth: new Date('1994/05/05').toISOString(), // '1994-05-05T00:00:00.000Z',
+        dateOfBirth: new Date('1994/05/05'),
         favoritesRanking: 0,
         phone: { phoneNumber: '555-765-4321', phoneType: 'mobile' },
         address: {
@@ -26,7 +26,7 @@ export class InMemoryContactsApi implements InMemoryDbService {
         personal: false,
         firstName: 'Mortimer',
         lastName: 'Flungford',
-        dateOfBirth: new Date('1988/10/05').toISOString(),
+        dateOfBirth: new Date('1988/10/05'),
         favoritesRanking: 0,
         phone: { phoneNumber: '555-877-5678', phoneType: 'mobile' },
         address: {
@@ -43,7 +43,7 @@ export class InMemoryContactsApi implements InMemoryDbService {
         personal: false,
         firstName: 'Wanda',
         lastName: 'Giggleworth',
-        dateOfBirth: new Date('1986/11/08').toISOString(),
+        dateOfBirth: new Date('1986/11/08'),
         favoritesRanking: 1,
         phone: { phoneNumber: '555-123-4567', phoneType: 'mobile' },
         address: {

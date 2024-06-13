@@ -22,4 +22,5 @@
   - Working with Range Inputs
   - Working with Textarea Elements
   - Working with Date Values as string
+  - Working with Date Values
 
