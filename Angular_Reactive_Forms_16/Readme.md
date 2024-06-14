@@ -26,3 +26,4 @@
 5. Validating Angular Reactive Forms
   - Angular's Built-in Validators
   - Adding Validation to FormControls
+  - Displaying Validation Messages
