@@ -23,4 +23,6 @@
   - Working with Textarea Elements
   - Working with Date Values as string
   - Working with Date Values
-
+5. Validating Angular Reactive Forms
+  - Angular's Built-in Validators
+  - Adding Validation to FormControls
