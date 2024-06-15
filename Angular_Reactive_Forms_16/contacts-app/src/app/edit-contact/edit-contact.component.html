@@ -38,7 +38,7 @@
     <section>
       <nav>Address</nav>
       <div>
-        <div formGroupName="address" class="address">
+        <div formGroupName="address" class="address" [class.error]="contactForm.controls.address.invalid && contactForm.controls.address.dirty">
           <div class="flex-group">
             <input formControlName="streetAddress" placeholder="Address" />
             <img src="/assets/plus-grey-blue.png" class="add" />
@@ -50,6 +50,7 @@
             <option *ngFor="let addressType of addressTypes" [value]="addressType.value">{{addressType.title}}</option>
           </select>
         </div>
+        <em *ngIf="contactForm.controls.address.invalid && contactForm.controls.address.dirty">Incomplete Address</em>
       </div>
     </section>
     <section>
@@ -60,7 +61,7 @@
     </section>
     <div class="buttons">
       <button class="secondary">Cancel</button>
-      <button type="submit" class="primary">Save</button>
+      <button type="submit" class="primary" [disabled]="contactForm.invalid">Save</button>
     </div>
   </form>
 

@@ -28,3 +28,4 @@
   - Adding Validation to FormControls
   - Displaying Validation Messages
   - Handling Multiple Validators on a Single Field
+  - Validating FormGroups and Forms
