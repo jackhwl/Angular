@@ -27,3 +27,4 @@
   - Angular's Built-in Validators
   - Adding Validation to FormControls
   - Displaying Validation Messages
+  - Handling Multiple Validators on a Single Field
