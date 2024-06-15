@@ -30,3 +30,4 @@
   - Handling Multiple Validators on a Single Field
   - Validating FormGroups and Forms
   - Creating Custom Validators
+  - Passing Data to and from Custom Validators
