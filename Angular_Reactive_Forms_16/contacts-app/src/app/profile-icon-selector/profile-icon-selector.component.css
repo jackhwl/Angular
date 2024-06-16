@@ -1,0 +1,15 @@
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+img {
+    cursor: pointer;
+    width: 100px;
+}
+
+.selected {
+    border-radius: 60px;
+    background-color: #e0fecb;
+}

@@ -6,6 +6,7 @@
     <section>
       <nav>Name/Info</nav>
       <div>
+        <con-profile-icon-selector />
         <input formControlName="firstName" [class.error]="firstName.invalid && firstName.touched" type="text" placeholder="First Name" />
         <em *ngIf="firstName.errors?.['required'] && firstName.touched">Please enter a First Name</em>
         <em *ngIf="firstName.errors?.['minlength'] && firstName.touched">First Name must be at least 3 characters</em>
