@@ -31,3 +31,6 @@
   - Validating FormGroups and Forms
   - Creating Custom Validators
   - Passing Data to and from Custom Validators
+6. Creating Custom Controls and ControlValueAccessors
+  - Creating a Custom DateValueAccessor
+    - ng g d date-value-accessor/date-value-accessor
