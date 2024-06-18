@@ -25,10 +25,10 @@
     <section>
       <nav>Phones</nav>
       <div formArrayName="phones">
-        <div formGroupName="0" class="flex-column">
+        <div *ngFor="let phone of contactForm.controls.phones.controls; let i=index" [formGroupName]="i" class="flex-column">
           <div class="flex-group">
             <input formControlName="phoneNumber" placeholder="Phone" />
-            <img src="/assets/plus-grey-blue.png" class="add" />
+            <img src="/assets/plus-grey-blue.png" class="add" (click)="addPhone()" />
           </div>
           <div class="radio">
             <span *ngFor="let phoneType of phoneTypes">
