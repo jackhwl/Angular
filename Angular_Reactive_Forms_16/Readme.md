@@ -38,3 +38,6 @@
   - Custom DeteValueAccessor: Handling Input Events
   - Creating Custom Input Controls
   - Binding a Custom Component to a FormControl
+7. Dynamically Adding Form Elements
+  - Understanding FormArrays
+  - Adding FormArrays to a Form Model
