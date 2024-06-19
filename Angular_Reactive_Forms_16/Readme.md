@@ -42,3 +42,6 @@
   - Understanding FormArrays
   - Adding FormArrays to a Form Model
   - Dynamically Adding Form Elements
+8. Reacting to Changes
+  - Subscribing to Value Changes
+  - Reacting to Value Changes

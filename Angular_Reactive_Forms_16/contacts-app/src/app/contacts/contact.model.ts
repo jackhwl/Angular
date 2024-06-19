@@ -14,6 +14,7 @@ export interface Contact {
 export interface Phone {
   phoneNumber: string,
   phoneType: string,
+  preferred: boolean
 }
 
 export interface Address {
