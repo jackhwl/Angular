@@ -45,3 +45,4 @@
 8. Reacting to Changes
   - Subscribing to Value Changes
   - Reacting to Value Changes
+  - Adding Reactive Transformations
