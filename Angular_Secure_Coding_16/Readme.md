@@ -19,3 +19,4 @@
   - Introduction
   - Robust Authentication Mechanisms
   - Identity Providers
+  - Demo: Adding Authentication
