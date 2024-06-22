@@ -15,3 +15,7 @@
   - Demo: OWASP Top Ten
     - Open Worldwide Application Security Project
   - Key OWASP Projects
+3. Managing Authentication and Identity
+  - Introduction
+  - Robust Authentication Mechanisms
+  - Identity Providers
