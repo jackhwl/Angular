@@ -20,3 +20,6 @@
   - Robust Authentication Mechanisms
   - Identity Providers
   - Demo: Adding Authentication
+4. Managing Sessions
+  - Session Considerations
+  - Demo: Session Expiration
