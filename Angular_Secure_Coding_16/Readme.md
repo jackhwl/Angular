@@ -24,3 +24,4 @@
   - Session Considerations
   - Demo: Session Expiration
   - Protecting Sessions
+  - Demo: XSRF Protection
