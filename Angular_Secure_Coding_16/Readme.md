@@ -23,3 +23,4 @@
 4. Managing Sessions
   - Session Considerations
   - Demo: Session Expiration
+  - Protecting Sessions
