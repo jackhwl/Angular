@@ -25,3 +25,6 @@
   - Demo: Session Expiration
   - Protecting Sessions
   - Demo: XSRF Protection
+5. Handling Inputs and Outputs
+  - Escaping Displayed Values
+  - Demos: Escaping Displayed Values
