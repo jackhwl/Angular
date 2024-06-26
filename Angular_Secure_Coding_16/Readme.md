@@ -28,3 +28,5 @@
 5. Handling Inputs and Outputs
   - Escaping Displayed Values
   - Demos: Escaping Displayed Values
+  - Input Validation
+  - Demos: Custom Validators
