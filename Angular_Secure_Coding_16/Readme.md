@@ -30,3 +30,5 @@
   - Demos: Escaping Displayed Values
   - Input Validation
   - Demos: Custom Validators
+6. Creating Dynamic Views
+  - Sanitizing Displayed Values
