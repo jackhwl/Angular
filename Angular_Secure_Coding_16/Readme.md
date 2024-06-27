@@ -32,3 +32,4 @@
   - Demos: Custom Validators
 6. Creating Dynamic Views
   - Sanitizing Displayed Values
+  - Demo: Property Binding and Safe Markup
