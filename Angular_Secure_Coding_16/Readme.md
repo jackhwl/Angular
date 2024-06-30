@@ -33,3 +33,5 @@
 6. Creating Dynamic Views
   - Sanitizing Displayed Values
   - Demo: Property Binding and Safe Markup
+  - Bypassing Automatic Sanitization
+  - Demo: Bypassing Automatic Sanitization
