@@ -40,3 +40,4 @@
 7. Managing Conditional View Elements
   - Introduction
   - Structural Directives
+  - Demo: Limit Access to Views
