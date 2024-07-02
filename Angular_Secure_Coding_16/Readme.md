@@ -36,3 +36,4 @@
   - Bypassing Automatic Sanitization
   - Demo: Bypassing Automatic Sanitization
   - Explicit Sanitization
+  - Demo: Explicit Sanitization
