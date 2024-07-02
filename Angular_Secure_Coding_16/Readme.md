@@ -35,3 +35,4 @@
   - Demo: Property Binding and Safe Markup
   - Bypassing Automatic Sanitization
   - Demo: Bypassing Automatic Sanitization
+  - Explicit Sanitization
