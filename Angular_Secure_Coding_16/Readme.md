@@ -37,3 +37,6 @@
   - Demo: Bypassing Automatic Sanitization
   - Explicit Sanitization
   - Demo: Explicit Sanitization
+7. Managing Conditional View Elements
+  - Introduction
+  - Structural Directives
