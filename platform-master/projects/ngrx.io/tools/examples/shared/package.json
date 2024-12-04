@@ -33,7 +33,7 @@
     "@ngrx/store": "^12.1.0",
     "@nguniversal/express-engine": "^12.0.0",
     "core-js": "^2.5.4",
-    "express": "^4.14.1",
+    "express": "^4.17.3",
     "rxjs": "~6.6.0",
     "systemjs": "0.19.39",
     "tslib": "^2.0.0",
